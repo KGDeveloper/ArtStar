@@ -1,0 +1,43 @@
+//
+//  TransformChineseToPinying.h
+//  ArtStar
+//
+//  Created by abc on 5/15/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface TransformChineseToPinying : NSObject
+
+/**
+ 转换中文为拼音
+
+ @param chinese 中文字符串
+ @return 拼音字符串
+ */
++ (NSString *)transform:(NSString *)chinese;
+/**
+ 判断是否包含字符串
+
+ @param str 主字符串
+ @param text 包含字符串
+ @return 是否包含
+ */
++ (BOOL)containsString:(NSString *)str text:(NSString *)text;
+/**
+ 根据字符串计算字符串长度
+
+ @param str 字符串
+ @return 字符串所占的宽度
+ */
++ (CGFloat)stringWidthFromString:(NSString *)str font:(UIFont *)font width:(CGFloat)width;
+/**
+ 根据字符串计算字符串高度
+ 
+ @param str 字符串
+ @return 字符串所占的宽度
+ */
++ (CGFloat)stringWidthFromString:(NSString *)str font:(UIFont *)font height:(CGFloat)height;
+
+@end

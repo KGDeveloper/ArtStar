@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="118" id="KGk-i7-Jjw" customClass="MineBooksFriendsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="72"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="356" height="71.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="1ic-5e-A5E">
+                        <rect key="frame" x="15" y="15" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="DWj-cZ-FRV"/>
+                            <constraint firstAttribute="height" constant="40" id="UGd-p8-ADV"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="爱你的天使" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNM-RU-UWs">
+                        <rect key="frame" x="70" y="27.5" width="271" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="gZl-zf-c8X"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="17"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awz-E1-AV5">
+                        <rect key="frame" x="291" y="23.5" width="50" height="23"/>
+                        <color key="backgroundColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="9La-d1-t6M"/>
+                            <constraint firstAttribute="width" constant="50" id="qHU-3f-prE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <state key="normal" title="关注"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sv5-2i-kGP">
+                        <rect key="frame" x="15" y="70.5" width="326" height="1"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="51c-hK-bJm"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cNM-RU-UWs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3oe-dV-LWL"/>
+                    <constraint firstItem="sv5-2i-kGP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Wb-KQ-Bnn"/>
+                    <constraint firstAttribute="bottom" secondItem="sv5-2i-kGP" secondAttribute="bottom" id="Ega-T2-ANI"/>
+                    <constraint firstItem="cNM-RU-UWs" firstAttribute="leading" secondItem="1ic-5e-A5E" secondAttribute="trailing" constant="15" id="HDh-ew-WAy"/>
+                    <constraint firstAttribute="trailing" secondItem="cNM-RU-UWs" secondAttribute="trailing" constant="15" id="VJd-48-LsV"/>
+                    <constraint firstItem="1ic-5e-A5E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XnQ-eO-MfP"/>
+                    <constraint firstItem="awz-E1-AV5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bKo-z8-QJT"/>
+                    <constraint firstAttribute="trailing" secondItem="sv5-2i-kGP" secondAttribute="trailing" constant="15" id="eHa-JG-9xQ"/>
+                    <constraint firstAttribute="trailing" secondItem="awz-E1-AV5" secondAttribute="trailing" constant="15" id="mah-Ny-z6F"/>
+                    <constraint firstItem="1ic-5e-A5E" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qF7-Vd-fak"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="foucsBtu" destination="awz-E1-AV5" id="2MK-jP-z5Z"/>
+                <outlet property="headImage" destination="1ic-5e-A5E" id="l4I-uH-ch6"/>
+                <outlet property="imageWidth" destination="DWj-cZ-FRV" id="mB6-pa-cXF"/>
+                <outlet property="nameLab" destination="cNM-RU-UWs" id="S47-Q4-Wrt"/>
+            </connections>
+            <point key="canvasLocation" x="52" y="90"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="1" width="324" height="220"/>
+    </resources>
+</document>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="85" id="KGk-i7-Jjw" customClass="FocusViewNickNameCell">
+            <rect key="frame" x="0.0" y="0.0" width="364" height="85"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="364" height="84.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQb-ms-JQn">
+                        <rect key="frame" x="15" y="35" width="50" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="3HZ-7D-x3f"/>
+                            <constraint firstAttribute="width" constant="50" id="apA-by-xFt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小仙女" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8s-ao-9Wi">
+                        <rect key="frame" x="85" y="35" width="264" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="hTp-EU-KgI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mtL-EJ-u9a">
+                        <rect key="frame" x="15" y="84" width="334" height="1"/>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="MLH-U0-rTv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="x8s-ao-9Wi" secondAttribute="trailing" constant="15" id="6Gx-3v-AEP"/>
+                    <constraint firstAttribute="trailing" secondItem="mtL-EJ-u9a" secondAttribute="trailing" constant="15" id="HgE-C8-A3B"/>
+                    <constraint firstItem="mtL-EJ-u9a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="IhF-W4-VTY"/>
+                    <constraint firstItem="x8s-ao-9Wi" firstAttribute="leading" secondItem="rQb-ms-JQn" secondAttribute="trailing" constant="20" id="JP3-US-bVK"/>
+                    <constraint firstItem="rQb-ms-JQn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RKR-IN-MH2"/>
+                    <constraint firstItem="rQb-ms-JQn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="cj3-VQ-kW5"/>
+                    <constraint firstAttribute="bottom" secondItem="mtL-EJ-u9a" secondAttribute="bottom" id="eML-Aa-IJc"/>
+                    <constraint firstItem="x8s-ao-9Wi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="s4f-0C-EvT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="detailLab" destination="x8s-ao-9Wi" id="fJJ-xk-26A"/>
+                <outlet property="titleLab" destination="rQb-ms-JQn" id="PO5-hf-arB"/>
+            </connections>
+            <point key="canvasLocation" x="56" y="81.5"/>
+        </tableViewCell>
+    </objects>
+</document>

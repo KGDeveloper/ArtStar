@@ -1,0 +1,920 @@
+//
+//  ChangeTheModelView.m
+//  ArtStar
+//
+//  Created by abc on 5/8/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "ChangeTheModelView.h"
+#import "ChangeModelView.h"
+#import "ChooseModelVC.h"
+
+typedef NS_ENUM(NSInteger,TextFieldTextType){
+    TextFieldTextTypeLeft,
+    TextFieldTextTypeCenter,
+    TextFieldTextTypeRight,
+};
+
+@interface ChangeTheModelView ()<UITextFieldDelegate,KGAlertViewDelegate,ChangeModelViewDelegate,KGCameraDelegate>
+
+@property (nonatomic,strong) ChangeModelView *ideaView;
+//MARK:--输入框模块--
+@property (nonatomic,strong) UIView *textView;//:--加载输入框视图--
+@property (nonatomic,strong)UITextField *firstTextField;//:--第一行--
+@property (nonatomic,strong)UITextField *sencedTF;//:--第二行--
+@property (nonatomic,strong)UITextField *thirdTF;//:--第三行--
+@property (nonatomic,strong)UITextField *fouceTF;//:--第四行--
+@property (nonatomic,strong)UITextField *fifthTF;//:--第五行--
+//MARK:--选择相片模块--
+@property (nonatomic,strong) UIImageView *pictureView;//:--展示图片--
+@property (nonatomic,strong) UIButton *touchBtu;//:--选择相片--
+//MARK:--位置以及可见范围模块--
+@property (nonatomic,strong) UIView *lowView;//:--加载位置以及可见人群视图--
+@property (nonatomic,strong) UIButton *locationBtu;//:--选择位置--
+@property (nonatomic,strong) UIButton *publicBtu;//:--可见范围--
+
+@property (nonatomic,strong) KGAlertView *alert;
+@property (nonatomic,strong) IrregularView *irregularView;//:--选择可见人群--
+@property (nonatomic,strong) UIView *backView;
+
+//MARK:--竖排文字--
+@property (nonatomic,strong) UIView *vertivalView;
+@property (nonatomic,strong)UITextView *oneTF;//:--第一行--
+@property (nonatomic,strong)UITextView *twoTF;//:--第一行--
+@property (nonatomic,strong)UITextView *threeTF;//:--第一行--
+@property (nonatomic,strong)UITextView *fourTF;//:--第一行--
+@property (nonatomic,strong)UITextView *fiveTF;//:--第一行--
+@property (nonatomic,strong)UILabel *placehodelLab;
+@property (nonatomic,assign) EditType type;
+@property (nonatomic,strong) KGCamera *cameraView;
+
+@end
+
+@implementation ChangeTheModelView
+
+- (instancetype)initWithFrame:(CGRect)frame type:(EditType)type{
+    if (self = [super initWithFrame:frame]) {
+        self.type = type;
+        [self setBackView];
+        switch (type) {
+            case EditTypeTheme:
+                [self setUpPicture:type];
+                self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+                self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+                break;
+            case EditTypeVideo:
+                [self setUpPicture:type];
+                self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight, kScreenWidth, 180);
+                self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + 60 + 58);
+                break;
+            default:
+                [self setUpPicture:type];
+                self.pictureView.hidden = YES;
+                self.textView.hidden = NO;
+                self.touchBtu.hidden = YES;
+                self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + textViewHeight, kScreenWidth, 180);
+                self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, textViewHeight + 60 + 58);
+                break;
+        }
+        self.ideaView.hidden = NO;
+    }
+    return self;
+}
+- (void)setBackView{
+    _backView = [[UIView alloc]initWithFrame:CGRectMake(0, NavTopHeight, ViewWidth(self),photoViewHeight + textViewHeight + 40)];
+    _backView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:_backView];
+}
+//MARK:--搭建输入框view--
+- (UIView *)textView{
+    if (!_textView) {
+        //:--创建加载输入框的视图--
+        _textView = [[UIView alloc]initWithFrame:CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight,281, 115)];
+        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.hidden = YES;
+        [self addSubview:_textView];
+        //:--第一行--
+        _firstTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 281, 22)];
+        _firstTextField.delegate = self;
+        _firstTextField.font = FZFont(12);
+        _firstTextField.placeholder = @"记录您的奇思妙想 ...";
+        _firstTextField.textAlignment = NSTextAlignmentCenter;
+        _firstTextField.enabled = NO;
+        [_textView addSubview:_firstTextField];
+        //:--第二行--
+        _sencedTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 23, 281, 22)];
+        _sencedTF.delegate = self;
+        _sencedTF.font = FZFont(12);
+        _sencedTF.textAlignment = NSTextAlignmentCenter;
+        _sencedTF.enabled = NO;
+        [_textView addSubview:_sencedTF];
+        //:--第三行--
+        _thirdTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 46, 281, 22)];
+        _thirdTF.delegate = self;
+        _thirdTF.font = FZFont(12);
+        _thirdTF.textAlignment = NSTextAlignmentCenter;
+        _thirdTF.enabled = NO;
+        [_textView addSubview:_thirdTF];
+        //:--第四行--
+        _fouceTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 69, 281, 22)];
+        _fouceTF.delegate = self;
+        _fouceTF.font = FZFont(12);
+        _fouceTF.textAlignment = NSTextAlignmentCenter;
+        _fouceTF.enabled = NO;
+        [_textView addSubview:_fouceTF];
+        //:--第五行--
+        _fifthTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 92, 281 , 22)];
+        _fifthTF.delegate = self;
+        _fifthTF.font = FZFont(12);
+        _fifthTF.textAlignment = NSTextAlignmentCenter;
+        _fifthTF.enabled = NO;
+        [_textView addSubview:_fifthTF];
+        
+        for (int i = 0; i < 5; i++) {
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 22 + 22*i, 281, 1)];
+            line.backgroundColor = Color_cccccc;
+            [_textView addSubview:line];
+        }
+    }
+    return _textView;
+}
+//MARK:--搭建选择图片模块--
+- (void)setUpPicture:(EditType)type{
+    //:--显示选择的图片或者视频--
+    _pictureView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, (kScreenWidth - 30)/690*468)];
+    switch (type) {
+        case EditTypeVideo:
+            _pictureView.image = Image(@"video");
+            break;
+        default:
+            _pictureView.image = Image(@"picture");
+            break;
+    }
+    [self addSubview:_pictureView];
+    //:--点击图片开始选择上传视频或者图片--
+    _touchBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _touchBtu.frame = _pictureView.frame;
+    [_touchBtu addTarget:self action:@selector(touchImageView) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_touchBtu];
+}
+- (void)touchImageView{
+    self.cameraView.hidden = NO;
+}
+//MARK:--选择照片--
+- (KGCamera *)cameraView{
+    if (!_cameraView) {
+        _cameraView = [[KGCamera alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _cameraView.hidden = YES;
+        _cameraView.delegate = self;
+        [self insertSubview:_cameraView atIndex:99];
+    }
+    return _cameraView;
+}
+//MARK:--代理方法--
+/**
+ 本地上传
+ */
+- (void)touchPhoto{
+    
+}
+/**
+ 拍照上传
+ */
+- (void)touchCamera{
+    
+}
+//MARK:--KGAlertViewDelegate--
+- (void)defult{
+    _alert.hidden = YES;
+}
+//MARK:--创建位置以及可见范围view--
+- (UIView *)lowView{
+    if (!_lowView) {
+        //:--在家底部定位按钮以及选择可见人群按钮--
+        _lowView = [[UIView alloc]initWithFrame:CGRectMake(0, ViewHeight(self) - 180, kScreenWidth, 180)];
+        [self addSubview:_lowView];
+        //:--左侧定位按钮--
+        _locationBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+        _locationBtu.frame = CGRectMake(15, 22, kScreenWidth/2, 14);
+        [_locationBtu setImage:Image(@"location") forState:UIControlStateNormal];
+        [_locationBtu setTitle:@"你在哪里？" forState:UIControlStateNormal];
+        [_locationBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
+        _locationBtu.titleLabel.font = FZFont(12);
+        [_locationBtu setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 5)];
+        [_locationBtu setTitleEdgeInsets:UIEdgeInsetsMake(2, 5, 2, 0)];
+        [_locationBtu setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [_locationBtu addTarget:self action:@selector(loactionClick) forControlEvents:UIControlEventTouchUpInside];
+        [_lowView addSubview:_locationBtu];
+        //:--右侧选择人群按钮--
+        _publicBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+        _publicBtu.frame = CGRectMake(ViewWidth(_lowView) - 15 - 40, 20, 40, 20);
+        [_publicBtu setTitle:@"公开" forState:UIControlStateNormal];
+        _publicBtu.backgroundColor = Color_f2f2f2;
+        _publicBtu.titleLabel.font = FZFont(12);
+        [_publicBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
+        _publicBtu.layer.cornerRadius = 10;
+        _publicBtu.layer.borderColor = Color_cccccc.CGColor;
+        _publicBtu.layer.borderWidth = 1;
+        [_publicBtu addTarget:self action:@selector(publicClick) forControlEvents:UIControlEventTouchUpInside];
+        [_lowView addSubview:_publicBtu];
+    }
+    return _lowView;
+}
+//MARK:--定位按钮点击事件--
+- (void)loactionClick{
+    
+}
+//MARK:--选择可见人群按钮点击事件--
+- (void)publicClick{
+    if (self.irregularView.hidden == NO) {
+        self.irregularView.hidden = YES;
+    }else{
+        self.irregularView.hidden = NO;
+    }
+}
+//MARK:--选择人群界面--
+- (IrregularView *)irregularView{
+    __weak typeof(self) mySelf = self;
+    if (!_irregularView) {
+        _irregularView = [[IrregularView alloc]initWithFrame:CGRectMake(ViewWidth(_lowView) - 95, 40, 80, 100)];
+        _irregularView.sendStr = ^(NSString *title) {
+            if ([title isEqualToString:@"公开"]) {
+                mySelf.publicBtu.frame = CGRectMake(ViewWidth(mySelf.lowView) - 15 - 40, 20, 40, 20);
+                [mySelf.publicBtu setTitle:title forState:UIControlStateNormal];
+            }else{
+                mySelf.publicBtu.frame = CGRectMake(ViewWidth(mySelf.lowView) - 15 - 80, 20, 80, 20);
+                [mySelf.publicBtu setTitle:title forState:UIControlStateNormal];
+            }
+        };
+        _irregularView.hidden = YES;
+        [self.lowView addSubview:_irregularView];
+    }
+    return _irregularView;
+}
+- (UIView *)vertivalView{
+    if (!_vertivalView) {
+        _vertivalView = [[UIView alloc]initWithFrame:CGRectMake(self.frame.size.width - 15 - textViewHeight - 20, 58 + NavTopHeight, textViewHeight + 20, 281)];
+        _vertivalView.hidden = YES;
+        [self addSubview:_vertivalView];
+        
+        _oneTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 22, 0, 22, ViewHeight(_vertivalView))];
+        _oneTF.font = FZFont(12);
+        _oneTF.editable = NO;
+        [_vertivalView addSubview:_oneTF];
+        
+        _twoTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 45, 0, 22, ViewHeight(_vertivalView))];
+        _twoTF.font = FZFont(12);
+        _twoTF.editable = NO;
+        [_vertivalView addSubview:_twoTF];
+        
+        _threeTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 68, 0, 22, ViewHeight(_vertivalView))];
+        _threeTF.font = FZFont(12);
+        _threeTF.editable = NO;
+        [_vertivalView addSubview:_threeTF];
+        
+        _fourTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 91, 0, 22, ViewHeight(_vertivalView))];
+        _fourTF.font = FZFont(12);
+        _fourTF.editable = NO;
+        [_vertivalView addSubview:_fourTF];
+        
+        _fiveTF = [[UITextView alloc]initWithFrame:CGRectMake(20, 0, 22, ViewHeight(_vertivalView))];
+        _fiveTF.font = FZFont(12);
+        _fiveTF.editable = NO;
+        [_vertivalView addSubview:_fiveTF];
+        
+        for (int i = 0; i < 5; i++) {
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(20 + 22*i, 0, 1, 281)];
+            line.backgroundColor = Color_cccccc;
+            [_vertivalView addSubview:line];
+        }
+        [self setupPlaceHolde];
+    }
+    return _vertivalView;
+}
+//MARK:--预留字--
+- (void)setupPlaceHolde{
+    _placehodelLab = [[UILabel alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 22, 0, 22, 281)];
+    _placehodelLab.text = @"记录您的奇思妙想 ...";
+    _placehodelLab.numberOfLines = 0;
+    _placehodelLab.textColor = Color_999999;
+    _placehodelLab.font = FZFont(12);
+    [_vertivalView addSubview:_placehodelLab];
+}
+//MARK:--底部输入框--
+- (ChangeModelView *)ideaView{
+    if (!_ideaView) {
+        _ideaView = [[ChangeModelView alloc]initWithFrame:CGRectMake(0,kScreenHeight - NavButtomHeight - 50, kScreenWidth, 50 + NavButtomHeight)];
+        _ideaView.delegate = self;
+        _ideaView.hidden = YES;
+        [self addSubview:_ideaView];
+    }
+    return _ideaView;
+}
+//MARK:--EditVideoType--
+- (void)setVideoType:(EditVideoType)videoType{
+    _videoType = videoType;
+    switch (videoType) {
+        case EditVideoTypeOnlyVideo:
+            self.textView.hidden = YES;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + 60 + 58);
+            break;
+        case EditVideoTypeTopLeft:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.textView.frame = CGRectMake(15, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeLeft];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditVideoTypeTopCenter:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditVideoTypeTopRight:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeRight];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditVideoTypeLeft:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.textView.frame = CGRectMake(15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeLeft];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditVideoTypeCenter:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        default:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeRight];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+    }
+}
+//MARK:--EditThemeType--
+- (void)setThemeType:(EditThemeType)themeType{
+    _themeType = themeType;
+    switch (themeType) {
+        case EditThemeTypeCircular:
+            self.pictureView.frame = CGRectMake(self.frame.size.width/2 - photoViewHeight/2, 58 + NavTopHeight, photoViewHeight, photoViewHeight);
+            self.pictureView.image = Image(@"round");
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditThemeTypeRightTop:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, self.frame.size.width - 30 - textViewHeight - 20, (self.frame.size.width - 30 - textViewHeight - 20)/225*345);
+            self.pictureView.image = Image(@"rectangle");
+            self.textView.hidden = YES;
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.vertivalView.hidden = NO;
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            [self setVertivalText:0];
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + (self.frame.size.width - 30 - textViewHeight - 20)/225*345, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, 58 + ViewHeight(self.pictureView) + 60);
+            break;
+        case EditThemeTypeRightCenter:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, self.frame.size.width - 30 - textViewHeight - 20, (self.frame.size.width - 30 - textViewHeight - 20)/225*345);
+            self.pictureView.image = Image(@"rectangle");
+            self.textView.hidden = YES;
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.vertivalView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            [self setVertivalText:1];
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + (self.frame.size.width - 30 - textViewHeight - 20)/225*345, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, 58 + ViewHeight(self.pictureView) + 60);
+            break;
+        case EditThemeTypeTopLeft:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(15, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeLeft];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditThemeTypeTopCenter:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditThemeTypeTopRight:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeRight];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditThemeTypeLeft:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeLeft];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditThemeTypeCenter:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        default:
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeRight];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+    }
+}
+//MARK:--EditGraphicType--
+- (void)setGraphicType:(EditGraphicType)graphicType{
+    _graphicType = graphicType;
+    switch (graphicType) {
+        case EditGraphicTypeOnlyTitle:
+            self.textView.hidden = NO;
+            self.pictureView.hidden = YES;
+            self.vertivalView.hidden = YES;
+            self.textView.frame = CGRectMake(15, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + textViewHeight, kScreenWidth, 60);
+            self.touchBtu.hidden = YES;
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, textViewHeight + 60 + 58);
+            break;
+        case EditGraphicTypeOnlyPicture:
+            self.textView.hidden = YES;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight, kScreenWidth, 60);
+            self.touchBtu.hidden = NO;
+            self.touchBtu.frame = self.pictureView.frame;
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + 60 + 58);
+            break;
+        case EditGraphicTypeCircular:
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(self.frame.size.width/2 - photoViewHeight/2, 58 + NavTopHeight, photoViewHeight, photoViewHeight);
+            self.pictureView.image = Image(@"round");
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditGraphicTypeRightTop:
+            self.textView.hidden = YES;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = NO;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, self.frame.size.width - 30 - textViewHeight - 20, (self.frame.size.width - 30 - textViewHeight - 20)/225*345);
+            self.pictureView.image = Image(@"rectangle");
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.vertivalView.hidden = NO;
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            [self setVertivalText:0];
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + (self.frame.size.width - 30 - textViewHeight - 20)/225*345, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, 58 + ViewHeight(self.pictureView) + 60);
+            break;
+        case EditGraphicTypeRightCenter:
+            self.textView.hidden = YES;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = NO;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, self.frame.size.width - 30 - textViewHeight - 20, (self.frame.size.width - 30 - textViewHeight - 20)/225*345);
+            self.pictureView.image = Image(@"rectangle");
+            self.textView.hidden = YES;
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.vertivalView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            [self setVertivalText:1];
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + (self.frame.size.width - 30 - textViewHeight - 20)/225*345, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, 58 + ViewHeight(self.pictureView) + 60);
+            break;
+        case EditGraphicTypeTopLeft:
+            self.textView.hidden = NO;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(15, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeLeft];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditGraphicTypeTopCenter:
+            self.textView.hidden = NO;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditGraphicTypeTopRight:
+            self.textView.hidden = NO;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeRight];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditGraphicTypeLeft:
+            self.textView.hidden = NO;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeLeft];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        case EditGraphicTypeCenter:
+            self.textView.hidden = NO;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+        default:
+            self.textView.hidden = NO;
+            self.pictureView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.touchBtu.hidden = NO;
+            self.pictureView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
+            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
+            self.touchBtu.frame = self.pictureView.frame;
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeRight];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            break;
+    }
+}
+//MARK:--设置输入框字体位置--
+- (void)setTextFieldLocation:(TextFieldTextType)type{
+    switch (type) {
+        case TextFieldTextTypeLeft:
+            _firstTextField.textAlignment = NSTextAlignmentLeft;
+            _sencedTF.textAlignment = NSTextAlignmentLeft;
+            _thirdTF.textAlignment = NSTextAlignmentLeft;
+            _fouceTF.textAlignment = NSTextAlignmentLeft;
+            _fifthTF.textAlignment = NSTextAlignmentLeft;
+            break;
+        case TextFieldTextTypeCenter:
+            _firstTextField.textAlignment = NSTextAlignmentCenter;
+            _sencedTF.textAlignment = NSTextAlignmentCenter;
+            _thirdTF.textAlignment = NSTextAlignmentCenter;
+            _fouceTF.textAlignment = NSTextAlignmentCenter;
+            _fifthTF.textAlignment = NSTextAlignmentCenter;
+            break;
+        default:
+            _firstTextField.textAlignment = NSTextAlignmentRight;
+            _sencedTF.textAlignment = NSTextAlignmentRight;
+            _thirdTF.textAlignment = NSTextAlignmentRight;
+            _fouceTF.textAlignment = NSTextAlignmentRight;
+            _fifthTF.textAlignment = NSTextAlignmentRight;
+            break;
+    }
+}
+//MARK:--设置竖排居中居上--
+- (void)setVertivalText:(NSInteger)type{
+    switch (type) {
+        case 0:
+            _oneTF.contentMode = UIViewContentModeTop;
+            _twoTF.contentMode = UIViewContentModeTop;
+            _threeTF.contentMode = UIViewContentModeTop;
+            _fourTF.contentMode = UIViewContentModeTop;
+            _fiveTF.contentMode = UIViewContentModeTop;
+            break;
+        default:
+            _oneTF.contentMode = UIViewContentModeRedraw;
+            _twoTF.contentMode = UIViewContentModeRedraw;
+            _threeTF.contentMode = UIViewContentModeRedraw;
+            _fourTF.contentMode = UIViewContentModeRedraw;
+            _fiveTF.contentMode = UIViewContentModeRedraw;
+            break;
+    }
+}
+//MARK:--ChangeModelViewDelegate--
+- (void)changeViewFrame:(CGRect)frame{
+    if (frame.size.height == 50 + NavButtomHeight) {
+        _ideaView.frame = CGRectMake(0, kScreenHeight - NavButtomHeight - 50 - 120, kScreenWidth, 50 + NavButtomHeight + 120);
+    }else{
+        _ideaView.frame = CGRectMake(0,kScreenHeight - NavButtomHeight - 50, kScreenWidth, 50 + NavButtomHeight);
+    }
+}
+- (void)changeModelViewClick{
+    __weak typeof(self) mySelf = self;
+    ChooseModelVC *vc = [[ChooseModelVC alloc]init];
+    if (self.type == EditTypeTheme) {
+        vc.imageArr = @[Image(@"C圆形"),Image(@"C右上"),Image(@"C右中"),Image(@"C上左"),Image(@"C上中"),Image(@"C上右"),Image(@"C下左"),Image(@"C下中"),Image(@"C下右")];
+        vc.sendModel = ^(NSInteger index) {
+            mySelf.themeType = [[ModelFrameIndex shareInterace] themeTypeWithIndex:index];
+        };
+    }else if (self.type == EditTypeVideo){
+        vc.imageArr = @[Image(@"B视频"),Image(@"B上左"),Image(@"B上中"),Image(@"B上右"),Image(@"B下左"),Image(@"B下中"),Image(@"B下右")];
+        vc.sendModel = ^(NSInteger index) {
+            mySelf.videoType = [[ModelFrameIndex shareInterace] videoTypeWithIndex:index];
+        };
+    }else{
+        vc.imageArr = @[Image(@"A文字"),Image(@"A图片"),Image(@"A圆形"),Image(@"A右上"),Image(@"A右中"),Image(@"A上左"),Image(@"A上中"),Image(@"A上右"),Image(@"A下左"),Image(@"A下中"),Image(@"A下右")];
+        vc.sendModel = ^(NSInteger index) {
+            mySelf.graphicType = [[ModelFrameIndex shareInterace] graphicTypeWithIndex:index];
+        };
+    }
+    [[self pushViewController].navigationController pushViewController:vc animated:YES];
+}
+- (void)textFieldLenght{
+    if (!_alert) {
+        _alert = [[KGAlertView alloc]initWithFrame:self.frame];
+        _alert.delegate = self;
+        [_alert setAlertViewTitle:@"提示" message:@"输入字符不能超过20，请重新输入" type:KGAlertViewTypeDefult];
+        [self addSubview:_alert];
+    }else{
+        _alert.hidden = NO;
+    }
+}
+- (void)sendStringToView:(NSString *)string index:(NSInteger)index{
+    switch (self.type) {
+        case EditTypeVideo:
+            switch (self.videoType) {
+                case EditVideoTypeOnlyVideo:
+                    
+                    break;
+                case EditVideoTypeTopLeft:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditVideoTypeTopCenter:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditVideoTypeTopRight:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditVideoTypeLeft:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditVideoTypeCenter:
+                    [self textFieldString:string number:index];
+                    break;
+                default:
+                    [self textFieldString:string number:index];
+                    break;
+            }
+            break;
+        case EditTypeTheme:
+            switch (self.themeType) {
+                case EditThemeTypeCircular:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditThemeTypeRightTop:
+                    [self textViewString:string number:index];
+                    break;
+                case EditThemeTypeRightCenter:
+                    [self textViewString:string number:index];
+                    break;
+                case EditThemeTypeTopLeft:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditThemeTypeTopCenter:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditThemeTypeTopRight:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditThemeTypeLeft:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditThemeTypeCenter:
+                    [self textFieldString:string number:index];
+                    break;
+                default:
+                    [self textFieldString:string number:index];
+                    break;
+            }
+            break;
+        default:
+            switch (self.graphicType) {
+                case EditGraphicTypeOnlyTitle:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditGraphicTypeOnlyPicture:
+                    
+                    break;
+                case EditGraphicTypeCircular:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditGraphicTypeRightTop:
+                    [self textViewString:string number:index];
+                    break;
+                case EditGraphicTypeRightCenter:
+                    [self textViewString:string number:index];
+                    break;
+                case EditGraphicTypeTopLeft:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditGraphicTypeTopCenter:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditGraphicTypeTopRight:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditGraphicTypeLeft:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditGraphicTypeCenter:
+                    [self textFieldString:string number:index];
+                    break;
+                default:
+                    [self textFieldString:string number:index];
+                    break;
+            }
+            break;
+    }
+}
+//MARK:--横排文字填充--
+- (void)textFieldString:(NSString *)str number:(NSInteger)nmb{
+    switch (nmb) {
+        case 0:
+            _firstTextField.text = str;
+            break;
+        case 1:
+            _sencedTF.text = str;
+            break;
+        case 2:
+            _thirdTF.text = str;
+            break;
+        case 3:
+            _fouceTF.text = str;
+            break;
+        default:
+            _fifthTF.text = str;
+            break;
+    }
+}
+//MARK:--竖排文字填充--
+- (void)textViewString:(NSString *)str number:(NSInteger)nmb{
+    switch (nmb) {
+        case 0:
+            _oneTF.text = str;
+            break;
+        case 1:
+            _twoTF.text = str;
+            break;
+        case 2:
+            _threeTF.text = str;
+            break;
+        case 3:
+            _fourTF.text = str;
+            break;
+        default:
+            _fiveTF.text = str;
+            break;
+    }
+}
+- (UIViewController *)pushViewController{
+    id target = self;
+    while (target) {
+        target = ((UIResponder *)target).nextResponder;
+        if ([target isKindOfClass:[UIViewController class]]) {
+            break;
+        }
+    }
+    return target;
+}
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

@@ -1,0 +1,126 @@
+//
+//  HeadLinesVideoPlayVide.m
+//  ArtStar
+//
+//  Created by abc on 5/24/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "HeadLinesVideoPlayVide.h"
+#import <AVFoundation/AVFoundation.h>
+
+@interface HeadLinesVideoPlayVide (){
+    NSTimer *_timer;
+    NSInteger _time;
+}
+
+@property (nonatomic,strong) AVPlayer *myPlayer;
+@property (nonatomic,strong) AVPlayerItem *playerItme;
+@property (nonatomic,strong) AVPlayerLayer *player;
+@property (nonatomic,strong) UIView *backView;
+@property (nonatomic,strong) UIButton *playBtu;
+@property (nonatomic,strong) UISlider *playSlider;
+@property (nonatomic,assign) BOOL isCarsh;
+
+@end
+
+@implementation HeadLinesVideoPlayVide
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        _isCarsh = NO;
+        _time = 0;
+        [self setUI];
+    }
+    return self;
+}
+
+- (void)setUI{
+    _backView.backgroundColor = [UIColor colorWithHexString:@"#000000"];
+    _backView.alpha = 0.2;
+    [self insertSubview:_backView atIndex:99];
+    
+    _playBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _playBtu.frame = CGRectMake(ViewWidth(self)/2 - 20, ViewHeight(self)/2 - 20, 40, 40);
+    [_playBtu setImage:Image(@"播放按钮") forState:UIControlStateNormal];
+    [_playBtu addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
+    [self insertSubview:_playBtu atIndex:99];
+    
+    _playSlider = [[UISlider alloc]initWithFrame:CGRectMake(0, ViewHeight(self) - 5, ViewWidth(self), 5)];
+    _playSlider.minimumTrackTintColor = [UIColor colorWithHexString:@"#00a0e9"];
+    _playSlider.maximumTrackTintColor = [UIColor whiteColor];
+    [self insertSubview:_playSlider atIndex:99];
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(playCurrent) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    [_timer setFireDate:[NSDate distantFuture]];
+}
+
+- (void)playVideo{
+    if (_isCarsh == YES) {
+        [_timer setFireDate:[NSDate date]];
+        _backView.hidden = YES;
+        _playBtu.hidden = YES;
+    }
+}
+
+- (void)playVideoWithUrl:(NSURL *)url{
+    _playerItme = [AVPlayerItem playerItemWithURL:url];
+    _myPlayer = [AVPlayer playerWithPlayerItem:_playerItme];
+    _player = [AVPlayerLayer playerLayerWithPlayer:_myPlayer];
+    _player.frame = self.bounds;
+    [self.layer addSublayer:_player];
+    
+    [self.myPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    
+}
+
+- (void)playCurrent{
+    _time++;
+    _playSlider.value = _time;
+    
+    if (_time == _playSlider.maximumValue) {
+        [_timer setFireDate:[NSDate distantPast]];
+        _time = 0;
+    }
+}
+
+- (void)releasePlayer{
+    _timer = nil;
+    [_timer invalidate];
+    _time = 0;
+    _playSlider.value = 0;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerItemStatus status = [change[NSKeyValueChangeNewKey] integerValue];
+        switch (status) {
+            case AVPlayerItemStatusFailed:
+                _isCarsh = NO;
+                break;
+            case AVPlayerItemStatusUnknown:
+                _isCarsh = YES;
+                _playSlider.maximumValue = _playerItme.duration.value/_playerItme.duration.timescale;
+                break;
+            case AVPlayerItemStatusReadyToPlay:
+                _isCarsh = NO;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    [object removeObserver:self forKeyPath:@"status"];
+}
+
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

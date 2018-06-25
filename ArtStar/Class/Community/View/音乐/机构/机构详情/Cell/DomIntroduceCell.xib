@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Bold.otf">
+            <string>SourceHanSansCN-Bold</string>
+        </array>
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="333" id="KGk-i7-Jjw" customClass="DomIntroduceCell">
+            <rect key="frame" x="0.0" y="0.0" width="456" height="333"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="456" height="332.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展览时间：2018-04-24至2018-05-04" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nV7-gc-f92">
+                        <rect key="frame" x="15" y="10" width="250" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="250" id="NqV-aK-NIX"/>
+                            <constraint firstAttribute="height" constant="15" id="gMW-iV-NzR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开始倒计时：10天" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6G-v4-Myq">
+                        <rect key="frame" x="275" y="10" width="166" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Jct-KW-JrG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="雅马哈琴行" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwf-B6-wjE">
+                        <rect key="frame" x="15" y="55" width="150" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="c3i-P4-0Zb"/>
+                            <constraint firstAttribute="width" constant="150" id="h3k-Iv-pcK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Bold" family="Source Han Sans CN" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ex8-E4-YoR">
+                        <rect key="frame" x="165" y="55.5" width="10" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="XL3-GV-Yst"/>
+                            <constraint firstAttribute="height" constant="15" id="smw-ua-cuz"/>
+                        </constraints>
+                        <state key="normal" image="voice"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="244-3n-8Ar">
+                        <rect key="frame" x="341" y="55.5" width="100" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="5U6-N0-s4L"/>
+                            <constraint firstAttribute="width" constant="100" id="meh-me-Li3"/>
+                        </constraints>
+                        <state key="normal" image="report open"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营业时间：周一至周日 早上 8：00-晚上 20：00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaJ-yi-SqU">
+                        <rect key="frame" x="15" y="85" width="426" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="R9w-2d-umk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-rn-KWK">
+                        <rect key="frame" x="15" y="115" width="426" height="90"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="xTw-i9-nPh"/>
+                        </constraints>
+                        <string key="text">迪拜位于阿拉伯半岛中部、阿拉伯湾南岸，是海湾地区中心。与南亚次大陆隔海相望，与卡塔尔为邻、与沙特阿拉伯交界、与阿曼毗连。迪拜常住人口约280万人，本地人口占15%左右，外籍人士来自全球200多个国家和地区。常住迪拜的华人有约34万人，其他外籍人士来自诸如埃及、黎巴嫩、约旦、伊朗、印度、巴基斯坦、菲律宾等。</string>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaK-pd-z0Z">
+                        <rect key="frame" x="0.0" y="322.5" width="456" height="10"/>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="IaR-8B-dxM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="VaK-pd-z0Z" secondAttribute="bottom" id="4GM-kT-uDk"/>
+                    <constraint firstAttribute="trailing" secondItem="TaJ-yi-SqU" secondAttribute="trailing" constant="15" id="6Me-9v-nnj"/>
+                    <constraint firstAttribute="trailing" secondItem="244-3n-8Ar" secondAttribute="trailing" constant="15" id="6fr-5x-uzp"/>
+                    <constraint firstItem="TaJ-yi-SqU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Dda-Ob-7LI"/>
+                    <constraint firstItem="m6G-v4-Myq" firstAttribute="leading" secondItem="nV7-gc-f92" secondAttribute="trailing" constant="10" id="HEx-vS-Ikb"/>
+                    <constraint firstItem="nV7-gc-f92" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="HKd-iz-Pat"/>
+                    <constraint firstItem="TaJ-yi-SqU" firstAttribute="top" secondItem="Bwf-B6-wjE" secondAttribute="bottom" constant="15" id="KOa-xf-gfr"/>
+                    <constraint firstItem="Bwf-B6-wjE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="KpM-od-Rz5"/>
+                    <constraint firstItem="VaK-pd-z0Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LZz-6r-hL7"/>
+                    <constraint firstAttribute="trailing" secondItem="PhR-rn-KWK" secondAttribute="trailing" constant="15" id="Lvg-rY-8Hn"/>
+                    <constraint firstItem="m6G-v4-Myq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Q6N-Ua-fyX"/>
+                    <constraint firstItem="nV7-gc-f92" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Rrx-pb-u6S"/>
+                    <constraint firstAttribute="trailing" secondItem="VaK-pd-z0Z" secondAttribute="trailing" id="SlI-p9-lnf"/>
+                    <constraint firstItem="Ex8-E4-YoR" firstAttribute="leading" secondItem="Bwf-B6-wjE" secondAttribute="trailing" id="Wkb-Zf-EIh"/>
+                    <constraint firstItem="PhR-rn-KWK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="aax-82-drW"/>
+                    <constraint firstItem="Bwf-B6-wjE" firstAttribute="top" secondItem="nV7-gc-f92" secondAttribute="bottom" constant="30" id="cGn-jP-ih1"/>
+                    <constraint firstItem="Ex8-E4-YoR" firstAttribute="centerY" secondItem="Bwf-B6-wjE" secondAttribute="centerY" id="dQS-18-FEU"/>
+                    <constraint firstItem="244-3n-8Ar" firstAttribute="centerY" secondItem="Ex8-E4-YoR" secondAttribute="centerY" id="eOT-SV-MP3"/>
+                    <constraint firstAttribute="trailing" secondItem="m6G-v4-Myq" secondAttribute="trailing" constant="15" id="j43-AO-fLE"/>
+                    <constraint firstItem="PhR-rn-KWK" firstAttribute="top" secondItem="TaJ-yi-SqU" secondAttribute="bottom" constant="15" id="yod-QF-B7l"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="detailLab" destination="PhR-rn-KWK" id="Aw1-TX-jRN"/>
+                <outlet property="endTime" destination="m6G-v4-Myq" id="WYl-Am-cEU"/>
+                <outlet property="nameLab" destination="Bwf-B6-wjE" id="0lt-uT-HCh"/>
+                <outlet property="starTime" destination="TaJ-yi-SqU" id="UeV-0p-yLG"/>
+                <outlet property="topTime" destination="nV7-gc-f92" id="VYE-Fs-PnC"/>
+            </connections>
+            <point key="canvasLocation" x="102" y="198.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="report open" width="5" height="10"/>
+        <image name="voice" width="9" height="14"/>
+    </resources>
+</document>

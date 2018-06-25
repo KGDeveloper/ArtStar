@@ -1,0 +1,197 @@
+//
+//  MyselfWordUploadingVC.m
+//  ArtStar
+//
+//  Created by abc on 6/4/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "MyselfWordUploadingVC.h"
+#import <Photos/Photos.h>
+
+@interface MyselfWordUploadingVC ()<KGCameraDelegate>
+
+@property (nonatomic,strong) UIView *chooseView;
+@property (nonatomic,strong) UIButton *statusBtu;
+@property (nonatomic,strong) UIButton *upLoadingBtu;
+@property (nonatomic,strong) UITextField *nameTF;
+@property (nonatomic,strong) UITextField *priceTF;
+@property (nonatomic,strong) KGCamera *cameraView;
+
+@end
+
+@implementation MyselfWordUploadingVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setLeftBtuWithTitle:@"上传作品" image:Image(@"back")];
+    [self setRightBtuWithTitle:@"完成" image:nil];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self setViewUI];
+}
+
+- (void)setViewUI{
+    NSArray *titleArr = @[@"作品名称:",@"作品状态:",@"作品价格:",@"作品"];
+    for (int i = 0; i < 4; i++) {
+        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, NavTopHeight + 20 + 50*i, 70, 15)];
+        titleLab.text = titleArr[i];
+        titleLab.textColor = Color_333333;
+        titleLab.font = SYFont(15);
+        [self.view addSubview:titleLab];
+        if (i > 0) {
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, NavTopHeight + 50*i, ViewWidth(self.view) - 30, 1)];
+            line.backgroundColor = Color_ededed;
+            [self.view addSubview:line];
+        }
+    }
+    
+    _nameTF = [[UITextField alloc]initWithFrame:CGRectMake(100, NavTopHeight + 20, kScreenWidth - 115, 20)];
+    _nameTF.placeholder = @"请输入作品名称";
+    _nameTF.textAlignment = NSTextAlignmentRight;
+    _nameTF.font = SYFont(14);
+    _nameTF.textColor = Color_333333;
+    [self.view addSubview:_nameTF];
+    
+    _priceTF = [[UITextField alloc]initWithFrame:CGRectMake(100, NavTopHeight + 120, kScreenWidth - 115, 20)];
+    _priceTF.placeholder = @"请输入出售价格";
+    _priceTF.textAlignment = NSTextAlignmentLeft;
+    _priceTF.font = SYFont(14);
+    _priceTF.textColor = Color_333333;
+    [self.view addSubview:_priceTF];
+    
+    _statusBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _statusBtu.frame = CGRectMake(95, NavTopHeight + 65, 75, 25);
+    [_statusBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    [_statusBtu setTitle:@"仅展示" forState:UIControlStateNormal];
+    _statusBtu.titleLabel.font = SYFont(15);
+    [_statusBtu setImage:Image(@"report dropdown") forState:UIControlStateNormal];
+    _statusBtu.titleEdgeInsets = UIEdgeInsetsMake(0, -_statusBtu.imageView.size.width - 10, 0, _statusBtu.imageView.size.width + 10);
+    _statusBtu.imageEdgeInsets = UIEdgeInsetsMake(0,_statusBtu.titleLabel.size.width, 0,-_statusBtu.titleLabel.size.width);
+    [_statusBtu addTarget:self action:@selector(statusBtuAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_statusBtu];
+    
+    _upLoadingBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _upLoadingBtu.frame = CGRectMake(15, NavTopHeight + 200, 165, 220);
+    [_upLoadingBtu setImage:Image(@"作品") forState:UIControlStateNormal];
+    [_upLoadingBtu addTarget:self action:@selector(upLoadingBtuAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_upLoadingBtu];
+    
+}
+//MARK:-----------------------------------------选择框-----------------------------------------------
+- (UIView *)chooseView{
+    if (!_chooseView) {
+        _chooseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 75, 50)];
+        _chooseView.backgroundColor = [UIColor whiteColor];
+        _chooseView.layer.cornerRadius = 5;
+        _chooseView.layer.borderColor = Color_cccccc.CGColor;
+        _chooseView.layer.borderWidth = 1;
+        _chooseView.layer.masksToBounds = YES;
+        [self.view insertSubview:_chooseView atIndex:99];
+        //MARK:---------------------------------------仅展示-------------------------------------------------
+        UIButton *onlyLoadingBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+        onlyLoadingBtu.frame = CGRectMake(0, 0, ViewWidth(_chooseView), ViewHeight(_chooseView)/2);
+        [onlyLoadingBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+        [onlyLoadingBtu setTitle:@"仅展示" forState:UIControlStateNormal];
+        onlyLoadingBtu.titleLabel.font = SYFont(12);
+        [onlyLoadingBtu setImage:Image(@"report dropdown") forState:UIControlStateNormal];
+        onlyLoadingBtu.titleEdgeInsets = UIEdgeInsetsMake(0, -onlyLoadingBtu.imageView.size.width - 10, 0, onlyLoadingBtu.imageView.size.width + 10);
+        onlyLoadingBtu.imageEdgeInsets = UIEdgeInsetsMake(0,onlyLoadingBtu.titleLabel.size.width, 0,-onlyLoadingBtu.titleLabel.size.width);
+        [onlyLoadingBtu addTarget:self action:@selector(onlyLoadingBtuAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_chooseView addSubview:onlyLoadingBtu];
+        //MARK:----------------------------------------中间线------------------------------------------------
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(7.5, ViewHeight(_chooseView)/2, 60, 1)];
+        line.backgroundColor = Color_cccccc;
+        [_chooseView addSubview:line];
+        //MARK:-----------------------------------------出售-----------------------------------------------
+        UIButton *buyBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+        buyBtu.frame = CGRectMake(0,ViewHeight(_chooseView)/2, ViewWidth(_chooseView), ViewHeight(_chooseView)/2);
+        [buyBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+        [buyBtu setTitle:@"出售" forState:UIControlStateNormal];
+        buyBtu.titleLabel.font = SYFont(12);
+        [buyBtu addTarget:self action:@selector(buyBtuAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_chooseView addSubview:buyBtu];
+        
+    }
+    return _chooseView;
+}
+//MARK:--------------------------------------仅展示--------------------------------------------------
+- (void)onlyLoadingBtuAction:(UIButton *)sender{
+    [_statusBtu setTitle:@"仅展示" forState:UIControlStateNormal];
+    _chooseView.hidden = YES;
+}
+//MARK:---------------------------------------出售-------------------------------------------------
+- (void)buyBtuAction:(UIButton *)sender{
+    [_statusBtu setTitle:@"出售" forState:UIControlStateNormal];
+    _chooseView.hidden = YES;
+}
+- (void)statusBtuAction:(UIButton *)sender{
+    self.chooseView.hidden = NO;
+    self.chooseView.frame = CGRectMake(85, NavTopHeight + 70, 75, 50);
+}
+- (void)upLoadingBtuAction:(UIButton *)sender{
+    self.cameraView.hidden = NO;
+}
+//MARK:--选择照片--
+- (KGCamera *)cameraView{
+    if (!_cameraView) {
+        _cameraView = [[KGCamera alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _cameraView.delegate = self;
+        [self.navigationController.view insertSubview:_cameraView atIndex:99];
+    }
+    return _cameraView;
+}
+//MARK:--代理方法--
+/**
+ 本地上传
+ */
+- (void)touchPhoto{
+    ZLPhotoActionSheet *ac = [[ZLPhotoActionSheet alloc]init];
+    ac.maxSelectCount = 1;
+    ac.allowSelectGif = NO;
+    ac.allowSelectVideo = NO;
+    ac.allowSelectImage = YES;
+    ac.sender = self;
+    __weak typeof(self) mySelf = self;
+    [ac setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
+        [mySelf.upLoadingBtu setImage:[images firstObject] forState:UIControlStateNormal];
+    }];
+    [ac showPhotoLibrary];
+    self.cameraView.hidden = YES;
+}
+/**
+ 拍照上传
+ */
+- (void)touchCamera{
+    __weak typeof(self) mySelf = self;
+    ZLCustomCamera *camera = [[ZLCustomCamera alloc]init];
+    camera.allowRecordVideo = NO;
+    camera.sessionPreset = ZLCaptureSessionPreset1280x720;
+    camera.maxRecordDuration = 10;
+    camera.circleProgressColor = [UIColor redColor];
+    camera.doneBlock = ^(UIImage *image, NSURL *videoUrl) {
+        [mySelf.upLoadingBtu setImage:image forState:UIControlStateNormal];
+        
+        
+    };
+    [self presentViewController:camera animated:YES completion:nil];
+    self.cameraView.hidden = YES;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

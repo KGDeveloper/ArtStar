@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="96" id="KGk-i7-Jjw" customClass="MineChooseIndustryTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="370" height="95.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbu-sw-moK">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="10"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="yzI-ZC-ofY"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择所在行业" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rg-cy-scB">
+                        <rect key="frame" x="15" y="10" width="100" height="85.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="7hY-l8-KZW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NsQ-Q9-L2J">
+                        <rect key="frame" x="115" y="10" width="228" height="85.5"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="report open" translatesAutoresizingMaskIntoConstraints="NO" id="x67-p9-nQo">
+                        <rect key="frame" x="348" y="46" width="7" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="7" id="Aow-rK-qT9"/>
+                            <constraint firstAttribute="height" constant="14" id="aJ8-JY-jAM"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvq-KD-5EU">
+                        <rect key="frame" x="162" y="38" width="46" height="30"/>
+                        <connections>
+                            <action selector="touchChooseBtu:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cCm-VA-bEo"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="7Rg-cy-scB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="0ui-Vl-iV3"/>
+                    <constraint firstItem="NsQ-Q9-L2J" firstAttribute="top" secondItem="jbu-sw-moK" secondAttribute="bottom" id="2Cv-2f-uAh"/>
+                    <constraint firstItem="NsQ-Q9-L2J" firstAttribute="leading" secondItem="7Rg-cy-scB" secondAttribute="trailing" id="5mq-Jv-RLA"/>
+                    <constraint firstItem="jbu-sw-moK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7FV-6Y-x2h"/>
+                    <constraint firstItem="gvq-KD-5EU" firstAttribute="top" secondItem="NsQ-Q9-L2J" secondAttribute="top" id="AIb-hd-tHg"/>
+                    <constraint firstItem="x67-p9-nQo" firstAttribute="leading" secondItem="NsQ-Q9-L2J" secondAttribute="trailing" constant="5" id="Bn8-rz-J9L"/>
+                    <constraint firstItem="gvq-KD-5EU" firstAttribute="trailing" secondItem="x67-p9-nQo" secondAttribute="trailing" id="Ezt-KE-HUu"/>
+                    <constraint firstAttribute="trailing" secondItem="x67-p9-nQo" secondAttribute="trailing" constant="15" id="IUm-zb-9JP"/>
+                    <constraint firstItem="gvq-KD-5EU" firstAttribute="height" secondItem="NsQ-Q9-L2J" secondAttribute="height" id="PXE-7Z-Wiv"/>
+                    <constraint firstAttribute="trailing" secondItem="jbu-sw-moK" secondAttribute="trailing" id="Xuo-cQ-maw"/>
+                    <constraint firstItem="x67-p9-nQo" firstAttribute="centerY" secondItem="7Rg-cy-scB" secondAttribute="centerY" id="h86-Ig-8nX"/>
+                    <constraint firstItem="gvq-KD-5EU" firstAttribute="leading" secondItem="NsQ-Q9-L2J" secondAttribute="leading" id="hDL-Mz-RC8"/>
+                    <constraint firstAttribute="bottom" secondItem="NsQ-Q9-L2J" secondAttribute="bottom" id="qUD-2G-AQx"/>
+                    <constraint firstItem="7Rg-cy-scB" firstAttribute="top" secondItem="jbu-sw-moK" secondAttribute="bottom" id="r4V-SS-Flo"/>
+                    <constraint firstItem="jbu-sw-moK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sbk-PW-kNJ"/>
+                    <constraint firstAttribute="bottom" secondItem="7Rg-cy-scB" secondAttribute="bottom" id="zmk-jl-Vhd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="detailLab" destination="NsQ-Q9-L2J" id="LWe-DG-Cf1"/>
+                <outlet property="textLab" destination="7Rg-cy-scB" id="VDi-dh-h6P"/>
+            </connections>
+            <point key="canvasLocation" x="59" y="80"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="report open" width="5" height="10"/>
+    </resources>
+</document>

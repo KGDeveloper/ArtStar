@@ -1,0 +1,107 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/4/23
+ 
+ Copyright (c) 2017 My Company
+ 
+ ☆★☆★☆★☆★☆★☆★☆★☆★☆
+ ★　　│　心想　│　事成　│　　★
+ ☆别╭═╮　　 ╭═╮　　 ╭═╮别☆
+ ★恋│人│　　│奎│　　│幸│恋★
+ ☆　│氣│　　│哥│　　│福│　☆
+ ★　│超│　　│制│　　│滿│　★
+ ☆别│旺│　　│作│　　│滿│别☆
+ ★恋│㊣│　　│㊣│　　│㊣│恋★
+ ☆　╰═╯ 天天╰═╯ 開心╰═╯　☆
+ ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+#import "PhotoIsShureOrCancel.h"
+
+@interface PhotoIsShureOrCancel ()
+/**
+ 展示拍照完成后的页面
+ */
+@property (nonatomic,strong) UIView *pictureImage;
+/**
+ 拍照得到的image
+ */
+@property (nonatomic,strong) UIImageView *cameraPhoto;
+/**
+ 重拍
+ */
+@property (nonatomic,strong) UIButton *cancelBtu;
+/**
+ 确定
+ */
+@property (nonatomic,strong) UIButton *shureBtu;
+
+@end
+
+@implementation PhotoIsShureOrCancel
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.pictureImage.hidden = NO;
+    }
+    return self;
+}
+- (void)setShureImage:(UIImage *)shureImage{
+    _shureImage = shureImage;
+    self.pictureImage.hidden = NO;
+    self.cameraPhoto.image = shureImage;
+}
+/**
+ 加载拍照后的照片
+ 
+ @return view
+ */
+- (UIView *)pictureImage{
+    if (!_pictureImage) {
+        _pictureImage = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _pictureImage.hidden = YES;
+        [self addSubview:_pictureImage];
+    }
+    return _pictureImage;
+}
+//MARK:--显示拍照后的照片--
+- (UIImageView *)cameraPhoto{
+    if (!_cameraPhoto) {
+        _cameraPhoto = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        [self.pictureImage addSubview:_cameraPhoto];
+        [self createButton:self.cancelBtu frame:CGRectMake(75, ViewHeight(self.pictureImage) - NavButtomHeight - 60 - 60, 60, 60) image:Image(@"false") action:@selector(cancelClick) addView:self.pictureImage];
+        [self createButton:self.shureBtu frame:CGRectMake(ViewWidth(self.pictureImage) - 75 - 60, ViewHeight(self.pictureImage) - NavButtomHeight - 60 - 60, 60, 60) image:Image(@"true") action:@selector(shureClick) addView:self.pictureImage];
+    }
+    return _cameraPhoto;
+}
+//MARK:--关闭，重拍按钮--
+- (void)cancelClick{
+    self.hidden = YES;
+}
+//MARK:--确定俺就点击事件--
+- (void)shureClick{
+    if ([self.delegate respondsToSelector:@selector(sendShureImage:)]) {
+        [self.delegate sendShureImage:_shureImage];
+    }
+}
+//MARK:--创建公共按钮--
+- (void)createButton:(UIButton *)button frame:(CGRect)frame image:(UIImage*)image action:(SEL)action addView:(UIView *)addView{
+    button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = frame;
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [addView addSubview:button];
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

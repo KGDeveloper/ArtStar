@@ -1,0 +1,81 @@
+//
+//  ThemeVC.m
+//  ArtStar
+//
+//  Created by abc on 5/7/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "ThemeVC.h"
+
+@interface ThemeVC ()
+
+@property (nonatomic,assign) EditThemeType chooseModel;//:--选择好的模板--
+@property (nonatomic,strong) ChangeTheModelView *modelView;
+
+@end
+
+@implementation ThemeVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setLeftBtuWithTitle:@"编辑卡片" image:Image(@"back")];
+    [self setRightBtuWithTitle:@"预览" image:nil];
+    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
+    
+    _modelView = [[ChangeTheModelView alloc]initWithFrame:self.view.frame type:EditTypeTheme];
+    [self.view addSubview:_modelView];
+}
+
+- (void)setChooseModel:(EditThemeType)chooseModel{
+    _chooseModel = chooseModel;
+    switch (chooseModel) {
+        case EditThemeTypeCircular:
+            self.modelView.themeType = chooseModel;
+            break;
+        case EditThemeTypeRightTop:
+            self.modelView.themeType = chooseModel;
+            break;
+        case EditThemeTypeRightCenter:
+            self.modelView.themeType = chooseModel;
+            break;
+        case EditThemeTypeTopLeft:
+            self.modelView.themeType = chooseModel;
+            break;
+        case EditThemeTypeTopCenter:
+            self.modelView.themeType = chooseModel;
+            break;
+        case EditThemeTypeTopRight:
+            self.modelView.themeType = chooseModel;
+            break;
+        case EditThemeTypeLeft:
+            self.modelView.themeType = chooseModel;
+            break;
+        case EditThemeTypeCenter:
+            self.modelView.themeType = chooseModel;
+            break;
+        default:
+            self.modelView.themeType = chooseModel;
+            break;
+    }
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

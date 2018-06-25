@@ -1,0 +1,89 @@
+//
+//  MusicFoundFriendsView.m
+//  ArtStar
+//
+//  Created by abc on 6/4/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "MusicFoundFriendsView.h"
+#import "MusicFriendsInfoView.h"
+
+@interface MusicFoundFriendsView ()
+
+@property (nonatomic,strong) MusicFriendsInfoView *topView;
+@property (nonatomic,strong) MusicFriendsInfoView *lowView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
+
+@end
+
+@implementation MusicFriendsInfoViewModel
+@end
+
+@implementation MusicFoundFriendsView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
+        [self createData];
+        [self setUI];
+    }
+    return self;
+}
+
+- (void)setUI{
+    
+    self.lowView.hidden = NO;
+    [self bringSubviewToFront:self.topView];
+
+}
+
+- (UIView *)topView{
+    if (!_topView) {
+        _topView = [[MusicFriendsInfoView alloc]initWithFrame:self.bounds];
+        _topView.model = _dataArr[0];
+        __weak typeof(self) mySelf = self;
+        _topView.finishAnimalShowView = ^{
+            [mySelf bringSubviewToFront:mySelf.lowView];
+            mySelf.topView.model = mySelf.dataArr[0];
+            mySelf.topView.frame = mySelf.bounds;
+        };
+        [self addSubview:_topView];
+    }
+    return _topView;
+}
+- (UIView *)lowView{
+    if (!_lowView) {
+        _lowView = [[MusicFriendsInfoView alloc]initWithFrame:self.bounds];
+        _lowView.model = _dataArr[1];
+        __weak typeof(self) mySelf = self;
+        _lowView.finishAnimalShowView = ^{
+            [mySelf bringSubviewToFront:mySelf.topView];
+            mySelf.lowView.frame = mySelf.bounds;
+        };
+        [self addSubview:_lowView];
+    }
+    return _lowView;
+}
+
+- (void)createData{
+    _dataArr = [NSMutableArray array];
+    NSArray *imageArr = @[@"1",@"2",@"3",@"4",@"5",@"1",@"2",@"3",@"4",@"5"];
+    for (int i = 0; i < 10; i++) {
+        MusicFriendsInfoViewModel *model = [MusicFriendsInfoViewModel new];
+        model.image = imageArr[i];
+        model.name = [NSString stringWithFormat:@"这是第%d个",i];
+        model.age = [NSString stringWithFormat:@"%d",arc4random_uniform(50)];
+        [_dataArr addObject:model];
+    }
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

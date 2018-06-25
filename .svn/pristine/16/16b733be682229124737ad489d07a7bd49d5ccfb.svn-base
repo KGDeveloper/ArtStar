@@ -1,0 +1,106 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/4/28
+ 
+ Copyright (c) 2017 My Company
+ 
+     ☆★☆★☆★☆★☆★☆★☆★☆★☆
+     ★ 　　│　心想　│　事成　│　　★
+     ☆ 别╭═╮　　 ╭═╮　　╭═╮别   ☆
+     ★ 恋│人│　　│奎│　　│幸│恋  ★
+     ☆ 　│氣│　　│哥│　　│福│　  ☆
+     ★ 　│超│　　│制│　　│滿│　  ★
+     ☆ 别│旺│　　│做│　　│滿│别  ☆
+     ★ 恋│㊣│　　│㊣│　　│㊣│恋  ★
+     ☆ 　╰═╯天天╰═╯開心╰═╯　    ☆
+     ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+import UIKit
+
+//MARK:--枚举，设置是GET请求还是POST请求--
+enum HTTPRequestType : Int {
+    case GET = 0
+    case POST
+}
+//MARK:--写一个类方法，在外部方便调用--
+class NetworkTools: AFHTTPSessionManager {
+    
+    static let shareInstance : NetworkTools = {
+        let tools = NetworkTools()
+        //MARK:--加上这句就是添加解析格式（responseSerializer是响应格式）--
+        tools.responseSerializer.acceptableContentTypes?.insert("text/html")
+        return tools
+    }()
+}
+
+extension NetworkTools {
+    //MARK:--创建网络请求方法--
+    /// 封装网络请求方法
+    ///
+    /// - Parameters:
+    ///   - methodType: 请求方式
+    ///   - urlString: 请求地址
+    ///   - parameter: 请求参数
+    ///   - finished: 完成返回
+    func request(methodType: HTTPRequestType,urlString: String,parameter: [String : AnyObject], finished: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) -> () {
+        //MARK:--网路请求成功--
+        let successCallBlock = {(task : URLSessionDataTask, result : Any) in
+            finished(result as AnyObject?, nil)
+        }
+        //MARK:--网络请求失败--
+        let failureCallBlock = {(task : URLSessionDataTask?,error :Error) in
+            finished(nil,error)
+        }
+        //MARK:--根据传过来的methodType的type判断是GET请求还是POST请求--
+        if methodType == .GET {
+            //MARK:--封装get请求--
+            get(urlString, parameters: parameter, progress: nil, success: successCallBlock, failure: failureCallBlock)
+        } else {
+            //MARK:--封装post请求--
+            post(urlString, parameters: parameter, progress: nil, success: successCallBlock, failure: failureCallBlock)
+        }
+
+    }
+    
+    func request(methodType: HTTPRequestType,urlString: String,parameter: [String : AnyObject], finished: (result: AnyObject?,error: Error?)) -> () {
+    
+    }
+    
+    func test(name:String) -> () {
+        print(name)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="494" id="KGk-i7-Jjw" customClass="ReadBooksHeaderViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="412" height="494"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="412" height="493.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carouse" translatesAutoresizingMaskIntoConstraints="NO" id="7fS-dE-nvC">
+                        <rect key="frame" x="0.0" y="0.0" width="412" height="263.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="7fS-dE-nvC" secondAttribute="height" multiplier="750:480" id="XXJ-K6-j9G"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsH-CT-jXM">
+                        <rect key="frame" x="15" y="35" width="150" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="8Lz-T0-eGM"/>
+                            <constraint firstAttribute="width" constant="150" id="UmD-XT-vGj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="15"/>
+                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="书籍详情" image="back-white"/>
+                        <connections>
+                            <action selector="returnView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rdk-SI-ju7"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKD-y7-5TM">
+                        <rect key="frame" x="377" y="35" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="eAI-Y2-2YD"/>
+                            <constraint firstAttribute="height" constant="20" id="vFm-oB-7NF"/>
+                        </constraints>
+                        <state key="normal" image="navbar share white"/>
+                        <connections>
+                            <action selector="shareView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kQF-yf-bpn"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="vVi-sX-d7u">
+                        <rect key="frame" x="156" y="98.5" width="100" height="140"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="ObG-nf-D2B"/>
+                            <constraint firstAttribute="height" constant="140" id="b2K-BY-o03"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阅读自由主义" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWx-Ay-qeL">
+                        <rect key="frame" x="15" y="278.5" width="150" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="0fi-WY-Zw2"/>
+                            <constraint firstAttribute="height" constant="15" id="Cg5-wK-RDm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者：[日]村上春树" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbn-vu-FQU">
+                        <rect key="frame" x="15" y="308.5" width="382" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="wxn-VT-b4e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出版社：北京教育出版社" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4en-3j-VhC">
+                        <rect key="frame" x="15" y="338.5" width="382" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="V5f-WP-D73"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出版时间：2010-05" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0h-kA-81j">
+                        <rect key="frame" x="15" y="368.5" width="382" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="cxo-lf-08t"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83y-72-Cii">
+                        <rect key="frame" x="15" y="398.5" width="60" height="30"/>
+                        <color key="backgroundColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="eEG-g9-PAS"/>
+                            <constraint firstAttribute="height" constant="30" id="pgM-90-9pS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <state key="normal" title="想读">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="wantRead:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RRx-kV-Pye"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVJ-Az-JyP">
+                        <rect key="frame" x="90" y="398.5" width="60" height="30"/>
+                        <color key="backgroundColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="FFc-dX-vXc"/>
+                            <constraint firstAttribute="height" constant="30" id="wsH-2C-Ujg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <state key="normal" title="在读">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="readIngAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RYi-cL-zUG"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQ6-Vb-B2X">
+                        <rect key="frame" x="165" y="398.5" width="100" height="30"/>
+                        <color key="backgroundColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="ZWl-W8-iTy"/>
+                            <constraint firstAttribute="width" constant="100" id="gu9-fl-yq3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <state key="normal" title="读过：评分">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="readedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WVu-Za-61B"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ca-cH-jMW">
+                        <rect key="frame" x="0.0" y="484" width="412" height="10"/>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="xKQ-YK-78K"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="FWx-Ay-qeL" firstAttribute="top" secondItem="7fS-dE-nvC" secondAttribute="bottom" constant="15" id="0qP-aP-uu5"/>
+                    <constraint firstItem="7fS-dE-nvC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4Ij-Mh-Gqs"/>
+                    <constraint firstAttribute="trailing" secondItem="4en-3j-VhC" secondAttribute="trailing" constant="15" id="51o-Di-wfP"/>
+                    <constraint firstAttribute="trailing" secondItem="7ca-cH-jMW" secondAttribute="trailing" id="6mq-PN-NK4"/>
+                    <constraint firstItem="VVJ-Az-JyP" firstAttribute="top" secondItem="X0h-kA-81j" secondAttribute="bottom" constant="15" id="Aiy-mM-czQ"/>
+                    <constraint firstItem="KsH-CT-jXM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="AkX-3K-vqr"/>
+                    <constraint firstItem="4en-3j-VhC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Eh0-L9-Aae"/>
+                    <constraint firstItem="Hbn-vu-FQU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="GTW-az-LGC"/>
+                    <constraint firstItem="Hbn-vu-FQU" firstAttribute="top" secondItem="FWx-Ay-qeL" secondAttribute="bottom" constant="15" id="IAT-33-M0e"/>
+                    <constraint firstItem="4en-3j-VhC" firstAttribute="top" secondItem="Hbn-vu-FQU" secondAttribute="bottom" constant="15" id="Jzw-8r-boS"/>
+                    <constraint firstItem="83y-72-Cii" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="KEO-2k-Cnd"/>
+                    <constraint firstAttribute="trailing" secondItem="7fS-dE-nvC" secondAttribute="trailing" id="PMv-Bl-Go6"/>
+                    <constraint firstItem="hQ6-Vb-B2X" firstAttribute="top" secondItem="X0h-kA-81j" secondAttribute="bottom" constant="15" id="PRT-Vd-66P"/>
+                    <constraint firstItem="7fS-dE-nvC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Xqp-AS-PDu"/>
+                    <constraint firstItem="AKD-y7-5TM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="ZKS-fu-r6v"/>
+                    <constraint firstItem="83y-72-Cii" firstAttribute="top" secondItem="X0h-kA-81j" secondAttribute="bottom" constant="15" id="cNx-6C-Z4I"/>
+                    <constraint firstAttribute="trailing" secondItem="Hbn-vu-FQU" secondAttribute="trailing" constant="15" id="ef9-Iu-ht9"/>
+                    <constraint firstItem="vVi-sX-d7u" firstAttribute="bottom" secondItem="7fS-dE-nvC" secondAttribute="bottom" constant="-25" id="elG-qq-rtv"/>
+                    <constraint firstAttribute="bottom" secondItem="7ca-cH-jMW" secondAttribute="bottom" id="elJ-Ox-EBY"/>
+                    <constraint firstItem="VVJ-Az-JyP" firstAttribute="leading" secondItem="83y-72-Cii" secondAttribute="trailing" constant="15" id="er8-bn-f4z"/>
+                    <constraint firstItem="vVi-sX-d7u" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gKW-Ah-ryC"/>
+                    <constraint firstItem="KsH-CT-jXM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="kfz-mW-anI"/>
+                    <constraint firstItem="X0h-kA-81j" firstAttribute="top" secondItem="4en-3j-VhC" secondAttribute="bottom" constant="15" id="nEk-mY-qBa"/>
+                    <constraint firstItem="hQ6-Vb-B2X" firstAttribute="leading" secondItem="VVJ-Az-JyP" secondAttribute="trailing" constant="15" id="nKh-Bx-KgU"/>
+                    <constraint firstItem="7ca-cH-jMW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="oBs-bz-aHF"/>
+                    <constraint firstItem="FWx-Ay-qeL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="vf3-4C-HMD"/>
+                    <constraint firstAttribute="trailing" secondItem="AKD-y7-5TM" secondAttribute="trailing" constant="15" id="wNi-lB-iZk"/>
+                    <constraint firstAttribute="trailing" secondItem="X0h-kA-81j" secondAttribute="trailing" constant="15" id="xOi-iI-JYz"/>
+                    <constraint firstItem="X0h-kA-81j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="xh3-IW-WPJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="acterlab" destination="Hbn-vu-FQU" id="FeY-vP-TRl"/>
+                <outlet property="finishBtu" destination="hQ6-Vb-B2X" id="Dab-FQ-SfG"/>
+                <outlet property="fromLab" destination="4en-3j-VhC" id="4Zy-YK-hXE"/>
+                <outlet property="lowImage" destination="7fS-dE-nvC" id="yvF-Jq-ep8"/>
+                <outlet property="nameLab" destination="FWx-Ay-qeL" id="dlB-8T-0gH"/>
+                <outlet property="readIngBtu" destination="VVJ-Az-JyP" id="RI2-lH-4iS"/>
+                <outlet property="returnBtu" destination="KsH-CT-jXM" id="WeQ-9l-o7I"/>
+                <outlet property="returnTop" destination="AkX-3K-vqr" id="Jch-BI-c8h"/>
+                <outlet property="shareBtu" destination="AKD-y7-5TM" id="fwd-K4-aKK"/>
+                <outlet property="shareTop" destination="ZKS-fu-r6v" id="Zhe-QC-ZGE"/>
+                <outlet property="timeLab" destination="X0h-kA-81j" id="jYt-Xi-5wX"/>
+                <outlet property="topImage" destination="vVi-sX-d7u" id="Azf-Ms-6LR"/>
+                <outlet property="wantBtu" destination="83y-72-Cii" id="C6w-cx-iHq"/>
+            </connections>
+            <point key="canvasLocation" x="80" y="279"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="2" width="324" height="220"/>
+        <image name="back-white" width="8" height="16"/>
+        <image name="carouse" width="5" height="5"/>
+        <image name="navbar share white" width="15" height="15"/>
+    </resources>
+</document>

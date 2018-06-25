@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Bold.otf">
+            <string>SourceHanSansCN-Bold</string>
+        </array>
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="554" id="KGk-i7-Jjw" customClass="MineWordLoveFoodsCell">
+            <rect key="frame" x="0.0" y="0.0" width="435" height="555"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="435" height="554.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的世界" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUK-fO-s4R">
+                        <rect key="frame" x="15" y="10" width="405" height="13"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Bold" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喜欢的美食(5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHu-Kp-i5O">
+                        <rect key="frame" x="15" y="48" width="405" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="RLG-n5-8ZU"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quH-Jg-T2O">
+                        <rect key="frame" x="412" y="9" width="8" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="cE5-qr-9hZ"/>
+                            <constraint firstAttribute="width" constant="8" id="gtQ-XK-NlG"/>
+                        </constraints>
+                        <state key="normal" image="report open"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCY-0g-ugr">
+                        <rect key="frame" x="15" y="88" width="405" height="55"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="55" id="LiK-WP-ReZ"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWV-7g-9ok">
+                        <rect key="frame" x="15" y="158" width="405" height="1"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="wBa-jd-gKM"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喜欢的运动(5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZc-tT-v5o">
+                        <rect key="frame" x="15" y="179" width="405" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Esf-oj-9BA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rq5-91-AyB">
+                        <rect key="frame" x="15" y="219" width="405" height="55"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="55" id="t8k-15-OGc"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQ0-8E-foI">
+                        <rect key="frame" x="15" y="289" width="405" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="T3W-J6-oCb"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喜欢的休闲方式(5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbI-MP-O0p">
+                        <rect key="frame" x="15" y="310" width="405" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="izH-H9-Tx2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m1T-gg-4tI">
+                        <rect key="frame" x="15" y="350" width="405" height="55"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="55" id="67r-FN-ueC"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkT-Du-H6r">
+                        <rect key="frame" x="15" y="420" width="405" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="MIu-ZB-AAR"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的旅行足迹(5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmZ-JX-FDI">
+                        <rect key="frame" x="15" y="441" width="405" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="bP6-Ta-EjH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ymh-Dv-k3T">
+                        <rect key="frame" x="15" y="481" width="405" height="55"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="55" id="D18-W9-zyx"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wab-dK-CMh">
+                        <rect key="frame" x="15" y="551" width="405" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="OvC-MK-6XC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="TkT-Du-H6r" firstAttribute="top" secondItem="m1T-gg-4tI" secondAttribute="bottom" constant="15" id="27K-0G-QjQ"/>
+                    <constraint firstAttribute="trailing" secondItem="HbI-MP-O0p" secondAttribute="trailing" constant="15" id="50u-e7-pcF"/>
+                    <constraint firstAttribute="trailing" secondItem="wab-dK-CMh" secondAttribute="trailing" constant="15" id="FVP-aC-aI8"/>
+                    <constraint firstAttribute="trailing" secondItem="VQ0-8E-foI" secondAttribute="trailing" constant="15" id="FjN-oh-iT9"/>
+                    <constraint firstItem="EWV-7g-9ok" firstAttribute="top" secondItem="bCY-0g-ugr" secondAttribute="bottom" constant="15" id="GxL-AC-ixk"/>
+                    <constraint firstAttribute="trailing" secondItem="Ymh-Dv-k3T" secondAttribute="trailing" constant="15" id="H9H-zq-imU"/>
+                    <constraint firstItem="AmZ-JX-FDI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Hbg-1u-etu"/>
+                    <constraint firstItem="VQ0-8E-foI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Jxn-60-bXc"/>
+                    <constraint firstAttribute="trailing" secondItem="RUK-fO-s4R" secondAttribute="trailing" constant="15" id="N3j-Jb-d09"/>
+                    <constraint firstAttribute="trailing" secondItem="AmZ-JX-FDI" secondAttribute="trailing" constant="15" id="OwB-wQ-Zqu"/>
+                    <constraint firstItem="wab-dK-CMh" firstAttribute="top" secondItem="Ymh-Dv-k3T" secondAttribute="bottom" constant="15" id="Pr7-BL-96O"/>
+                    <constraint firstItem="PHu-Kp-i5O" firstAttribute="top" secondItem="RUK-fO-s4R" secondAttribute="bottom" constant="25" id="PuA-6Y-fnC"/>
+                    <constraint firstAttribute="trailing" secondItem="BZc-tT-v5o" secondAttribute="trailing" constant="15" id="SL4-wN-u3P"/>
+                    <constraint firstItem="HbI-MP-O0p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="SSd-vZ-6Lf"/>
+                    <constraint firstAttribute="trailing" secondItem="m1T-gg-4tI" secondAttribute="trailing" constant="15" id="T5z-Wx-zC0"/>
+                    <constraint firstItem="PHu-Kp-i5O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="UM3-CU-elw"/>
+                    <constraint firstAttribute="trailing" secondItem="quH-Jg-T2O" secondAttribute="trailing" constant="15" id="X3c-Wz-2JJ"/>
+                    <constraint firstItem="EWV-7g-9ok" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ys7-9k-ojN"/>
+                    <constraint firstAttribute="trailing" secondItem="PHu-Kp-i5O" secondAttribute="trailing" constant="15" id="Ywj-k9-5vZ"/>
+                    <constraint firstAttribute="trailing" secondItem="rq5-91-AyB" secondAttribute="trailing" constant="15" id="Z6Q-TK-86l"/>
+                    <constraint firstItem="RUK-fO-s4R" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Zqm-zL-9bn"/>
+                    <constraint firstItem="bCY-0g-ugr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bj0-OO-TCc"/>
+                    <constraint firstItem="RUK-fO-s4R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cBd-Da-Eao"/>
+                    <constraint firstItem="Ymh-Dv-k3T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="cJY-Xz-oUG"/>
+                    <constraint firstAttribute="trailing" secondItem="EWV-7g-9ok" secondAttribute="trailing" constant="15" id="ckm-Ay-Ybx"/>
+                    <constraint firstItem="BZc-tT-v5o" firstAttribute="top" secondItem="EWV-7g-9ok" secondAttribute="bottom" constant="20" id="eCY-W1-iTu"/>
+                    <constraint firstItem="quH-Jg-T2O" firstAttribute="centerY" secondItem="RUK-fO-s4R" secondAttribute="centerY" id="eck-MR-OkH"/>
+                    <constraint firstItem="Ymh-Dv-k3T" firstAttribute="top" secondItem="AmZ-JX-FDI" secondAttribute="bottom" constant="25" id="fhB-51-CPv"/>
+                    <constraint firstItem="m1T-gg-4tI" firstAttribute="top" secondItem="HbI-MP-O0p" secondAttribute="bottom" constant="25" id="g4B-ay-cZg"/>
+                    <constraint firstAttribute="trailing" secondItem="bCY-0g-ugr" secondAttribute="trailing" constant="15" id="g7w-Nz-BAD"/>
+                    <constraint firstAttribute="trailing" secondItem="TkT-Du-H6r" secondAttribute="trailing" constant="15" id="ic5-dP-ncV"/>
+                    <constraint firstItem="TkT-Du-H6r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="jYe-5g-Wbt"/>
+                    <constraint firstItem="VQ0-8E-foI" firstAttribute="top" secondItem="rq5-91-AyB" secondAttribute="bottom" constant="15" id="jcG-KO-cxh"/>
+                    <constraint firstItem="AmZ-JX-FDI" firstAttribute="top" secondItem="TkT-Du-H6r" secondAttribute="bottom" constant="20" id="l3E-2E-2vG"/>
+                    <constraint firstItem="HbI-MP-O0p" firstAttribute="top" secondItem="VQ0-8E-foI" secondAttribute="bottom" constant="20" id="n72-T4-A1U"/>
+                    <constraint firstItem="bCY-0g-ugr" firstAttribute="top" secondItem="PHu-Kp-i5O" secondAttribute="bottom" constant="25" id="qLo-G9-lYF"/>
+                    <constraint firstItem="m1T-gg-4tI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qQm-JI-8da"/>
+                    <constraint firstItem="rq5-91-AyB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qeL-mF-UzD"/>
+                    <constraint firstItem="BZc-tT-v5o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qu1-Hg-hIZ"/>
+                    <constraint firstItem="rq5-91-AyB" firstAttribute="top" secondItem="BZc-tT-v5o" secondAttribute="bottom" constant="25" id="rqI-No-j0S"/>
+                    <constraint firstItem="wab-dK-CMh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="sOp-ay-ViI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="foodView" destination="bCY-0g-ugr" id="ShH-iD-QDQ"/>
+                <outlet property="footView" destination="Ymh-Dv-k3T" id="yXr-3C-NIv"/>
+                <outlet property="loveFoods" destination="PHu-Kp-i5O" id="nh7-1d-NLM"/>
+                <outlet property="loveType" destination="HbI-MP-O0p" id="ADc-1P-YSk"/>
+                <outlet property="lovesport" destination="BZc-tT-v5o" id="ql1-rf-XJu"/>
+                <outlet property="myFoot" destination="AmZ-JX-FDI" id="VxY-Xu-cnf"/>
+                <outlet property="sportView" destination="rq5-91-AyB" id="FOS-Hu-ZYl"/>
+                <outlet property="typeView" destination="m1T-gg-4tI" id="Srd-TT-k2Q"/>
+            </connections>
+            <point key="canvasLocation" x="91.5" y="309"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="report open" width="5" height="10"/>
+    </resources>
+</document>

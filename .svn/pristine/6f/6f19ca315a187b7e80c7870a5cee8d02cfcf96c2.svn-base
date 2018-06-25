@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="65" id="KGk-i7-Jjw" customClass="MineSetUpPushTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="343" height="64.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFx-T2-XsB">
+                        <rect key="frame" x="15" y="0.0" width="313" height="64.5"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="report open" translatesAutoresizingMaskIntoConstraints="NO" id="jer-kg-Arh">
+                        <rect key="frame" x="321" y="25.5" width="7" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="7" id="0Mc-Yw-PaJ"/>
+                            <constraint firstAttribute="height" constant="14" id="uQ2-HZ-FNC"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2E8-TZ-tEW">
+                        <rect key="frame" x="15" y="63" width="313" height="1"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="fsE-qg-ahk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jer-kg-Arh" firstAttribute="centerY" secondItem="YFx-T2-XsB" secondAttribute="centerY" id="5Tk-7m-9zZ"/>
+                    <constraint firstItem="YFx-T2-XsB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="MDC-oA-9Z5"/>
+                    <constraint firstAttribute="trailing" secondItem="2E8-TZ-tEW" secondAttribute="trailing" constant="15" id="YHK-b5-gm6"/>
+                    <constraint firstAttribute="bottom" secondItem="2E8-TZ-tEW" secondAttribute="bottom" id="YgU-ze-3Dj"/>
+                    <constraint firstAttribute="trailing" secondItem="jer-kg-Arh" secondAttribute="trailing" constant="15" id="dTB-AW-Lu2"/>
+                    <constraint firstAttribute="trailing" secondItem="YFx-T2-XsB" secondAttribute="trailing" constant="15" id="gKK-dd-31F"/>
+                    <constraint firstItem="YFx-T2-XsB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uf0-4u-e36"/>
+                    <constraint firstAttribute="bottom" secondItem="YFx-T2-XsB" secondAttribute="bottom" id="yA4-kV-Gdl"/>
+                    <constraint firstItem="2E8-TZ-tEW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="zIx-Xg-H0N"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="rightIamge" destination="jer-kg-Arh" id="ezq-k3-BH3"/>
+                <outlet property="textLab" destination="YFx-T2-XsB" id="W6Y-vO-IK2"/>
+            </connections>
+            <point key="canvasLocation" x="45.5" y="64.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="report open" width="5" height="10"/>
+    </resources>
+</document>

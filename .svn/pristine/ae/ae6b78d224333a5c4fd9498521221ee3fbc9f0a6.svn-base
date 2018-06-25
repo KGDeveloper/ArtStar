@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="329" id="KGk-i7-Jjw" customClass="TalentPushPhotosTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="413" height="329"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="413" height="328.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ns9-Xx-KdB">
+                        <rect key="frame" x="0.0" y="0.0" width="413" height="40"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Jt6-wa-M08"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传地标专属照片" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoG-Mn-BgH">
+                        <rect key="frame" x="15" y="0.0" width="383" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="K29-4b-SHY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FkF-Ij-i6P">
+                        <rect key="frame" x="15" y="60" width="383" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="69K-yu-ePw"/>
+                        </constraints>
+                    </scrollView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YqN-GS-Mt1">
+                        <rect key="frame" x="15" y="60" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="YqN-GS-Mt1" secondAttribute="height" multiplier="1:1" id="5H1-0D-BHu"/>
+                        </constraints>
+                        <state key="normal" image="达人上传视频"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="FkF-Ij-i6P" secondAttribute="trailing" constant="15" id="Aez-45-EoQ"/>
+                    <constraint firstAttribute="trailing" secondItem="Ns9-Xx-KdB" secondAttribute="trailing" id="DBa-mo-kRH"/>
+                    <constraint firstItem="Ns9-Xx-KdB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DQt-ZC-7Mv"/>
+                    <constraint firstAttribute="trailing" secondItem="KoG-Mn-BgH" secondAttribute="trailing" constant="15" id="E4r-T3-ZQW"/>
+                    <constraint firstItem="YqN-GS-Mt1" firstAttribute="bottom" secondItem="FkF-Ij-i6P" secondAttribute="bottom" id="Fh4-7K-1rs"/>
+                    <constraint firstItem="KoG-Mn-BgH" firstAttribute="top" secondItem="Ns9-Xx-KdB" secondAttribute="top" id="HPw-Z3-SmY"/>
+                    <constraint firstItem="YqN-GS-Mt1" firstAttribute="leading" secondItem="FkF-Ij-i6P" secondAttribute="leading" id="VA9-2D-cvP"/>
+                    <constraint firstItem="FkF-Ij-i6P" firstAttribute="top" secondItem="Ns9-Xx-KdB" secondAttribute="bottom" constant="20" id="ljV-l7-1yo"/>
+                    <constraint firstItem="Ns9-Xx-KdB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="plm-ld-Ihy"/>
+                    <constraint firstItem="KoG-Mn-BgH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ptM-xC-zkm"/>
+                    <constraint firstItem="YqN-GS-Mt1" firstAttribute="top" secondItem="FkF-Ij-i6P" secondAttribute="top" id="qCZ-4u-GgA"/>
+                    <constraint firstItem="FkF-Ij-i6P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="vWe-y0-NZQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="addBtu" destination="YqN-GS-Mt1" id="olz-fd-ohM"/>
+                <outlet property="backView" destination="FkF-Ij-i6P" id="0Xm-GJ-zxP"/>
+                <outlet property="titleLab" destination="KoG-Mn-BgH" id="FTY-OK-M1p"/>
+            </connections>
+            <point key="canvasLocation" x="80.5" y="196.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="达人上传视频" width="100" height="100"/>
+    </resources>
+</document>

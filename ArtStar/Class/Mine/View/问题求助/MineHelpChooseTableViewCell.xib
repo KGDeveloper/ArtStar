@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="396" id="KGk-i7-Jjw" customClass="MineHelpChooseTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="396"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="376" height="395.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fhp-24-UpH">
+                        <rect key="frame" x="15" y="0.0" width="346" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="g5I-fG-JEy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <state key="normal" title="怎么查看聊天记录">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="foundChatHistory:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1Rs-Gr-1c9"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shG-l4-dky">
+                        <rect key="frame" x="15" y="49" width="346" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="amQ-Qs-Tym"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYu-Dd-GFL">
+                        <rect key="frame" x="15" y="49" width="346" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="imN-fy-sFX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <state key="normal" title="朋友圈发表异常问题">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="releaseFriendQuest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zWH-EQ-Jkl"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOS-AO-mjg">
+                        <rect key="frame" x="15" y="98" width="346" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="am0-Fw-SlZ"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9Q-G9-Baf">
+                        <rect key="frame" x="15" y="99" width="346" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="uq8-hb-a6c"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <state key="normal" title="怎么样才能成为达人">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="becomeTalent:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="058-09-i3c"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLW-Wg-28T">
+                        <rect key="frame" x="15" y="149" width="346" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="wjz-bq-nob"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <state key="normal" title="申请成为达人的收益">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="talentearnings:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mBC-dA-xAB"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gcy-mv-lE6">
+                        <rect key="frame" x="15" y="199" width="346" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="EdK-XR-mTa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <state key="normal" title="忘记密码怎么办">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="forgetPassword:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Qms-H7-qg4"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WM5-IU-CRe">
+                        <rect key="frame" x="15" y="148" width="346" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="rbG-up-Hmz"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YT-1k-42Z">
+                        <rect key="frame" x="15" y="198" width="346" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="V92-BY-bNe"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-Pg-a1h">
+                        <rect key="frame" x="15" y="248" width="346" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="5sI-v1-Jdl"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="WM5-IU-CRe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="1pc-XR-RVV"/>
+                    <constraint firstItem="yLW-Wg-28T" firstAttribute="top" secondItem="WM5-IU-CRe" secondAttribute="bottom" id="3cC-d3-AP1"/>
+                    <constraint firstItem="lYu-Dd-GFL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Cy-I2-Fol"/>
+                    <constraint firstAttribute="trailing" secondItem="z4g-Pg-a1h" secondAttribute="trailing" constant="15" id="9Nb-4u-XTW"/>
+                    <constraint firstItem="5YT-1k-42Z" firstAttribute="top" secondItem="yLW-Wg-28T" secondAttribute="bottom" id="B2G-CU-8eY"/>
+                    <constraint firstItem="5YT-1k-42Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="BWS-aL-CmJ"/>
+                    <constraint firstItem="Fhp-24-UpH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Bro-cb-RhK"/>
+                    <constraint firstAttribute="trailing" secondItem="Gcy-mv-lE6" secondAttribute="trailing" constant="15" id="Ckc-PP-TSB"/>
+                    <constraint firstAttribute="trailing" secondItem="5YT-1k-42Z" secondAttribute="trailing" constant="15" id="KjU-dD-E9K"/>
+                    <constraint firstAttribute="trailing" secondItem="Fhp-24-UpH" secondAttribute="trailing" constant="15" id="N7f-Ub-bf8"/>
+                    <constraint firstItem="shG-l4-dky" firstAttribute="top" secondItem="Fhp-24-UpH" secondAttribute="bottom" id="OIk-tl-j73"/>
+                    <constraint firstAttribute="trailing" secondItem="yLW-Wg-28T" secondAttribute="trailing" constant="15" id="PHg-vC-FHG"/>
+                    <constraint firstAttribute="trailing" secondItem="WM5-IU-CRe" secondAttribute="trailing" constant="15" id="QK0-T1-mkG"/>
+                    <constraint firstItem="X9Q-G9-Baf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Scf-tD-Imv"/>
+                    <constraint firstAttribute="trailing" secondItem="shG-l4-dky" secondAttribute="trailing" constant="15" id="TOz-rx-gLq"/>
+                    <constraint firstItem="X9Q-G9-Baf" firstAttribute="top" secondItem="KOS-AO-mjg" secondAttribute="bottom" id="bGx-1u-phk"/>
+                    <constraint firstItem="lYu-Dd-GFL" firstAttribute="top" secondItem="Fhp-24-UpH" secondAttribute="bottom" id="cuD-Kj-45d"/>
+                    <constraint firstItem="z4g-Pg-a1h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="eTX-8p-pcZ"/>
+                    <constraint firstItem="KOS-AO-mjg" firstAttribute="top" secondItem="lYu-Dd-GFL" secondAttribute="bottom" id="fTo-xt-7am"/>
+                    <constraint firstItem="Gcy-mv-lE6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fuV-fN-oYX"/>
+                    <constraint firstItem="z4g-Pg-a1h" firstAttribute="top" secondItem="Gcy-mv-lE6" secondAttribute="bottom" id="igO-X7-nbu"/>
+                    <constraint firstItem="KOS-AO-mjg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ihF-C8-ZaU"/>
+                    <constraint firstItem="Gcy-mv-lE6" firstAttribute="top" secondItem="5YT-1k-42Z" secondAttribute="bottom" id="jdh-9P-7Je"/>
+                    <constraint firstItem="WM5-IU-CRe" firstAttribute="top" secondItem="X9Q-G9-Baf" secondAttribute="bottom" id="mZ6-be-OCg"/>
+                    <constraint firstAttribute="trailing" secondItem="lYu-Dd-GFL" secondAttribute="trailing" constant="15" id="myh-xy-0e0"/>
+                    <constraint firstItem="shG-l4-dky" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="nnM-MA-egi"/>
+                    <constraint firstItem="yLW-Wg-28T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ppx-dz-IwN"/>
+                    <constraint firstItem="Fhp-24-UpH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="r7L-QN-oD0"/>
+                    <constraint firstAttribute="trailing" secondItem="X9Q-G9-Baf" secondAttribute="trailing" constant="15" id="sdR-K0-djo"/>
+                    <constraint firstAttribute="trailing" secondItem="KOS-AO-mjg" secondAttribute="trailing" constant="15" id="y6n-o4-aKM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="70" y="208"/>
+        </tableViewCell>
+    </objects>
+</document>

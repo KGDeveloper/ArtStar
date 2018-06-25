@@ -1,0 +1,21 @@
+//
+//  MineHeaderView.h
+//  ArtStar
+//
+//  Created by abc on 6/7/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@protocol MineHeaderViewDelegate <NSObject>
+
+- (void)pushViewControllerViewTitle:(NSString *)title;
+
+@end
+
+@interface MineHeaderView : UIView
+
+@property (nonatomic,weak) id<MineHeaderViewDelegate>delegate;
+
+@end

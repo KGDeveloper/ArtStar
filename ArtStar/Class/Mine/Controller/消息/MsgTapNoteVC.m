@@ -1,0 +1,70 @@
+//
+//  MsgTapNoteVC.m
+//  ArtStar
+//
+//  Created by abc on 6/8/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "MsgTapNoteVC.h"
+
+@interface MsgTapNoteVC ()
+
+@property (nonatomic,strong) UITextField *textField;
+
+@end
+
+@implementation MsgTapNoteVC
+
+- (void)rightNavBtuAction:(UIButton *)sender{
+    if (self.sendNoteName) {
+        self.sendNoteName(_textField.text);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setLeftBtuWithTitle:@"备注信息" image:Image(@"back")];
+    [self setRightBtuWithTitle:@"完成" image:nil];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self setViewUI];
+}
+
+- (void)setViewUI{
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(15, NavTopHeight + 20, kScreenWidth - 30, 15)];
+    label.text = @"备注名";
+    label.textColor = Color_333333;
+    label.font = SYFont(13);
+    [self.view addSubview:label];
+    
+    _textField = [[UITextField alloc]initWithFrame:CGRectMake(15, NavTopHeight + 65, kScreenWidth - 30, 15)];
+    _textField.placeholder = @"请填写备注";
+    _textField.font = SYFont(14);
+    _textField.textColor = Color_333333;
+    [self.view addSubview:_textField];
+    
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15,NavTopHeight + 90, kScreenWidth - 30, 1)];
+    line.backgroundColor = Color_cccccc;
+    [self.view addSubview:line];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,234 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/4/20
+ 
+ Copyright (c) 2017 My Company
+ 
+ ☆★☆★☆★☆★☆★☆★☆★☆★☆
+ ★　　│　心想　│　事成　│　　★
+ ☆别╭═╮　　 ╭═╮　　 ╭═╮别☆
+ ★恋│人│　　│奎│　　│幸│恋★
+ ☆　│氣│　　│哥│　　│福│　☆
+ ★　│超│　　│制│　　│滿│　★
+ ☆别│旺│　　│作│　　│滿│别☆
+ ★恋│㊣│　　│㊣│　　│㊣│恋★
+ ☆　╰═╯ 天天╰═╯ 開心╰═╯　☆
+ ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+#import "CameraView.h"
+#import <AVFoundation/AVFoundation.h>
+#import "PhotoIsShureOrCancel.h"
+
+@interface CameraView ()
+<AVCapturePhotoCaptureDelegate,PhotoIsShureOrCancelDelegate>
+/**
+ 获取设备硬件,相机
+ */
+@property (nonatomic,strong) AVCaptureDevice *device;
+/**
+ 捕获对象数据的类，也就是输入设备
+ */
+@property (nonatomic,strong) AVCaptureDeviceInput *input;
+/**
+ 捕获对象后输出对象
+ */
+@property (nonatomic,strong) AVCapturePhotoOutput *imageOutput;
+/**
+ 输出图像设置
+ */
+@property (nonatomic,strong) AVCapturePhotoSettings *photoSetting;
+/**
+ 在接收器的设备上显示闪光模式的常数，如果有的话
+ */
+@property (nonatomic,assign) AVCaptureFlashMode model;
+/**
+ 对象捕获控制中心
+ */
+@property (nonatomic,strong) AVCaptureSession *session;
+/**
+ 预览图层
+ */
+@property (nonatomic,strong) AVCaptureVideoPreviewLayer *previewLayer;
+/**
+ 返回按钮
+ */
+@property (nonatomic,strong) UIButton *returnBtu;
+/**
+ 切换摄像头
+ */
+@property (nonatomic,strong) UIButton *cameraBtu;
+/**
+ 打开关闭闪光灯
+ */
+@property (nonatomic,strong) UIButton *flashBtu;
+/**
+ 拍照按钮
+ */
+@property (nonatomic,strong) UIButton *touchBtu;
+@property (nonatomic,strong) PhotoIsShureOrCancel *shureImage;
+
+@end
+
+@implementation CameraView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self initCamera];
+        [self createUI];
+    }
+    return self;
+}
+//MARK:--设置相机--
+- (void)initCamera{
+    /*
+     *AVCaptureDevice表示一个物理设备，它提供实时输入媒体数据，如视频和音频
+     */
+    self.device = [self cameraWithPosition:AVCaptureDevicePositionBack];
+    /*
+     *AVCaptureDeviceInput是AVCaptureInput的一个具体子类，它提供了从一个AVCaptureDevice捕获媒体的接口
+     */
+    self.input = [[AVCaptureDeviceInput alloc]initWithDevice:self.device error:nil];
+    /*
+     *AVCapturePhotoOutput是AVCaptureOutput的一个具体子类，取代AVCaptureStillImageOutput作为捕获照片的首选接口。除了捕捉AVCaptureStillImageOutput支持的静态图像的所有味道外，它还支持实时照片捕捉、预览大小的图像传递、宽颜色、原始、原始+JPG和RAW+DNG格式
+     */
+    self.imageOutput = [[AVCapturePhotoOutput alloc]init];
+    self.imageOutput.accessibilityFrame = self.frame;
+    /*
+     *AVCaptureSession是AVFoundation捕获类的中心中心
+     *为了执行实时捕获，客户端可以实例化AVCaptureSession并添加适当的avcaptureinput，例如AVCaptureDeviceInput和输出，比如AVCaptureMovieFileOutput。[AVCaptureSession startRunning]启动从输入到输出的数据流，[AVCaptureSession stopRunning]停止流。客户端可以设置sessionPreset属性来定制输出的质量级别或比特率
+     */
+    self.session = [[AVCaptureSession alloc]init];
+    /*
+     *客户端可以使用AVCaptureSessionPreset来设置AVCaptureSession的输出格式
+     *AVCaptureSessionPresetPhoto:客户端可以设置AVCaptureSession实例的sessionPreset，以AVCaptureSessionPresetPhoto进行完整的分辨率照片质量输出
+     *AVCaptureSessionPresetHigh:客户端可以设置AVCaptureSession实例的sessionPreset以AVCaptureSessionPresetHigh，以获得高质量的视频和音频输出。AVCaptureSessionPresetHigh是默认的sessionPreset值
+     */
+    self.session.sessionPreset = AVCaptureSessionPresetHigh;
+    if ([self.session canAddInput:self.input]) {
+        [self.session addInput:self.input];
+    }
+    if ([self.session canAddOutput:self.imageOutput]) {
+        [self.session addOutput:self.imageOutput];
+    }
+    /*
+     *AVCaptureVideoPreviewLayer实例是CALayer的子类，因此适合作为图形界面的一部分插入到层层次结构中。通过使用+layerWithSession:或-initWithSession:创建一个AVCaptureVideoPreviewLayer实例，并使用+layerWithSession进行预览。使用@“videoGravity”属性，可以影响如何将内容与层边界相关联。在一些硬件配置上，可以使用@“orientation”和@“镜像”来处理层的方向
+     */
+    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.session];
+    /*设置预览图层的frame*/
+    self.previewLayer.frame = self.frame;
+    /*设置预览图层为铺满屏幕*/
+    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    [self.layer addSublayer:self.previewLayer];
+    /*取景设备开始取景*/
+    [self.session startRunning];
+}
+//MARK:--根据设备硬件的位置获取到相应的摄像头--
+- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position{
+    if ([AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo].position == position) {
+        return [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    }
+    return nil;
+}
+//MARK:--创建公共按钮--
+- (void)createButton:(UIButton *)button frame:(CGRect)frame image:(UIImage*)image action:(SEL)action addView:(UIView *)addView{
+    button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = frame;
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [addView addSubview:button];
+}
+//MARK:--创建相机控制按钮--
+- (void)createUI{
+    /*创建返回按钮*/
+    [self createButton:self.returnBtu frame:CGRectMake(15, NavTopHeight - 44 + 15, 10, 16) image:Image(@"返回") action:@selector(returnClick) addView:self];
+    /*创建切换摄像头按钮*/
+    [self createButton:self.cameraBtu frame:CGRectMake(kScreenWidth - 43, NavTopHeight - 44 + 15, 28, 23) image:Image(@"镜头切换") action:@selector(createClick) addView:self];
+    /*创建闪光灯控制按钮*/
+    [self createButton:self.flashBtu frame:CGRectMake(kScreenWidth - 39, NavTopHeight - 44 + 15 + 23 + 23 , 20, 34) image:Image(@"闪光灯关闭") action:@selector(flashClick:) addView:self];
+    /*创建拍照按钮*/
+    [self createButton:self.touchBtu frame:CGRectMake(kScreenWidth/2 - 30,kScreenHeight - NavButtomHeight - 100, 60, 60) image:Image(@"拍照-未点击") action:@selector(touchClick) addView:self];
+}
+//MARK:--返回按钮点击事件--
+- (void)returnClick{
+    self.hidden = YES;
+}
+//MARK:--切换摄像头按钮点击事件--
+- (void)createClick{
+    AVCaptureDevicePosition position;
+    if (self.device.position == AVCaptureDevicePositionBack) {
+        position = AVCaptureDevicePositionFront;
+    }else{
+        position = AVCaptureDevicePositionBack;
+    }
+    AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera mediaType:AVMediaTypeVideo position:position];
+    if (device) {
+        self.device = device;
+        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
+        [self.session beginConfiguration];
+        [self.session removeInput:self.input];
+        if ([self.session canAddInput:input]) {
+            [self.session addInput:input];
+            self.input = input;
+            [self.session commitConfiguration];
+        }
+    }
+}
+//MARK:--控制闪光灯按钮点击事件--
+- (void)flashClick:(UIButton *)sender{
+    
+    if (self.model == AVCaptureFlashModeOn) {
+        self.model = AVCaptureFlashModeOff;
+        [sender setImage:Image(@"闪光灯关闭") forState:UIControlStateNormal];
+    }else{
+        self.model = AVCaptureFlashModeOn;
+        [sender setImage:Image(@"闪光灯自动") forState:UIControlStateNormal];
+    }
+}
+//MARK:--拍照按钮点击事件--
+- (void)touchClick{
+    AVCaptureConnection *connection = [self.imageOutput connectionWithMediaType:AVMediaTypeVideo];
+    if (!connection) {
+        /*拍照失败*/
+        return;
+    }
+    /*设置输出的照片格式为jpg*/
+    self.photoSetting = [AVCapturePhotoSettings photoSettingsWithFormat:@{AVVideoCodecKey:AVVideoCodecTypeJPEG}];
+    /*设置拍照时候是否闪光*/
+    self.model = AVCaptureFlashModeOff;
+    self.photoSetting.flashMode = self.model;
+    /*输出图像*/
+    [self.imageOutput capturePhotoWithSettings:self.photoSetting delegate:self];
+}
+//MARK:--AVCapturePhotoCaptureDelegate--
+- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(NSError *)error{
+    /*获取拍摄到的照片*/
+    NSData *data = photo.fileDataRepresentation;
+    /*把得到的data类型的数据转成想要的image类型*/
+    UIImage *image = [UIImage imageWithData:data];
+    self.shureImage.hidden = NO;
+    self.shureImage.shureImage = image;
+}
+- (PhotoIsShureOrCancel *)shureImage{
+    if (!_shureImage) {
+        _shureImage = [[PhotoIsShureOrCancel alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _shureImage.delegate = self;
+        [self addSubview:_shureImage];
+    }
+    return _shureImage;
+}
+- (void)sendShureImage:(UIImage *)image{
+    NSLog(@"%@",image);
+}
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

@@ -1,0 +1,28 @@
+//
+//  FileHeader.h
+//  ArtStar
+//
+//  Created by KG丿轩帝 on 2018/4/19.
+//  Copyright © 2018年 KG丿轩帝. All rights reserved.
+//
+
+#ifndef FileHeader_h
+#define FileHeader_h
+
+#ifdef __OBJC__
+
+#import <YYKit.h>
+
+
+//MARK:--简单的一个选择相机，提示消息等弹窗--
+#import "KGAlertView.h"
+//MARK:--swift和Objective-C混编的桥接文件--
+#import "ArtStar-Swift.h"
+//MARK:--导航栏左侧右侧按钮定制--
+#import "CustomNavBtu.h"
+//MARK:--扩展UIColor类，实现十六进制转RGBA--
+#import "HexStringColor.h"
+
+#endif
+
+#endif /* FileHeader_h */

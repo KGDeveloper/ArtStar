@@ -1,0 +1,75 @@
+//
+//  GraphicVC.m
+//  ArtStar
+//
+//  Created by abc on 5/7/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "GraphicVC.h"
+#import "ChangeModelView.h"
+#import "ChooseModelVC.h"
+
+@interface GraphicVC ()<ChangeModelViewDelegate>
+
+@property (nonatomic,strong) ChangeModelView *ideaView;
+@property (nonatomic,assign) NSInteger chooseModel;//:--选择好的模板--
+@property (nonatomic,strong) ChangeTheModelView *modelView;
+
+@end
+
+@implementation GraphicVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setLeftBtuWithTitle:@"编辑卡片" image:Image(@"back")];
+    [self setRightBtuWithTitle:@"预览" image:nil];
+    
+    self.view.backgroundColor = Color_f2f2f2;
+    
+    _ideaView = [[ChangeModelView alloc]initWithFrame:CGRectMake(0,kScreenHeight - NavButtomHeight - 50, kScreenWidth, 50 + NavButtomHeight)];
+    _ideaView.delegate = self;
+    [self.view addSubview:_ideaView];
+    
+    _modelView = [[ChangeTheModelView alloc]initWithFrame:CGRectMake(0,NavTopHeight, kScreenWidth, 180 + textViewHeight + 58) type:EditTypeGraphic];
+    [self.view addSubview:_modelView];
+}
+//MARK:--ChangeModelViewDelegate--
+- (void)changeViewFrame:(CGRect)frame{
+    if (frame.size.height == 50 + NavButtomHeight) {
+        _ideaView.frame = CGRectMake(0, kScreenHeight - NavButtomHeight - 50 - 120, kScreenWidth, 50 + NavButtomHeight + 120);
+    }else{
+        _ideaView.frame = CGRectMake(0,kScreenHeight - NavButtomHeight - 50, kScreenWidth, 50 + NavButtomHeight);
+    }
+}
+- (void)changeModelViewClick{
+    __weak typeof(self) mySelf = self;
+    ChooseModelVC *vc = [[ChooseModelVC alloc]init];
+    vc.imageArr = @[Image(@"A文字"),Image(@"A图片"),Image(@"A圆形"),Image(@"A右上"),Image(@"A右中"),Image(@"A上左"),Image(@"A上中"),Image(@"A上右"),Image(@"A下左"),Image(@"A下中"),Image(@"A下右")];
+    //:--在这里获取选择好的模板，保存起来，然后修改view布局--
+    vc.sendModel = ^(NSInteger index) {
+        mySelf.chooseModel = [[ModelFrameIndex shareInterace] graphicTypeWithIndex:index];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    _ideaView.frame = CGRectMake(0,kScreenHeight - NavButtomHeight - 50, kScreenWidth, 50 + NavButtomHeight);
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

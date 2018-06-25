@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="156" id="KGk-i7-Jjw" customClass="ReadBooksCell">
+            <rect key="frame" x="0.0" y="0.0" width="491" height="156"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="491" height="155.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="Qk1-Mc-a5I">
+                        <rect key="frame" x="15" y="15" width="100" height="140"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="4uH-Gv-dOq"/>
+                            <constraint firstAttribute="height" constant="140" id="SbI-MT-kZv"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="寻找你的适合远方" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDb-1A-PQN">
+                        <rect key="frame" x="130" y="25" width="346" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="ejj-T6-Auu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ert-tl-EGR">
+                        <rect key="frame" x="220" y="55" width="256" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="k6H-Cq-QiI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="987-C5-aTv">
+                        <rect key="frame" x="130" y="55" width="80" height="15"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="8vX-fb-J7Y"/>
+                            <constraint firstAttribute="height" constant="15" id="Vpb-Fc-Dfd"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1I-AN-oKD">
+                        <rect key="frame" x="130" y="85" width="346" height="60.5"/>
+                        <string key="text">书籍的历史和文字、语言、文学、艺术、技术和科学的发展，有着紧密的联系。它最早可追溯于石、木、陶器、青铜、棕榈树叶、骨、白桦树皮等物上的铭刻。将纸莎草用于写字，对书籍的发展起了巨大的推动作用。约在公元前30世纪，埃及纸草书卷的出现，是最早的埃及书籍雏形。纸草书卷比苏美尔、巴比伦、亚述和赫梯人的泥版书更接近于现代书籍的概念。</string>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="iDb-1A-PQN" firstAttribute="leading" secondItem="Qk1-Mc-a5I" secondAttribute="trailing" constant="15" id="7Zc-Cc-0VJ"/>
+                    <constraint firstAttribute="trailing" secondItem="iDb-1A-PQN" secondAttribute="trailing" constant="15" id="Bh4-Cj-JFA"/>
+                    <constraint firstItem="987-C5-aTv" firstAttribute="leading" secondItem="Qk1-Mc-a5I" secondAttribute="trailing" constant="15" id="FQn-7I-G9Z"/>
+                    <constraint firstItem="987-C5-aTv" firstAttribute="top" secondItem="iDb-1A-PQN" secondAttribute="bottom" constant="15" id="GPi-1o-hgg"/>
+                    <constraint firstItem="t1I-AN-oKD" firstAttribute="top" secondItem="987-C5-aTv" secondAttribute="bottom" constant="15" id="JuY-hq-tjo"/>
+                    <constraint firstAttribute="trailing" secondItem="ert-tl-EGR" secondAttribute="trailing" constant="15" id="MhJ-ce-Vc3"/>
+                    <constraint firstItem="Qk1-Mc-a5I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="QkL-ew-OBC"/>
+                    <constraint firstItem="ert-tl-EGR" firstAttribute="top" secondItem="iDb-1A-PQN" secondAttribute="bottom" constant="15" id="Tij-fD-O9I"/>
+                    <constraint firstItem="iDb-1A-PQN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="WP3-Ff-hVL"/>
+                    <constraint firstAttribute="bottom" secondItem="t1I-AN-oKD" secondAttribute="bottom" constant="10" id="YnP-Mt-7rn"/>
+                    <constraint firstAttribute="trailing" secondItem="t1I-AN-oKD" secondAttribute="trailing" constant="15" id="mHB-Qp-NeU"/>
+                    <constraint firstItem="t1I-AN-oKD" firstAttribute="leading" secondItem="Qk1-Mc-a5I" secondAttribute="trailing" constant="15" id="ndL-PN-od9"/>
+                    <constraint firstItem="Qk1-Mc-a5I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="pjg-DX-bYk"/>
+                    <constraint firstItem="ert-tl-EGR" firstAttribute="leading" secondItem="987-C5-aTv" secondAttribute="trailing" constant="10" id="wCi-WX-oYf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="bookImag" destination="Qk1-Mc-a5I" id="TUS-Tn-rBU"/>
+                <outlet property="detailLab" destination="t1I-AN-oKD" id="Kp6-Hf-xlu"/>
+                <outlet property="nameLab" destination="iDb-1A-PQN" id="1hh-yC-H3U"/>
+                <outlet property="starView" destination="987-C5-aTv" id="NIk-uT-GyG"/>
+                <outlet property="stareLab" destination="ert-tl-EGR" id="bzR-dO-qRx"/>
+            </connections>
+            <point key="canvasLocation" x="119.5" y="110"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="2" width="324" height="220"/>
+    </resources>
+</document>

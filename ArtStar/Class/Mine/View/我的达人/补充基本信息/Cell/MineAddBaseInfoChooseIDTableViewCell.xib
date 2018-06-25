@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="136" id="KGk-i7-Jjw" customClass="MineAddBaseInfoChooseIDTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="371" height="136"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="371" height="135.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zF-fM-D8u">
+                        <rect key="frame" x="0.0" y="0.0" width="371" height="10"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="Uia-85-tdu"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择证件类型" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7CG-RZ-rc5">
+                        <rect key="frame" x="15" y="28" width="90" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="NlA-dR-0P1"/>
+                            <constraint firstAttribute="width" constant="90" id="yVO-B9-53j"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二代身份证" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Znk-1P-KRC">
+                        <rect key="frame" x="120" y="27.5" width="223" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="jGE-pM-Uhe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="report open" translatesAutoresizingMaskIntoConstraints="NO" id="SpA-sE-Yuv">
+                        <rect key="frame" x="348" y="28" width="8" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="8" id="4Ll-rF-2cF"/>
+                            <constraint firstAttribute="height" constant="14" id="Y6M-Qg-DHX"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49d-y7-4XN">
+                        <rect key="frame" x="120" y="20" width="236" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="dpU-WU-1oz"/>
+                        </constraints>
+                        <connections>
+                            <action selector="chooseCardClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="maV-vi-EPC"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UZ7-uM-Ydp">
+                        <rect key="frame" x="15" y="60" width="341" height="1"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="2Uy-Eq-mUr"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="证件号码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1N-1Z-jV1">
+                        <rect key="frame" x="15" y="79" width="90" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="lgX-yj-6nG"/>
+                            <constraint firstAttribute="width" constant="90" id="uaL-Oj-gd0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的证件号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uQY-mR-U4T">
+                        <rect key="frame" x="115" y="76" width="241" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Rzf-f7-cgg"/>
+                        </constraints>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="X1N-1Z-jV1" firstAttribute="top" secondItem="UZ7-uM-Ydp" secondAttribute="bottom" constant="18" id="2pc-hU-F74"/>
+                    <constraint firstItem="49d-y7-4XN" firstAttribute="leading" secondItem="Znk-1P-KRC" secondAttribute="leading" id="9MY-pc-nql"/>
+                    <constraint firstItem="Znk-1P-KRC" firstAttribute="leading" secondItem="7CG-RZ-rc5" secondAttribute="trailing" constant="15" id="EfX-9s-CDs"/>
+                    <constraint firstItem="uQY-mR-U4T" firstAttribute="leading" secondItem="X1N-1Z-jV1" secondAttribute="trailing" constant="10" id="FCm-BE-Jl2"/>
+                    <constraint firstItem="49d-y7-4XN" firstAttribute="trailing" secondItem="SpA-sE-Yuv" secondAttribute="trailing" id="LAY-on-Eyx"/>
+                    <constraint firstItem="X1N-1Z-jV1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="N66-qd-9Mj"/>
+                    <constraint firstItem="3zF-fM-D8u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="P16-CW-UJ1"/>
+                    <constraint firstItem="49d-y7-4XN" firstAttribute="centerY" secondItem="7CG-RZ-rc5" secondAttribute="centerY" id="PS8-OU-dXx"/>
+                    <constraint firstAttribute="trailing" secondItem="UZ7-uM-Ydp" secondAttribute="trailing" constant="15" id="Rjh-M2-2YK"/>
+                    <constraint firstItem="7CG-RZ-rc5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="V3A-22-TZd"/>
+                    <constraint firstItem="UZ7-uM-Ydp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="aT1-Ps-vpN"/>
+                    <constraint firstAttribute="trailing" secondItem="3zF-fM-D8u" secondAttribute="trailing" id="cRl-2P-xhC"/>
+                    <constraint firstAttribute="trailing" secondItem="SpA-sE-Yuv" secondAttribute="trailing" constant="15" id="hVV-kQ-LAG"/>
+                    <constraint firstItem="Znk-1P-KRC" firstAttribute="centerY" secondItem="7CG-RZ-rc5" secondAttribute="centerY" id="i2s-sW-DIj"/>
+                    <constraint firstItem="SpA-sE-Yuv" firstAttribute="leading" secondItem="Znk-1P-KRC" secondAttribute="trailing" constant="5" id="k3D-2l-HwR"/>
+                    <constraint firstItem="3zF-fM-D8u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lag-eZ-3Ex"/>
+                    <constraint firstItem="7CG-RZ-rc5" firstAttribute="top" secondItem="3zF-fM-D8u" secondAttribute="bottom" constant="18" id="mUB-Sy-xBY"/>
+                    <constraint firstItem="UZ7-uM-Ydp" firstAttribute="top" secondItem="49d-y7-4XN" secondAttribute="bottom" constant="10" id="oh7-RR-hUt"/>
+                    <constraint firstAttribute="trailing" secondItem="uQY-mR-U4T" secondAttribute="trailing" constant="15" id="uMb-zo-VW5"/>
+                    <constraint firstItem="SpA-sE-Yuv" firstAttribute="centerY" secondItem="7CG-RZ-rc5" secondAttribute="centerY" id="v7g-zT-KEw"/>
+                    <constraint firstItem="uQY-mR-U4T" firstAttribute="centerY" secondItem="X1N-1Z-jV1" secondAttribute="centerY" id="wjW-Oc-cXQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="cardTF" destination="uQY-mR-U4T" id="RcY-oo-XuY"/>
+                <outlet property="carfLab" destination="Znk-1P-KRC" id="MZl-s5-ZDd"/>
+                <outlet property="numLab" destination="X1N-1Z-jV1" id="UdH-Ps-XPF"/>
+                <outlet property="topLab" destination="7CG-RZ-rc5" id="H3q-dC-2Xk"/>
+            </connections>
+            <point key="canvasLocation" x="59.5" y="100"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="report open" width="5" height="10"/>
+    </resources>
+</document>

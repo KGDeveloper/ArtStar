@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="144" id="KGk-i7-Jjw" customClass="HotMoviesCell">
+            <rect key="frame" x="0.0" y="0.0" width="391" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="391" height="143.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="8tz-U8-D3i">
+                        <rect key="frame" x="15" y="15" width="80" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="8Cc-R2-Lmd"/>
+                            <constraint firstAttribute="height" constant="100" id="o0t-fo-BYh"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="复仇者联盟 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PG2-yZ-9nb">
+                        <rect key="frame" x="110" y="25" width="150" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="1q9-hK-uY1"/>
+                            <constraint firstAttribute="width" constant="150" id="rDG-d2-Syp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主演：钢铁队长，美国巨人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yY-DN-ATQ">
+                        <rect key="frame" x="110" y="57.5" width="266" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="a0X-q6-Y1b"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93E-An-diF">
+                        <rect key="frame" x="110" y="92" width="45" height="23"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="U0B-oD-4QN"/>
+                            <constraint firstAttribute="width" constant="45" id="qEA-jS-Epk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <state key="normal" title="购票"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.5分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2W-EW-fyg">
+                        <rect key="frame" x="276" y="25" width="100" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="C6S-mS-Qfu"/>
+                            <constraint firstAttribute="height" constant="15" id="XVa-p6-4iT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-zf-v5k">
+                        <rect key="frame" x="15" y="142.5" width="361" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="gAo-yt-vfa"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="k2W-EW-fyg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="2pd-8Q-DiQ"/>
+                    <constraint firstItem="8tz-U8-D3i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="EbH-26-04A"/>
+                    <constraint firstItem="4yY-DN-ATQ" firstAttribute="leading" secondItem="8tz-U8-D3i" secondAttribute="trailing" constant="15" id="Of0-q2-aS4"/>
+                    <constraint firstItem="JnV-zf-v5k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="PoF-wj-8iL"/>
+                    <constraint firstItem="93E-An-diF" firstAttribute="leading" secondItem="8tz-U8-D3i" secondAttribute="trailing" constant="15" id="Sns-og-aCL"/>
+                    <constraint firstItem="93E-An-diF" firstAttribute="bottom" secondItem="8tz-U8-D3i" secondAttribute="bottom" id="YT0-eV-gyA"/>
+                    <constraint firstAttribute="trailing" secondItem="JnV-zf-v5k" secondAttribute="trailing" constant="15" id="Z6d-Da-1Ed"/>
+                    <constraint firstItem="PG2-yZ-9nb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="ZAp-GT-GPB"/>
+                    <constraint firstAttribute="trailing" secondItem="k2W-EW-fyg" secondAttribute="trailing" constant="15" id="fUA-CE-tM3"/>
+                    <constraint firstAttribute="trailing" secondItem="4yY-DN-ATQ" secondAttribute="trailing" constant="15" id="jrs-TH-sDv"/>
+                    <constraint firstAttribute="bottom" secondItem="JnV-zf-v5k" secondAttribute="bottom" id="k7s-fj-38J"/>
+                    <constraint firstItem="PG2-yZ-9nb" firstAttribute="leading" secondItem="8tz-U8-D3i" secondAttribute="trailing" constant="15" id="l60-JT-66h"/>
+                    <constraint firstItem="8tz-U8-D3i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="nQO-QD-LAw"/>
+                    <constraint firstItem="4yY-DN-ATQ" firstAttribute="centerY" secondItem="8tz-U8-D3i" secondAttribute="centerY" id="p36-qC-oMZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="buyTickBtu" destination="93E-An-diF" id="biY-7D-hwb"/>
+                <outlet property="introduceLab" destination="4yY-DN-ATQ" id="cQL-ut-AZe"/>
+                <outlet property="movieImage" destination="8tz-U8-D3i" id="pb2-A9-DwG"/>
+                <outlet property="nameLab" destination="PG2-yZ-9nb" id="e3m-sr-qb1"/>
+                <outlet property="scoreLab" destination="k2W-EW-fyg" id="JYb-IU-tO0"/>
+            </connections>
+            <point key="canvasLocation" x="69.5" y="104"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="1" width="324" height="220"/>
+    </resources>
+</document>

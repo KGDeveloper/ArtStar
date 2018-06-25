@@ -1,0 +1,70 @@
+//
+//  HeadLinesVC.m
+//  ArtStar
+//
+//  Created by abc on 5/28/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "HeadLinesVC.h"
+#import "HeadLinesDetailVC.h"
+
+@interface HeadLinesVC ()
+
+@property (nonatomic,strong) HeadlinesView *headLinesView;
+
+@end
+
+@implementation HeadLinesVC
+
+- (void)rightNavBtuAction:(UIButton *)sender{
+    [self pushNoTabBarViewController:[[MIneMessageVC alloc]init] animated:YES];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self setLeftBtuWithTitle:nil image:Image(@"back")];
+    [self setRightBtuWithTitle:nil image:Image(@"more popup message")];
+    
+    __weak typeof(self) mySelf = self;
+    CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
+    scrollerView.itemArr = @[@"头条",@"美术",@"音乐",@"戏剧",@"电影",@"图书",@"餐饮",@"摄影",@"文学",@"机构",@"展览",@"交友"];
+    scrollerView.rightAction = ^(NSString *title) {
+        
+    };
+    scrollerView.titleAction = ^(NSString *title) {
+        if ([title isEqualToString:@"活动"]) {
+            mySelf.headLinesView.hidden = YES;
+        }else if([title isEqualToString:@"头条"]){
+            mySelf.headLinesView.hidden = NO;
+        }
+    };
+    [self.view addSubview:scrollerView];
+    
+    _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
+    _headLinesView.pushViewController = ^{
+        [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
+    };
+    [self.view addSubview:_headLinesView];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

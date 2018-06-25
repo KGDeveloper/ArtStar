@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="237" id="KGk-i7-Jjw" customClass="TlentIntroudceTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="384" height="237"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="384" height="236.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请对您上传的地标做一番介绍吧！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp3-Hn-EDK">
+                        <rect key="frame" x="30" y="25" width="324" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="M5t-c9-Qdr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="596-8h-upD">
+                        <rect key="frame" x="15" y="196.5" width="354" height="39.5"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="你在哪里？" image="location">
+                            <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="locationClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Rrc-jn-Fbt"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0I-fP-ZYo">
+                        <rect key="frame" x="0.0" y="0.0" width="384" height="10"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="tu7-MW-MHF"/>
+                        </constraints>
+                    </view>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZB-Rw-bnn">
+                        <rect key="frame" x="15" y="25" width="354" height="171.5"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="Hd6-b3-4V0"/>
+                        </connections>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="g0I-fP-ZYo" secondAttribute="trailing" id="1t7-Cu-R7c"/>
+                    <constraint firstAttribute="bottom" secondItem="CZB-Rw-bnn" secondAttribute="bottom" constant="40" id="38H-pd-JaO"/>
+                    <constraint firstItem="CZB-Rw-bnn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Y4-5W-Gb3"/>
+                    <constraint firstItem="596-8h-upD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8vh-ja-ZAT"/>
+                    <constraint firstItem="hp3-Hn-EDK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="94j-ZL-TST"/>
+                    <constraint firstItem="g0I-fP-ZYo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GTt-Db-4tf"/>
+                    <constraint firstAttribute="bottom" secondItem="596-8h-upD" secondAttribute="bottom" id="XtA-e8-6rK"/>
+                    <constraint firstAttribute="trailing" secondItem="hp3-Hn-EDK" secondAttribute="trailing" constant="30" id="cGf-YJ-0AW"/>
+                    <constraint firstAttribute="trailing" secondItem="596-8h-upD" secondAttribute="trailing" constant="15" id="f5t-Fi-el2"/>
+                    <constraint firstItem="hp3-Hn-EDK" firstAttribute="top" secondItem="g0I-fP-ZYo" secondAttribute="bottom" constant="15" id="nFu-6H-Qji"/>
+                    <constraint firstItem="CZB-Rw-bnn" firstAttribute="top" secondItem="g0I-fP-ZYo" secondAttribute="bottom" constant="15" id="ryY-Rg-wim"/>
+                    <constraint firstItem="g0I-fP-ZYo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="tpF-bX-aDg"/>
+                    <constraint firstAttribute="trailing" secondItem="CZB-Rw-bnn" secondAttribute="trailing" constant="15" id="vDk-32-7hh"/>
+                    <constraint firstItem="596-8h-upD" firstAttribute="top" secondItem="CZB-Rw-bnn" secondAttribute="bottom" id="yRd-0T-SvQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="introudceTV" destination="CZB-Rw-bnn" id="NC0-iP-UiY"/>
+                <outlet property="locationBtu" destination="596-8h-upD" id="Axz-Wk-0lL"/>
+                <outlet property="plholderLab" destination="hp3-Hn-EDK" id="XV0-Ab-rpn"/>
+            </connections>
+            <point key="canvasLocation" x="66" y="150.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="location" width="10" height="14"/>
+    </resources>
+</document>

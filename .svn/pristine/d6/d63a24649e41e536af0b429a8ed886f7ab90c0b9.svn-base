@@ -1,0 +1,167 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/4/23
+ 
+ Copyright (c) 2017 My Company
+ 
+ ☆★☆★☆★☆★☆★☆★☆★☆★☆
+ ★　　│　心想　│　事成　│　　★
+ ☆别╭═╮　　 ╭═╮　　 ╭═╮别☆
+ ★恋│人│　　│奎│　　│幸│恋★
+ ☆　│氣│　　│哥│　　│福│　☆
+ ★　│超│　　│制│　　│滿│　★
+ ☆别│旺│　　│作│　　│滿│别☆
+ ★恋│㊣│　　│㊣│　　│㊣│恋★
+ ☆　╰═╯ 天天╰═╯ 開心╰═╯　☆
+ ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+#import "PhotosLibraryView.h"
+#import <Photos/Photos.h>
+#import "PhotosCell.h"
+#import "PhotoIsShureOrCancel.h"
+
+@interface PhotosLibraryView ()<UICollectionViewDelegate,UICollectionViewDataSource,PhotoIsShureOrCancelDelegate>
+
+@property (nonatomic,strong) NSMutableArray *imageArr;
+@property (nonatomic,strong) UICollectionView *photoList;
+@property (nonatomic,strong) PhotoIsShureOrCancel *shureImage;
+
+@end
+
+@implementation PhotosLibraryViewModel
+@end
+
+@implementation PhotosLibraryView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        _imageArr = [NSMutableArray array];
+        [self requestLibraryPicture];
+    }
+    return self;
+}
+//MARK:--获取本地相册--
+- (void)requestLibraryPicture{
+    /*获取所有资源的集合，并且按照创件时间排序*/
+    PHFetchOptions *options = [[PHFetchOptions alloc]init];
+    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"" ascending:YES]];
+    /*获取相机胶卷所有图片*/
+    PHFetchResult *assets = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+    PHImageRequestOptions *opion = [[PHImageRequestOptions alloc]init];
+    /*设置显示模式*/
+    opion.resizeMode = PHImageRequestOptionsResizeModeFast;
+    opion.synchronous = NO;
+    opion.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    
+    __weak typeof(self) mySelf = self;
+    for (PHAsset *asset in assets) {
+        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(screenSize.width * scale, screenSize.height * scale) contentMode:PHImageContentModeAspectFit options:opion resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            PhotosLibraryViewModel *model = [PhotosLibraryViewModel new];
+            model.image = [UIImage imageWithData:UIImageJPEGRepresentation(result, 0.5)];
+            [mySelf.imageArr addObject:model];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [mySelf.photoList reloadData];
+            });
+        }];
+    }
+}
+
+- (UICollectionView *)photoList{
+    if (!_photoList) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        layout.sectionHeadersPinToVisibleBounds = YES;
+        layout.headerReferenceSize = CGSizeMake(kScreenWidth, 44);
+        layout.itemSize = CGSizeMake((kScreenWidth - 8)/3, (kScreenWidth - 8)/3);
+        _photoList = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        _photoList.backgroundColor = Color_333333;
+        _photoList.delegate = self;
+        _photoList.dataSource = self;
+        [self addSubview:_photoList];
+        
+        [_photoList registerNib:[UINib nibWithNibName:@"PhotosCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
+        
+        [_photoList registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView"];
+    }
+    return _photoList;
+}
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return _imageArr.count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    PhotosCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    PhotosLibraryViewModel *model = _imageArr[indexPath.row];
+    cell.photosImage.image = model.image;
+    return cell;
+}
+//MARK:--创建UICollectionReusableView--
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView" forIndexPath:indexPath];
+    headerView.backgroundColor = Color_333333;
+    UIButton *returnBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    returnBtu.frame = CGRectMake(15, ViewHeight(headerView) - 30, 13, 20);
+    [returnBtu setImage:Image(@"返回") forState:UIControlStateNormal];
+    [returnBtu addTarget:self action:@selector(returnClick) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:returnBtu];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(ViewWidth(headerView) - 95,ViewHeight(headerView) - 30, 80, 20)];
+    label.textColor = [UIColor whiteColor];
+    label.text = @"所有照片";
+    label.font = FZFont(15);
+    label.textAlignment = NSTextAlignmentRight;
+    [headerView addSubview:label];
+    return headerView;
+}
+//设置每个item的UIEdgeInsets
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(2, 2, 2, 2);
+}
+//设置每个item水平间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 2;
+}
+//设置每个item垂直间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 2;
+}
+//点击item方法
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    PhotosLibraryViewModel *model = _imageArr[indexPath.row];
+    self.shureImage.hidden = NO;
+    self.shureImage.shureImage = model.image;
+}
+//MARK:--头视图点击事件--
+- (void)returnClick{
+    self.hidden = YES;
+}
+//MARK:--显示选择的相片--
+- (PhotoIsShureOrCancel *)shureImage{
+    if (!_shureImage) {
+        _shureImage = [[PhotoIsShureOrCancel alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _shureImage.delegate = self;
+        [self addSubview:_shureImage];
+    }
+    return _shureImage;
+}
+- (void)sendShureImage:(UIImage *)image{
+    NSLog(@"%@",image);
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

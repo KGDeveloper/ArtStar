@@ -1,0 +1,76 @@
+//
+//  KGLocationCityManager.m
+//  ArtStar
+//
+//  Created by abc on 2018/6/21.
+//  Copyright © 2018年 KG丿轩帝. All rights reserved.
+//
+
+#import "KGLocationCityManager.h"
+#import <CoreLocation/CoreLocation.h>
+
+@interface KGLocationCityManager ()<CLLocationManagerDelegate>
+
+@property (nonatomic,strong) CLLocationManager *locationManager;
+
+@end
+
+@implementation KGLocationCityManager
+
++ (KGLocationCityManager *)shareManager{
+    static KGLocationCityManager *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (!manager) {
+            manager = [[KGLocationCityManager alloc]init];
+        }
+    });
+    return manager;
+}
+
+- (void)obtainYourLocation{
+    _locationManager = [[CLLocationManager alloc]init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = 100.0f;
+    if ([[[UIDevice currentDevice]systemVersion]doubleValue] > 8.0) {
+        [_locationManager requestWhenInUseAuthorization];
+    }
+    if ([[UIDevice currentDevice].systemVersion floatValue] > 8.0) {
+        _locationManager.allowsBackgroundLocationUpdates = YES;
+    }
+    [_locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+                [_locationManager requestWhenInUseAuthorization];
+            }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations{
+    CLLocation *newLocation = locations[0];
+    [manager stopUpdatingLocation];
+    CLGeocoder *geocder = [[CLGeocoder alloc]init];
+    [geocder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        for (CLPlacemark *place in placemarks) {
+            NSString *city = place.locality;
+            if (!city) {
+                city = place.administrativeArea;
+            }
+            if (self.ToObtainYourLocation) {
+                self.ToObtainYourLocation(city,newLocation.coordinate.latitude,newLocation.coordinate.longitude);
+            }
+        }
+    }];
+}
+
+
+@end

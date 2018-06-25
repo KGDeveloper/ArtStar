@@ -1,0 +1,80 @@
+//
+//  CommunityThemeVC.m
+//  ArtStar
+//
+//  Created by abc on 6/5/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "CommunityThemeVC.h"
+#import "MusicThemeView.h"
+#import "MusicManagementMyThemeVC.h"
+
+@interface CommunityThemeVC ()
+
+@property (nonatomic,strong) MusicThemeView *themeView;//:--话题--
+
+@end
+
+@implementation CommunityThemeVC
+
+- (void)rightNavBtuAction:(UIButton *)sender{
+    [self pushNoTabBarViewController:[[MIneMessageVC alloc]init] animated:YES];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self setLeftBtuWithTitle:nil image:Image(@"back")];
+    [self setRightBtuWithTitle:nil image:Image(@"more popup message")];
+    
+    __weak typeof(self) mySelf = self;
+    //MARK:-------------------------------------------顶部滚动条---------------------------------------------
+    CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
+    scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影"];
+    //MARK:---------------------------------------------滚动条按钮点击事件-------------------------------------------
+    scrollerView.titleAction = ^(NSString *title) {
+        if ([title isEqualToString:@"全部"]) {
+            [mySelf.view bringSubviewToFront:self.themeView];
+        }else if([title isEqualToString:@"美术"]){
+            [mySelf.view bringSubviewToFront:self.themeView];
+        }else if ([title isEqualToString:@"音乐"]){
+            [mySelf.view bringSubviewToFront:self.themeView];
+        }else if ([title isEqualToString:@"戏剧"]){
+            [mySelf.view bringSubviewToFront:self.themeView];
+        }else{
+            [mySelf.view bringSubviewToFront:self.themeView];
+        }
+    };
+    [self.view addSubview:scrollerView];
+    [self.view insertSubview:self.themeView atIndex:99];
+}
+//MARK:----------------------------------------------------------话题--------------------------------------------------------------
+- (MusicThemeView *)themeView{
+    __weak typeof(self) mySelf = self;
+    if (!_themeView) {
+        _themeView = [[MusicThemeView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
+        _themeView.pushViewController = ^{
+            [mySelf pushNoTabBarViewController:[[MusicManagementMyThemeVC alloc]init] animated:YES];
+        };
+        [self.view addSubview:_themeView];
+    }
+    return _themeView;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,73 @@
+//
+//  ChangeModelView.m
+//  ArtStar
+//
+//  Created by abc on 5/7/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "ChangeModelView.h"
+
+@interface ChangeModelView ()<UITextFieldDelegate>
+
+@property (nonatomic,strong) UITextField *ideaTF;
+@property (nonatomic,strong) UIButton *leftBtu;
+@property (nonatomic,strong) UIButton *rightBtu;
+
+@end
+
+@implementation ChangeModelView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        [self setUI];
+    }
+    return self;
+}
+
+- (void)setUI{
+    //:--初始化--
+    _ideaTF = [UITextField new];
+    _leftBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _rightBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    //:--加载到视图--
+    [self sd_addSubviews:@[_ideaTF,_rightBtu,_leftBtu]];
+    //:--左侧按钮--
+    [_leftBtu setImage:Image(@"more") forState:UIControlStateNormal];
+    [_leftBtu addTarget:self action:@selector(leftClick) forControlEvents:UIControlEventTouchUpInside];
+    _leftBtu.sd_layout.leftSpaceToView(self, 15).topSpaceToView(self, 15).widthIs(20).heightIs(20);
+    //:--右侧按钮--
+    [_rightBtu setImage:Image(@"confirm") forState:UIControlStateNormal];
+    [_rightBtu addTarget:self action:@selector(rightClick) forControlEvents:UIControlEventTouchUpInside];
+    _rightBtu.sd_layout.rightSpaceToView(self, 15).topEqualToView(_leftBtu).widthIs(20).heightIs(20);
+    //:--中间输入框--
+    _ideaTF.placeholder = @"写下你此刻的想法（100字以内）";
+    _ideaTF.layer.borderColor = Color_cccccc.CGColor;
+    _ideaTF.layer.borderWidth = 1;
+    _ideaTF.delegate = self;
+    _ideaTF.sd_layout.leftSpaceToView(_leftBtu, 15).rightSpaceToView(_rightBtu, 15).topEqualToView(_leftBtu).heightIs(20);
+    
+    
+    
+    
+}
+//MARK:--左侧按钮点击事件--
+- (void)leftClick{
+    
+}
+//MARK:--右侧按钮点击事件--
+- (void)rightClick{
+    
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

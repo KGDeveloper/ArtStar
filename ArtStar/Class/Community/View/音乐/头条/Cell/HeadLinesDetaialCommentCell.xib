@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="142" id="KGk-i7-Jjw" customClass="HeadLinesDetaialCommentCell">
+            <rect key="frame" x="0.0" y="0.0" width="437" height="142"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="437" height="141.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="rbL-Yq-mf8">
+                        <rect key="frame" x="15" y="15" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="RWW-mp-kq0"/>
+                            <constraint firstAttribute="width" constant="20" id="TrS-lw-cUy"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轩哥哥来啦" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ko-ir-8AU">
+                        <rect key="frame" x="45" y="18" width="150" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="4Sa-Tu-gOV"/>
+                            <constraint firstAttribute="width" constant="150" id="tDL-Gz-4Je"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018.04.26 10:23" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wm8-pt-Sz1">
+                        <rect key="frame" x="205" y="18" width="217" height="15"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我是一个可爱的小姑娘，你是可爱，但是傻乎乎的，每天虎里虎气的" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoQ-B5-VAF">
+                        <rect key="frame" x="45" y="48" width="377" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="6V2-Lj-SjI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz6-ZU-MCb">
+                        <rect key="frame" x="322" y="96.5" width="100" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="gDy-al-GXj"/>
+                            <constraint firstAttribute="width" constant="100" id="hzN-X9-NTk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="15"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                        <state key="normal" title="34" image="点赞">
+                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="zansAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="crk-dV-tQX"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jP-9L-Kvm">
+                        <rect key="frame" x="35" y="141" width="402" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Bxe-vi-gS0"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="yz6-ZU-MCb" secondAttribute="bottom" constant="15" id="0Cj-7s-VoX"/>
+                    <constraint firstItem="rbL-Yq-mf8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="3fz-Im-skA"/>
+                    <constraint firstItem="6ko-ir-8AU" firstAttribute="centerY" secondItem="rbL-Yq-mf8" secondAttribute="centerY" id="98U-ZF-shD"/>
+                    <constraint firstItem="Wm8-pt-Sz1" firstAttribute="height" secondItem="6ko-ir-8AU" secondAttribute="height" id="9hp-kV-6iA"/>
+                    <constraint firstAttribute="trailing" secondItem="yz6-ZU-MCb" secondAttribute="trailing" constant="15" id="GMR-oZ-9qE"/>
+                    <constraint firstItem="Wm8-pt-Sz1" firstAttribute="centerY" secondItem="6ko-ir-8AU" secondAttribute="centerY" id="GPT-rh-FhZ"/>
+                    <constraint firstAttribute="trailing" secondItem="Wm8-pt-Sz1" secondAttribute="trailing" constant="15" id="V38-P5-yfn"/>
+                    <constraint firstItem="hoQ-B5-VAF" firstAttribute="trailing" secondItem="Wm8-pt-Sz1" secondAttribute="trailing" id="aHx-KT-Wsy"/>
+                    <constraint firstAttribute="trailing" secondItem="5jP-9L-Kvm" secondAttribute="trailing" id="b8W-DA-ngk"/>
+                    <constraint firstItem="Wm8-pt-Sz1" firstAttribute="leading" secondItem="6ko-ir-8AU" secondAttribute="trailing" constant="10" id="eeG-qX-c6z"/>
+                    <constraint firstItem="5jP-9L-Kvm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="evr-Vn-7f0"/>
+                    <constraint firstAttribute="bottom" secondItem="5jP-9L-Kvm" secondAttribute="bottom" id="f0x-u4-yKy"/>
+                    <constraint firstItem="rbL-Yq-mf8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="gFL-yX-LyS"/>
+                    <constraint firstItem="6ko-ir-8AU" firstAttribute="leading" secondItem="rbL-Yq-mf8" secondAttribute="trailing" constant="10" id="kCa-n4-sPd"/>
+                    <constraint firstItem="hoQ-B5-VAF" firstAttribute="top" secondItem="6ko-ir-8AU" secondAttribute="bottom" constant="15" id="ldJ-P2-eXw"/>
+                    <constraint firstItem="hoQ-B5-VAF" firstAttribute="leading" secondItem="6ko-ir-8AU" secondAttribute="leading" id="zY5-7L-OeU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="commentLab" destination="hoQ-B5-VAF" id="I2i-lg-6vj"/>
+                <outlet property="headerImage" destination="rbL-Yq-mf8" id="vLx-kU-22H"/>
+                <outlet property="nikName" destination="6ko-ir-8AU" id="VrQ-Ua-Heu"/>
+                <outlet property="timeLab" destination="Wm8-pt-Sz1" id="Bxu-OZ-Yxz"/>
+                <outlet property="zansBtu" destination="yz6-ZU-MCb" id="xaE-Fa-I7G"/>
+            </connections>
+            <point key="canvasLocation" x="92.5" y="103"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="5" width="324" height="220"/>
+        <image name="点赞" width="14" height="15"/>
+    </resources>
+</document>

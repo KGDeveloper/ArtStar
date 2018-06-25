@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Bold.otf">
+            <string>SourceHanSansCN-Bold</string>
+        </array>
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="261" id="KGk-i7-Jjw" customClass="MyselfCenterSchoolCell">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="261"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="447" height="260.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职业与学校" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uf8-hd-bP6">
+                        <rect key="frame" x="15" y="25" width="150" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="V8B-OL-u0Z"/>
+                            <constraint firstAttribute="width" constant="150" id="ooq-6w-UQn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Bold" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行业" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zR-HT-Ktf">
+                        <rect key="frame" x="15" y="65" width="50" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="PgT-PF-rbt"/>
+                            <constraint firstAttribute="width" constant="50" id="bfa-z7-I4e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学校" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82Y-JT-DWL">
+                        <rect key="frame" x="15" y="105" width="50" height="15"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="互联网" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHJ-Wt-P8j">
+                        <rect key="frame" x="115" y="65" width="317" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="oKo-bx-ecS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="五道口职业技术学院" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig0-Go-CtW">
+                        <rect key="frame" x="115" y="105" width="317" height="15"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="82Y-JT-DWL" firstAttribute="height" secondItem="7zR-HT-Ktf" secondAttribute="height" id="FnP-Zr-tAh"/>
+                    <constraint firstItem="82Y-JT-DWL" firstAttribute="top" secondItem="7zR-HT-Ktf" secondAttribute="bottom" constant="25" id="FrE-Gm-N86"/>
+                    <constraint firstItem="7zR-HT-Ktf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Lwd-iz-LQa"/>
+                    <constraint firstItem="Ig0-Go-CtW" firstAttribute="height" secondItem="pHJ-Wt-P8j" secondAttribute="height" id="M2P-c7-xi3"/>
+                    <constraint firstAttribute="trailing" secondItem="pHJ-Wt-P8j" secondAttribute="trailing" constant="15" id="Mac-mJ-6HW"/>
+                    <constraint firstItem="82Y-JT-DWL" firstAttribute="width" secondItem="7zR-HT-Ktf" secondAttribute="width" id="OWB-PR-Zlg"/>
+                    <constraint firstItem="Ig0-Go-CtW" firstAttribute="centerY" secondItem="82Y-JT-DWL" secondAttribute="centerY" id="RkH-JE-4tB"/>
+                    <constraint firstItem="82Y-JT-DWL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="dqc-uD-nHM"/>
+                    <constraint firstItem="Ig0-Go-CtW" firstAttribute="width" secondItem="pHJ-Wt-P8j" secondAttribute="width" id="eel-tq-EeQ"/>
+                    <constraint firstItem="pHJ-Wt-P8j" firstAttribute="centerY" secondItem="7zR-HT-Ktf" secondAttribute="centerY" id="lIM-UI-guv"/>
+                    <constraint firstItem="7zR-HT-Ktf" firstAttribute="top" secondItem="uf8-hd-bP6" secondAttribute="bottom" constant="25" id="mGw-i7-l0Z"/>
+                    <constraint firstItem="uf8-hd-bP6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="mZ9-EY-jAS"/>
+                    <constraint firstItem="pHJ-Wt-P8j" firstAttribute="leading" secondItem="7zR-HT-Ktf" secondAttribute="trailing" constant="50" id="qhI-8U-ogr"/>
+                    <constraint firstItem="Ig0-Go-CtW" firstAttribute="leading" secondItem="82Y-JT-DWL" secondAttribute="trailing" constant="50" id="xgp-3h-8tw"/>
+                    <constraint firstItem="uf8-hd-bP6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="zQN-Zb-NPM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="industryLab" destination="pHJ-Wt-P8j" id="1Qt-Mf-gwI"/>
+                <outlet property="schoolLab" destination="Ig0-Go-CtW" id="dsR-oL-WIQ"/>
+            </connections>
+            <point key="canvasLocation" x="97.5" y="162.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,22 @@
+platform :ios, '9.0'
+
+target 'ArtStar' do
+  # use_frameworks!
+
+  # Pods for ArtStar
+
+pod 'YYKit', '~> 1.0.9'
+pod 'IQKeyboardManager', '~> 6.0.0'
+pod 'AFNetworking', '~> 3.2.0'
+
+  target 'ArtStarTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'ArtStarUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

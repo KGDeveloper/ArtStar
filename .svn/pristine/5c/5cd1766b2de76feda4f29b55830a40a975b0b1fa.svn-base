@@ -1,0 +1,29 @@
+//
+//  ReadBooksHeaderViewCell.h
+//  ArtStar
+//
+//  Created by abc on 6/5/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ReadBooksHeaderViewCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIButton *returnBtu;
+@property (weak, nonatomic) IBOutlet UIButton *shareBtu;
+@property (weak, nonatomic) IBOutlet UIImageView *topImage;
+@property (weak, nonatomic) IBOutlet UIImageView *lowImage;
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UILabel *acterlab;
+@property (weak, nonatomic) IBOutlet UILabel *fromLab;
+@property (weak, nonatomic) IBOutlet UILabel *timeLab;
+@property (weak, nonatomic) IBOutlet UIButton *wantBtu;
+@property (weak, nonatomic) IBOutlet UIButton *readIngBtu;
+@property (weak, nonatomic) IBOutlet UIButton *finishBtu;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *returnTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shareTop;
+
+
+
+@end

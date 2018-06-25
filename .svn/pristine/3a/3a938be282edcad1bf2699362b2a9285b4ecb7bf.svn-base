@@ -1,0 +1,28 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '9.0'
+
+target 'ArtStar' do
+  
+
+pod 'YYKit', '~> 1.0.9'
+pod 'IQKeyboardManager', '~> 6.0.0'
+pod 'AFNetworking', '~> 3.2.0'
+pod 'SDAutoLayout', '~> 2.2.0'
+pod 'SDWebImage', '~> 4.3.3'
+#pod 'MobileVLCKit', '~> 3.0.2'
+
+  use_frameworks!
+
+  # Pods for ArtStar
+
+  target 'ArtStarTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'ArtStarUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

@@ -1,0 +1,176 @@
+//
+//  MineWorksIndustryView.m
+//  ArtStar
+//
+//  Created by abc on 6/12/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "MineWorksIndustryView.h"
+#import "KGCityChooseCell.h"
+
+@interface MineWorksIndustryView ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic,strong) UITableView *oneListView;
+@property (nonatomic,strong) UITableView *twoListView;
+@property (nonatomic,strong) UITableView *threeListView;
+
+@property (nonatomic,strong) UIButton *leftBtu;
+@property (nonatomic,strong) UIButton *rightBtu;
+@property (nonatomic,strong) UIView *line;
+@property (nonatomic,strong) UIView *backView;
+
+@end
+
+@implementation MineWorksIndustryView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+        [self setView];
+    }
+    return self;
+}
+
+- (void)setView{
+    
+    _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 135, ViewWidth(self), ViewHeight(self) - 135)];
+    _backView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:_backView];
+    
+    _leftBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _leftBtu.frame = CGRectMake(0, 0, ViewWidth(self)/4, 40);
+    [_leftBtu setTitle:@"文艺爱好者" forState:UIControlStateNormal];
+    [_leftBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    _leftBtu.titleLabel.font = SYFont(13);
+    [_leftBtu addTarget:self action:@selector(leftAction) forControlEvents:UIControlEventTouchUpInside];
+    [_backView addSubview:_leftBtu];
+    
+    _rightBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _rightBtu.frame = CGRectMake(ViewWidth(self)/4, 0, ViewWidth(self)/4, 40);
+    [_rightBtu setTitle:@"文艺工作者" forState:UIControlStateNormal];
+    [_rightBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
+    _rightBtu.titleLabel.font = SYFont(13);
+    [_rightBtu addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+    [_backView addSubview:_rightBtu];
+    
+    UIButton *cancelBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelBtu.frame = CGRectMake(ViewWidth(self) - 55, 0, 40, 40);
+    [cancelBtu setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    cancelBtu.titleLabel.font = SYFont(13);
+    cancelBtu.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [cancelBtu addTarget:self action:@selector(cancelBtuClick) forControlEvents:UIControlEventTouchUpInside];
+    [_backView addSubview:cancelBtu];
+    
+    _line = [[UIView alloc]initWithFrame:CGRectMake(0,38, 64, 2)];
+    _line.centerX = _leftBtu.centerX;
+    _line.backgroundColor = Color_333333;
+    [_backView addSubview:_line];
+    
+    UIView *lowLine = [[UIView alloc]initWithFrame:CGRectMake(0, 40, ViewWidth(self), 1)];
+    lowLine.backgroundColor = Color_ededed;
+    [_backView addSubview:lowLine];
+    
+    [self setTheFirstColumn];
+    [self setTheSecondColumn];
+    [self setTheThirdColumn];
+}
+- (void)setTheFirstColumn{
+    
+    _oneListView = [[UITableView alloc]initWithFrame:CGRectMake(0, 41, ViewWidth(self)/3, ViewHeight(_backView) - 41)];
+    _oneListView.backgroundColor = [UIColor colorWithHexString:@"#f5f5f5"];
+    _oneListView.delegate = self;
+    _oneListView.dataSource = self;
+    _oneListView.tableFooterView = TabLeViewFootView;
+    _oneListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _oneListView.bounces = NO;
+    [_backView addSubview:_oneListView];
+    
+    [_oneListView registerNib:[UINib nibWithNibName:@"KGCityChooseCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"KGCityChooseCell"];
+    
+}
+- (void)setTheSecondColumn{
+    _twoListView = [[UITableView alloc]initWithFrame:CGRectMake(ViewWidth(self)/3, 41, ViewWidth(self)/3, ViewHeight(_backView) - 41)];
+    _twoListView.backgroundColor = [UIColor whiteColor];
+    _twoListView.delegate = self;
+    _twoListView.dataSource = self;
+    _twoListView.tableFooterView = TabLeViewFootView;
+    _twoListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _twoListView.bounces = NO;
+    [_backView addSubview:_twoListView];
+    
+    [_twoListView registerNib:[UINib nibWithNibName:@"KGCityChooseCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"KGCityChooseCell"];
+}
+- (void)setTheThirdColumn{
+    _threeListView = [[UITableView alloc]initWithFrame:CGRectMake(ViewWidth(self)/3*2, 41, ViewWidth(self)/3, ViewHeight(_backView) - 41)];
+    _threeListView.backgroundColor = [UIColor colorWithHexString:@"#f5f5f5"];
+    _threeListView.delegate = self;
+    _threeListView.dataSource = self;
+    _threeListView.tableFooterView = TabLeViewFootView;
+    _threeListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _threeListView.bounces = NO;
+    [_backView addSubview:_threeListView];
+    
+    [_threeListView registerNib:[UINib nibWithNibName:@"KGCityChooseCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"KGCityChooseCell"];
+}
+- (void)leftAction{
+    [_leftBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    [_rightBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
+    _line.centerX = _leftBtu.centerX;
+}
+- (void)rightAction{
+    [_leftBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
+    [_rightBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    _line.centerX = _rightBtu.centerX;
+}
+- (void)cancelBtuClick{
+    self.hidden = YES;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 45;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == _oneListView) {
+        KGCityChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KGCityChooseCell"];
+        cell.backgroundView = [self tableViewNormalBackView:cell.frame];
+        cell.selectedBackgroundView = [self tableViewWhiteBackView:cell.frame];
+        cell.titleLab.text = @"文学";
+        return cell;
+    }else if (tableView == _twoListView){
+        KGCityChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KGCityChooseCell"];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.titleLab.text = @"文学家";
+        cell.selectedBackgroundView = [self tableViewWhiteBackView:CGRectMake(ViewX(cell), ViewY(cell), ViewWidth(cell), ViewHeight(cell) - 1)];
+        return cell;
+    }else{
+        KGCityChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KGCityChooseCell"];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.titleLab.text = @"我是画家";
+        cell.selectedBackgroundView = [self tableViewWhiteBackView:CGRectMake(ViewX(cell), ViewY(cell), ViewWidth(cell), ViewHeight(cell) - 1)];
+        return cell;
+    }
+}
+- (UIView *)tableViewWhiteBackView:(CGRect)frame{
+    UIView *backView = [[UIView alloc]initWithFrame:frame];
+    backView.backgroundColor = [UIColor whiteColor];
+    return backView;
+}
+- (UIView *)tableViewNormalBackView:(CGRect)frame{
+    UIView *backView = [[UIView alloc]initWithFrame:frame];
+    backView.backgroundColor = [UIColor colorWithHexString:@"#f5f5f5"];
+    return backView;
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

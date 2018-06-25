@@ -1,0 +1,124 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/4/28
+ 
+ Copyright (c) 2017 My Company
+ 
+ ☆★☆★☆★☆★☆★☆★☆★☆★☆
+ ★　　│　心想　│　事成　│　　★
+ ☆别╭═╮　　 ╭═╮　　 ╭═╮别☆
+ ★恋│人│　　│奎│　　│幸│恋★
+ ☆　│氣│　　│哥│　　│福│　☆
+ ★　│超│　　│制│　　│滿│　★
+ ☆别│旺│　　│作│　　│滿│别☆
+ ★恋│㊣│　　│㊣│　　│㊣│恋★
+ ☆　╰═╯ 天天╰═╯ 開心╰═╯　☆
+ ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+#import "TabBarVC.h"
+#import "CustomTabbar.h"
+#import "BaseVC.h"
+#import "MineVC.h"
+#import "ReleaseView.h"
+#import "FriendsVC.h"
+#import "CommunityVC.h"
+#import "MapVC.h"
+
+@interface TabBarVC ()<CustomTabbarDelegate>
+
+@property (nonatomic,strong) ReleaseView *releaseView;
+
+@end
+
+@implementation TabBarVC
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self addChildVC];
+    
+    [[UITabBar appearance] setShadowImage:[UIImage new]];
+    CustomTabbar *tabbar = [[CustomTabbar alloc]init];
+    tabbar.centerImage = @"发布";
+    tabbar.mydelegate = self;
+    [self setValue:tabbar forKey:@"tabBar"];
+    
+}
+
+- (void)addChildVC{
+    
+    [self addChildVC:[[MapVC alloc]init] title:@"地图" image:@"tabbr_map_nor" selectImage:@"tabbr_map_sel"];
+    [self addChildVC:[[CommunityVC alloc]init] title:@"社区" image:@"tabbar_comm_nor" selectImage:@"tabbar_comm_sel"];
+    [self addChildVC:[[FriendsVC alloc]init] title:@"朋友圈" image:@"tabbar_friend_nor" selectImage:@"tabbar_friend_sel"];
+    [self addChildVC:[[MineVC alloc]init] title:@"我的" image:@"tabbar_mine_nor" selectImage:@"tabbar_mine_sel"];
+    
+}
+
+- (void)addChildVC:(UIViewController *)childVC title:(NSString *)title image:(NSString *)image selectImage:(NSString *)selectImage{
+    childVC.tabBarItem.title = title;
+    childVC.tabBarItem.image = Image(image);
+    childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [childVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:Color_999999} forState:UIControlStateNormal];
+    [childVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:Color_333333} forState:UIControlStateSelected];
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:childVC];
+    [self addChildViewController:navVC];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+}
+
+- (void)tabbar:(CustomTabbar *)tabbar clickCenterBtu:(UIButton *)sender{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.releaseView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    }];
+}
+
+- (ReleaseView *)releaseView{
+    _releaseView = [[ReleaseView alloc]initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kScreenHeight)];
+    _releaseView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_releaseView];
+    return _releaseView;
+}
+
+//ChooseModelVC *vc = [[ChooseModelVC alloc]init];
+//vc.imageArr = @[Image(@"D-1-3选择模板-1文字居上居左"),Image(@"D-1-3选择模板-2文字居上居中"),Image(@"D-1-3选择模板-3文字居上居右"),Image(@"D-1-3选择模板-4文字居下居左"),Image(@"D-1-3选择模板-5文字居下居中"),Image(@"D-1-3选择模板-6文字居下居右"),Image(@"D-1-3选择模板-7文字居右居上"),Image(@"D-1-3选择模板-8文字居右居中"),Image(@"D-1-3选择模板-9图片圆形")];
+//UINavigationController *choose = [[UINavigationController alloc]initWithRootViewController:vc];
+//[self presentViewController:choose animated:YES completion:nil];
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

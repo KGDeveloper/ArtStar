@@ -1,0 +1,175 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/5/2
+ 
+ Copyright (c) 2017 My Company
+ 
+ ☆★☆★☆★☆★☆★☆★☆★☆★☆
+ ★　　│　心想　│　事成　│　　★
+ ☆别╭═╮　　 ╭═╮　　 ╭═╮别☆
+ ★恋│人│　　│奎│　　│幸│恋★
+ ☆　│氣│　　│哥│　　│福│　☆
+ ★　│超│　　│制│　　│滿│　★
+ ☆别│旺│　　│作│　　│滿│别☆
+ ★恋│㊣│　　│㊣│　　│㊣│恋★
+ ☆　╰═╯ 天天╰═╯ 開心╰═╯　☆
+ ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+#import "ReleaseView.h"
+#import "CustomBtu.h"
+#import "IrregularView.h"
+#import "VideoVC.h"
+#import "ThemeVC.h"
+#import "TalentVC.h"
+#import "GraphicVC.h"
+
+@interface ReleaseView ()
+//MARK:--顶部布局--
+@property (nonatomic,strong) UILabel *dayLab;
+@property (nonatomic,strong) UILabel *monthLab;
+@property (nonatomic,strong) UILabel *weekDay;
+@property (nonatomic,strong) UILabel *locationLab;
+@property (nonatomic,strong) UILabel *weatherLab;
+//MARK:--底部布局--
+/**
+ 话题
+ */
+@property (nonatomic,strong) CustomBtu *topicBtu;
+/**
+ 视频
+ */
+@property (nonatomic,strong) CustomBtu *videoBtu;
+/**
+ 图文
+ */
+@property (nonatomic,strong) CustomBtu *pictueBtu;
+/**
+ 拍摄
+ */
+@property (nonatomic,strong) CustomBtu *camcareBtu;
+
+@end
+
+@implementation ReleaseView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self setWeatcherUI];
+        [self setUpUI];
+    }
+    return self;
+}
+//MARK:--顶部天气日历布局--
+- (void)setWeatcherUI{
+    //:--初始化--
+    _dayLab = [UILabel new];
+    _weekDay = [UILabel new];
+    _monthLab = [UILabel new];
+    _locationLab = [UILabel new];
+    _weatherLab = [UILabel new];
+    //:--加载到试图--
+    [self sd_addSubviews:@[_dayLab,_weatherLab,_weekDay,_monthLab,_locationLab]];
+    //:--调整布局--
+    //:--天--
+    _dayLab.text = @"06";
+    _dayLab.textColor = Color_333333;
+    _dayLab.font = [UIFont systemFontOfSize:55];
+    _dayLab.textAlignment = NSTextAlignmentLeft;
+    _dayLab.sd_layout.leftSpaceToView(self, 25).topSpaceToView(self, NavTopHeight - 44 + 72).widthIs(70).heightIs(43);
+    //:--星期--
+    _weekDay.text = @"星期二";
+    _weekDay.textColor = Color_333333;
+    _weekDay.font = [UIFont systemFontOfSize:15];
+    _weekDay.textAlignment = NSTextAlignmentLeft;
+    _weekDay.sd_layout.leftSpaceToView(_dayLab, 20).topEqualToView(_dayLab).rightEqualToView(self).heightIs(20);
+    //:--年月--
+    _monthLab.text = @"02/2018";
+    _monthLab.textColor = Color_333333;
+    _monthLab.font = [UIFont systemFontOfSize:15];
+    _monthLab.textAlignment = NSTextAlignmentLeft;
+    _monthLab.sd_layout.leftSpaceToView(_dayLab, 20).bottomEqualToView(_dayLab).rightEqualToView(self).heightIs(20);
+    //:--位置--
+    _locationLab.text = @"北京：";
+    _locationLab.textColor = Color_333333;
+    _locationLab.font = [UIFont systemFontOfSize:16];
+    _locationLab.textAlignment = NSTextAlignmentLeft;
+    _locationLab.sd_layout.leftEqualToView(_dayLab).topSpaceToView(_dayLab, 18).widthIs(60).heightIs(20);
+    //:--天气--
+    _weatherLab.text = @"晴 -3°C";
+    _weatherLab.textColor = Color_333333;
+    _weatherLab.font = [UIFont systemFontOfSize:16];
+    _weatherLab.textAlignment = NSTextAlignmentLeft;
+    _weatherLab.sd_layout.leftSpaceToView(_locationLab, 0).topEqualToView(_locationLab).rightEqualToView(self).heightIs(20);
+    
+    
+}
+//MARK:--创建底部按钮--
+- (void)setUpUI{
+    //:--计算每个按钮的宽度--
+    CGFloat btuWidth = (self.frame.size.width - 125)/4;
+    __weak typeof(self) weakSelf = self;
+    //:--创建图文按钮--
+    _topicBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(25, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"图文" image:Image(@"图文")];
+    _topicBtu.action = ^(NSString *str) {
+        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[GraphicVC alloc]init]] animated:YES completion:nil];
+    };
+    [self addSubview:_topicBtu];
+    //:--创建拍摄按钮--
+    _videoBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(50 + btuWidth, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"拍摄" image:Image(@"拍摄")];
+    _videoBtu.action = ^(NSString *str) {
+        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[VideoVC alloc]init]] animated:YES completion:nil];
+    };
+    [self addSubview:_videoBtu];
+    //:--创建达人按钮--
+    _pictueBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(75 + btuWidth * 2, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"达人" image:Image(@"达人")];
+    _pictueBtu.action = ^(NSString *str) {
+        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[TalentVC alloc]init]] animated:YES completion:nil];
+    };
+    [self addSubview:_pictueBtu];
+    //:--创建话题按钮--
+    _camcareBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(100 + btuWidth * 3, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"话题" image:Image(@"话题")];
+    _camcareBtu.action = ^(NSString *str) {
+        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[ThemeVC alloc]init]] animated:YES completion:nil];
+    };
+    [self addSubview:_camcareBtu];
+    //:--创建底部直线--
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, ViewHeight(self) - 51 - NavButtomHeight, kScreenWidth, 1)];
+    line.backgroundColor = Color_ededed;
+    [self addSubview:line];
+    //:--创建底部取消按钮--
+    UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancel.frame = CGRectMake(0, ViewHeight(self) - 50 - NavButtomHeight, kScreenWidth, 50);
+    cancel.backgroundColor = [UIColor whiteColor];
+    [cancel setTitle:@"取消" forState:UIControlStateNormal];
+    [cancel setTitleColor:Color_333333 forState:UIControlStateNormal];
+    cancel.titleLabel.font = [UIFont systemFontOfSize:14];
+    [cancel addTarget:self action:@selector(cancelClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:cancel];
+}
+//MARK:--取消按钮点击事件--
+- (void)cancelClick:(UIButton *)sender{
+    [self removeFromSuperview];
+}
+- (UIViewController *)pushViewController{
+    id target = self;
+    while (target) {
+        target = ((UIResponder *)target).nextResponder;
+        if ([target isKindOfClass:[UIViewController class]]) {
+            break;
+        }
+    }
+    return target;
+}
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

@@ -1,0 +1,108 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/4/28
+ 
+ Copyright (c) 2017 My Company
+ 
+ ☆★☆★☆★☆★☆★☆★☆★☆★☆
+ ★　　│　心想　│　事成　│　　★
+ ☆别╭═╮　　 ╭═╮　　 ╭═╮别☆
+ ★恋│人│　　│奎│　　│幸│恋★
+ ☆　│氣│　　│哥│　　│福│　☆
+ ★　│超│　　│制│　　│滿│　★
+ ☆别│旺│　　│作│　　│滿│别☆
+ ★恋│㊣│　　│㊣│　　│㊣│恋★
+ ☆　╰═╯ 天天╰═╯ 開心╰═╯　☆
+ ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+#import "BaseVC.h"
+
+@interface BaseVC ()<CustomNavBtuDelegate>
+
+@property (nonatomic,strong)UIView *navBackView;
+
+@end
+
+@implementation BaseVC
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [self setRightBtuWithTitle:nil image:nil];
+    [self setLeftBtuWithTitle:nil image:nil];
+    
+}
+
+- (void)clickBtu:(NavButtonItemType)type{
+    if (type == LeftBtu) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        
+    }
+}
+
+- (void)setLeftBtuWithTitle:(NSString *)title image:(UIImage *)image{
+    
+    CustomNavBtu *leftBtu = [[CustomNavBtu alloc]initWithFrame:CGRectMake(15, 7, 100, 30) type:LeftBtu];
+    leftBtu.backgroundColor = [UIColor clearColor];
+    leftBtu.btuImage = image;
+    leftBtu.btutitle = title;
+    leftBtu.delegate = self;
+    UIBarButtonItem *left = [[UIBarButtonItem alloc]initWithCustomView:leftBtu];
+    self.navigationItem.leftBarButtonItem = left;
+}
+
+- (void)setRightBtuWithTitle:(NSString *)title image:(UIImage *)image{
+    
+   CustomNavBtu *rightBtu = [[CustomNavBtu alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 115, 7, 100, 30) type:RightBtu];
+    rightBtu.backgroundColor = [UIColor clearColor];
+    rightBtu.btuImage = image;
+    rightBtu.btutitle = title;
+    rightBtu.delegate = self;
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:rightBtu];
+    self.navigationItem.rightBarButtonItem = right;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

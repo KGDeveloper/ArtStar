@@ -1,0 +1,134 @@
+//
+//  CommunityShieldingView.m
+//  ArtStar
+//
+//  Created by abc on 5/23/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "CommunityShieldingView.h"
+
+@interface CommunityShieldingView ()
+
+@property (nonatomic,strong) UIButton *shureBtu;
+@property (nonatomic,strong) UIView *whiteView;
+@property (nonatomic,strong) NSMutableArray *seleteArr;
+
+@end
+
+@implementation CommunityShieldingView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        _seleteArr = [NSMutableArray array];
+        [self setUI];
+    }
+    return self;
+}
+
+- (void)setUI{
+    
+    UIView *backView = [[UIView alloc]initWithFrame:self.bounds];
+    backView.backgroundColor = [UIColor colorWithHexString:@"#000000"];
+    backView.alpha = 0.2;
+    [self addSubview:backView];
+    
+    _whiteView = [[UIView alloc]initWithFrame:CGRectMake(15, ViewHeight(self)/2, ViewWidth(self) - 30, 120)];
+    _whiteView.backgroundColor = [UIColor whiteColor];
+    _whiteView.layer.cornerRadius = 5;
+    _whiteView.layer.masksToBounds = YES;
+    [self addSubview:_whiteView];
+    
+    UILabel *feedBackLab = [[UILabel alloc]initWithFrame:CGRectMake(70, 10, ViewWidth(_whiteView) - 140, 15)];
+    feedBackLab.text = @"反馈";
+    feedBackLab.font = SYBFont(14);
+    feedBackLab.textAlignment = NSTextAlignmentCenter;
+    feedBackLab.textColor = [UIColor colorWithHexString:@"#000000"];
+    [_whiteView addSubview:feedBackLab];
+    
+    _shureBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _shureBtu.frame = CGRectMake(ViewWidth(_whiteView) - 70, 0, 70, 35);
+    [_shureBtu setTitle:@"确定" forState:UIControlStateNormal];
+    _shureBtu.titleLabel.font = SYFont(13);
+    _shureBtu.tag = 105;
+    [_shureBtu setTitleColor:Color_cccccc forState:UIControlStateNormal];
+    [_shureBtu addTarget:self action:@selector(shureClick) forControlEvents:UIControlEventTouchUpInside];
+    [_whiteView addSubview:_shureBtu];
+    
+    NSArray *titleArr = @[@"不感兴趣",@"内容不实",@"旧文重复",@"垃圾内容"];
+    
+    for (int i = 0; i < 4; i++) {
+        if (i < 2) {
+            [_whiteView addSubview:[self createButtonWithFrame:CGRectMake(((ViewWidth(_whiteView) - 73)/2 + 33) *i + 20, 40, (ViewWidth(_whiteView) - 73)/2, 24) title:titleArr[i] font:SYFont(14) color:Color_cccccc tag:110 + i]];
+        }else{
+            [_whiteView addSubview:[self createButtonWithFrame:CGRectMake(((ViewWidth(_whiteView) - 73)/2 + 33) *(i - 2) + 20, 40 + 15 + 24, (ViewWidth(_whiteView) - 73)/2, 24) title:titleArr[i] font:SYFont(14) color:Color_cccccc tag:110 + i]];
+        }
+    }
+    
+}
+
+- (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString *)title font:(UIFont *)font color:(UIColor *)color tag:(NSInteger)tag{
+    UIButton *titleBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    titleBtu.frame = frame;
+    [titleBtu setTitle:title forState:UIControlStateNormal];
+    [titleBtu setTitleColor:color forState:UIControlStateNormal];
+    titleBtu.titleLabel.font = font;
+    titleBtu.tag = tag;
+    [titleBtu addTarget:self action:@selector(titleBtuClick:) forControlEvents:UIControlEventTouchUpInside];
+    titleBtu.layer.cornerRadius = 5;
+    titleBtu.layer.masksToBounds = YES;
+    titleBtu.layer.borderColor = color.CGColor;
+    titleBtu.layer.borderWidth = 1;
+    return titleBtu;
+}
+
+- (void)titleBtuClick:(UIButton *)sender{
+    BOOL isSelete = NO;
+    for (NSString *obj in _seleteArr) {
+        if (sender.currentTitle == obj) {
+            isSelete = YES;
+        }
+    }
+    if (isSelete == YES) {
+        [sender setTitleColor:Color_cccccc forState:UIControlStateNormal];
+        sender.layer.borderColor = Color_cccccc.CGColor;
+        [_seleteArr removeObject:sender.currentTitle];
+    }else{
+        [sender setTitleColor:Color_333333 forState:UIControlStateNormal];
+        sender.layer.borderColor = Color_333333.CGColor;
+        [_seleteArr addObject:sender.currentTitle];
+    }
+    if (_seleteArr.count > 0) {
+        [_shureBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    }else{
+        [_shureBtu setTitleColor:Color_cccccc forState:UIControlStateNormal];
+    }
+}
+
+- (void)shureClick{
+    if ([self.delegate respondsToSelector:@selector(sendTitleArrToView:)]) {
+        [self.delegate sendTitleArrToView:self.seleteArr.copy];
+    }
+    for (id obj in _whiteView.subviews) {
+        if ([obj isKindOfClass:[UIButton class]]) {
+            UIButton *normalBtu = obj;
+            if (normalBtu.tag == 105) {
+                [normalBtu setTitleColor:Color_cccccc forState:UIControlStateNormal];
+            }else{
+                [normalBtu setTitleColor:Color_cccccc forState:UIControlStateNormal];
+                normalBtu.layer.borderColor = Color_cccccc.CGColor;
+            }
+        }
+    }
+    self.hidden = YES;
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

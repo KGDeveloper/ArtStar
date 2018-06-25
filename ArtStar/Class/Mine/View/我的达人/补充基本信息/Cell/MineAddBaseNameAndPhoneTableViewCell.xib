@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="247" id="KGk-i7-Jjw" customClass="MineAddBaseNameAndPhoneTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="429" height="247"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="429" height="246.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwP-VE-IHV">
+                        <rect key="frame" x="0.0" y="0.0" width="429" height="10"/>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="8c7-hK-QaI"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="真实姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wW-9t-63z">
+                        <rect key="frame" x="15" y="28" width="60" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="4M8-Ma-nLc"/>
+                            <constraint firstAttribute="width" constant="60" id="RIH-Ba-6y2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Z-R8-934">
+                        <rect key="frame" x="15" y="79" width="60" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="aiq-Zt-dVn"/>
+                            <constraint firstAttribute="width" constant="60" id="gKw-Ou-8uQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的真实姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="imJ-aW-vsd">
+                        <rect key="frame" x="85" y="25" width="329" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="gjL-m3-PNA"/>
+                        </constraints>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alJ-KN-m46">
+                        <rect key="frame" x="15" y="60" width="399" height="1"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="4Zb-MK-hOs"/>
+                        </constraints>
+                    </view>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的手机号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aLz-KX-a8v">
+                        <rect key="frame" x="85" y="76" width="329" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="32H-9v-7x9"/>
+                        </constraints>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="aLz-KX-a8v" secondAttribute="trailing" constant="15" id="3sg-Ta-QkP"/>
+                    <constraint firstItem="3wW-9t-63z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Ot-bI-Hky"/>
+                    <constraint firstItem="C6Z-R8-934" firstAttribute="top" secondItem="alJ-KN-m46" secondAttribute="bottom" constant="18" id="DJX-S4-SCu"/>
+                    <constraint firstItem="alJ-KN-m46" firstAttribute="top" secondItem="imJ-aW-vsd" secondAttribute="bottom" constant="15" id="H6W-87-n4d"/>
+                    <constraint firstItem="zwP-VE-IHV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IN2-cU-ueE"/>
+                    <constraint firstItem="aLz-KX-a8v" firstAttribute="centerY" secondItem="C6Z-R8-934" secondAttribute="centerY" id="S9Q-ll-6cC"/>
+                    <constraint firstAttribute="trailing" secondItem="zwP-VE-IHV" secondAttribute="trailing" id="VC8-NP-Cph"/>
+                    <constraint firstItem="C6Z-R8-934" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Vh5-kl-GzS"/>
+                    <constraint firstItem="alJ-KN-m46" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="WVq-Uo-eTx"/>
+                    <constraint firstItem="aLz-KX-a8v" firstAttribute="leading" secondItem="C6Z-R8-934" secondAttribute="trailing" constant="10" id="aiH-iR-WsH"/>
+                    <constraint firstAttribute="trailing" secondItem="alJ-KN-m46" secondAttribute="trailing" constant="15" id="dbD-FU-HDq"/>
+                    <constraint firstItem="3wW-9t-63z" firstAttribute="top" secondItem="zwP-VE-IHV" secondAttribute="bottom" constant="18" id="fdA-T4-FnI"/>
+                    <constraint firstItem="zwP-VE-IHV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hNC-bE-XJE"/>
+                    <constraint firstItem="imJ-aW-vsd" firstAttribute="leading" secondItem="3wW-9t-63z" secondAttribute="trailing" constant="10" id="xPo-ME-zP0"/>
+                    <constraint firstAttribute="trailing" secondItem="imJ-aW-vsd" secondAttribute="trailing" constant="15" id="yez-lv-7tD"/>
+                    <constraint firstItem="imJ-aW-vsd" firstAttribute="centerY" secondItem="3wW-9t-63z" secondAttribute="centerY" id="zFu-WZ-dGd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="nameLab" destination="3wW-9t-63z" id="U0X-oa-XJI"/>
+                <outlet property="nameTF" destination="imJ-aW-vsd" id="dTw-Qd-FQR"/>
+                <outlet property="phoneLab" destination="C6Z-R8-934" id="BOh-tL-BDj"/>
+                <outlet property="phoneTF" destination="aLz-KX-a8v" id="gDP-nU-kfc"/>
+            </connections>
+            <point key="canvasLocation" x="88.5" y="155.5"/>
+        </tableViewCell>
+    </objects>
+</document>

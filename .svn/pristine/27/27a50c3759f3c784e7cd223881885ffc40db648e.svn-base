@@ -1,0 +1,75 @@
+//
+//  MineMessageHeaderView.m
+//  ArtStar
+//
+//  Created by abc on 6/7/18.
+//  Copyright © 2018 KG丿轩帝. All rights reserved.
+//
+
+#import "MineMessageHeaderView.h"
+
+@interface MineMessageHeaderView ()
+
+@property (nonatomic,strong) UIImageView *headerImage;
+@property (nonatomic,strong) UILabel *nameLab;
+@property (nonatomic,strong) UILabel *detaialLab;
+@property (nonatomic,strong) UIButton *newsBtu;
+@property (nonatomic,strong) UIView *line;
+
+@end
+
+@implementation MineMessageHeaderView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self setViewCell];
+    }
+    return self;
+}
+
+- (void)setViewCell{
+    _headerImage = [UIImageView new];
+    _nameLab = [UILabel new];
+    _detaialLab = [UILabel new];
+    _newsBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _line = [UIView new];
+    
+    [self sd_addSubviews:@[_headerImage,_nameLab,_detaialLab,_newsBtu,_line]];
+    
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:@"http://sem.g3img.com/site/34012976/20140918140006_19555.jpg"]];
+    _headerImage.layer.cornerRadius = 20;
+    _headerImage.layer.masksToBounds = YES;
+    _headerImage.sd_layout.leftSpaceToView(self, 15).topSpaceToView(self, 15).widthIs(40).heightIs(40);
+    
+    _nameLab.textColor = Color_333333;
+    _nameLab.font = SYFont(14);
+    _nameLab.text = @"文艺星球官方";
+    _nameLab.sd_layout.leftSpaceToView(_headerImage, 15).topEqualToView(_headerImage).rightSpaceToView(self, 55).heightIs(15);
+    
+    _detaialLab.textColor = Color_999999;
+    _detaialLab.font = SYFont(13);
+    _detaialLab.text = @"文艺星球最新通知";
+    _detaialLab.sd_layout.leftSpaceToView(_headerImage, 15).bottomEqualToView(_headerImage).rightSpaceToView(self, 55).heightIs(15);
+    
+    [_newsBtu setTitle:@"NEW" forState:UIControlStateNormal];
+    [_newsBtu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _newsBtu.backgroundColor = [UIColor colorWithHexString:@"#ff4545"];
+    _newsBtu.layer.cornerRadius = 10;
+    _newsBtu.layer.masksToBounds = YES;
+    _newsBtu.titleLabel.font = SYFont(9);
+    _newsBtu.sd_layout.rightSpaceToView(self, 15).centerYEqualToView(_headerImage).widthIs(40).heightIs(20);
+    
+    _line.backgroundColor = Color_fafafa;
+    _line.sd_layout.leftSpaceToView(self, 0).rightSpaceToView(self, 0).bottomSpaceToView(self, 0).heightIs(10);
+    
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MyselfWordWorksCell">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="496"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="348" height="496"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="VRR-bE-NyX">
+                        <rect key="frame" x="0.0" y="0.0" width="348" height="464"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="VRR-bE-NyX" secondAttribute="height" multiplier="330:440" id="4JM-U3-ORp"/>
+                        </constraints>
+                    </imageView>
+                    <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWI-25-ojS">
+                        <rect key="frame" x="0.0" y="439" width="348" height="25"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="kzg-Mb-Iv3"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在出售" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsR-Dy-qmd">
+                        <rect key="frame" x="15" y="439" width="318" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="7gZ-kq-nQR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="色彩世界" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPX-IE-isr">
+                        <rect key="frame" x="0.0" y="464" width="348" height="32"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="BPX-IE-isr" firstAttribute="top" secondItem="VRR-bE-NyX" secondAttribute="bottom" id="18r-OK-FlD"/>
+                <constraint firstAttribute="trailing" secondItem="BPX-IE-isr" secondAttribute="trailing" id="5G7-uU-COD"/>
+                <constraint firstItem="nWI-25-ojS" firstAttribute="bottom" secondItem="VRR-bE-NyX" secondAttribute="bottom" id="ITQ-lE-dJU"/>
+                <constraint firstAttribute="bottom" secondItem="BPX-IE-isr" secondAttribute="bottom" id="MNV-lR-tAu"/>
+                <constraint firstAttribute="trailing" secondItem="nsR-Dy-qmd" secondAttribute="trailing" constant="15" id="Su3-gw-fQz"/>
+                <constraint firstAttribute="trailing" secondItem="nWI-25-ojS" secondAttribute="trailing" id="V4D-hQ-sFt"/>
+                <constraint firstItem="nsR-Dy-qmd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="dEl-ch-AEl"/>
+                <constraint firstItem="nsR-Dy-qmd" firstAttribute="bottom" secondItem="nWI-25-ojS" secondAttribute="bottom" id="e7g-iO-kGC"/>
+                <constraint firstItem="VRR-bE-NyX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="icv-ZN-oUT"/>
+                <constraint firstAttribute="trailing" secondItem="VRR-bE-NyX" secondAttribute="trailing" id="jgd-0i-wFn"/>
+                <constraint firstItem="nWI-25-ojS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nh2-Ty-ift"/>
+                <constraint firstItem="BPX-IE-isr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rfc-zm-yGg"/>
+                <constraint firstItem="VRR-bE-NyX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wWe-s7-4LY"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="348" height="496"/>
+            <connections>
+                <outlet property="labView" destination="nWI-25-ojS" id="HOr-DL-fIS"/>
+                <outlet property="nameLab" destination="BPX-IE-isr" id="liw-9r-m6e"/>
+                <outlet property="statusLab" destination="nsR-Dy-qmd" id="Sib-P6-ewd"/>
+                <outlet property="topImage" destination="VRR-bE-NyX" id="Ok1-HH-uDr"/>
+            </connections>
+            <point key="canvasLocation" x="157" y="277"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="1" width="324" height="220"/>
+    </resources>
+</document>
