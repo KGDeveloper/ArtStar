@@ -44,22 +44,31 @@
     scrollerView.titleAction = ^(NSString *title) {
         if ([title isEqualToString:@"全部"]) {
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }else if([title isEqualToString:@"美术"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }else if ([title isEqualToString:@"音乐"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }else if ([title isEqualToString:@"戏剧"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }else if ([title isEqualToString:@"电影"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"电影";
         }else if ([title isEqualToString:@"美食"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }else if ([title isEqualToString:@"书籍"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }else if ([title isEqualToString:@"设计"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }else{
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
+            mySelf.institutionsView.chooseStyle = @"机构";
         }
     };
     [self.view addSubview:scrollerView];
@@ -71,6 +80,7 @@
     if (!_institutionsView) {
         _institutionsView = [[MusicInstitutionsView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
         _institutionsView.delegate = self;
+        _institutionsView.chooseStyle = @"机构";
         _institutionsView.pushViewController = ^{
             [mySelf pushNoTabBarViewController:[[InstitutionsVC alloc]init] animated:YES];
         };

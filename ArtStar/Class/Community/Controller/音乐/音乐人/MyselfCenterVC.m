@@ -15,7 +15,7 @@
 #import "MyselfCenterMyWordCell.h"
 #import "MyselfWordVC.h"
 #import "MyselfCenterVideo+Music+BookVC.h"
-#import "FriendsVC.h"
+#import "YourFriendsCenterVC.h"
 
 @interface MyselfCenterVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -135,7 +135,7 @@
     if (indexPath.row == 3) {
         [self pushNoTabBarViewController:[[MyselfCenterVideo_Music_BookVC alloc]init] animated:YES];
     }else if (indexPath.row == 0){
-        [self pushNoTabBarViewController:[[FriendsVC alloc]init] animated:YES];
+        [self pushNoTabBarViewController:[[YourFriendsCenterVC alloc]init] animated:YES];
     }
 }
 

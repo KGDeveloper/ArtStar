@@ -50,7 +50,7 @@
     [self.contentView sd_addSubviews:@[_topImage,_deleteBtu,_titleLab,_nameLab,_zansBtu,_commentBtu,_shareBtu,_playBtu,_backPlay,_line]];
     
     _topImage.image = Image(@"2");
-    _topImage.sd_layout.leftSpaceToView(self.contentView, 15).rightSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 20).heightIs((ViewWidth(self) - 30)/690*400);
+    _topImage.sd_layout.leftSpaceToView(self.contentView, 15).rightSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 40).heightIs((ViewWidth(self) - 30)/690*400);
     
     _backPlay.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     _backPlay.alpha = 0.2;
@@ -66,7 +66,7 @@
     
     [_deleteBtu setImage:Image(@"del") forState:UIControlStateNormal];
     [_deleteBtu addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-    _deleteBtu.sd_layout.rightSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 5).widthIs(10).heightIs(10);
+    _deleteBtu.sd_layout.rightSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 5).widthIs(30).heightIs(30);
     
     _titleLab.textColor = Color_333333;
     _titleLab.font = SYFont(14);

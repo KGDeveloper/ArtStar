@@ -25,7 +25,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请对您上传的地标做一番介绍吧！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp3-Hn-EDK">
-                        <rect key="frame" x="30" y="25" width="324" height="15"/>
+                        <rect key="frame" x="15" y="25" width="339" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="M5t-c9-Qdr"/>
                         </constraints>
@@ -66,7 +66,7 @@
                     <constraint firstAttribute="bottom" secondItem="CZB-Rw-bnn" secondAttribute="bottom" constant="40" id="38H-pd-JaO"/>
                     <constraint firstItem="CZB-Rw-bnn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8Y4-5W-Gb3"/>
                     <constraint firstItem="596-8h-upD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="8vh-ja-ZAT"/>
-                    <constraint firstItem="hp3-Hn-EDK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="94j-ZL-TST"/>
+                    <constraint firstItem="hp3-Hn-EDK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="94j-ZL-TST"/>
                     <constraint firstItem="g0I-fP-ZYo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GTt-Db-4tf"/>
                     <constraint firstAttribute="bottom" secondItem="596-8h-upD" secondAttribute="bottom" id="XtA-e8-6rK"/>
                     <constraint firstAttribute="trailing" secondItem="hp3-Hn-EDK" secondAttribute="trailing" constant="30" id="cGf-YJ-0AW"/>

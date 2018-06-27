@@ -66,16 +66,21 @@
     scrollerView.titleAction = ^(NSString *title) {
         if ([title isEqualToString:@"演出"]) {
             [mySelf.view bringSubviewToFront:mySelf.performanceView];
+            mySelf.smartView.hidden = YES;
         }else if([title isEqualToString:@"头条"]){
             [mySelf.view bringSubviewToFront:mySelf.headLinesView];
+            mySelf.smartView.hidden = YES;
         }else if ([title isEqualToString:@"机构"]){
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
         }else if ([title isEqualToString:@"话题"]){
             [mySelf.view bringSubviewToFront:self.themeView];
+            mySelf.smartView.hidden = YES;
         }else if ([title isEqualToString:@"音乐人"]){
             [mySelf.view bringSubviewToFront:mySelf.musiciansView];
+            mySelf.smartView.hidden = YES;
         }else{
             [mySelf.view bringSubviewToFront:mySelf.foundFriendsView];
+            mySelf.smartView.hidden = YES;
         }
     };
     [self.view addSubview:scrollerView];
@@ -111,6 +116,7 @@
     if (!_institutionsView) {
         _institutionsView = [[MusicInstitutionsView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
         _institutionsView.delegate = self;
+        _institutionsView.chooseStyle = @"音乐";
         _institutionsView.pushViewController = ^{
             [mySelf pushNoTabBarViewController:[[InstitutionsVC alloc]init] animated:YES];
         };

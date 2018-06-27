@@ -41,9 +41,19 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineReleasePictureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineReleasePictureTableViewCell"];
-    cell.viewWidth.constant = 0;
-    cell.deleteBtu.hidden = YES;
+    if (_isEditCell == YES) {
+        cell.viewWidth.constant = 30;
+        cell.deleteBtu.hidden = NO;
+    }else{
+        cell.viewWidth.constant = 0;
+        cell.deleteBtu.hidden = YES;
+    }
     return cell;
+}
+
+- (void)setIsEditCell:(BOOL)isEditCell{
+    _isEditCell = isEditCell;
+    [_listView reloadData];
 }
 
 /*

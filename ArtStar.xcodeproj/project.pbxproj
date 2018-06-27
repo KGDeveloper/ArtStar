@@ -27,6 +27,11 @@
 		280601B720B80C250090254E /* HeadLinesDetaialCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280601B520B80C250090254E /* HeadLinesDetaialCommentCell.m */; };
 		280601B820B80C250090254E /* HeadLinesDetaialCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280601B620B80C250090254E /* HeadLinesDetaialCommentCell.xib */; };
 		280601BC20B81C560090254E /* KGMusicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280601BB20B81C560090254E /* KGMusicVC.m */; };
+		2807C76820E1DCD8007C1740 /* MineChatDetaialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C76720E1DCD8007C1740 /* MineChatDetaialViewController.m */; };
+		2807C76A20E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807C76920E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib */; };
+		2807C76D20E1EA85007C1740 /* YourFriendsCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C76C20E1EA85007C1740 /* YourFriendsCenterVC.m */; };
+		2807C76F20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807C76E20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib */; };
+		2807C77220E1EEA0007C1740 /* MyselfCenterYourFriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C77120E1EEA0007C1740 /* MyselfCenterYourFriendsView.m */; };
 		280E751D20C01AA100609736 /* MyselyCenterDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E751B20C01AA100609736 /* MyselyCenterDynamicCell.m */; };
 		280E751E20C01AA100609736 /* MyselyCenterDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E751C20C01AA100609736 /* MyselyCenterDynamicCell.xib */; };
 		280E752120C01F6A00609736 /* MyselfCenterMyLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E752020C01F6A00609736 /* MyselfCenterMyLabelCell.m */; };
@@ -120,6 +125,7 @@
 		28211C8B20A59BE7009C8E49 /* PreviewVerticalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28211C8A20A59BE7009C8E49 /* PreviewVerticalView.m */; };
 		28211C8E20A59C2B009C8E49 /* PreviewVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28211C8D20A59C2B009C8E49 /* PreviewVideoPlayView.m */; };
 		2825F6CC20B6B2AB0076B71B /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */; };
+		28283F6720E23B71008D1224 /* KGTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28283F6620E23B71008D1224 /* KGTicketView.m */; };
 		282E071C20C8D3C600A9B2E1 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */; };
 		282E071F20C8D57100A9B2E1 /* MineOnlineOrStealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E071E20C8D57100A9B2E1 /* MineOnlineOrStealthView.m */; };
 		282E072220C8E18B00A9B2E1 /* MineButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E072120C8E18B00A9B2E1 /* MineButtonView.m */; };
@@ -550,6 +556,14 @@
 		280601B620B80C250090254E /* HeadLinesDetaialCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeadLinesDetaialCommentCell.xib; sourceTree = "<group>"; };
 		280601BA20B81C560090254E /* KGMusicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGMusicVC.h; sourceTree = "<group>"; };
 		280601BB20B81C560090254E /* KGMusicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGMusicVC.m; sourceTree = "<group>"; };
+		2807C76620E1DCD8007C1740 /* MineChatDetaialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineChatDetaialViewController.h; sourceTree = "<group>"; };
+		2807C76720E1DCD8007C1740 /* MineChatDetaialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineChatDetaialViewController.m; sourceTree = "<group>"; };
+		2807C76920E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineMessageFirstIntoShowView.xib; sourceTree = "<group>"; };
+		2807C76B20E1EA85007C1740 /* YourFriendsCenterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YourFriendsCenterVC.h; sourceTree = "<group>"; };
+		2807C76C20E1EA85007C1740 /* YourFriendsCenterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YourFriendsCenterVC.m; sourceTree = "<group>"; };
+		2807C76E20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyselfCenterYourFriendsView.xib; sourceTree = "<group>"; };
+		2807C77020E1EEA0007C1740 /* MyselfCenterYourFriendsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfCenterYourFriendsView.h; sourceTree = "<group>"; };
+		2807C77120E1EEA0007C1740 /* MyselfCenterYourFriendsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselfCenterYourFriendsView.m; sourceTree = "<group>"; };
 		280E751A20C01AA100609736 /* MyselyCenterDynamicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselyCenterDynamicCell.h; sourceTree = "<group>"; };
 		280E751B20C01AA100609736 /* MyselyCenterDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselyCenterDynamicCell.m; sourceTree = "<group>"; };
 		280E751C20C01AA100609736 /* MyselyCenterDynamicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyselyCenterDynamicCell.xib; sourceTree = "<group>"; };
@@ -705,6 +719,8 @@
 		28211C8D20A59C2B009C8E49 /* PreviewVideoPlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewVideoPlayView.m; sourceTree = "<group>"; };
 		2825F6CA20B6B2AB0076B71B /* ActivityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
 		2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
+		28283F6520E23B71008D1224 /* KGTicketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGTicketView.h; sourceTree = "<group>"; };
+		28283F6620E23B71008D1224 /* KGTicketView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGTicketView.m; sourceTree = "<group>"; };
 		282E071A20C8D3C600A9B2E1 /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
 		282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
 		282E071D20C8D57100A9B2E1 /* MineOnlineOrStealthView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineOnlineOrStealthView.h; sourceTree = "<group>"; };
@@ -1763,6 +1779,7 @@
 		2820B07E20B5602000EA1DAC /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				28283F6420E23AFD008D1224 /* 买票 */,
 				28FDAC3820C0F01A00531597 /* 个人中心顶部滚动条 */,
 				28E33AC020BBF0CD009F9382 /* 头部轮播图 */,
 				28E33ABF20BBF0B3009F9382 /* 屏蔽框 */,
@@ -1794,6 +1811,15 @@
 				28211C8320A58BBD009C8E49 /* PreviewVC.m */,
 			);
 			path = "预览";
+			sourceTree = "<group>";
+		};
+		28283F6420E23AFD008D1224 /* 买票 */ = {
+			isa = PBXGroup;
+			children = (
+				28283F6520E23B71008D1224 /* KGTicketView.h */,
+				28283F6620E23B71008D1224 /* KGTicketView.m */,
+			);
+			path = "买票";
 			sourceTree = "<group>";
 		};
 		282E071720C8D38300A9B2E1 /* View */ = {
@@ -1868,6 +1894,8 @@
 			children = (
 				282E072D20C911F600A9B2E1 /* MIneMessageVC.h */,
 				282E072E20C911F600A9B2E1 /* MIneMessageVC.m */,
+				2807C76620E1DCD8007C1740 /* MineChatDetaialViewController.h */,
+				2807C76720E1DCD8007C1740 /* MineChatDetaialViewController.m */,
 				2804BEAE20E0DF12007E33DE /* MineSystemVC.h */,
 				2804BEAF20E0DF12007E33DE /* MineSystemVC.m */,
 				2874724E20CA676A004317A5 /* MsgTapCellHeaderPushFocusVC.h */,
@@ -1889,6 +1917,7 @@
 				2874724620CA5AF4004317A5 /* FocusView.m */,
 				2874726820CA8B6F004317A5 /* CancelFocusView.h */,
 				2874726920CA8B6F004317A5 /* CancelFocusView.m */,
+				2807C76920E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib */,
 				2874724820CA604A004317A5 /* 点击头像页面cell */,
 				287471E820CA313C004317A5 /* Cell */,
 			);
@@ -2052,6 +2081,8 @@
 				28BF33CC20C4EDA800598919 /* MyselfWordUploadingVC.m */,
 				2813DB5420C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.h */,
 				2813DB5520C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.m */,
+				2807C76B20E1EA85007C1740 /* YourFriendsCenterVC.h */,
+				2807C76C20E1EA85007C1740 /* YourFriendsCenterVC.m */,
 			);
 			path = "音乐人";
 			sourceTree = "<group>";
@@ -2061,6 +2092,9 @@
 			children = (
 				284C8D6A20BFA4A100487225 /* MusicMusiciansView.h */,
 				284C8D6B20BFA4A100487225 /* MusicMusiciansView.m */,
+				2807C77020E1EEA0007C1740 /* MyselfCenterYourFriendsView.h */,
+				2807C77120E1EEA0007C1740 /* MyselfCenterYourFriendsView.m */,
+				2807C76E20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib */,
 				28D09E0720C00C4400FA45A2 /* 资料中心 */,
 				284C8D7620BFC7B700487225 /* 筛选 */,
 				284C8D6D20BFA5CB00487225 /* Cell */,
@@ -3789,6 +3823,7 @@
 				2870B74120C69EEC00133D1A /* BuyBooksCell.xib in Resources */,
 				28FDAC2F20C0E75900531597 /* MyselfCenterVideoAndVicesAndBooksCell.xib in Resources */,
 				287D2D0120BE8C1800500156 /* HotMoviesDetailCommentNormalCell.xib in Resources */,
+				2807C76F20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib in Resources */,
 				A8FD4F472088439E008B53FC /* Assets.xcassets in Resources */,
 				28E8E87820B68CC9002E10FC /* KGSearchViewCell.xib in Resources */,
 				2875DABD20D3C87200D6CAFE /* MineAddBaseInfoChooseIDTableViewCell.xib in Resources */,
@@ -3820,6 +3855,7 @@
 				281DF70620D25FFA0086030E /* MineCollectionExibitionTableViewCell.xib in Resources */,
 				28F996A920A43E2600678494 /* ZLPhotoBrowserCell.xib in Resources */,
 				28F996A720A43E2600678494 /* ZLPhotoBrowser.bundle in Resources */,
+				2807C76A20E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib in Resources */,
 				28FDAC4D20C11DE900531597 /* TheEndCell.xib in Resources */,
 				28B21A9420AEA13B00108F50 /* FriendsTopImageButtomLabelCell.xib in Resources */,
 				283EBAD320CF6A3F006C28C0 /* MineWordLoveFoodsCell.xib in Resources */,
@@ -4056,6 +4092,7 @@
 				282E071C20C8D3C600A9B2E1 /* MineHeaderView.m in Sources */,
 				28B21A9320AEA13B00108F50 /* FriendsTopImageButtomLabelCell.m in Sources */,
 				A8FD4F3C20884396008B53FC /* AppDelegate.m in Sources */,
+				2807C76D20E1EA85007C1740 /* YourFriendsCenterVC.m in Sources */,
 				284C8D7520BFB09100487225 /* CALayer+KGLayerColor.m in Sources */,
 				28CA5BF020CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.m in Sources */,
 				28A6C9CB20D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.m in Sources */,
@@ -4117,6 +4154,7 @@
 				28E8E88320B6A86E002E10FC /* HeadLinesVideoPlayVide.m in Sources */,
 				282E073720C941E700A9B2E1 /* LoginUserRongInfo.m in Sources */,
 				283EBAD220CF6A3F006C28C0 /* MineWordLoveFoodsCell.m in Sources */,
+				2807C76820E1DCD8007C1740 /* MineChatDetaialViewController.m in Sources */,
 				280E752520C02F9500609736 /* MyselfCenterSchoolCell.m in Sources */,
 				28FDAC5420C12AA500531597 /* MyselfWordHomeMusicCell.m in Sources */,
 				28EC5F7B20D9F61C0019D4C1 /* MineFeedBackIdeaTableViewCell.m in Sources */,
@@ -4170,6 +4208,7 @@
 				280601AF20B8008A0090254E /* KGLowCommentView.m in Sources */,
 				286C902520BD01F9004EBA67 /* HotMoviesView.m in Sources */,
 				28577B7A20D125060082075D /* MineSearchYourLoveCell.m in Sources */,
+				28283F6720E23B71008D1224 /* KGTicketView.m in Sources */,
 				28FDAC3720C0EF9600531597 /* MyselfWordVC.m in Sources */,
 				286C903F20BD3EA6004EBA67 /* DomIntroduceCell.m in Sources */,
 				283482D020DCD7DC0026DD83 /* MapScreeningCompoentView.m in Sources */,
@@ -4338,6 +4377,7 @@
 				28E33AB720BBCF8E009F9382 /* MusicPerformanceView.m in Sources */,
 				28A6C9F220D8EB9F00ECBF4F /* MineSetUpPushTableViewCell.m in Sources */,
 				281DF72120D2700A0086030E /* MineTheAddressBookVC.m in Sources */,
+				2807C77220E1EEA0007C1740 /* MyselfCenterYourFriendsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

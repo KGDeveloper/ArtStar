@@ -10,6 +10,7 @@
 #import "MineMessageHeaderView.h"
 #import "MineSystemVC.h"
 #import "MineSystemMessageListCell.h"
+#import "MineChatDetaialViewController.h"
 
 @interface MIneMessageVC ()
 
@@ -99,7 +100,7 @@
 }
 - (void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath{
     
-    RCConversationViewController *chatVC = [[RCConversationViewController alloc]init];
+    MineChatDetaialViewController *chatVC = [[MineChatDetaialViewController alloc]init];
     chatVC.title = model.conversationTitle;
     chatVC.conversationType = model.conversationType;
     chatVC.targetId = model.targetId;
@@ -109,10 +110,12 @@
     
 }
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource{
-    RCConversationModel *model = dataSource[0];
-    if ([model.targetId isEqualToString:@"文艺星球官方"]) {
-        NSLog(@"1");
-    }
+    [dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        RCConversationModel *model = obj;
+        if ([model.targetId isEqualToString:@"文艺星球官方"]) {
+            [dataSource removeObject:model];
+        }
+    }];
     return dataSource;
 }
 

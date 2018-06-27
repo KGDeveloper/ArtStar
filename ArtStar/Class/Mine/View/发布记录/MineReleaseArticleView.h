@@ -10,4 +10,6 @@
 
 @interface MineReleaseArticleView : UIView
 
+@property (nonatomic,assign) BOOL isEditCell;
+
 @end

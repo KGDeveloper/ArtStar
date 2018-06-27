@@ -70,6 +70,12 @@
     }
 }
 
+- (void)setBtu:(NSInteger)btu{
+    _btu = btu;
+    _lineView.centerX = kScreenWidth/10*btu;
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -15,12 +15,13 @@
 #import "MusicBuyTicketCell.h"
 #import "MusicSimilarToRecommendCell.h"
 #import "HotInstitutionsDetailVC.h"
-
+#import "KGTicketView.h"
 
 @interface InstitutionsVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) InstitutionsDetailHeaderView *headerView;
+@property (nonatomic,strong) KGTicketView *ticketView;
 
 @end
 
@@ -45,6 +46,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self setTableView];
+    [self setTicket];
 }
 
 - (void)setTableView{
@@ -61,7 +63,6 @@
     [_listView registerNib:[UINib nibWithNibName:@"MusicAboutCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicAboutCell"];
     [_listView registerNib:[UINib nibWithNibName:@"MusicPhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicPhotosCell"];
     [_listView registerNib:[UINib nibWithNibName:@"MusicCommentCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicCommentCell"];
-    [_listView registerNib:[UINib nibWithNibName:@"MusicBuyTicketCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicBuyTicketCell"];
     [_listView registerClass:[MusicSimilarToRecommendCell class] forCellReuseIdentifier:@"MusicSimilarToRecommendCell"];
 }
 
@@ -72,7 +73,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,11 +85,8 @@
         return 220;
     }else if (indexPath.row == 3){
         return 220;
-    }else if (indexPath.row == 4){
+    }else{
         return 395;
-    }
-    else{
-        return 50;
     }
 }
 
@@ -109,12 +107,8 @@
         cell.topCount = @"3.5";
         cell.centerCount = @"3.0";
         return cell;
-    }else if(indexPath.row == 4){
+    }else{
         MusicSimilarToRecommendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicSimilarToRecommendCell"];
-        return cell;
-    }
-    else{
-        MusicBuyTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicBuyTicketCell"];
         return cell;
     }
 }
@@ -124,6 +118,16 @@
         [self pushNoTabBarViewController:[[HotInstitutionsDetailVC alloc]init] animated:YES];
     }
 }
+
+- (void)setTicket{
+    _ticketView = [[KGTicketView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 50, kScreenWidth, 50)];
+    _ticketView.theTicketAction = ^{
+        
+    };
+    _ticketView.backgroundColor = [UIColor colorWithHexString:@"#4d4d4d"];
+    [self.view insertSubview:_ticketView atIndex:99];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -36,6 +36,15 @@
     [_listView registerNib:[UINib nibWithNibName:@"MineCollectionInstitutionViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MineCollectionInstitutionViewCell"];
 }
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        
+    }];
+    deleteAction.backgroundColor = [UIColor redColor];
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
+    return config;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }

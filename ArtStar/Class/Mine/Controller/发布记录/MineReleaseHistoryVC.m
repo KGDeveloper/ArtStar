@@ -27,6 +27,8 @@
 @property (nonatomic,strong) MineReleaseThemeView *themeView;
 @property (nonatomic,strong) MineReleaseArticleView *articleView;
 
+@property (nonatomic,copy) NSString *actionStr;
+
 @end
 
 @implementation MineReleaseHistoryVC
@@ -39,9 +41,37 @@
     [self setRightBtuWithTitle:@"编辑" image:nil];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _actionStr = @"图文记录";
     [self setTopView];
     
 }
+
+- (void)rightNavBtuAction:(UIButton *)sender{
+    if ([sender.currentTitle isEqualToString:@"编辑"]) {
+        [sender setTitle:@"完成" forState:UIControlStateNormal];
+        if ([_actionStr isEqualToString:@"图文记录"]) {
+            self.pictureView.isEditCell = YES;
+        }else if ([_actionStr isEqualToString:@"视频记录"]){
+            self.videoView.isEditCell = YES;
+        }else if ([_actionStr isEqualToString:@"话题记录"]){
+            self.themeView.isEditCell = YES;
+        }else{
+            self.articleView.isEditCell = YES;
+        }
+    }else{
+        [sender setTitle:@"编辑" forState:UIControlStateNormal];
+        if ([_actionStr isEqualToString:@"图文记录"]) {
+            self.pictureView.isEditCell = NO;
+        }else if ([_actionStr isEqualToString:@"视频记录"]){
+            self.videoView.isEditCell = NO;
+        }else if ([_actionStr isEqualToString:@"话题记录"]){
+            self.themeView.isEditCell = NO;
+        }else{
+            self.articleView.isEditCell = NO;
+        }
+    }
+}
+
 - (void)setTopView{
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0,NavTopHeight, kScreenWidth, 60)];
     topView.backgroundColor = [UIColor whiteColor];
@@ -59,6 +89,8 @@
         mySelf.articleBtu.btuColor = Color_999999;
         [mySelf changeLineOriginX:mySelf.pictureBtu];
         [mySelf.view bringSubviewToFront:mySelf.pictureView];
+        mySelf.actionStr = @"图文记录";
+        [mySelf changeCellEditStye];
     };
     [topView addSubview:_pictureBtu];
     
@@ -73,6 +105,8 @@
         mySelf.articleBtu.btuColor = Color_999999;
         [mySelf changeLineOriginX:mySelf.videoBtu];
       [mySelf.view bringSubviewToFront:mySelf.videoView];
+        mySelf.actionStr = @"视频记录";
+        [mySelf changeCellEditStye];
     };
     [topView addSubview:_videoBtu];
     
@@ -87,6 +121,8 @@
         mySelf.articleBtu.btuColor = Color_999999;
         [mySelf changeLineOriginX:mySelf.themeBtu];
         [mySelf.view bringSubviewToFront:mySelf.themeView];
+        mySelf.actionStr = @"话题记录";
+        [mySelf changeCellEditStye];
     };
     [topView addSubview:_themeBtu];
     
@@ -101,6 +137,8 @@
         mySelf.articleBtu.btuColor = Color_333333;
         [mySelf changeLineOriginX:mySelf.articleBtu];
         [mySelf.view bringSubviewToFront:mySelf.articleView];
+        mySelf.actionStr = @"文章记录";
+        [mySelf changeCellEditStye];
     };
     [topView addSubview:_articleBtu];
     
@@ -151,6 +189,14 @@
         [self.view addSubview:_articleView];
     }
     return _articleView;
+}
+
+- (void)changeCellEditStye{
+    self.pictureView.isEditCell = NO;
+    self.videoView.isEditCell = NO;
+    self.themeView.isEditCell = NO;
+    self.articleView.isEditCell = NO;
+    [self setRightBtuWithTitle:@"编辑" image:nil];
 }
 
 - (void)didReceiveMemoryWarning {

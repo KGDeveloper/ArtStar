@@ -80,9 +80,16 @@
 
 - (void)setChooseStyle:(NSString *)chooseStyle{
     _chooseStyle = chooseStyle;
-    _headerView.frame = CGRectMake(0, 0, ViewWidth(self), 10);
-    _hotView.hidden = YES;
-    _isChoose = YES;
+    if ([chooseStyle isEqualToString:@"电影"]) {
+        _headerView.frame = CGRectMake(0, 0, ViewWidth(self), 185);
+        _hotView.hidden = NO;
+        _isChoose = NO;
+    }else{
+        _headerView.frame = CGRectMake(0, 0, ViewWidth(self), 10);
+        _hotView.hidden = YES;
+        _isChoose = YES;
+    }
+    
     [_listView reloadData];
 }
 

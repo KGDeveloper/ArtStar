@@ -23,15 +23,7 @@
 
 @interface CommunityExhibitionVC ()<MusicInstitutionsViewDelegate>
 
-@property (nonatomic,strong) HeadlinesView *headLinesView;//:--头条--
 @property (nonatomic,strong) MusicPerformanceView *performanceView;//:--演出--
-@property (nonatomic,strong) MusicInstitutionsView *institutionsView;//:--机构--
-@property (nonatomic,strong) CommunitySmartView *smartView;//:--机构筛选--
-@property (nonatomic,strong) MusicThemeView *themeView;//:--话题--
-@property (nonatomic,strong) MusicMusiciansView *musiciansView;//:--音乐人--
-@property (nonatomic,strong) MusicScreeningView *screeningView;//:--音乐人筛选--
-@property (nonatomic,strong) MusicFoundFriendsView *foundFriendsView;//:--交友--
-@property (nonatomic,strong) FoundFriendsScreeningView *foundFriendsScreening;//:--交友筛选--
 
 @end
 
@@ -66,20 +58,9 @@
         }
     };
     [self.view addSubview:scrollerView];
-    [self.view insertSubview:self.headLinesView atIndex:99];
+    [self.view insertSubview:self.performanceView atIndex:99];
 }
-//MARK:----------------------------------------------------------头条--------------------------------------------------------------
-- (HeadlinesView *)headLinesView{
-    __weak typeof(self) mySelf = self;
-    if (!_headLinesView) {
-        _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        _headLinesView.pushViewController = ^{
-            [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
-        };
-        [self.view addSubview:_headLinesView];
-    }
-    return _headLinesView;
-}
+
 //MARK:----------------------------------------------------------展览--------------------------------------------------------------
 - (MusicPerformanceView *)performanceView{
     __weak typeof(self) mySelf = self;
@@ -91,93 +72,6 @@
         [self.view addSubview:_performanceView];
     }
     return _performanceView;
-}
-//MARK:----------------------------------------------------------机构--------------------------------------------------------------
-- (MusicInstitutionsView *)institutionsView{
-    __weak typeof(self) mySelf = self;
-    if (!_institutionsView) {
-        _institutionsView = [[MusicInstitutionsView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        _institutionsView.delegate = self;
-        _institutionsView.pushViewController = ^{
-            [mySelf pushNoTabBarViewController:[[InstitutionsVC alloc]init] animated:YES];
-        };
-        [self.view addSubview:_institutionsView];
-    }
-    return _institutionsView;
-}
-//MARK:----------------------------------------------------------机构--------------------------------------------------------------
-- (MusicThemeView *)themeView{
-    __weak typeof(self) mySelf = self;
-    if (!_themeView) {
-        _themeView = [[MusicThemeView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        _themeView.pushViewController = ^{
-            [mySelf pushNoTabBarViewController:[[MusicManagementMyThemeVC alloc]init] animated:YES];
-        };
-        [self.view addSubview:_themeView];
-    }
-    return _themeView;
-}
-//MARK:-----------------------------------------------------音乐人----------------------------------------------------------------------
-- (MusicMusiciansView *)musiciansView{
-    if (!_musiciansView) {
-        _musiciansView = [[MusicMusiciansView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        __weak typeof(self) mySelf = self;
-        _musiciansView.pushViewController = ^{
-            [mySelf pushNoTabBarViewController:[[MyselfCenterVC alloc]init] animated:YES];
-        };
-        [self.view addSubview:_musiciansView];
-    }
-    return _musiciansView;
-}
-//MARK:-------------------------------------------------------音乐人筛选框---------------------------------
-- (MusicScreeningView *)screeningView{
-    if (!_screeningView) {
-        _screeningView = [[MusicScreeningView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        _screeningView.sendProvinceNameAndCityName = ^(NSString *provinceName, NSString *cityName) {
-            NSLog(@"%@--%@",provinceName,cityName);
-        };
-        _screeningView.sendSexStr = ^(NSString *sex) {
-            NSLog(@"%@",sex);
-        };
-        _screeningView.sendTypeStr = ^(NSString *type) {
-            NSLog(@"%@",type);
-        };
-        [self.navigationController.view addSubview:_screeningView];
-    }
-    return _screeningView;
-}
-//MARK:-------------------------------------------------------机构筛选框--------------------------------------------------------------
-- (CommunitySmartView *)smartView{
-    if (!_smartView) {
-        _smartView = [[CommunitySmartView alloc]initWithFrame:CGRectMake(ViewWidth(self.view) - 120, NavTopHeight + 40, 120, 135) titleArr:@[@"智能筛选",@"销量最高",@"距离最近"] iconArr:@[@"screen popup screen",@"screen popup hot",@"screen popup location"]];
-        __weak typeof(self) mySelf = self;
-        _smartView.action = ^(NSString *title) {
-            mySelf.institutionsView.chooseStyle = title;
-        };
-        [self.navigationController.view addSubview:_smartView];
-        
-    }
-    return _smartView;
-}
-//MARK:------------------------------MusicInstitutionsViewDelegate--------------------------------------------------------
-- (void)loadHotMovies{
-    [self pushNoTabBarViewController:[[HotMoviesVC alloc]init] animated:YES];
-}
-//MARK:----------------------------------------------交友------------------------------------------
-- (MusicFoundFriendsView *)foundFriendsView{
-    if (!_foundFriendsView) {
-        _foundFriendsView = [[MusicFoundFriendsView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        [self.view addSubview:_foundFriendsView];
-    }
-    return _foundFriendsView;
-}
-//MARK:---------------------------------------------交友筛选-------------------------------------------
-- (FoundFriendsScreeningView *)foundFriendsScreening{
-    if (!_foundFriendsScreening) {
-        _foundFriendsScreening = [[FoundFriendsScreeningView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        [self.navigationController.view addSubview:_foundFriendsScreening];
-    }
-    return _foundFriendsScreening;
 }
 
 - (void)didReceiveMemoryWarning {

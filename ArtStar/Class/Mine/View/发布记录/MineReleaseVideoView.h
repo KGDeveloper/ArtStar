@@ -10,4 +10,6 @@
 
 @interface MineReleaseVideoView : UIView
 
+@property (nonatomic,assign) BOOL isEditCell;
+
 @end

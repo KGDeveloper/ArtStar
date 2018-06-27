@@ -43,7 +43,7 @@
     _listView.dataSource = self;
     _listView.tableHeaderView = [self tableViewHeaderView];
     _listView.tableFooterView = TabLeViewFootView;
-    _listView.rowHeight = (kScreenWidth-30)/690*400 + 20 + 10 + 15 + 37 + 15 + 15;
+    _listView.rowHeight = (kScreenWidth-30)/690*400 + 120;
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addSubview:_listView];
     

@@ -41,10 +41,22 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineReleaseThemeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineReleaseThemeTableViewCell"];
-    cell.viewWidth.constant = 0;
-    cell.deleteBtu.hidden = YES;
+    if (_isEditCell == YES) {
+        cell.viewWidth.constant = 30;
+        cell.deleteBtu.hidden = NO;
+    }else{
+        cell.viewWidth.constant = 0;
+        cell.deleteBtu.hidden = YES;
+    }
     return cell;
 }
+
+- (void)setIsEditCell:(BOOL)isEditCell{
+    _isEditCell = isEditCell;
+    [_listView reloadData];
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

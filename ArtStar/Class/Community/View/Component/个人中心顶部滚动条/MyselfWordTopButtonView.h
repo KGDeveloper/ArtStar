@@ -11,6 +11,7 @@
 @interface MyselfWordTopButtonView : UIView
 
 @property (nonatomic,copy) void(^showDiffentView)(NSString *title);
+@property (nonatomic,assign) NSInteger btu;
 
 - (instancetype)initWithFrame:(CGRect)frame btuArr:(NSArray *)arr;
 

@@ -15,13 +15,15 @@
 #import "MyselfWordUploadingVC.h"
 #import "MyselfWordArticleView.h"
 
-@interface MyselfWordVC ()
+@interface MyselfWordVC ()<UIScrollViewDelegate>
 
 @property (nonatomic,strong) MyselfWordHomeView *homeView;
 @property (nonatomic,strong) MyselfWordInfoView *infoView;
 @property (nonatomic,strong) MySelfWordPerformanView *performanView;
 @property (nonatomic,strong) MyselfWordWorksView *worksView;
 @property (nonatomic,strong) MyselfWordArticleView *articleView;
+@property (nonatomic,strong) UIScrollView *backScroView;
+@property (nonatomic,strong) MyselfWordTopButtonView *topView;
 
 @end
 
@@ -34,72 +36,89 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTopView];
+    [self setBackView];
     
 }
 
+- (void)setBackView{
+    _backScroView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+    _backScroView.contentSize = CGSizeMake(kScreenWidth *5, kScreenHeight - NavTopHeight - 50);
+    _backScroView.bounces = NO;
+    _backScroView.showsVerticalScrollIndicator = NO;
+    _backScroView.showsHorizontalScrollIndicator = NO;
+    _backScroView.delegate = self;
+    _backScroView.pagingEnabled = YES;
+    [self.view addSubview:_backScroView];
+    
+    [self.backScroView addSubview:self.homeView];
+    [self.backScroView addSubview:self.infoView];
+    [self.backScroView addSubview:self.performanView];
+    [self.backScroView addSubview:self.worksView];
+    [self.backScroView addSubview:self.articleView];
+}
+
 - (void)setTopView{
-    MyselfWordTopButtonView *topView = [[MyselfWordTopButtonView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 50) btuArr:@[@"主页",@"履历",@"演出",@"作品",@"文章"]];
+    _topView = [[MyselfWordTopButtonView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 50) btuArr:@[@"主页",@"履历",@"演出",@"作品",@"文章"]];
     __weak typeof(self) mySelf = self;
-    topView.showDiffentView = ^(NSString *title) {
+    _topView.showDiffentView = ^(NSString *title) {
         if ([title isEqualToString:@"主页"]) {
-            [mySelf.view bringSubviewToFront:mySelf.homeView];
+            mySelf.backScroView.contentOffset = CGPointMake(0, kScreenHeight - NavTopHeight - 50);
         }else if ([title isEqualToString:@"履历"]){
-            [mySelf.view bringSubviewToFront:mySelf.infoView];
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth, kScreenHeight - NavTopHeight - 50);
         }else if ([title isEqualToString:@"演出"]){
-            [mySelf.view bringSubviewToFront:mySelf.performanView];
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*2, kScreenHeight - NavTopHeight - 50);
         }else if ([title isEqualToString:@"作品"]){
-            [mySelf.view bringSubviewToFront:mySelf.worksView];
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*3, kScreenHeight - NavTopHeight - 50);
         }else{
-            [mySelf.view bringSubviewToFront:mySelf.articleView];
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*4, kScreenHeight - NavTopHeight - 50);
         }
     };
-    [self.view addSubview:topView];
-    self.homeView.hidden = NO;
+    [self.view addSubview:_topView];
 }
 //MARK:-----------------------------------------homeView-----------------------------------------------
 - (MyselfWordHomeView *)homeView{
     if (!_homeView) {
-        _homeView = [[MyselfWordHomeView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
-        [self.view addSubview:_homeView];
+        _homeView = [[MyselfWordHomeView alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
     }
     return _homeView;
 }
 //MARK:------------------------------------------infoView----------------------------------------------
 - (MyselfWordInfoView *)infoView{
     if (!_infoView) {
-        _infoView = [[MyselfWordInfoView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
-        [self.view addSubview:_infoView];
+        _infoView = [[MyselfWordInfoView alloc]initWithFrame:CGRectMake(kScreenWidth,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
     }
     return _infoView;
 }
 //MARK:-------------------------------------------performanView---------------------------------------------
 - (MySelfWordPerformanView *)performanView{
     if (!_performanView) {
-        _performanView = [[MySelfWordPerformanView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
-        [self.view addSubview:_performanView];
+        _performanView = [[MySelfWordPerformanView alloc]initWithFrame:CGRectMake(kScreenWidth*2, 0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
     }
     return _performanView;
 }
 //MARK:--------------------------------------------worksView--------------------------------------------
 - (MyselfWordWorksView *)worksView{
     if (!_worksView) {
-        _worksView = [[MyselfWordWorksView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+        _worksView = [[MyselfWordWorksView alloc]initWithFrame:CGRectMake(kScreenWidth*3,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
         __weak typeof(self) mySelf = self;
         _worksView.pushUploadingVC = ^{
             [mySelf pushNoTabBarViewController:[[MyselfWordUploadingVC alloc]init] animated:YES];
         };
-        [self.view addSubview:_worksView];
     }
     return _worksView;
 }
 //MARK:--------------------------------------------articlView--------------------------------------------
 - (MyselfWordArticleView *)articleView{
     if (!_articleView) {
-        _articleView = [[MyselfWordArticleView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
-        [self.view addSubview:_articleView];
+        _articleView = [[MyselfWordArticleView alloc]initWithFrame:CGRectMake(kScreenWidth*4,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
     }
     return _articleView;
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    _topView.btu = scrollView.contentOffset.x/kScreenWidth;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

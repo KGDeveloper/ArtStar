@@ -30,6 +30,8 @@
     [self setUpIQKeyboardManager];
     //:--注册融云--
     [self registRongIM];
+    
+    sleep(3);
 
     return YES;
 }

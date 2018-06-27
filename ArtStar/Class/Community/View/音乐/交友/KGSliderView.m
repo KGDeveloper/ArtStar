@@ -32,10 +32,10 @@
     _titleLab.textColor = Color_333333;
     [self addSubview:_titleLab];
     
-    _valueLab = [[UILabel alloc]initWithFrame:CGRectMake(50, 65, 30, 15)];
+    _valueLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 65, ViewWidth(self), 15)];
     _valueLab.font = SYFont(13);
     _valueLab.textColor = Color_333333;
-    _valueLab.textAlignment = NSTextAlignmentLeft;
+    _valueLab.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_valueLab];
     
     _kgSlider = [[KGSlider alloc]initWithFrame:CGRectMake(50, 35, ViewWidth(self) - 100, 15)];
@@ -48,7 +48,6 @@
 
 - (void)changeValuew:(UISlider *)sender{
     _valueLab.text = [NSString stringWithFormat:@"%.0f%@",sender.value,_unitStr];
-    _valueLab.frame = CGRectMake(50 + sender.frame.size.width/sender.maximumValue*sender.value, 65, 40, 15);
     if (self.sendValueToFormView) {
         self.sendValueToFormView(_valueLab.text);
     }

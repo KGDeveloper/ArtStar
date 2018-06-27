@@ -87,6 +87,7 @@
     if (!_institutionsView) {
         _institutionsView = [[MusicInstitutionsView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
         _institutionsView.delegate = self;
+        _institutionsView.chooseStyle = @"美食";
         _institutionsView.pushViewController = ^{
             [mySelf pushNoTabBarViewController:[[InstitutionsVC alloc]init] animated:YES];
         };
