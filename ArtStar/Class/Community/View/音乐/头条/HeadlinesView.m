@@ -72,8 +72,14 @@
 }
 //MARK:---------------------------------------delegate------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.pushViewController) {
-        self.pushViewController();
+    if (indexPath.row%2==0) {
+        if (self.pushViewController) {
+            self.pushViewController(@"视频");
+        }
+    }else{
+        if (self.pushViewController) {
+            self.pushViewController(@"新闻");
+        }
     }
 }
 //MARK:---------------------------------------显示头视图------------------------------------------

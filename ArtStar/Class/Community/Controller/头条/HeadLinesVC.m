@@ -45,8 +45,12 @@
     [self.view addSubview:scrollerView];
     
     _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-    _headLinesView.pushViewController = ^{
-        [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
+    _headLinesView.pushViewController = ^(NSString *type) {
+        if ([type isEqualToString:@"视频"]) {
+            [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
+        }else{
+            [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
+        }
     };
     [self.view addSubview:_headLinesView];
     

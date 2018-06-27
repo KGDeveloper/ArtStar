@@ -10,7 +10,7 @@
 
 @interface HeadlinesView : UIView
 
-@property (nonatomic,copy) void(^pushViewController)(void);
+@property (nonatomic,copy) void(^pushViewController)(NSString *type);
 
 - (void)showHeaderView;
 - (void)hideHeaderView;

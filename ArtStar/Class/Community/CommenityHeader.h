@@ -29,5 +29,7 @@
 #import "KGLowCommentView.h"
 //:--头部轮播图--
 #import "HeaderScrollAndPageView.h"
+//:--头条新闻详情页--
+#import "MovieNewsDetaialVC.h"
 
 #endif /* CommenityHeader_h */

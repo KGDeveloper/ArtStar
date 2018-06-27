@@ -126,6 +126,8 @@
 		28211C8E20A59C2B009C8E49 /* PreviewVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28211C8D20A59C2B009C8E49 /* PreviewVideoPlayView.m */; };
 		2825F6CC20B6B2AB0076B71B /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */; };
 		28283F6720E23B71008D1224 /* KGTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28283F6620E23B71008D1224 /* KGTicketView.m */; };
+		282BA8FE20E33C9700FF3119 /* MovieNewsDetaialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */; };
+		282BA90220E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA90120E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m */; };
 		282E071C20C8D3C600A9B2E1 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */; };
 		282E071F20C8D57100A9B2E1 /* MineOnlineOrStealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E071E20C8D57100A9B2E1 /* MineOnlineOrStealthView.m */; };
 		282E072220C8E18B00A9B2E1 /* MineButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E072120C8E18B00A9B2E1 /* MineButtonView.m */; };
@@ -721,6 +723,10 @@
 		2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		28283F6520E23B71008D1224 /* KGTicketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGTicketView.h; sourceTree = "<group>"; };
 		28283F6620E23B71008D1224 /* KGTicketView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGTicketView.m; sourceTree = "<group>"; };
+		282BA8FC20E33C9700FF3119 /* MovieNewsDetaialVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieNewsDetaialVC.h; sourceTree = "<group>"; };
+		282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieNewsDetaialVC.m; sourceTree = "<group>"; };
+		282BA90020E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadLineHaveTitleNewsTableViewCell.h; sourceTree = "<group>"; };
+		282BA90120E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadLineHaveTitleNewsTableViewCell.m; sourceTree = "<group>"; };
 		282E071A20C8D3C600A9B2E1 /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
 		282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
 		282E071D20C8D57100A9B2E1 /* MineOnlineOrStealthView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineOnlineOrStealthView.h; sourceTree = "<group>"; };
@@ -1761,6 +1767,7 @@
 		2820B07920B55FB100EA1DAC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				282BA8FF20E33DCD00FF3119 /* 新闻详情 */,
 				2834849E20C66B1D00AB6E9A /* 读书 */,
 				28E33AB320BBCF3F009F9382 /* 音乐 */,
 				28E8E88820B6AD33002E10FC /* 活动 */,
@@ -1820,6 +1827,15 @@
 				28283F6620E23B71008D1224 /* KGTicketView.m */,
 			);
 			path = "买票";
+			sourceTree = "<group>";
+		};
+		282BA8FF20E33DCD00FF3119 /* 新闻详情 */ = {
+			isa = PBXGroup;
+			children = (
+				282BA90020E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.h */,
+				282BA90120E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m */,
+			);
+			path = "新闻详情";
 			sourceTree = "<group>";
 		};
 		282E071720C8D38300A9B2E1 /* View */ = {
@@ -1929,6 +1945,8 @@
 			children = (
 				2834847620C63D1200AB6E9A /* MoviesVC.h */,
 				2834847720C63D1200AB6E9A /* MoviesVC.m */,
+				282BA8FC20E33C9700FF3119 /* MovieNewsDetaialVC.h */,
+				282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */,
 			);
 			path = "电影";
 			sourceTree = "<group>";
@@ -4145,6 +4163,7 @@
 				A89E3560209AB7B900D871D7 /* EditReleaseCard.m in Sources */,
 				286C903020BD2FDE004EBA67 /* InstitutionsVC.m in Sources */,
 				284D45F520A15297008633DB /* ChangeTheModelView.m in Sources */,
+				282BA8FE20E33C9700FF3119 /* MovieNewsDetaialVC.m in Sources */,
 				28FDAC3320C0EC0600531597 /* MyselfCenterMyWordCell.m in Sources */,
 				284C8D6620BF986A00487225 /* MusicManagementMyThemeCell.m in Sources */,
 				28F9969F20A43E2600678494 /* ZLPhotoBrowser.m in Sources */,
@@ -4202,6 +4221,7 @@
 				28577B6820D10E2A0082075D /* MineMyselfWordAddLabelVC.m in Sources */,
 				281DF71D20D26D700086030E /* MineCollectionBookTableViewCell.m in Sources */,
 				2875DA6620D392D100D6CAFE /* MineReleasePictureView.m in Sources */,
+				282BA90220E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m in Sources */,
 				28FDAC4420C1149B00531597 /* MyselfWordHomeView.m in Sources */,
 				286C902C20BD1D3B004EBA67 /* InstittutionsCell.m in Sources */,
 				2834848120C63D8600AB6E9A /* CommunityInstitutionsVC.m in Sources */,
