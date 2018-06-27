@@ -13,6 +13,7 @@ pod 'SDWebImage', '~> 4.3.3'
 pod 'MJRefresh', '~> 3.1.15.3'
 pod 'RongCloudIM', '~> 2.8.32'
 pod 'MJExtension', '~> 3.0.13'
+pod 'XHWebImageAutoSize', '~> 1.1.2'
 
   use_frameworks!
 

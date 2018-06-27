@@ -24,5 +24,7 @@
 @interface RegisterVC : UIViewController
 
 @property (nonatomic,assign) BOOL isFirst;
+@property (nonatomic,copy) NSString *userPhoneStr;
+@property (nonatomic,copy) NSString *userPassStr;
 
 @end

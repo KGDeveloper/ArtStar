@@ -37,4 +37,47 @@
 
 #define GeocodeApiKey @"12c88a2b6a7130459f81a9545d5a5dfd"
 
+//MARK:---------------------------------------登录模块-------------------------------------------------
+//#define serverIP @"http://192.168.1.119:80/"192.168.1.13
+#define serverIP @"http://192.168.1.13/"
+
+#define sendMsgAuthCode [serverIP stringByAppendingString:@"sendMsgAuthCode"]
+#define judgeMsgAuthCode [serverIP stringByAppendingString:@"judgeMsgAuthCode"]
+#define regist [serverIP stringByAppendingString:@"regist"]
+#define loginServer [serverIP stringByAppendingString:@"login"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif /* FileDefine_h */

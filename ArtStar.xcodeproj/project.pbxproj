@@ -128,6 +128,9 @@
 		28283F6720E23B71008D1224 /* KGTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28283F6620E23B71008D1224 /* KGTicketView.m */; };
 		282BA8FE20E33C9700FF3119 /* MovieNewsDetaialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */; };
 		282BA90220E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA90120E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m */; };
+		282BA90520E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA90420E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m */; };
+		282BA90820E36A5C00FF3119 /* HeadLineImageNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA90720E36A5C00FF3119 /* HeadLineImageNewsTableViewCell.m */; };
+		282BA90B20E38A4C00FF3119 /* KGUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA90A20E38A4C00FF3119 /* KGUserInfo.m */; };
 		282E071C20C8D3C600A9B2E1 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */; };
 		282E071F20C8D57100A9B2E1 /* MineOnlineOrStealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E071E20C8D57100A9B2E1 /* MineOnlineOrStealthView.m */; };
 		282E072220C8E18B00A9B2E1 /* MineButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E072120C8E18B00A9B2E1 /* MineButtonView.m */; };
@@ -727,6 +730,12 @@
 		282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieNewsDetaialVC.m; sourceTree = "<group>"; };
 		282BA90020E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadLineHaveTitleNewsTableViewCell.h; sourceTree = "<group>"; };
 		282BA90120E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadLineHaveTitleNewsTableViewCell.m; sourceTree = "<group>"; };
+		282BA90320E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadLineNotTitleNewsTableViewCell.h; sourceTree = "<group>"; };
+		282BA90420E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadLineNotTitleNewsTableViewCell.m; sourceTree = "<group>"; };
+		282BA90620E36A5C00FF3119 /* HeadLineImageNewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadLineImageNewsTableViewCell.h; sourceTree = "<group>"; };
+		282BA90720E36A5C00FF3119 /* HeadLineImageNewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadLineImageNewsTableViewCell.m; sourceTree = "<group>"; };
+		282BA90920E38A4C00FF3119 /* KGUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGUserInfo.h; sourceTree = "<group>"; };
+		282BA90A20E38A4C00FF3119 /* KGUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGUserInfo.m; sourceTree = "<group>"; };
 		282E071A20C8D3C600A9B2E1 /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
 		282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
 		282E071D20C8D57100A9B2E1 /* MineOnlineOrStealthView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineOnlineOrStealthView.h; sourceTree = "<group>"; };
@@ -1834,6 +1843,10 @@
 			children = (
 				282BA90020E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.h */,
 				282BA90120E33E0F00FF3119 /* HeadLineHaveTitleNewsTableViewCell.m */,
+				282BA90320E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.h */,
+				282BA90420E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m */,
+				282BA90620E36A5C00FF3119 /* HeadLineImageNewsTableViewCell.h */,
+				282BA90720E36A5C00FF3119 /* HeadLineImageNewsTableViewCell.m */,
 			);
 			path = "新闻详情";
 			sourceTree = "<group>";
@@ -3640,6 +3653,8 @@
 				286A2E8A20DB7FB500D3994C /* KGLocationCityManager.m */,
 				284C8D7C20BFD5A300487225 /* KGCity.h */,
 				284C8D7D20BFD5A300487225 /* KGCity.m */,
+				282BA90920E38A4C00FF3119 /* KGUserInfo.h */,
+				282BA90A20E38A4C00FF3119 /* KGUserInfo.m */,
 				282E073520C941E600A9B2E1 /* LoginUserRongInfo.h */,
 				282E073620C941E600A9B2E1 /* LoginUserRongInfo.m */,
 				286A2E8C20DB9AB300D3994C /* KGRequestNetWorking.h */,
@@ -3976,6 +3991,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/SDAutoLayout/SDAutoLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/XHWebImageAutoSize/XHWebImageAutoSize.framework",
 				"${BUILT_PRODUCTS_DIR}/YYKit/YYKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -3986,6 +4002,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDAutoLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XHWebImageAutoSize.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4112,6 +4129,7 @@
 				A8FD4F3C20884396008B53FC /* AppDelegate.m in Sources */,
 				2807C76D20E1EA85007C1740 /* YourFriendsCenterVC.m in Sources */,
 				284C8D7520BFB09100487225 /* CALayer+KGLayerColor.m in Sources */,
+				282BA90820E36A5C00FF3119 /* HeadLineImageNewsTableViewCell.m in Sources */,
 				28CA5BF020CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.m in Sources */,
 				28A6C9CB20D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.m in Sources */,
 				287D2CF720BE833D00500156 /* HotMoviesDetailIntroudceCell.m in Sources */,
@@ -4200,6 +4218,7 @@
 				286C901820BCF502004EBA67 /* MusicExhibitTableViewCell.m in Sources */,
 				28A6CA0720D907A100ECBF4F /* MineChangePhoneWithOldPhoneVC.m in Sources */,
 				28F996A320A43E2600678494 /* ZLEditViewController.m in Sources */,
+				282BA90520E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m in Sources */,
 				2813DB4D20C786CD004CD973 /* BooksIntroudceCell.m in Sources */,
 				28BF33E220C528B800598919 /* MusicFriendsInfoView.m in Sources */,
 				2868408620B287FF00441926 /* FriendsThemeLeftImageCell.m in Sources */,
@@ -4308,6 +4327,7 @@
 				2875DA8720D3AEE800D6CAFE /* MineTalentShowVC.m in Sources */,
 				28B21A9820AECF8300108F50 /* FriendsButtomImageTopLabelCell.m in Sources */,
 				28A6C9FD20D8F6D500ECBF4F /* MineChangePhoneWithPassWordVC.m in Sources */,
+				282BA90B20E38A4C00FF3119 /* KGUserInfo.m in Sources */,
 				28E2AED220A98DE500ACC119 /* SearchBarView.m in Sources */,
 				287D2D0920BEA5B000500156 /* HotInstitutionsDetailVC.m in Sources */,
 				28211C8420A58BBD009C8E49 /* PreviewVC.m in Sources */,

@@ -75,8 +75,16 @@
         manager = [[AFHTTPSessionManager alloc]initWithBaseURL:url];
     }
     
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    AFSecurityPolicy *security = [AFSecurityPolicy defaultPolicy];
+    security.allowInvalidCertificates = YES;
+    security.validatesDomainName = NO;
+    manager.securityPolicy = security;
+    
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    manager.requestSerializer = requestSerializer;
     
     return manager;
 }

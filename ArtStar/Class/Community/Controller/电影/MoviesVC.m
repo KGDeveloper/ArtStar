@@ -86,7 +86,7 @@
             if ([type isEqualToString:@"视频"]) {
                 [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
             }else{
-                [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
+                [mySelf pushNoTabBarViewController:[[MovieNewsDetaialVC alloc]init] animated:YES];
             }
         };
         [self.view addSubview:_headLinesView];

@@ -127,6 +127,7 @@
 @property (weak, nonatomic) IBOutlet UIView *buttomLine;
 @property (nonatomic,assign) BOOL isSMSLogin;
 @property (nonatomic,strong) GuidePageView *guideView;
+@property (weak, nonatomic) IBOutlet UILabel *errorLab;
 
 @end
 
@@ -135,8 +136,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.guideView.hidden = NO;
-    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"Guidepage"]) {
+        self.guideView.hidden = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:@"启动页" forKey:@"Guidepage"];
+    }
 }
 
 - (void)viewDidLoad {
@@ -254,9 +257,22 @@
 }
 - (IBAction)loginClick:(UIButton *)sender {
     if (_isSMSLogin == YES) {
-        RegisterVC *regist = [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil];
-        regist.isFirst = NO;
-        [self presentViewController:regist animated:YES completion:nil];
+        __weak typeof(self) mySelf = self;
+        NSString *latitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlatitude"];
+        NSString *longitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlongitude"];
+        [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"msgAuthCode":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
+            NSLog(@"%@",result);
+//            if ([result[@"message"] isEqualToString:@"操作成功"]) {
+//                RegisterVC *registVC = [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil];
+//                registVC.isFirst = NO;
+//                [self presentViewController:registVC animated:YES completion:nil];
+//            }else if ([result[@"message"] isEqualToString:@"验证码有误"]){
+//
+//            }
+        } fail:^(NSString *error) {
+            mySelf.errorLab.hidden = NO;
+            mySelf.errorLab.text = @"验证码错误";
+        }];
     }else{
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         window.rootViewController = [[TabBarVC alloc]init];
@@ -267,6 +283,13 @@
 - (void)sendSMSToServer{
     _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestSMS) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    
+    [KGRequestNetWorking postWothUrl:sendMsgAuthCode parameters:@{@"telphone":_userTF.text,@"templateId":@"2"} succ:^(id result) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
+    
 }
 - (void)requestSMS{
     [self.seePassWord setTitle:[NSString stringWithFormat:@"重新获取(%lds)",(long)_number] forState:UIControlStateNormal];

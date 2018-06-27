@@ -23,8 +23,8 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor blackColor];
-//    self.window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
-    self.window.rootViewController = [[TabBarVC alloc]init];
+    self.window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
+//    self.window.rootViewController = [[TabBarVC alloc]init];
     [self.window makeKeyAndVisible];
     /*设置全局输入框控制类*/
     [self setUpIQKeyboardManager];
@@ -32,10 +32,20 @@
     [self registRongIM];
     
     sleep(3);
+    
+    [self cllLocation];
 
     return YES;
 }
-
+- (void)cllLocation{
+    KGLocationCityManager *manager = [KGLocationCityManager shareManager];
+    [manager obtainYourLocation];
+    manager.ToObtainYourLocation = ^(NSString *city, double latitude, double longitude) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",latitude] forKey:@"Userlatitude"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",longitude] forKey:@"Userlongitude"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    };
+}
 //MARK:--设置全局输入框控制类--
 - (void)setUpIQKeyboardManager{
     /*获取类库单例变量*/

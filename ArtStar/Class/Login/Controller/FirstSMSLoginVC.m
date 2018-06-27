@@ -76,16 +76,25 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)nextClick:(UIButton *)sender {
-    RegisterVC *regist = [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil];
-    regist.isFirst = YES;
-    [self presentViewController:regist animated:YES completion:nil];
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:judgeMsgAuthCode parameters:@{@"telphone":_phoneTF.text,@"msgAuthCode":_smsTF.text} succ:^(id result) {
+        if ([result[@"message"] isEqualToString:@"操作成功"]) {
+            RegisterVC *registVC = [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil];
+            registVC.isFirst = YES;
+            registVC.userPhoneStr = mySelf.phoneTF.text;
+            registVC.userPassStr = mySelf.passWordTF.text;
+            [mySelf presentViewController:registVC animated:YES completion:nil];
+        }
+    } fail:^(NSString *error) {
+        
+    }];
 }
 - (IBAction)loginClick:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)forgetClick:(UIButton *)sender {
-    ForgetVC *regist = [[ForgetVC alloc]initWithNibName:@"ForgetVC" bundle:nil];
-    [self presentViewController:regist animated:YES completion:nil];
+    ForgetVC *forgetVC = [[ForgetVC alloc]initWithNibName:@"ForgetVC" bundle:nil];
+    [self presentViewController:forgetVC animated:YES completion:nil];
 }
 - (IBAction)agreeClick:(UIButton *)sender {
     if ([sender.currentImage isEqual:Image(@"对号选取框")]) {

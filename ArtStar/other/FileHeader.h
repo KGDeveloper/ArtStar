@@ -21,6 +21,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import <MJExtension/MJExtension.h>
 #import <UserNotifications/UserNotifications.h>
+#import <XHWebImageAutoSize/XHWebImageAutoSize.h>
 
 
 //MARK:--简单的一个选择相机，提示消息等弹窗--
@@ -35,6 +36,7 @@
 #import "LoginUserRongInfo.h"
 #import "KGLocationCityManager.h"
 #import "KGRequestNetWorking.h"
+#import "KGUserInfo.h"
 
 #endif
 

@@ -40,6 +40,7 @@ PODS:
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
+  - XHWebImageAutoSize (1.1.2)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - RongCloudIM (~> 2.8.32)
   - SDAutoLayout (~> 2.2.0)
   - SDWebImage (~> 4.3.3)
+  - XHWebImageAutoSize (~> 1.1.2)
   - YYKit (~> 1.0.9)
 
 SPEC REPOS:
@@ -63,6 +65,7 @@ SPEC REPOS:
     - RongCloudIM
     - SDAutoLayout
     - SDWebImage
+    - XHWebImageAutoSize
     - YYKit
 
 SPEC CHECKSUMS:
@@ -73,8 +76,9 @@ SPEC CHECKSUMS:
   RongCloudIM: 48bfc2fcb8d7cae8ce1e19cb5fb26d6d90616375
   SDAutoLayout: c5509e77ae75735d9a39f7bc83dba6d3f75d49d8
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  XHWebImageAutoSize: 8e5d7bf036f960885769dbe3410579024d3ac1a1
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: c835356998c8e6b82d58fde76bf5d5ea5318d071
+PODFILE CHECKSUM: 80d4507e6a0df77c068e1521ad404129f8d283de
 
 COCOAPODS: 1.5.2
