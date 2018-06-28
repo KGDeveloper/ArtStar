@@ -23,13 +23,13 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor blackColor];
-    self.window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
-//    self.window.rootViewController = [[TabBarVC alloc]init];
+//    self.window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
+    self.window.rootViewController = [[TabBarVC alloc]init];
     [self.window makeKeyAndVisible];
     /*设置全局输入框控制类*/
     [self setUpIQKeyboardManager];
     //:--注册融云--
-    [self registRongIM];
+//    [self registRongIM];
     
     sleep(3);
     
@@ -71,7 +71,7 @@
 - (void)registRongIM{
     [[RCIM sharedRCIM] initWithAppKey:@"x4vkb1qpxf17k"];
 
-    [[RCIM sharedRCIM] connectWithToken:@"uNB0SsTBhNmyWlV436PyKcrd0S6wv6EExMQdjChmkLQCbWEMou6UtHeq7xLDgWE0sTPjgWaPpdP6u/Ut+l0yDA==" success:^(NSString *userId) {
+    [[RCIM sharedRCIM] connectWithToken:@"jVIcoGpB2g8IbenvEZozHjMFm1h8jBV5GxtNvkme+FIHa3+26vxY1VyxPcoC7DeYQYr5sYPUPfakF1o2y7K3Gg==" success:^(NSString *userId) {
         [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"RongId"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         dispatch_async(dispatch_get_main_queue(), ^{

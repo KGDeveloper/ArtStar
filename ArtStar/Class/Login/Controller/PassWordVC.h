@@ -23,4 +23,10 @@
 
 @interface PassWordVC : UIViewController
 
+@property (nonatomic,copy) NSString *userPhone;
+@property (nonatomic,copy) NSString *userBirthday;
+@property (nonatomic,copy) NSString *userPassword;
+@property (nonatomic,copy) NSString *userImageUrl;
+@property (nonatomic,copy) NSString *userSex;
+
 @end

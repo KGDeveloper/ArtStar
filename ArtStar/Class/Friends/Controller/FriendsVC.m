@@ -11,6 +11,7 @@
 #import "FriendsDetailVC.h"
 #import "FriendsMessageView.h"
 #import "FriendsMessageVC.h"
+#import "FriendsTalentTableViewCell.h"
 
 @interface FriendsVC ()
 <UITableViewDelegate,
@@ -84,6 +85,7 @@ FriendsMessageViewDelegate>
     [_listView registerNib:[UINib nibWithNibName:@"FriendsThemeButtomImageCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"FriendsThemeButtomImageCell"];
     [_listView registerClass:[FriendsThemeLeftImageCell class] forCellReuseIdentifier:@"FriendsThemeLeftImageCell"];
     [_listView registerNib:[UINib nibWithNibName:@"FriendsThemeCirulerImageCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"FriendsThemeCirulerImageCell"];
+    [_listView registerNib:[UINib nibWithNibName:@"FriendsTalentTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"FriendsTalentTableViewCell"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -119,7 +121,7 @@ FriendsMessageViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        return 58 + 55 + photoViewHeight + 10;
+        return 232 + photoViewHeight;
     }else if (indexPath.row == 1){
         return 58 + 55 + photoViewHeight + 115 + 10 + 20;
     }else if (indexPath.row == 2){
@@ -143,9 +145,7 @@ FriendsMessageViewDelegate>
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        FriendsOnlyHaveImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsOnlyHaveImageCell"];
-        cell.delegate = self;
-        [cell showGraphic];
+        FriendsTalentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsTalentTableViewCell"];
         return cell;
     }else if (indexPath.row == 1){
         FriendsTopImageButtomLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsTopImageButtomLabelCell"];

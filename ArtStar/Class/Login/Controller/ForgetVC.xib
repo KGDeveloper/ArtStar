@@ -9,11 +9,17 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ForgetVC">
             <connections>
                 <outlet property="buttomLine" destination="hpS-hO-fui" id="Gs0-HQ-6j5"/>
                 <outlet property="centerLine" destination="S0E-Ex-4xQ" id="W3m-h2-NKk"/>
+                <outlet property="errorLab" destination="uoD-o1-dq1" id="pBS-6K-cDf"/>
                 <outlet property="headerImage" destination="TT9-Vx-y84" id="EGR-Xz-LcC"/>
                 <outlet property="headerImageTop" destination="v5i-3d-Yer" id="Mfg-az-Ob1"/>
                 <outlet property="msgLab" destination="2aD-li-lkE" id="AmI-0R-Jj5"/>
@@ -182,6 +188,15 @@
                     <color key="textColor" red="1" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoD-o1-dq1">
+                    <rect key="frame" x="47" y="398" width="281" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="xTD-6x-fo6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                    <color key="textColor" red="1" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -195,11 +210,14 @@
                 <constraint firstItem="hpS-hO-fui" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="9jH-WT-3Th"/>
                 <constraint firstItem="jVc-A1-6pa" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="AS0-cO-7zQ"/>
                 <constraint firstItem="ciH-wk-V0E" firstAttribute="top" secondItem="TT9-Vx-y84" secondAttribute="bottom" constant="80" id="Ayh-9F-zUL"/>
+                <constraint firstItem="uoD-o1-dq1" firstAttribute="trailing" secondItem="moM-0h-FXE" secondAttribute="trailing" id="BBH-Z1-bt8"/>
                 <constraint firstItem="TT9-Vx-y84" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BTi-zK-aIU"/>
                 <constraint firstItem="2aD-li-lkE" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="C28-E8-YRS"/>
                 <constraint firstItem="moM-0h-FXE" firstAttribute="top" secondItem="hpS-hO-fui" secondAttribute="bottom" constant="50" id="Fhg-T4-rcu"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="U4k-ag-wlP" secondAttribute="trailing" constant="47" id="G26-Nv-0ap"/>
                 <constraint firstItem="ciH-wk-V0E" firstAttribute="leading" secondItem="MsH-n8-hAJ" secondAttribute="trailing" constant="10" id="Krh-Ow-Sp3"/>
+                <constraint firstItem="uoD-o1-dq1" firstAttribute="top" secondItem="hpS-hO-fui" secondAttribute="bottom" constant="5" id="Lmb-Xo-7rc"/>
+                <constraint firstItem="uoD-o1-dq1" firstAttribute="leading" secondItem="moM-0h-FXE" secondAttribute="leading" id="LnE-Lk-lJ8"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="GQl-iv-U2N" secondAttribute="trailing" constant="47" id="MVl-uJ-h0q"/>
                 <constraint firstItem="MsH-n8-hAJ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="Sf8-nd-Gce"/>
                 <constraint firstItem="6rl-37-eef" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="T99-Ih-jbv"/>
@@ -229,7 +247,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back" width="8" height="16"/>
+        <image name="back" width="17" height="32"/>
         <image name="头像" width="97" height="97"/>
         <image name="账号-未点击" width="30" height="32"/>
         <image name="输入密码不可见" width="32" height="23"/>

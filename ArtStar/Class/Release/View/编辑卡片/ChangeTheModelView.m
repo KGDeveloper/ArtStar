@@ -62,6 +62,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
 
 //:--接受视频--
 @property (nonatomic,copy) NSString *videoURL;
+@property (nonatomic,strong) UIButton *themetypeBtu;
 
 @end
 
@@ -117,6 +118,11 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     _titleTF.rightView = [[UIImageView alloc]initWithImage:Image(@"#")];
     _titleTF.rightViewMode = UITextFieldViewModeAlways;
     [self addSubview:_titleTF];
+    
+    _themetypeBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _themetypeBtu.frame = CGRectMake(ViewWidth(self) - 150, 20+NavTopHeight, 135, 30);
+    [_themetypeBtu setTitle:@"请选择话题类型" forState:UIControlStateNormal];
+    
 }
 - (void)setBackView{
     _backView = [[UIView alloc]initWithFrame:CGRectMake(0, NavTopHeight, ViewWidth(self),photoViewHeight + textViewHeight + 40)];
@@ -1161,16 +1167,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         }
     }
     return target;
-}
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (textField == _titleTF) {
-        if (textField.text.length*12 < kScreenWidth - 54 && textField.text.length*12 > 120 - 54) {
-            _titleTF.frame = CGRectMake(15, NavTopHeight + 20, textField.text.length*12 + 24, 22);
-        }else if (textField.text.length*12 < 120 - 54){
-            _titleTF.frame = CGRectMake(15, 20 + NavTopHeight, 120, 22);
-        }
-    }
-    return YES;
 }
 
 - (PreviewVCModel *)model{

@@ -27,6 +27,8 @@
 		280601B720B80C250090254E /* HeadLinesDetaialCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280601B520B80C250090254E /* HeadLinesDetaialCommentCell.m */; };
 		280601B820B80C250090254E /* HeadLinesDetaialCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280601B620B80C250090254E /* HeadLinesDetaialCommentCell.xib */; };
 		280601BC20B81C560090254E /* KGMusicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280601BB20B81C560090254E /* KGMusicVC.m */; };
+		2806481720E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2806481520E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.m */; };
+		2806481820E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2806481620E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.xib */; };
 		2807C76820E1DCD8007C1740 /* MineChatDetaialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C76720E1DCD8007C1740 /* MineChatDetaialViewController.m */; };
 		2807C76A20E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807C76920E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib */; };
 		2807C76D20E1EA85007C1740 /* YourFriendsCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C76C20E1EA85007C1740 /* YourFriendsCenterVC.m */; };
@@ -561,6 +563,9 @@
 		280601B620B80C250090254E /* HeadLinesDetaialCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeadLinesDetaialCommentCell.xib; sourceTree = "<group>"; };
 		280601BA20B81C560090254E /* KGMusicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGMusicVC.h; sourceTree = "<group>"; };
 		280601BB20B81C560090254E /* KGMusicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGMusicVC.m; sourceTree = "<group>"; };
+		2806481420E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsTalentTableViewCell.h; sourceTree = "<group>"; };
+		2806481520E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsTalentTableViewCell.m; sourceTree = "<group>"; };
+		2806481620E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsTalentTableViewCell.xib; sourceTree = "<group>"; };
 		2807C76620E1DCD8007C1740 /* MineChatDetaialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineChatDetaialViewController.h; sourceTree = "<group>"; };
 		2807C76720E1DCD8007C1740 /* MineChatDetaialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineChatDetaialViewController.m; sourceTree = "<group>"; };
 		2807C76920E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineMessageFirstIntoShowView.xib; sourceTree = "<group>"; };
@@ -1504,6 +1509,16 @@
 				28E8E88420B6A8AD002E10FC /* 头条 */,
 			);
 			path = "音乐";
+			sourceTree = "<group>";
+		};
+		2806481320E4E0CC00BB7DD2 /* TalentCell */ = {
+			isa = PBXGroup;
+			children = (
+				2806481420E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.h */,
+				2806481520E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.m */,
+				2806481620E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.xib */,
+			);
+			path = TalentCell;
 			sourceTree = "<group>";
 		};
 		280E751920C01A6600609736 /* Cell */ = {
@@ -2812,6 +2827,7 @@
 		28C7756920AD7A1F001F472B /* FriendsCell */ = {
 			isa = PBXGroup;
 			children = (
+				2806481320E4E0CC00BB7DD2 /* TalentCell */,
 				2814620320B3CBB0000C5E47 /* DetaialCell */,
 				28B21A8F20AE731500108F50 /* ThemeCell */,
 				28B21A8E20AE72F500108F50 /* GraphicAndVideoCell */,
@@ -3807,6 +3823,7 @@
 				28E2AED920A9959C00ACC119 /* YourLocationTableViewCell.xib in Resources */,
 				28577B7020D115130082075D /* MineMyselfWordChooseYourLoveCell.xib in Resources */,
 				2875DA8D20D3B1ED00D6CAFE /* MineTalentShowTableViewCell.xib in Resources */,
+				2806481820E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.xib in Resources */,
 				282E072B20C90CE300A9B2E1 /* MineTableViewCell.xib in Resources */,
 				A82ED36620942A130066EA5E /* FirstSMSLoginVC.xib in Resources */,
 				2875DA5F20D3601A00D6CAFE /* MineBooksFriendsTableViewCell.xib in Resources */,
@@ -4320,6 +4337,7 @@
 				28A3DC8420A05EE300FEDD62 /* ChangeModelView.m in Sources */,
 				2834849620C63E2E00AB6E9A /* CommunityLiteratureVC.m in Sources */,
 				28EC5F8420DA04000019D4C1 /* MineQuestionHelpVC.m in Sources */,
+				2806481720E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.m in Sources */,
 				28E2AECF20A97F8800ACC119 /* YourLocationVC.m in Sources */,
 				281DF70120D25F3F0086030E /* MineCollectionExhibitionView.m in Sources */,
 				281DF71520D269640086030E /* MineCollectionArticleTableViewCell.m in Sources */,

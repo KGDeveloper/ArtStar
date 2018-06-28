@@ -56,6 +56,7 @@
 }
 - (IBAction)registCLick:(UIButton *)sender {
     if ([self valueFrameTextField:_passWordTF] >= 6 && [self valueFrameTextField:_passWordTF] <= 16) {
+        
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         window.rootViewController = [[TabBarVC alloc]init];
     }

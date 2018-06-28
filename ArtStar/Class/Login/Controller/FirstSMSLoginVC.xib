@@ -129,14 +129,21 @@
                     <state key="normal" title="获取验证码">
                         <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="takeSMSCode:" destination="-1" eventType="touchUpInside" id="mpa-7G-tQs"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpE-6H-Kh8">
-                    <rect key="frame" x="312" y="380" width="16" height="12"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpE-6H-Kh8">
+                    <rect key="frame" x="288" y="372" width="40" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="16" id="qux-CY-pue"/>
-                        <constraint firstAttribute="height" constant="12" id="re7-MH-mfo"/>
+                        <constraint firstAttribute="width" constant="40" id="qux-CY-pue"/>
+                        <constraint firstAttribute="height" constant="20" id="re7-MH-mfo"/>
                     </constraints>
+                    <inset key="imageEdgeInsets" minX="25" minY="3" maxX="0.0" maxY="3"/>
                     <state key="normal" image="输入密码不可见"/>
+                    <connections>
+                        <action selector="seePassWord:" destination="-1" eventType="touchUpInside" id="bwS-SP-Ecp"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wED-z5-6gW">
                     <rect key="frame" x="47" y="433" width="15" height="15"/>
@@ -226,7 +233,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入6~16位密码，区分大小写" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RRd-o9-riy">
-                    <rect key="frame" x="47" y="372" width="255" height="20"/>
+                    <rect key="frame" x="47" y="372" width="231" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="1Lv-KI-ReN"/>
                     </constraints>
@@ -292,7 +299,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back" width="8" height="16"/>
+        <image name="back" width="17" height="32"/>
         <image name="头像" width="97" height="97"/>
         <image name="对号选取框" width="15" height="15"/>
         <image name="账号-未点击" width="30" height="32"/>

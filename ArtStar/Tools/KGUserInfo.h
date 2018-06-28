@@ -13,5 +13,13 @@
 + (KGUserInfo *)shareInterace;
 
 - (NSString *)userPhone;
+- (NSString *)userAge;
+- (NSString *)userSex;
+- (NSString *)userState;
+- (NSString *)userToken;
+- (NSString *)userTokenCode;
+- (NSString *)userName;
+- (NSString *)portraitUri;
+- (NSString *)userIntroduce;
 
 @end

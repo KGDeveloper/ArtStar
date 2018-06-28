@@ -24,6 +24,7 @@
 #import "PassWordVC.h"
 #import "AppDelegate.h"
 #import "TabBarVC.h"
+#import "LoginVC.h"
 
 @interface RegisterVC ()
 <DatePickerViewDelegate,
@@ -89,6 +90,8 @@ KGCameraDelegate>
  选择框
  */
 @property (nonatomic,strong) KGCamera *cameraView;
+@property (nonatomic,copy) NSString *birthday;
+@property (weak, nonatomic) IBOutlet UILabel *errorLab;
 
 @end
 
@@ -115,7 +118,7 @@ KGCameraDelegate>
 }
 //MARK:--选择男--
 - (IBAction)manSexClick:(UIButton *)sender {
-    self.sexStr = @"保密";
+    self.sexStr = @"1";
     [self.womanBtu setImage:Image(@"性别未选中") forState:UIControlStateNormal];
     [self.unKnowSexBtu setImage:Image(@"性别未选中") forState:UIControlStateNormal];
     [sender setImage:Image(@"性别选中") forState:UIControlStateNormal];
@@ -123,7 +126,7 @@ KGCameraDelegate>
 }
 //MARK:--选择女--
 - (IBAction)womanClick:(UIButton *)sender {
-    self.sexStr = @"保密";
+    self.sexStr = @"0";
     [sender setImage:Image(@"性别选中") forState:UIControlStateNormal];
     [self.manBtu setImage:Image(@"性别未选中") forState:UIControlStateNormal];
     [self.unKnowSexBtu setImage:Image(@"性别未选中") forState:UIControlStateNormal];
@@ -131,7 +134,7 @@ KGCameraDelegate>
 }
 //MARK:--选择保密--
 - (IBAction)unKnowClick:(UIButton *)sender {
-    self.sexStr = @"保密";
+    self.sexStr = @"-1";
     [self.womanBtu setImage:Image(@"性别未选中") forState:UIControlStateNormal];
     [self.manBtu setImage:Image(@"性别未选中") forState:UIControlStateNormal];
     [sender setImage:Image(@"性别选中") forState:UIControlStateNormal];
@@ -140,13 +143,20 @@ KGCameraDelegate>
 //MARK:--下一步点击事件--
 - (IBAction)nextClick:(UIButton *)sender {
     if ([self toDetermineWhetherToComplete] == YES) {
-        if (_isFirst == YES) {
-            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            window.rootViewController = [[TabBarVC alloc]init];
-        }else{
-            PassWordVC *passWord = [[PassWordVC alloc]initWithNibName:@"PassWordVC" bundle:nil];
-            [self presentViewController:passWord animated:YES completion:nil];
-        }
+        __weak typeof(self) mySelf = self;
+        [KGRequestNetWorking postWothUrl:registServer parameters:@{@"telphone":_userPhoneStr,@"username":_nikNameTF.text,@"birthday":_birthday,@"password":_userPassStr,@"imageURL":@"http://p1.qzone.la/upload/20150222/yk961fx2.jpg",@"sex":_sexStr} succ:^(id result) {
+            if ([result[@"message"] isEqualToString:@"用户已存在"]) {
+                mySelf.errorLab.hidden = NO;
+            }else if ([result[@"message"] isEqualToString:@"操作成功！"]){
+                mySelf.errorLab.hidden = NO;
+                mySelf.errorLab.text = @"注册成功，2s后自动前往登录页面";
+                sleep(2);
+                LoginVC *loginVC = [[LoginVC alloc]init];
+                [mySelf presentViewController:loginVC animated:YES completion:nil];
+            }
+        } fail:^(NSString *error) {
+            
+        }];
     }
 }
 //MARK:--点击头像事件--
@@ -180,8 +190,8 @@ KGCameraDelegate>
 - (void)getSelectDate:(NSString *)date type:(DateType)type{
     NSInteger month = [[date componentsSeparatedByString:@"/"][1] integerValue];
     NSInteger day = [[date componentsSeparatedByString:@"/"][2] integerValue];
-    NSString *birthday = [date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    [self.birthdayBtu setTitle:[NSString stringWithFormat:@"%@ (%@座)",birthday,[self getAstroWithMonth:(int)month day:(int)day]] forState:UIControlStateNormal];
+    _birthday = [date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+    [self.birthdayBtu setTitle:[NSString stringWithFormat:@"%@ (%@座)",_birthday,[self getAstroWithMonth:(int)month day:(int)day]] forState:UIControlStateNormal];
     [self.birthdayBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
 }
 //MARK:--修改下一步按钮的状态--

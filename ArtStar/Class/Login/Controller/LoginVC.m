@@ -140,6 +140,9 @@
         self.guideView.hidden = NO;
         [[NSUserDefaults standardUserDefaults] setObject:@"启动页" forKey:@"Guidepage"];
     }
+    
+    [self.seePassWord setTitle:nil forState:UIControlStateNormal];
+    [self.seePassWord setImage:Image(@"输入密码不可见") forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad {
@@ -166,6 +169,9 @@
 - (IBAction)passLoginClick:(UIButton *)sender {
     self.forgetBtu.hidden = NO;
     _isSMSLogin = NO;
+    if (_number != 60) {
+        [_timer setFireDate:[NSDate distantFuture]];
+    }
     [UIView animateWithDuration:0.2 animations:^{
         /*点击按钮后，修改line的位置*/
         self.moveCenterX.constant = ViewX(sender);
@@ -191,6 +197,9 @@
 - (IBAction)smsLoginClick:(UIButton *)sender {
     self.forgetBtu.hidden = YES;
     _isSMSLogin = YES;
+    if (_number != 60) {
+        [_timer setFireDate:[NSDate date]];
+    }
     __weak typeof(self) mySelf = self;
     [UIView animateWithDuration:0.2 animations:^{
         /*点击按钮后，修改line的位置*/
@@ -256,26 +265,65 @@
     
 }
 - (IBAction)loginClick:(UIButton *)sender {
+    NSString *latitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlatitude"];
+    NSString *longitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlongitude"];
+    __weak typeof(self) mySelf = self;
     if (_isSMSLogin == YES) {
-        __weak typeof(self) mySelf = self;
-        NSString *latitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlatitude"];
-        NSString *longitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlongitude"];
         [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"msgAuthCode":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
-            NSLog(@"%@",result);
-//            if ([result[@"message"] isEqualToString:@"操作成功"]) {
-//                RegisterVC *registVC = [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil];
-//                registVC.isFirst = NO;
-//                [self presentViewController:registVC animated:YES completion:nil];
-//            }else if ([result[@"message"] isEqualToString:@"验证码有误"]){
-//
-//            }
+            if ([result[@"message"] isEqualToString:@"操作成功！"]) {
+                NSDictionary *userDic = result[@"data"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"token"] forKey:@"userToken"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"introduce"] forKey:@"userIntroduce"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                window.rootViewController = [[TabBarVC alloc]init];
+            }else if ([result[@"message"] isEqualToString:@"验证码有误"]){
+                mySelf.errorLab.hidden = NO;
+                mySelf.errorLab.text = @"验证码有误";
+            }else if ([result[@"message"] isEqualToString:@"用户未注册"]){
+                mySelf.errorLab.hidden = NO;
+                mySelf.errorLab.text = @"用户未注册,请先注册账号";
+            }
         } fail:^(NSString *error) {
             mySelf.errorLab.hidden = NO;
-            mySelf.errorLab.text = @"验证码错误";
+            mySelf.errorLab.text = @"登录超时";
         }];
     }else{
-        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        window.rootViewController = [[TabBarVC alloc]init];
+        [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"password":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
+            mySelf.errorLab.hidden = YES;
+            if ([result[@"message"] isEqualToString:@"操作成功！"]) {
+                NSArray *dataArr = result[@"data"];
+                NSDictionary *userDic = dataArr[0];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"token"] forKey:@"userToken"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"introduce"] forKey:@"userIntroduce"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                window.rootViewController = [[TabBarVC alloc]init];
+            }else if ([result[@"message"] isEqualToString:@"用户未注册"]){
+                mySelf.errorLab.hidden = NO;
+                mySelf.errorLab.text = @"用户未注册,请先注册账号";
+            }else if ([result[@"message"] isEqualToString:@"用户名/密码错误"]){
+                mySelf.errorLab.hidden = NO;
+                mySelf.errorLab.text = @"用户名/密码错误";
+            }
+        } fail:^(NSString *error) {
+            mySelf.errorLab.hidden = NO;
+            mySelf.errorLab.text = @"登录超时";
+        }];
     }
 }
 
@@ -312,8 +360,8 @@
             _userImage.tintColor = Color_333333;
             _userImage.image = [_userImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         }else{
-            self.msgLab.hidden = NO;
-            self.msgLab.text = @"手机号格式错误";
+            self.errorLab.hidden = NO;
+            self.errorLab.text = @"手机号格式错误";
             _phoneShure = NO;
             _topLine.backgroundColor = Color_999999;
             _userImage.image = [_userImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -326,8 +374,8 @@
                 _passWordImage.tintColor = Color_333333;
                 _passWordImage.image =[_passWordImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             }else{
-                self.msgLab.hidden = NO;
-                self.msgLab.text = @"密码格式错误";
+                self.errorLab.hidden = NO;
+                self.errorLab.text = @"密码格式错误";
                 _passShure = NO;
                 _buttomLine.backgroundColor = Color_999999;
                 _passWordImage.image = [_passWordImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -339,8 +387,8 @@
                 _passWordImage.tintColor = Color_333333;
                 _passWordImage.image =[_passWordImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             }else{
-                self.msgLab.hidden = NO;
-                self.msgLab.text = @"验证码格式错误";
+                self.errorLab.hidden = NO;
+                self.errorLab.text = @"验证码格式错误";
                 _passShure = NO;
                 _buttomLine.backgroundColor = Color_999999;
                 _passWordImage.image = [_passWordImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

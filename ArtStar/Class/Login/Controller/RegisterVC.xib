@@ -9,12 +9,18 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterVC">
             <connections>
                 <outlet property="birthdayBtu" destination="vfk-7W-1t5" id="I4i-NT-9Gd"/>
                 <outlet property="buttomLine" destination="bMh-Cw-aF8" id="AGF-oV-PRJ"/>
                 <outlet property="centerLine" destination="eWX-bE-Z32" id="Png-f0-OQ0"/>
+                <outlet property="errorLab" destination="hOn-28-ydj" id="yy2-PS-YE8"/>
                 <outlet property="headerImage" destination="xLC-1O-cfe" id="b7m-vc-3rC"/>
                 <outlet property="headerImageTop" destination="ndD-lT-YK9" id="qOx-ba-ccZ"/>
                 <outlet property="manBtu" destination="U0M-Jk-U58" id="xXf-9R-18m"/>
@@ -212,12 +218,22 @@
                         <action selector="headerClickj:" destination="-1" eventType="touchUpInside" id="X1L-b4-sal"/>
                     </connections>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户已存在" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOn-28-ydj">
+                    <rect key="frame" x="47" y="487" width="281" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="ZqT-TV-IBl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                    <color key="textColor" red="1" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="eWX-bE-Z32" firstAttribute="top" secondItem="vfk-7W-1t5" secondAttribute="bottom" constant="10" id="0Uc-lP-0Xb"/>
                 <constraint firstItem="a4o-Ec-5zI" firstAttribute="leading" secondItem="yHx-P4-AgB" secondAttribute="trailing" constant="25" id="0mJ-yX-nFO"/>
                 <constraint firstItem="IaI-xW-lv7" firstAttribute="width" secondItem="xLC-1O-cfe" secondAttribute="width" id="1bo-1H-BCq"/>
+                <constraint firstItem="hOn-28-ydj" firstAttribute="top" secondItem="VfN-FC-3Yo" secondAttribute="bottom" constant="10" id="4Rw-Pn-5ip"/>
                 <constraint firstItem="yHx-P4-AgB" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="4gT-II-63b"/>
                 <constraint firstItem="kyc-me-Ls6" firstAttribute="top" secondItem="yHx-P4-AgB" secondAttribute="bottom" constant="10" id="7UA-gW-OI6"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="eWX-bE-Z32" secondAttribute="trailing" constant="47" id="9an-fc-voh"/>
@@ -239,8 +255,10 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="VfN-FC-3Yo" secondAttribute="trailing" constant="47" id="auF-Xe-uAJ"/>
                 <constraint firstItem="bMh-Cw-aF8" firstAttribute="top" secondItem="Rrc-6v-lAR" secondAttribute="bottom" constant="10" id="awm-aj-MOc"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="bMh-Cw-aF8" secondAttribute="trailing" constant="47" id="c7O-L6-GiI"/>
+                <constraint firstItem="hOn-28-ydj" firstAttribute="leading" secondItem="VfN-FC-3Yo" secondAttribute="leading" id="cul-ea-3Ka"/>
                 <constraint firstItem="bMh-Cw-aF8" firstAttribute="top" secondItem="qj8-MR-Xqc" secondAttribute="bottom" constant="10" id="eIn-Dk-KkH"/>
                 <constraint firstItem="qj8-MR-Xqc" firstAttribute="leading" secondItem="pTd-sV-RqI" secondAttribute="trailing" constant="45" id="gDY-wl-0qT"/>
+                <constraint firstItem="hOn-28-ydj" firstAttribute="trailing" secondItem="VfN-FC-3Yo" secondAttribute="trailing" id="gGd-Vo-5XS"/>
                 <constraint firstItem="xSN-Oo-062" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="ge5-sd-rk2"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="kyc-me-Ls6" secondAttribute="trailing" constant="47" id="iTJ-Pt-WgZ"/>
                 <constraint firstItem="eWX-bE-Z32" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="47" id="jzl-7X-I10"/>
@@ -262,7 +280,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back" width="8" height="16"/>
+        <image name="back" width="17" height="32"/>
         <image name="头像" width="97" height="97"/>
         <image name="性别未选中" width="20" height="20"/>
     </resources>

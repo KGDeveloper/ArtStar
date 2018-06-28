@@ -20,6 +20,7 @@
  */
 
 #import "ForgetVC.h"
+#import "LoginVC.h"
 
 @interface ForgetVC ()
 <UITextFieldDelegate>
@@ -105,6 +106,7 @@
  判断密码是否规范
  */
 @property (nonatomic,assign) BOOL passShure;
+@property (weak, nonatomic) IBOutlet UILabel *errorLab;
 
 @end
 
@@ -139,11 +141,8 @@
  @param sender 获取验证码按钮
  */
 - (IBAction)sendSMSClick:(UIButton *)sender {
-    if ([sender.currentTitle isEqualToString:@"获取验证码"]) {
-        [self sendSMSToServer];
-    }else{
-        sender.enabled = NO;
-    }
+    [self sendSMSToServer];
+    sender.enabled = NO;
 }
 /**
  查看密码按钮点击事件
@@ -166,7 +165,23 @@
  @param sender 忘记密码按钮
  */
 - (IBAction)forgetClick:(UIButton *)sender {
-    
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:toSetPayrollPwd parameters:@{@"telphone":_phoneTF.text,@"msgAuthCode":_smsTF.text,@"password":_passTF.text} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            mySelf.errorLab.hidden = NO;
+            mySelf.errorLab.text = @"修改成功，2s后自动跳转登录页面";
+            sleep(2);
+            mySelf.errorLab.hidden = YES;
+            LoginVC *loginVC = [[LoginVC alloc]init];
+            [mySelf presentViewController:loginVC animated:YES completion:nil];
+        }else{
+            mySelf.errorLab.hidden = NO;
+            mySelf.errorLab.text = @"修改失败";
+        }
+    } fail:^(NSString *error) {
+        mySelf.errorLab.hidden = NO;
+        mySelf.errorLab.text = @"访问服务器失败";
+    }];
 }
 //MARK:--UITextFieldDelegate--
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -227,15 +242,20 @@
 - (void)sendSMSToServer{
     _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestSMS) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    [KGRequestNetWorking postWothUrl:sendMsgAuthCode parameters:@{@"telphone":_phoneTF.text,@"templateId":@"3"} succ:^(id result) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
 }
 - (void)requestSMS{
-    [self.seePass setTitle:[NSString stringWithFormat:@"重新获取(%lds)",(long)_number] forState:UIControlStateNormal];
+    [self.sendSMS setTitle:[NSString stringWithFormat:@"重新获取(%lds)",(long)_number] forState:UIControlStateNormal];
     if (_number == 0) {
         [_timer invalidate];
         _timer = nil;
         _number = 60;
-        self.seePass.enabled = YES;
-        [self.seePass setTitle:@"获取验证码" forState:UIControlStateNormal];
+        self.sendSMS.enabled = YES;
+        [self.sendSMS setTitle:@"获取验证码" forState:UIControlStateNormal];
     }else{
         _number --;
     }
@@ -246,8 +266,8 @@
     [_timer invalidate];
     _timer = nil;
     _number = 60;
-    self.seePass.enabled = YES;
-    [self.seePass setTitle:@"获取验证码" forState:UIControlStateNormal];
+    self.sendSMS.enabled = YES;
+    [self.sendSMS setTitle:@"获取验证码" forState:UIControlStateNormal];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.phoneTF resignFirstResponder];

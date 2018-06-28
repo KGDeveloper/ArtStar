@@ -52,6 +52,15 @@
 @property (nonatomic,assign) BOOL writeSMS;
 @property (nonatomic,assign) BOOL agree;
 
+/**
+ 获取验证码定时器
+ */
+@property (nonatomic,strong) NSTimer *timer;
+/**
+ 获取验证码计数
+ */
+@property (nonatomic,assign) NSInteger number;
+
 @end
 
 @implementation FirstSMSLoginVC
@@ -71,6 +80,8 @@
     self.returnTop.constant = NavTopHeight - 35;
     self.imageTop.constant = NavTopHeight + 25;
     
+    _number = 60;
+    
 }
 - (IBAction)returnClick:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -78,16 +89,59 @@
 - (IBAction)nextClick:(UIButton *)sender {
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:judgeMsgAuthCode parameters:@{@"telphone":_phoneTF.text,@"msgAuthCode":_smsTF.text} succ:^(id result) {
-        if ([result[@"message"] isEqualToString:@"操作成功"]) {
+        mySelf.buttomErrorBtu.hidden = YES;
+        if ([result[@"message"] isEqualToString:@"操作成功！"]) {
             RegisterVC *registVC = [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil];
             registVC.isFirst = YES;
             registVC.userPhoneStr = mySelf.phoneTF.text;
             registVC.userPassStr = mySelf.passWordTF.text;
-            [mySelf presentViewController:registVC animated:YES completion:nil];
+            [self presentViewController:registVC animated:YES completion:nil];
         }
     } fail:^(NSString *error) {
-        
+        mySelf.buttomErrorBtu.hidden = NO;
+        mySelf.buttomErrorBtu.text = @"验证码错误";
     }];
+}
+- (IBAction)takeSMSCode:(UIButton *)sender {
+    [self sendSMSToServer];
+    sender.enabled = NO;
+}
+//MARK:创建定时器，开始发送验证码计时
+- (void)sendSMSToServer{
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestSMS) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:sendMsgAuthCode parameters:@{@"telphone":_phoneTF.text,@"templateId":@"1"} succ:^(id result) {
+        if ([result[@"message"] isEqualToString:@"发送短信失败"]) {
+            mySelf.topErrorLab.hidden = NO;
+            mySelf.topErrorLab.text = @"验证码发送失败";
+        }else{
+            mySelf.topErrorLab.hidden = YES;
+        }
+    } fail:^(NSString *error) {
+        mySelf.topErrorLab.hidden = NO;
+        mySelf.topErrorLab.text = @"验证码发送失败";
+    }];
+    
+}
+- (void)requestSMS{
+    [self.smsBtu setTitle:[NSString stringWithFormat:@"重新获取(%lds)",(long)_number] forState:UIControlStateNormal];
+    if (_number == 0) {
+        [_timer invalidate];
+        _timer = nil;
+        _number = 60;
+        self.smsBtu.enabled = YES;
+        [self.smsBtu setTitle:@"获取验证码" forState:UIControlStateNormal];
+    }else{
+        _number --;
+    }
+}
+- (IBAction)seePassWord:(UIButton *)sender {
+    if (_passWordTF.secureTextEntry == YES) {
+        [sender setImage:Image(@"输入密码可见-点击") forState:UIControlStateNormal];
+    }else{
+        [sender setImage:Image(@"输入密码不可见") forState:UIControlStateNormal];
+    }
 }
 - (IBAction)loginClick:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -140,6 +194,16 @@
 }
 - (NSInteger)valueFrameTextField:(UITextField *)textF{
     return textF.text.length;
+}
+
+//MARK:--防止输完验证码后登陆成功，但是定时器还没有被释放--
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_timer invalidate];
+    _timer = nil;
+    _number = 60;
+    self.smsBtu.enabled = YES;
+    [self.smsBtu setTitle:@"获取验证码" forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
