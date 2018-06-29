@@ -13,4 +13,8 @@
 
 #import "ReportView.h"
 
+
+//MARK:----------------------------------------------------------------------------------------
+#import "CommenityModel.h"
+
 #endif /* MineHeader_h */

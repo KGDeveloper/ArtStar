@@ -135,6 +135,8 @@
     [self addSubview:lowline];
 }
 
+
+
 - (void)changeStatus:(UIButton *)sender{
     self.stutaView.hidden = NO;
 }

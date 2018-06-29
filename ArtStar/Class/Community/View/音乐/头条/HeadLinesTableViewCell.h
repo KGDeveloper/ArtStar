@@ -20,5 +20,6 @@
 @property (nonatomic,assign) CGFloat btuOriginY;
 @property (nonatomic,assign) NSInteger cellIndex;
 @property (nonatomic,weak) id<HeadLinesTableViewCellDelagate>delegate;
+@property (nonatomic,strong) CommenityModel *model;
 
 @end

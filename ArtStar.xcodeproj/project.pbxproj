@@ -127,6 +127,8 @@
 		28211C8820A59BAB009C8E49 /* PreviewHorizontalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28211C8720A59BAB009C8E49 /* PreviewHorizontalView.m */; };
 		28211C8B20A59BE7009C8E49 /* PreviewVerticalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28211C8A20A59BE7009C8E49 /* PreviewVerticalView.m */; };
 		28211C8E20A59C2B009C8E49 /* PreviewVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28211C8D20A59C2B009C8E49 /* PreviewVideoPlayView.m */; };
+		2823124920E613A60026904E /* CommenityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2823124820E613A60026904E /* CommenityModel.m */; };
+		2823124C20E639520026904E /* FriendsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2823124B20E639520026904E /* FriendsModel.m */; };
 		2825F6CC20B6B2AB0076B71B /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */; };
 		28283F6720E23B71008D1224 /* KGTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28283F6620E23B71008D1224 /* KGTicketView.m */; };
 		282BA8FE20E33C9700FF3119 /* MovieNewsDetaialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */; };
@@ -731,6 +733,10 @@
 		28211C8A20A59BE7009C8E49 /* PreviewVerticalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewVerticalView.m; sourceTree = "<group>"; };
 		28211C8C20A59C2B009C8E49 /* PreviewVideoPlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreviewVideoPlayView.h; sourceTree = "<group>"; };
 		28211C8D20A59C2B009C8E49 /* PreviewVideoPlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewVideoPlayView.m; sourceTree = "<group>"; };
+		2823124720E613A60026904E /* CommenityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommenityModel.h; sourceTree = "<group>"; };
+		2823124820E613A60026904E /* CommenityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommenityModel.m; sourceTree = "<group>"; };
+		2823124A20E639520026904E /* FriendsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsModel.h; sourceTree = "<group>"; };
+		2823124B20E639520026904E /* FriendsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsModel.m; sourceTree = "<group>"; };
 		2825F6CA20B6B2AB0076B71B /* ActivityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
 		2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		28283F6520E23B71008D1224 /* KGTicketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGTicketView.h; sourceTree = "<group>"; };
@@ -1808,6 +1814,8 @@
 		2820B07A20B55FB600EA1DAC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2823124720E613A60026904E /* CommenityModel.h */,
+				2823124820E613A60026904E /* CommenityModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2828,6 +2836,8 @@
 		28C7756820AD7011001F472B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2823124A20E639520026904E /* FriendsModel.h */,
+				2823124B20E639520026904E /* FriendsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4212,6 +4222,7 @@
 				284C8D6620BF986A00487225 /* MusicManagementMyThemeCell.m in Sources */,
 				28F9969F20A43E2600678494 /* ZLPhotoBrowser.m in Sources */,
 				28E8E87F20B69A87002E10FC /* HeadLinesTableViewCell.m in Sources */,
+				2823124920E613A60026904E /* CommenityModel.m in Sources */,
 				28F9962020A41ACF00678494 /* CustomTextField.m in Sources */,
 				A8FD4F87208896F7008B53FC /* ForgetVC.m in Sources */,
 				28E8E88320B6A86E002E10FC /* HeadLinesVideoPlayVide.m in Sources */,
@@ -4236,6 +4247,7 @@
 				28E33ACD20BC0234009F9382 /* PerFormanceIntorduceCell.m in Sources */,
 				28FDAC2E20C0E75900531597 /* MyselfCenterVideoAndVicesAndBooksCell.m in Sources */,
 				28BF33E820C5492300598919 /* KGSliderView.m in Sources */,
+				2823124C20E639520026904E /* FriendsModel.m in Sources */,
 				2875DA5E20D3601A00D6CAFE /* MineBooksFriendsTableViewCell.m in Sources */,
 				28577B6120D0CA770082075D /* MineChooseMyHomeCell.m in Sources */,
 				2820B05620B512C700EA1DAC /* FriendsSuspensionView.m in Sources */,

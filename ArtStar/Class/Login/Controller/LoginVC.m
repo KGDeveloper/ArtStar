@@ -281,6 +281,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"introduce"] forKey:@"userIntroduce"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 window.rootViewController = [[TabBarVC alloc]init];
@@ -310,6 +311,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"introduce"] forKey:@"userIntroduce"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 window.rootViewController = [[TabBarVC alloc]init];

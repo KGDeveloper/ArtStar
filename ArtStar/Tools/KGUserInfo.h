@@ -21,5 +21,6 @@
 - (NSString *)userName;
 - (NSString *)portraitUri;
 - (NSString *)userIntroduce;
+- (NSString *)userID;
 
 @end

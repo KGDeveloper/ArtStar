@@ -23,6 +23,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self setUI];
+        [_listView.mj_header beginRefreshing];
     }
     return self;
 }
@@ -45,6 +46,10 @@
     _listView.tableFooterView = TabLeViewFootView;
     _listView.rowHeight = (kScreenWidth-30)/690*400 + 120;
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    __weak typeof(self) mySelf = self;
+    _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+    }];
     [self addSubview:_listView];
     
     [_listView registerClass:[HeadLinesTableViewCell class] forCellReuseIdentifier:@"HeadLinesTableViewCell"];
@@ -61,14 +66,21 @@
 }
 //MARK:---------------------------------------dataSoucre------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count;
 }
 //MARK:---------------------------------------dataSoucre------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HeadLinesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLinesTableViewCell"];
+    CommenityModel *model = _dataArr[indexPath.row];
+    cell.model = model;
     cell.cellIndex = indexPath.row;
     cell.delegate = self;
     return cell;
+}
+- (void)setDataArr:(NSArray *)dataArr{
+    _dataArr = dataArr;
+    [_listView reloadData];
+    [_listView.mj_header endRefreshing];
 }
 //MARK:---------------------------------------delegate------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

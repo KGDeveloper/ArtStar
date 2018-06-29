@@ -56,5 +56,8 @@
 - (NSString *)userIntroduce{
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"userIntroduce"];
 }
+- (NSString *)userID{
+    return [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userID"]];
+}
 
 @end

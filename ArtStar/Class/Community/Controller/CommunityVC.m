@@ -65,33 +65,61 @@
 
 - (BaseVC *)pushController:(NSString *)name{
     if ([name isEqualToString:@"音乐"]) {
-        return [[KGMusicVC alloc] init];
+        KGMusicVC *vc = [[KGMusicVC alloc] init];
+        vc.titleName = @"音乐";
+        return vc;
     }else if ([name isEqualToString:@"电影"]){
-        return [[MoviesVC alloc]init];
+        MoviesVC *vc = [[MoviesVC alloc]init];
+        vc.titleName = @"电影";
+        return vc;
     }else if ([name isEqualToString:@"话题"]){
-        return [[CommunityThemeVC alloc] init];
+        CommunityThemeVC *vc = [[CommunityThemeVC alloc] init];
+        vc.titleName = @"话题";
+        return vc;
     }else if ([name isEqualToString:@"机构"]){
-        return [[CommunityInstitutionsVC alloc]init];
+        CommunityInstitutionsVC *vc = [[CommunityInstitutionsVC alloc]init];
+        vc.titleName = @"机构";
+        return vc;
     }else if ([name isEqualToString:@"交友"]){
-        return [[CommunityFriendsVC alloc]init];
+        CommunityFriendsVC *vc = [[CommunityFriendsVC alloc]init];
+        vc.titleName = @"交友";
+        return vc;
     }else if ([name isEqualToString:@"美食"]){
-        return [[CommunityGoodFoodVC alloc]init];
+        CommunityGoodFoodVC *vc = [[CommunityGoodFoodVC alloc]init];
+        vc.titleName = @"美食";
+        return vc;
     }else if ([name isEqualToString:@"美术"]){
-        return [[CommunityArtsVC alloc]init];
+        CommunityArtsVC *vc = [[CommunityArtsVC alloc]init];
+        vc.titleName = @"美术";
+        return vc;
     }else if ([name isEqualToString:@"设计"]){
-        return [[CommunityDesigVC alloc]init];
+        CommunityDesigVC *vc = [[CommunityDesigVC alloc]init];
+        vc.titleName = @"设计";
+        return vc;
     }else if ([name isEqualToString:@"摄影"]){
-        return [[CommunityVideoVC alloc]init];
+        CommunityVideoVC *vc = [[CommunityVideoVC alloc]init];
+        vc.titleName = @"摄影";
+        return vc;
     }else if ([name isEqualToString:@"书籍"]){
-        return [[CommunityBooksVC alloc]init];
+        CommunityBooksVC *vc = [[CommunityBooksVC alloc]init];
+        vc.titleName = @"书籍";
+        return vc;
     }else if ([name isEqualToString:@"头条"]){
-        return [[HeadLinesVC alloc]init];
+        HeadLinesVC *vc = [[HeadLinesVC alloc]init];
+        vc.titleName = @"头条";
+        return vc;
     }else if ([name isEqualToString:@"文学"]){
-        return [[CommunityLiteratureVC alloc]init];
+        CommunityLiteratureVC *vc = [[CommunityLiteratureVC alloc]init];
+        vc.titleName = @"文学";
+        return vc;
     }else if ([name isEqualToString:@"戏剧"]){
-        return [[CommunityDramaVC alloc]init];
+        CommunityDramaVC *vc = [[CommunityDramaVC alloc]init];
+        vc.titleName = @"戏剧";
+        return vc;
     }else{
-        return [[CommunityExhibitionVC alloc]init];
+        CommunityExhibitionVC *vc = [[CommunityExhibitionVC alloc]init];
+        vc.titleName = @"展览";
+        return vc;
     }
 }
 

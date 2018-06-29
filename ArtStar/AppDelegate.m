@@ -23,8 +23,8 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor blackColor];
-//    self.window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
-    self.window.rootViewController = [[TabBarVC alloc]init];
+    self.window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
+//    self.window.rootViewController = [[TabBarVC alloc]init];
     [self.window makeKeyAndVisible];
     /*设置全局输入框控制类*/
     [self setUpIQKeyboardManager];

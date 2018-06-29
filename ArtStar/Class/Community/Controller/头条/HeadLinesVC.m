@@ -8,10 +8,13 @@
 
 #import "HeadLinesVC.h"
 #import "HeadLinesDetailVC.h"
+#import "CommenityModel.h"
 
 @interface HeadLinesVC ()
 
 @property (nonatomic,strong) HeadlinesView *headLinesView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
+@property (nonatomic,copy) NSString *typeName;
 
 @end
 
@@ -29,22 +32,25 @@
     [self setLeftBtuWithTitle:nil image:Image(@"back")];
     [self setRightBtuWithTitle:nil image:Image(@"more popup message")];
     
+    _typeName = @"";
+    [self createDataArr];
+    [self setViewUI];
+    
     __weak typeof(self) mySelf = self;
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
-    scrollerView.itemArr = @[@"头条",@"美术",@"音乐",@"戏剧",@"电影",@"图书",@"餐饮",@"摄影",@"文学",@"机构",@"展览",@"交友"];
+    scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影",@"图书",@"餐饮",@"摄影",@"文学",@"机构",@"展览",@"交友"];
     scrollerView.rightAction = ^(NSString *title) {
         
     };
     scrollerView.titleAction = ^(NSString *title) {
-        if ([title isEqualToString:@"活动"]) {
-            mySelf.headLinesView.hidden = YES;
-        }else if([title isEqualToString:@"头条"]){
-            mySelf.headLinesView.hidden = NO;
-        }
+        mySelf.typeName = title;
     };
     [self.view addSubview:scrollerView];
-    
+}
+
+- (void)setViewUI{
     _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
+    __weak typeof(self) mySelf = self;
     _headLinesView.pushViewController = ^(NSString *type) {
         if ([type isEqualToString:@"视频"]) {
             [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
@@ -53,6 +59,18 @@
         }
     };
     [self.view addSubview:_headLinesView];
+}
+
+- (void)createDataArr{
+    _dataArr = [NSMutableArray array];
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":_typeName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+        NSArray *dataArray = result[@"data"];
+        mySelf.dataArr = [CommenityModel mj_keyValuesArrayWithObjectArray:dataArray];
+        mySelf.headLinesView.dataArr = mySelf.dataArr;
+    } fail:^(NSString *error) {
+        
+    }];
     
 }
 

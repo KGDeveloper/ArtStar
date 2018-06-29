@@ -33,6 +33,7 @@ FriendsMessageViewDelegate>
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) UIView *headerView;
 @property (nonatomic,strong) NSMutableArray *zansArr;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -55,7 +56,23 @@ FriendsMessageViewDelegate>
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
     self.zansArr = [NSMutableArray array];
+    
+    [self createData];
     [self setTableView];
+}
+
+- (void)createData{
+    
+    _dataArr = [NSMutableArray array];
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:ReleaseFriendTimeline parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            mySelf.dataArr = [FriendsModel mj_objectArrayWithKeyValuesArray:result[@"data"]];
+            [mySelf.listView reloadData];
+        }
+    } fail:^(NSString *error) {
+        
+    }];
 }
 
 - (void)setTableView{
@@ -89,7 +106,7 @@ FriendsMessageViewDelegate>
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count;
 }
 - (UIView *)setTableViewHeader{
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, (kScreenWidth - 40)/670*450 + 60)];
@@ -120,26 +137,83 @@ FriendsMessageViewDelegate>
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        return 232 + photoViewHeight;
-    }else if (indexPath.row == 1){
-        return 58 + 55 + photoViewHeight + 115 + 10 + 20;
-    }else if (indexPath.row == 2){
-        return 58 + 55 + photoViewHeight + 115 + 10 + 20;
-    }else if (indexPath.row == 3){
-        return 58 + 55 + 115 + 10;
-    }else if (indexPath.row == 4){
-        return 58 + 55 + (kScreenWidth - 115 - 30)/450*690 + 10;
-    }else if (indexPath.row == 5){
-        return 58 + 55 + photoViewHeight + 115 + 10 + 20;
-    }else if (indexPath.row == 6){
-        return 58 + 95 + photoViewHeight + 115 + 20;
-    }else if (indexPath.row == 7){
-        return 58 + 95 + photoViewHeight + 115 + 20;
-    }else if (indexPath.row == 8){
-        return 58 + 95 + photoViewHeight + 115 + 20;
+    FriendsModel *model = _dataArr[indexPath.row];
+    if ([model.type isEqualToString:@"0"]) {
+        if ([model.composing isEqualToString:@"0"]) {
+            return 250;
+        }else if ([model.composing isEqualToString:@"1"]){
+            return photoViewHeight + 20;
+        }else if ([model.composing isEqualToString:@"2"]){
+            return photoViewHeight + 260;
+        }else if ([model.composing isEqualToString:@"3"]){
+            return 125 + (kScreenWidth - 115 - 30)/450*690;
+        }else if ([model.composing isEqualToString:@"4"]){
+            return 125 + (kScreenWidth - 115 - 30)/450*690;
+        }else if ([model.composing isEqualToString:@"5"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"6"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"7"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"8"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"9"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"10"]){
+            return photoViewHeight + 290;
+        }else{
+            return 500;
+        }
+    }else if ([model.type isEqualToString:@"1"]){
+        if ([model.composing isEqualToString:@"0"]) {
+            return 250;
+        }else if ([model.composing isEqualToString:@"1"]){
+            return photoViewHeight + 20;
+        }else if ([model.composing isEqualToString:@"2"]){
+            return photoViewHeight + 260;
+        }else if ([model.composing isEqualToString:@"3"]){
+            return 125 + (kScreenWidth - 115 - 30)/450*690;
+        }else if ([model.composing isEqualToString:@"4"]){
+            return 125 + (kScreenWidth - 115 - 30)/450*690;
+        }else if ([model.composing isEqualToString:@"5"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"6"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"7"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"8"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"9"]){
+            return photoViewHeight + 290;
+        }else{
+            return photoViewHeight + 290;
+        }
+    }else if ([model.type isEqualToString:@"2"]){
+        if ([model.composing isEqualToString:@"0"]) {
+            return 250;
+        }else if ([model.composing isEqualToString:@"1"]){
+            return photoViewHeight + 20;
+        }else if ([model.composing isEqualToString:@"2"]){
+            return photoViewHeight + 260;
+        }else if ([model.composing isEqualToString:@"3"]){
+            return 125 + (kScreenWidth - 115 - 30)/450*690;
+        }else if ([model.composing isEqualToString:@"4"]){
+            return 125 + (kScreenWidth - 115 - 30)/450*690;
+        }else if ([model.composing isEqualToString:@"5"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"6"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"7"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"8"]){
+            return photoViewHeight + 290;
+        }else if ([model.composing isEqualToString:@"9"]){
+            return photoViewHeight + 290;
+        }else{
+            return photoViewHeight + 290;
+        }
     }else{
-        return 58 + 95 + photoViewHeight + 115 + 20;
+        return 500;
     }
 }
 

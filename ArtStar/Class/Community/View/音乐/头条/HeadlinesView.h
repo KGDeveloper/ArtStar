@@ -11,6 +11,7 @@
 @interface HeadlinesView : UIView
 
 @property (nonatomic,copy) void(^pushViewController)(NSString *type);
+@property (nonatomic,copy) NSArray *dataArr;
 
 - (void)showHeaderView;
 - (void)hideHeaderView;

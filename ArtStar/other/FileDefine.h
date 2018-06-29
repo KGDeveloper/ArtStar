@@ -38,15 +38,17 @@
 #define GeocodeApiKey @"12c88a2b6a7130459f81a9545d5a5dfd"
 
 //MARK:---------------------------------------登录模块-------------------------------------------------
-#define serverIP @"http://192.168.1.119:80/"
+//#define serverIP @"http://192.168.1.119:80/"
 //#define serverIP @"http://192.168.1.13/"
+#define serverIP @"http://192.168.1.10/"
 
 #define sendMsgAuthCode [serverIP stringByAppendingString:@"sendMsgAuthCode"]
 #define judgeMsgAuthCode [serverIP stringByAppendingString:@"judgeMsgAuthCode"]
 #define registServer [serverIP stringByAppendingString:@"regist"]
 #define loginServer [serverIP stringByAppendingString:@"login"]
 #define toSetPayrollPwd [serverIP stringByAppendingString:@"toSetPayrollPwd"]
-
+#define communityServer [serverIP stringByAppendingString:@"community/ntvBynews"]
+#define ReleaseFriendTimeline [serverIP stringByAppendingString:@"ReleaseFriendTimeline/searchfriendMessages"]
 
 
 

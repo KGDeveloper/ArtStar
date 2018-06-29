@@ -34,6 +34,16 @@
     return self;
 }
 
+- (void)setModel:(CommenityModel *)model{
+    _model = model;
+    NSLog(@"%@",model.imgList);
+    [_topImage sd_setImageWithURL:[NSURL URLWithString:model.imgList]];
+    _titleLab.text = model.title;
+    NSLog(@"%@",model.title);
+    NSLog(@"%@",model.sitename);
+    _nameLab.text = model.sitename;
+}
+
 - (void)setUI{
     
     _topImage = [UIImageView new];

@@ -10,4 +10,6 @@
 
 @interface CommunityDesigVC : BaseVC
 
+@property (nonatomic,copy) NSString *titleName;
+
 @end

@@ -10,4 +10,6 @@
 
 @interface MoviesVC : BaseVC
 
+@property (nonatomic,copy) NSString *titleName;
+
 @end

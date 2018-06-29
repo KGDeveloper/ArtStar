@@ -40,4 +40,7 @@
 //:--分享--
 #import "DXShareView.h"
 
+
+#import "FriendsModel.h"
+
 #endif /* FriendsHeader_h */
