@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTK-Ye-hSc">
+                    <rect key="frame" x="45" y="45" width="285" height="165"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你总说是你的错，热恋的时候怎么不说，是我的无奈我也好困惑，安达市大所多撒" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12f-zY-mGv">
+                            <rect key="frame" x="30" y="50" width="225" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Cwk-BZ-GYK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="11"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="12f-zY-mGv" secondAttribute="trailing" constant="30" id="4gB-UP-68T"/>
+                        <constraint firstAttribute="width" constant="285" id="FRv-09-Qel"/>
+                        <constraint firstItem="12f-zY-mGv" firstAttribute="top" secondItem="jTK-Ye-hSc" secondAttribute="top" constant="50" id="HYV-H8-HOZ"/>
+                        <constraint firstItem="12f-zY-mGv" firstAttribute="leading" secondItem="jTK-Ye-hSc" secondAttribute="leading" constant="30" id="Maa-Zw-qpe"/>
+                        <constraint firstAttribute="height" constant="165" id="xg7-ZW-A42"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="F2G-aa-qoO">
+                    <rect key="frame" x="87.5" y="20" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="A0S-Eb-e5g"/>
+                        <constraint firstAttribute="width" constant="50" id="TTB-7J-pEk"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="Iqk-XQ-1bm">
+                    <rect key="frame" x="237.5" y="20" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="G0b-Lm-rxo"/>
+                        <constraint firstAttribute="height" constant="50" id="pof-Ob-c2L"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="F2G-aa-qoO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="87.5" id="ISL-zC-tM5"/>
+                <constraint firstItem="jTK-Ye-hSc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="KHZ-rE-RVN"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Iqk-XQ-1bm" secondAttribute="trailing" constant="87.5" id="M0X-Vp-vMC"/>
+                <constraint firstItem="F2G-aa-qoO" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="a4r-BP-KEp"/>
+                <constraint firstItem="Iqk-XQ-1bm" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="r2N-pZ-ywT"/>
+                <constraint firstItem="jTK-Ye-hSc" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="x53-65-bFW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="108.5" y="40.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="1" width="324" height="220"/>
+        <image name="3" width="324" height="220"/>
+    </resources>
+</document>

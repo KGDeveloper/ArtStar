@@ -65,7 +65,7 @@
     
     [_listView registerClass:[HeadLineHaveTitleNewsTableViewCell class] forCellReuseIdentifier:@"HeadLineHaveTitleNewsTableViewCell"];
     [_listView registerClass:[HeadLineNotTitleNewsTableViewCell class] forCellReuseIdentifier:@"HeadLineNotTitleNewsTableViewCell"];
-    [_listView registerNib:[UINib nibWithNibName:@"HeadLineImageNewsTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"HeadLineImageNewsTableViewCell"];
+    [_listView registerClass:[HeadLineImageNewsTableViewCell class] forCellReuseIdentifier:@"HeadLineImageNewsTableViewCell"];
     
 }
 
@@ -89,7 +89,8 @@
     if (indexPath.row%2==0) {
         if (indexPath.row%3==0) {
             HeadLineImageNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLineImageNewsTableViewCell"];
-            [cell.topImage sd_setImageWithURL:[NSURL URLWithString:@"http://tougao.duowan.com/pic/2013/10/143/1381729007458.jpg"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            cell.newsImage = @"http://tougao.duowan.com/pic/2013/10/143/1381729007458.jpg";
+            [cell.myImage sd_setImageWithURL:[NSURL URLWithString:@"http://tougao.duowan.com/pic/2013/10/143/1381729007458.jpg"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 [XHWebImageAutoSize storeImageSize:image forURL:imageURL completed:^(BOOL result) {
                     if (result) {
                         [tableView xh_reloadDataForURL:imageURL];

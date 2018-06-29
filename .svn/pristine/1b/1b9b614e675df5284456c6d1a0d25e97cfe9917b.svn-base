@@ -10,7 +10,6 @@
 #import "ChangeModelView.h"
 #import "ChooseModelVC.h"
 #import <Photos/Photos.h>
-#import "ReleaseChooseThemeTypeView.h"
 
 typedef NS_ENUM(NSInteger,TextFieldTextType){
     TextFieldTextTypeLeft,
@@ -65,8 +64,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
 @property (nonatomic,copy) NSString *videoURL;
 @property (nonatomic,strong) UIButton *themetypeBtu;
 
-@property (nonatomic,strong) ReleaseChooseThemeTypeView *chooseThemeTypeView;
-
 @end
 
 @implementation ChangeTheModelView
@@ -75,7 +72,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
 - (instancetype)initWithFrame:(CGRect)frame type:(EditType)type{
     if (self = [super initWithFrame:frame]) {
         self.type = type;
-        self.backgroundColor = [UIColor whiteColor];
+        [self setBackView];
         switch (type) {
             case EditTypeTheme:
                 [self setTitleTextField];
@@ -123,35 +120,16 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     [self addSubview:_titleTF];
     
     _themetypeBtu = [UIButton buttonWithType:UIButtonTypeCustom];
-    _themetypeBtu.frame = CGRectMake(ViewWidth(self) - 150, 20+NavTopHeight, 125, 30);
+    _themetypeBtu.frame = CGRectMake(ViewWidth(self) - 150, 20+NavTopHeight, 135, 30);
     [_themetypeBtu setTitle:@"请选择话题类型" forState:UIControlStateNormal];
-    _themetypeBtu.titleLabel.font = FZFont(12);
-    [_themetypeBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
-    [_themetypeBtu setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    [_themetypeBtu addTarget:self action:@selector(chooseThemeType:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_themetypeBtu];
+    _themetypeBtu
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self) - 20, 28+NavTopHeight, 5, 12)];
-    imageView.image = Image(@"话题选择");
-    [self addSubview:imageView];
 }
-
-- (void)chooseThemeType:(UIButton *)sender{
-    self.chooseThemeTypeView.hidden = NO;
+- (void)setBackView{
+    _backView = [[UIView alloc]initWithFrame:CGRectMake(0, NavTopHeight, ViewWidth(self),photoViewHeight + textViewHeight + 40)];
+    _backView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:_backView];
 }
-
-- (ReleaseChooseThemeTypeView *)chooseThemeTypeView{
-    if (!_chooseThemeTypeView) {
-        _chooseThemeTypeView = [[ReleaseChooseThemeTypeView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        __weak typeof(self) mySelf = self;
-        _chooseThemeTypeView.sendChooseResult = ^(NSString *result) {
-            [mySelf.themetypeBtu setTitle:result forState:UIControlStateNormal];
-        };
-        [[self pushViewController].navigationController.view addSubview:_chooseThemeTypeView];
-    }
-    return _chooseThemeTypeView;
-}
-
 //MARK:--搭建输入框view--
 - (UIView *)textView{
     if (!_textView) {
