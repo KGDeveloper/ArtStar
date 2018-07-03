@@ -27,8 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"设置" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"设置" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self createData];

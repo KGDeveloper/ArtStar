@@ -17,6 +17,7 @@
 @interface CancelFocusView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) KGSearchChatHistoryView *searchView;
 
 @end
 
@@ -85,7 +86,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        
+        self.searchView.hidden = YES;
     }else if (indexPath.section == 1){
         
     }else{
@@ -93,6 +94,14 @@
             self.focusOn();
         }
     }
+}
+
+- (KGSearchChatHistoryView *)searchView{
+    if (!_searchView) {
+        _searchView = [[KGSearchChatHistoryView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        [[self rootViewCintroller].navigationController.view addSubview:_searchView];
+    }
+    return _searchView;
 }
 
 - (UIViewController *)rootViewCintroller{

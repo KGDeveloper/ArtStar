@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setLeftBtuWithTitle:_titleStr image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:_titleStr image:Image(@"back")];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -105,7 +105,7 @@
             [mySelf.headerView removeFromSuperview];
             mySelf.headerView.frame = CGRectMake(0, 0, 0, 0);
             [mySelf.listView reloadData];
-            [mySelf setRightBtuWithTitle:@"添加" image:nil];
+            [mySelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"添加" image:nil];
         };
         [self.navigationController.view addSubview:_searchView];
     }

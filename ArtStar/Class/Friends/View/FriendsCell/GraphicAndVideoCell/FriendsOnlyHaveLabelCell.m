@@ -16,14 +16,34 @@
 }
 
 - (IBAction)headerClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(headerPushInfo:)]) {
+        [self.delegate headerPushInfo:self.cellIndex];
+    }
 }
 - (IBAction)deleteClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(deleteCell:)]) {
+        [self.delegate deleteCell:self.cellIndex];
+    }
 }
 - (IBAction)shareClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(shareCell:)]) {
+        [self.delegate shareCell:self.cellIndex];
+    }
 }
 - (IBAction)commentClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(commentCell:)]) {
+        [self.delegate commentCell:self.cellIndex];
+    }
 }
 - (IBAction)zansClick:(UIButton *)sender {
+    if ([sender.currentImage isEqual:Image(@"点赞")]) {
+        [sender setImage:Image(@"点赞选中状态") forState:UIControlStateNormal];
+    }else{
+        [sender setImage:Image(@"点赞") forState:UIControlStateNormal];
+    }
+    if ([self.delegate respondsToSelector:@selector(zansCell:)]) {
+        [self.delegate zansCell:self.cellIndex];
+    }
 }
 
 

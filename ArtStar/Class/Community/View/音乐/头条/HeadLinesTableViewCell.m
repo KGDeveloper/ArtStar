@@ -36,8 +36,9 @@
 
 - (void)setModel:(CommenityModel *)model{
     _model = model;
-    NSLog(@"%@",model.imgList);
-    [_topImage sd_setImageWithURL:[NSURL URLWithString:model.imgList]];
+//    NSArray *tmp = model.imgList;
+//    NSDictionary *dic = tmp[0];
+//    [_topImage sd_setImageWithURL:[NSURL URLWithString:model.imgList]];
     _titleLab.text = model.title;
     NSLog(@"%@",model.title);
     NSLog(@"%@",model.sitename);

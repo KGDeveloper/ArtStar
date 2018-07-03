@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setLeftBtuWithTitle:nil image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _isSelectSegment = NO;

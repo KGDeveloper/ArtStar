@@ -10,15 +10,31 @@
 #import "HeadLinesDetailVC.h"
 #import "CommenityModel.h"
 
-@interface HeadLinesVC ()
+@interface HeadLinesVC ()<UITextFieldDelegate>
 
 @property (nonatomic,strong) HeadlinesView *headLinesView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,copy) NSString *typeName;
+@property (nonatomic,strong) KGSearchBarTF *searchTF;
 
 @end
 
 @implementation HeadLinesVC
+
+- (void)setSearchBar{
+    _searchTF = [[KGSearchBarTF alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth - 75, 30)];
+    _searchTF.placeholder = @"搜索";
+    _searchTF.leftView = [[UIImageView alloc]initWithImage:Image(@"search")];
+    _searchTF.leftViewMode = UITextFieldViewModeAlways;
+    _searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _searchTF.delegate = self;
+    _searchTF.font = SYFont(12);
+    _searchTF.layer.cornerRadius = 5;
+    _searchTF.layer.masksToBounds = YES;
+    _searchTF.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
+    _searchTF.returnKeyType = UIReturnKeySearch;
+    [self setNavTitleView:_searchTF];
+}
 
 - (void)rightNavBtuAction:(UIButton *)sender{
     [self pushNoTabBarViewController:[[MIneMessageVC alloc]init] animated:YES];
@@ -29,9 +45,9 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self setLeftBtuWithTitle:nil image:Image(@"back")];
-    [self setRightBtuWithTitle:nil image:Image(@"more popup message")];
-    
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
+    [self setSearchBar];
     _typeName = @"";
     [self createDataArr];
     [self setViewUI];
@@ -72,6 +88,18 @@
         
     }];
     
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField == _searchTF) {
+        [_searchTF resignFirstResponder];
+        KGSearchBarAndSearchView *searchView = nil;
+        if (!searchView) {
+            searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+            [self.navigationController.view addSubview:searchView];
+        }
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

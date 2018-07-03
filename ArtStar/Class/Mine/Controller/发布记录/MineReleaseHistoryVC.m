@@ -36,9 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"发布记录" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"编辑" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"发布记录" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"编辑" image:nil];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _actionStr = @"图文记录";
@@ -196,7 +195,7 @@
     self.videoView.isEditCell = NO;
     self.themeView.isEditCell = NO;
     self.articleView.isEditCell = NO;
-    [self setRightBtuWithTitle:@"编辑" image:nil];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"编辑" image:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -27,8 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setLeftBtuWithTitle:@"后来的我们" image:Image(@"back")];
-    [self setRightBtuWithTitle:nil image:Image(@"more popup message")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"后来的我们" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTbaleView];

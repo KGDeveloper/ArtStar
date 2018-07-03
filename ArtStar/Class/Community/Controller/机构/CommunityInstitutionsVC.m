@@ -9,17 +9,34 @@
 #import "CommunityInstitutionsVC.h"
 #import "MusicInstitutionsView.h"
 #import "InstitutionsVC.h"
+#import "HotMoviesVC.h"
+#import "FoodDetailVC.h"
 
 
-@interface CommunityInstitutionsVC ()<MusicInstitutionsViewDelegate>
+@interface CommunityInstitutionsVC ()<MusicInstitutionsViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic,strong) MusicInstitutionsView *institutionsView;//:--机构--
 @property (nonatomic,strong) CommunitySmartView *smartView;//:--机构筛选--
+@property (nonatomic,strong) KGSearchBarTF *searchTF;
 
 @end
 
 @implementation CommunityInstitutionsVC
 
+- (void)setSearchBar{
+    _searchTF = [[KGSearchBarTF alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth - 75, 30)];
+    _searchTF.placeholder = @"搜索";
+    _searchTF.leftView = [[UIImageView alloc]initWithImage:Image(@"search")];
+    _searchTF.leftViewMode = UITextFieldViewModeAlways;
+    _searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _searchTF.delegate = self;
+    _searchTF.font = SYFont(12);
+    _searchTF.layer.cornerRadius = 5;
+    _searchTF.layer.masksToBounds = YES;
+    _searchTF.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
+    _searchTF.returnKeyType = UIReturnKeySearch;
+    [self setNavTitleView:_searchTF];
+}
 
 - (void)rightNavBtuAction:(UIButton *)sender{
     [self pushNoTabBarViewController:[[MIneMessageVC alloc]init] animated:YES];
@@ -29,9 +46,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setLeftBtuWithTitle:nil image:Image(@"back")];
-    [self setRightBtuWithTitle:nil image:Image(@"more popup message")];
-    
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
+    [self setSearchBar];
     __weak typeof(self) mySelf = self;
     //MARK:-------------------------------------------顶部滚动条---------------------------------------------
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
@@ -82,11 +99,14 @@
         _institutionsView.delegate = self;
         _institutionsView.chooseStyle = @"机构";
         _institutionsView.pushViewController = ^{
-            [mySelf pushNoTabBarViewController:[[InstitutionsVC alloc]init] animated:YES];
+            [mySelf pushNoTabBarViewController:[[FoodDetailVC alloc]init] animated:YES];
         };
         [self.view addSubview:_institutionsView];
     }
     return _institutionsView;
+}
+- (void)loadHotMovies{
+    [self pushNoTabBarViewController:[[HotMoviesVC alloc]init] animated:YES];
 }
 //MARK:-------------------------------------------------------机构筛选框--------------------------------------------------------------
 - (CommunitySmartView *)smartView{
@@ -100,6 +120,18 @@
         
     }
     return _smartView;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField == _searchTF) {
+        [_searchTF resignFirstResponder];
+        KGSearchBarAndSearchView *searchView = nil;
+        if (!searchView) {
+            searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+            [self.navigationController.view addSubview:searchView];
+        }
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

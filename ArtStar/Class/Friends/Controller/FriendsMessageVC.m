@@ -14,6 +14,7 @@
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) FriendsDeleteAllMessageView *deleteView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -22,15 +23,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setLeftBtuWithTitle:@"消息" image:Image(@"back")];
-    [self setRightBtuWithTitle:nil image:Image(@"empty")];
-    
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"消息" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 150, 30) title:nil image:Image(@"empty")];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
     
+    [self createData];
     [self setUpTableView];
 }
 - (void)rightNavBtuAction:(UIButton *)sender{
     self.deleteView.hidden = NO;
+}
+
+- (void)createData{
+    _dataArr = [NSMutableArray array];
+    [KGRequestNetWorking postWothUrl:pushUnreadMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"informQuery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
 }
 
 - (void)setUpTableView{

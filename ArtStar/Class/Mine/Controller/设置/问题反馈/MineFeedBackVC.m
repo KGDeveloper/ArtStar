@@ -23,8 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"意见反馈" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"意见反馈" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _headerArr = @[@"请选择问题发生场景",@"请输入详细问题和意见",@"请提供问题相关截图或照片",@""];

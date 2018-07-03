@@ -14,9 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - HappyDNS (0.3.14)
   - IQKeyboardManager (6.0.3)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.15.3)
+  - Qiniu (7.2.4):
+    - HappyDNS (~> 0.3)
   - RongCloudIM (2.8.32):
     - RongCloudIM/CallKit (= 2.8.32)
     - RongCloudIM/CallLib (= 2.8.32)
@@ -50,6 +53,7 @@ DEPENDENCIES:
   - IQKeyboardManager (~> 6.0.0)
   - MJExtension (~> 3.0.13)
   - MJRefresh (~> 3.1.15.3)
+  - Qiniu (~> 7.1)
   - RongCloudIM (~> 2.8.32)
   - SDAutoLayout (~> 2.2.0)
   - SDWebImage (~> 4.3.3)
@@ -59,9 +63,11 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - HappyDNS
     - IQKeyboardManager
     - MJExtension
     - MJRefresh
+    - Qiniu
     - RongCloudIM
     - SDAutoLayout
     - SDWebImage
@@ -70,15 +76,17 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  HappyDNS: dc6a164ee81979093123c241c6353bcf0218add6
   IQKeyboardManager: c390e612f4b98c8fd748016470138537dc163ead
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  Qiniu: 65384bca1cdb0480a68d9b9b8f54db53418c0355
   RongCloudIM: 48bfc2fcb8d7cae8ce1e19cb5fb26d6d90616375
   SDAutoLayout: c5509e77ae75735d9a39f7bc83dba6d3f75d49d8
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   XHWebImageAutoSize: 8e5d7bf036f960885769dbe3410579024d3ac1a1
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 80d4507e6a0df77c068e1521ad404129f8d283de
+PODFILE CHECKSUM: 0cdac90e4ae0b4bb943f3f6a44eb860d7d13113d
 
 COCOAPODS: 1.5.2

@@ -10,16 +10,16 @@
 
 @interface FriendsModel : NSObject
 
-@property (nonatomic,copy) NSString *ID;
+@property (nonatomic,copy) NSNumber *ID;
 @property (nonatomic,copy) NSDictionary *user;
 @property (nonatomic,copy) NSString *content;
 @property (nonatomic,copy) NSString *location;
 @property (nonatomic,copy) NSString *createTime;
 @property (nonatomic,copy) NSString *title;
-@property (nonatomic,copy) NSString *likeCount;
-@property (nonatomic,copy) NSString *rccommentNum;
-@property (nonatomic,copy) NSString *type;
-@property (nonatomic,copy) NSString *visitPermission;
+@property (nonatomic,copy) NSNumber *likeCount;
+@property (nonatomic,copy) NSNumber *rccommentNum;
+@property (nonatomic,copy) NSNumber *type;
+@property (nonatomic,copy) NSNumber *visitPermission;
 @property (nonatomic,copy) NSString *composing;
 @property (nonatomic,copy) NSArray *images;
 @property (nonatomic,copy) NSString *praPrtraitUri;

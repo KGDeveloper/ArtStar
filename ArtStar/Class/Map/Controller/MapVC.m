@@ -31,9 +31,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setLeftBtuWithTitle:@"定位中" image:Image(@"loc")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
     [self cllLocation];
-    [self setRightBtuWithTitle:@"筛选" image:nil];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"筛选" image:nil];
     
     [self setNavCenterView];
     
@@ -93,7 +93,7 @@
 }
 
 - (void)leftNavBtuAction:(UIButton *)sender{
-    [self setLeftBtuWithTitle:@"定位中" image:Image(@"loc")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
     [self cllLocation];
 }
 
@@ -114,7 +114,7 @@
     [manager obtainYourLocation];
     __weak typeof(self) mySelf = self;
     manager.ToObtainYourLocation = ^(NSString *city, double latitude, double longitude) {
-        [mySelf setLeftBtuWithTitle:city image:Image(@"loc")];
+        [mySelf setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:city image:Image(@"loc")];
     };
 }
 

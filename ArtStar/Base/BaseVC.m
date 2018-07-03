@@ -55,11 +55,25 @@
     [self.navigationController.navigationBar setShadowImage:image];
     [self.navigationController pushViewController:viewController animated:animated];
 }
-
-- (void)setLeftBtuWithTitle:(NSString *)title image:(UIImage *)image{
+- (void)setLeftBtuWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image color:(UIColor *)color{
+    _leftBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _leftBtu.frame = frame;
+    [_leftBtu setTitle:title forState:UIControlStateNormal];
+    [_leftBtu setTitleColor:color forState:UIControlStateNormal];
+    [_leftBtu setImage:image forState:UIControlStateNormal];
+    _leftBtu.titleLabel.font = SYBFont(15);
+    _leftBtu.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    _leftBtu.imageEdgeInsets = UIEdgeInsetsMake(7.5, 0, 7.5,0);
+    _leftBtu.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    _leftBtu.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [_leftBtu addTarget:self action:@selector(leftNavBtuAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc]initWithCustomView:_leftBtu];
+    self.navigationItem.leftBarButtonItem = left;
+}
+- (void)setLeftBtuWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image{
     
     _leftBtu = [UIButton buttonWithType:UIButtonTypeCustom];
-    _leftBtu.frame = CGRectMake(15, 0,100, 30);
+    _leftBtu.frame = frame;
     [_leftBtu setTitle:title forState:UIControlStateNormal];
     [_leftBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
     [_leftBtu setImage:image forState:UIControlStateNormal];
@@ -80,7 +94,7 @@
     
 }
 
-- (void)setRightBtuWithTitle:(NSString *)title image:(UIImage *)image{
+- (void)setRightBtuWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image{
     
     _rightBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     _rightBtu.frame = CGRectMake(0, 0,60, 30);

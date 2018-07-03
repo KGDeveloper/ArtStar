@@ -23,8 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"身份认证" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"身份认证" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self createData];

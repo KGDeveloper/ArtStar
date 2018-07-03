@@ -27,9 +27,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self setLeftBtuWithTitle:@"2018王嘉尔全国演唱会" image:Image(@"back")];
-    [self setRightBtuWithTitle:nil image:Image(@"more popup share")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0,250, 30) title:@"2018王嘉尔全国演唱会" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
     
     [self setTableView];
 }

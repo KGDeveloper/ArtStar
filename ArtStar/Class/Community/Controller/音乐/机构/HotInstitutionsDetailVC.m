@@ -19,8 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"全部评论（300）" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"全部评论（300）" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTbaleView];

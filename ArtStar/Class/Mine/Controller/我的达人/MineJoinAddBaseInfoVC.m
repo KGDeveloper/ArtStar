@@ -26,8 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"补充基本信息" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"补充基本信息" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTableView];

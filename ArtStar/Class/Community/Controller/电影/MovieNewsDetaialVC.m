@@ -23,8 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setRightBtuWithTitle:nil image:Image(@"more")];
-    [self setLeftBtuWithTitle:nil image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTableView];

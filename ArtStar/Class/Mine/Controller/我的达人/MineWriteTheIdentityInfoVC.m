@@ -24,8 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"填写认证信息" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"填写认证信息" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTableView];

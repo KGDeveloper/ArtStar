@@ -21,14 +21,29 @@
 #import "MusicFoundFriendsView.h"
 #import "FoundFriendsScreeningView.h"
 
-@interface CommunityExhibitionVC ()<MusicInstitutionsViewDelegate>
+@interface CommunityExhibitionVC ()<MusicInstitutionsViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic,strong) MusicPerformanceView *performanceView;//:--演出--
+@property (nonatomic,strong) KGSearchBarTF *searchTF;
 
 @end
 
 @implementation CommunityExhibitionVC
 
+- (void)setSearchBar{
+    _searchTF = [[KGSearchBarTF alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth - 75, 30)];
+    _searchTF.placeholder = @"搜索";
+    _searchTF.leftView = [[UIImageView alloc]initWithImage:Image(@"search")];
+    _searchTF.leftViewMode = UITextFieldViewModeAlways;
+    _searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _searchTF.delegate = self;
+    _searchTF.font = SYFont(12);
+    _searchTF.layer.cornerRadius = 5;
+    _searchTF.layer.masksToBounds = YES;
+    _searchTF.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
+    _searchTF.returnKeyType = UIReturnKeySearch;
+    [self setNavTitleView:_searchTF];
+}
 
 - (void)rightNavBtuAction:(UIButton *)sender{
     [self pushNoTabBarViewController:[[MIneMessageVC alloc]init] animated:YES];
@@ -36,11 +51,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setLeftBtuWithTitle:nil image:Image(@"back")];
-    [self setRightBtuWithTitle:nil image:Image(@"more popup message")];
-    
+    [self setSearchBar];
     __weak typeof(self) mySelf = self;
     //MARK:-------------------------------------------顶部滚动条---------------------------------------------
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
@@ -72,6 +86,18 @@
         [self.view addSubview:_performanceView];
     }
     return _performanceView;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField == _searchTF) {
+        [_searchTF resignFirstResponder];
+        KGSearchBarAndSearchView *searchView = nil;
+        if (!searchView) {
+            searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+            [self.navigationController.view addSubview:searchView];
+        }
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

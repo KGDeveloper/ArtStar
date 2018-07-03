@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSMutableArray *countryArr;
 @property (nonatomic,strong) NSMutableArray *addressArr;
 @property (nonatomic,assign) MapType type;
+@property (nonatomic,copy) NSString *leftStr;
 
 @end
 
@@ -42,13 +43,13 @@
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MapTypePlist" ofType:@"plist"];
     if (type == MapTypeInstitutions) {
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:filePath];
+        NSDictionary *dic = [[NSDictionary alloc]initWithContentsOfFile:filePath];
         NSDictionary *tmpDic = dic[@"文化场所"];
         _countryArr = [NSMutableArray arrayWithArray:tmpDic.allKeys.copy];
         [_leftView reloadData];
         [_rightView reloadData];
     }else{
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:filePath];
+        NSDictionary *dic = [[NSDictionary alloc]initWithContentsOfFile:filePath];
         NSDictionary *tmpDic = dic[@"文化消费"];
         _countryArr = tmpDic.allKeys.copy;
         [_leftView reloadData];
@@ -100,12 +101,16 @@
         cell.backgroundView = [self tableViewNormalBackView:cell.frame];
         cell.textLabel.text = _countryArr[indexPath.row];
         cell.selectedBackgroundView = [self tableViewWhiteBackView:cell.frame];
+        cell.textLabel.textColor = Color_999999;
+        cell.textLabel.font = SYFont(14);
         return cell;
     }else{
         KGCityChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KGCityChooseCell"];
         cell.backgroundView = [self tableViewWhiteBackView:cell.frame];
         cell.textLabel.text = _addressArr[indexPath.row];
         cell.selectedBackgroundView = [self tableViewNormalBackView:cell.frame];
+        cell.textLabel.textColor = Color_999999;
+        cell.textLabel.font = SYFont(14);
         return cell;
     }
 }
@@ -113,18 +118,30 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_type == MapTypeInstitutions) {
         if (tableView == _leftView) {
-            
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MapTypePlist" ofType:@"plist"];
+            NSDictionary *dic = [[NSDictionary alloc]initWithContentsOfFile:filePath];
+            NSDictionary *tmpDic = dic[@"文化场所"];
+            NSLog(@"%@",tmpDic[_countryArr[indexPath.row]][@"id"]);
         }
     }else{
         if (tableView == _leftView) {
             NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MapTypePlist" ofType:@"plist"];
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:filePath];
+            NSDictionary *dic = [[NSDictionary alloc]initWithContentsOfFile:filePath];
             NSDictionary *tmpDic = dic[@"文化消费"];
             NSDictionary *detailDic = tmpDic[_countryArr[indexPath.row]];
-            _addressArr = detailDic.allKeys.copy;
+            NSDictionary *dataDic = detailDic[@"data"];
+            NSLog(@"detailDic = %@",detailDic[@"id"]);
+            _leftStr = _countryArr[indexPath.row];
+            _addressArr = dataDic.allKeys.copy;
             [_rightView reloadData];
         }else{
-            
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MapTypePlist" ofType:@"plist"];
+            NSDictionary *dic = [[NSDictionary alloc]initWithContentsOfFile:filePath];
+            NSDictionary *tmpDic = dic[@"文化消费"];
+            NSDictionary *detailDic = tmpDic[_leftStr];
+            NSDictionary *dataDic = detailDic[@"data"];
+            NSDictionary *tmp = dataDic[_addressArr[indexPath.row]];
+            NSLog(@"tmp = %@",tmp[@"id"]);
         }
     }
 }

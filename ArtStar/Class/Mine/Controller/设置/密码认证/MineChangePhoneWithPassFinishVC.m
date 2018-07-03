@@ -27,8 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"密码认证" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"密码认证" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setUI];

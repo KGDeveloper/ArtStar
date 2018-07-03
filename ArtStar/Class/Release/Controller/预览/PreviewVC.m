@@ -31,9 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"预览" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"确定" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"预览" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"确定" image:nil];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
     self.height = NavTopHeight + 30 + 28;
     

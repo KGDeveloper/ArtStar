@@ -24,8 +24,9 @@
 @class BaseVC;
 @interface BaseVC : UIViewController
 
-- (void)setLeftBtuWithTitle:(NSString *)title image:(UIImage *)image;
-- (void)setRightBtuWithTitle:(NSString *)title image:(UIImage *)image;
+- (void)setLeftBtuWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image;
+- (void)setLeftBtuWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image color:(UIColor *)color;
+- (void)setRightBtuWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image;
 - (void)setNavBackGroundClearColor;
 - (void) pushNoTabBarViewController:(UIViewController *)viewController animated:(BOOL)animated;
 - (void)leftNavBtuAction:(UIButton *)sender;

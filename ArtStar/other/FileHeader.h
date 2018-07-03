@@ -37,6 +37,7 @@
 #import "KGLocationCityManager.h"
 #import "KGRequestNetWorking.h"
 #import "KGUserInfo.h"
+#import "KGSearchBarTF.h"
 
 #endif
 

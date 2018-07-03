@@ -7,7 +7,6 @@
 //
 
 #import "KGSearchBarAndSearchView.h"
-#import "KGSearchBarTF.h"
 #import "KGSearchViewCell.h"
 
 @interface KGSearchBarAndSearchView ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>

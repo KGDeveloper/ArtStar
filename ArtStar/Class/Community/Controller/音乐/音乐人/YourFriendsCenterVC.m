@@ -47,9 +47,8 @@ FriendsCurilerImageCellDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:nil image:Image(@"back")];
-    [self setRightBtuWithTitle:@"关注" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
     self.zansArr = [NSMutableArray array];
     [self setTableView];

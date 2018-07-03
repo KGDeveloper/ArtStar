@@ -19,9 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"编辑卡片" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"预览" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"编辑卡片" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"预览" image:nil];
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
     

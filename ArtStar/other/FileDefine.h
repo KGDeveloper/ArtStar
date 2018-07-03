@@ -37,10 +37,19 @@
 
 #define GeocodeApiKey @"12c88a2b6a7130459f81a9545d5a5dfd"
 
+//MARK:-------------------------------------------话题，图文，视频发布cell高度---------------------------------------------
+#define OnlyHaveImageHeight (kScreenWidth - 30)/690*468 + 118
+#define OnlyHaveTitleHeight 245
+#define TopAndBottomHeight (kScreenWidth - 30)/690*468 + 243
+#define LeftAndRightHeight 118 + (kScreenWidth - 155)/450*690
+#define talentHeight 238 + (kScreenWidth - 30)/690*468
+#define curileImageHeight 513
+
+
 //MARK:---------------------------------------登录模块-------------------------------------------------
-//#define serverIP @"http://192.168.1.119:80/"
+#define serverIP @"http://192.168.1.119:80/"
 //#define serverIP @"http://192.168.1.13/"
-#define serverIP @"http://192.168.1.10/"
+//#define serverIP @"http://192.168.1.10/"
 
 #define sendMsgAuthCode [serverIP stringByAppendingString:@"sendMsgAuthCode"]
 #define judgeMsgAuthCode [serverIP stringByAppendingString:@"judgeMsgAuthCode"]
@@ -49,10 +58,10 @@
 #define toSetPayrollPwd [serverIP stringByAppendingString:@"toSetPayrollPwd"]
 #define communityServer [serverIP stringByAppendingString:@"community/ntvBynews"]
 #define ReleaseFriendTimeline [serverIP stringByAppendingString:@"ReleaseFriendTimeline/searchfriendMessages"]
-
-
-
-
+#define firendlikeCount [serverIP stringByAppendingString:@"ReleaseFriendTimeline/firendlikeCount"]
+#define ReleaseFriendTimelineunreadMessageCount [serverIP stringByAppendingString:@"ReleaseFriendTimeline/unreadMessageCount"]
+#define pushUnreadMessages [serverIP stringByAppendingString:@"ReleaseFriendTimeline/pushUnreadMessages"]
+#define friendComment [serverIP stringByAppendingString:@"friendComment/commentOrReply"]
 
 
 

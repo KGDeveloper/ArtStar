@@ -69,6 +69,10 @@
         if (self.pushUploadingVC) {
             self.pushUploadingVC();
         }
+    }else{
+        if (self.pushDetaialVIewController) {
+            self.pushDetaialVIewController();
+        }
     }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{

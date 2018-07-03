@@ -20,8 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"积分明细" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"积分明细" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTableView];

@@ -190,9 +190,32 @@
         [self createSecondArr:_isWorks key:_indutryStr];
     }else if (tableView == _twoListView ){
         _positionStr = _secondArr[indexPath.row];
+        NSLog(@"%@",[self returnIdWithFirstKey:_indutryStr sencedKey:_positionStr thirdKey:nil status:_isWorks]);
         [self createThriedArr:_isWorks title:_indutryStr key:_positionStr];
     }else{
         _jobStr = _thirdArr[indexPath.row];
+        NSLog(@"%@",[self returnIdWithFirstKey:_indutryStr sencedKey:_positionStr thirdKey:_jobStr status:_isWorks]);
+    }
+}
+
+- (NSString *)returnIdWithFirstKey:(NSString *)first sencedKey:(NSString *)senced thirdKey:(NSString *)third status:(BOOL)status{
+    NSString *fileUlr = [[NSBundle mainBundle] pathForResource:@"KGIndustryPlist" ofType:@"plist"];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:fileUlr];
+    NSDictionary *typeDic = dic[first];
+    NSDictionary *worksDic;
+    if (status == YES) {
+        worksDic = typeDic[@"工作者"];
+    }else{
+        worksDic = typeDic[@"兴趣爱好"];
+    }
+    NSDictionary *dataDic = worksDic[@"data"];
+    NSDictionary *sencDic = dataDic[senced];
+    if (third == nil) {
+        return sencDic[@"id"];
+    }else{
+        NSDictionary *thDic = sencDic[@"data"];
+        NSDictionary *endDic = thDic[third];
+        return endDic[@"id"];
     }
 }
 
@@ -212,7 +235,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:fileUlr];
     _firstArr = [NSMutableArray arrayWithArray:dic.allKeys];
     [self createSecondArr:YES key:_firstArr[0]];
-    [self createThriedArr:YES title:_firstArr[0] key:_secondArr[0]];
+    [self createThriedArr:YES title:_firstArr[0] key:_secondArr[1]];
 }
 
 - (void)createSecondArr:(BOOL)status key:(NSString *)key{
@@ -221,14 +244,16 @@
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:fileUlr];
         NSDictionary *typeDic = dic[key];
         NSDictionary *worksDic = typeDic[@"工作者"];
-        _secondArr = [NSMutableArray arrayWithArray:worksDic.allKeys];
+        NSDictionary *dataDic = worksDic[@"data"];
+        _secondArr = [NSMutableArray arrayWithArray:dataDic.allKeys];
         [self createThriedArr:status title:key key:_secondArr[0]];
     }else{
         NSString *fileUlr = [[NSBundle mainBundle] pathForResource:@"KGIndustryPlist" ofType:@"plist"];
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:fileUlr];
         NSDictionary *typeDic = dic[key];
         NSDictionary *worksDic = typeDic[@"兴趣爱好"];
-        _secondArr = [NSMutableArray arrayWithArray:worksDic.allKeys];
+        NSDictionary *dataDic = worksDic[@"data"];
+        _secondArr = [NSMutableArray arrayWithArray:dataDic.allKeys];
         [self createThriedArr:status title:key key:_secondArr[0]];
     }
     [_twoListView reloadData];
@@ -240,15 +265,19 @@
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:fileUlr];
         NSDictionary *typeDic = dic[title];
         NSDictionary *worksDic = typeDic[@"工作者"];
-        NSDictionary *detiaDic = worksDic[key];
-        _thirdArr = [NSMutableArray arrayWithArray:detiaDic.allKeys];
+        NSDictionary *detiaDic = worksDic[@"data"];
+        NSDictionary *dataDic = detiaDic[key];
+        NSDictionary *endDic = dataDic[@"data"];
+        _thirdArr = [NSMutableArray arrayWithArray:endDic.allKeys];
     }else{
         NSString *fileUlr = [[NSBundle mainBundle] pathForResource:@"KGIndustryPlist" ofType:@"plist"];
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:fileUlr];
         NSDictionary *typeDic = dic[title];
         NSDictionary *worksDic = typeDic[@"兴趣爱好"];
-        NSDictionary *detiaDic = worksDic[key];
-        _thirdArr = [NSMutableArray arrayWithArray:detiaDic.allKeys];
+        NSDictionary *detiaDic = worksDic[@"data"];
+        NSDictionary *dataDic = detiaDic[key];
+        NSDictionary *endDic = dataDic[@"data"];
+        _thirdArr = [NSMutableArray arrayWithArray:endDic.allKeys];
     }
     [_threeListView reloadData];
 }

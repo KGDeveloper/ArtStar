@@ -25,8 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setLeftBtuWithTitle:@"上传作品" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"完成" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"上传作品" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"完成" image:nil];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setViewUI];

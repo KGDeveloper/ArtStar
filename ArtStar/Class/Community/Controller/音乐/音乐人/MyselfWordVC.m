@@ -14,6 +14,7 @@
 #import "MyselfWordWorksView.h"
 #import "MyselfWordUploadingVC.h"
 #import "MyselfWordArticleView.h"
+#import "MyselfWorksDetaialVC.h"
 
 @interface MyselfWordVC ()<UIScrollViewDelegate>
 
@@ -32,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setLeftBtuWithTitle:@"姚新月" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"姚新月" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTopView];
@@ -62,15 +63,15 @@
     __weak typeof(self) mySelf = self;
     _topView.showDiffentView = ^(NSString *title) {
         if ([title isEqualToString:@"主页"]) {
-            mySelf.backScroView.contentOffset = CGPointMake(0, kScreenHeight - NavTopHeight - 50);
+            mySelf.backScroView.contentOffset = CGPointMake(0, 0);
         }else if ([title isEqualToString:@"履历"]){
-            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth, kScreenHeight - NavTopHeight - 50);
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth, 0);
         }else if ([title isEqualToString:@"演出"]){
-            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*2, kScreenHeight - NavTopHeight - 50);
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*2, 0);
         }else if ([title isEqualToString:@"作品"]){
-            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*3, kScreenHeight - NavTopHeight - 50);
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*3, 0);
         }else{
-            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*4, kScreenHeight - NavTopHeight - 50);
+            mySelf.backScroView.contentOffset = CGPointMake(kScreenWidth*4, 0);
         }
     };
     [self.view addSubview:_topView];
@@ -78,31 +79,34 @@
 //MARK:-----------------------------------------homeView-----------------------------------------------
 - (MyselfWordHomeView *)homeView{
     if (!_homeView) {
-        _homeView = [[MyselfWordHomeView alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+        _homeView = [[MyselfWordHomeView alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, ViewHeight(self.backScroView))];
     }
     return _homeView;
 }
 //MARK:------------------------------------------infoView----------------------------------------------
 - (MyselfWordInfoView *)infoView{
     if (!_infoView) {
-        _infoView = [[MyselfWordInfoView alloc]initWithFrame:CGRectMake(kScreenWidth,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+        _infoView = [[MyselfWordInfoView alloc]initWithFrame:CGRectMake(kScreenWidth,0, kScreenWidth, ViewHeight(self.backScroView))];
     }
     return _infoView;
 }
 //MARK:-------------------------------------------performanView---------------------------------------------
 - (MySelfWordPerformanView *)performanView{
     if (!_performanView) {
-        _performanView = [[MySelfWordPerformanView alloc]initWithFrame:CGRectMake(kScreenWidth*2, 0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+        _performanView = [[MySelfWordPerformanView alloc]initWithFrame:CGRectMake(kScreenWidth*2, 0, kScreenWidth, ViewHeight(self.backScroView))];
     }
     return _performanView;
 }
 //MARK:--------------------------------------------worksView--------------------------------------------
 - (MyselfWordWorksView *)worksView{
     if (!_worksView) {
-        _worksView = [[MyselfWordWorksView alloc]initWithFrame:CGRectMake(kScreenWidth*3,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+        _worksView = [[MyselfWordWorksView alloc]initWithFrame:CGRectMake(kScreenWidth*3,0, kScreenWidth, ViewHeight(self.backScroView))];
         __weak typeof(self) mySelf = self;
         _worksView.pushUploadingVC = ^{
             [mySelf pushNoTabBarViewController:[[MyselfWordUploadingVC alloc]init] animated:YES];
+        };
+        _worksView.pushDetaialVIewController = ^{
+            [mySelf pushNoTabBarViewController:[[MyselfWorksDetaialVC alloc]init] animated:YES];
         };
     }
     return _worksView;
@@ -110,12 +114,12 @@
 //MARK:--------------------------------------------articlView--------------------------------------------
 - (MyselfWordArticleView *)articleView{
     if (!_articleView) {
-        _articleView = [[MyselfWordArticleView alloc]initWithFrame:CGRectMake(kScreenWidth*4,0, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+        _articleView = [[MyselfWordArticleView alloc]initWithFrame:CGRectMake(kScreenWidth*4,0, kScreenWidth, ViewHeight(self.backScroView))];
     }
     return _articleView;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     _topView.btu = scrollView.contentOffset.x/kScreenWidth;
 }
 

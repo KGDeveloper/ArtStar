@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setLeftBtuWithTitle:@"我的位置" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"我的位置" image:Image(@"back")];
     
     self.dataArr = [NSMutableArray array];
     self.allData = [NSMutableArray array];

@@ -35,9 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setRightBtuWithTitle:nil image:Image(@"more white")];
-    [self setLeftBtuWithTitle:nil image:Image(@"backwhite")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"backwhite")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more white")];
     
     _dataArr = [NSMutableArray arrayWithObjects:@"",@"",@"",@"",@"",@"",@"",@"", nil];
     [self setTableView];

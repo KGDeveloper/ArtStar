@@ -41,21 +41,20 @@
         _isProvince = NO;
         _dataArr = _countryArr.copy;
         [_cityView reloadData];
-        [self setLeftBtuWithTitle:@"家乡" image:Image(@"back")];
+        [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"家乡" image:Image(@"back")];
     }
     if (_isCity == YES) {
         _isProvince = YES;
         _isCity = NO;
         _dataArr = _provinceArr.copy;
         [_cityView reloadData];
-        [self setLeftBtuWithTitle:@"中国" image:Image(@"back")];
+        [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"中国" image:Image(@"back")];
     }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"家乡" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"确定" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"家乡" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"确定" image:nil];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _dataArr = [NSMutableArray array];
@@ -117,7 +116,7 @@
         _isCity = YES;
         _provinceStr = _dataArr[indexPath.row];
         NSArray *arr = [KGCity cityWithprovince:_dataArr[indexPath.row]];
-        [self setLeftBtuWithTitle:_dataArr[indexPath.row] image:Image(@"back")];
+        [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:_dataArr[indexPath.row] image:Image(@"back")];
         for (NSDictionary *dic in arr) {
             NSArray *city = dic.allKeys;
             _cityArr = [NSMutableArray arrayWithArray:city];
@@ -131,7 +130,7 @@
             _isCountry = NO;
             _isProvince = YES;
             _dataArr = _provinceArr.copy;
-            [self setLeftBtuWithTitle:@"中国" image:Image(@"back")];
+            [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"中国" image:Image(@"back")];
             [_cityView reloadData];
         }
     }

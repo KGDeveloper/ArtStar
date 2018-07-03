@@ -43,9 +43,8 @@ FriendsPlayVideoViewdelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"动态详情" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"关注" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"动态详情" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
     _isAttention = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -220,10 +219,10 @@ FriendsPlayVideoViewdelegate>
 }
 - (void)rightNavBtuAction:(UIButton *)sender{
     if (_isAttention == NO) {
-        [self setRightBtuWithTitle:@"已关注" image:nil];
+        [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"已关注" image:nil];
         _isAttention = YES;
     }else{
-        [self setRightBtuWithTitle:@"关注" image:nil];
+        [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
         _isAttention = NO;
     }
 }

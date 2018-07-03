@@ -31,9 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"通讯录" image:Image(@"back")];
-    [self setRightBtuWithTitle:nil image:Image(@"搜索")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"通讯录" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"搜索")];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setTopTouchView];

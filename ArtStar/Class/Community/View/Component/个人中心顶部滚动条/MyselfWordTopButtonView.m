@@ -72,7 +72,7 @@
 
 - (void)setBtu:(NSInteger)btu{
     _btu = btu;
-    _lineView.centerX = kScreenWidth/10*btu;
+    _lineView.centerX = kScreenWidth/5*btu + kScreenWidth/10;
 }
 
 

@@ -48,9 +48,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"选择模板" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"下一步" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"选择模板" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"下一步" image:nil];
     
     UIImageView *imageBack = [[UIImageView alloc]initWithFrame:self.view.frame];
     imageBack.image = Image(@"background");

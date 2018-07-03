@@ -16,5 +16,6 @@
 
 //MARK:----------------------------------------------------------------------------------------
 #import "CommenityModel.h"
+#import "KGSearchChatHistoryView.h"
 
 #endif /* MineHeader_h */

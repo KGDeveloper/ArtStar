@@ -23,9 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setLeftBtuWithTitle:@"我要做达人" image:Image(@"back")];
-    [self setRightBtuWithTitle:@"提交" image:nil];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"我要做达人" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"提交" image:nil];
     self.view.backgroundColor = Color_f2f2f2;
     
     _plholderArr = @[@"请输入标题",@"请输入机构/场所名称",@"请输入地址",@"请输入场所电话(选填)",@"请对你上传的地标做一番介绍吧！"];

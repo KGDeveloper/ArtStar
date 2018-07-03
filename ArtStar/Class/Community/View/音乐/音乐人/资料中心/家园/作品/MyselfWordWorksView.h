@@ -11,5 +11,6 @@
 @interface MyselfWordWorksView : UIView
 
 @property (nonatomic,copy) void (^pushUploadingVC)(void);
+@property (nonatomic,copy) void (^pushDetaialVIewController)(void);
 
 @end
