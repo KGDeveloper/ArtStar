@@ -77,7 +77,7 @@
                 }
             }
         }else if ([view isEqual:self.centerBtu]){
-            view.frame = CGRectMake(self.frame.size.width/2 - width/2,52 - width*14/13, width, width*14/13);
+            view.frame = CGRectMake(self.frame.size.width/2 - width/2,view.frame.origin.y - 15, width, width*69/62);
         }
     }
 }

@@ -321,6 +321,7 @@
 		287D7D5020EB766700AD749E /* FriendsTalentDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D4F20EB766700AD749E /* FriendsTalentDetailHeaderView.m */; };
 		287D7D5220EB767700AD749E /* FriendsTalentDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287D7D5120EB767700AD749E /* FriendsTalentDetailHeaderView.xib */; };
 		287D7D5520EB864600AD749E /* KGQiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5420EB864600AD749E /* KGQiniuUploadManager.m */; };
+		287D7D5820EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */; };
 		28A3DC6E20A02C3A00FEDD62 /* IrregularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC6D20A02C3A00FEDD62 /* IrregularView.m */; };
 		28A3DC7120A04BD100FEDD62 /* CustomBtu.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7020A04BD100FEDD62 /* CustomBtu.m */; };
 		28A3DC7820A05A7E00FEDD62 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7720A05A7E00FEDD62 /* VideoVC.m */; };
@@ -1079,6 +1080,8 @@
 		287D7D5120EB767700AD749E /* FriendsTalentDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsTalentDetailHeaderView.xib; sourceTree = "<group>"; };
 		287D7D5320EB864600AD749E /* KGQiniuUploadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGQiniuUploadManager.h; sourceTree = "<group>"; };
 		287D7D5420EB864600AD749E /* KGQiniuUploadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGQiniuUploadManager.m; sourceTree = "<group>"; };
+		287D7D5620EC957C00AD749E /* ReadBooksWriteYourIdeaVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadBooksWriteYourIdeaVC.h; sourceTree = "<group>"; };
+		287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadBooksWriteYourIdeaVC.m; sourceTree = "<group>"; };
 		28A3DC6C20A02C3A00FEDD62 /* IrregularView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IrregularView.h; sourceTree = "<group>"; };
 		28A3DC6D20A02C3A00FEDD62 /* IrregularView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IrregularView.m; sourceTree = "<group>"; };
 		28A3DC6F20A04BD100FEDD62 /* CustomBtu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomBtu.h; sourceTree = "<group>"; };
@@ -2089,6 +2092,8 @@
 				2870B73020C6879200133D1A /* ReadBooksHotVC.m */,
 				2870B73220C68BCB00133D1A /* ReadBooksDetailVC.h */,
 				2870B73320C68BCB00133D1A /* ReadBooksDetailVC.m */,
+				287D7D5620EC957C00AD749E /* ReadBooksWriteYourIdeaVC.h */,
+				287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */,
 			);
 			path = "书籍";
 			sourceTree = "<group>";
@@ -4292,6 +4297,7 @@
 				2823124C20E639520026904E /* FriendsModel.m in Sources */,
 				2875DA5E20D3601A00D6CAFE /* MineBooksFriendsTableViewCell.m in Sources */,
 				28577B6120D0CA770082075D /* MineChooseMyHomeCell.m in Sources */,
+				287D7D5820EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m in Sources */,
 				2820B05620B512C700EA1DAC /* FriendsSuspensionView.m in Sources */,
 				28E33AC420BBF141009F9382 /* MapAndNaviagtionView.m in Sources */,
 				281DF70920D2652A0086030E /* MineCollectionStarcircleView.m in Sources */,

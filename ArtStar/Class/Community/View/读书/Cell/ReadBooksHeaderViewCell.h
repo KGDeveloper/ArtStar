@@ -14,6 +14,7 @@
 - (void)shareBooks;
 - (void)sendMyIdea:(NSString *)idea;
 
+
 @end
 
 @interface ReadBooksHeaderViewCell : UITableViewCell
@@ -26,11 +27,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *acterlab;
 @property (weak, nonatomic) IBOutlet UILabel *fromLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
+@property (weak, nonatomic) IBOutlet UIButton *writeIdea;
 @property (weak, nonatomic) IBOutlet UIButton *wantBtu;
 @property (weak, nonatomic) IBOutlet UIButton *readIngBtu;
 @property (weak, nonatomic) IBOutlet UIButton *finishBtu;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *returnTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *shareTop;
+@property (weak, nonatomic) IBOutlet UIView *ideaView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ideaViewHeight;
 @property (weak, nonatomic) id<ReadBooksHeaderViewCellDelegate>delegate;
 
 

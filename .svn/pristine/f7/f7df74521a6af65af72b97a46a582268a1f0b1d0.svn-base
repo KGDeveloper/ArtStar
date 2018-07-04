@@ -1,0 +1,107 @@
+/**
+ 
+ ArtStar
+ 
+ Created by: KG丿轩帝 on 2018/5/2
+ 
+ Copyright (c) 2017 My Company
+ 
+ ☆★☆★☆★☆★☆★☆★☆★☆★☆
+ ★　　│　心想　│　事成　│　　★
+ ☆别╭═╮　　 ╭═╮　　 ╭═╮别☆
+ ★恋│人│　　│奎│　　│幸│恋★
+ ☆　│氣│　　│哥│　　│福│　☆
+ ★　│超│　　│制│　　│滿│　★
+ ☆别│旺│　　│作│　　│滿│别☆
+ ★恋│㊣│　　│㊣│　　│㊣│恋★
+ ☆　╰═╯ 天天╰═╯ 開心╰═╯　☆
+ ★☆★☆★☆★☆★☆★☆★☆★☆★.
+ 
+ */
+
+#import "ChooseModelVC.h"
+#import "HW3DBannerView.h"
+
+@interface ChooseModelVC ()
+/**
+ 模板选择器
+ */
+@property (nonatomic,strong) HW3DBannerView *scrollView;
+/**
+ 选择模板的下标
+ */
+@property (nonatomic,assign) NSInteger curModelTag;
+
+@end
+
+@implementation ChooseModelVC
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"选择模板" image:Image(@"back")];
+    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"下一步" image:nil];
+    
+    UIImageView *imageBack = [[UIImageView alloc]initWithFrame:self.view.frame];
+    imageBack.image = Image(@"background");
+    [self.view addSubview:imageBack];
+    
+    [self setUpScrollView];
+}
+
+- (void)setUpScrollView{
+    
+    _scrollView = [HW3DBannerView initWithFrame:CGRectMake(0, kScreenHeight/2 - (kScreenWidth *1089/879 - 100)/2, kScreenWidth, kScreenWidth *1089/879 - 100) imageSpacing:10 imageWidth:294];
+    _scrollView.data = self.imageArr;
+    _scrollView.initAlpha = 0.5;
+    _scrollView.imageRadius = 5;
+    _scrollView.imageHeightPoor = 20;
+    _scrollView.curPageControlColor = [UIColor blueColor];
+    [self.view addSubview:_scrollView];
+    __weak typeof(self) mySelf = self;
+    _scrollView.clickImageBlock = ^(NSInteger currentIndex) {
+        mySelf.curModelTag = currentIndex;
+    };
+}
+- (void)rightNavBtuAction:(UIButton *)sender{
+    if (self.sendModel) {
+        self.sendModel(self.curModelTag);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

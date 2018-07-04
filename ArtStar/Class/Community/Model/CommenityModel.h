@@ -10,13 +10,12 @@
 
 @interface CommenityModel : NSObject
 
-@property (nonatomic,copy) NSString *author;
-@property (nonatomic,copy) NSString *content;
-@property (nonatomic,copy) NSNumber *goodsum;
-@property (nonatomic,copy) NSString *ID;
-@property (nonatomic,copy) NSArray *imgList;
+@property (nonatomic,copy) NSNumber *ID;
 @property (nonatomic,copy) NSNumber *plsum;
-@property (nonatomic,copy) NSString *sitename;
 @property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy) NSString *sitename;
+@property (nonatomic,copy) NSNumber *zantype;
+@property (nonatomic,copy) NSString *locationimg;
+@property (nonatomic,copy) NSNumber *goodsum;
 
 @end

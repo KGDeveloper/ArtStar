@@ -47,9 +47,9 @@
 
 
 //MARK:---------------------------------------登录模块-------------------------------------------------
-#define serverIP @"http://192.168.1.119:80/"
+//#define serverIP @"http://192.168.1.119:80/"
 //#define serverIP @"http://192.168.1.13/"
-//#define serverIP @"http://192.168.1.10/"
+#define serverIP @"http://192.168.1.4/"
 
 #define sendMsgAuthCode [serverIP stringByAppendingString:@"sendMsgAuthCode"]
 #define judgeMsgAuthCode [serverIP stringByAppendingString:@"judgeMsgAuthCode"]

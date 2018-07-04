@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,copy) NSString *typeName;
 @property (nonatomic,strong) KGSearchBarTF *searchTF;
+@property (nonatomic,assign) NSInteger page;
 
 @end
 
@@ -48,6 +49,8 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
     [self setSearchBar];
+    _page = 0;
+    _dataArr = [NSMutableArray array];
     _typeName = @"";
     [self createDataArr];
     [self setViewUI];
@@ -74,15 +77,28 @@
             [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
         }
     };
+    _headLinesView.requestNewData = ^(NSString *type) {
+        if ([type isEqualToString:@"上拉"]) {
+            mySelf.page = 0;
+            [mySelf.dataArr removeAllObjects];
+            [mySelf createDataArr];
+        }else{
+            mySelf.page++;
+            [mySelf createDataArr];
+        }
+    };
     [self.view addSubview:_headLinesView];
 }
 
 - (void)createDataArr{
-    _dataArr = [NSMutableArray array];
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":_typeName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":_typeName,@"query":@{@"page":[NSString stringWithFormat:@"%ld",(long)self.page],@"rows":@"15"}} succ:^(id result) {
         NSArray *dataArray = result[@"data"];
-        mySelf.dataArr = [CommenityModel mj_keyValuesArrayWithObjectArray:dataArray];
+        for (int i = 0; i < dataArray.count; i++) {
+            NSDictionary *dic = dataArray[i];
+            CommenityModel *model = [CommenityModel mj_objectWithKeyValues:dic];
+            [mySelf.dataArr addObject:model];
+        }
         mySelf.headLinesView.dataArr = mySelf.dataArr;
     } fail:^(NSString *error) {
         

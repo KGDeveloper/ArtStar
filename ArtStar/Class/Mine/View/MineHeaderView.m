@@ -133,6 +133,12 @@
     UIView *lowline = [[UIView alloc]initWithFrame:CGRectMake(0, ViewHeight(self) - 10, ViewWidth(self), 10)];
     lowline.backgroundColor = Color_fafafa;
     [self addSubview:lowline];
+    
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(90, NavTopHeight - 4 + 17, 106, 25)];
+    imageView.image = Image(@"提示语");
+    [self addSubview:imageView];
+    
 }
 
 

@@ -37,7 +37,18 @@
 }
 - (IBAction)readedAction:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(sendMyIdea:)]) {
-        [self.delegate sendMyIdea:@"读过：评分"];
+        [self.delegate sendMyIdea:@"读过"];
+    }
+}
+- (IBAction)writeYourIdea:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(sendMyIdea:)]) {
+        [self.delegate sendMyIdea:@"书评"];
+    }
+    
+}
+- (IBAction)changeYourIdea:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(sendMyIdea:)]) {
+        [self.delegate sendMyIdea:@"编辑"];
     }
 }
 

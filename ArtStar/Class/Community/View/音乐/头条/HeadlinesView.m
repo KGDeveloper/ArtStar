@@ -8,6 +8,7 @@
 
 #import "HeadlinesView.h"
 #import "HeadLinesTableViewCell.h"
+#import "CommenityModel.h"
 
 @interface HeadlinesView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,HeadLinesTableViewCellDelagate,CommunityShieldingViewDelegate>
 
@@ -48,7 +49,16 @@
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
     __weak typeof(self) mySelf = self;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
+        [mySelf.listView.mj_header beginRefreshing];
+        if (mySelf.requestNewData) {
+            mySelf.requestNewData(@"下拉");
+        }
+    }];
+    _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [mySelf.listView.mj_footer beginRefreshing];
+        if (mySelf.requestNewData) {
+            mySelf.requestNewData(@"上拉");
+        }
     }];
     [self addSubview:_listView];
     
@@ -81,6 +91,7 @@
     _dataArr = dataArr;
     [_listView reloadData];
     [_listView.mj_header endRefreshing];
+    [_listView.mj_footer endRefreshing];
 }
 //MARK:---------------------------------------delegate------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

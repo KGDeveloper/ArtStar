@@ -13,6 +13,7 @@
 #import "MusicCommentCell.h"
 #import "BooksYourLoveCell.h"
 #import "ReadBooksCell.h"
+#import "ReadBooksWriteYourIdeaVC.h"
 
 @interface ReadBooksDetailVC ()<UITableViewDelegate,UITableViewDataSource,ReadBooksHeaderViewCellDelegate>
 
@@ -55,7 +56,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        return kScreenWidth/750*480 + 190;
+        return kScreenWidth/750*480 + 355;
     }else if(indexPath.row == 1){
         return 70;
     }else if(indexPath.row == 2){
@@ -106,7 +107,9 @@
     
 }
 - (void)sendMyIdea:(NSString *)idea{
-    
+    ReadBooksWriteYourIdeaVC *vc = [[ReadBooksWriteYourIdeaVC alloc]init];
+    vc.status = idea;
+    [self pushNoTabBarViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

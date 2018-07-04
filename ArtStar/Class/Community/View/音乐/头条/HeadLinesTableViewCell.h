@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommenityModel.h"
 
 @class HeadLinesTableViewCell;
 @protocol HeadLinesTableViewCellDelagate <NSObject>

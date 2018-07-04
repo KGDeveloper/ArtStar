@@ -12,4 +12,6 @@
 
 + (KGQiniuUploadManager *)shareInstance;
 
+
+
 @end
