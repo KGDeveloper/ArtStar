@@ -9,6 +9,8 @@
 #import "HeadLinesVC.h"
 #import "HeadLinesDetailVC.h"
 #import "CommenityModel.h"
+#import "CommenityHotSearchModel.h"
+#import "CommenityHoistorySearchModel.h"
 
 @interface HeadLinesVC ()<UITextFieldDelegate>
 
@@ -17,6 +19,10 @@
 @property (nonatomic,copy) NSString *typeName;
 @property (nonatomic,strong) KGSearchBarTF *searchTF;
 @property (nonatomic,assign) NSInteger page;
+@property (nonatomic,strong) KGSearchBarAndSearchView *searchView;
+
+@property (nonatomic,strong) NSMutableArray *hotArr;
+@property (nonatomic,strong) NSMutableArray *hoistryArr;
 
 @end
 
@@ -33,7 +39,6 @@
     _searchTF.layer.cornerRadius = 5;
     _searchTF.layer.masksToBounds = YES;
     _searchTF.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
-    _searchTF.returnKeyType = UIReturnKeySearch;
     [self setNavTitleView:_searchTF];
 }
 
@@ -43,26 +48,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
+    self.view.backgroundColor = [UIColor whiteColor];
+    //:--设置搜索框--
     [self setSearchBar];
+    //:--初始化--
     _page = 0;
-    _dataArr = [NSMutableArray array];
     _typeName = @"";
+    _dataArr = [NSMutableArray array];
+    _hotArr = [NSMutableArray array];
+    _hoistryArr = [NSMutableArray array];
+    //:--请求初始数据--
     [self createDataArr];
+    //:--搜索记录数据--
+    [self craeteSeachArr];
+    //:--搭建界面--
     [self setViewUI];
-    
+    //:--顶部滚动条--
+    [self setTopView];
+}
+
+- (void)setTopView{
     __weak typeof(self) mySelf = self;
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
-    scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影",@"图书",@"餐饮",@"摄影",@"文学",@"机构",@"展览",@"交友"];
+    scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影",@"图书",@"餐饮",@"摄影",@"文学"];
     scrollerView.rightAction = ^(NSString *title) {
         
     };
     scrollerView.titleAction = ^(NSString *title) {
-        mySelf.typeName = title;
+        if ([title isEqualToString:@"全部"]) {
+            mySelf.typeName = @"";
+            [mySelf.headLinesView showHeaderView];
+            
+        }else{
+            mySelf.typeName = title;
+            [mySelf.headLinesView hideHeaderView];
+        }
+        [mySelf.dataArr removeAllObjects];
+        [mySelf.headLinesView starRefrash];
+        [mySelf createDataArr];
     };
     [self.view addSubview:scrollerView];
 }
@@ -93,13 +118,15 @@
 - (void)createDataArr{
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":_typeName,@"query":@{@"page":[NSString stringWithFormat:@"%ld",(long)self.page],@"rows":@"15"}} succ:^(id result) {
-        NSArray *dataArray = result[@"data"];
-        for (int i = 0; i < dataArray.count; i++) {
-            NSDictionary *dic = dataArray[i];
-            CommenityModel *model = [CommenityModel mj_objectWithKeyValues:dic];
-            [mySelf.dataArr addObject:model];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *dataArray = result[@"data"];
+            for (int i = 0; i < dataArray.count; i++) {
+                NSDictionary *dic = dataArray[i];
+                CommenityModel *model = [CommenityModel mj_objectWithKeyValues:dic];
+                [mySelf.dataArr addObject:model];
+            }
+            mySelf.headLinesView.dataArr = mySelf.dataArr;
         }
-        mySelf.headLinesView.dataArr = mySelf.dataArr;
     } fail:^(NSString *error) {
         
     }];
@@ -109,13 +136,73 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (textField == _searchTF) {
         [_searchTF resignFirstResponder];
-        KGSearchBarAndSearchView *searchView = nil;
-        if (!searchView) {
-            searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-            [self.navigationController.view addSubview:searchView];
-        }
-        
+        self.searchView.hidden = NO;
+        self.searchView.hotArr = _hotArr;
+        self.searchView.historyArr = _hoistryArr;
     }
+}
+
+- (KGSearchBarAndSearchView *)searchView{
+    if (!_searchView) {
+        _searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        __weak typeof(self) mySelf = self;
+        _searchView.searchResult = ^(NSString *result) {
+            [mySelf createNewsData:result];
+        };
+        _searchView.clickSearchTitle = ^(NSString *title) {
+            [mySelf createNewsData:title];
+        };
+        [self.navigationController.view addSubview:_searchView];
+    }
+    return _searchView;
+}
+
+- (void)createNewsData:(NSString *)searchStr{
+    [_dataArr removeAllObjects];
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:newsSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"mohu":searchStr,@"query":@{@"page":[NSString stringWithFormat:@"%ld",(long)_page],@"rows":@"15"},@"typename":@""} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *dataArray = result[@"data"];
+            for (int i = 0; i < dataArray.count; i++) {
+                NSDictionary *dic = dataArray[i];
+                CommenityModel *model = [CommenityModel mj_objectWithKeyValues:dic];
+                [mySelf.dataArr addObject:model];
+            }
+            mySelf.headLinesView.dataArr = mySelf.dataArr;
+            mySelf.searchView.hidden = YES;
+        }
+    } fail:^(NSString *error) {
+        
+    }];
+}
+
+- (void)craeteSeachArr{
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:hotSearch parameters:@{} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            for (int i = 0; i < arr.count; i++) {
+                NSDictionary *dic = arr[i];
+                CommenityHotSearchModel *model = [CommenityHotSearchModel mj_objectWithKeyValues:dic];
+                [mySelf.hotArr addObject:model];
+            }
+        }
+    } fail:^(NSString *error) {
+        
+    }];
+    
+    [KGRequestNetWorking postWothUrl:oldSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"query":@{@"page":@"0",@"rows":@"20"}} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            for (int i = 0; i < arr.count; i++) {
+                NSDictionary *dic = arr[i];
+                CommenityHoistorySearchModel *model = [CommenityHoistorySearchModel mj_objectWithKeyValues:dic];
+                [mySelf.hoistryArr addObject:model];
+            }
+        }
+    } fail:^(NSString *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

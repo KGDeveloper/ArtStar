@@ -8,6 +8,8 @@
 
 #import "KGSearchBarAndSearchView.h"
 #import "KGSearchViewCell.h"
+#import "CommenityHoistorySearchModel.h"
+#import "CommenityHotSearchModel.h"
 
 @interface KGSearchBarAndSearchView ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -17,8 +19,6 @@
 @property (nonatomic,strong) UIView *hotView;
 @property (nonatomic,strong) UIView *historyView;
 
-@property (nonatomic,strong) NSMutableArray *searchArr;
-
 @end
 
 @implementation KGSearchBarAndSearchView
@@ -26,7 +26,6 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         
-        _searchArr = [NSMutableArray array];
         self.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
         
         [self setUI];
@@ -76,7 +75,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _searchArr.count;
+    return _historyArr.count;
 }
 
 - (UIView *)tableViewHeaderView{
@@ -106,14 +105,30 @@
 }
 
 - (void)deleteBtuClick{
-    [_searchArr removeAllObjects];
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:deleteSearchNews parameters:@{@"uid":[KGUserInfo shareInterace].userID} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            mySelf.historyArr = nil;
+            [mySelf.listView reloadData];
+        }
+    } fail:^(NSString *error) {
+        
+    }];
     [_listView reloadData];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     KGSearchViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KGSearchViewCell"];
-    cell.historyLab.text = _searchArr[indexPath.row];
+    CommenityHoistorySearchModel *model = _historyArr[indexPath.row];
+    cell.historyLab.text = model.searchfor;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CommenityHoistorySearchModel *model = _historyArr[indexPath.row];
+    if (self.clickSearchTitle) {
+        self.clickSearchTitle(model.searchfor);
+    }
 }
 
 - (void)setHotArr:(NSArray *)hotArr{
@@ -122,13 +137,14 @@
     CGFloat height = 70;
     NSInteger count = 0;
     for (int i = 0; i < hotArr.count; i++) {
-        if (width + [TransformChineseToPinying stringWidthFromString:hotArr[i] font:FZFont(15) width:ViewWidth(self)] > ViewWidth(self)) {
+        CommenityHotSearchModel *model = hotArr[i];
+        if (width + [TransformChineseToPinying stringWidthFromString:model.searchfor font:FZFont(15) width:ViewWidth(self)] > ViewWidth(self)) {
             width = 15;
             count ++;
             height = 70 + 30*count;
         }
-        [_hotView addSubview:[self createButtonWithFrame:CGRectMake(width, height, [TransformChineseToPinying stringWidthFromString:hotArr[i] font:FZFont(15) width:ViewWidth(self)], 15) title:hotArr[i] font:SYFont(12) color:[UIColor colorWithHexString:@"#666666"]]];
-        width = width + 20 + [TransformChineseToPinying stringWidthFromString:hotArr[i] font:FZFont(15) width:ViewWidth(self)];
+        [_hotView addSubview:[self createButtonWithFrame:CGRectMake(width, height, [TransformChineseToPinying stringWidthFromString:model.searchfor font:FZFont(15) width:ViewWidth(self)], 15) title:model.searchfor font:SYFont(12) color:[UIColor colorWithHexString:@"#666666"]]];
+        width = width + 20 + [TransformChineseToPinying stringWidthFromString:model.searchfor font:FZFont(15) width:ViewWidth(self)];
     }
     
     _hotView.frame = CGRectMake(ViewX(_hotView), ViewY(_hotView), ViewWidth(_hotView), height + 40 + 50);
@@ -139,7 +155,6 @@
 
 - (void)setHistoryArr:(NSArray *)historyArr{
     _historyArr = historyArr;
-    _searchArr = [NSMutableArray arrayWithArray:historyArr];
     [_listView reloadData];
 }
 
@@ -154,7 +169,9 @@
 }
 
 - (void)titleBtuClick:(UIButton *)sender{
-    
+    if (self.clickSearchTitle) {
+        self.clickSearchTitle(sender.currentTitle);
+    }
 }
 
 - (void)cancelClick{
@@ -162,16 +179,10 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    BOOL isAdd = YES;
-    for (NSString *obj in _searchArr) {
-        if ([textField.text isEqualToString:obj]) {
-            isAdd = NO;
-        }
-    }
-    if (isAdd == YES) {
-        [_searchArr addObject:textField.text];
-    }
     [_listView reloadData];
+    if (self.searchResult) {
+        self.searchResult(textField.text);
+    }
     return YES;
 }
 

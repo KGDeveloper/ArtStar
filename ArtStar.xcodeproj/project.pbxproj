@@ -322,6 +322,8 @@
 		287D7D5220EB767700AD749E /* FriendsTalentDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287D7D5120EB767700AD749E /* FriendsTalentDetailHeaderView.xib */; };
 		287D7D5520EB864600AD749E /* KGQiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5420EB864600AD749E /* KGQiniuUploadManager.m */; };
 		287D7D5820EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */; };
+		287D7D5C20ECD28600AD749E /* CommenityHotSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5B20ECD28500AD749E /* CommenityHotSearchModel.m */; };
+		287D7D5F20ECD29C00AD749E /* CommenityHoistorySearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5E20ECD29C00AD749E /* CommenityHoistorySearchModel.m */; };
 		28A3DC6E20A02C3A00FEDD62 /* IrregularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC6D20A02C3A00FEDD62 /* IrregularView.m */; };
 		28A3DC7120A04BD100FEDD62 /* CustomBtu.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7020A04BD100FEDD62 /* CustomBtu.m */; };
 		28A3DC7820A05A7E00FEDD62 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7720A05A7E00FEDD62 /* VideoVC.m */; };
@@ -1082,6 +1084,10 @@
 		287D7D5420EB864600AD749E /* KGQiniuUploadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGQiniuUploadManager.m; sourceTree = "<group>"; };
 		287D7D5620EC957C00AD749E /* ReadBooksWriteYourIdeaVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadBooksWriteYourIdeaVC.h; sourceTree = "<group>"; };
 		287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadBooksWriteYourIdeaVC.m; sourceTree = "<group>"; };
+		287D7D5A20ECD28500AD749E /* CommenityHotSearchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommenityHotSearchModel.h; sourceTree = "<group>"; };
+		287D7D5B20ECD28500AD749E /* CommenityHotSearchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommenityHotSearchModel.m; sourceTree = "<group>"; };
+		287D7D5D20ECD29C00AD749E /* CommenityHoistorySearchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommenityHoistorySearchModel.h; sourceTree = "<group>"; };
+		287D7D5E20ECD29C00AD749E /* CommenityHoistorySearchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommenityHoistorySearchModel.m; sourceTree = "<group>"; };
 		28A3DC6C20A02C3A00FEDD62 /* IrregularView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IrregularView.h; sourceTree = "<group>"; };
 		28A3DC6D20A02C3A00FEDD62 /* IrregularView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IrregularView.m; sourceTree = "<group>"; };
 		28A3DC6F20A04BD100FEDD62 /* CustomBtu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomBtu.h; sourceTree = "<group>"; };
@@ -1837,8 +1843,7 @@
 		2820B07A20B55FB600EA1DAC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2823124720E613A60026904E /* CommenityModel.h */,
-				2823124820E613A60026904E /* CommenityModel.m */,
+				287D7D5920ECD25700AD749E /* 头条 */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2608,6 +2613,19 @@
 				284C8D6520BF986A00487225 /* MusicManagementMyThemeCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		287D7D5920ECD25700AD749E /* 头条 */ = {
+			isa = PBXGroup;
+			children = (
+				2823124720E613A60026904E /* CommenityModel.h */,
+				2823124820E613A60026904E /* CommenityModel.m */,
+				287D7D5A20ECD28500AD749E /* CommenityHotSearchModel.h */,
+				287D7D5B20ECD28500AD749E /* CommenityHotSearchModel.m */,
+				287D7D5D20ECD29C00AD749E /* CommenityHoistorySearchModel.h */,
+				287D7D5E20ECD29C00AD749E /* CommenityHoistorySearchModel.m */,
+			);
+			path = "头条";
 			sourceTree = "<group>";
 		};
 		28A3DC6A20A0029F00FEDD62 /* Community */ = {
@@ -4250,6 +4268,7 @@
 				2814620E20B3F1D1000C5E47 /* FriendsDetailVericalView.m in Sources */,
 				28EC5F8D20DA09D50019D4C1 /* MapVC.m in Sources */,
 				282E072220C8E18B00A9B2E1 /* MineButtonView.m in Sources */,
+				287D7D5F20ECD29C00AD749E /* CommenityHoistorySearchModel.m in Sources */,
 				286A2E9A20DBB80300D3994C /* MapTypeChooseView.m in Sources */,
 				286A2E9420DBB7DA00D3994C /* MapSpaceToYourView.m in Sources */,
 				28FDAC4720C1151F00531597 /* MySelfWordHomeTableViewHeaderView.m in Sources */,
@@ -4448,6 +4467,7 @@
 				2834848720C63DB200AB6E9A /* CommunityGoodFoodVC.m in Sources */,
 				2820B06F20B5452C00EA1DAC /* DXShareView.m in Sources */,
 				2820B07720B54B3500EA1DAC /* FriendsVideoView.m in Sources */,
+				287D7D5C20ECD28600AD749E /* CommenityHotSearchModel.m in Sources */,
 				284C8D7E20BFD5A300487225 /* KGCity.m in Sources */,
 				28CA5BEC20CE778E00D38F1F /* MineEditMyLabelCell.m in Sources */,
 				282E072A20C90CE300A9B2E1 /* MineTableViewCell.m in Sources */,

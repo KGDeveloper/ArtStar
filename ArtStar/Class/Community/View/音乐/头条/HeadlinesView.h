@@ -16,5 +16,6 @@
 
 - (void)showHeaderView;
 - (void)hideHeaderView;
+- (void)starRefrash;
 
 @end

@@ -12,5 +12,7 @@
 
 @property (nonatomic,copy) NSArray *hotArr;
 @property (nonatomic,copy) NSArray *historyArr;
+@property (nonatomic,copy) void(^searchResult)(NSString *result);
+@property (nonatomic,copy) void(^clickSearchTitle)(NSString *title);
 
 @end

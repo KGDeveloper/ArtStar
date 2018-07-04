@@ -41,6 +41,7 @@
 - (void)setUI{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(self), ViewHeight(self))];
     _listView.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
+    _listView.backgroundView = [[UIImageView alloc]initWithImage:Image(@"空空如也")];
     _listView.delegate = self;
     _listView.dataSource = self;
     _listView.tableHeaderView = [self tableViewHeaderView];
@@ -49,16 +50,11 @@
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
     __weak typeof(self) mySelf = self;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [mySelf.listView.mj_header beginRefreshing];
-        if (mySelf.requestNewData) {
-            mySelf.requestNewData(@"下拉");
-        }
-    }];
-    _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [mySelf.listView.mj_footer beginRefreshing];
-        if (mySelf.requestNewData) {
-            mySelf.requestNewData(@"上拉");
-        }
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            if (mySelf.requestNewData) {
+                mySelf.requestNewData(@"下拉");
+            }
+        });
     }];
     [self addSubview:_listView];
     
@@ -87,8 +83,25 @@
     cell.delegate = self;
     return cell;
 }
+//MARK:----------------------------------------------------------------------------------------
+- (void)starRefrash{
+    [_listView.mj_header beginRefreshing];
+    if (_dataArr.count == 0) {
+        _listView.mj_footer = nil;
+    }
+    [_listView reloadData];
+}
 - (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
+    if (dataArr.count > 15) {
+        __weak typeof(self) mySelf = self;
+        _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [mySelf.listView.mj_footer beginRefreshing];
+            if (mySelf.requestNewData) {
+                mySelf.requestNewData(@"上拉");
+            }
+        }];
+    }
     [_listView reloadData];
     [_listView.mj_header endRefreshing];
     [_listView.mj_footer endRefreshing];

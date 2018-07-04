@@ -62,9 +62,10 @@
 #define ReleaseFriendTimelineunreadMessageCount [serverIP stringByAppendingString:@"ReleaseFriendTimeline/unreadMessageCount"]
 #define pushUnreadMessages [serverIP stringByAppendingString:@"ReleaseFriendTimeline/pushUnreadMessages"]
 #define friendComment [serverIP stringByAppendingString:@"friendComment/commentOrReply"]
-
-
-
+#define newsSearch [serverIP stringByAppendingString:@"community/newsSearch"]
+#define hotSearch [serverIP stringByAppendingString:@"community/hotSearch"]
+#define oldSearch [serverIP stringByAppendingString:@"community/oldSearch"]
+#define deleteSearchNews [serverIP stringByAppendingString:@"community/deleteSearchNews"]
 
 
 
