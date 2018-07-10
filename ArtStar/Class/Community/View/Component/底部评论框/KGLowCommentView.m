@@ -74,6 +74,7 @@
     if (self.actionWithTitle) {
         self.actionWithTitle(@"评论", _commentTF.text);
     }
+    _commentTF.text = @"";
 }
 
 - (void)zansAction:(UIButton *)sender{

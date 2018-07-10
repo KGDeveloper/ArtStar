@@ -10,8 +10,9 @@
 
 @interface HeadlinesView : UIView
 
-@property (nonatomic,copy) void(^pushViewController)(NSString *type);
+@property (nonatomic,copy) void(^pushViewController)(NSString *ID);
 @property (nonatomic,copy) void(^requestNewData)(NSString *type);
+@property (nonatomic,copy) void(^closeNewsWithReson)(NSArray *resonArr,NSString *ID);
 @property (nonatomic,copy) NSArray *dataArr;
 
 - (void)showHeaderView;

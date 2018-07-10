@@ -18,7 +18,6 @@
 @property (nonatomic,strong) CommunitySmartView *smartView;
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) UIView *headerView;
-@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 //MARK:--头条--
@@ -38,7 +37,6 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"backwhite")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more white")];
     
-    _dataArr = [NSMutableArray arrayWithObjects:@"",@"",@"",@"",@"",@"",@"",@"", nil];
     [self setTableView];
     [self setLowView];
     

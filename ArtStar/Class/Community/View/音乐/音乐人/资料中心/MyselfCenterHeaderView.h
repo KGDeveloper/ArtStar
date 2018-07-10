@@ -12,5 +12,6 @@
 
 @property (nonatomic,copy) void(^pushViewController)(NSString *btuTitle);
 @property (nonatomic,copy) NSString *rightName;
+@property (nonatomic,copy) NSArray *dataArr;
 
 @end

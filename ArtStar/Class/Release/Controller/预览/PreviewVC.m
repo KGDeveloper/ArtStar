@@ -39,6 +39,24 @@
     [self setUI];
 }
 
+- (void)rightNavBtuAction:(UIButton *)sender{
+    NSArray *strArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:strArr options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonStr = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSData *imgData = [NSJSONSerialization dataWithJSONObject:_model.imageURLs options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *imgStr = [[NSString alloc]initWithData:imgData encoding:NSUTF8StringEncoding];
+    
+    NSData *idsData = [NSJSONSerialization dataWithJSONObject:_model.ids options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *idsStr = [[NSString alloc]initWithData:idsData encoding:NSUTF8StringEncoding];
+    
+    [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"content":jsonStr,@"location":_model.location,@"visitPermission":_model.visitPermission,@"composing":_model.composing,@"type":_model.typeStr,@"title":_model.title,@"imageURLs":imgStr,@"topicType":_model.topicType,@"ids":idsStr} succ:^(id result) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
+}
+
 //MARK:--选择加载页面--
 - (void)setUI{
     
@@ -161,8 +179,6 @@
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = @"北京.望春园";
             self.videoView.themeStr = @"# 哈哈哈 #";
-            self.videoView.playVideo = self.model.videoData;
-            self.videoView.videoImage = self.model.videoImage;
             break;
         case EditVideoTypeTopLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopLeftText];
@@ -171,8 +187,6 @@
             self.videoView.locationStr = @"北京.望春园";
             self.videoView.themeStr = @"# 哈哈哈 #";
             self.videoView.type = TextAlignmentLeft;
-            self.videoView.playVideo = self.model.videoData;
-            self.videoView.videoImage = self.model.videoImage;
             break;
         case EditVideoTypeTopCenter:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopCenterText];
@@ -181,8 +195,6 @@
             self.videoView.locationStr = @"北京.望春园";
             self.videoView.themeStr = @"# 哈哈哈 #";
             self.videoView.type = TextAlignmentCenter;
-            self.videoView.playVideo = self.model.videoData;
-            self.videoView.videoImage = self.model.videoImage;
             break;
         case EditVideoTypeTopRight:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopRightText];
@@ -191,8 +203,6 @@
             self.videoView.locationStr = @"北京.望春园";
             self.videoView.themeStr = @"# 哈哈哈 #";
             self.videoView.type = TextAlignmentRight;
-            self.videoView.playVideo = self.model.videoData;
-            self.videoView.videoImage = self.model.videoImage;
             break;
         case EditVideoTypeLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomLeftText];
@@ -201,8 +211,6 @@
             self.videoView.locationStr = @"北京.望春园";
             self.videoView.themeStr = @"# 哈哈哈 #";
             self.videoView.type = TextAlignmentLeft;
-            self.videoView.playVideo = self.model.videoData;
-            self.videoView.videoImage = self.model.videoImage;
             break;
         case EditVideoTypeCenter:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomCenterText];
@@ -211,8 +219,6 @@
             self.videoView.locationStr = @"北京.望春园";
             self.videoView.themeStr = @"# 哈哈哈 #";
             self.videoView.type = TextAlignmentTypeCenter;
-            self.videoView.playVideo = self.model.videoData;
-            self.videoView.videoImage = self.model.videoImage;
             break;
         default:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomRightText];
@@ -221,8 +227,6 @@
             self.videoView.locationStr = @"北京.望春园";
             self.videoView.themeStr = @"# 哈哈哈 #";
             self.videoView.type = TextAlignmentRight;
-            self.videoView.playVideo = self.model.videoData;
-            self.videoView.videoImage = self.model.videoImage;
             break;
     }
 }
@@ -342,7 +346,7 @@
     [self.view addSubview:_videoView];
 }
 - (void)playVideoOnController{
-    self.playVideo.videoUrl = [NSURL URLWithString:self.model.videoData];
+//    self.playVideo.videoUrl = [NSURL URLWithString:self.model.videoData];
     self.playVideo.hidden = NO;
     [self.playVideo play];
     self.navigationController.navigationBar.hidden = YES;

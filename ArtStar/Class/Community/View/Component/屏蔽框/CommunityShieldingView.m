@@ -111,8 +111,8 @@
 }
 
 - (void)shureClick{
-    if ([self.delegate respondsToSelector:@selector(sendTitleArrToView:)]) {
-        [self.delegate sendTitleArrToView:self.seleteArr.copy];
+    if ([self.delegate respondsToSelector:@selector(sendTitleArrToView:index:)]) {
+        [self.delegate sendTitleArrToView:self.seleteArr.copy index:_index];
     }
     for (id obj in _whiteView.subviews) {
         if ([obj isKindOfClass:[UIButton class]]) {

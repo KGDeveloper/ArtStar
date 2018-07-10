@@ -28,7 +28,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = Color_333333;
         _backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0,0, ViewWidth(self), ViewHeight(self) - 10)];
-        _backImage.image = Image(@"2");
+        [_backImage sd_setImageWithURL:[NSURL URLWithString:[KGUserInfo shareInterace].portraitUri]];
         _backImage.alpha = 0.2;
         [self addSubview:_backImage];
         [self setHeaderView];
@@ -39,7 +39,7 @@
 - (void)setHeaderView{
     
     _headerImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, NavTopHeight - 4, 60, 60)];
-    _headerImage.image = Image(@"2");
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:[KGUserInfo shareInterace].portraitUri]];
     _headerImage.layer.cornerRadius = 30;
     _headerImage.layer.borderColor = [UIColor colorWithHexString:@"#ffffff"].CGColor;
     _headerImage.layer.borderWidth = 1;
@@ -53,7 +53,11 @@
     
     _statuBtu = [[UIButton alloc]initWithFrame:CGRectMake(ViewWidth(self) - 55, NavTopHeight - 4, 40, 20)];
     [_statuBtu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_statuBtu setTitle:@"在线" forState:UIControlStateNormal];
+    if ([[KGUserInfo shareInterace].userState integerValue] == 0) {
+        [_statuBtu setTitle:@"在线" forState:UIControlStateNormal];
+    }else if ([[KGUserInfo shareInterace].userState integerValue] == 1){
+        [_statuBtu setTitle:@"隐身" forState:UIControlStateNormal];
+    }
     _statuBtu.titleLabel.font = SYFont(11);
     [_statuBtu addTarget:self action:@selector(changeStatus:) forControlEvents:UIControlEventTouchUpInside];
     _statuBtu.backgroundColor = [UIColor colorWithRed:211/255.0 green:211/255.0 blue:211/255.0 alpha:0.1];
@@ -64,17 +68,22 @@
     _nameLab = [[UILabel alloc]initWithFrame:CGRectMake(15, NavTopHeight + 71, 120, 15)];
     _nameLab.textColor = [UIColor whiteColor];
     _nameLab.font = SYFont(15);
-    _nameLab.text = @"轩哥哥";
+    _nameLab.text = [KGUserInfo shareInterace].userName;
     [self addSubview:_nameLab];
     
     _ageBtu = [UIButton buttonWithType:UIButtonTypeCustom];
-    _ageBtu.frame = CGRectMake(25 + [TransformChineseToPinying stringWidthFromString:@"轩哥哥" font:SYFont(15) width:ViewWidth(self)], NavTopHeight + 71, 40, 15);
-    [_ageBtu setTitle:@"28" forState:UIControlStateNormal];
+    _ageBtu.frame = CGRectMake(25 + [TransformChineseToPinying stringWidthFromString:[KGUserInfo shareInterace].userName font:SYFont(15) width:ViewWidth(self)], NavTopHeight + 71, 40, 15);
+    [_ageBtu setTitle:[NSString stringWithFormat:@"%@",[KGUserInfo shareInterace].userAge] forState:UIControlStateNormal];
     _ageBtu.titleLabel.font = SYFont(11);
     [_ageBtu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_ageBtu setImage:Image(@"man") forState:UIControlStateNormal];
+    if ([[KGUserInfo shareInterace].userSex integerValue] == 0) {
+        [_ageBtu setImage:Image(@"girl") forState:UIControlStateNormal];
+        _ageBtu.backgroundColor = Color_Girl;
+    }else if ([[KGUserInfo shareInterace].userSex integerValue] == 1){
+        [_ageBtu setImage:Image(@"man") forState:UIControlStateNormal];
+        _ageBtu.backgroundColor = Color_Boy;
+    }
     [_ageBtu setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 5)];
-    _ageBtu.backgroundColor = Color_Boy;
     _ageBtu.layer.cornerRadius = 2;
     _ageBtu.layer.masksToBounds = YES;
     [self addSubview:_ageBtu];
@@ -82,7 +91,7 @@
     _signatureLab = [[UILabel alloc]initWithFrame:CGRectMake(15, NavTopHeight + 101, ViewWidth(self) - 30, 15)];
     _signatureLab.textColor = [UIColor whiteColor];
     _signatureLab.font = SYFont(11);
-    _signatureLab.text = @"我若成佛，天下无魔。我若成魔，杀神屠佛！！！";
+    _signatureLab.text = [KGUserInfo shareInterace].personSignature;
     [self addSubview:_signatureLab];
     
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, NavTopHeight + 131, ViewWidth(self) - 30, 1)];
@@ -134,11 +143,11 @@
     lowline.backgroundColor = Color_fafafa;
     [self addSubview:lowline];
     
-    
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(90, NavTopHeight - 4 + 17, 106, 25)];
-    imageView.image = Image(@"提示语");
-    [self addSubview:imageView];
-    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"MineAlertImage"]) {
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(90, NavTopHeight - 4 + 17, 106, 25)];
+        imageView.image = Image(@"提示语");
+        [self addSubview:imageView];
+    }
 }
 
 
@@ -163,6 +172,8 @@
     if (self.pushIntoMyselfCenter) {
         self.pushIntoMyselfCenter();
     }
+    [[NSUserDefaults standardUserDefaults] setObject:@"MineAlertImage" forKey:@"MineAlertImage"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /*

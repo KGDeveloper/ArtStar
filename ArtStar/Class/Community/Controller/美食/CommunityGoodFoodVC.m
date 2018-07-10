@@ -57,7 +57,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
+    
+    [self createHeadLineData];
     [self setSearchBar];
+    [self setTopView];
+}
+- (void)setTopView{
     __weak typeof(self) mySelf = self;
     //MARK:-------------------------------------------顶部滚动条---------------------------------------------
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
@@ -90,13 +95,7 @@
     __weak typeof(self) mySelf = self;
     if (!_headLinesView) {
         _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        _headLinesView.pushViewController = ^(NSString *type) {
-            if ([type isEqualToString:@"视频"]) {
-                [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
-            }else{
-                [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
-            }
-        };
+        
         [self.view addSubview:_headLinesView];
     }
     return _headLinesView;
@@ -171,6 +170,14 @@
         }
         
     }
+}
+
+- (void)createHeadLineData{
+    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":_titleName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

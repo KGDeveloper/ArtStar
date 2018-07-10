@@ -10,4 +10,6 @@
 
 @interface MineEditVCChooseImageView : UIView
 
+@property (nonatomic,copy) void(^sendChooseFileToController)(NSString *fileStr);
+
 @end

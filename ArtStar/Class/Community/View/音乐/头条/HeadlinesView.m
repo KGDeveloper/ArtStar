@@ -9,6 +9,7 @@
 #import "HeadlinesView.h"
 #import "HeadLinesTableViewCell.h"
 #import "CommenityModel.h"
+#import "CommenityNewsDetailModel.h"
 
 @interface HeadlinesView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,HeadLinesTableViewCellDelagate,CommunityShieldingViewDelegate>
 
@@ -108,14 +109,9 @@
 }
 //MARK:---------------------------------------delegate------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row%2==0) {
-        if (self.pushViewController) {
-            self.pushViewController(@"视频");
-        }
-    }else{
-        if (self.pushViewController) {
-            self.pushViewController(@"新闻");
-        }
+    CommenityModel *model = _dataArr[indexPath.row];
+    if (self.pushViewController) {
+        self.pushViewController([NSString stringWithFormat:@"%ld",(long)model.ID.integerValue]);
     }
 }
 //MARK:---------------------------------------显示头视图------------------------------------------
@@ -132,14 +128,25 @@
     [_listView reloadData];
 }
 //MARK:--------------------------HeadLinesTableViewCellDelagate----------------------------------
-- (void)deleteNewsWithIndex:(HeadLinesTableViewCell *)index buttonOriginY:(CGFloat)y{
-    
+- (void)deleteNewsWithIndex:(HeadLinesTableViewCell *)cell buttonOriginY:(CGFloat)y index:(NSInteger)index{
     self.shieldingView.hidden = NO;
-    self.shieldingView.shieldingOrigin = [self convertRect:[_listView rectForRowAtIndexPath:[_listView indexPathForCell:index]] toView:self].origin.y - _listView.contentOffset.y + 20 + NavTopHeight + 40;
+    self.shieldingView.index = index;
+    self.shieldingView.shieldingOrigin = [self convertRect:[_listView rectForRowAtIndexPath:[_listView indexPathForCell:cell]] toView:self].origin.y - _listView.contentOffset.y + 20 + NavTopHeight + 40;
+}
+- (void)touchCellButtonWithTitle:(NSString *)title cellIndex:(NSInteger)cellIndex{
+    if ([title isEqualToString:@"分享"]) {
+        
+    }else if ([title isEqualToString:@"点赞"]){
+        
+    }else if ([title isEqualToString:@"评论"]){
+        
+    }
 }
 //MARK:--------------------------CommunityShieldingViewDelegate----------------------------------
-- (void)sendTitleArrToView:(NSArray *)selectArr{
-    
+- (void)sendTitleArrToView:(NSArray *)selectArr index:(NSInteger)index{
+    if (self.closeNewsWithReson) {
+        self.closeNewsWithReson(selectArr,[NSString stringWithFormat:@"%ld",(long)index]);
+    }
 }
 
 - (UIViewController *)rootViewCintroller{

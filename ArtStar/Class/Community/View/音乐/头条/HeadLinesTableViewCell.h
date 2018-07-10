@@ -12,7 +12,8 @@
 @class HeadLinesTableViewCell;
 @protocol HeadLinesTableViewCellDelagate <NSObject>
 
-- (void)deleteNewsWithIndex:(HeadLinesTableViewCell *)cell buttonOriginY:(CGFloat)y;
+- (void)deleteNewsWithIndex:(HeadLinesTableViewCell *)cell buttonOriginY:(CGFloat)y index:(NSInteger)index;
+- (void)touchCellButtonWithTitle:(NSString *)title cellIndex:(NSInteger)cellIndex;
 
 @end
 

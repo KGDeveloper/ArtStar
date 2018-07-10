@@ -7,7 +7,10 @@
 //
 
 #import "BaseVC.h"
+#import "CommenityNewsDetailModel.h"
 
 @interface MovieNewsDetaialVC : BaseVC
+
+@property (nonatomic,copy) NSString *ID;
 
 @end

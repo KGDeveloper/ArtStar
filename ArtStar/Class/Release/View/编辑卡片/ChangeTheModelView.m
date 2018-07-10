@@ -166,35 +166,35 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         _firstTextField.font = FZFont(12);
         _firstTextField.placeholder = @"记录您的奇思妙想 ...";
         _firstTextField.textAlignment = NSTextAlignmentCenter;
-        _firstTextField.enabled = NO;
+//        _firstTextField.enabled = NO;
         [_textView addSubview:_firstTextField];
         //:--第二行--
         _sencedTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 23, 281, 22)];
         _sencedTF.delegate = self;
         _sencedTF.font = FZFont(12);
         _sencedTF.textAlignment = NSTextAlignmentCenter;
-        _sencedTF.enabled = NO;
+//        _sencedTF.enabled = NO;
         [_textView addSubview:_sencedTF];
         //:--第三行--
         _thirdTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 46, 281, 22)];
         _thirdTF.delegate = self;
         _thirdTF.font = FZFont(12);
         _thirdTF.textAlignment = NSTextAlignmentCenter;
-        _thirdTF.enabled = NO;
+//        _thirdTF.enabled = NO;
         [_textView addSubview:_thirdTF];
         //:--第四行--
         _fouceTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 69, 281, 22)];
         _fouceTF.delegate = self;
         _fouceTF.font = FZFont(12);
         _fouceTF.textAlignment = NSTextAlignmentCenter;
-        _fouceTF.enabled = NO;
+//        _fouceTF.enabled = NO;
         [_textView addSubview:_fouceTF];
         //:--第五行--
         _fifthTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 92, 281 , 22)];
         _fifthTF.delegate = self;
         _fifthTF.font = FZFont(12);
         _fifthTF.textAlignment = NSTextAlignmentCenter;
-        _fifthTF.enabled = NO;
+//        _fifthTF.enabled = NO;
         [_textView addSubview:_fifthTF];
         
         for (int i = 0; i < 5; i++) {
@@ -419,27 +419,27 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         
         _oneTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 22, 0, 22, ViewHeight(_vertivalView))];
         _oneTF.font = FZFont(12);
-        _oneTF.editable = NO;
+//        _oneTF.editable = NO;
         [_vertivalView addSubview:_oneTF];
         
         _twoTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 45, 0, 22, ViewHeight(_vertivalView))];
         _twoTF.font = FZFont(12);
-        _twoTF.editable = NO;
+//        _twoTF.editable = NO;
         [_vertivalView addSubview:_twoTF];
         
         _threeTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 68, 0, 22, ViewHeight(_vertivalView))];
         _threeTF.font = FZFont(12);
-        _threeTF.editable = NO;
+//        _threeTF.editable = NO;
         [_vertivalView addSubview:_threeTF];
         
         _fourTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 91, 0, 22, ViewHeight(_vertivalView))];
         _fourTF.font = FZFont(12);
-        _fourTF.editable = NO;
+//        _fourTF.editable = NO;
         [_vertivalView addSubview:_fourTF];
         
         _fiveTF = [[UITextView alloc]initWithFrame:CGRectMake(20, 0, 22, ViewHeight(_vertivalView))];
         _fiveTF.font = FZFont(12);
-        _fiveTF.editable = NO;
+//        _fiveTF.editable = NO;
         [_vertivalView addSubview:_fiveTF];
         
         for (int i = 0; i < 5; i++) {
@@ -1202,21 +1202,16 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageArr = self.imageArr.copy;
-                model.locationStr = @"北京.王崇远";
-                model.timeStr = @"十分钟前";
-                model.videoData = nil;
+                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageArr = self.imageArr.copy;
-                model.locationStr = @"北京.王崇远";
-                model.timeStr = @"十分钟前";
-                model.videoData = nil;
+                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
             }
+            model.composing = [self returnTType:self.themeType];
             break;
         case EditTypeGraphic:
             if (self.graphicType == EditGraphicTypeRightTop & self.graphicType == EditGraphicTypeRightCenter) {
@@ -1225,21 +1220,16 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageArr = self.imageArr.copy;
-                model.locationStr = @"北京.王崇远";
-                model.timeStr = @"十分钟前";
-                model.videoData = nil;
+                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageArr = self.imageArr.copy;
-                model.locationStr = @"北京.王崇远";
-                model.timeStr = @"十分钟前";
-                model.videoData = nil;
+                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
             }
+            model.composing = [self returnGType:self.graphicType];
             break;
         default:
             if (self.videoType == EditVideoTypeOnlyVideo) {
@@ -1248,22 +1238,39 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.videoImage = self.pictureView.image;
-                model.locationStr = @"北京.王崇远";
-                model.timeStr = @"十分钟前";
-                model.videoData = self.videoURL;
+                model.imageURLs = @[@""];
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.videoImage = self.pictureView.image;
-                model.locationStr = @"北京.王崇远";
-                model.timeStr = @"十分钟前";
-                model.videoData = self.videoURL;
+                model.imageURLs = @[@""];
             }
+            model.composing = [self returnVType:self.videoType];
             break;
+    }
+    if ([_locationBtu.currentTitle isEqualToString:@"你在哪里？"]) {
+        
+    }else{
+        model.location = _locationBtu.currentTitle;
+    }
+    model.ids = @[@""];
+    if (_type == EditTypeTheme) {
+        model.typeStr = @"1";
+        model.title = _titleTF.text;
+        model.topicType = _themetypeBtu.currentTitle;
+    }else if (_type == EditTypeGraphic){
+        model.typeStr = @"0";
+    }else{
+        model.typeStr = @"2";
+    }
+    if ([_publicBtu.currentTitle isEqualToString:@"公开"]){
+        model.visitPermission = @"0";
+    }else if ([_publicBtu.currentTitle isEqualToString:@"仅自己可见"]){
+        model.visitPermission = @"1";
+    }else{
+        model.visitPermission = @"2";
     }
     return model;
 }
@@ -1275,6 +1282,107 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         self.pictureView.layer.masksToBounds = YES;
     }
 }
+
+- (NSString *)returnTType:(EditThemeType)type{
+    switch (type) {
+        case EditThemeTypeCircular:
+            return @"2";
+            break;
+        case EditThemeTypeRightTop:
+            return @"3";
+            break;
+        case EditThemeTypeRightCenter:
+            return @"4";
+            break;
+        case EditThemeTypeTopLeft:
+            return @"5";
+            break;
+        case EditThemeTypeTopCenter:
+            return @"6";
+            break;
+        case EditThemeTypeTopRight:
+            return @"7";
+            break;
+        case EditThemeTypeLeft:
+            return @"8";
+            break;
+        case EditThemeTypeCenter:
+            return @"9";
+            break;
+        case EditThemeTypeRight:
+            return @"10";
+            break;
+        default:
+            break;
+    }
+}
+- (NSString *)returnVType:(EditVideoType)type{
+    switch (type) {
+        case EditVideoTypeTopLeft:
+            return @"5";
+            break;
+        case EditVideoTypeTopCenter:
+            return @"6";
+            break;
+        case EditVideoTypeTopRight:
+            return @"7";
+            break;
+        case EditVideoTypeLeft:
+            return @"8";
+            break;
+        case EditVideoTypeCenter:
+            return @"9";
+            break;
+        case EditVideoTypeRight:
+            return @"10";
+            break;
+        case EditVideoTypeOnlyVideo:
+            return @"1";
+            break;
+        default:
+            break;
+    }
+}
+- (NSString *)returnGType:(EditGraphicType)type{
+    switch (type) {
+        case EditGraphicTypeCircular:
+            return @"2";
+            break;
+        case EditGraphicTypeRightTop:
+            return @"3";
+            break;
+        case EditGraphicTypeRightCenter:
+            return @"4";
+            break;
+        case EditGraphicTypeTopLeft:
+            return @"5";
+            break;
+        case EditGraphicTypeTopCenter:
+            return @"6";
+            break;
+        case EditGraphicTypeTopRight:
+            return @"7";
+            break;
+        case EditGraphicTypeLeft:
+            return @"8";
+            break;
+        case EditGraphicTypeCenter:
+            return @"9";
+            break;
+        case EditGraphicTypeRight:
+            return @"10";
+            break;
+        case EditGraphicTypeOnlyTitle:
+            return @"0";
+            break;
+        case EditGraphicTypeOnlyPicture:
+            return @"1";
+            break;
+        default:
+            break;
+    }
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

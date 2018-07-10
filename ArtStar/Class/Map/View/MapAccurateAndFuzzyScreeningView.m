@@ -124,7 +124,7 @@
     
     MapScreeningCompoentView *worksView = [[MapScreeningCompoentView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 105)];
     worksView.title = @"文艺工作者";
-    worksView.choosebtuArr = @[@"影视",@"文学",@"设计",@"艺术",@"音乐",@"表演"];
+    worksView.choosebtuArr = @[@"影视",@"文学",@"设计",@"美术",@"音乐",@"表演"];
     worksView.chooseScreeningType = ^(NSString *str) {
         
     };
@@ -132,7 +132,7 @@
     
     MapScreeningCompoentView *loveView = [[MapScreeningCompoentView alloc]initWithFrame:CGRectMake(0, 105, kScreenWidth, 105)];
     loveView.title = @"文艺爱好者";
-    loveView.choosebtuArr = @[@"影视",@"文学",@"设计",@"艺术",@"音乐",@"表演"];
+    loveView.choosebtuArr = @[@"影视",@"文学",@"设计",@"美术",@"音乐",@"表演"];
     loveView.chooseScreeningType = ^(NSString *str) {
         
     };

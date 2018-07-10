@@ -36,13 +36,6 @@
     _scrollView.pagingEnabled = YES;
     [self addSubview:_scrollView];
     
-    NSArray *imageArr = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527774757546&di=f74edc751c9577baf15ee8d9b0f6f717&imgtype=0&src=http%3A%2F%2Fd.paper.i4.cn%2Fmax%2F2016%2F12%2F07%2F14%2F1481090523023_661606.JPG",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527774757511&di=97d9d8e85db1ea4437647c187c7aa52e&imgtype=0&src=http%3A%2F%2Fd.paper.i4.cn%2Fmax%2F2017%2F01%2F03%2F14%2F1483425530339_291404.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527774757510&di=74d5006e9e54c54c4219ef1e11bc4385&imgtype=0&src=http%3A%2F%2Fd.paper.i4.cn%2Fmax%2F2017%2F02%2F04%2F14%2F1486191355004_064633.jpg"];
-    for (int i = 0; i < 3; i++) {
-        UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(self))];
-        [image sd_setImageWithURL:[NSURL URLWithString:imageArr[i]]];
-        [_scrollView addSubview:image];
-    }
-    
     _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(ViewWidth(self) - 100, ViewHeight(self) - 15, 75, 5)];
     _pageControl.numberOfPages = 3;
     _pageControl.pageIndicatorTintColor = Color_999999;
@@ -97,6 +90,15 @@
 }
 - (void)addAction{
     
+}
+
+- (void)setDataArr:(NSArray *)dataArr{
+    _dataArr = dataArr;
+    for (int i = 0; i < 3; i++) {
+        UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(self))];
+        [image sd_setImageWithURL:[NSURL URLWithString:dataArr[i]]];
+        [_scrollView addSubview:image];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

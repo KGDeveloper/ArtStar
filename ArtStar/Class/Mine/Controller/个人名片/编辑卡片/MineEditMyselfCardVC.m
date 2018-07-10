@@ -24,6 +24,8 @@
 #import "MineMyselfWordChooseYourLoveVC.h"
 #import "MineMyselfLabelVC.h"
 
+#import "MineCenterHometownModel.h"
+
 @interface MineEditMyselfCardVC ()
 <UITableViewDelegate,
 UITableViewDataSource,
@@ -43,6 +45,13 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 @property (nonatomic,strong) MineChooseWeightAndHeightView *chooseWeightView;
 @property (nonatomic,strong) MineWorksIndustryView *worksIndustryView;
 
+@property (nonatomic,strong) NSMutableDictionary *userDic;
+@property (nonatomic,strong) NSMutableArray *userMusicDic;
+@property (nonatomic,strong) NSMutableArray *userMoviceDic;
+@property (nonatomic,strong) NSMutableArray *userBookDic;
+
+@property (nonatomic,copy) NSString *oneImage;
+
 @end
 
 @implementation MineEditMyselfCardVC
@@ -57,9 +66,46 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     _isChooseHeaderIamge = NO;
     _isCoverImage = NO;
     
+    _userDic = [NSMutableDictionary dictionary];
+    _userMusicDic = [NSMutableArray array];
+    _userMoviceDic = [NSMutableArray array];
+    _userBookDic = [NSMutableArray array];
+    
+    [self createUser];
     [self setTableView];
     
 }
+
+- (void)createUser{
+    [_userDic setObject:@"轩哥哥" forKey:@"username"];
+    [_userDic setObject:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530879076512&di=063a53b2c9b69e7997dcd81118f191e2&imgtype=0&src=http%3A%2F%2Fimage001.server110.com%2F20170403%2F3b3f80288eb5f96fa69fea213400b555.jpg" forKey:@"portraitUri"];
+    [_userDic setObject:@"1990-01-12" forKey:@"birthday"];
+    [_userDic setObject:@"引领时尚巅峰，黑客无所不能" forKey:@"personSignature"];
+    [_userDic setObject:@"帝王座" forKey:@"constellation"];
+    [_userDic setObject:@{@"country":@"中国",@"province":@"北京市",@"city":@"北京市",@"district":@"朝阳区"} forKey:@"hometown"];
+    [_userDic setObject:@(180) forKey:@"stature"];
+    [_userDic setObject:@(75) forKey:@"weight"];
+    [_userDic setObject:@"O型" forKey:@"bloodGroup"];
+    [_userDic setObject:@[@{@"name":@"鼻子"},@{@"name":@"嘴"}] forKey:@"bodyparts"];
+    [_userDic setObject:@[@{@"imageURL":@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1565734990,1198494824&fm=27&gp=0.jpg",@"iscover":@"0"},@{@"imageURL":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530879415806&di=7a073edc1feacd60bf24018ee47ff5eb&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D2621041864%2C2103405661%26fm%3D214%26gp%3D0.jpg",@"iscover":@"0"},@{@"imageURL":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530879424628&di=e643e014ab761d47da27cedaedcceef2&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D3828435172%2C2633378697%26fm%3D214%26gp%3D0.jpg",@"iscover":@"0" },@{@"iscover":@"1",@"imageURL":@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=154346632,3569703340&fm=27&gp=0.jpg"}] forKey:@"imageUris"];
+    [_userDic setObject:@[@{@"name":@"投资人"}] forKey:@"mylabels"];
+    [_userDic setObject:@[@{@"name":@"旅游"}] forKey:@"mywords"];
+}
+
+- (void)rightNavBtuAction:(UIButton *)sender{
+    
+    [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:_oneImage fileName:nil result:^(NSString *strPath) {
+        NSLog(@"%@",strPath);
+    }];
+    
+    
+//    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userDic,@"userMovice":_userMoviceDic,@"userMusic":_userMusicDic,@"userBook":_userBookDic} succ:^(id result) {
+//
+//    } fail:^(NSString *error) {
+//
+//    }];
+}
+
 - (void)setTableView{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0,NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
     _listView.delegate = self;
@@ -82,6 +128,10 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 175)];
     for (int i = 0; i < 3; i++) {
         MineEditVCChooseImageView *chooseView = [[MineEditVCChooseImageView alloc]initWithFrame:CGRectMake(15 + (kScreenWidth - 30 - 315)/2*i + 105*i, 10, 105, 140)];
+        __weak typeof(self) mySelf = self;
+        chooseView.sendChooseFileToController = ^(NSString *fileStr) {
+            mySelf.oneImage = fileStr;
+        };
         [headerView addSubview:chooseView];
     }
     return headerView;
@@ -209,7 +259,7 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     camera.sessionPreset = ZLCaptureSessionPreset1280x720;
     camera.maxRecordDuration = 10;
     camera.circleProgressColor = [UIColor redColor];
-    camera.doneBlock = ^(UIImage *image, NSURL *videoUrl) {
+    camera.doneBlock = ^(UIImage *image , NSURL *videoUrl) {
         if (mySelf.isCoverImage == YES) {
             mySelf.isCoverImage = NO;
         }else if (mySelf.isCoverImage == YES){

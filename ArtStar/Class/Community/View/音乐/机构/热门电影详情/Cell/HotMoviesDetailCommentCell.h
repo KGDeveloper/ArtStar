@@ -10,4 +10,11 @@
 
 @interface HotMoviesDetailCommentCell : UITableViewCell
 
+@property (nonatomic,strong) UIImageView *headerImage;
+@property (nonatomic,strong) UILabel *nameLab;
+@property (nonatomic,strong) UIView *starView;
+@property (nonatomic,strong) UILabel *commentLab;
+@property (nonatomic,strong) UILabel *timeLab;
+@property (nonatomic,strong) UIButton *zansBtu;
+
 @end

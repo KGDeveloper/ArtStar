@@ -10,7 +10,7 @@
 
 @protocol CommunityShieldingViewDelegate <NSObject>
 
-- (void)sendTitleArrToView:(NSArray *)selectArr;
+- (void)sendTitleArrToView:(NSArray *)selectArr index:(NSInteger)index;
 
 @end
 
@@ -18,5 +18,6 @@
 
 @property (nonatomic,weak) id<CommunityShieldingViewDelegate>delegate;
 @property (nonatomic,assign) CGFloat shieldingOrigin;
+@property (nonatomic,assign) NSInteger index;
 
 @end

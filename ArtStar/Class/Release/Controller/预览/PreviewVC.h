@@ -23,17 +23,43 @@
 
 @interface PreviewVCModel : NSObject
 
-@property (nonatomic,copy) NSArray *imageArr;
-@property (nonatomic,copy) UIImage *videoImage;
-@property (nonatomic,copy) NSString *videoData;
-@property (nonatomic,copy) NSString *locationStr;
-@property (nonatomic,copy) NSString *timeStr;
-@property (nonatomic,copy) NSString *themeStr;
+/**
+ 保存选择的照片数组
+ */
+@property (nonatomic,copy) NSArray *imageURLs;
+/**
+ 位置信息
+ */
+@property (nonatomic,copy) NSString *location;
+/**
+ 消息类型
+ */
+@property (nonatomic,copy) NSString *typeStr;
+/**
+ 标题
+ */
+@property (nonatomic,copy) NSString *title;
+/**
+ 权限
+ */
+@property (nonatomic,copy) NSString *visitPermission;
 @property (nonatomic,copy) NSString *str1;
 @property (nonatomic,copy) NSString *str2;
 @property (nonatomic,copy) NSString *str3;
 @property (nonatomic,copy) NSString *str4;
 @property (nonatomic,copy) NSString *str5;
+/**
+ 话题分类
+ */
+@property (nonatomic,copy) NSString *topicType;
+/**
+ 排版
+ */
+@property (nonatomic,copy) NSString *composing;
+/**
+ @人集合
+ */
+@property (nonatomic,copy) NSArray *ids;
 
 @end
 

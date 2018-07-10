@@ -10,4 +10,6 @@
 
 @interface HeadLinesDetailVC : BaseVC
 
+@property (nonatomic,copy) NSArray *dataArr;
+
 @end

@@ -302,14 +302,14 @@
             if ([result[@"message"] isEqualToString:@"操作成功！"]) {
                 NSArray *dataArr = result[@"data"];
                 NSDictionary *userDic = dataArr[0];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];//:--number类型--
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];//:--number类型--
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];//:--number类型--
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"token"] forKey:@"userToken"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"introduce"] forKey:@"userIntroduce"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];

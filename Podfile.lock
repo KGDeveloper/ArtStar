@@ -53,7 +53,7 @@ DEPENDENCIES:
   - IQKeyboardManager (~> 6.0.0)
   - MJExtension (~> 3.0.13)
   - MJRefresh (~> 3.1.15.3)
-  - Qiniu (~> 7.1)
+  - Qiniu (~> 7.2.4)
   - RongCloudIM (~> 2.8.32)
   - SDAutoLayout (~> 2.2.0)
   - SDWebImage (~> 4.3.3)
@@ -87,6 +87,6 @@ SPEC CHECKSUMS:
   XHWebImageAutoSize: 8e5d7bf036f960885769dbe3410579024d3ac1a1
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 0cdac90e4ae0b4bb943f3f6a44eb860d7d13113d
+PODFILE CHECKSUM: 61ffc2e75cbf42a9056a36935d82779e64aa292d
 
 COCOAPODS: 1.5.2

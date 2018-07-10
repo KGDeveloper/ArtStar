@@ -29,7 +29,7 @@
     /*设置全局输入框控制类*/
     [self setUpIQKeyboardManager];
     //:--注册融云--
-//    [self registRongIM];
+    [self registRongIM];
     
     sleep(3);
     
@@ -71,7 +71,7 @@
 - (void)registRongIM{
     [[RCIM sharedRCIM] initWithAppKey:@"x4vkb1qpxf17k"];
 
-    [[RCIM sharedRCIM] connectWithToken:@"jVIcoGpB2g8IbenvEZozHjMFm1h8jBV5GxtNvkme+FIHa3+26vxY1VyxPcoC7DeYQYr5sYPUPfakF1o2y7K3Gg==" success:^(NSString *userId) {
+    [[RCIM sharedRCIM] connectWithToken:@"8iwcGirSw6ixC70TOVrlG8rd0S6wv6EExMQdjChmkLQhdR8kPL5hoK0+Ddui7n/OsTPjgWaPpdP6u/Ut+l0yDA==" success:^(NSString *userId) {
         [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"RongId"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         dispatch_async(dispatch_get_main_queue(), ^{

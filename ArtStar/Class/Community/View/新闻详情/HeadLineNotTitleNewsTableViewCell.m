@@ -39,7 +39,7 @@
     _detailLab.numberOfLines = 0;
     _detailLab.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 20).rightSpaceToView(self.contentView, 15).heightIs(30);
     
-    _line.sd_layout.leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).topSpaceToView(_detailLab, 0).heightIs(10);
+    _line.sd_layout.leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0).heightIs(10);
     
     [self setupAutoHeightWithBottomView:_line bottomMargin:0];
 }
@@ -47,20 +47,45 @@
 - (void)setDetailStr:(NSString *)detailStr{
     _detailStr = detailStr;
     _detailLab.attributedText = [self attributedStringWithString:detailStr];
-    _detailLab.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 20).rightSpaceToView(self.contentView, 15).heightIs(([self attributedStringWithString:detailStr].size.width/(kScreenWidth - 30))*25);
-    _line.sd_layout.leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).topSpaceToView(_detailLab, 0).heightIs(10);
+    CGFloat height = 15;
+    CGFloat width = kScreenWidth - 30;
+    for (int i = 0; i < 100; i++) {
+        if ([self attributedStringWithString:detailStr].size.width + 20 > width) {
+            width = width + kScreenWidth - 30;
+            height = 25 + height;
+        }else{
+            break;
+        }
+    }
+    _detailLab.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 20).rightSpaceToView(self.contentView, 15).heightIs(height);
+    _line.sd_layout.leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0).heightIs(10);
 }
 
 - (NSMutableAttributedString *)attributedStringWithString:(NSString *)string{
     NSMutableParagraphStyle *pargraph = [[NSMutableParagraphStyle alloc]init];
     pargraph.lineSpacing = 10;
-    pargraph.firstLineHeadIndent = 30;
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:string attributes:@{NSFontAttributeName:SYFont(13),NSParagraphStyleAttributeName:pargraph}];
+    pargraph.firstLineHeadIndent = 20;
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:string];
+    if (attributedStr.size.width > kScreenWidth - 30) {
+        [attributedStr addAttributes:@{NSFontAttributeName:SYFont(13),NSParagraphStyleAttributeName:pargraph} range:NSMakeRange(0, [string length])];
+    }else{
+        [attributedStr addAttributes:@{NSFontAttributeName:SYFont(13)} range:NSMakeRange(0, [string length])];
+    }
     return attributedStr;
 }
 
 - (CGFloat)tableViewCellRowHeight:(NSString *)string{
-    return 20 + ([self attributedStringWithString:string].size.width/(kScreenWidth - 30))*25 + 10;
+    CGFloat height = 15;
+    CGFloat width = kScreenWidth - 30;
+    for (int i = 0; i < 100; i++) {
+        if ([self attributedStringWithString:string].size.width + 20 > width) {
+            width = width + kScreenWidth - 30;
+            height = 25 + height;
+        }else{
+            break;
+        }
+    }
+    return 20 + height + 10;
 }
 
 - (void)awakeFromNib {

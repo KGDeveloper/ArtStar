@@ -16,10 +16,17 @@
 #import "MyselfCenterVideo+Music+BookVC.h"
 #import "FriendsVC.h"
 #import "MineEditMyselfCardVC.h"
+#import "MineMyselfCenterInfoModel.h"
+#import "MineMyselfCenterInfoThecoverModel.h"
+#import "MineSelfCenterImageLIstModel.h"
 
 @interface MineCenterHomeVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) MineMyselfCenterInfoModel *model;
+@property (nonatomic,strong) MyselfCenterHeaderView *headerView;
+@property (nonatomic,strong) NSMutableArray *imageArr;
+@property (nonatomic,copy) NSString *coverImageStr;
 
 @end
 
@@ -39,7 +46,34 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _imageArr = [NSMutableArray array];
+    [self createData];
     [self setTableView];
+}
+
+- (void)createData{
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:seachUserInforMore parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            NSDictionary *dic = arr[0];
+            mySelf.model = [MineMyselfCenterInfoModel mj_objectWithKeyValues:dic];
+            NSArray *array = mySelf.model.imageUris;
+            for (int i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                MineSelfCenterImageLIstModel *model = [MineSelfCenterImageLIstModel mj_objectWithKeyValues:dic];
+                if ([model.iscover integerValue] == 0) {
+                    [mySelf.imageArr addObject:model.imageURL];
+                }else{
+                    mySelf.coverImageStr = model.imageURL;
+                }
+            }
+            mySelf.headerView.dataArr = mySelf.imageArr;
+            [mySelf.listView reloadData];
+        }
+    } fail:^(NSString *error) {
+        
+    }];
 }
 
 - (void)setTableView{
@@ -59,17 +93,17 @@
 }
 
 - (UIView *)setTableViewHeader{
-    MyselfCenterHeaderView *headerView = [[MyselfCenterHeaderView alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight)];
-    headerView.rightName = @"编辑";
+    _headerView = [[MyselfCenterHeaderView alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight)];
+    _headerView.rightName = @"编辑";
     __weak typeof(self) mySelf = self;
-    headerView.pushViewController = ^(NSString *btuTitle) {
+    _headerView.pushViewController = ^(NSString *btuTitle) {
         if ([btuTitle isEqualToString:@"返回"]) {
             [mySelf.navigationController popViewControllerAnimated:YES];
         }else{
             [mySelf pushNoTabBarViewController:[[MineEditMyselfCardVC alloc]init] animated:YES];
         }
     };
-    return headerView;
+    return _headerView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
@@ -95,14 +129,16 @@
     if (indexPath.row == 0) {
         MineCenterMyCoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineCenterMyCoverCell"];
         cell.loadBtu.hidden = YES;
-        [cell.coverImage sd_setImageWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527778767115&di=88714621fd1ea16a9ccbed0512e35a86&imgtype=0&src=http%3A%2F%2Fimg2.zol.com.cn%2Fup_pic%2F20120309%2Fz1rfczWtkvN2.jpg"]];
+        [cell.coverImage sd_setImageWithURL:[NSURL URLWithString:_coverImageStr]];
         return cell;
     }else if (indexPath.row == 1){
         MyselfCenterMyLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterMyLabelCell"];
-        cell.labArr = @[@"射手座",@"乌鲁木齐",@"AB型",@"163cm",@"画家",@"文艺工作者：纪实摄影",@"轩哥哥制作"];
+//        cell.labArr = _model.mylabels;
         return cell;
     }else if (indexPath.row == 2){
         MyselfCenterSchoolCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterSchoolCell"];
+        cell.industryLab.text = _model.iname;
+        cell.schoolLab.text = _model.school;
         return cell;
     }else if (indexPath.row == 3){
         MyselfCenterVideoAndVicesAndBooksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterVideoAndVicesAndBooksCell"];

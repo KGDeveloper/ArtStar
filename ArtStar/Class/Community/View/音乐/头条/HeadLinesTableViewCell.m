@@ -131,8 +131,8 @@
 }
 
 - (void)deleteAction{
-    if ([self.delegate respondsToSelector:@selector(deleteNewsWithIndex: buttonOriginY:)]) {
-        [self.delegate deleteNewsWithIndex:self buttonOriginY:self.btuOriginY];
+    if ([self.delegate respondsToSelector:@selector(deleteNewsWithIndex: buttonOriginY:index:)]) {
+        [self.delegate deleteNewsWithIndex:self buttonOriginY:self.btuOriginY index:_cellIndex];
     }
 }
 
@@ -150,11 +150,15 @@
 }
 
 - (void)shareAction{
-    
+    if ([self.delegate respondsToSelector:@selector(touchCellButtonWithTitle:cellIndex:)]) {
+        [self.delegate touchCellButtonWithTitle:@"分享" cellIndex:_cellIndex];
+    }
 }
 
 - (void)commentAction:(UIButton *)sender{
-    
+    if ([self.delegate respondsToSelector:@selector(touchCellButtonWithTitle:cellIndex:)]) {
+        [self.delegate touchCellButtonWithTitle:@"评论" cellIndex:_cellIndex];
+    }
 }
 
 - (void)zansAction:(UIButton *)sender{
@@ -162,6 +166,9 @@
         [sender setImage:Image(@"点赞选中") forState:UIControlStateNormal];
     }else{
         [sender setImage:Image(@"点赞") forState:UIControlStateNormal];
+    }
+    if ([self.delegate respondsToSelector:@selector(touchCellButtonWithTitle:cellIndex:)]) {
+        [self.delegate touchCellButtonWithTitle:@"点赞" cellIndex:_cellIndex];
     }
 }
 

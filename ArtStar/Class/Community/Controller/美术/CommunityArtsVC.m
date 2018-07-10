@@ -63,16 +63,21 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
+    
+    [self createHeadLineData];
     [self setSearchBar];
+    [self setTopView];
+}
+- (void)setTopView{
     __weak typeof(self) mySelf = self;
     //MARK:-------------------------------------------顶部滚动条---------------------------------------------
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
-    scrollerView.itemArr = @[@"头条",@"展览",@"机构",@"话题",@"艺术人",@"交友"];
+    scrollerView.itemArr = @[@"头条",@"展览",@"机构",@"话题",@"美术人",@"交友"];
     //MARK:--------------------------------------------滚动条右侧按钮点击事件--------------------------------------------
     scrollerView.rightAction = ^(NSString *title) {
         if ([title isEqualToString:@"机构"]) {
             mySelf.smartView.hidden = NO;
-        }else if ([title isEqualToString:@"艺术人"]){
+        }else if ([title isEqualToString:@"美术人"]){
             mySelf.screeningView.hidden = NO;
         }else if ([title isEqualToString:@"交友"]){
             mySelf.foundFriendsScreening.hidden = NO;
@@ -88,7 +93,7 @@
             [mySelf.view bringSubviewToFront:mySelf.institutionsView];
         }else if ([title isEqualToString:@"话题"]){
             [mySelf.view bringSubviewToFront:self.themeView];
-        }else if ([title isEqualToString:@"艺术人"]){
+        }else if ([title isEqualToString:@"美术人"]){
             [mySelf.view bringSubviewToFront:mySelf.musiciansView];
         }else{
             [mySelf.view bringSubviewToFront:mySelf.foundFriendsView];
@@ -102,13 +107,7 @@
     __weak typeof(self) mySelf = self;
     if (!_headLinesView) {
         _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        _headLinesView.pushViewController = ^(NSString *type) {
-            if ([type isEqualToString:@"视频"]) {
-                [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
-            }else{
-                [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
-            }
-        };
+        
         [self.view addSubview:_headLinesView];
     }
     return _headLinesView;
@@ -131,7 +130,7 @@
     if (!_institutionsView) {
         _institutionsView = [[MusicInstitutionsView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
         _institutionsView.delegate = self;
-        _institutionsView.chooseStyle = @"艺术";
+        _institutionsView.chooseStyle = @"美术";
         _institutionsView.pushViewController = ^{
             [mySelf pushNoTabBarViewController:[[InstitutionsVC alloc]init] animated:YES];
         };
@@ -225,6 +224,15 @@
         
     }
 }
+
+- (void)createHeadLineData{
+    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":_titleName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

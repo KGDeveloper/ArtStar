@@ -125,7 +125,7 @@
     
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, kScreenWidth - 30, 15)];
     titleLab.textColor = Color_333333;
-    titleLab.text = @"艺术";
+    titleLab.text = @"美术";
     titleLab.font = SYFont(13);
     [_artView addSubview:titleLab];
     

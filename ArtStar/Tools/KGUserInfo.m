@@ -53,8 +53,8 @@
 - (NSString *)portraitUri{
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"portraitUri"];
 }
-- (NSString *)userIntroduce{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"userIntroduce"];
+- (NSString *)personSignature{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"personSignature"];
 }
 - (NSString *)userID{
     return [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userID"]];

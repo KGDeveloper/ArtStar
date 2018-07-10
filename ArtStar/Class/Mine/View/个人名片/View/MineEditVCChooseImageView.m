@@ -16,6 +16,8 @@
 @property (nonatomic,strong) KGCamera *cameraView;
 @property (nonatomic,assign) BOOL isChoose;
 
+@property (nonatomic,copy) NSString *imageString;
+
 @end
 
 @implementation MineEditVCChooseImageView
@@ -96,6 +98,9 @@
     [ac setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
         mySelf.choooseImage.image = [images firstObject];
         mySelf.isChoose = YES;
+        if (mySelf.sendChooseFileToController) {
+            mySelf.sendChooseFileToController([[KGQiniuUploadManager shareInstance] getImagePath:[images firstObject]]);
+        }
     }];
     [ac showPhotoLibrary];
     self.cameraView.hidden = YES;
@@ -112,6 +117,9 @@
     camera.circleProgressColor = [UIColor redColor];
     camera.doneBlock = ^(UIImage *image, NSURL *videoUrl) {
         mySelf.choooseImage.image = image;
+        if (mySelf.sendChooseFileToController) {
+            mySelf.sendChooseFileToController([[KGQiniuUploadManager shareInstance] getImagePath:image]);
+        }
         mySelf.isChoose = YES;
     };
     [[self rootViewCintroller] presentViewController:camera animated:YES completion:nil];

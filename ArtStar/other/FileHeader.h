@@ -22,7 +22,7 @@
 #import <MJExtension/MJExtension.h>
 #import <UserNotifications/UserNotifications.h>
 #import <XHWebImageAutoSize/XHWebImageAutoSize.h>
-
+#import <Qiniu/QiniuSDK.h>
 
 //MARK:--简单的一个选择相机，提示消息等弹窗--
 #import "KGAlertView.h"
@@ -38,6 +38,7 @@
 #import "KGRequestNetWorking.h"
 #import "KGUserInfo.h"
 #import "KGSearchBarTF.h"
+#import "KGQiniuUploadManager.h"
 
 #endif
 

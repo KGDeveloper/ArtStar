@@ -7,10 +7,11 @@
 //
 
 #import "HeadLinesVC.h"
-#import "HeadLinesDetailVC.h"
 #import "CommenityModel.h"
+#import "MovieNewsDetaialVC.h"
 #import "CommenityHotSearchModel.h"
 #import "CommenityHoistorySearchModel.h"
+#import <objc/runtime.h>
 
 @interface HeadLinesVC ()<UITextFieldDelegate>
 
@@ -59,8 +60,6 @@
     _dataArr = [NSMutableArray array];
     _hotArr = [NSMutableArray array];
     _hoistryArr = [NSMutableArray array];
-    //:--请求初始数据--
-    [self createDataArr];
     //:--搜索记录数据--
     [self craeteSeachArr];
     //:--搭建界面--
@@ -87,7 +86,6 @@
         }
         [mySelf.dataArr removeAllObjects];
         [mySelf.headLinesView starRefrash];
-        [mySelf createDataArr];
     };
     [self.view addSubview:scrollerView];
 }
@@ -95,15 +93,13 @@
 - (void)setViewUI{
     _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
     __weak typeof(self) mySelf = self;
-    _headLinesView.pushViewController = ^(NSString *type) {
-        if ([type isEqualToString:@"视频"]) {
-            [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
-        }else{
-            [mySelf pushNoTabBarViewController:[[HeadLinesDetailVC alloc]init] animated:YES];
-        }
+    _headLinesView.pushViewController = ^(NSString *ID) {
+        MovieNewsDetaialVC *vc = [[MovieNewsDetaialVC alloc]init];
+        vc.ID = ID;
+        [mySelf pushNoTabBarViewController:vc animated:YES];
     };
     _headLinesView.requestNewData = ^(NSString *type) {
-        if ([type isEqualToString:@"上拉"]) {
+        if ([type isEqualToString:@"下拉"]) {
             mySelf.page = 0;
             [mySelf.dataArr removeAllObjects];
             [mySelf createDataArr];
@@ -112,9 +108,30 @@
             [mySelf createDataArr];
         }
     };
+    _headLinesView.closeNewsWithReson = ^(NSArray *resonArr,NSString *ID) {
+        [mySelf requestCloseNews:resonArr nid:ID];
+    };
     [self.view addSubview:_headLinesView];
 }
-
+//MARK:-------------------------------------请求关闭新闻---------------------------------------------------
+- (void)requestCloseNews:(NSArray *)arr nid:(NSString *)ID{
+    NSString *backname = @"";
+    CommenityModel *model = _dataArr[ID.integerValue];
+    for (int i = 0; i < arr.count; i++) {
+        backname = [[backname stringByAppendingString:arr[0]] stringByAppendingString:@","];
+    }
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:closeNewsByNid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"nid":model.ID,@"backname":backname} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            mySelf.page = 0;
+            [mySelf.dataArr removeAllObjects];
+            [mySelf.headLinesView starRefrash];
+        }
+    } fail:^(NSString *error) {
+        
+    }];
+}
+//MARK:-------------------------------------------拉首页数据---------------------------------------------
 - (void)createDataArr{
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":_typeName,@"query":@{@"page":[NSString stringWithFormat:@"%ld",(long)self.page],@"rows":@"15"}} succ:^(id result) {
@@ -156,7 +173,7 @@
     }
     return _searchView;
 }
-
+//MARK:-----------------------------------搜索新闻-----------------------------------------------------
 - (void)createNewsData:(NSString *)searchStr{
     [_dataArr removeAllObjects];
     __weak typeof(self) mySelf = self;
@@ -175,7 +192,7 @@
         
     }];
 }
-
+//MARK:----------------------------------------热词以及搜索历史------------------------------------------------
 - (void)craeteSeachArr{
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:hotSearch parameters:@{} succ:^(id result) {

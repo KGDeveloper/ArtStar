@@ -7,7 +7,11 @@
 //
 
 #import "BaseVC.h"
+#import "MineSelfCenterImageLIstModel.h"
+
 
 @interface MineEditMyselfCardVC : BaseVC
+
+
 
 @end

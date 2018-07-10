@@ -61,7 +61,7 @@ FriendsMessageViewDelegate>
 
 - (void)createMsgArr{
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineunreadMessageCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:friendsunreadMessageCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
         NSArray *tmpArr = result[@"data"];
         NSDictionary *dic = [tmpArr firstObject];
         if ([dic[@"count"] integerValue] == 0) {
@@ -80,7 +80,7 @@ FriendsMessageViewDelegate>
     
     _dataArr = [NSMutableArray array];
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:ReleaseFriendTimeline parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:searchOthercfm parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *dataarray = result[@"data"];
             for (int i = 0; i <  dataarray.count; i++) {

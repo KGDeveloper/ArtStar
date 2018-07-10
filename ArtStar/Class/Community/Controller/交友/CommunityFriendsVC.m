@@ -45,7 +45,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
+    [self createHeadLineData];
     [self setSearchBar];
+    [self setTopView];
+}
+- (void)setTopView{
     __weak typeof(self) mySelf = self;
     //MARK:-------------------------------------------顶部滚动条---------------------------------------------
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
@@ -106,6 +110,14 @@
         }
         
     }
+}
+
+- (void)createHeadLineData{
+    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":_titleName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
