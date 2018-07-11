@@ -10,9 +10,4 @@
 
 @interface MineMySelfWordVC : BaseVC
 
-@property (nonatomic,copy) NSArray *foodArr;
-@property (nonatomic,copy) NSArray *sportArr;
-@property (nonatomic,copy) NSArray *leisureArr;
-@property (nonatomic,copy) NSArray *footprintArr;
-
 @end

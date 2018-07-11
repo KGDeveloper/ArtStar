@@ -45,12 +45,15 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 @property (nonatomic,strong) MineChooseWeightAndHeightView *chooseWeightView;
 @property (nonatomic,strong) MineWorksIndustryView *worksIndustryView;
 
-@property (nonatomic,strong) NSMutableDictionary *userDic;
+@property (nonatomic,strong) NSMutableDictionary *userInfoDic;
 @property (nonatomic,strong) NSMutableArray *userMusicDic;
 @property (nonatomic,strong) NSMutableArray *userMoviceDic;
 @property (nonatomic,strong) NSMutableArray *userBookDic;
-
-@property (nonatomic,copy) NSString *oneImage;
+@property (nonatomic,copy) NSString *coverImage;//:--封面--
+@property (nonatomic,copy) NSString *headerImage;//:--头像--
+@property (nonatomic,strong) NSMutableArray *imageUris;//:--保存选择的图片--
+@property (nonatomic,strong) NSMutableArray *imageUrisHttp;//:--保存选择的图片地址--
+@property (nonatomic,strong) NSMutableArray *headerImageArr;//:--保存选择的图片地址--
 
 @end
 
@@ -66,44 +69,51 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     _isChooseHeaderIamge = NO;
     _isCoverImage = NO;
     
-    _userDic = [NSMutableDictionary dictionary];
+    _userInfoDic = [NSMutableDictionary dictionary];
     _userMusicDic = [NSMutableArray array];
     _userMoviceDic = [NSMutableArray array];
     _userBookDic = [NSMutableArray array];
+    _imageUris = [NSMutableArray array];
+    _imageUrisHttp = [NSMutableArray array];
+    _headerImageArr = [NSMutableArray array];
     
-    [self createUser];
     [self setTableView];
     
 }
 
-- (void)createUser{
-    [_userDic setObject:@"轩哥哥" forKey:@"username"];
-    [_userDic setObject:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530879076512&di=063a53b2c9b69e7997dcd81118f191e2&imgtype=0&src=http%3A%2F%2Fimage001.server110.com%2F20170403%2F3b3f80288eb5f96fa69fea213400b555.jpg" forKey:@"portraitUri"];
-    [_userDic setObject:@"1990-01-12" forKey:@"birthday"];
-    [_userDic setObject:@"引领时尚巅峰，黑客无所不能" forKey:@"personSignature"];
-    [_userDic setObject:@"帝王座" forKey:@"constellation"];
-    [_userDic setObject:@{@"country":@"中国",@"province":@"北京市",@"city":@"北京市",@"district":@"朝阳区"} forKey:@"hometown"];
-    [_userDic setObject:@(180) forKey:@"stature"];
-    [_userDic setObject:@(75) forKey:@"weight"];
-    [_userDic setObject:@"O型" forKey:@"bloodGroup"];
-    [_userDic setObject:@[@{@"name":@"鼻子"},@{@"name":@"嘴"}] forKey:@"bodyparts"];
-    [_userDic setObject:@[@{@"imageURL":@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1565734990,1198494824&fm=27&gp=0.jpg",@"iscover":@"0"},@{@"imageURL":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530879415806&di=7a073edc1feacd60bf24018ee47ff5eb&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D2621041864%2C2103405661%26fm%3D214%26gp%3D0.jpg",@"iscover":@"0"},@{@"imageURL":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530879424628&di=e643e014ab761d47da27cedaedcceef2&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D3828435172%2C2633378697%26fm%3D214%26gp%3D0.jpg",@"iscover":@"0" },@{@"iscover":@"1",@"imageURL":@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=154346632,3569703340&fm=27&gp=0.jpg"}] forKey:@"imageUris"];
-    [_userDic setObject:@[@{@"name":@"投资人"}] forKey:@"mylabels"];
-    [_userDic setObject:@[@{@"name":@"旅游"}] forKey:@"mywords"];
+- (void)rightNavBtuAction:(UIButton *)sender{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) mySelf = self;
+    if (_imageUris.count > 0) {
+        for (int i = 0; i < _imageUris.count ; i++) {
+            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:_imageUris[i] fileName:nil result:^(NSString *strPath) {
+                NSDictionary *dic = @{@"imageURL":strPath,@"iscover":@"0"};
+                [mySelf.imageUrisHttp addObject:dic];
+                if (mySelf.imageUrisHttp.count == mySelf.imageUris.count) {
+                    [mySelf uploadData];
+                }
+            }];
+        }
+    }else{
+        [self uploadData];
+    }
 }
 
-- (void)rightNavBtuAction:(UIButton *)sender{
-    
-    [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:_oneImage fileName:nil result:^(NSString *strPath) {
-        NSLog(@"%@",strPath);
+- (void)uploadData{
+    __weak typeof(self) mySelf = self;
+    [_userInfoDic setObject:_imageUrisHttp forKey:@"imageUris"];
+    [_userInfoDic setObject:_model.username forKey:@"username"];
+    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userInfoDic,@"userMovice":_userMoviceDic,@"userMusic":_userMusicDic,@"userBook":_userBookDic} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            if (mySelf.refreshCenterListView) {
+                mySelf.refreshCenterListView();
+            }
+            [mySelf.navigationController popViewControllerAnimated:YES];
+        }
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+    } fail:^(NSString *error) {
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     }];
-    
-    
-//    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userDic,@"userMovice":_userMoviceDic,@"userMusic":_userMusicDic,@"userBook":_userBookDic} succ:^(id result) {
-//
-//    } fail:^(NSString *error) {
-//
-//    }];
 }
 
 - (void)setTableView{
@@ -126,11 +136,25 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 //MARK:--------------------------------------创建头视图选择照片--------------------------------------------------
 - (UIView *)setTableViewHeader{
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 175)];
+    NSArray *tmp = _model.imageUris;
+    for (int i = 0; i < tmp.count; i++) {
+        MineSelfCenterImageLIstModel *model = [MineSelfCenterImageLIstModel mj_objectWithKeyValues:tmp[i]];
+        if ([model.iscover integerValue] == 0) {
+            [_headerImageArr addObject:model];
+        }
+    }
     for (int i = 0; i < 3; i++) {
         MineEditVCChooseImageView *chooseView = [[MineEditVCChooseImageView alloc]initWithFrame:CGRectMake(15 + (kScreenWidth - 30 - 315)/2*i + 105*i, 10, 105, 140)];
+        if (i < _headerImageArr.count) {
+            MineSelfCenterImageLIstModel *model = [MineSelfCenterImageLIstModel mj_objectWithKeyValues:_headerImageArr[i]];
+            chooseView.model = model;
+        }
         __weak typeof(self) mySelf = self;
         chooseView.sendChooseFileToController = ^(NSString *fileStr) {
-            mySelf.oneImage = fileStr;
+            [mySelf.imageUris addObject:fileStr];
+        };
+        chooseView.deleteChooseFileFromArr = ^(NSString *fileStr) {
+            [mySelf.imageUris removeObject:fileStr];
         };
         [headerView addSubview:chooseView];
     }
@@ -157,11 +181,25 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         MineEditMyselfInfoEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineEditMyselfInfoEditCell"];
+        cell.nikNameTF.text = _model.username;
+        cell.brithdayLab.text = [NSString stringWithFormat:@"%@  %@",_model.birthday,_model.constellation];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:_model.portraitUri]];
+        cell.heightLab.text = [NSString stringWithFormat:@"%@cm",_model.stature];
+        cell.weightLab.text = [NSString stringWithFormat:@"%@KG",_model.weight];
+        cell.introudceTF.text = _model.personSignature;
+        MineCenterHometownModel *model = [MineCenterHometownModel mj_objectWithKeyValues:_model.hometown];
+        cell.homeLab.text = [NSString stringWithFormat:@"%@-%@-%@",model.country,model.province,model.city];
         cell.delegate = self;
         return cell;
     }else if(indexPath.row == 1){
         MineCenterMyCoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineCenterMyCoverCell"];
-        cell.coverImage.image = Image(@"tianjia");
+        NSArray *tmp = _model.imageUris;
+        for (int i = 0; i < tmp.count; i++) {
+            MineSelfCenterImageLIstModel *model = [MineSelfCenterImageLIstModel mj_objectWithKeyValues:tmp[i]];
+            if ([model.iscover integerValue] == 1) {
+                [cell.coverImage sd_setImageWithURL:[NSURL URLWithString:model.imageURL]];
+            }
+        }
         cell.delegate = self;
         return cell;
     }else if(indexPath.row == 2){
@@ -189,17 +227,20 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
         _isCoverImage = YES;
     }else if (indexPath.row == 5){
         MineMySelfWordVC *wordVC = [[MineMySelfWordVC alloc]init];
-        wordVC.foodArr = @[@"专一",@"工作狂",@"偏执狂",@"浪漫",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-        wordVC.sportArr = @[@"专一",@"工作狂",@"偏执狂",@"浪漫",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-        wordVC.leisureArr = @[@"专一",@"工作狂",@"偏执狂",@"浪漫",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-        wordVC.footprintArr = @[@"专一",@"工作狂",@"偏执狂",@"浪漫",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
         [self pushNoTabBarViewController:wordVC animated:YES];
     }
 }
 //MARK:--------------------------------------MineEditMyselfInfoEditCellDelegate--------------------------------------------------
+- (void)sendIntroudceToController:(NSString *)introudce{
+    [_userInfoDic setObject:introudce forKey:@"personSignature"];
+}
+- (void)sendNikNameToController:(NSString *)nikName{
+    [_userInfoDic setObject:nikName forKey:@"username"];
+}
 - (void)touchUITableViewCellMakeSomeThingWithTitle:(NSString *)title{
     if ([title isEqualToString:@"头像"]) {
         self.cameraView.hidden = NO;
+        self.isChooseHeaderIamge = YES;
     }else if ([title isEqualToString:@"生日"]){
         self.dataPickView.hidden = NO;
     }else if ([title isEqualToString:@"身高"]){
@@ -216,6 +257,11 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
         self.chooseWeightView.type = ChooseWeight;
     }else{
         MineChooseMyHomeVC *homeVC = [[MineChooseMyHomeVC alloc]init];
+        __weak typeof(self) mySelf = self;
+        homeVC.chooseHomeTwon = ^(NSString *country, NSString *provices, NSString *city) {
+            mySelf.model.hometown = @{@"country":country,@"province":provices,@"city":city};
+            [mySelf.userInfoDic setObject:@{@"country":country,@"province":provices,@"city":city} forKey:@"hometown"];
+        };
         [self pushNoTabBarViewController:homeVC animated:YES];
     }
 }
@@ -242,9 +288,20 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     [ac setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
         if (mySelf.isCoverImage == YES) {
             mySelf.isCoverImage = NO;
-        }else if (mySelf.isCoverImage == YES){
-            mySelf.isCoverImage = NO;
+            mySelf.coverImage = [[KGQiniuUploadManager shareInstance] getImagePath:[images firstObject]];
+            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:mySelf.coverImage fileName:nil result:^(NSString *strPath) {
+                NSDictionary *dic = @{@"imageURL":strPath,@"iscover":@"1"};
+                [mySelf.imageUrisHttp addObject:dic];
+            }];
+        }else if (mySelf.isChooseHeaderIamge == YES){
+            mySelf.isChooseHeaderIamge = NO;
+            mySelf.headerImage = [[KGQiniuUploadManager shareInstance] getImagePath:[images firstObject]];
+            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:mySelf.headerImage fileName:nil result:^(NSString *strPath) {
+                mySelf.model.portraitUri = strPath;
+                [mySelf.userInfoDic setObject:strPath forKey:@"portraitUri"];
+            }];
         }
+        [mySelf.listView reloadData];
     }];
     [ac showPhotoLibrary];
     self.cameraView.hidden = YES;
@@ -262,9 +319,20 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     camera.doneBlock = ^(UIImage *image , NSURL *videoUrl) {
         if (mySelf.isCoverImage == YES) {
             mySelf.isCoverImage = NO;
-        }else if (mySelf.isCoverImage == YES){
-            mySelf.isCoverImage = NO;
+            mySelf.coverImage = [[KGQiniuUploadManager shareInstance] getImagePath:image];
+            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:mySelf.coverImage fileName:nil result:^(NSString *strPath) {
+                NSDictionary *dic = @{@"imageURL":strPath,@"iscover":@"1"};
+                [mySelf.imageUrisHttp addObject:dic];
+            }];
+        }else if (mySelf.isChooseHeaderIamge == YES){
+            mySelf.isChooseHeaderIamge = NO;
+            mySelf.headerImage = [[KGQiniuUploadManager shareInstance] getImagePath:image];
+            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:mySelf.headerImage fileName:nil result:^(NSString *strPath) {
+                mySelf.model.portraitUri = strPath;
+                [mySelf.userInfoDic setObject:strPath forKey:@"portraitUri"];
+            }];
         }
+        [mySelf.listView reloadData];
     };
     [self presentViewController:camera animated:YES completion:nil];
     self.cameraView.hidden = YES;
@@ -298,24 +366,32 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     NSInteger day = [[date componentsSeparatedByString:@"/"][2] integerValue];
     NSString *birthday = [date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
     NSString *starStr = [self getAstroWithMonth:(int)month day:(int)day];
-    
+    _model.birthday = birthday;
+    _model.constellation = [NSString stringWithFormat:@"%@座",starStr];
+    [_userInfoDic setObject:birthday forKey:@"birthday"];
+    [_userInfoDic setObject:[NSString stringWithFormat:@"%@座",starStr] forKey:@"constellation"];
+    [_listView reloadData];
 }
 
 - (MineChooseWeightAndHeightView *)chooseWeightView{
     if (!_chooseWeightView) {
         _chooseWeightView = [[MineChooseWeightAndHeightView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        __weak typeof(self) mySelf = self;
         _chooseWeightView.sendValueToController = ^(ChooseType type, NSString *value) {
             switch (type) {
                 case ChooseHeight:
                     //:--身高--
-                    NSLog(@"身高%@",value);
+                    mySelf.model.stature = @([value integerValue]);
+                    [mySelf.userInfoDic setObject:@([value integerValue]) forKey:@"stature"];
                     break;
                     
                 default:
                     //:--体重--
-                    NSLog(@"体重%@",value);
+                    mySelf.model.weight = @([value integerValue]);
+                    [mySelf.userInfoDic setObject:@([value integerValue]) forKey:@"weight"];
                     break;
             }
+            [mySelf.listView reloadData];
         };
         [self.navigationController.view addSubview:_chooseWeightView];
     }
@@ -340,14 +416,10 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 //MARK:---------------------------------------MineEditMyLabelCellDelegate-------------------------------------------------
 - (void)pushMyWordViewController{
     MineMyselfLabelVC *myLabel = [[MineMyselfLabelVC alloc]init];
-    myLabel.chooseArr = @[@"摄影",@"制片人",@"收藏家",@"画家"];
-    myLabel.moviesArr = @[@"制片人",@"摄像",@"专一",@"工作狂",@"偏执狂",@"浪漫",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-    myLabel.liteArr = @[@"诗人",@"工作狂",@"偏执狂",@"浪漫",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-    myLabel.artArr = @[@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-    myLabel.desigArr = @[@"建筑设计",@"室内设计",@"工业设计",@"服装设计",@"平面设计",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-    myLabel.musicArr = @[@"音乐人",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-    myLabel.perfacmArr = @[@"导演",@"演员",@"制片人",@"内向",@"控制狂",@"爱冒险",@"善变",@"中二",@"理性",@"居家",@"感性",@"乐观",@"理想主义",@"完美主义"];
-    myLabel.customArr = @[@"+"];
+    __weak typeof(self) mySelf = self;
+    myLabel.sendChooseArr = ^(NSArray *myLabels) {
+        
+    };
     [self pushNoTabBarViewController:myLabel animated:YES];
 }
 //MARK:----------------------------------------MineLoveMoviesAndMusicAndBooksCellDelegate------------------------------------------------

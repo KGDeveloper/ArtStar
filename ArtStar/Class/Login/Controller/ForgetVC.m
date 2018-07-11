@@ -165,6 +165,7 @@
  @param sender 忘记密码按钮
  */
 - (IBAction)forgetClick:(UIButton *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:toSetPayrollPwd parameters:@{@"telphone":_phoneTF.text,@"msgAuthCode":_smsTF.text,@"password":_passTF.text} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
@@ -178,9 +179,11 @@
             mySelf.errorLab.hidden = NO;
             mySelf.errorLab.text = @"修改失败";
         }
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     } fail:^(NSString *error) {
         mySelf.errorLab.hidden = NO;
         mySelf.errorLab.text = @"访问服务器失败";
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     }];
 }
 //MARK:--UITextFieldDelegate--

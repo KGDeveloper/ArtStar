@@ -10,13 +10,6 @@
 
 @interface MineMyselfLabelVC : BaseVC
 
-@property (nonatomic,copy) NSArray *chooseArr;
-@property (nonatomic,copy) NSArray *moviesArr;
-@property (nonatomic,copy) NSArray *liteArr;
-@property (nonatomic,copy) NSArray *artArr;
-@property (nonatomic,copy) NSArray *desigArr;
-@property (nonatomic,copy) NSArray *musicArr;
-@property (nonatomic,copy) NSArray *perfacmArr;
-@property (nonatomic,copy) NSArray *customArr;
+@property (nonatomic,copy)void(^sendChooseArr)(NSArray *myLabels);
 
 @end

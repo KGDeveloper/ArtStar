@@ -46,7 +46,7 @@
     _touchBtu.sd_layout.topEqualToView(_choooseImage).leftEqualToView(_choooseImage).heightIs(ViewHeight(self)).widthIs(ViewWidth(self));
     
     [_deleteBtu setImage:Image(@"收藏删除") forState:UIControlStateNormal];
-    [_deleteBtu addTarget:self action:@selector(deleteImage) forControlEvents:UIControlEventTouchUpInside];
+    [_deleteBtu addTarget:self action:@selector(deleteImageAction) forControlEvents:UIControlEventTouchUpInside];
     _deleteBtu.backgroundColor = [UIColor whiteColor];
     _deleteBtu.layer.cornerRadius = 12;
     _deleteBtu.layer.masksToBounds = YES;
@@ -57,10 +57,26 @@
 - (void)touchUpImage{
     self.cameraView.hidden = NO;
 }
-- (void)deleteImage{
-    _choooseImage.image = Image(@"tianjia");
-    _isChoose = NO;
-    _deleteBtu.hidden = YES;
+- (void)deleteImageAction{
+    if (_model.imageURL) {
+        __weak typeof(self) mySelf = self;
+        [KGRequestNetWorking postWothUrl:deleteImage parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":_model.ID} succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                mySelf.choooseImage.image = Image(@"tianjia");
+                mySelf.isChoose = NO;
+                mySelf.deleteBtu.hidden = YES;
+            }
+        } fail:^(NSString *error) {
+            
+        }];
+    }else{
+        if (self.deleteChooseFileFromArr) {
+            self.deleteChooseFileFromArr([[KGQiniuUploadManager shareInstance] getImagePath:_choooseImage.image]);
+        }
+        _choooseImage.image = Image(@"tianjia");
+        _isChoose = NO;
+        _deleteBtu.hidden = YES;
+    }
 }
 
 - (UIViewController *)rootViewCintroller{
@@ -98,6 +114,10 @@
     [ac setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
         mySelf.choooseImage.image = [images firstObject];
         mySelf.isChoose = YES;
+        time_t deadline;
+        time(&deadline);//返回当前系统时间
+        NSNumber *deadlineNumber = [NSNumber numberWithLongLong:deadline];
+        mySelf.imageString = [NSString stringWithFormat:@"%@",deadlineNumber];
         if (mySelf.sendChooseFileToController) {
             mySelf.sendChooseFileToController([[KGQiniuUploadManager shareInstance] getImagePath:[images firstObject]]);
         }
@@ -117,6 +137,10 @@
     camera.circleProgressColor = [UIColor redColor];
     camera.doneBlock = ^(UIImage *image, NSURL *videoUrl) {
         mySelf.choooseImage.image = image;
+        time_t deadline;
+        time(&deadline);//返回当前系统时间
+        NSNumber *deadlineNumber = [NSNumber numberWithLongLong:deadline];
+        mySelf.imageString = [NSString stringWithFormat:@"%@",deadlineNumber];
         if (mySelf.sendChooseFileToController) {
             mySelf.sendChooseFileToController([[KGQiniuUploadManager shareInstance] getImagePath:image]);
         }
@@ -124,6 +148,14 @@
     };
     [[self rootViewCintroller] presentViewController:camera animated:YES completion:nil];
     self.cameraView.hidden = YES;
+}
+
+- (void)setModel:(MineSelfCenterImageLIstModel *)model{
+    _model = model;
+    if ([model.ID integerValue]) {
+        [_choooseImage sd_setImageWithURL:[NSURL URLWithString:model.imageURL]];
+        _deleteBtu.hidden = NO;
+    }
 }
 
 - (void)setIsChoose:(BOOL)isChoose{

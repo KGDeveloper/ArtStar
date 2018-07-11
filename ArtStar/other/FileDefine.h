@@ -127,8 +127,49 @@
  @return 我的中，查看个人名片
  */
 #define seachUserInforMore [serverIP stringByAppendingString:@"personalBusinessCard/seachUserInforMore"]
+/**
+ 填写个人资料时,查看我的标签
 
+ @return 填写个人资料时,查看我的标签
+ */
+#define showMyLabels [serverIP stringByAppendingString:@"myLabel/showMyLabels"]
+/**
+ 填写个人资料时，从数据库中查询世界
 
+ @return 填写个人资料时，从数据库中查询世界
+ */
+#define getMyWordByPid [serverIP stringByAppendingString:@"myWord/getMyWordByPid"]
+/**
+ 填写个人资料时，从数据库中查询身体部位
+
+ @return 填写个人资料时，从数据库中查询身体部位
+ */
+#define mineGetAll [serverIP stringByAppendingString:@"BodyPart/getAll"]
+/**
+ 搜索喜欢的书籍
+
+ @return 搜索喜欢的书籍
+ */
+#define likeBookName [serverIP stringByAppendingString:@"userbook/likeBookName"]
+/**
+ 搜索喜欢的音乐
+
+ @return 搜索喜欢的音乐
+ */
+#define likeMusicName [serverIP stringByAppendingString:@"userMusic/likeMusicName"]
+/**
+ 搜索喜欢的电影
+
+ @return 搜索喜欢的电影
+ */
+#define likeMoviceName [serverIP stringByAppendingString:@"userMovice/likeMoviceName"]
+/**
+ 删除图片
+
+ @return 删除图片
+ */
+#define deleteImage [serverIP stringByAppendingString:@"image/deleteImage"]
+#define qiniuToken [serverIP stringByAppendingString:@"ReleaseFriendTimeline/searchreturnToken"]
 
 
 

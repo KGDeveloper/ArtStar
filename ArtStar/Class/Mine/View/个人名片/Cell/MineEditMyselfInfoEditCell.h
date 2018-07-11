@@ -11,10 +11,12 @@
 @protocol MineEditMyselfInfoEditCellDelegate <NSObject>
 
 - (void)touchUITableViewCellMakeSomeThingWithTitle:(NSString *)title;
+- (void)sendNikNameToController:(NSString *)nikName;
+- (void)sendIntroudceToController:(NSString *)introudce;
 
 @end
 
-@interface MineEditMyselfInfoEditCell : UITableViewCell
+@interface MineEditMyselfInfoEditCell : UITableViewCell <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nikNameTF;
 @property (weak, nonatomic) IBOutlet UILabel *brithdayLab;

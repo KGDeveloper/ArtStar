@@ -16,18 +16,27 @@
 
 @interface MineLoveMoviesModel : NSObject
 
-@property (nonatomic,copy) NSString *url;
-@property (nonatomic,copy) NSString *name;
-@property (nonatomic,copy) NSString *price;
-@property (nonatomic,copy) NSString *detailStr;
+@property (nonatomic,copy) NSString *region;
+@property (nonatomic,copy) NSString *writer;
+@property (nonatomic,copy) NSNumber *userId;
+@property (nonatomic,copy) NSNumber *ID;
+@property (nonatomic,assign) double bookGrade;
+@property (nonatomic,copy) NSString *bookName;
+@property (nonatomic,copy) NSString *imageUrl;
+@property (nonatomic,copy) NSString *createTime;
 
 @end
 
 @interface MineLoveMusicModel : NSObject
 
-@property (nonatomic,copy) NSString *url;
-@property (nonatomic,copy) NSString *name;
-@property (nonatomic,copy) NSString *detailStr;
+@property (nonatomic,copy) NSString *region;
+@property (nonatomic,copy) NSString *writer;
+@property (nonatomic,copy) NSNumber *userId;
+@property (nonatomic,copy) NSNumber *ID;
+@property (nonatomic,assign) double bookGrade;
+@property (nonatomic,copy) NSString *bookName;
+@property (nonatomic,copy) NSString *imageUrl;
+@property (nonatomic,copy) NSString *createTime;
 
 @end
 

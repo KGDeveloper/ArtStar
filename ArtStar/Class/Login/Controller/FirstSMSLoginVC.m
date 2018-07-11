@@ -87,6 +87,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)nextClick:(UIButton *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:judgeMsgAuthCode parameters:@{@"telphone":_phoneTF.text,@"msgAuthCode":_smsTF.text} succ:^(id result) {
         mySelf.buttomErrorBtu.hidden = YES;
@@ -97,9 +98,11 @@
             registVC.userPassStr = mySelf.passWordTF.text;
             [self presentViewController:registVC animated:YES completion:nil];
         }
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     } fail:^(NSString *error) {
         mySelf.buttomErrorBtu.hidden = NO;
         mySelf.buttomErrorBtu.text = @"验证码错误";
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     }];
 }
 - (IBAction)takeSMSCode:(UIButton *)sender {

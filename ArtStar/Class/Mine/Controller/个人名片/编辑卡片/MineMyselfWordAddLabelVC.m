@@ -28,7 +28,12 @@
     [self setTextView];
 
 }
-
+- (void)rightNavBtuAction:(UIButton *)sender{
+    if (self.sendLabelToViewController) {
+        self.sendLabelToViewController(_textTF.text);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)setTextView{
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 10, kScreenWidth, 100)];
     backView.backgroundColor = [UIColor whiteColor];

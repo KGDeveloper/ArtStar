@@ -8,10 +8,12 @@
 
 #import "BaseVC.h"
 #import "MineSelfCenterImageLIstModel.h"
+#import "MineMyselfCenterInfoModel.h"
 
 
 @interface MineEditMyselfCardVC : BaseVC
 
-
+@property (nonatomic,strong) MineMyselfCenterInfoModel *model;
+@property (nonatomic,copy) void(^refreshCenterListView)(void);
 
 @end

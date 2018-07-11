@@ -22,6 +22,11 @@
 @property (nonatomic,strong) NSMutableArray *chooseLeisure;
 @property (nonatomic,strong) NSMutableArray *chooseFootprint;
 
+@property (nonatomic,copy) NSArray *foodArr;
+@property (nonatomic,copy) NSArray *sportArr;
+@property (nonatomic,copy) NSArray *leisureArr;
+@property (nonatomic,copy) NSArray *footprintArr;
+
 @end
 
 @implementation MineMySelfWordVC

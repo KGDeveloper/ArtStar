@@ -11,5 +11,6 @@
 @interface MineMyselfWordAddLabelVC : BaseVC
 
 @property (nonatomic,copy) NSString *titleStr;
+@property (nonatomic,copy) void(^sendLabelToViewController)(NSString *labStr);
 
 @end

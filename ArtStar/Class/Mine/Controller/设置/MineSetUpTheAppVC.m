@@ -14,6 +14,7 @@
 #import "MineChangePhoneWithOldPhoneVC.h"
 #import "MineChangePassWordVC.h"
 #import "MineFeedBackVC.h"
+#import "LoginVC.h"
 
 @interface MineSetUpTheAppVC ()<UITableViewDelegate,UITableViewDataSource,MineSetUpChangePhoneTableViewCellDelegate>
 
@@ -149,6 +150,10 @@
         if (indexPath.row == 0) {
             [self pushNoTabBarViewController:[[MineFeedBackVC alloc]init] animated:YES];
         }
+    }else if (indexPath.section == 3){
+        if (indexPath.row == 0) {
+            [self showAlert];
+        }
     }
 }
 //MARK:----------------------------------------MineSetUpChangePhoneTableViewCellDelegate------------------------------------------------
@@ -158,6 +163,23 @@
     }else{
         [self pushNoTabBarViewController:[[MineChangePhoneWithOldPhoneVC alloc]init] animated:YES];
     }
+}
+
+- (void)showAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定退出当前账号？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *shureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:shureAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

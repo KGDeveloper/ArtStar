@@ -10,4 +10,6 @@
 
 @interface MineChooseMyHomeVC : BaseVC
 
+@property (nonatomic,copy) void(^chooseHomeTwon)(NSString *country,NSString *provices,NSString *city);
+
 @end

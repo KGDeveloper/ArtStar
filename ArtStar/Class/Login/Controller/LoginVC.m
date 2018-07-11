@@ -265,6 +265,7 @@
     
 }
 - (IBAction)loginClick:(UIButton *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *latitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlatitude"];
     NSString *longitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlongitude"];
     __weak typeof(self) mySelf = self;
@@ -292,9 +293,11 @@
                 mySelf.errorLab.hidden = NO;
                 mySelf.errorLab.text = @"用户未注册,请先注册账号";
             }
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         } fail:^(NSString *error) {
             mySelf.errorLab.hidden = NO;
             mySelf.errorLab.text = @"登录超时";
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         }];
     }else{
         [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"password":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
@@ -322,9 +325,11 @@
                 mySelf.errorLab.hidden = NO;
                 mySelf.errorLab.text = @"用户名/密码错误";
             }
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         } fail:^(NSString *error) {
             mySelf.errorLab.hidden = NO;
             mySelf.errorLab.text = @"登录超时";
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         }];
     }
 }

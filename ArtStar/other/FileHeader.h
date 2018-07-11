@@ -23,6 +23,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <XHWebImageAutoSize/XHWebImageAutoSize.h>
 #import <Qiniu/QiniuSDK.h>
+#import "MBProgressHUD+BWMExtension.h"
 
 //MARK:--简单的一个选择相机，提示消息等弹窗--
 #import "KGAlertView.h"

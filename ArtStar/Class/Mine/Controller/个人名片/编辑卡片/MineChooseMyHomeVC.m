@@ -51,6 +51,12 @@
         [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"中国" image:Image(@"back")];
     }
 }
+- (void)rightNavBtuAction:(UIButton *)sender{
+    if (self.chooseHomeTwon) {
+        self.chooseHomeTwon(_countryStr, _provinceStr, _cityStr);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"家乡" image:Image(@"back")];
@@ -101,10 +107,17 @@
         cell.openImage.hidden = NO;
     }
     if (_isCity == YES) {
+        cell.selectedBackgroundView = [self tableViewNormalBackView:cell.frame];
         cell.openImage.hidden = YES;
     }
     cell.titleLab.text = _dataArr[indexPath.row];
     return cell;
+}
+
+- (UIView *)tableViewNormalBackView:(CGRect)frame{
+    UIView *backView = [[UIView alloc]initWithFrame:frame];
+    backView.backgroundColor = [UIColor colorWithHexString:@"#f5f5f5"];
+    return backView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

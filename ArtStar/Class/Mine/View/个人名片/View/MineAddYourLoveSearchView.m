@@ -10,13 +10,14 @@
 #import "MineTextField.h"
 #import "MineSearchYourLoveCell.h"
 
-@interface MineAddYourLoveSearchView ()<UITableViewDelegate,UITableViewDataSource>
+@interface MineAddYourLoveSearchView ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) MineTextField *searchTF;
 @property (nonatomic,strong) MineLoveMoviesModel *movie;
 @property (nonatomic,strong) MineLoveMusicModel *music;
 @property (nonatomic,strong) MineLoveBookModel *book;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -25,6 +26,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = Color_fafafa;
+        _dataArr = [NSMutableArray array];
         [self setTableView];
     }
     return self;
@@ -44,6 +46,7 @@
     _searchTF.leftViewMode = UITextFieldViewModeAlways;
     _searchTF.layer.cornerRadius = 5;
     _searchTF.layer.masksToBounds = YES;
+    _searchTF.delegate = self;
     _searchTF.returnKeyType = UIReturnKeySearch;
     [topView addSubview:_searchTF];
     
@@ -73,10 +76,20 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return _dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineSearchYourLoveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineSearchYourLoveCell"];
+    if (_type == LoveMovie) {
+        MineLoveMoviesModel *model = _dataArr[indexPath.row];
+        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
+    }else if (_type == LoveMusic){
+        MineLoveMusicModel *model = _dataArr[indexPath.row];
+        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
+    }else if (_type == LoveBook){
+        MineLoveBookModel *model = _dataArr[indexPath.row];
+//        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
+    }
     return cell;
 }
 
@@ -103,6 +116,40 @@
     self.hidden = YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    NSString *url = nil;
+    switch (_type) {
+        case LoveMovie:
+            url = likeMoviceName;
+            break;
+        case LoveMusic:
+            url = likeMusicName;
+            break;
+        case LoveBook:
+            url = likeBookName;
+            break;
+        default:
+            break;
+    }
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"name":textField.text,@"query":@{@"page":@"1",@"rows":@"20"}} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            for (int i = 0; i < arr.count; i++) {
+                NSDictionary *dic = arr[i];
+                MineLoveMoviesModel *model = [MineLoveMoviesModel mj_objectWithKeyValues:dic];
+                [mySelf.dataArr addObject:model];
+            }
+            [mySelf.listView reloadData];
+        }
+        [MBProgressHUD hideHUDForView:mySelf animated:YES];
+    } fail:^(NSString *error) {
+        [MBProgressHUD hideHUDForView:mySelf animated:YES];
+    }];
+    
+    return YES;
+}
 
 
 /*

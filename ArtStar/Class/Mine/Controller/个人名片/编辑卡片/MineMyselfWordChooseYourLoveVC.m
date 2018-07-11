@@ -74,10 +74,10 @@
 }
 
 - (void)addYourLove{
-    if ([_titleStr isEqualToString:@"电影"]) {
+    if ([_titleStr isEqualToString:@"喜欢的电影"]) {
         self.searchView.hidden = NO;
         self.searchView.type = LoveMovie;
-    }else if ([_titleStr isEqualToString:@"音乐"]){
+    }else if ([_titleStr isEqualToString:@"喜欢的音乐"]){
         self.searchView.hidden = NO;
         self.searchView.type = LoveMusic;
     }else{
@@ -137,6 +137,11 @@
 @end
 
 @implementation MineLoveMoviesModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
+}
+
 @end
 
 

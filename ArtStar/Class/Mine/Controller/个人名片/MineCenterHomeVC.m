@@ -17,7 +17,6 @@
 #import "FriendsVC.h"
 #import "MineEditMyselfCardVC.h"
 #import "MineMyselfCenterInfoModel.h"
-#import "MineMyselfCenterInfoThecoverModel.h"
 #import "MineSelfCenterImageLIstModel.h"
 
 @interface MineCenterHomeVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -49,6 +48,7 @@
     _imageArr = [NSMutableArray array];
     [self createData];
     [self setTableView];
+    
 }
 
 - (void)createData{
@@ -100,7 +100,12 @@
         if ([btuTitle isEqualToString:@"返回"]) {
             [mySelf.navigationController popViewControllerAnimated:YES];
         }else{
-            [mySelf pushNoTabBarViewController:[[MineEditMyselfCardVC alloc]init] animated:YES];
+            MineEditMyselfCardVC *vc = [[MineEditMyselfCardVC alloc]init];
+            vc.model = mySelf.model;
+            vc.refreshCenterListView = ^{
+                [mySelf createData];
+            };
+            [mySelf pushNoTabBarViewController:vc animated:YES];
         }
     };
     return _headerView;

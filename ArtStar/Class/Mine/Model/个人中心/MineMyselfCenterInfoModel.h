@@ -56,7 +56,7 @@
 /**
  家乡
  */
-@property (nonatomic,copy) NSString *hometown;
+@property (nonatomic,copy) NSDictionary *hometown;
 /**
  用户ID
  */
@@ -168,7 +168,7 @@
 /**
  身高
  */
-@property (nonatomic,copy) NSString *stature;
+@property (nonatomic,copy) NSNumber *stature;
 /**
  电话
  */
@@ -208,6 +208,6 @@
 /**
  体重
  */
-@property (nonatomic,copy) NSString *weight;
+@property (nonatomic,copy) NSNumber *weight;
 
 @end

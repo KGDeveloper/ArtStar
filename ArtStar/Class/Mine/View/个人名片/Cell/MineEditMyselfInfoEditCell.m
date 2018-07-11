@@ -12,6 +12,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.nikNameTF.delegate = self;
+    self.introudceTF.delegate = self;
+    
     // Initialization code
 }
 - (IBAction)homeChooseClick:(UIButton *)sender {
@@ -39,6 +43,19 @@
         [self.delegate touchUITableViewCellMakeSomeThingWithTitle:@"体重"];
     }
 }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField == self.nikNameTF) {
+        if ([self.delegate respondsToSelector:@selector(sendNikNameToController:)]) {
+            [self.delegate sendNikNameToController:textField.text];
+        }
+    }else{
+        if ([self.delegate respondsToSelector:@selector(sendIntroudceToController:)]) {
+            [self.delegate sendIntroudceToController:textField.text];
+        }
+    }
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

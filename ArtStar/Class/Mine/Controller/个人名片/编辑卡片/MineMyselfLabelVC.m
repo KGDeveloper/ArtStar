@@ -7,6 +7,9 @@
 //
 
 #import "MineMyselfLabelVC.h"
+#import "MineSelfMyLabelsModel.h"
+#import "MineMyselfWordAddLabelVC.h"
+#import "MineSelfMyLabelsDetailModel.h"
 
 @interface MineMyselfLabelVC ()
 
@@ -23,19 +26,33 @@
 @property (nonatomic,strong) UILabel *countLab;
 @property (nonatomic,strong) UIView *line;
 
-@property (nonatomic,strong) NSMutableArray *myArr;
-@property (nonatomic,strong) NSMutableArray *muArr;
-@property (nonatomic,strong) NSMutableArray *mcArr;
-@property (nonatomic,strong) NSMutableArray *aArr;
-@property (nonatomic,strong) NSMutableArray *lArr;
-@property (nonatomic,strong) NSMutableArray *pArr;
-@property (nonatomic,strong) NSMutableArray *cArr;
-@property (nonatomic,strong) NSMutableArray *dArr;
+@property (nonatomic,strong) NSMutableArray *musicArr;
+@property (nonatomic,strong) NSMutableArray *movieArr;
+@property (nonatomic,strong) NSMutableArray *artArr;
+@property (nonatomic,strong) NSMutableArray *literArr;
+@property (nonatomic,strong) NSMutableArray *designArr;
+@property (nonatomic,strong) NSMutableArray *perfArr;
+@property (nonatomic,strong) NSMutableArray *customArr;
+@property (nonatomic,strong) NSMutableArray *chooseArr;
+
+@property (nonatomic,strong) MineSelfMyLabelsModel *model;
 
 
 @end
 
 @implementation MineMyselfLabelVC
+
+- (void)rightNavBtuAction:(UIButton *)sender{
+    NSMutableArray *sendArr = [NSMutableArray array];
+    for (NSDictionary *dic in _chooseArr) {
+        if ([dic[@"id"] integerValue] != 0) {
+            [sendArr addObject:dic];
+        }
+    }
+    if (self.sendChooseArr) {
+        self.sendChooseArr(sendArr.copy);
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,19 +60,34 @@
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"保存" image:nil];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _myArr = [NSMutableArray arrayWithArray:_chooseArr];
-    _mcArr = [NSMutableArray arrayWithArray:_musicArr];
-    _muArr = [NSMutableArray arrayWithArray:_moviesArr];
-    _dArr = [NSMutableArray arrayWithArray:_desigArr];
-    _lArr = [NSMutableArray arrayWithArray:_liteArr];
-    _aArr = [NSMutableArray arrayWithArray:_artArr];
-    _cArr = [NSMutableArray arrayWithArray:_customArr];
-    _pArr = [NSMutableArray arrayWithArray:_perfacmArr];
-    
-    [self setBackView];
+    [self createData];
+}
+- (void)createData{
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:showMyLabels parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            mySelf.model = [MineSelfMyLabelsModel mj_objectWithKeyValues:[arr firstObject]];
+            mySelf.movieArr = [NSMutableArray arrayWithArray:mySelf.model.movies];
+            mySelf.musicArr = [NSMutableArray arrayWithArray:mySelf.model.music];
+            mySelf.artArr = [NSMutableArray arrayWithArray:mySelf.model.art];
+            mySelf.literArr = [NSMutableArray arrayWithArray:mySelf.model.literature];
+            mySelf.designArr = [NSMutableArray arrayWithArray:mySelf.model.design];
+            mySelf.perfArr = [NSMutableArray arrayWithArray:mySelf.model.performance];
+            mySelf.customArr = [NSMutableArray arrayWithObject:@{@"name":@"+",@"children":@[],@"id":@"10000",@"path":@"",@"pid":@(0)}];
+            mySelf.chooseArr = [NSMutableArray array];
+            [mySelf setBackView];
+        }
+    } fail:^(NSString *error) {
+        
+    }];
 }
 //MARK:-------------------------------------创建底部加载视图---------------------------------------------------
 - (void)setBackView{
+    if (_backScrollView) {
+        [_backScrollView removeFromSuperview];
+    }
+    
     _backScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
     [self.view addSubview:_backScrollView];
     
@@ -74,12 +106,12 @@
     [_backScrollView addSubview:_chooseView];
     
     _countLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, kScreenWidth - 30, 15)];
-    _countLab.text = @"已选择的标签（4/5）";
+    _countLab.text = [NSString stringWithFormat:@"已选择的标签（%lu/5）",(unsigned long)_chooseArr.count];
     _countLab.textColor = Color_333333;
     _countLab.font = SYFont(14);
     [_chooseView addSubview:_countLab];
     
-    _chooseView.frame = CGRectMake(0, 0, kScreenWidth, [self setCreateButtonWithArr:_myArr addView:_chooseView tag:110] + 10);
+    _chooseView.frame = CGRectMake(0, 0, kScreenWidth, [self setCreateButtonWithArr:_chooseArr addView:_chooseView tag:110 color:[UIColor whiteColor]] + 10);
     
     _line = [[UIView alloc]initWithFrame:CGRectMake(0, ViewHeight(_chooseView) - 10, kScreenWidth, 10)];
     _line.backgroundColor = Color_fafafa;
@@ -97,9 +129,8 @@
     titleLab.text = @"影视";
     titleLab.font = SYFont(13);
     [_moviesView addSubview:titleLab];
-    
-    
-    _moviesView.frame = CGRectMake(0,ViewHeight(_chooseView), kScreenWidth,[self setCreateButtonWithArr:_muArr addView:_moviesView tag:210]);
+
+    _moviesView.frame = CGRectMake(0,ViewHeight(_chooseView), kScreenWidth,[self setCreateButtonWithArr:_movieArr addView:_moviesView tag:210 color:Color_333333]);
     
     _backScrollView.contentSize = CGSizeMake(kScreenWidth, ViewHeight(_chooseView) + ViewHeight(_moviesView));
 }
@@ -114,7 +145,7 @@
     titleLab.font = SYFont(13);
     [_literatureView addSubview:titleLab];
     
-    _literatureView.frame = CGRectMake(0,ViewHeight(_chooseView) + ViewHeight(_moviesView), kScreenWidth,[self setCreateButtonWithArr:_lArr addView:_literatureView tag:310]);
+    _literatureView.frame = CGRectMake(0,ViewHeight(_chooseView) + ViewHeight(_moviesView), kScreenWidth,[self setCreateButtonWithArr:_literArr addView:_literatureView tag:310 color:Color_333333]);
     
     _backScrollView.contentSize = CGSizeMake(kScreenWidth, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView));
 }
@@ -129,7 +160,7 @@
     titleLab.font = SYFont(13);
     [_artView addSubview:titleLab];
     
-    _artView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView), kScreenWidth, [self setCreateButtonWithArr:_aArr addView:_artView tag:410]);
+    _artView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView), kScreenWidth, [self setCreateButtonWithArr:_artArr addView:_artView tag:410 color:Color_333333]);
     
     _backScrollView.contentSize = CGSizeMake(kScreenWidth, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView));
 }
@@ -144,7 +175,7 @@
     titleLab.font = SYFont(13);
     [_designView addSubview:titleLab];
     
-    _designView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView), kScreenWidth, [self setCreateButtonWithArr:_dArr addView:_designView tag:510]);
+    _designView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView), kScreenWidth, [self setCreateButtonWithArr:_designArr addView:_designView tag:510 color:Color_333333]);
     
     _backScrollView.contentSize = CGSizeMake(kScreenWidth, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView));
 }
@@ -159,7 +190,7 @@
     titleLab.font = SYFont(13);
     [_musicView addSubview:titleLab];
     
-    _musicView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView), kScreenWidth, [self setCreateButtonWithArr:_mcArr addView:_musicView tag:610]);
+    _musicView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView), kScreenWidth, [self setCreateButtonWithArr:_musicArr addView:_musicView tag:610 color:Color_333333]);
     
     _backScrollView.contentSize = CGSizeMake(kScreenWidth, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView) + ViewHeight(_musicView));
 }
@@ -174,7 +205,7 @@
     titleLab.font = SYFont(13);
     [_performanceView addSubview:titleLab];
     
-    _performanceView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView) + ViewHeight(_musicView), kScreenWidth, [self setCreateButtonWithArr:_pArr addView:_performanceView tag:710]);
+    _performanceView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView) + ViewHeight(_musicView), kScreenWidth, [self setCreateButtonWithArr:_perfArr addView:_performanceView tag:710 color:Color_333333]);
     [_backScrollView addSubview:_performanceView];
     
     _backScrollView.contentSize = CGSizeMake(kScreenWidth, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView) + ViewHeight(_musicView) + ViewHeight(_performanceView));
@@ -190,17 +221,26 @@
     titleLab.font = SYFont(13);
     [_customView addSubview:titleLab];
     
-    _customView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView) + ViewHeight(_musicView) + ViewHeight(_performanceView), kScreenWidth, [self setCreateButtonWithArr:_cArr addView:_customView tag:810]);
+    _customView.frame = CGRectMake(0, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView) + ViewHeight(_musicView) + ViewHeight(_performanceView), kScreenWidth, [self setCreateButtonWithArr:_customArr addView:_customView tag:810 color:Color_333333]);
     
     _backScrollView.contentSize = CGSizeMake(kScreenWidth, ViewHeight(_chooseView) + ViewHeight(_moviesView) + ViewHeight(_literatureView) + ViewHeight(_artView) + ViewHeight(_designView) + ViewHeight(_musicView) + ViewHeight(_performanceView) + ViewHeight(_customView));
 }
 //MARK:----------------------------------------创建公共按钮方法------------------------------------------------
-- (UIButton *)createButtonframe:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag{
+- (UIButton *)createButtonframe:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag color:(UIColor *)color{
     UIButton *norBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     norBtu.frame = frame;
     norBtu.tag = tag;
     [norBtu setTitle:title forState:UIControlStateNormal];
-    [norBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    [norBtu setTitleColor:color forState:UIControlStateNormal];
+    if ([self firstColor:color secondColor:Color_333333] == NO) {
+        norBtu.backgroundColor = Color_333333;
+    }
+    for (NSDictionary *dic in _chooseArr) {
+        if ([dic[@"name"] isEqualToString:title] && [dic[@"id"] integerValue] == tag) {
+            norBtu.backgroundColor = Color_333333;
+            [norBtu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+    }
     norBtu.titleLabel.font = SYFont(12);
     [norBtu addTarget:self action:@selector(buttonTouchUpInSide:) forControlEvents:UIControlEventTouchUpInside];
     norBtu.layer.cornerRadius = 10;
@@ -211,26 +251,48 @@
 }
 //MARK:---------------------------------------------公共按钮点击事件-------------------------------------------
 - (void)buttonTouchUpInSide:(UIButton *)sender{
-    if ([self firstColor:sender.currentTitleColor secondColor:Color_333333]) {
-        [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        sender.backgroundColor = Color_333333;
+    if ([sender.currentTitle isEqualToString:@"+"]) {
+        MineMyselfWordAddLabelVC *vc = [[MineMyselfWordAddLabelVC alloc]init];
+        vc.titleStr = @"标签";
+        __weak typeof(self) mySelf = self;
+        vc.sendLabelToViewController = ^(NSString *labStr) {
+            [mySelf.customArr addObject:@{@"name":labStr,@"id":@(0)}];
+            [mySelf setBackView];
+        };
+        [self pushNoTabBarViewController:vc animated:YES];
     }else{
-        [sender setTitleColor:Color_333333 forState:UIControlStateNormal];
-        sender.backgroundColor = [UIColor whiteColor];
+        if ([self firstColor:sender.currentTitleColor secondColor:Color_333333]) {
+            if (_chooseArr.count < 5) {
+                [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                sender.backgroundColor = Color_333333;
+                NSDictionary *dic = @{@"name":sender.currentTitle,@"id":@(sender.tag)};
+                [_chooseArr addObject:dic];
+            }else{
+                [[MBProgressHUD bwm_showHUDAddedTo:self.view title:@"最多只能选择五个标签"] hide:YES afterDelay:1];
+            }
+        }else{
+            [sender setTitleColor:Color_333333 forState:UIControlStateNormal];
+            sender.backgroundColor = [UIColor whiteColor];
+            NSDictionary *dic = @{@"name":sender.currentTitle,@"id":@(sender.tag)};
+            [_chooseArr removeObject:dic];
+        }
+        [self setBackView];
     }
 }
 //MARK:---------------------------------------------循环创建按钮-------------------------------------------
-- (CGFloat)setCreateButtonWithArr:(NSMutableArray *)arr addView:(UIView *)addView tag:(NSInteger)tag{
+- (CGFloat)setCreateButtonWithArr:(NSMutableArray *)arr addView:(UIView *)addView tag:(NSInteger)tag color:(UIColor *)color{
+    
     CGFloat width = 15;
     CGFloat height = 45;
     for (int i = 0; i < arr.count; i++) {
-        if (width + [TransformChineseToPinying stringWidthFromString:arr[i] font:SYFont(12) width:kScreenWidth] + 30 > kScreenWidth) {
+        NSDictionary *dic = arr[i];
+        if (width + [TransformChineseToPinying stringWidthFromString:dic[@"name"] font:SYFont(12) width:kScreenWidth] + 30 > kScreenWidth) {
             width = 15;
             height = height + 30;
         }
-        [addView addSubview:[self createButtonframe:CGRectMake(width,height,[TransformChineseToPinying stringWidthFromString:arr[i] font:SYFont(12) width:kScreenWidth] + 15,20) title:arr[i] tag:tag + i]];
+        [addView addSubview:[self createButtonframe:CGRectMake(width,height,[TransformChineseToPinying stringWidthFromString:dic[@"name"] font:SYFont(12) width:kScreenWidth] + 15,20) title:dic[@"name"] tag:[dic[@"id"] integerValue] color:color]];
         
-        width = width + [TransformChineseToPinying stringWidthFromString:arr[i] font:SYFont(12) width:kScreenWidth] + 35;
+        width = width + [TransformChineseToPinying stringWidthFromString:dic[@"name"] font:SYFont(12) width:kScreenWidth] + 35;
     }
     return height + 35;
 }

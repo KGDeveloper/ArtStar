@@ -15,6 +15,8 @@ pod 'RongCloudIM', '~> 2.8.32'
 pod 'MJExtension', '~> 3.0.13'
 pod 'XHWebImageAutoSize', '~> 1.1.2'
 pod 'Qiniu', '~> 7.2.4'
+#pod 'MBProgressHUD', '~> 1.1.0'
+pod 'MBProgressHUD+BWMExtension', '~> 1.0.1'
 
   use_frameworks!
 

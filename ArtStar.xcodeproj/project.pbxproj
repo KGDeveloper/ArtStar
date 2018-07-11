@@ -174,6 +174,7 @@
 		283F8F3220EDBBBE0085D6B5 /* CommenityNewsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 283F8F3120EDBBBE0085D6B5 /* CommenityNewsDetailModel.m */; };
 		283F8F3520EE05680085D6B5 /* CommenityDetailCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 283F8F3420EE05680085D6B5 /* CommenityDetailCommentModel.m */; };
 		2840DF5020DCF2C00066E2C4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2840DF4F20DCF2C00066E2C4 /* UserNotifications.framework */; };
+		2847BC8520F60B090052EE19 /* MineSelfMyLabelsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2847BC8420F60B090052EE19 /* MineSelfMyLabelsDetailModel.m */; };
 		284C8D6620BF986A00487225 /* MusicManagementMyThemeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 284C8D6420BF986A00487225 /* MusicManagementMyThemeCell.m */; };
 		284C8D6720BF986A00487225 /* MusicManagementMyThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 284C8D6520BF986A00487225 /* MusicManagementMyThemeCell.xib */; };
 		284C8D6C20BFA4A100487225 /* MusicMusiciansView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284C8D6B20BFA4A100487225 /* MusicMusiciansView.m */; };
@@ -203,6 +204,7 @@
 		28577B7620D11B860082075D /* MineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 28577B7520D11B860082075D /* MineTextField.m */; };
 		28577B7A20D125060082075D /* MineSearchYourLoveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28577B7820D125060082075D /* MineSearchYourLoveCell.m */; };
 		28577B7B20D125060082075D /* MineSearchYourLoveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28577B7920D125060082075D /* MineSearchYourLoveCell.xib */; };
+		28636D7A20F4BCE900DE0926 /* MineSelfMyLabelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */; };
 		2868407720B279D100441926 /* FriendsCurilerImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2868407520B279D100441926 /* FriendsCurilerImageCell.m */; };
 		2868407820B279D100441926 /* FriendsCurilerImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868407620B279D100441926 /* FriendsCurilerImageCell.xib */; };
 		2868407C20B287D100441926 /* FriendsThemeTopImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2868407A20B287D100441926 /* FriendsThemeTopImageCell.m */; };
@@ -216,7 +218,6 @@
 		2868409120B2889F00441926 /* FriendsOnlyHaveLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868408F20B2889F00441926 /* FriendsOnlyHaveLabelCell.xib */; };
 		2868409520B2B4EC00441926 /* ChangeTextViewTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2868409420B2B4EC00441926 /* ChangeTextViewTextStyle.m */; };
 		286A0A6D20EF185500F4EB17 /* MineMyselfCenterInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 286A0A6C20EF185500F4EB17 /* MineMyselfCenterInfoModel.m */; };
-		286A0A7020EF444D00F4EB17 /* MineMyselfCenterInfoThecoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 286A0A6F20EF444D00F4EB17 /* MineMyselfCenterInfoThecoverModel.m */; };
 		286A0A7420EF47DF00F4EB17 /* ReleaseLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 286A0A7320EF47DF00F4EB17 /* ReleaseLineModel.m */; };
 		286A0A7720EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 286A0A7620EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.m */; };
 		286A0A7B20EF78F400F4EB17 /* MineCenterHometownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 286A0A7A20EF78F400F4EB17 /* MineCenterHometownModel.m */; };
@@ -835,6 +836,8 @@
 		283F8F3420EE05680085D6B5 /* CommenityDetailCommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommenityDetailCommentModel.m; sourceTree = "<group>"; };
 		2840DF4F20DCF2C00066E2C4 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2840DF5120DCFDBB0066E2C4 /* ArtStar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ArtStar.entitlements; sourceTree = "<group>"; };
+		2847BC8320F60B090052EE19 /* MineSelfMyLabelsDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineSelfMyLabelsDetailModel.h; sourceTree = "<group>"; };
+		2847BC8420F60B090052EE19 /* MineSelfMyLabelsDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineSelfMyLabelsDetailModel.m; sourceTree = "<group>"; };
 		284C8D6320BF986A00487225 /* MusicManagementMyThemeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicManagementMyThemeCell.h; sourceTree = "<group>"; };
 		284C8D6420BF986A00487225 /* MusicManagementMyThemeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicManagementMyThemeCell.m; sourceTree = "<group>"; };
 		284C8D6520BF986A00487225 /* MusicManagementMyThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicManagementMyThemeCell.xib; sourceTree = "<group>"; };
@@ -884,6 +887,8 @@
 		28577B7720D125060082075D /* MineSearchYourLoveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineSearchYourLoveCell.h; sourceTree = "<group>"; };
 		28577B7820D125060082075D /* MineSearchYourLoveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineSearchYourLoveCell.m; sourceTree = "<group>"; };
 		28577B7920D125060082075D /* MineSearchYourLoveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineSearchYourLoveCell.xib; sourceTree = "<group>"; };
+		28636D7820F4BCE900DE0926 /* MineSelfMyLabelsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineSelfMyLabelsModel.h; sourceTree = "<group>"; };
+		28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineSelfMyLabelsModel.m; sourceTree = "<group>"; };
 		2868407420B279D100441926 /* FriendsCurilerImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsCurilerImageCell.h; sourceTree = "<group>"; };
 		2868407520B279D100441926 /* FriendsCurilerImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsCurilerImageCell.m; sourceTree = "<group>"; };
 		2868407620B279D100441926 /* FriendsCurilerImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsCurilerImageCell.xib; sourceTree = "<group>"; };
@@ -905,8 +910,6 @@
 		2868409420B2B4EC00441926 /* ChangeTextViewTextStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeTextViewTextStyle.m; sourceTree = "<group>"; };
 		286A0A6B20EF185500F4EB17 /* MineMyselfCenterInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineMyselfCenterInfoModel.h; sourceTree = "<group>"; };
 		286A0A6C20EF185500F4EB17 /* MineMyselfCenterInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineMyselfCenterInfoModel.m; sourceTree = "<group>"; };
-		286A0A6E20EF444D00F4EB17 /* MineMyselfCenterInfoThecoverModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineMyselfCenterInfoThecoverModel.h; sourceTree = "<group>"; };
-		286A0A6F20EF444D00F4EB17 /* MineMyselfCenterInfoThecoverModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineMyselfCenterInfoThecoverModel.m; sourceTree = "<group>"; };
 		286A0A7220EF47DF00F4EB17 /* ReleaseLineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReleaseLineModel.h; sourceTree = "<group>"; };
 		286A0A7320EF47DF00F4EB17 /* ReleaseLineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReleaseLineModel.m; sourceTree = "<group>"; };
 		286A0A7520EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineSelfCenterImageLIstModel.h; sourceTree = "<group>"; };
@@ -2303,12 +2306,14 @@
 			children = (
 				286A0A6B20EF185500F4EB17 /* MineMyselfCenterInfoModel.h */,
 				286A0A6C20EF185500F4EB17 /* MineMyselfCenterInfoModel.m */,
-				286A0A6E20EF444D00F4EB17 /* MineMyselfCenterInfoThecoverModel.h */,
-				286A0A6F20EF444D00F4EB17 /* MineMyselfCenterInfoThecoverModel.m */,
 				286A0A7520EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.h */,
 				286A0A7620EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.m */,
 				286A0A7920EF78F400F4EB17 /* MineCenterHometownModel.h */,
 				286A0A7A20EF78F400F4EB17 /* MineCenterHometownModel.m */,
+				28636D7820F4BCE900DE0926 /* MineSelfMyLabelsModel.h */,
+				28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */,
+				2847BC8320F60B090052EE19 /* MineSelfMyLabelsDetailModel.h */,
+				2847BC8420F60B090052EE19 /* MineSelfMyLabelsDetailModel.m */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -4100,6 +4105,8 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/HappyDNS/HappyDNS.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD+BWMExtension/MBProgressHUD_BWMExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Qiniu/Qiniu.framework",
@@ -4113,6 +4120,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HappyDNS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD_BWMExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Qiniu.framework",
@@ -4291,6 +4300,7 @@
 				2870B73B20C68C8A00133D1A /* ReadBooksHeaderViewCell.m in Sources */,
 				2875DA9F20D3BC0800D6CAFE /* MineTheIdentityAuthenticationVC.m in Sources */,
 				28F9969A20A43E2600678494 /* ZLPhotoBrowserCell.m in Sources */,
+				28636D7A20F4BCE900DE0926 /* MineSelfMyLabelsModel.m in Sources */,
 				2820B08720B56F1D00EA1DAC /* CommunitySmartView.m in Sources */,
 				28E56FCF20AA7DFD00203D1E /* TransformChineseToPinying.m in Sources */,
 				281DF70520D25FFA0086030E /* MineCollectionExibitionTableViewCell.m in Sources */,
@@ -4368,6 +4378,7 @@
 				28E2AED820A9959C00ACC119 /* YourLocationTableViewCell.m in Sources */,
 				28FDAC5B20C12DFF00531597 /* MyselfWordInfoHeaderView.m in Sources */,
 				28BF33E520C53E1E00598919 /* FoundFriendsScreeningView.m in Sources */,
+				2847BC8520F60B090052EE19 /* MineSelfMyLabelsDetailModel.m in Sources */,
 				28E33ACD20BC0234009F9382 /* PerFormanceIntorduceCell.m in Sources */,
 				28FDAC2E20C0E75900531597 /* MyselfCenterVideoAndVicesAndBooksCell.m in Sources */,
 				28BF33E820C5492300598919 /* KGSliderView.m in Sources */,
@@ -4455,7 +4466,6 @@
 				2804BE9F20E0955B007E33DE /* TelentTitleTableViewCell.m in Sources */,
 				A81C961A2099BA4900E6D223 /* HW3DBannerView.m in Sources */,
 				2814621720B414F0000C5E47 /* FriendsDetailCommentCell.m in Sources */,
-				286A0A7020EF444D00F4EB17 /* MineMyselfCenterInfoThecoverModel.m in Sources */,
 				28D09E0220C0043900FA45A2 /* MusicChooseTypeCell.m in Sources */,
 				2868407C20B287D100441926 /* FriendsThemeTopImageCell.m in Sources */,
 				2825F6CC20B6B2AB0076B71B /* ActivityTableViewCell.m in Sources */,

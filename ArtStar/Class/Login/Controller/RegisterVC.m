@@ -142,6 +142,7 @@ KGCameraDelegate>
 }
 //MARK:--下一步点击事件--
 - (IBAction)nextClick:(UIButton *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if ([self toDetermineWhetherToComplete] == YES) {
         __weak typeof(self) mySelf = self;
         [KGRequestNetWorking postWothUrl:registServer parameters:@{@"telphone":_userPhoneStr,@"username":_nikNameTF.text,@"birthday":_birthday,@"password":_userPassStr,@"imageURL":@"http://p1.qzone.la/upload/20150222/yk961fx2.jpg",@"sex":_sexStr} succ:^(id result) {
@@ -154,8 +155,9 @@ KGCameraDelegate>
                 LoginVC *loginVC = [[LoginVC alloc]init];
                 [mySelf presentViewController:loginVC animated:YES completion:nil];
             }
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         } fail:^(NSString *error) {
-            
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         }];
     }
 }

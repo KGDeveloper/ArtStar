@@ -94,10 +94,18 @@
 
 - (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
-    for (int i = 0; i < 3; i++) {
-        UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(self))];
-        [image sd_setImageWithURL:[NSURL URLWithString:dataArr[i]]];
-        [_scrollView addSubview:image];
+    if (dataArr.count >= 3) {
+        for (int i = 0; i < 3; i++) {
+            UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(self))];
+            [image sd_setImageWithURL:[NSURL URLWithString:dataArr[i]]];
+            [_scrollView addSubview:image];
+        }
+    }else if (dataArr.count > 0 || dataArr.count < 3){
+        for (int i = 0; i < dataArr.count; i++) {
+            UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(self))];
+            [image sd_setImageWithURL:[NSURL URLWithString:dataArr[i]]];
+            [_scrollView addSubview:image];
+        }
     }
 }
 
