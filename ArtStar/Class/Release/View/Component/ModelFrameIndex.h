@@ -19,7 +19,9 @@ typedef NS_ENUM(NSInteger,EditVideoType){
 };
 //MARK:--话题模板--
 typedef NS_ENUM(NSInteger,EditThemeType){
-    EditThemeTypeCircular = 0,//:--圆形图片--
+    EditThemeTypeOnlyTitle = 0,//:--只有文字--
+    EditThemeTypeOnlyPicture,//:--只有图片--
+    EditThemeTypeCircular,//:--圆形图片--
     EditThemeTypeRightTop,//:--文字居右居上--
     EditThemeTypeRightCenter,//:--文字居右居中--
     EditThemeTypeTopLeft,//:--文字居上居左--

@@ -11,5 +11,6 @@
 @interface MineMyselfLabelVC : BaseVC
 
 @property (nonatomic,copy)void(^sendChooseArr)(NSArray *myLabels);
+@property (nonatomic,copy) NSArray *dataArr;
 
 @end

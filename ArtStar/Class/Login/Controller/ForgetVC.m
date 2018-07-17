@@ -180,7 +180,7 @@
             mySelf.errorLab.text = @"修改失败";
         }
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         mySelf.errorLab.hidden = NO;
         mySelf.errorLab.text = @"访问服务器失败";
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
@@ -247,7 +247,7 @@
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     [KGRequestNetWorking postWothUrl:sendMsgAuthCode parameters:@{@"telphone":_phoneTF.text,@"templateId":@"3"} succ:^(id result) {
         
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }

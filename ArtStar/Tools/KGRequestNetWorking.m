@@ -24,7 +24,7 @@
 + (void)postWothUrl:(NSString *)url
          parameters:(NSDictionary *)dic
                succ:(void (^)(id))succ
-               fail:(void (^)(NSString *))fail{
+               fail:(void (^)(NSError *))fail{
     
     AFHTTPSessionManager *manager = [KGRequestNetWorking managerWithBaseUrl:nil sessionConfiguration:NO];
     [manager POST:url parameters:dic progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -33,7 +33,7 @@
         id respond = [KGRequestNetWorking responseConfiguration:responseObject];
         succ(respond);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        fail(@"请求出错");
+        fail(error);
     }];
 }
 
@@ -45,7 +45,7 @@
              mimeType:(NSString *)mimetype
              progress:(NSProgress *)progress
                  succ:(void (^)(id))succ
-                 fail:(void (^)(NSString *))fail{
+                 fail:(void (^)(NSError *))fail{
     
     AFHTTPSessionManager *manager = [KGRequestNetWorking managerWithBaseUrl:nil sessionConfiguration:NO];
     [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -59,7 +59,7 @@
         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
         NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
         NSLog(@"error--%@",serializedData);
-        fail(@"请求失败");
+        fail(error);
     }];
 }
 

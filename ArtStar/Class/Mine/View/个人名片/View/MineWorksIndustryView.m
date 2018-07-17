@@ -31,6 +31,9 @@
 
 @property (nonatomic,strong) UIButton *cancelBtu;
 
+@property (nonatomic,copy) NSString *worksName;
+@property (nonatomic,copy) NSString *worksID;
+
 @end
 
 @implementation MineWorksIndustryView
@@ -148,6 +151,11 @@
     [self createSecondArr:NO key:_firstArr[0]];
 }
 - (void)cancelBtuClick{
+    if ([_cancelBtu.currentTitle isEqualToString:@"确定"]) {
+        if (self.sendChooseworks) {
+            self.sendChooseworks(_worksName, _worksID);
+        }
+    }
     self.hidden = YES;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -190,11 +198,13 @@
         [self createSecondArr:_isWorks key:_indutryStr];
     }else if (tableView == _twoListView ){
         _positionStr = _secondArr[indexPath.row];
-        NSLog(@"%@",[self returnIdWithFirstKey:_indutryStr sencedKey:_positionStr thirdKey:nil status:_isWorks]);
+        _worksName = _secondArr[indexPath.row];
+        _worksID = [self returnIdWithFirstKey:_indutryStr sencedKey:_positionStr thirdKey:nil status:_isWorks];
         [self createThriedArr:_isWorks title:_indutryStr key:_positionStr];
     }else{
         _jobStr = _thirdArr[indexPath.row];
-        NSLog(@"%@",[self returnIdWithFirstKey:_indutryStr sencedKey:_positionStr thirdKey:_jobStr status:_isWorks]);
+        _worksName = _thirdArr[indexPath.row];
+        _worksID = [self returnIdWithFirstKey:_indutryStr sencedKey:_positionStr thirdKey:_jobStr status:_isWorks];
     }
 }
 
@@ -288,6 +298,11 @@
         _cancelBtu.hidden = YES;
         _backView.frame = CGRectMake(0, 0, ViewWidth(self), ViewHeight(self));
     }
+}
+
+- (void)setCancelStr:(NSString *)cancelStr{
+    _cancelStr = cancelStr;
+    [_cancelBtu setTitle:cancelStr forState:UIControlStateNormal];
 }
 
 

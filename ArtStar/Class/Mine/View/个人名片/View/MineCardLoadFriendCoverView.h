@@ -12,6 +12,6 @@
 @interface MineCardLoadFriendCoverView : UIView
 
 @property (nonatomic,copy) void(^popRootViewController)(void);
-@property (nonatomic,strong) MineLoadCoverVCModel *model;
+@property (nonatomic,copy) NSString *coverImage;
 
 @end

@@ -84,27 +84,33 @@
 - (EditThemeType)themeTypeWithIndex:(NSInteger)index{
     switch (index) {
         case 0:
-            return EditThemeTypeCircular;//:--圆形图片--
+            return EditThemeTypeOnlyTitle;//:--圆形图片--
             break;
         case 1:
-            return EditThemeTypeRightTop;//:--文字居右居上--
+            return EditThemeTypeOnlyPicture;//:--圆形图片--
             break;
         case 2:
-            return EditThemeTypeRightCenter;//:--文字居右居中--
+            return EditThemeTypeCircular;//:--圆形图片--
             break;
         case 3:
-            return EditThemeTypeTopLeft;//:--文字居上居左--
+            return EditThemeTypeRightTop;//:--文字居右居上--
             break;
         case 4:
-            return EditThemeTypeTopCenter;//:--文字居上居中--
+            return EditThemeTypeRightCenter;//:--文字居右居中--
             break;
         case 5:
-            return EditThemeTypeTopRight;//:--文字居上居右--
+            return EditThemeTypeTopLeft;//:--文字居上居左--
             break;
         case 6:
-            return EditThemeTypeLeft;//:--文字居下居左--
+            return EditThemeTypeTopCenter;//:--文字居上居中--
             break;
         case 7:
+            return EditThemeTypeTopRight;//:--文字居上居右--
+            break;
+        case 8:
+            return EditThemeTypeLeft;//:--文字居下居左--
+            break;
+        case 9:
             return EditThemeTypeCenter;//:--文字居下居中--
             break;
         default:

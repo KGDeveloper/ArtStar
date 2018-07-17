@@ -43,15 +43,10 @@
 @implementation MineMyselfLabelVC
 
 - (void)rightNavBtuAction:(UIButton *)sender{
-    NSMutableArray *sendArr = [NSMutableArray array];
-    for (NSDictionary *dic in _chooseArr) {
-        if ([dic[@"id"] integerValue] != 0) {
-            [sendArr addObject:dic];
-        }
-    }
     if (self.sendChooseArr) {
-        self.sendChooseArr(sendArr.copy);
+        self.sendChooseArr(_chooseArr.copy);
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
@@ -75,10 +70,10 @@
             mySelf.designArr = [NSMutableArray arrayWithArray:mySelf.model.design];
             mySelf.perfArr = [NSMutableArray arrayWithArray:mySelf.model.performance];
             mySelf.customArr = [NSMutableArray arrayWithObject:@{@"name":@"+",@"children":@[],@"id":@"10000",@"path":@"",@"pid":@(0)}];
-            mySelf.chooseArr = [NSMutableArray array];
+            mySelf.chooseArr = [NSMutableArray arrayWithArray:mySelf.dataArr];
             [mySelf setBackView];
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }
@@ -277,6 +272,17 @@
             [_chooseArr removeObject:dic];
         }
         [self setBackView];
+    }
+    for (NSDictionary *obj in _dataArr) {
+        NSDictionary *dic = @{@"name":sender.currentTitle,@"id":@(sender.tag)};
+        if ([dic isEqual:obj]) {
+            [_chooseArr removeObject:dic];
+            [KGRequestNetWorking postWothUrl:deleteMyLabel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"name":sender.currentTitle,@"id":@(sender.tag)} succ:^(id result) {
+                
+            } fail:^(NSError *error) {
+                
+            }];
+        }
     }
 }
 //MARK:---------------------------------------------循环创建按钮-------------------------------------------

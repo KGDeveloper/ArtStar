@@ -50,6 +50,53 @@
     
     _labView.sd_layout.leftEqualToView(_titleLab).rightEqualToView(_writeLabBtu).topSpaceToView(_titleLab, 50).heightIs(55);
 }
+
+- (CGFloat)arrayToHeight:(NSArray *)arr{
+    CGFloat width = 0;
+    CGFloat height = 0;
+    NSInteger number = 1;
+    for (int i = 0; i < arr.count; i++) {
+        if (width + [TransformChineseToPinying stringWidthFromString:arr[i] font:SYFont(12) width:kScreenWidth - 30] + 40 > kScreenWidth - 30) {
+            width = 0;
+            height = 30*number;
+            number ++;
+        }
+        width = width + [TransformChineseToPinying stringWidthFromString:arr[i] font:SYFont(12) width:kScreenWidth - 30] + 40;
+    }
+    return height + 100;
+}
+
+- (void)setTitleArr:(NSArray *)titleArr{
+    _titleArr = titleArr;
+    if (titleArr.count > 0) {
+        CGFloat width = 0;
+        CGFloat height = 0;
+        NSInteger number = 1;
+        for (int i = 0; i < titleArr.count; i++) {
+            if (width + [TransformChineseToPinying stringWidthFromString:titleArr[i] font:SYFont(12) width:kScreenWidth - 30] + 40 > kScreenWidth - 30) {
+                width = 0;
+                height = 30*number;
+                number ++;
+            }
+            [_labView addSubview:[self createLabelWithTitle:titleArr[i] frame:CGRectMake(width, height, [TransformChineseToPinying stringWidthFromString:titleArr[i] font:SYFont(12) width:kScreenWidth - 30] + 20, 20)]];
+            width = width + [TransformChineseToPinying stringWidthFromString:titleArr[i] font:SYFont(12) width:kScreenWidth - 30] + 40;
+        }
+        _labView.sd_layout.leftEqualToView(_titleLab).rightEqualToView(_writeLabBtu).topSpaceToView(_titleLab, 25).heightIs(height + 10);
+    }
+}
+
+- (UILabel *)createLabelWithTitle:(NSString *)title frame:(CGRect)frame{
+    UILabel *lab = [[UILabel alloc]initWithFrame:frame];
+    lab.text = title;
+    lab.backgroundColor = Color_333333;
+    lab.textColor = [UIColor whiteColor];
+    lab.textAlignment = NSTextAlignmentCenter;
+    lab.font = SYFont(12);
+    lab.layer.cornerRadius = 10;
+    lab.layer.masksToBounds = YES;
+    return lab;
+}
+
 - (void)showLabel{
     _labView.hidden = NO;
 }

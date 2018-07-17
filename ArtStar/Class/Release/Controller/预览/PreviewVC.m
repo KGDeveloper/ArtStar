@@ -40,21 +40,105 @@
 }
 
 - (void)rightNavBtuAction:(UIButton *)sender{
-    NSArray *strArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:strArr options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonStr = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __block NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:[KGUserInfo shareInterace].userTokenCode forKey:@"tokenCode"];
+    [parameters setObject:_model.visitPermission forKey:@"visitPermission"];
+    [parameters setObject:_model.location forKey:@"location"];
+    [parameters setObject:_model.composing forKey:@"composing"];
+    //:--判断是否有文字内容--
+    if (_model.str1.length > 0 && _model.str1 != nil) {
+        NSArray *strArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:strArr options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *jsonStr = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+        [parameters setObject:jsonStr forKey:@"content"];
+    }else{
+        [parameters setObject:@"" forKey:@"content"];
+    }
+    //:--判断是否@别人--
+    if (_model.ids.count > 0) {
+        [parameters setObject:_model.ids forKey:@"ids"];
+    }else{
+        [parameters setObject:@[] forKey:@"ids"];
+    }
+    //:--判断是否有话题--
+    if (_model.title.length > 0 && _model.title != nil) {
+        [parameters setObject:_model.title forKey:@"title"];
+    }
+    if ([self topicTypeWithString:_model.topicType] != 10) {
+        [parameters setObject:@([self topicTypeWithString:_model.topicType]) forKey:@"topicType"];
+    }
+    //:--判断是否有图片--
+    __weak typeof(self) mySelf = self;
+    if (_model.imageURLs.count > 0) {
+        __block NSMutableArray *imageArr = [NSMutableArray array];
+        [_model.imageURLs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIImage *image = obj;
+            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:[[KGQiniuUploadManager shareInstance] getImagePath:image] fileName:nil result:^(NSString *strPath) {
+                [imageArr addObject:strPath];
+                [parameters setObject:imageArr forKey:@"imageURLs"];
+                [mySelf requestDataWithArr:imageArr dic:parameters];
+            }];
+        }];
+    }else{
+        [parameters setObject:@[] forKey:@"imageURLs"];
+        [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:parameters succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
+                [mySelf.navigationController popViewControllerAnimated:YES];
+            }else{
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+            [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
+        }];
+    }
     
-    NSData *imgData = [NSJSONSerialization dataWithJSONObject:_model.imageURLs options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *imgStr = [[NSString alloc]initWithData:imgData encoding:NSUTF8StringEncoding];
-    
-    NSData *idsData = [NSJSONSerialization dataWithJSONObject:_model.ids options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *idsStr = [[NSString alloc]initWithData:idsData encoding:NSUTF8StringEncoding];
-    
-    [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"content":jsonStr,@"location":_model.location,@"visitPermission":_model.visitPermission,@"composing":_model.composing,@"type":_model.typeStr,@"title":_model.title,@"imageURLs":imgStr,@"topicType":_model.topicType,@"ids":idsStr} succ:^(id result) {
-        
-    } fail:^(NSString *error) {
-        
-    }];
+}
+
+- (void)requestDataWithArr:(NSMutableArray *)arr dic:(NSMutableDictionary *)parameters{
+    __weak typeof(self) mySelf = self;
+    if (arr.count == _model.imageURLs.count) {
+        [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:parameters succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
+                [mySelf.navigationController popViewControllerAnimated:YES];
+            }else{
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
+            }
+            
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+            [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
+        }];
+    }
+}
+
+- (NSInteger)topicTypeWithString:(NSString *)str{
+    if ([str isEqualToString:@"美术"]) {
+        return 1;
+    }else if ([str isEqualToString:@"设计"]){
+        return 8;
+    }else if ([str isEqualToString:@"摄影"]){
+        return 7;
+    }else if ([str isEqualToString:@"电影"]){
+        return 3;
+    }else if ([str isEqualToString:@"书籍"]){
+        return 5;
+    }else if ([str isEqualToString:@"文学"]){
+        return 9;
+    }else if ([str isEqualToString:@"音乐"]){
+        return 2;
+    }else if ([str isEqualToString:@"戏剧"]){
+        return 4;
+    }else if ([str isEqualToString:@"美食"]){
+        return 6;
+    }else{
+        return 10;
+    }
 }
 
 //MARK:--选择加载页面--
@@ -65,13 +149,13 @@
     [self.view addSubview:back];
     
     _headerIamge = [[UIImageView alloc]initWithFrame:CGRectMake(15, NavTopHeight + 15, 28, 28)];
-    _headerIamge.image = Image(@"round");
+    [_headerIamge sd_setImageWithURL:[NSURL URLWithString:[KGUserInfo shareInterace].portraitUri]];
     _headerIamge.layer.cornerRadius = 14;
     _headerIamge.layer.masksToBounds = YES;
     [self.view addSubview:_headerIamge];
     
     _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(25 + 28, NavTopHeight + 15 + 4, kScreenWidth - 25 - 28, 20)];
-    _nameLabel.text = @"遥不可及";
+    _nameLabel.text = [KGUserInfo shareInterace].userName;
     _nameLabel.font = SYFont(15);
     [self.view addSubview:_nameLabel];
     
@@ -90,83 +174,101 @@
 //MARK:--话题页面--
 - (void)setThemeView{
     switch (_themeType) {
+        case EditThemeTypeOnlyTitle:
+            [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeOnlyLabel];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
+            self.horizontalView.timeStr = @"5分钟前";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
+            self.horizontalView.type = TextAlignmentTypeCenter;
+            break;
+        case EditThemeTypeOnlyPicture:
+            [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeOnlyImage];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
+            self.horizontalView.timeStr = @"5分钟前";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
+            self.horizontalView.type = TextAlignmentTypeCenter;
+            break;
         case EditThemeTypeCircular:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeCircular];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
             self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = @"北京.望春园";
-            self.horizontalView.themeStr = @"# 哈哈哈 #";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             self.horizontalView.type = TextAlignmentTypeCenter;
             break;
         case EditThemeTypeRightTop:
             [self setUpVerticalView:LabelTextLocationTypeTop];
-            self.verticalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.verticalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
-            self.verticalView.timeStr = @"5分钟前";
-            self.verticalView.locationStr = @"北京.望春园";
-            self.verticalView.themeStr = @"# 哈哈哈 #";
+            self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
+            self.horizontalView.timeStr = @"5分钟前";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             break;
         case EditThemeTypeRightCenter:
             [self setUpVerticalView:LabelTextLocationTypeCenter];
-            self.verticalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.verticalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
-            self.verticalView.timeStr = @"5分钟前";
-            self.verticalView.locationStr = @"北京.望春园";
-            self.verticalView.themeStr = @"# 哈哈哈 #";
+            self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
+            self.horizontalView.timeStr = @"5分钟前";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             break;
         case EditThemeTypeTopLeft:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
             self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = @"北京.望春园";
-            self.horizontalView.themeStr = @"# 哈哈哈 #";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             self.horizontalView.type = TextAlignmentTypeLeft;
             break;
         case EditThemeTypeTopCenter:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
             self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = @"北京.望春园";
-            self.horizontalView.themeStr = @"# 哈哈哈 #";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             self.horizontalView.type = TextAlignmentTypeCenter;
             break;
         case EditThemeTypeTopRight:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
             self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = @"北京.望春园";
-            self.horizontalView.themeStr = @"# 哈哈哈 #";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             self.horizontalView.type = TextAlignmentTypeRight;
             break;
         case EditThemeTypeLeft:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
             self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = @"北京.望春园";
-            self.horizontalView.themeStr = @"# 哈哈哈 #";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             self.horizontalView.type = TextAlignmentTypeLeft;
             break;
         case EditThemeTypeCenter:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
             self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = @"北京.望春园";
-            self.horizontalView.themeStr = @"# 哈哈哈 #";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             self.horizontalView.type = TextAlignmentTypeCenter;
             break;
         default:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
-            self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.imageArr = _model.imageURLs;
             self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = @"北京.望春园";
-            self.horizontalView.themeStr = @"# 哈哈哈 #";
+            self.horizontalView.locationStr = _model.location;
+            self.horizontalView.themeStr = _model.title;
             self.horizontalView.type = TextAlignmentTypeRight;
             break;
     }
@@ -177,55 +279,55 @@
         case EditVideoTypeOnlyVideo:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, photoViewHeight + 50) type:VideoViewTextTypeOnlyVideo];
             self.videoView.timeStr = @"5分钟前";
-            self.videoView.locationStr = @"北京.望春园";
-            self.videoView.themeStr = @"# 哈哈哈 #";
+            self.videoView.locationStr = _model.location;
+            self.videoView.themeStr = _model.title;
             break;
         case EditVideoTypeTopLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopLeftText];
-            self.videoView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
-            self.videoView.locationStr = @"北京.望春园";
-            self.videoView.themeStr = @"# 哈哈哈 #";
+            self.videoView.locationStr = _model.location;
+            self.videoView.themeStr = _model.title;
             self.videoView.type = TextAlignmentLeft;
             break;
         case EditVideoTypeTopCenter:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopCenterText];
-            self.videoView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
-            self.videoView.locationStr = @"北京.望春园";
-            self.videoView.themeStr = @"# 哈哈哈 #";
+            self.videoView.locationStr = _model.location;
+            self.videoView.themeStr = _model.title;
             self.videoView.type = TextAlignmentCenter;
             break;
         case EditVideoTypeTopRight:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopRightText];
-            self.videoView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
-            self.videoView.locationStr = @"北京.望春园";
-            self.videoView.themeStr = @"# 哈哈哈 #";
+            self.videoView.locationStr = _model.location;
+            self.videoView.themeStr = _model.title;
             self.videoView.type = TextAlignmentRight;
             break;
         case EditVideoTypeLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomLeftText];
-            self.videoView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
-            self.videoView.locationStr = @"北京.望春园";
-            self.videoView.themeStr = @"# 哈哈哈 #";
+            self.videoView.locationStr = _model.location;
+            self.videoView.themeStr = _model.title;
             self.videoView.type = TextAlignmentLeft;
             break;
         case EditVideoTypeCenter:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomCenterText];
-            self.videoView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
-            self.videoView.locationStr = @"北京.望春园";
-            self.videoView.themeStr = @"# 哈哈哈 #";
+            self.videoView.locationStr = _model.location;
+            self.videoView.themeStr = _model.title;
             self.videoView.type = TextAlignmentTypeCenter;
             break;
         default:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomRightText];
-            self.videoView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
-            self.videoView.locationStr = @"北京.望春园";
-            self.videoView.themeStr = @"# 哈哈哈 #";
+            self.videoView.locationStr = _model.location;
+            self.videoView.themeStr = _model.title;
             self.videoView.type = TextAlignmentRight;
             break;
     }
@@ -235,7 +337,7 @@
     switch (_graphicType) {
         case EditGraphicTypeOnlyTitle:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 200) type:LabelAndImageTypeOnlyLabel];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";
             self.horizontalView.themeStr = @"# 哈哈哈 #";
@@ -250,7 +352,7 @@
             break;
         case EditGraphicTypeCircular:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeCircular];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";
@@ -259,7 +361,7 @@
             break;
         case EditGraphicTypeRightTop:
             [self setUpVerticalView:LabelTextLocationTypeTop];
-            self.verticalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.verticalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.verticalView.timeStr = @"5分钟前";
             self.verticalView.locationStr = @"北京.望春园";
@@ -267,7 +369,7 @@
             break;
         case EditGraphicTypeRightCenter:
             [self setUpVerticalView:LabelTextLocationTypeCenter];
-            self.verticalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.verticalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.verticalView.timeStr = @"5分钟前";
             self.verticalView.locationStr = @"北京.望春园";
@@ -275,7 +377,7 @@
             break;
         case EditGraphicTypeTopLeft:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";
@@ -284,7 +386,7 @@
             break;
         case EditGraphicTypeTopCenter:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";
@@ -293,7 +395,7 @@
             break;
         case EditGraphicTypeTopRight:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";
@@ -302,7 +404,7 @@
             break;
         case EditGraphicTypeLeft:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";
@@ -311,7 +413,7 @@
             break;
         case EditGraphicTypeCenter:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";
@@ -320,7 +422,7 @@
             break;
         default:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[@"君不见，黄河之水天上来，奔流到海不复回",@"君不见，高堂明镜悲白发，朝成青丝暮成雪",@"人生得意须尽欢，莫使金樽空对月",@"天生我材必有用，千金散尽还复来",@"烹羊宰牛且为乐，会须一饮三百杯"];
+            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.horizontalView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = @"北京.望春园";

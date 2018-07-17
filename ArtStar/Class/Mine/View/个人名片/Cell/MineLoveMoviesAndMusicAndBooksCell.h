@@ -27,4 +27,9 @@
 
 @property (weak,nonatomic) id<MineLoveMoviesAndMusicAndBooksCellDelegate>delegate;
 
+
+@property (nonatomic,copy) NSArray *bookArr;
+@property (nonatomic,copy) NSArray *moviesArr;
+@property (nonatomic,copy) NSArray *musicArr;
+
 @end

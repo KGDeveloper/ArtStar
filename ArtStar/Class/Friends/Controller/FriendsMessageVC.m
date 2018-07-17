@@ -38,7 +38,7 @@
     _dataArr = [NSMutableArray array];
     [KGRequestNetWorking postWothUrl:pushUnreadMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"informQuery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
         
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }

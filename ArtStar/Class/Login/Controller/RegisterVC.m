@@ -156,7 +156,7 @@ KGCameraDelegate>
                 [mySelf presentViewController:loginVC animated:YES completion:nil];
             }
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        } fail:^(NSString *error) {
+        } fail:^(NSError *error) {
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         }];
     }

@@ -19,4 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIView *typeView;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 
+- (void)addArray:(NSArray *)arr toView:(UIView *)addView;
+
 @end

@@ -71,7 +71,7 @@
             mySelf.headerView.dataArr = mySelf.imageArr;
             [mySelf.listView reloadData];
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }
@@ -115,16 +115,62 @@
         return (kScreenWidth - 30)/690*534 + 65;
     }else if (indexPath.row == 1){
         MyselfCenterMyLabelCell *cell = [MyselfCenterMyLabelCell new];
-        return [cell heightWithArr:@[@"射手座",@"乌鲁木齐",@"AB型",@"163cm",@"画家",@"文艺工作者：纪实摄影",@"轩哥哥制作"]];
+        NSMutableArray *arr = [NSMutableArray array];
+        [_model.mylabels enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *dic = obj;
+            [arr addObject:dic[@"name"]];
+        }];
+        return [cell heightWithArr:arr];
     }else if (indexPath.row == 2){
         return 120;
     }else if (indexPath.row == 3){
         return 220;
     }else if (indexPath.row == 4){
         return 40;
+    }else if (indexPath.row == 5){
+        MyselfCenterMyLabelCell *cell = [MyselfCenterMyLabelCell new];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 4) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        return [cell heightWithArr:titleArr.copy];
+    }else if (indexPath.row == 6){
+        MyselfCenterMyLabelCell *cell = [MyselfCenterMyLabelCell new];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 5) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        return [cell heightWithArr:titleArr.copy];
+    }else if (indexPath.row == 7){
+        MyselfCenterMyLabelCell *cell = [MyselfCenterMyLabelCell new];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 6) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        return [cell heightWithArr:titleArr.copy];
     }else{
         MyselfCenterMyLabelCell *cell = [MyselfCenterMyLabelCell new];
-        return [cell heightWithArr:@[@"射手座",@"乌鲁木齐",@"AB型",@"163cm",@"画家",@"文艺工作者：纪实摄影",@"轩哥哥制作"]];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 7) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        return [cell heightWithArr:titleArr.copy];
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -138,11 +184,19 @@
         return cell;
     }else if (indexPath.row == 1){
         MyselfCenterMyLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterMyLabelCell"];
-//        cell.labArr = _model.mylabels;
+        NSMutableArray *arr = [NSMutableArray array];
+        [_model.mylabels enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *dic = obj;
+            [arr addObject:dic[@"name"]];
+        }];
+        cell.labArr = arr.copy;
         return cell;
     }else if (indexPath.row == 2){
         MyselfCenterSchoolCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterSchoolCell"];
-        cell.industryLab.text = _model.iname;
+        NSDictionary *dic = [_model.industries firstObject];
+        if (dic != nil) {
+            cell.industryLab.text = dic[@"name"];
+        }
         cell.schoolLab.text = _model.school;
         return cell;
     }else if (indexPath.row == 3){
@@ -153,22 +207,54 @@
         return cell;
     }else if (indexPath.row == 5){
         MyselfCenterMyLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterMyLabelCell"];
-        cell.labArr = @[@"射手座",@"乌鲁木齐",@"AB型",@"163cm",@"画家",@"文艺工作者：纪实摄影",@"轩哥哥制作"];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 4) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        cell.labArr = titleArr.copy;
         cell.titleStr = @"喜欢的美食";
         return cell;
     }else if (indexPath.row == 6){
         MyselfCenterMyLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterMyLabelCell"];
-        cell.labArr = @[@"射手座",@"乌鲁木齐",@"AB型",@"163cm",@"画家",@"文艺工作者：纪实摄影",@"轩哥哥制作"];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 5) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        cell.labArr = titleArr.copy;
         cell.titleStr = @"喜欢的运动";
         return cell;
     }else if (indexPath.row == 7){
         MyselfCenterMyLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterMyLabelCell"];
-        cell.labArr = @[@"射手座",@"乌鲁木齐",@"AB型",@"163cm",@"画家",@"文艺工作者：纪实摄影",@"轩哥哥制作"];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 6) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        cell.labArr = titleArr.copy;
         cell.titleStr = @"喜欢的休闲方式";
         return cell;
     }else{
         MyselfCenterMyLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterMyLabelCell"];
-        cell.labArr = @[@"射手座",@"乌鲁木齐",@"AB型",@"163cm",@"画家",@"文艺工作者：纪实摄影",@"轩哥哥制作"];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *titleArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 7) {
+                [titleArr addObject:tmpDic[@"name"]];
+            }
+        }];
+        cell.labArr = titleArr.copy;
         cell.titleStr = @"我的旅行足迹";
         return cell;
     }
@@ -177,8 +263,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 3) {
         [self pushNoTabBarViewController:[[MyselfCenterVideo_Music_BookVC alloc]init] animated:YES];
-    }else if (indexPath.row == 0){
-        [self pushNoTabBarViewController:[[FriendsVC alloc]init] animated:YES];
     }
 }
 

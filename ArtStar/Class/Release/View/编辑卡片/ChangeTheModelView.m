@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     TextFieldTextTypeRight,
 };
 
-@interface ChangeTheModelView ()<UITextFieldDelegate,KGAlertViewDelegate,ChangeModelViewDelegate,KGCameraDelegate>
+@interface ChangeTheModelView ()<UITextFieldDelegate,KGAlertViewDelegate,ChangeModelViewDelegate,KGCameraDelegate,UITextViewDelegate>
 
 @property (nonatomic,strong) ChangeModelView *ideaView;
 //MARK:--输入框模块--
@@ -66,6 +66,8 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
 @property (nonatomic,strong) UIButton *themetypeBtu;
 
 @property (nonatomic,strong) ReleaseChooseThemeTypeView *chooseThemeTypeView;
+
+@property (nonatomic,copy) NSString *touchPictureStr;
 
 @end
 
@@ -420,26 +422,31 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         _oneTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 22, 0, 22, ViewHeight(_vertivalView))];
         _oneTF.font = FZFont(12);
 //        _oneTF.editable = NO;
+        _oneTF.delegate = self;
         [_vertivalView addSubview:_oneTF];
         
         _twoTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 45, 0, 22, ViewHeight(_vertivalView))];
         _twoTF.font = FZFont(12);
 //        _twoTF.editable = NO;
+        _twoTF.delegate = self;
         [_vertivalView addSubview:_twoTF];
         
         _threeTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 68, 0, 22, ViewHeight(_vertivalView))];
         _threeTF.font = FZFont(12);
 //        _threeTF.editable = NO;
+        _threeTF.delegate = self;
         [_vertivalView addSubview:_threeTF];
         
         _fourTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 91, 0, 22, ViewHeight(_vertivalView))];
         _fourTF.font = FZFont(12);
 //        _fourTF.editable = NO;
+        _fourTF.delegate = self;
         [_vertivalView addSubview:_fourTF];
         
         _fiveTF = [[UITextView alloc]initWithFrame:CGRectMake(20, 0, 22, ViewHeight(_vertivalView))];
         _fiveTF.font = FZFont(12);
 //        _fiveTF.editable = NO;
+        _fiveTF.delegate = self;
         [_vertivalView addSubview:_fiveTF];
         
         for (int i = 0; i < 5; i++) {
@@ -581,6 +588,34 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     _themeType = themeType;
     self.isMask = NO;
     switch (themeType) {
+        case EditThemeTypeOnlyTitle:
+            //:--重新设置frame--
+            self.textView.hidden = NO;
+            self.photoView.hidden = YES;
+            self.vertivalView.hidden = YES;
+            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight, 281, textViewHeight);
+            self.textView.hidden = NO;
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
+            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
+            [self reloadPhotoViewSubViews];
+            self.clipType = @"横向";
+            [self isClipImageView:NO];
+            break;
+        case EditThemeTypeOnlyPicture:
+            //:--重新设置frame--
+            self.textView.hidden = YES;
+            self.photoView.hidden = NO;
+            self.vertivalView.hidden = YES;
+            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
+            self.pictureView.image = Image(@"picture");
+            [self setTextFieldLocation:TextFieldTextTypeCenter];
+            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
+            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20, kScreenWidth, 180);
+            [self reloadPhotoViewSubViews];
+            self.clipType = @"横向";
+            [self isClipImageView:NO];
+            break;
         case EditThemeTypeCircular:
             self.isMask = YES;
             //:--重新设置frame--
@@ -609,7 +644,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
             self.pictureView.image = Image(@"rectangle");
             self.textView.hidden = YES;
             self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.vertivalView.hidden = NO;
             self.vertivalView.frame = CGRectMake(self.frame.size.width - 15 - textViewHeight - 20, 58 + NavTopHeight, textViewHeight + 20, 281);
             _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
             [self setVertivalText:0];
@@ -1011,7 +1045,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     __weak typeof(self) mySelf = self;
     ChooseModelVC *vc = [[ChooseModelVC alloc]init];
     if (self.type == EditTypeTheme) {
-        vc.imageArr = @[Image(@"C圆形"),Image(@"C右上"),Image(@"C右中"),Image(@"C上左"),Image(@"C上中"),Image(@"C上右"),Image(@"C下左"),Image(@"C下中"),Image(@"C下右")];
+        vc.imageArr = @[Image(@"A文字"),Image(@"A图片"),Image(@"C圆形"),Image(@"C右上"),Image(@"C右中"),Image(@"C上左"),Image(@"C上中"),Image(@"C上右"),Image(@"C下左"),Image(@"C下中"),Image(@"C下右")];
         vc.sendModel = ^(NSInteger index) {
             mySelf.themeType = [[ModelFrameIndex shareInterace] themeTypeWithIndex:index];
         };
@@ -1067,6 +1101,12 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
             break;
         case EditTypeTheme:
             switch (self.themeType) {
+                case EditThemeTypeOnlyTitle:
+                    [self textFieldString:string number:index];
+                    break;
+                case EditThemeTypeOnlyPicture:
+                    [self textFieldString:string number:index];
+                    break;
                 case EditThemeTypeCircular:
                     [self textFieldString:string number:index];
                     break;
@@ -1197,19 +1237,43 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     switch (self.type) {
         case EditTypeTheme:
             if (self.themeType == EditThemeTypeRightTop & self.themeType == EditThemeTypeRightCenter) {
+                if (_titleTF.text.length > 0 & _titleTF.text != nil) {
+                    model.title = _titleTF.text;
+                    model.topicType = _themetypeBtu.currentTitle;
+                    model.typeStr = @"1";
+                }else{
+                    model.typeStr = @"0";
+                }
                 model.str1 = self.oneTF.text;
                 model.str2 = self.twoTF.text;
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
-            }else{
+                model.imageURLs = self.imageArr.copy;
+            }else if (self.themeType == EditThemeTypeOnlyTitle & self.themeType == EditThemeTypeOnlyPicture){
+                model.typeStr = @"0";
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
+                model.imageURLs = self.imageArr.copy;
+            }else{
+                
+                if (_titleTF.text.length > 0 & _titleTF.text != nil) {
+                    model.title = _titleTF.text;
+                    model.topicType = _themetypeBtu.currentTitle;
+                    model.typeStr = @"1";
+                }else{
+                    model.typeStr = @"0";
+                }
+                
+                model.str1 = self.firstTextField.text;
+                model.str2 = self.sencedTF.text;
+                model.str3 = self.thirdTF.text;
+                model.str4 = self.fouceTF.text;
+                model.str5 = self.fifthTF.text;
+                model.imageURLs = self.imageArr.copy;
             }
             model.composing = [self returnTType:self.themeType];
             break;
@@ -1220,15 +1284,16 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
+                model.imageURLs = self.imageArr.copy;
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674803&di=2b336325890e19b082634542854df0bf&imgtype=0&src=http%3A%2F%2Fpic24.nipic.com%2F20121029%2F3822951_123134776000_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=7cc0e64422fbbd521a77deba6c6973b6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D026db0c73dd3d539d530078353ff8c3c%2Fa2cc7cd98d1001e9f2868436b30e7bec54e79755.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674802&di=977ddc77d1f29dd9313307992fdf875d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd50735fae6cd7b896fede657052442a7d8330e65.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674801&di=9ec6b8d6b005ce341f344df05bfecd8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0df431adcbef7609c64a714b24dda3cc7dd99ea5.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674800&di=1029f9a20bb5ecc70daf1438fdba9ac1&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F7dd98d1001e93901750ba62d71ec54e736d19693.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674799&di=190e60833144ad53da59345cc9904281&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fb8014a90f603738db70ae707b91bb051f819ec57.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674798&di=23cebd73f453c42f5dccafe0253dbf7f&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130514%2F12477194_083818249176_2.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674797&di=0ff43e989e78617f2bc4ccb0a2b9332e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D1482fd451a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eeb285e2106d7912397dd8c05.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530874674796&di=3554f18791b3087592938d635accba67&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F0b7b02087bf40ad1cd0f99c55d2c11dfa9ecce29.jpg"];
+                model.imageURLs = self.imageArr.copy;
             }
+            
             model.composing = [self returnGType:self.graphicType];
             break;
         default:
@@ -1238,33 +1303,21 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = @[@""];
+                model.imageURLs = self.imageArr.copy;
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @[@""];
+                model.imageURLs = self.imageArr.copy;
             }
+            model.typeStr = @"2";
             model.composing = [self returnVType:self.videoType];
             break;
     }
-    if ([_locationBtu.currentTitle isEqualToString:@"你在哪里？"]) {
-        
-    }else{
-        model.location = _locationBtu.currentTitle;
-    }
-    model.ids = @[@""];
-    if (_type == EditTypeTheme) {
-        model.typeStr = @"1";
-        model.title = _titleTF.text;
-        model.topicType = _themetypeBtu.currentTitle;
-    }else if (_type == EditTypeGraphic){
-        model.typeStr = @"0";
-    }else{
-        model.typeStr = @"2";
-    }
+    model.location = _locationBtu.currentTitle;
+    model.ids = @[];
     if ([_publicBtu.currentTitle isEqualToString:@"公开"]){
         model.visitPermission = @"0";
     }else if ([_publicBtu.currentTitle isEqualToString:@"仅自己可见"]){
@@ -1285,6 +1338,12 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
 
 - (NSString *)returnTType:(EditThemeType)type{
     switch (type) {
+        case EditThemeTypeOnlyTitle:
+            return @"0";
+            break;
+        case EditThemeTypeOnlyPicture:
+            return @"1";
+            break;
         case EditThemeTypeCircular:
             return @"2";
             break;
@@ -1383,6 +1442,9 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     }
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    self.placehodelLab.hidden = YES;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

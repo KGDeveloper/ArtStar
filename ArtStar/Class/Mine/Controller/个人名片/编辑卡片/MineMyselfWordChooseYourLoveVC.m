@@ -33,6 +33,22 @@
         self.searchView.type = LoveBook;
     }
 }
+- (void)leftNavBtuAction:(UIButton *)sender{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (int i = 0; i < _dataArr.count; i++) {
+        if (self.searchView.type == LoveBook) {
+            MineLoveBookModel *model = _dataArr[i];
+            NSDictionary *dic = [model mj_JSONObject];
+            [arr addObject:dic];
+        }
+    }
+    if (self.sendYourLoveArr) {
+        self.sendYourLoveArr(arr.copy);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -92,7 +108,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineMyselfWordChooseYourLoveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineMyselfWordChooseYourLoveCell"];
-    [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528896034429&di=61c80c2b182f6e4a60d509de5237d93b&imgtype=0&src=http%3A%2F%2Fww2.sinaimg.cn%2Flarge%2F005TTqq4gw1fb1tf69lr7j30rs1b8aja.jpg"]];
+    if (self.searchView.type == LoveBook) {
+        MineLoveBookModel *model = _dataArr[indexPath.row];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+        cell.titleLab.text = model.bookName;
+        cell.detailLab.text = [NSString stringWithFormat:@"%f/%@/%@",model.bookGrade,model.writer,model.createTime];
+    }
+    
     return cell;
 }
 
@@ -101,10 +123,12 @@
         _searchView = [[MineAddYourLoveSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         __weak typeof(self) mySelf = self;
         _searchView.sendChoose = ^(MineLoveMoviesModel *movies, MineLoveMusicModel *music, MineLoveBookModel *books) {
-            [mySelf.dataArr addObject:@""];
-            [mySelf.headerView removeFromSuperview];
-            mySelf.headerView.frame = CGRectMake(0, 0, 0, 0);
-            [mySelf.listView reloadData];
+            if (mySelf.searchView.type == LoveBook) {
+                [mySelf.dataArr addObject:books];
+                [mySelf.headerView removeFromSuperview];
+                mySelf.headerView.frame = CGRectMake(0, 0, 0, 0);
+                [mySelf.listView reloadData];
+            }
             [mySelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"添加" image:nil];
         };
         [self.navigationController.view addSubview:_searchView];
@@ -131,9 +155,19 @@
 
 
 @implementation MineLoveBookModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
+}
+
 @end
 
 @implementation MineLoveMusicModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
+}
+
 @end
 
 @implementation MineLoveMoviesModel

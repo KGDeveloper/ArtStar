@@ -39,7 +39,6 @@
     
     [self sd_addSubviews:@[_lowImage,_returnBtu,_headerImage,_signatureLab,_nikNameLab]];
     
-    _lowImage.image = Image(@"2");
     _lowImage.sd_layout.leftEqualToView(self).topEqualToView(self).rightEqualToView(self).heightIs(ViewHeight(self) - 70);
     
     
@@ -48,14 +47,14 @@
     _returnBtu.imageEdgeInsets = UIEdgeInsetsMake(7.5, 0, 7.5, 43);
     _returnBtu.sd_layout.leftSpaceToView(self, 15).topSpaceToView(self,NavTopHeight - 44 + 10).widthIs(50).heightIs(30);
     
-    _headerImage.image = Image(@"1");
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:[KGUserInfo shareInterace].portraitUri] placeholderImage:Image(@"1")];
     _headerImage.layer.cornerRadius = 37.5;
     _headerImage.layer.borderColor = [UIColor whiteColor].CGColor;
     _headerImage.layer.borderWidth = 2;
     _headerImage.layer.masksToBounds = YES;
     _headerImage.sd_layout.rightSpaceToView(self, 15).bottomSpaceToView(self,50).widthIs(75).heightIs(75);
     
-    _nikNameLab.text = @"轩哥哥来啦";
+    _nikNameLab.text = [KGUserInfo shareInterace].userName;
     _nikNameLab.textColor = [UIColor whiteColor];
     _nikNameLab.font = SYFont(15);
     _nikNameLab.textAlignment = NSTextAlignmentRight;
@@ -65,7 +64,7 @@
     _nikNameLab.layer.shadowRadius = 90;
     _nikNameLab.sd_layout.rightSpaceToView(_headerImage, 10).leftSpaceToView(self, 15).heightIs(15).bottomSpaceToView(self, 75);
     
-    _signatureLab.text = @"轩哥哥来啦轩哥哥来啦轩哥哥来啦轩哥哥来啦轩哥哥来啦轩哥哥来啦轩哥哥来啦轩哥哥来啦轩哥哥来啦";
+    _signatureLab.text = [KGUserInfo shareInterace].personSignature;
     _signatureLab.textColor = Color_333333;
     _signatureLab.font = SYFont(11);
     _signatureLab.numberOfLines = 2;
@@ -74,12 +73,9 @@
     
 }
 
-- (void)setModel:(MineLoadCoverVCModel *)model{
-    _model = model;
-    _lowImage.image = Image(model.lowUrl);
-    [_headerImage sd_setImageWithURL:[NSURL URLWithString:model.headerUrl]];
-    _nikNameLab.text = model.nikNameStr;
-    _signatureLab.text = model.signtureStr;
+- (void)setCoverImage:(NSString *)coverImage{
+    _coverImage = coverImage;
+    [_lowImage sd_setImageWithURL:[NSURL URLWithString:coverImage]];
 }
 
 - (void)popToRootView{

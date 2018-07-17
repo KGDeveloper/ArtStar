@@ -25,7 +25,6 @@
 #import "VideoVC.h"
 #import "ThemeVC.h"
 #import "TalentVC.h"
-#import "GraphicVC.h"
 
 @interface ReleaseView ()
 //MARK:--顶部布局--
@@ -115,7 +114,7 @@
     //:--创建图文按钮--
     _topicBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(25, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"图文" image:Image(@"图文")];
     _topicBtu.action = ^(NSString *str) {
-        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[GraphicVC alloc]init]] animated:YES completion:nil];
+        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[ThemeVC alloc]init]] animated:YES completion:nil];
     };
     [self addSubview:_topicBtu];
     //:--创建拍摄按钮--
@@ -131,9 +130,9 @@
     };
     [self addSubview:_pictueBtu];
     //:--创建话题按钮--
-    _camcareBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(100 + btuWidth * 3, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"话题" image:Image(@"话题")];
+    _camcareBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(100 + btuWidth * 3, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"任务" image:Image(@"任务")];
     _camcareBtu.action = ^(NSString *str) {
-        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[ThemeVC alloc]init]] animated:YES completion:nil];
+//        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[ThemeVC alloc]init]] animated:YES completion:nil];
     };
     [self addSubview:_camcareBtu];
     //:--创建底部直线--

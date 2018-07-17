@@ -54,12 +54,14 @@ FriendsMessageViewDelegate>
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
     _msgCount = 0;
+    
     [self createData];
     [self createMsgArr];
     [self setTableView];
 }
 
 - (void)createMsgArr{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:friendsunreadMessageCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
         NSArray *tmpArr = result[@"data"];
@@ -71,8 +73,9 @@ FriendsMessageViewDelegate>
             mySelf.messageView.messStr = [NSString stringWithFormat:@"%@条新消息",mySelf.msgCount];
         }
         [mySelf.listView reloadData];
-    } fail:^(NSString *error) {
-        
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     }];
 }
 
@@ -80,7 +83,7 @@ FriendsMessageViewDelegate>
     
     _dataArr = [NSMutableArray array];
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:searchOthercfm parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:searchfriendMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@"1",@"rows":@"15"},@"brushPerss":@"1"} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *dataarray = result[@"data"];
             for (int i = 0; i <  dataarray.count; i++) {
@@ -91,13 +94,13 @@ FriendsMessageViewDelegate>
             [mySelf.listView reloadData];
             [mySelf.listView.mj_header endRefreshing];
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
 
     }];
 }
 
 - (void)setTableView{
-    _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight - NavButtomHeight - 20)];
+    _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight - NavButtomHeight - 49 - 20)];
     _listView.delegate = self;
     _listView.dataSource = self;
     _listView.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
@@ -163,27 +166,27 @@ FriendsMessageViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     FriendsModel *model = _dataArr[indexPath.row];
-    if ([model.composing isEqualToString:@"0"]) {
+    if ([model.composing integerValue] == 0) {
         return OnlyHaveTitleHeight;
-    }else if ([model.composing isEqualToString:@"1"]){
+    }else if ([model.composing integerValue] == 1){
         return OnlyHaveImageHeight;
-    }else if ([model.composing isEqualToString:@"2"]){
+    }else if ([model.composing integerValue] == 2){
         return curileImageHeight;
-    }else if ([model.composing isEqualToString:@"3"]){
+    }else if ([model.composing integerValue] == 3){
         return LeftAndRightHeight;
-    }else if ([model.composing isEqualToString:@"4"]){
+    }else if ([model.composing integerValue] == 4){
         return LeftAndRightHeight;
-    }else if ([model.composing isEqualToString:@"5"]){
+    }else if ([model.composing integerValue] == 5){
         return TopAndBottomHeight;
-    }else if ([model.composing isEqualToString:@"6"]){
+    }else if ([model.composing integerValue] == 6){
         return TopAndBottomHeight;
-    }else if ([model.composing isEqualToString:@"7"]){
+    }else if ([model.composing integerValue] == 7){
         return TopAndBottomHeight;
-    }else if ([model.composing isEqualToString:@"8"]){
+    }else if ([model.composing integerValue] == 8){
         return TopAndBottomHeight + 20;
-    }else if ([model.composing isEqualToString:@"9"]){
+    }else if ([model.composing integerValue] == 9){
         return TopAndBottomHeight + 20;
-    }else if ([model.composing isEqualToString:@"10"]){
+    }else if ([model.composing integerValue] == 10){
         return TopAndBottomHeight + 20;
     }else{
         return talentHeight;
@@ -192,65 +195,149 @@ FriendsMessageViewDelegate>
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FriendsModel *model = _dataArr[indexPath.row];
-    if ([model.composing isEqualToString:@"0"]) {
+    if ([model.composing integerValue] == 0) {
         FriendsOnlyHaveLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsOnlyHaveLabelCell"];
-        [self changeTextViewLineSpace:cell.textView string:model.content alignment:NSTextAlignmentCenter];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 1; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [self changeTextViewLineSpace:cell.textView string:str alignment:NSTextAlignmentCenter];
         cell.delegate = self;
-        cell.timeLab.text = model.createTime;
+        cell.timeLab.text = model.createTimeStr;
         cell.locationLab.text = model.location;
         [cell.commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
         [cell.zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
         cell.cellIndex = indexPath.row;
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikeNameLab.text = dic[@"username"];
+        cell.tileWidth.constant = [TransformChineseToPinying stringWidthFromString:model.createTimeStr font:SYFont(12) width:kScreenWidth];
         return cell;
-    }else if ([model.composing isEqualToString:@"1"]){
+    }else if ([model.composing integerValue] == 1){
         FriendsOnlyHaveImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsOnlyHaveImageCell"];
         cell.delegate = self;
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikNameLab.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"2"]){
+    }else if ([model.composing integerValue] == 2){
         FriendsCurilerImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsCurilerImageCell"];
-        [ChangeTextViewTextStyle changeTextView:cell.textView text:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentCenter];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 1; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [ChangeTextViewTextStyle changeTextView:cell.textView text:str alignment:NSTextAlignmentCenter];
         cell.delegate = self;
+        NSDictionary *dic = model.user;
+        [cell.headerIamge sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikNameLab.text = dic[@"username"];
+        cell.locationLab.text = model.location;
+        cell.timeLab.text = model.createTimeStr;
         return cell;
-    }else if ([model.composing isEqualToString:@"3"]){
+    }else if ([model.composing integerValue] == 3){
         FriendsLeftImageRightLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsLeftImageRightLabelCell"];
         cell.delegate = self;
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikNameLab.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"4"]){
+    }else if ([model.composing integerValue] == 4){
         FriendsLeftImageRightLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsLeftImageRightLabelCell"];
         cell.delegate = self;
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikNameLab.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"5"]){
+    }else if ([model.composing integerValue] == 5){
         FriendsButtomImageTopLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsButtomImageTopLabelCell"];
         cell.delegate = self;
         [cell showGraphic];
-        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentLeft];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 1; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [self changeTextViewLineSpace:cell.textView string:str alignment:NSTextAlignmentLeft];
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikName.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"6"]){
+    }else if ([model.composing integerValue] == 6){
         FriendsButtomImageTopLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsButtomImageTopLabelCell"];
         cell.delegate = self;
         [cell showGraphic];
-        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentCenter];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 0; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [self changeTextViewLineSpace:cell.textView string:str alignment:NSTextAlignmentCenter];
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikName.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"7"]){
+    }else if ([model.composing integerValue] == 7){
         FriendsButtomImageTopLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsButtomImageTopLabelCell"];
         cell.delegate = self;
         [cell showGraphic];
-        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentRight];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 0; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [self changeTextViewLineSpace:cell.textView string:str alignment:NSTextAlignmentRight];
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikName.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"8"]){
+    }else if ([model.composing integerValue] == 8){
         FriendsThemeTopImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeTopImageCell"];
-        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentLeft];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 0; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [self changeTextViewLineSpace:cell.textView string:str alignment:NSTextAlignmentLeft];
         cell.delegate = self;
+        NSDictionary *dic = model.user;
+        [cell.headerIamge sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikNameLab.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"9"]){
+    }else if ([model.composing integerValue] == 9){
         FriendsThemeTopImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeTopImageCell"];
-        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentCenter];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 0; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [self changeTextViewLineSpace:cell.textView string:str alignment:NSTextAlignmentCenter];
         cell.delegate = self;
+        NSDictionary *dic = model.user;
+        [cell.headerIamge sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikNameLab.text = dic[@"username"];
         return cell;
-    }else if ([model.composing isEqualToString:@"10"]){
+    }else if ([model.composing integerValue] == 10){
         FriendsThemeTopImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeTopImageCell"];
-        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentRight];
+        NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 0; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        [self changeTextViewLineSpace:cell.textView string:str alignment:NSTextAlignmentRight];
         cell.delegate = self;
+        NSDictionary *dic = model.user;
+        [cell.headerIamge sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikNameLab.text = dic[@"username"];
         return cell;
     }else{
         FriendsTalentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsTalentTableViewCell"];
@@ -299,7 +386,7 @@ FriendsMessageViewDelegate>
     FriendsModel *model = _dataArr[index];
     [KGRequestNetWorking postWothUrl:firendlikeCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":model.ID} succ:^(id result) {
         
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }
@@ -307,7 +394,7 @@ FriendsMessageViewDelegate>
     FriendsModel *model = _dataArr[index];
     [KGRequestNetWorking postWothUrl:friendComment parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":model.ID,@"content":@"大SB，小SB，中SB，SB群体"} succ:^(id result) {
         
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
     

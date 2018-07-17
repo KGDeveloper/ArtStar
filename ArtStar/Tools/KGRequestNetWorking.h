@@ -22,7 +22,7 @@
 + (void)postWothUrl:(NSString *)url
          parameters:(NSDictionary *)dic
                succ:(void(^)(id result))succ
-               fail:(void(^)(NSString *error))fail;
+               fail:(void(^)(NSError *error))fail;
 /**
  普通上传文件
 
@@ -44,7 +44,7 @@
              mimeType:(NSString *)mimetype
              progress:(NSProgress *)progress
                  succ:(void(^)(id result))succ
-                 fail:(void(^)(NSString *error))fail;
+                 fail:(void(^)(NSError *error))fail;
 
 
 

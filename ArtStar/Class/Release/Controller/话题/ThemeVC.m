@@ -26,6 +26,7 @@
     
     _modelView = [[ChangeTheModelView alloc]initWithFrame:self.view.frame type:EditTypeTheme];
     _modelView.delegate = self;
+    _modelView.themeType = EditThemeTypeCircular;
     [self.view addSubview:_modelView];
 }
 - (void)leftNavBtuAction:(UIButton *)sender{
@@ -34,9 +35,13 @@
 - (void)rightNavBtuAction:(UIButton *)sender{
     PreviewVC *vc = [[PreviewVC alloc]init];
     vc.model = _modelView.model;
-    vc.type = EditTypeTheme;
-    vc.themeType = _modelView.themeType;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([_modelView.model.location isEqualToString:@"你在哪里？"]) {
+        [[MBProgressHUD showHUDAddedTo:self.view animated:YES] bwm_hideWithTitle:@"请选择你的位置" hideAfter:1];
+    }else{
+        vc.type = EditTypeTheme;
+        vc.themeType = _modelView.themeType;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 //MARK:--ChangeTheModelViewDelegate--
 - (void)pushViewControllerWithVC:(YourLocationVC *)vc{

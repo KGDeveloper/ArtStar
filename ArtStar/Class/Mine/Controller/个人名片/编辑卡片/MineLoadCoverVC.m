@@ -13,9 +13,6 @@
 
 @end
 
-@implementation MineLoadCoverVCModel
-@end
-
 @implementation MineLoadCoverVC
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -35,7 +32,7 @@
     
     MineCardLoadFriendCoverView *coverView = [[MineCardLoadFriendCoverView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth/750*580 + 70)];
     __weak typeof(self) mySelf = self;
-//    coverView.model = _model;
+    coverView.coverImage = _coverImage;
     coverView.popRootViewController = ^{
         [mySelf.navigationController popViewControllerAnimated:YES];
     };

@@ -332,12 +332,12 @@
 		287D7D5820EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */; };
 		287D7D5C20ECD28600AD749E /* CommenityHotSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5B20ECD28500AD749E /* CommenityHotSearchModel.m */; };
 		287D7D5F20ECD29C00AD749E /* CommenityHoistorySearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D7D5E20ECD29C00AD749E /* CommenityHoistorySearchModel.m */; };
+		2887886220F8AAEA0025515A /* MineMyWordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2887886120F8AAEA0025515A /* MineMyWordsModel.m */; };
 		28A3DC6E20A02C3A00FEDD62 /* IrregularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC6D20A02C3A00FEDD62 /* IrregularView.m */; };
 		28A3DC7120A04BD100FEDD62 /* CustomBtu.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7020A04BD100FEDD62 /* CustomBtu.m */; };
 		28A3DC7820A05A7E00FEDD62 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7720A05A7E00FEDD62 /* VideoVC.m */; };
 		28A3DC7B20A05AA700FEDD62 /* TalentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7A20A05AA700FEDD62 /* TalentVC.m */; };
 		28A3DC7E20A05AB500FEDD62 /* ThemeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC7D20A05AB500FEDD62 /* ThemeVC.m */; };
-		28A3DC8120A05ACC00FEDD62 /* GraphicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC8020A05ACC00FEDD62 /* GraphicVC.m */; };
 		28A3DC8420A05EE300FEDD62 /* ChangeModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DC8320A05EE300FEDD62 /* ChangeModelView.m */; };
 		28A6C9CB20D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A6C9CA20D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.m */; };
 		28A6C9D020D8A33700ECBF4F /* MineChooseIndustryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A6C9CE20D8A33700ECBF4F /* MineChooseIndustryTableViewCell.m */; };
@@ -1107,6 +1107,8 @@
 		287D7D5B20ECD28500AD749E /* CommenityHotSearchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommenityHotSearchModel.m; sourceTree = "<group>"; };
 		287D7D5D20ECD29C00AD749E /* CommenityHoistorySearchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommenityHoistorySearchModel.h; sourceTree = "<group>"; };
 		287D7D5E20ECD29C00AD749E /* CommenityHoistorySearchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommenityHoistorySearchModel.m; sourceTree = "<group>"; };
+		2887886020F8AAEA0025515A /* MineMyWordsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineMyWordsModel.h; sourceTree = "<group>"; };
+		2887886120F8AAEA0025515A /* MineMyWordsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineMyWordsModel.m; sourceTree = "<group>"; };
 		28A3DC6C20A02C3A00FEDD62 /* IrregularView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IrregularView.h; sourceTree = "<group>"; };
 		28A3DC6D20A02C3A00FEDD62 /* IrregularView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IrregularView.m; sourceTree = "<group>"; };
 		28A3DC6F20A04BD100FEDD62 /* CustomBtu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomBtu.h; sourceTree = "<group>"; };
@@ -1117,8 +1119,6 @@
 		28A3DC7A20A05AA700FEDD62 /* TalentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TalentVC.m; sourceTree = "<group>"; };
 		28A3DC7C20A05AB500FEDD62 /* ThemeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemeVC.h; sourceTree = "<group>"; };
 		28A3DC7D20A05AB500FEDD62 /* ThemeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemeVC.m; sourceTree = "<group>"; };
-		28A3DC7F20A05ACC00FEDD62 /* GraphicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicVC.h; sourceTree = "<group>"; };
-		28A3DC8020A05ACC00FEDD62 /* GraphicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphicVC.m; sourceTree = "<group>"; };
 		28A3DC8220A05EE300FEDD62 /* ChangeModelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeModelView.h; sourceTree = "<group>"; };
 		28A3DC8320A05EE300FEDD62 /* ChangeModelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeModelView.m; sourceTree = "<group>"; };
 		28A6C9C920D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineWriteTheIdentityInfoVC.h; sourceTree = "<group>"; };
@@ -2314,6 +2314,8 @@
 				28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */,
 				2847BC8320F60B090052EE19 /* MineSelfMyLabelsDetailModel.h */,
 				2847BC8420F60B090052EE19 /* MineSelfMyLabelsDetailModel.m */,
+				2887886020F8AAEA0025515A /* MineMyWordsModel.h */,
+				2887886120F8AAEA0025515A /* MineMyWordsModel.m */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -2701,15 +2703,6 @@
 				28E56FD120AA8A1000203D1E /* KGTextField.m */,
 			);
 			path = Component;
-			sourceTree = "<group>";
-		};
-		28A3DC7220A05A3B00FEDD62 /* 图文 */ = {
-			isa = PBXGroup;
-			children = (
-				28A3DC7F20A05ACC00FEDD62 /* GraphicVC.h */,
-				28A3DC8020A05ACC00FEDD62 /* GraphicVC.m */,
-			);
-			path = "图文";
 			sourceTree = "<group>";
 		};
 		28A3DC7320A05A4600FEDD62 /* 话题 */ = {
@@ -3590,7 +3583,6 @@
 				28A3DC7520A05A5700FEDD62 /* 视频 */,
 				28A3DC7420A05A4C00FEDD62 /* 达人 */,
 				28A3DC7320A05A4600FEDD62 /* 话题 */,
-				28A3DC7220A05A3B00FEDD62 /* 图文 */,
 				A81C961C2099C4A500E6D223 /* ChooseModelVC.h */,
 				A81C961D2099C4A500E6D223 /* ChooseModelVC.m */,
 				28E2AECD20A97F8800ACC119 /* YourLocationVC.h */,
@@ -4160,6 +4152,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ArtStar/Pods-ArtStar-resources.sh",
+				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/AMapNavi/AMapNaviKit.framework/AMapNavi.bundle",
 				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle",
 				"${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj",
 				"${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj",
@@ -4175,6 +4169,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMapNavi.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RongCloud.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hans.lproj",
@@ -4328,7 +4324,6 @@
 				284C8D8B20BFDF1700487225 /* KGCityChooseCell.m in Sources */,
 				28211C8B20A59BE7009C8E49 /* PreviewVerticalView.m in Sources */,
 				283484A120C66CC300AB6E9A /* ReadBooksView.m in Sources */,
-				28A3DC8120A05ACC00FEDD62 /* GraphicVC.m in Sources */,
 				2814621120B3FC64000C5E47 /* FriendsDetailTimeComponentView.m in Sources */,
 				281DF71920D26D3C0086030E /* MineCollectionBookView.m in Sources */,
 				A81C960A2099B32900E6D223 /* ReleaseView.m in Sources */,
@@ -4564,6 +4559,7 @@
 				2868409520B2B4EC00441926 /* ChangeTextViewTextStyle.m in Sources */,
 				28E8E88720B6A8D0002E10FC /* HeadLinesDetailVC.m in Sources */,
 				28F996A120A43E2600678494 /* ZLPlayer.m in Sources */,
+				2887886220F8AAEA0025515A /* MineMyWordsModel.m in Sources */,
 				287D7D4A20EA1C4000AD749E /* FoodDetailVC.m in Sources */,
 				281DF6FA20D257EE0086030E /* MineCollectionInstitutionViewCell.m in Sources */,
 				286A0A7720EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.m in Sources */,

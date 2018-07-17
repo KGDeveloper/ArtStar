@@ -50,24 +50,21 @@
                 [mySelf.listView reloadData];
             }
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }
 - (void)createData{
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:selectNewsByUid parameters:@{@"nid":_ID} succ:^(id result) {
-        if ([result[@"code"] integerValue] == 200) {
-            NSArray *arr = result[@"data"];
-            NSDictionary *dic = arr[0];
-            mySelf.model = [CommenityNewsDetailModel mj_objectWithKeyValues:dic];
-            NSData *data = [mySelf.model.content dataUsingEncoding:NSUTF8StringEncoding];
-            NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            mySelf.dataArr = [NSMutableArray arrayWithArray:array];
-            mySelf.listView.tableHeaderView = [mySelf tableViewHeader];
-            [mySelf.listView reloadData];
-        }
-    } fail:^(NSString *error) {
+        NSDictionary *dic = result;
+        mySelf.model = [CommenityNewsDetailModel mj_objectWithKeyValues:dic];
+        NSData *data = [mySelf.model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        mySelf.dataArr = [NSMutableArray arrayWithArray:array];
+        mySelf.listView.tableHeaderView = [mySelf tableViewHeader];
+        [mySelf.listView reloadData];
+    } fail:^(NSError *error) {
         
     }];
 }
@@ -257,7 +254,7 @@
         if ([result[@"code"] integerValue] == 200) {
             [mySelf createCommentArrData];
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }

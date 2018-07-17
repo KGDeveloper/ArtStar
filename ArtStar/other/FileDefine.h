@@ -35,7 +35,8 @@
 
 #define TabLeViewFootView [[UIView alloc]initWithFrame:CGRectZero]
 
-#define GeocodeApiKey @"446c203cd06fabadbfc26884db375281"
+#define GeocodeApiKey @"e172283179a7520685fe0053ea06a4fd"
+
 #define QiniuAK @"GtoI3GgOSMPciZWop4byiRMAGlvHv2RVvbCUXLYS"
 #define QiniuSK @"d7wyhtUIYp7ekQ6vrLGYvGCvfvHePM-YIpe1d82_"
 #define QiniuScope @"literarystar"
@@ -169,8 +170,36 @@
  @return 删除图片
  */
 #define deleteImage [serverIP stringByAppendingString:@"image/deleteImage"]
-#define qiniuToken [serverIP stringByAppendingString:@"ReleaseFriendTimeline/searchreturnToken"]
+/**
+ 删除我的标签
 
+ @return 删除我的标签
+ */
+#define deleteMyLabel [serverIP stringByAppendingString:@"myLabel/deleteMyLabel"]
+/**
+ 删除喜欢的行业
+
+ @return 删除喜欢的行业
+ */
+#define industrydeleteByid [serverIP stringByAppendingString:@"industry/deleteByid"]
+/**
+ 获取七牛云token
+
+ @return 获取七牛云token
+ */
+#define qiniuToken [serverIP stringByAppendingString:@"ReleaseFriendTimeline/searchreturnToken"]
+/**
+ 获取融云用户信息
+
+ @return 获取融云用户信息
+ */
+#define rongUserID [serverIP stringByAppendingString:@"user/getInforById"]
+/**
+ 删除我的世界
+
+ @return 删除我的世界
+ */
+#define deleteMyWord [serverIP stringByAppendingString:@"myWord/deleteMyWord"]
 
 
 

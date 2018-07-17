@@ -127,7 +127,7 @@
             [mySelf.dataArr removeAllObjects];
             [mySelf.headLinesView starRefrash];
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }
@@ -144,7 +144,7 @@
             }
             mySelf.headLinesView.dataArr = mySelf.dataArr;
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
     
@@ -188,7 +188,7 @@
             mySelf.headLinesView.dataArr = mySelf.dataArr;
             mySelf.searchView.hidden = YES;
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }
@@ -204,7 +204,7 @@
                 [mySelf.hotArr addObject:model];
             }
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
     
@@ -217,7 +217,7 @@
                 [mySelf.hoistryArr addObject:model];
             }
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }

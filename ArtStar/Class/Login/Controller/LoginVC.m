@@ -164,6 +164,14 @@
     self.passWordTF.delegate = self;
     self.passWordTF.placeholder = @"密码";
     
+    if (_userTF.text.length == 11 && _passWordTF.text.length >= 6) {
+        _loginBtu.backgroundColor = Color_333333;
+        _loginBtu.enabled = YES;
+    }
+    
+    NSNotification *notification =[NSNotification notificationWithName:@"LoginRongClond" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
 }
 //MARK:--密码登录按钮点击事件--
 - (IBAction)passLoginClick:(UIButton *)sender {
@@ -273,17 +281,19 @@
         [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"msgAuthCode":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
             if ([result[@"message"] isEqualToString:@"操作成功！"]) {
                 NSDictionary *userDic = result[@"data"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];//:--number类型--
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];//:--number类型--
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];//:--number类型--
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"token"] forKey:@"userToken"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"introduce"] forKey:@"userIntroduce"];
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                NSNotification *notification =[NSNotification notificationWithName:@"LoginRongClond" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 window.rootViewController = [[TabBarVC alloc]init];
             }else if ([result[@"message"] isEqualToString:@"验证码有误"]){
@@ -294,7 +304,7 @@
                 mySelf.errorLab.text = @"用户未注册,请先注册账号";
             }
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        } fail:^(NSString *error) {
+        } fail:^(NSError *error) {
             mySelf.errorLab.hidden = NO;
             mySelf.errorLab.text = @"登录超时";
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
@@ -312,10 +322,15 @@
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
+                id personSignature = userDic[@"personSignature"];
+                if (![personSignature isKindOfClass:[NSNull class]]) {
+                    [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
+                }
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                NSNotification *notification =[NSNotification notificationWithName:@"LoginRongClond" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 window.rootViewController = [[TabBarVC alloc]init];
             }else if ([result[@"message"] isEqualToString:@"用户未注册"]){
@@ -326,7 +341,7 @@
                 mySelf.errorLab.text = @"用户名/密码错误";
             }
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        } fail:^(NSString *error) {
+        } fail:^(NSError *error) {
             mySelf.errorLab.hidden = NO;
             mySelf.errorLab.text = @"登录超时";
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
@@ -341,7 +356,7 @@
     
     [KGRequestNetWorking postWothUrl:sendMsgAuthCode parameters:@{@"telphone":_userTF.text,@"templateId":@"2"} succ:^(id result) {
         
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
     
@@ -437,6 +452,7 @@
     }
     return _guideView;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

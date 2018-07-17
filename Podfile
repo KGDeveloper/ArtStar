@@ -17,6 +17,10 @@ pod 'XHWebImageAutoSize', '~> 1.1.2'
 pod 'Qiniu', '~> 7.2.4'
 #pod 'MBProgressHUD', '~> 1.1.0'
 pod 'MBProgressHUD+BWMExtension', '~> 1.0.1'
+pod 'AMap3DMap', '~> 6.2.0'
+pod 'AMapSearch', '~> 6.1.1'
+pod 'AMapLocation', '~> 2.6.0'
+pod 'AMapNavi', '~> 6.1.1'
 
   use_frameworks!
 

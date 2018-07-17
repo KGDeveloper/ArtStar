@@ -111,7 +111,7 @@
             mySelf.historyArr = nil;
             [mySelf.listView reloadData];
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
     [_listView reloadData];

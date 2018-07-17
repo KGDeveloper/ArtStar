@@ -166,7 +166,7 @@
                         <constraint firstAttribute="width" constant="16" id="qct-kz-5fR"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vE3-FJ-Ug8">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="17695659227" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vE3-FJ-Ug8">
                     <rect key="frame" x="73" y="312" width="255" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="ptt-JY-xAl"/>
@@ -175,7 +175,7 @@
                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ggA-B8-T2Y">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ggA-B8-T2Y">
                     <rect key="frame" x="73" y="363" width="145" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="Kq0-K6-yTE"/>

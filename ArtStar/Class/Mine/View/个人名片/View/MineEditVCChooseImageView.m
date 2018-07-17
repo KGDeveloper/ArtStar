@@ -66,7 +66,7 @@
                 mySelf.isChoose = NO;
                 mySelf.deleteBtu.hidden = YES;
             }
-        } fail:^(NSString *error) {
+        } fail:^(NSError *error) {
             
         }];
     }else{

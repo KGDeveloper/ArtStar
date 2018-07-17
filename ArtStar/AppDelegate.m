@@ -12,7 +12,7 @@
 #import "TabBarVC.h"
 #import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate ()<RCIMUserInfoDataSource,RCIMGroupInfoDataSource,UNUserNotificationCenterDelegate>
+@interface AppDelegate ()<UNUserNotificationCenterDelegate,RCIMUserInfoDataSource,RCIMGroupInfoDataSource>
 
 @end
 
@@ -28,15 +28,77 @@
     [self.window makeKeyAndVisible];
     /*设置全局输入框控制类*/
     [self setUpIQKeyboardManager];
-    //:--注册融云--
     [self registRongIM];
-    
     sleep(3);
     
     [self cllLocation];
 
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LoginRongClond" object:nil];
+    
     return YES;
 }
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    
+    [[RCIM sharedRCIM] connectWithToken:[KGUserInfo shareInterace].userToken success:^(NSString *userId) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [RCIM sharedRCIM].userInfoDataSource = self;
+            [RCIM sharedRCIM].groupInfoDataSource = self;
+            [RCIM sharedRCIM].enableMessageRecall = YES;
+            [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
+            [RCIM sharedRCIM].enablePersistentUserInfoCache = YES;
+        });
+    } error:^(RCConnectErrorCode status) {
+        
+    } tokenIncorrect:^{
+        
+    }];
+    
+}
+
+- (void)registRongIM{
+    
+    [[RCIM sharedRCIM] initWithAppKey:@"c9kqb3rdcmuej"];
+//    if ([KGUserInfo shareInterace].userToken.length > 0 && [KGUserInfo shareInterace].userToken != nil) {
+//        [[RCIM sharedRCIM] connectWithToken:[KGUserInfo shareInterace].userToken success:^(NSString *userId) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [RCIM sharedRCIM].userInfoDataSource = self;
+//                [RCIM sharedRCIM].groupInfoDataSource = self;
+//                [RCIM sharedRCIM].enableMessageRecall = YES;
+//                [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
+//                [RCIM sharedRCIM].enablePersistentUserInfoCache = YES;
+//            });
+//        } error:^(RCConnectErrorCode status) {
+//
+//        } tokenIncorrect:^{
+//
+//        }];
+//    }
+}
+
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion{
+    
+    if ([userId isEqualToString:[KGUserInfo shareInterace].userToken]) {
+        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+        userInfo.userId = userId;
+        userInfo.name = [KGUserInfo shareInterace].userName;
+        userInfo.portraitUri = [KGUserInfo shareInterace].portraitUri;
+        return completion(userInfo);
+    }else{
+        [KGRequestNetWorking postWothUrl:rongUserID parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"uid":userId} succ:^(id result) {
+            
+        } fail:^(NSError *error) {
+            
+        }];
+        RCUserInfo *info = [[RCIM sharedRCIM] getUserInfoCache:userId];
+        return completion(info);
+    }
+}
+
+- (void)getGroupInfoWithGroupId:(NSString *)groupId completion:(void (^)(RCGroup *groupInfo))completion{
+    
+}
+
 - (void)cllLocation{
     KGLocationCityManager *manager = [KGLocationCityManager shareManager];
     [manager obtainYourLocation];
@@ -66,40 +128,6 @@
     keyboardManager.placeholderFont = FZFont(15);
     /*输入框距离键盘的距离*/
     keyboardManager.keyboardDistanceFromTextField = 25.0f;
-}
-
-- (void)registRongIM{
-    [[RCIM sharedRCIM] initWithAppKey:@"x4vkb1qpxf17k"];
-
-    [[RCIM sharedRCIM] connectWithToken:@"8iwcGirSw6ixC70TOVrlG8rd0S6wv6EExMQdjChmkLQhdR8kPL5hoK0+Ddui7n/OsTPjgWaPpdP6u/Ut+l0yDA==" success:^(NSString *userId) {
-        [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"RongId"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [RCIM sharedRCIM].userInfoDataSource = self;
-            [RCIM sharedRCIM].groupInfoDataSource = self;
-            [RCIM sharedRCIM].enableMessageRecall = YES;
-            [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
-            [RCIM sharedRCIM].enablePersistentUserInfoCache = YES;
-        });
-    } error:^(RCConnectErrorCode status) {
-        
-    } tokenIncorrect:^{
-
-    }];
-}
-
-- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion{
-    if ([userId isEqualToString:@"别恋"]) {
-        RCUserInfo *userInfo = [[RCUserInfo alloc]init];
-        userInfo.userId = userId;
-        userInfo.name = @"别恋";
-        userInfo.portraitUri = @"http://img3.duitang.com/uploads/item/201508/02/20150802102918_UZYdH.jpeg";
-        return completion(userInfo);
-    }else{
-        RCUserInfo *info = [[RCIM sharedRCIM] getUserInfoCache:userId];
-        return completion(info);
-    }
-//    RCUserInfo *info = [[RCUserInfo alloc]initWithUserId:[RCIM sharedRCIM].currentUserInfo.userId name:[RCIM sharedRCIM].currentUserInfo.name portrait:[RCIM sharedRCIM].currentUserInfo.portraitUri];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

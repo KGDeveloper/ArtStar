@@ -16,9 +16,11 @@
 
 @interface MineEditMyLabelCell : UITableViewCell
 
+@property (nonatomic,copy) NSArray *titleArr;
 @property (nonatomic,weak) id<MineEditMyLabelCellDelegate>delegate;
 
 - (void)showLabel;
 - (void)hidenLabel;
+- (CGFloat)arrayToHeight:(NSArray *)arr;
 
 @end

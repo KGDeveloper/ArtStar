@@ -88,7 +88,7 @@
         cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
     }else if (_type == LoveBook){
         MineLoveBookModel *model = _dataArr[indexPath.row];
-//        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
+        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
     }
     return cell;
 }
@@ -103,7 +103,8 @@
                 self.sendChoose(nil, _music, nil);
                 break;
             case LoveBook:
-                self.sendChoose(nil, nil, _book);
+                
+                self.sendChoose(nil, nil, _dataArr[indexPath.row]);
                 break;
             default:
                 break;
@@ -138,13 +139,13 @@
             NSArray *arr = result[@"data"];
             for (int i = 0; i < arr.count; i++) {
                 NSDictionary *dic = arr[i];
-                MineLoveMoviesModel *model = [MineLoveMoviesModel mj_objectWithKeyValues:dic];
+                MineLoveBookModel *model = [MineLoveBookModel mj_objectWithKeyValues:dic];
                 [mySelf.dataArr addObject:model];
             }
             [mySelf.listView reloadData];
         }
         [MBProgressHUD hideHUDForView:mySelf animated:YES];
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         [MBProgressHUD hideHUDForView:mySelf animated:YES];
     }];
     

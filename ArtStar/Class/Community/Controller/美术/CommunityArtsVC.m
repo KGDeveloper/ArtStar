@@ -228,7 +228,7 @@
 - (void)createHeadLineData{
     [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":_titleName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
         
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }

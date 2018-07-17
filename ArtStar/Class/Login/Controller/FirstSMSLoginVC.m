@@ -99,7 +99,7 @@
             [self presentViewController:registVC animated:YES completion:nil];
         }
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         mySelf.buttomErrorBtu.hidden = NO;
         mySelf.buttomErrorBtu.text = @"验证码错误";
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
@@ -121,7 +121,7 @@
         }else{
             mySelf.topErrorLab.hidden = YES;
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         mySelf.topErrorLab.hidden = NO;
         mySelf.topErrorLab.text = @"验证码发送失败";
     }];

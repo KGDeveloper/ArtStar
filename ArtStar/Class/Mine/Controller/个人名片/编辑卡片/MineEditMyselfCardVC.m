@@ -35,7 +35,8 @@ DatePickerViewDelegate,
 MineCenterMyCoverCellDelegate,
 MineSchoolAndWorksCellDelegate,
 MineEditMyLabelCellDelegate,
-MineLoveMoviesAndMusicAndBooksCellDelegate>
+MineLoveMoviesAndMusicAndBooksCellDelegate,
+UITextFieldDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) KGCamera *cameraView;
@@ -48,12 +49,19 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 @property (nonatomic,strong) NSMutableDictionary *userInfoDic;
 @property (nonatomic,strong) NSMutableArray *userMusicDic;
 @property (nonatomic,strong) NSMutableArray *userMoviceDic;
-@property (nonatomic,strong) NSMutableArray *userBookDic;
 @property (nonatomic,copy) NSString *coverImage;//:--封面--
+@property (nonatomic,copy) NSString *coverNowImage;
 @property (nonatomic,copy) NSString *headerImage;//:--头像--
 @property (nonatomic,strong) NSMutableArray *imageUris;//:--保存选择的图片--
 @property (nonatomic,strong) NSMutableArray *imageUrisHttp;//:--保存选择的图片地址--
 @property (nonatomic,strong) NSMutableArray *headerImageArr;//:--保存选择的图片地址--
+@property (nonatomic,strong) NSMutableArray *mylabelArr;//:--我的标签--
+@property (nonatomic,strong) NSMutableArray *mylabelChooseArr;//:--我的标签--
+
+@property (nonatomic,strong) UITextField *cellText;
+//MARK:--------------------------------------喜欢的--------------------------------------------------
+@property (nonatomic,strong) NSMutableArray *loveBooks;//:--我的标签--
+
 
 @end
 
@@ -72,11 +80,27 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     _userInfoDic = [NSMutableDictionary dictionary];
     _userMusicDic = [NSMutableArray array];
     _userMoviceDic = [NSMutableArray array];
-    _userBookDic = [NSMutableArray array];
     _imageUris = [NSMutableArray array];
     _imageUrisHttp = [NSMutableArray array];
     _headerImageArr = [NSMutableArray array];
-    
+    _mylabelArr = [NSMutableArray array];
+    _loveBooks = [NSMutableArray array];
+    NSArray *array = _model.mylabels;
+    for (int i = 0; i < array.count; i++) {
+        NSDictionary *dic = array[i];
+        [_mylabelArr addObject:@{@"name":dic[@"name"],@"id":dic[@"id"]}];
+    }
+    NSArray *tmp = _model.imageUris;
+    for (int i = 0; i < tmp.count; i++) {
+        MineSelfCenterImageLIstModel *model = [MineSelfCenterImageLIstModel mj_objectWithKeyValues:tmp[i]];
+        if ([model.iscover integerValue] == 1) {
+            if (model.imageURL.length > 0 && model.imageURL != nil) {
+                _coverNowImage = model.imageURL;
+            }else{
+                 _coverNowImage = @"http://img.zcool.cn/community/014dda5548dc320000019ae9402052.jpg@1280w_1l_2o_100sh.jpg";
+            }
+        }
+    }
     [self setTableView];
     
 }
@@ -101,9 +125,20 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 
 - (void)uploadData{
     __weak typeof(self) mySelf = self;
-    [_userInfoDic setObject:_imageUrisHttp forKey:@"imageUris"];
+    if (_imageUrisHttp.count > 0) {
+        [_userInfoDic setObject:_imageUrisHttp forKey:@"imageUris"];
+    }
+    if (_mylabelChooseArr.count > 0) {
+        [_userInfoDic setObject:_mylabelChooseArr forKey:@"mylabels"];
+    }
     [_userInfoDic setObject:_model.username forKey:@"username"];
-    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userInfoDic,@"userMovice":_userMoviceDic,@"userMusic":_userMusicDic,@"userBook":_userBookDic} succ:^(id result) {
+    if (_model.personSignature != nil || _model.personSignature != NULL) {
+        [_userInfoDic setObject:_model.personSignature forKey:@"personSignature"];
+    }
+    if (_model.school != nil || _model.school != NULL) {
+        [_userInfoDic setObject:_model.school forKey:@"school"];
+    }
+    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userInfoDic,@"userMovice":_userMoviceDic,@"userMusic":_userMusicDic,@"userBook":_loveBooks} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             if (mySelf.refreshCenterListView) {
                 mySelf.refreshCenterListView();
@@ -111,7 +146,7 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
             [mySelf.navigationController popViewControllerAnimated:YES];
         }
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     }];
 }
@@ -168,7 +203,13 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
     }else if (indexPath.row == 2){
         return 155;
     }else if(indexPath.row == 3){
-        return 50;
+        MineEditMyLabelCell *cell = [MineEditMyLabelCell new];
+        NSMutableArray *arr = [NSMutableArray array];
+        for (int i = 0; i < self.mylabelArr.count; i++) {
+            NSDictionary *dic = self.mylabelArr[i];
+            [arr addObject:dic[@"name"]];
+        }
+        return [cell arrayToHeight:arr.copy];
     }else if(indexPath.row == 4){
         return 770;
     }else{
@@ -193,30 +234,62 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
         return cell;
     }else if(indexPath.row == 1){
         MineCenterMyCoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineCenterMyCoverCell"];
-        NSArray *tmp = _model.imageUris;
-        for (int i = 0; i < tmp.count; i++) {
-            MineSelfCenterImageLIstModel *model = [MineSelfCenterImageLIstModel mj_objectWithKeyValues:tmp[i]];
-            if ([model.iscover integerValue] == 1) {
-                [cell.coverImage sd_setImageWithURL:[NSURL URLWithString:model.imageURL]];
-            }
-        }
+        [cell.coverImage sd_setImageWithURL:[NSURL URLWithString:_coverNowImage]];
         cell.delegate = self;
         return cell;
     }else if(indexPath.row == 2){
         MineSchoolAndWorksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineSchoolAndWorksCell"];
         cell.delegate = self;
+        NSDictionary *dic = [_model.industries firstObject];
+        cell.workName.text = dic[@"name"];
+        cell.schoolName.text = _model.school;
+        cell.schoolName.delegate = self;
+        _cellText = cell.schoolName;
         return cell;
     }else if(indexPath.row == 3){
         MineEditMyLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineEditMyLabelCell"];
         cell.delegate = self;
-        [cell hidenLabel];
+        NSMutableArray *arr = [NSMutableArray array];
+        for (int i = 0; i < self.mylabelArr.count; i++) {
+            NSDictionary *dic = self.mylabelArr[i];
+            [arr addObject:dic[@"name"]];
+        }
+        cell.titleArr = arr.copy;
+        if (arr.count > 0) {
+            [cell showLabel];
+        }else{
+            [cell hidenLabel];
+        }
         return cell;
     }else if(indexPath.row == 4){
         MineLoveMoviesAndMusicAndBooksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineLoveMoviesAndMusicAndBooksCell"];
+        cell.bookArr = _model.userBooks;
         cell.delegate = self;
         return cell;
     }else{
         MineWordLoveFoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineWordLoveFoodsCell"];
+        NSArray *arr = _model.mywords;
+        __block NSMutableArray *tmpfoodArr = [NSMutableArray array];
+        __block NSMutableArray *tmpsportArr = [NSMutableArray array];
+        __block NSMutableArray *tmpleiArr = [NSMutableArray array];
+        __block NSMutableArray *tmpfootpointArr = [NSMutableArray array];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *tmpDic = obj;
+            if ([tmpDic[@"pid"] integerValue] == 4) {
+                [tmpfoodArr addObject:tmpDic];
+            }else if ([tmpDic[@"pid"] integerValue] == 5){
+                [tmpsportArr addObject:tmpDic];
+            }else if ([tmpDic[@"pid"] integerValue] == 6){
+                [tmpleiArr addObject:tmpDic];
+            }else if ([tmpDic[@"pid"] integerValue] == 7){
+                [tmpfootpointArr addObject:tmpDic];
+            }
+        }];
+        
+        [cell addArray:tmpfoodArr toView:cell.foodView];
+        [cell addArray:tmpsportArr toView:cell.sportView];
+        [cell addArray:tmpleiArr toView:cell.typeView];
+        [cell addArray:tmpfootpointArr toView:cell.footView];
         return cell;
     }
 }
@@ -227,15 +300,24 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
         _isCoverImage = YES;
     }else if (indexPath.row == 5){
         MineMySelfWordVC *wordVC = [[MineMySelfWordVC alloc]init];
+        __weak typeof(self) mySelf = self;
+        wordVC.myWords = _model.mywords;
+        wordVC.sendChooseWords = ^(NSArray *foodArr, NSArray *spotArr, NSArray *leisureArr, NSArray *footPointArr) {
+            NSMutableArray *arr = [NSMutableArray arrayWithArray:foodArr];
+            [arr addObjectsFromArray:spotArr];
+            [arr addObjectsFromArray:leisureArr];
+            [arr addObjectsFromArray:footPointArr];
+            [mySelf.userInfoDic setObject:arr forKey:@"mywords"];
+        };
         [self pushNoTabBarViewController:wordVC animated:YES];
     }
 }
 //MARK:--------------------------------------MineEditMyselfInfoEditCellDelegate--------------------------------------------------
 - (void)sendIntroudceToController:(NSString *)introudce{
-    [_userInfoDic setObject:introudce forKey:@"personSignature"];
+    _model.personSignature = introudce;
 }
 - (void)sendNikNameToController:(NSString *)nikName{
-    [_userInfoDic setObject:nikName forKey:@"username"];
+    _model.username = nikName;
 }
 - (void)touchUITableViewCellMakeSomeThingWithTitle:(NSString *)title{
     if ([title isEqualToString:@"头像"]) {
@@ -291,6 +373,7 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
             mySelf.coverImage = [[KGQiniuUploadManager shareInstance] getImagePath:[images firstObject]];
             [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:mySelf.coverImage fileName:nil result:^(NSString *strPath) {
                 NSDictionary *dic = @{@"imageURL":strPath,@"iscover":@"1"};
+                mySelf.coverNowImage = strPath;
                 [mySelf.imageUrisHttp addObject:dic];
             }];
         }else if (mySelf.isChooseHeaderIamge == YES){
@@ -321,6 +404,7 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
             mySelf.isCoverImage = NO;
             mySelf.coverImage = [[KGQiniuUploadManager shareInstance] getImagePath:image];
             [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:mySelf.coverImage fileName:nil result:^(NSString *strPath) {
+                mySelf.coverNowImage = strPath;
                 NSDictionary *dic = @{@"imageURL":strPath,@"iscover":@"1"};
                 [mySelf.imageUrisHttp addObject:dic];
             }];
@@ -399,12 +483,35 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 }
 //MARK:----------------------------------------MineCenterMyCoverCellDelegate------------------------------------------------
 - (void)pushControllerLoadResult{
-    [self pushNoTabBarViewController:[[MineLoadCoverVC alloc]init] animated:YES];
+    MineLoadCoverVC *vc = [[MineLoadCoverVC alloc]init];
+    vc.coverImage = _coverNowImage;
+    [self pushNoTabBarViewController:vc animated:YES];
 }
 //MARK:------------------------------------选择行业----------------------------------------------------
 - (MineWorksIndustryView *)worksIndustryView{
     if (!_worksIndustryView) {
         _worksIndustryView = [[MineWorksIndustryView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        __weak typeof(self) mySelf = self;
+        _worksIndustryView.cancelStr = @"确定";
+        _worksIndustryView.sendChooseworks = ^(NSString *name, NSString *ID) {
+            dispatch_queue_t deleteQueue = dispatch_queue_create("请求删除旧行业", DISPATCH_QUEUE_SERIAL);
+            dispatch_sync(deleteQueue, ^{
+                NSDictionary *dic = [mySelf.model.industries firstObject];
+                if (dic[@"id"] != nil) {
+                    [KGRequestNetWorking postWothUrl:industrydeleteByid parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":dic[@"id"]} succ:^(id result) {
+                        
+                    } fail:^(NSError *error) {
+                        
+                    }];
+                }
+            });
+            mySelf.model.industries = @[@{@"name":name,@"id":ID}];
+            NSDictionary *dic = [mySelf.model.industries firstObject];
+            if (dic != nil) {
+                [mySelf.userInfoDic setObject:@[@{@"id":dic[@"id"]}] forKey:@"industries"];
+            }
+            [mySelf.listView reloadData];
+        };
         [self.navigationController.view addSubview:_worksIndustryView];
     }
     return _worksIndustryView;
@@ -413,30 +520,81 @@ MineLoveMoviesAndMusicAndBooksCellDelegate>
 - (void)showWorksIndutryView{
     self.worksIndustryView.hidden = NO;
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField == _cellText) {
+        _model.school = _cellText.text;
+        [_listView reloadData];
+    }
+}
 //MARK:---------------------------------------MineEditMyLabelCellDelegate-------------------------------------------------
 - (void)pushMyWordViewController{
     MineMyselfLabelVC *myLabel = [[MineMyselfLabelVC alloc]init];
+    myLabel.dataArr = self.mylabelArr.copy;
     __weak typeof(self) mySelf = self;
+    mySelf.mylabelChooseArr = [NSMutableArray array];
     myLabel.sendChooseArr = ^(NSArray *myLabels) {
-        
+        for (int i = 0; i < myLabels.count; i++) {
+            NSDictionary *dic = myLabels[i];
+            if (mySelf.mylabelArr.count > 0) {
+                __block BOOL isHave = NO;
+                [mySelf.mylabelArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([obj isEqual:dic]) {//:--判断是否是请求下来的--
+                        isHave = YES;
+                        *stop = YES;
+                    }
+                }];
+                if (isHave == NO) {
+                    [mySelf.mylabelArr addObject:dic];
+                    for (int i = 0; i < mySelf.mylabelChooseArr.count; i++) {
+                        NSDictionary *tmp = mySelf.mylabelChooseArr[i];
+                        if ([tmp isEqual:dic]) {//:--判断是否第一次跳转已经添加了--
+                            break;
+                        }else{
+                            [mySelf.mylabelChooseArr addObject:dic];
+                        }
+                    }
+                }
+            }else{
+                mySelf.mylabelArr = [NSMutableArray arrayWithArray:myLabels];
+                mySelf.mylabelChooseArr = [NSMutableArray arrayWithArray:myLabels];
+        }
+        }
+        [mySelf.listView reloadData];
     };
     [self pushNoTabBarViewController:myLabel animated:YES];
 }
 //MARK:----------------------------------------MineLoveMoviesAndMusicAndBooksCellDelegate------------------------------------------------
 - (void)pushToViewControllerChooseYourLove:(NSString *)title{
+    MineMyselfWordChooseYourLoveVC *chooseVC = [[MineMyselfWordChooseYourLoveVC alloc]init];
+    __weak typeof(self) mySelf = self;
     if ([title isEqualToString:@"电影"]) {
-        MineMyselfWordChooseYourLoveVC *chooseVC = [[MineMyselfWordChooseYourLoveVC alloc]init];
         chooseVC.titleStr = @"喜欢的电影";
-        [self pushNoTabBarViewController:chooseVC animated:YES];
     }else if ([title isEqualToString:@"音乐"]){
-        MineMyselfWordChooseYourLoveVC *chooseVC = [[MineMyselfWordChooseYourLoveVC alloc]init];
         chooseVC.titleStr = @"喜欢的音乐";
-        [self pushNoTabBarViewController:chooseVC animated:YES];
     }else{
-        MineMyselfWordChooseYourLoveVC *chooseVC = [[MineMyselfWordChooseYourLoveVC alloc]init];
         chooseVC.titleStr = @"喜欢的书籍";
-        [self pushNoTabBarViewController:chooseVC animated:YES];
+        chooseVC.sendYourLoveArr = ^(NSArray *dataArr) {
+            for (int i = 0; i < dataArr.count; i++) {
+                NSDictionary *dic = dataArr[i];
+                if (mySelf.model.userBooks.count > 0) {
+                    for (NSDictionary *obj in mySelf.model.userBooks) {
+                        if ([dic isEqual:obj]) {break;}else{
+                            if (mySelf.loveBooks.count > 0) {
+                                for (NSDictionary *newObj in mySelf.loveBooks) {
+                                    if ([dic isEqual:newObj]) {break;}else{[mySelf.loveBooks addObject:dic];}
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    mySelf.loveBooks = [NSMutableArray arrayWithArray:dataArr.copy];
+                }
+            }
+            mySelf.model.userBooks = dataArr;
+            [mySelf.listView reloadData];
+        };
     }
+    [self pushNoTabBarViewController:chooseVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

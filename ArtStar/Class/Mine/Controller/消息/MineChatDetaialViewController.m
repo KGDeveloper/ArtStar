@@ -7,6 +7,7 @@
 //
 
 #import "MineChatDetaialViewController.h"
+#import "MsgTapCellHeaderPushFocusVC.h"
 
 @interface MineChatDetaialViewController ()
 
@@ -19,6 +20,7 @@
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:Color_333333,NSFontAttributeName:SYBFont(15)}];
     [self leftNavButton];
+    [self rightNavButton];
     
     UIView *custom = [[[NSBundle mainBundle] loadNibNamed:@"MineMessageFirstIntoShowView" owner:self options:nil] lastObject];
     custom.frame = CGRectMake(0,NavTopHeight + 20, 295, 185);
@@ -41,6 +43,21 @@
 }
 - (void)leftNavBtuAction:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)rightNavButton{
+    UIButton *rightBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtu.frame = CGRectMake(15, 0,100, 30);
+    [rightBtu setTitle:@"管理" forState:UIControlStateNormal];
+    [rightBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    rightBtu.titleLabel.font = SYFont(15);
+    rightBtu.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [rightBtu addTarget:self action:@selector(rightNavBtuAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithCustomView:rightBtu];
+    self.navigationItem.rightBarButtonItem = right;
+}
+- (void)rightNavBtuAction:(UIButton *)sender{
+    [self.navigationController pushViewController:[[MsgTapCellHeaderPushFocusVC alloc]init] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

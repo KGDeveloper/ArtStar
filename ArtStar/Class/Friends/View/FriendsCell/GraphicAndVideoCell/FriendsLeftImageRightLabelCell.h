@@ -21,6 +21,8 @@
 
 @interface FriendsLeftImageRightLabelCell : UITableViewCell
 
+@property (nonatomic,strong) UIImageView *headerImage;
+@property (nonatomic,strong) UILabel *nikNameLab;
 @property (nonatomic,weak) id<FriendsButtomImageTopLabelCellDelegate>delegate;
 @property (nonatomic,assign) NSInteger cellIndex;
 

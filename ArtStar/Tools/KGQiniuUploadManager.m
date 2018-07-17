@@ -35,7 +35,7 @@
     
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
-        NSLog(@"percent == %.2f", percent);
+        //MARK:------------------------------------------在这里获取上传进度----------------------------------------------
     }
                                                                  params:nil
                                                                checkCrc:NO
@@ -43,7 +43,9 @@
     
     [KGRequestNetWorking postWothUrl:qiniuToken parameters:@{} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
-            [upManager putFile:filePath key:nil token:result[@"message"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            NSArray *arr = result[@"data"];
+            NSDictionary *dic = [arr firstObject];
+            [upManager putFile:filePath key:nil token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                 if (info.statusCode == 200) {
                     NSString *path = @"http://pbl758zx4.bkt.clouddn.com/";
                     path = [path stringByAppendingString:resp[@"hash"]];
@@ -51,7 +53,7 @@
                 }
             } option:uploadOption];
         }
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
 }

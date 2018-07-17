@@ -10,8 +10,11 @@
 #import "SearchBarView.h"
 #import "YourLocationTableViewCell.h"
 #import "YourLocationModel.h"
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchAPI.h>
 
-@interface YourLocationVC ()<UITableViewDelegate,UITableViewDataSource,SearchBarViewDelegate>
+
+@interface YourLocationVC ()<UITableViewDelegate,UITableViewDataSource,SearchBarViewDelegate,AMapSearchDelegate>
 //:--显示地理位置的列表视图--
 @property (nonatomic,strong) UITableView *locationView;
 //:--自定义搜索框--
@@ -25,30 +28,71 @@
 
 @property (nonatomic,copy) NSString *locationStr;
 
+@property (nonatomic,strong) AMapSearchAPI *searchApi;
+@property (nonatomic,copy) NSString *currentType;
+@property (nonatomic,assign) NSInteger searchPage;
+
 @end
 
 
 @implementation YourLocationVC
 
+/**
+ 根据中心点坐标来搜周边的POI.
+
+ @param coord 中心点经纬度
+ */
+- (void)searchPointWithCenterCoordinate:(CLLocationCoordinate2D)coord{
+    [AMapServices sharedServices].apiKey = GeocodeApiKey;
+    AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc]init];
+    request.location = [AMapGeoPoint locationWithLatitude:coord.latitude longitude:coord.longitude];
+    request.types = @"";
+    request.sortrule = 0;
+    request.radius = 3000;
+    request.page = self.searchPage;
+    request.requireExtension = YES;
+    request.requireSubPOIs = YES;
+    [self.searchApi AMapPOIAroundSearch:request];
+}
+
+- (void)searchReGeocodeWithCoordnate:(CLLocationCoordinate2D)coordinate{
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc]init];
+    regeo.location = [AMapGeoPoint locationWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    regeo.requireExtension = YES;
+    [self.searchApi AMapReGoecodeSearch:regeo];
+}
+
+- (void)initSearchApi{
+    self.searchPage = 1;
+    [AMapServices sharedServices].apiKey = GeocodeApiKey;
+    self.searchApi = [[AMapSearchAPI alloc]init];
+    self.searchApi.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"我的位置" image:Image(@"back")];
-    
+
     self.dataArr = [NSMutableArray array];
     self.allData = [NSMutableArray array];
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [self cllLocation];
+    [self initSearchApi];
     [self setTableView];
+    
 }
+
 
 - (void)cllLocation{
     KGLocationCityManager *manager = [KGLocationCityManager shareManager];
     [manager obtainYourLocation];
     __weak typeof(self) mySelf = self;
     manager.ToObtainYourLocation = ^(NSString *city, double latitude, double longitude) {
-        mySelf.locationStr = [NSString stringWithFormat:@"%f,%f",longitude,latitude];
-        [mySelf setData:mySelf.locationStr];
+        
+        [mySelf searchPointWithCenterCoordinate:CLLocationCoordinate2DMake(latitude, longitude)];
     };
 }
 
@@ -81,16 +125,16 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YourLocationTableViewCell" owner:self options:nil] lastObject];
     }
-    YourLocationModel *model = _dataArr[indexPath.row];
-    cell.locationLab.text = model.name;
-    cell.posenLab.text = model.type;
-    
+    NSDictionary *dic = _dataArr[indexPath.row];
+    cell.locationLab.text = dic[@"name"];
+    cell.posenLab.text = dic[@"address"];
+
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    YourLocationModel *model = _dataArr[indexPath.row];
+    NSDictionary *dic = _dataArr[indexPath.row];
     if (self.nowLocation) {
-        self.nowLocation(model.name);
+        self.nowLocation(dic[@"name"]);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -114,19 +158,22 @@
     }
 }
 
-- (void)setData:(NSString *)location{
+- (void)onPOISearchDone:(AMapPOISearchBaseRequest *)request response:(AMapPOISearchResponse *)response{
+    NSArray *arr = response.pois;
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:@"http://restapi.amap.com/v3/geocode/regeo" parameters:@{@"key":GeocodeApiKey,@"location":location,@"radius":@"3000",@"extensions":@"all",@"batch":@"true",@"roadlevel":@"0"} succ:^(id result) {
-        NSArray *regeocodeArr = result[@"regeocodes"];
-        NSDictionary *regeocodeDic = regeocodeArr[0];
-        NSArray *poisArr = regeocodeDic[@"pois"];
-        mySelf.dataArr = [YourLocationModel mj_objectArrayWithKeyValuesArray:poisArr];
-        mySelf.allData = mySelf.dataArr.copy;
-        [mySelf.locationView reloadData];
-    } fail:^(NSString *error) {
-        
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        AMapPOI *poi = obj;
+        [mySelf.dataArr addObject:@{@"name":poi.name,@"address":poi.address}];
     }];
+    [_locationView reloadData];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
+
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [[MBProgressHUD showHUDAddedTo:self.view animated:YES] bwm_hideWithTitle:@"请求出错，请重新尝试" hideAfter:1];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

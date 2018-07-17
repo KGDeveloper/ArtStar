@@ -12,15 +12,7 @@
 @class MineLoadCoverVCModel;
 @interface MineLoadCoverVC : BaseVC
 
-@property (nonatomic,strong) MineLoadCoverVCModel *model;
+@property (nonatomic,copy) NSString *coverImage;
 
 @end
 
-@interface MineLoadCoverVCModel : NSObject
-
-@property (nonatomic,copy) NSString *lowUrl;
-@property (nonatomic,copy) NSString *headerUrl;
-@property (nonatomic,copy) NSString *nikNameStr;
-@property (nonatomic,copy) NSString *signtureStr;
-
-@end

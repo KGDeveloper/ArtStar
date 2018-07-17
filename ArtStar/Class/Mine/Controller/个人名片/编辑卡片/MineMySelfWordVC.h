@@ -10,4 +10,7 @@
 
 @interface MineMySelfWordVC : BaseVC
 
+@property (nonatomic,copy) NSArray *myWords;
+@property (nonatomic,copy) void(^sendChooseWords)(NSArray *foodArr,NSArray *spotArr,NSArray *leisureArr,NSArray *footPointArr);
+
 @end

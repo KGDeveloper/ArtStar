@@ -40,7 +40,7 @@
         mySelf.countryArr = [MapChooseCityAreaModel mj_objectArrayWithKeyValuesArray:areaArr];
         [mySelf.countryArr insertObject:@"全城" atIndex:0];
         [mySelf.leftView reloadData];
-    } fail:^(NSString *error) {
+    } fail:^(NSError *error) {
         
     }];
     

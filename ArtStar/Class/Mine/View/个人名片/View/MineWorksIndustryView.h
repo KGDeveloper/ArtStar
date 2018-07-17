@@ -11,5 +11,7 @@
 @interface MineWorksIndustryView : UIView
 
 @property (nonatomic,copy) NSString *status;
+@property (nonatomic,copy) NSString *cancelStr;
+@property (nonatomic,copy) void (^sendChooseworks)(NSString *name,NSString *ID);
 
 @end

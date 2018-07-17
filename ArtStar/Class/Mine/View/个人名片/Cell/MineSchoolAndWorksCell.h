@@ -15,6 +15,8 @@
 
 @interface MineSchoolAndWorksCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *workName;
+@property (weak, nonatomic) IBOutlet UITextField *schoolName;
 @property (nonatomic,weak) id<MineSchoolAndWorksCellDelegate>delegate;
 
 @end

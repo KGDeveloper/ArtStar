@@ -18,10 +18,9 @@
 
 @interface FriendsLeftImageRightLabelCell ()
 
-@property (nonatomic,strong) UIImageView *headerImage;
+
 @property (nonatomic,strong) UIImageView *topImage;
 @property (nonatomic,strong) YYTextView *textView;
-@property (nonatomic,strong) UILabel *nikNameLab;
 @property (nonatomic,strong) UILabel *timeLab;
 @property (nonatomic,strong) UILabel *locationLab;
 @property (nonatomic,strong) UILabel *countLab;

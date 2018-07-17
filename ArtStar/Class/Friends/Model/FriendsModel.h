@@ -10,21 +10,24 @@
 
 @interface FriendsModel : NSObject
 
-@property (nonatomic,copy) NSNumber *ID;
-@property (nonatomic,copy) NSDictionary *user;
+@property (nonatomic,copy) NSNumber *composing;
 @property (nonatomic,copy) NSString *content;
-@property (nonatomic,copy) NSString *location;
 @property (nonatomic,copy) NSString *createTime;
-@property (nonatomic,copy) NSString *title;
-@property (nonatomic,copy) NSNumber *likeCount;
-@property (nonatomic,copy) NSNumber *rccommentNum;
-@property (nonatomic,copy) NSNumber *type;
-@property (nonatomic,copy) NSNumber *visitPermission;
-@property (nonatomic,copy) NSString *composing;
+@property (nonatomic,copy) NSString *createTimeStr;
+@property (nonatomic,copy) NSNumber *ID;
 @property (nonatomic,copy) NSArray *images;
-@property (nonatomic,copy) NSString *praPrtraitUri;
-@property (nonatomic,copy) NSString *rccomment;
-
-
+@property (nonatomic,copy) NSNumber *islikeCount;
+@property (nonatomic,copy) NSString *issId;
+@property (nonatomic,copy) NSNumber *likeCount;
+@property (nonatomic,copy) NSString *location;
+@property (nonatomic,copy) NSArray *praPrtraitUri;
+@property (nonatomic,copy) NSArray *rccomment;
+@property (nonatomic,copy) NSNumber *rccommentNum;
+@property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy) NSNumber *type;
+@property (nonatomic,copy) NSString *uid;
+@property (nonatomic,copy) NSDictionary *user;
+@property (nonatomic,copy) NSString *views;
+@property (nonatomic,copy) NSNumber *visitPermission;
 
 @end

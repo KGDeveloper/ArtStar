@@ -43,15 +43,15 @@
     CGFloat wight = 0;
     CGFloat height = 0;
     
+    [_backView removeAllSubviews];
+    
     for (int i = 0; i < labArr.count; i++) {
         if (wight + 30 + [TransformChineseToPinying stringWidthFromString:labArr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20 >= kScreenWidth - 30) {
             wight = 0;
-            height = height + 45;
-            [_backView addSubview:[self createLabel:CGRectMake(wight, height, [TransformChineseToPinying stringWidthFromString:labArr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20, 20) title:labArr[i]]];
-        }else{
-            [_backView addSubview:[self createLabel:CGRectMake(wight, height, [TransformChineseToPinying stringWidthFromString:labArr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20, 20) title:labArr[i]]];
-            wight = wight + 30 + [TransformChineseToPinying stringWidthFromString:labArr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20;
+            height = height + 30;
         }
+        [_backView addSubview:[self createLabel:CGRectMake(wight, height, [TransformChineseToPinying stringWidthFromString:labArr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20, 20) title:labArr[i]]];
+        wight = wight + 30 + [TransformChineseToPinying stringWidthFromString:labArr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20;
     }
     
     _backView.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(_titleLab, 25).rightSpaceToView(self.contentView, 15).heightIs(height);
@@ -60,12 +60,12 @@
 
 - (CGFloat)heightWithArr:(NSArray *)arr{
     CGFloat wight = 0;
-    CGFloat height = 0;
+    CGFloat height = 30;
     
     for (int i = 0; i < arr.count; i++) {
         if (wight + 30 + [TransformChineseToPinying stringWidthFromString:arr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20 >= kScreenWidth - 30) {
             wight = 0;
-            height = height + 45;
+            height = height + 30;
         }else{
             wight = wight + 30 + [TransformChineseToPinying stringWidthFromString:arr[i] font:SYFont(12) width:ViewWidth(_backView)] + 20;
         }

@@ -130,6 +130,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="schoolName" destination="KPX-Jq-EHp" id="8aX-Ll-k1a"/>
+                <outlet property="workName" destination="emS-H5-Wf2" id="bEA-hg-v2U"/>
+            </connections>
             <point key="canvasLocation" x="39.5" y="155.5"/>
         </tableViewCell>
     </objects>
