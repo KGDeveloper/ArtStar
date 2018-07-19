@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,45 +40,33 @@
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FkF-Ij-i6P">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zqr-Ak-8D0">
                         <rect key="frame" x="15" y="60" width="383" height="100"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="69K-yu-ePw"/>
+                            <constraint firstAttribute="height" constant="100" id="oje-Vy-Aj0"/>
                         </constraints>
-                    </scrollView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YqN-GS-Mt1">
-                        <rect key="frame" x="15" y="60" width="100" height="100"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="YqN-GS-Mt1" secondAttribute="height" multiplier="1:1" id="5H1-0D-BHu"/>
-                        </constraints>
-                        <state key="normal" image="达人上传视频"/>
-                    </button>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="FkF-Ij-i6P" secondAttribute="trailing" constant="15" id="Aez-45-EoQ"/>
                     <constraint firstAttribute="trailing" secondItem="Ns9-Xx-KdB" secondAttribute="trailing" id="DBa-mo-kRH"/>
                     <constraint firstItem="Ns9-Xx-KdB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DQt-ZC-7Mv"/>
                     <constraint firstAttribute="trailing" secondItem="KoG-Mn-BgH" secondAttribute="trailing" constant="15" id="E4r-T3-ZQW"/>
-                    <constraint firstItem="YqN-GS-Mt1" firstAttribute="bottom" secondItem="FkF-Ij-i6P" secondAttribute="bottom" id="Fh4-7K-1rs"/>
+                    <constraint firstAttribute="trailing" secondItem="Zqr-Ak-8D0" secondAttribute="trailing" constant="15" id="Eng-W6-Stu"/>
                     <constraint firstItem="KoG-Mn-BgH" firstAttribute="top" secondItem="Ns9-Xx-KdB" secondAttribute="top" id="HPw-Z3-SmY"/>
-                    <constraint firstItem="YqN-GS-Mt1" firstAttribute="leading" secondItem="FkF-Ij-i6P" secondAttribute="leading" id="VA9-2D-cvP"/>
-                    <constraint firstItem="FkF-Ij-i6P" firstAttribute="top" secondItem="Ns9-Xx-KdB" secondAttribute="bottom" constant="20" id="ljV-l7-1yo"/>
+                    <constraint firstItem="Zqr-Ak-8D0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="YoK-lL-p1V"/>
+                    <constraint firstItem="Zqr-Ak-8D0" firstAttribute="top" secondItem="Ns9-Xx-KdB" secondAttribute="bottom" constant="20" id="hWJ-2m-DGM"/>
                     <constraint firstItem="Ns9-Xx-KdB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="plm-ld-Ihy"/>
                     <constraint firstItem="KoG-Mn-BgH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ptM-xC-zkm"/>
-                    <constraint firstItem="YqN-GS-Mt1" firstAttribute="top" secondItem="FkF-Ij-i6P" secondAttribute="top" id="qCZ-4u-GgA"/>
-                    <constraint firstItem="FkF-Ij-i6P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="vWe-y0-NZQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
-                <outlet property="addBtu" destination="YqN-GS-Mt1" id="olz-fd-ohM"/>
-                <outlet property="backView" destination="FkF-Ij-i6P" id="0Xm-GJ-zxP"/>
+                <outlet property="backView" destination="Zqr-Ak-8D0" id="fwn-MV-q1n"/>
+                <outlet property="backViewHeight" destination="oje-Vy-Aj0" id="ckR-No-LHx"/>
                 <outlet property="titleLab" destination="KoG-Mn-BgH" id="FTY-OK-M1p"/>
             </connections>
             <point key="canvasLocation" x="80.5" y="196.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="达人上传视频" width="100" height="100"/>
-    </resources>
 </document>

@@ -52,7 +52,7 @@
 
 //MARK:---------------------------------------登录模块-------------------------------------------------
 #define serverIP @"http://192.168.1.119:80/"
-//#define serverIP @"http://192.168.1.13/"
+//#define serverIP @"http://192.168.1.5/"
 //#define serverIP @"http://192.168.1.4/"
 //MARK:----------------------------------------注册登录------------------------------------------------
 #define sendMsgAuthCode [serverIP stringByAppendingString:@"sendMsgAuthCode"]
@@ -78,6 +78,13 @@
 
 //MARK:--------------------------------------------发布模块--------------------------------------------
 #define ReleaseFriendTimelineAddfriendMessage [serverIP stringByAppendingString:@"ReleaseFriendTimeline/addfriendMessage"]
+/**
+ 发布：我要做达人
+
+ @param 包括自己 发布：我要做达人
+ @return 发布：我要做达人
+ */
+#define saveMerchantIssue [serverIP stringByAppendingString:@"Issue/saveMerchantIssue"]
 
 //MARK:---------------------------------------------朋友圈-------------------------------------------
 /**
@@ -200,7 +207,24 @@
  @return 删除我的世界
  */
 #define deleteMyWord [serverIP stringByAppendingString:@"myWord/deleteMyWord"]
+/**
+ 删除喜欢的电影
 
+ @return 删除喜欢的电影
+ */
+#define deleteMovice [serverIP stringByAppendingString:@"userMovice/deleteMovice"]
+/**
+ 删除喜欢的音乐
+
+ @return 删除喜欢的音乐
+ */
+#define deleteMusic [serverIP stringByAppendingString:@"userMusic/deleteMusic"]
+/**
+ 删除喜欢的书籍
+
+ @return 删除喜欢的书籍
+ */
+#define deleteBook [serverIP stringByAppendingString:@"userbook/deleteBook"]
 
 
 

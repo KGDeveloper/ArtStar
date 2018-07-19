@@ -11,6 +11,7 @@
 @interface MineMyselfWordChooseYourLoveVC : BaseVC
 
 @property (nonatomic,copy) NSString *titleStr;
+@property (nonatomic,copy) NSArray *oldArr;
 @property (nonatomic,copy) void(^sendYourLoveArr)(NSArray *dataArr);
 
 @end
@@ -18,11 +19,11 @@
 @interface MineLoveMoviesModel : NSObject
 
 @property (nonatomic,copy) NSString *region;
-@property (nonatomic,copy) NSString *writer;
+@property (nonatomic,copy) NSString *director;
 @property (nonatomic,copy) NSNumber *userId;
 @property (nonatomic,copy) NSNumber *ID;
-@property (nonatomic,assign) double bookGrade;
-@property (nonatomic,copy) NSString *bookName;
+@property (nonatomic,assign) double movieGrade;
+@property (nonatomic,copy) NSString *movieName;
 @property (nonatomic,copy) NSString *imageUrl;
 @property (nonatomic,copy) NSString *createTime;
 

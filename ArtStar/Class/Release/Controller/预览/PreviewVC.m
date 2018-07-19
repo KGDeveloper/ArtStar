@@ -46,6 +46,7 @@
     [parameters setObject:_model.visitPermission forKey:@"visitPermission"];
     [parameters setObject:_model.location forKey:@"location"];
     [parameters setObject:_model.composing forKey:@"composing"];
+    [parameters setObject:@([_model.typeStr integerValue]) forKey:@"type"];
     //:--判断是否有文字内容--
     if (_model.str1.length > 0 && _model.str1 != nil) {
         NSArray *strArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
@@ -204,18 +205,18 @@
         case EditThemeTypeRightTop:
             [self setUpVerticalView:LabelTextLocationTypeTop];
             self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
-            self.horizontalView.imageArr = _model.imageURLs;
-            self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = _model.location;
-            self.horizontalView.themeStr = _model.title;
+            self.verticalView.imageArr = _model.imageURLs;
+            self.verticalView.timeStr = @"5分钟前";
+            self.verticalView.locationStr = _model.location;
+            self.verticalView.themeStr = _model.title;
             break;
         case EditThemeTypeRightCenter:
             [self setUpVerticalView:LabelTextLocationTypeCenter];
             self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
-            self.horizontalView.imageArr = _model.imageURLs;
-            self.horizontalView.timeStr = @"5分钟前";
-            self.horizontalView.locationStr = _model.location;
-            self.horizontalView.themeStr = _model.title;
+            self.verticalView.imageArr = _model.imageURLs;
+            self.verticalView.timeStr = @"5分钟前";
+            self.verticalView.locationStr = _model.location;
+            self.verticalView.themeStr = _model.title;
             break;
         case EditThemeTypeTopLeft:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];

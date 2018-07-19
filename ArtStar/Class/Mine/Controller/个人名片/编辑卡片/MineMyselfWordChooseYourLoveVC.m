@@ -22,10 +22,10 @@
 @implementation MineMyselfWordChooseYourLoveVC
 
 - (void)rightNavBtuAction:(UIButton *)sender{
-    if ([_titleStr isEqualToString:@"电影"]) {
+    if ([_titleStr isEqualToString:@"喜欢的电影"]) {
         self.searchView.hidden = NO;
         self.searchView.type = LoveMovie;
-    }else if ([_titleStr isEqualToString:@"音乐"]){
+    }else if ([_titleStr isEqualToString:@"喜欢的音乐"]){
         self.searchView.hidden = NO;
         self.searchView.type = LoveMusic;
     }else{
@@ -37,9 +37,53 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < _dataArr.count; i++) {
-        if (self.searchView.type == LoveBook) {
+        if ([_titleStr isEqualToString:@"喜欢的书籍"]) {
             MineLoveBookModel *model = _dataArr[i];
-            NSDictionary *dic = [model mj_JSONObject];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:model.region forKey:@"region"];
+            [dic setObject:model.writer forKey:@"writer"];
+            if (model.userId == nil) {
+                [dic setObject:@"" forKey:@"userId"];
+            }else{
+                [dic setObject:model.userId forKey:@"userId"];
+            }
+            if (model.ID == nil) {
+                [dic setObject:@"" forKey:@"id"];
+            }else{
+                [dic setObject:model.ID forKey:@"id"];
+            }
+            [dic setObject:@(model.bookGrade) forKey:@"bookGrade"];
+            [dic setObject:model.bookName forKey:@"bookName"];
+            [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            if (model.createTime == nil) {
+                [dic setObject:@"暂无" forKey:@"createTime"];
+            }else{
+                [dic setObject:model.createTime forKey:@"createTime"];
+            }
+            [arr addObject:dic];
+        }else if([_titleStr isEqualToString:@"喜欢的电影"]){
+            MineLoveMoviesModel *model = _dataArr[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:model.region forKey:@"region"];
+            [dic setObject:model.director forKey:@"director"];
+            if (model.userId == nil) {
+                [dic setObject:@"" forKey:@"userId"];
+            }else{
+                [dic setObject:model.userId forKey:@"userId"];
+            }
+            if (model.ID == nil) {
+                [dic setObject:@"" forKey:@"id"];
+            }else{
+                [dic setObject:model.ID forKey:@"id"];
+            }
+            [dic setObject:@(model.movieGrade) forKey:@"movieGrade"];
+            [dic setObject:model.movieName forKey:@"movieName"];
+            [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            if (model.createTime == nil) {
+                [dic setObject:@"暂无" forKey:@"createTime"];
+            }else{
+                [dic setObject:model.createTime forKey:@"createTime"];
+            }
             [arr addObject:dic];
         }
     }
@@ -58,8 +102,25 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _dataArr = [NSMutableArray array];
+    [self createArr];
     [self setTableView];
+}
+
+- (void)createArr{
+    _dataArr = [NSMutableArray array];
+    __weak typeof(self) mySelf = self;
+    [_oldArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([mySelf.titleStr isEqualToString:@"喜欢的电影"]) {
+            MineLoveMoviesModel *model = [MineLoveMoviesModel mj_objectWithKeyValues:obj];
+            [mySelf.dataArr addObject:model];
+        }else if ([mySelf.titleStr isEqualToString:@"喜欢的音乐"]){
+            MineLoveMusicModel *model = [MineLoveMusicModel mj_objectWithKeyValues:obj];
+            [mySelf.dataArr addObject:model];
+        }else{
+            MineLoveBookModel *model = [MineLoveBookModel mj_objectWithKeyValues:obj];
+            [mySelf.dataArr addObject:model];
+        }
+    }];
 }
 
 - (void)setTableView{
@@ -68,7 +129,11 @@
     _listView.delegate = self;
     _listView.rowHeight = 85;
     _listView.tableFooterView = TabLeViewFootView;
-    _listView.tableHeaderView = [self setTabLeViewHeaderView];
+    if (_dataArr.count > 0) {
+        [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"添加" image:nil];
+    }else{
+        _listView.tableHeaderView = [self setTabLeViewHeaderView];
+    }
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_listView];
     
@@ -108,14 +173,94 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineMyselfWordChooseYourLoveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineMyselfWordChooseYourLoveCell"];
-    if (self.searchView.type == LoveBook) {
+    if ([_titleStr isEqualToString:@"喜欢的书籍"]) {
         MineLoveBookModel *model = _dataArr[indexPath.row];
         [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
         cell.titleLab.text = model.bookName;
         cell.detailLab.text = [NSString stringWithFormat:@"%f/%@/%@",model.bookGrade,model.writer,model.createTime];
+    }else if ([_titleStr isEqualToString:@"喜欢的电影"]){
+        MineLoveMoviesModel *model = _dataArr[indexPath.row];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+        cell.titleLab.text = model.movieName;
+        cell.detailLab.text = [NSString stringWithFormat:@"%f/%@/%@",model.movieGrade,model.director,model.createTime];
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在删除..." animated:YES];
+    __weak typeof(self) mySelf = self;
+    if ([_titleStr isEqualToString:@"喜欢的电影"]) {
+        MineLoveMoviesModel *model = _dataArr[indexPath.row];
+        if (model.ID == nil) {
+            [_dataArr removeObject:model];
+            [_listView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }else{
+            [KGRequestNetWorking postWothUrl:deleteMovice parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":model.ID} succ:^(id result) {
+                if ([result[@"code"] integerValue] == 200) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MBProgressHUD bwm_showTitle:@"删除成功" toView:self.view hideAfter:2];
+                    [mySelf.dataArr removeObject:model];
+                    [mySelf.listView reloadData];
+                }else{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MBProgressHUD bwm_showTitle:@"删除失败" toView:self.view hideAfter:2];
+                }
+            } fail:^(NSError *error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [MBProgressHUD bwm_showTitle:@"删除失败" toView:self.view hideAfter:2];
+            }];
+        }
+    }else if ([_titleStr isEqualToString:@"喜欢的音乐"]){
+        MineLoveMusicModel *model = _dataArr[indexPath.row];
+        if (model.ID == nil) {
+            [_dataArr removeObject:model];
+            [_listView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }else{
+            [KGRequestNetWorking postWothUrl:deleteMusic parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":model.ID} succ:^(id result) {
+                if ([result[@"code"] integerValue] == 200) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MBProgressHUD bwm_showTitle:@"删除成功" toView:self.view hideAfter:2];
+                    [mySelf.dataArr removeObject:model];
+                    [mySelf.listView reloadData];
+                }else{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MBProgressHUD bwm_showTitle:@"删除失败" toView:self.view hideAfter:2];
+                }
+            } fail:^(NSError *error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [MBProgressHUD bwm_showTitle:@"删除失败" toView:self.view hideAfter:2];
+            }];
+        }
+    }else{
+        MineLoveBookModel *model = _dataArr[indexPath.row];
+        if (model.ID == nil) {
+            [_dataArr removeObject:model];
+            [_listView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }else{
+            [KGRequestNetWorking postWothUrl:deleteBook parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":model.ID} succ:^(id result) {
+                if ([result[@"code"] integerValue] == 200) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MBProgressHUD bwm_showTitle:@"删除成功" toView:self.view hideAfter:2];
+                    [mySelf.dataArr removeObject:model];
+                    [mySelf.listView reloadData];
+                }else{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MBProgressHUD bwm_showTitle:@"删除失败" toView:self.view hideAfter:2];
+                }
+            } fail:^(NSError *error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [MBProgressHUD bwm_showTitle:@"删除失败" toView:self.view hideAfter:2];
+            }];
+        }
+    }
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
 }
 
 - (MineAddYourLoveSearchView *)searchView{
@@ -128,9 +273,15 @@
                 [mySelf.headerView removeFromSuperview];
                 mySelf.headerView.frame = CGRectMake(0, 0, 0, 0);
                 [mySelf.listView reloadData];
+            }else if (mySelf.searchView.type == LoveMovie){
+                [mySelf.dataArr addObject:movies];
+                [mySelf.headerView removeFromSuperview];
+                mySelf.headerView.frame = CGRectMake(0, 0, 0, 0);
+                [mySelf.listView reloadData];
             }
             [mySelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"添加" image:nil];
         };
+//        _searchView.hidden = YES;
         [self.navigationController.view addSubview:_searchView];
     }
     return _searchView;

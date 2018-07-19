@@ -11,6 +11,7 @@
 @protocol TlentIntroudceTableViewCellDelegate <NSObject>
 
 - (void)whereAreYour;
+- (void)sendYouIntroudceToController:(NSString *)text;
 
 @end
 

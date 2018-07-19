@@ -1236,7 +1236,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     PreviewVCModel *model = [PreviewVCModel new];
     switch (self.type) {
         case EditTypeTheme:
-            if (self.themeType == EditThemeTypeRightTop & self.themeType == EditThemeTypeRightCenter) {
+            if (self.themeType == EditThemeTypeRightTop || self.themeType == EditThemeTypeRightCenter) {
                 if (_titleTF.text.length > 0 & _titleTF.text != nil) {
                     model.title = _titleTF.text;
                     model.topicType = _themetypeBtu.currentTitle;

@@ -21,11 +21,6 @@
 
 @property (nonatomic,strong) UIImageView *topImage;
 @property (nonatomic,strong) YYTextView *textView;
-@property (nonatomic,strong) UILabel *timeLab;
-@property (nonatomic,strong) UILabel *locationLab;
-@property (nonatomic,strong) UILabel *countLab;
-@property (nonatomic,strong) UIButton *commentBtu;
-@property (nonatomic,strong) UIButton *zansBtu;
 @property (nonatomic,strong) UIButton *shareBtu;
 @property (nonatomic,strong) UIButton *headerBtu;
 @property (nonatomic,strong) UIButton *topBtu;
@@ -106,12 +101,8 @@
     _countLab.textAlignment = NSTextAlignmentCenter;
     _countLab.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(27).heightIs(14);
     
-    //    _textView.verticalForm = YES;
-    //    _textView.textVerticalAlignment = YYTextVerticalAlignmentCenter;
-    //    _textView.font = FZFont(13);
     _textView.textColor = Color_333333;
-    //    _textView.text = @"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯";
-    [self changeYYTextView:_textView text:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:YYTextVerticalAlignmentCenter];
+    _textView.userInteractionEnabled = YES;
     _textView.sd_layout.topEqualToView(_topImage).rightSpaceToView(self.contentView, 15).widthIs(115).heightIs((kScreenWidth - 165)/450*690);
     
     [_shareBtu setImage:Image(@"分享") forState:UIControlStateNormal];
@@ -156,7 +147,7 @@
 - (YYTextView *)changeYYTextView:(YYTextView *)textView text:(NSString *)text alignment:(YYTextVerticalAlignment)alignment{
     textView.font = FZFont(13);
     textView.verticalForm = YES;
-    textView.textVerticalAlignment = alignment;
+    textView.textVerticalAlignment = YYTextVerticalAlignmentTop;
     NSMutableParagraphStyle *paragrapStyle = [[NSMutableParagraphStyle alloc]init];
     paragrapStyle.lineSpacing = 7;
     NSDictionary *attributes = @{NSFontAttributeName:FZFont(13),NSParagraphStyleAttributeName:paragrapStyle};
@@ -199,6 +190,20 @@
     if ([self.delegate respondsToSelector:@selector(zansCell:)]) {
         [self.delegate zansCell:self.cellIndex];
     }
+}
+- (void)setTopImageUrl:(NSString *)topImageUrl{
+    _topImageUrl = topImageUrl;
+    [_topImage sd_setImageWithURL:[NSURL URLWithString:topImageUrl]];
+}
+- (void)setContentStr:(NSString *)contentStr{
+    _contentStr = contentStr;
+    NSData *strData = [contentStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+    NSString *str = strArr[0];
+    for (int i = 1; i < strArr.count; i++) {
+        str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+    }
+    [self changeYYTextView:_textView text:str alignment:_textAlignment];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

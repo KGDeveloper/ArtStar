@@ -10,4 +10,8 @@
 
 @interface MyselfCenterVideo_Music_BookVC : BaseVC
 
+@property (nonatomic,copy) NSArray *userMovies;
+@property (nonatomic,copy) NSArray *userBooks;
+@property (nonatomic,copy) NSArray *userMusics;
+
 @end

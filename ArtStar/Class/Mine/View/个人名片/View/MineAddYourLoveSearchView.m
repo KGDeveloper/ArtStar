@@ -82,7 +82,7 @@
     MineSearchYourLoveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineSearchYourLoveCell"];
     if (_type == LoveMovie) {
         MineLoveMoviesModel *model = _dataArr[indexPath.row];
-        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
+        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.movieName,model.director];
     }else if (_type == LoveMusic){
         MineLoveMusicModel *model = _dataArr[indexPath.row];
         cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
@@ -97,13 +97,12 @@
     if (self.sendChoose) {
         switch (_type) {
             case LoveMovie:
-                self.sendChoose(_movie, nil, nil);
+                self.sendChoose(_dataArr[indexPath.row], nil, nil);
                 break;
             case LoveMusic:
                 self.sendChoose(nil, _music, nil);
                 break;
             case LoveBook:
-                
                 self.sendChoose(nil, nil, _dataArr[indexPath.row]);
                 break;
             default:
@@ -137,10 +136,21 @@
     [KGRequestNetWorking postWothUrl:url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"name":textField.text,@"query":@{@"page":@"1",@"rows":@"20"}} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *arr = result[@"data"];
-            for (int i = 0; i < arr.count; i++) {
-                NSDictionary *dic = arr[i];
-                MineLoveBookModel *model = [MineLoveBookModel mj_objectWithKeyValues:dic];
-                [mySelf.dataArr addObject:model];
+            [mySelf.dataArr removeAllObjects];
+            if (mySelf.type == LoveMovie) {
+                for (int i = 0; i < arr.count; i++) {
+                    NSDictionary *dic = arr[i];
+                    MineLoveMoviesModel *model = [MineLoveMoviesModel mj_objectWithKeyValues:dic];
+                    [mySelf.dataArr addObject:model];
+                }
+            }else if (mySelf.type == LoveMusic){
+                
+            }else if (mySelf.type == LoveBook){
+                for (int i = 0; i < arr.count; i++) {
+                    NSDictionary *dic = arr[i];
+                    MineLoveBookModel *model = [MineLoveBookModel mj_objectWithKeyValues:dic];
+                    [mySelf.dataArr addObject:model];
+                }
             }
             [mySelf.listView reloadData];
         }

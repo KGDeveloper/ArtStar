@@ -13,6 +13,7 @@
 + (KGQiniuUploadManager *)shareInstance;
 
 - (void)uploadImageToQiniuWithFile:(NSString *)filePath fileName:(NSString *)fileName result:(void(^)(NSString *strPath))uploadData;
+- (void)uploadDataToQiniuWithData:(NSURL *)url result:(void(^)(NSString *strPath))uploadData;
 - (NSString *)getImagePath:(UIImage *)Image;
 
 @end

@@ -8,10 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TalentPushPhotosTableViewCellDelegate <NSObject>
+
+- (void)touchAddButtonWithIndex:(NSInteger)index;
+- (void)deleteImageFrameCell:(UIImage *)image;
+- (void)deleteVideos;
+
+@end
+
 @interface TalentPushPhotosTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
-@property (weak, nonatomic) IBOutlet UIScrollView *backView;
-@property (weak, nonatomic) IBOutlet UIButton *addBtu;
+@property (weak, nonatomic) IBOutlet UIView *backView;
+@property (nonatomic,copy) NSArray *imageArr;
+@property (nonatomic,copy) NSURL *videoStr;
+@property (nonatomic,assign) NSInteger cellIndex;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backViewHeight;
+@property (nonatomic,weak) id<TalentPushPhotosTableViewCellDelegate> delegate;
+
+- (CGFloat)cellHeightFromArray:(NSArray *)imageArr;
 
 @end

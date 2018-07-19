@@ -12,6 +12,7 @@
 #import "GTMBase64.h"
 #import "GTMDefines.h"
 #import "Common.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface KGQiniuUploadManager ()
 
@@ -45,10 +46,40 @@
         if ([result[@"code"] integerValue] == 200) {
             NSArray *arr = result[@"data"];
             NSDictionary *dic = [arr firstObject];
-            [upManager putFile:filePath key:nil token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            [upManager putFile:filePath key:[[NSString alloc] initWithFormat:@"%ld.png",(long)[self getNowTimestamp]] token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                 if (info.statusCode == 200) {
                     NSString *path = @"http://pbl758zx4.bkt.clouddn.com/";
-                    path = [path stringByAppendingString:resp[@"hash"]];
+                    path = [path stringByAppendingString:resp[@"key"]];
+                    uploadData(path);
+                }
+            } option:uploadOption];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+}
+
+- (void)uploadDataToQiniuWithData:(NSURL *)url result:(void(^)(NSString *strPath))uploadData{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *failName = [NSString stringWithFormat:@"%@.mp4",[formatter stringFromDate:[NSDate date]]];
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
+        //MARK:------------------------------------------在这里获取上传进度----------------------------------------------
+    }
+                                                                 params:nil
+                                                               checkCrc:NO
+                                                     cancellationSignal:nil];
+    
+    [KGRequestNetWorking postWothUrl:qiniuToken parameters:@{} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            NSDictionary *dic = [arr firstObject];
+            NSData *videoData = [NSData dataWithContentsOfURL:url];
+            [upManager putData:videoData key:failName token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+                if (info.statusCode == 200) {
+                    NSString *path = @"http://pbl758zx4.bkt.clouddn.com/";
+                    path = [path stringByAppendingString:resp[@"key"]];
                     uploadData(path);
                 }
             } option:uploadOption];
@@ -94,7 +125,7 @@
     
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     
-    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    [formatter setDateFormat:@"YYYYMMddHHmmss"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
     
     //设置时区,这个对于时间的处理有时很重要
     

@@ -12,6 +12,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    _introudceTV.delegate = self;
+    if (_introudceTV.text.length > 0) {
+        _plholderLab.hidden = YES;
+    }else{
+        _plholderLab.hidden = NO;
+    }
     // Initialization code
 }
 
@@ -25,10 +31,17 @@
 
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
+    _plholderLab.hidden = YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
     if (textView.text.length > 0) {
         _plholderLab.hidden = YES;
     }else{
         _plholderLab.hidden = NO;
+    }
+    if ([self.delegate respondsToSelector:@selector(sendYouIntroudceToController:)]) {
+        [self.delegate sendYouIntroudceToController:textView.text];
     }
 }
 

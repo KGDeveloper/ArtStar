@@ -47,6 +47,26 @@
     }
 }
 
+- (void)setMoviesArr:(NSArray *)moviesArr{
+    _moviesArr = moviesArr;
+    if (moviesArr.count > 0) {
+        _moviesView.contentSize = CGSizeMake(120*moviesArr.count, ViewHeight(_moviesView));
+        for (int i = 0; i < moviesArr.count; i++) {
+            NSDictionary *dic = moviesArr[i];
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(120*i, 0, 100, 130)];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageUrl"]]];
+            [_moviesView addSubview:imageView];
+            
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(120*i, 130, 100, ViewHeight(_bookView) - 130)];
+            lab.text = dic[@"movieName"];
+            lab.textColor = Color_333333;
+            lab.textAlignment = NSTextAlignmentCenter;
+            lab.font = SYFont(12);
+            [_moviesView addSubview:lab];
+        }
+    }
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

@@ -419,6 +419,7 @@
 		28E33AD120BC0A92009F9382 /* MusicActorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E33AD020BC0A92009F9382 /* MusicActorCell.m */; };
 		28E33AD520BC11C2009F9382 /* MusicRelatedArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E33AD320BC11C2009F9382 /* MusicRelatedArticlesCell.m */; };
 		28E33AD620BC11C2009F9382 /* MusicRelatedArticlesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E33AD420BC11C2009F9382 /* MusicRelatedArticlesCell.xib */; };
+		28E4DAC5210065B300FDCC2B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E9F3CE20AC3C9A009AD4FC /* MediaPlayer.framework */; };
 		28E56FCF20AA7DFD00203D1E /* TransformChineseToPinying.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E56FCE20AA7DFD00203D1E /* TransformChineseToPinying.m */; };
 		28E56FD220AA8A1000203D1E /* KGTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E56FD120AA8A1000203D1E /* KGTextField.m */; };
 		28E8E86F20B663D5002E10FC /* KGSearchBarAndSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8E86E20B663D5002E10FC /* KGSearchBarAndSearchView.m */; };
@@ -1464,6 +1465,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E4DAC5210065B300FDCC2B /* MediaPlayer.framework in Frameworks */,
 				2840DF5020DCF2C00066E2C4 /* UserNotifications.framework in Frameworks */,
 				2813DB6B20C7BD24004CD973 /* CoreLocation.framework in Frameworks */,
 				2813DB8720C7BDBD004CD973 /* Photos.framework in Frameworks */,

@@ -95,7 +95,7 @@
 }
 
 - (void)setImage{
-    _backView = [[UIView alloc]initWithFrame:CGRectMake(15, 0, kScreenWidth - textViewHeight - 50, (kScreenWidth - textViewHeight - 50)/225*345)];
+    _backView = [[UIView alloc]initWithFrame:CGRectMake(15, 0, kScreenWidth - textViewHeight - 50, (kScreenWidth - textViewHeight - 50)/354*544)];
     [self addSubview:_backView];
     
     _imageBackView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(_backView), ViewHeight(_backView))];
@@ -120,6 +120,7 @@
 - (void)setLocationView{
     //:--加载view--
     _lowView = [[UIView alloc]initWithFrame:CGRectMake(15, ViewHeight(_backView), kScreenWidth - 30, 50)];
+    _lowView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_lowView];
     //:--时间标签--
     _timelab = [[UILabel alloc]initWithFrame:CGRectMake(0, 25, 0, 0)];
@@ -142,10 +143,10 @@
 - (void)setImageArr:(NSArray *)imageArr{
     _imageArr = imageArr;
     _countN = imageArr.count;
-    _imageBackView.contentSize = CGSizeMake(ViewWidth(_imageBackView)*imageArr.count, photoViewHeight);
+    _imageBackView.contentSize = CGSizeMake(ViewWidth(_imageBackView)*imageArr.count, ViewHeight(_imageBackView));
     for (int i = 0; i < imageArr.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(_imageBackView)*i, 0,ViewWidth(_imageBackView), ViewWidth(_imageBackView))];
-        imageView.image = Image(imageArr[i]);
+        imageView.image = imageArr[i];
         [_imageBackView addSubview:imageView];
     }
     _countlab.text = [NSString stringWithFormat:@"1/%ld",(long)_countN];

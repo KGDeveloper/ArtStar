@@ -201,6 +201,15 @@
         return cell;
     }else if (indexPath.row == 3){
         MyselfCenterVideoAndVicesAndBooksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterVideoAndVicesAndBooksCell"];
+        NSDictionary *booksDic = [_model.userBooks firstObject];
+        cell.bookName.text = booksDic[@"bookName"];
+        [cell.bookImage sd_setImageWithURL:[NSURL URLWithString:booksDic[@"imageUrl"]]];
+        NSDictionary *musicDic = [_model.userMusics firstObject];
+        cell.musicName.text = musicDic[@"musicsName"];
+        [cell.musicImage sd_setImageWithURL:[NSURL URLWithString:booksDic[@"imageUrl"]]];
+        NSDictionary *moviesDic = [_model.userMovices firstObject];
+        cell.movieName.text = moviesDic[@"movieName"];
+        [cell.movieImage sd_setImageWithURL:[NSURL URLWithString:moviesDic[@"imageUrl"]]];
         return cell;
     }else if (indexPath.row == 4){
         MyselfCenterMyWordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfCenterMyWordCell"];
@@ -262,7 +271,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 3) {
-        [self pushNoTabBarViewController:[[MyselfCenterVideo_Music_BookVC alloc]init] animated:YES];
+        MyselfCenterVideo_Music_BookVC *vc = [[MyselfCenterVideo_Music_BookVC alloc]init];
+        vc.userMusics = _model.userMusics;
+        vc.userBooks = _model.userBooks;
+        vc.userMovies = _model.userMovices;
+        [self pushNoTabBarViewController:vc animated:YES];
     }
 }
 

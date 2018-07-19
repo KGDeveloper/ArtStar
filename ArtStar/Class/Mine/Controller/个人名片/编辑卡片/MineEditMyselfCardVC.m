@@ -48,7 +48,6 @@ UITextFieldDelegate>
 
 @property (nonatomic,strong) NSMutableDictionary *userInfoDic;
 @property (nonatomic,strong) NSMutableArray *userMusicDic;
-@property (nonatomic,strong) NSMutableArray *userMoviceDic;
 @property (nonatomic,copy) NSString *coverImage;//:--封面--
 @property (nonatomic,copy) NSString *coverNowImage;
 @property (nonatomic,copy) NSString *headerImage;//:--头像--
@@ -61,6 +60,7 @@ UITextFieldDelegate>
 @property (nonatomic,strong) UITextField *cellText;
 //MARK:--------------------------------------喜欢的--------------------------------------------------
 @property (nonatomic,strong) NSMutableArray *loveBooks;//:--我的标签--
+@property (nonatomic,strong) NSMutableArray *loveMovies;//:--我的标签--
 
 
 @end
@@ -79,12 +79,12 @@ UITextFieldDelegate>
     
     _userInfoDic = [NSMutableDictionary dictionary];
     _userMusicDic = [NSMutableArray array];
-    _userMoviceDic = [NSMutableArray array];
     _imageUris = [NSMutableArray array];
     _imageUrisHttp = [NSMutableArray array];
     _headerImageArr = [NSMutableArray array];
     _mylabelArr = [NSMutableArray array];
     _loveBooks = [NSMutableArray array];
+    _loveMovies = [NSMutableArray array];
     NSArray *array = _model.mylabels;
     for (int i = 0; i < array.count; i++) {
         NSDictionary *dic = array[i];
@@ -138,7 +138,7 @@ UITextFieldDelegate>
     if (_model.school != nil || _model.school != NULL) {
         [_userInfoDic setObject:_model.school forKey:@"school"];
     }
-    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userInfoDic,@"userMovice":_userMoviceDic,@"userMusic":_userMusicDic,@"userBook":_loveBooks} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userInfoDic,@"userMovice":_loveMovies,@"userMusic":_userMusicDic,@"userBook":_loveBooks} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             if (mySelf.refreshCenterListView) {
                 mySelf.refreshCenterListView();
@@ -264,6 +264,7 @@ UITextFieldDelegate>
     }else if(indexPath.row == 4){
         MineLoveMoviesAndMusicAndBooksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineLoveMoviesAndMusicAndBooksCell"];
         cell.bookArr = _model.userBooks;
+        cell.moviesArr = _model.userMovices;
         cell.delegate = self;
         return cell;
     }else{
@@ -384,7 +385,8 @@ UITextFieldDelegate>
                 [mySelf.userInfoDic setObject:strPath forKey:@"portraitUri"];
             }];
         }
-        [mySelf.listView reloadData];
+        NSIndexPath *dex = [NSIndexPath indexPathForRow:0 inSection:0];
+        [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
     [ac showPhotoLibrary];
     self.cameraView.hidden = YES;
@@ -416,7 +418,8 @@ UITextFieldDelegate>
                 [mySelf.userInfoDic setObject:strPath forKey:@"portraitUri"];
             }];
         }
-        [mySelf.listView reloadData];
+        NSIndexPath *dex = [NSIndexPath indexPathForRow:0 inSection:0];
+        [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
     };
     [self presentViewController:camera animated:YES completion:nil];
     self.cameraView.hidden = YES;
@@ -454,7 +457,8 @@ UITextFieldDelegate>
     _model.constellation = [NSString stringWithFormat:@"%@座",starStr];
     [_userInfoDic setObject:birthday forKey:@"birthday"];
     [_userInfoDic setObject:[NSString stringWithFormat:@"%@座",starStr] forKey:@"constellation"];
-    [_listView reloadData];
+    NSIndexPath *dex = [NSIndexPath indexPathForRow:0 inSection:0];
+    [_listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (MineChooseWeightAndHeightView *)chooseWeightView{
@@ -475,7 +479,8 @@ UITextFieldDelegate>
                     [mySelf.userInfoDic setObject:@([value integerValue]) forKey:@"weight"];
                     break;
             }
-            [mySelf.listView reloadData];
+            NSIndexPath *dex = [NSIndexPath indexPathForRow:0 inSection:0];
+            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
         };
         [self.navigationController.view addSubview:_chooseWeightView];
     }
@@ -510,7 +515,8 @@ UITextFieldDelegate>
             if (dic != nil) {
                 [mySelf.userInfoDic setObject:@[@{@"id":dic[@"id"]}] forKey:@"industries"];
             }
-            [mySelf.listView reloadData];
+            NSIndexPath *dex = [NSIndexPath indexPathForRow:2 inSection:0];
+            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
         };
         [self.navigationController.view addSubview:_worksIndustryView];
     }
@@ -523,7 +529,8 @@ UITextFieldDelegate>
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField == _cellText) {
         _model.school = _cellText.text;
-        [_listView reloadData];
+        NSIndexPath *dex = [NSIndexPath indexPathForRow:2 inSection:0];
+        [_listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 //MARK:---------------------------------------MineEditMyLabelCellDelegate-------------------------------------------------
@@ -559,7 +566,8 @@ UITextFieldDelegate>
                 mySelf.mylabelChooseArr = [NSMutableArray arrayWithArray:myLabels];
         }
         }
-        [mySelf.listView reloadData];
+        NSIndexPath *dex = [NSIndexPath indexPathForRow:3 inSection:0];
+        [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
     };
     [self pushNoTabBarViewController:myLabel animated:YES];
 }
@@ -569,10 +577,49 @@ UITextFieldDelegate>
     __weak typeof(self) mySelf = self;
     if ([title isEqualToString:@"电影"]) {
         chooseVC.titleStr = @"喜欢的电影";
+        chooseVC.oldArr = _model.userMovices;
+        chooseVC.sendYourLoveArr = ^(NSArray *dataArr) {
+            for (int i = 0; i < dataArr.count; i++) {
+                NSDictionary *dic = dataArr[i];
+                if (mySelf.model.userMovices.count > 0) {
+                    for (NSDictionary *obj in mySelf.model.userMovices) {
+                        if ([dic isEqual:obj]) {
+                            break;
+                        }else{
+                            if (mySelf.loveMovies.count > 0) {
+                                for (NSDictionary *tmpObj in mySelf.loveMovies) {
+                                    if ([dic isEqual:tmpObj]) {
+                                        break;
+                                    }else{
+                                        [mySelf.loveMovies addObject:dic];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if (mySelf.loveMovies.count > 0) {
+                        [mySelf.loveMovies enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            if ([dic isEqual:obj]) {
+                                *stop = YES;
+                            }else{
+                                [mySelf.loveMovies addObject:dic];
+                            }
+                        }];
+                    }else{
+                        [mySelf.loveMovies addObject:dic];
+                    }
+                }
+            }
+            mySelf.model.userMovices = dataArr;
+            NSIndexPath *dex = [NSIndexPath indexPathForRow:4 inSection:0];
+            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
+        };
     }else if ([title isEqualToString:@"音乐"]){
         chooseVC.titleStr = @"喜欢的音乐";
     }else{
         chooseVC.titleStr = @"喜欢的书籍";
+        chooseVC.oldArr = _model.userBooks;
         chooseVC.sendYourLoveArr = ^(NSArray *dataArr) {
             for (int i = 0; i < dataArr.count; i++) {
                 NSDictionary *dic = dataArr[i];
@@ -587,11 +634,18 @@ UITextFieldDelegate>
                         }
                     }
                 }else{
-                    mySelf.loveBooks = [NSMutableArray arrayWithArray:dataArr.copy];
+                    if (mySelf.loveBooks.count > 0) {
+                        [mySelf.loveBooks enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            if ([dic isEqual:obj]) {*stop = YES;}else{[mySelf.loveBooks addObject:dic];}
+                        }];
+                    }else{
+                        [mySelf.loveBooks addObject:dic];
+                    }
                 }
             }
             mySelf.model.userBooks = dataArr;
-            [mySelf.listView reloadData];
+            NSIndexPath *dex = [NSIndexPath indexPathForRow:4 inSection:0];
+            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
         };
     }
     [self pushNoTabBarViewController:chooseVC animated:YES];

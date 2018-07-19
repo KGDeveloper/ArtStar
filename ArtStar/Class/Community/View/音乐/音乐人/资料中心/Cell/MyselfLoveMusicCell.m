@@ -16,7 +16,7 @@
     for (int i = 0; i < imageArr.count; i++) {
         NSDictionary *dic = imageArr[i];
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(130*i, 0, 110, 110)];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageUrl"]]];
         imageView.layer.cornerRadius = 55;
         imageView.layer.masksToBounds = YES;
         [_scrollView addSubview:imageView];
@@ -24,7 +24,7 @@
         UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(130*i, 120, 110, 15)];
         nameLab.textColor = Color_333333;
         nameLab.font = SYFont(14);
-        nameLab.text = dic[@"name"];
+        nameLab.text = dic[@"musicsName"];
         nameLab.textAlignment = NSTextAlignmentCenter;
         [_scrollView addSubview:nameLab];
     }
