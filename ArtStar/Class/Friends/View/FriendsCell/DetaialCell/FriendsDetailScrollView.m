@@ -62,8 +62,9 @@
     number = photosArr.count;
     _scrollView.contentSize = CGSizeMake(self.frame.size.width * photosArr.count, _scrollView.frame.size.height);
     for (int i = 0; i < photosArr.count; i++) {
+        NSDictionary *dic = photosArr[i];
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
-        imageView.image = Image(photosArr[i]);
+        [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageURL"]]];
         [_scrollView addSubview:imageView];
     }
 }

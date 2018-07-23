@@ -65,13 +65,20 @@
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="adad安达市按时大大阿斯顿撒按时阿萨德按时ad阿萨德奥术大师阿萨德阿萨德阿萨德阿萨德阿萨德阿萨德阿斯达是撒多阿萨德阿斯顿撒SaaS打算安达市阿斯顿撒按时大声道阿萨德阿萨德阿萨大声道阿萨德阿萨德" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2H-v3-hfT">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2H-v3-hfT">
                     <rect key="frame" x="15" y="136" width="345" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="Nuj-at-J7y"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="14"/>
-                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <attributedString key="attributedText">
+                        <fragment content="adad安达市按时大大阿斯顿撒按时阿萨德按时ad阿萨德奥术大师阿萨德阿萨德阿萨德阿萨德阿萨德阿萨德阿斯达是撒多阿萨德阿斯顿撒SaaS打算安达市阿斯顿撒按时大声道阿萨德阿萨德阿萨大声道阿萨德阿萨德">
+                            <attributes>
+                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="14" name="SourceHanSansCN-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="10" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USd-9G-Oeo">
@@ -206,6 +213,22 @@
                 <constraint firstItem="sDC-54-8Cp" firstAttribute="top" secondItem="USd-9G-Oeo" secondAttribute="bottom" constant="20" id="xVP-Jp-dER"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="detailHeight" destination="Nuj-at-J7y" id="m8H-XB-xIW"/>
+                <outlet property="detailLab" destination="O2H-v3-hfT" id="Rw7-bK-toC"/>
+                <outlet property="headerImage" destination="Csn-ft-iYf" id="RO3-o6-hve"/>
+                <outlet property="imageBack" destination="USd-9G-Oeo" id="Qaj-bb-a1i"/>
+                <outlet property="imageViewHeight" destination="cbK-mR-kI6" id="oy5-35-6ys"/>
+                <outlet property="infoHeaderImage" destination="QSf-DO-Qfh" id="ptD-Dp-LAV"/>
+                <outlet property="infoLocationLab" destination="Su7-O9-SY0" id="kDD-sG-jvL"/>
+                <outlet property="infoNiknameLab" destination="Bee-Hx-gbI" id="4pu-mt-IbV"/>
+                <outlet property="infoTelephoneLab" destination="Y23-VM-qgV" id="0HZ-sC-fHx"/>
+                <outlet property="infoView" destination="ajb-YQ-4kA" id="2m6-lF-mJ7"/>
+                <outlet property="locationLab" destination="sDC-54-8Cp" id="dwr-at-Byr"/>
+                <outlet property="nikeName" destination="FZE-85-wch" id="CHY-7q-Pgc"/>
+                <outlet property="timeLab" destination="S0C-hS-MLG" id="Qoe-RQ-svm"/>
+                <outlet property="titleLab" destination="YvM-CB-qik" id="9F3-g1-6Mr"/>
+            </connections>
             <point key="canvasLocation" x="-68.5" y="218.5"/>
         </view>
     </objects>

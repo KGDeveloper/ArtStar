@@ -28,13 +28,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="613.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="4xP-dk-Jd2">
-                        <rect key="frame" x="15" y="58" width="345" height="234"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="4xP-dk-Jd2">
+                        <rect key="frame" x="15" y="59" width="345" height="234"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="4xP-dk-Jd2" secondAttribute="height" multiplier="690:468" id="BW5-dA-wgU"/>
                         </constraints>
                     </imageView>
-                    <textView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n8-0i-YrL">
+                    <textView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8n8-0i-YrL">
                         <rect key="frame" x="15" y="312" width="345" height="115"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -89,12 +89,6 @@
                         <rect key="frame" x="-133" y="-74" width="324" height="220"/>
                         <connections>
                             <action selector="headerClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SCT-xo-UCZ"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTe-MJ-QuN">
-                        <rect key="frame" x="146" y="165" width="46" height="30"/>
-                        <connections>
-                            <action selector="allImageClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dZ5-Sw-znj"/>
                         </connections>
                     </button>
                     <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Yc-Bh-BiV">
@@ -225,7 +219,6 @@
                     <constraint firstItem="1rS-df-f0y" firstAttribute="leading" secondItem="KgZ-7l-J2p" secondAttribute="trailing" constant="10" id="PqM-0R-NGl"/>
                     <constraint firstItem="KhL-uN-YJn" firstAttribute="centerY" secondItem="4xP-dk-Jd2" secondAttribute="centerY" id="QRb-Uo-lYP"/>
                     <constraint firstItem="cMq-AZ-a60" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Qg7-bd-bui"/>
-                    <constraint firstItem="gTe-MJ-QuN" firstAttribute="width" secondItem="4xP-dk-Jd2" secondAttribute="width" id="R0E-tb-jPB"/>
                     <constraint firstItem="NaZ-5Y-Xx7" firstAttribute="width" secondItem="cMq-AZ-a60" secondAttribute="width" id="SOP-YC-S4a"/>
                     <constraint firstItem="7aH-cj-7Ry" firstAttribute="height" secondItem="HVE-aM-t1N" secondAttribute="height" id="SPe-Lk-CBl"/>
                     <constraint firstItem="4xP-dk-Jd2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="SqD-he-FI9"/>
@@ -233,8 +226,6 @@
                     <constraint firstItem="o5y-PT-YHO" firstAttribute="top" secondItem="S28-oy-q6k" secondAttribute="top" id="aDW-7t-GNf"/>
                     <constraint firstAttribute="trailing" secondItem="8n8-0i-YrL" secondAttribute="trailing" constant="15" id="aGW-zk-vUu"/>
                     <constraint firstItem="o5y-PT-YHO" firstAttribute="height" secondItem="S28-oy-q6k" secondAttribute="height" id="b3g-ms-d9h"/>
-                    <constraint firstItem="gTe-MJ-QuN" firstAttribute="leading" secondItem="4xP-dk-Jd2" secondAttribute="leading" id="cR0-pa-zwG"/>
-                    <constraint firstItem="gTe-MJ-QuN" firstAttribute="height" secondItem="4xP-dk-Jd2" secondAttribute="height" id="cnu-cM-v0W"/>
                     <constraint firstItem="HVE-aM-t1N" firstAttribute="leading" secondItem="7aH-cj-7Ry" secondAttribute="trailing" constant="25" id="dsw-b1-qQ5"/>
                     <constraint firstItem="oNp-6d-lfG" firstAttribute="centerY" secondItem="4xP-dk-Jd2" secondAttribute="centerY" id="f7T-MI-vg2"/>
                     <constraint firstItem="HVE-aM-t1N" firstAttribute="top" secondItem="WSi-hR-4cV" secondAttribute="top" id="fIP-uA-IBA"/>
@@ -250,7 +241,6 @@
                     <constraint firstItem="cMq-AZ-a60" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="wMU-k6-dnT"/>
                     <constraint firstItem="KgZ-7l-J2p" firstAttribute="leading" secondItem="cMq-AZ-a60" secondAttribute="trailing" constant="10" id="x7d-w9-YAU"/>
                     <constraint firstItem="6R4-ck-TNz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xqh-yX-cn2"/>
-                    <constraint firstItem="gTe-MJ-QuN" firstAttribute="top" secondItem="4xP-dk-Jd2" secondAttribute="top" id="ylN-m3-iJK"/>
                     <constraint firstAttribute="bottom" secondItem="6R4-ck-TNz" secondAttribute="bottom" id="za5-tR-NIS"/>
                     <constraint firstItem="KgZ-7l-J2p" firstAttribute="centerY" secondItem="cMq-AZ-a60" secondAttribute="centerY" id="zlt-Wk-mPG"/>
                 </constraints>
@@ -264,7 +254,6 @@
                 <outlet property="deleteBtu" destination="1rS-df-f0y" id="YQP-B0-VBg"/>
                 <outlet property="headerBtu" destination="NaZ-5Y-Xx7" id="us0-Lg-Z3m"/>
                 <outlet property="headerIamge" destination="cMq-AZ-a60" id="eVV-Y9-fYp"/>
-                <outlet property="imageBtu" destination="gTe-MJ-QuN" id="eAm-h4-ApR"/>
                 <outlet property="locationLab" destination="o5y-PT-YHO" id="Igp-Bi-Y4u"/>
                 <outlet property="locationWidth" destination="8Vj-yE-QP5" id="ud5-q7-QUg"/>
                 <outlet property="nikName" destination="KgZ-7l-J2p" id="wwo-bf-qyc"/>

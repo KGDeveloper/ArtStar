@@ -46,7 +46,7 @@
         if ([result[@"code"] integerValue] == 200) {
             NSArray *arr = result[@"data"];
             NSDictionary *dic = [arr firstObject];
-            [upManager putFile:filePath key:[[NSString alloc] initWithFormat:@"%ld.png",(long)[self getNowTimestamp]] token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            [upManager putFile:filePath key:[[NSString alloc] initWithFormat:@"%@.png",[self getNowTimestamp]] token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                 if (info.statusCode == 200) {
                     NSString *path = @"http://pbl758zx4.bkt.clouddn.com/";
                     path = [path stringByAppendingString:resp[@"key"]];
@@ -60,9 +60,7 @@
 }
 
 - (void)uploadDataToQiniuWithData:(NSURL *)url result:(void(^)(NSString *strPath))uploadData{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyyMMddHHmmss"];
-    NSString *failName = [NSString stringWithFormat:@"%@.mp4",[formatter stringFromDate:[NSDate date]]];
+    NSString *failName = [NSString stringWithFormat:@"%@.mp4",[self getNowTimestamp]];
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
         //MARK:------------------------------------------在这里获取上传进度----------------------------------------------
@@ -108,36 +106,35 @@
     
     //把刚刚图片转换的data对象拷贝至沙盒中
     [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-    NSString *ImagePath = [[NSString alloc] initWithFormat:@"/%ld.png",(long)[self getNowTimestamp]];
+    NSString *ImagePath = [[NSString alloc] initWithFormat:@"/%@.png",[self getNowTimestamp]];
     [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:ImagePath] contents:data attributes:nil];
     
     //得到选择后沙盒中图片的完整路径
-    filePath = [[NSString alloc] initWithFormat:@"%@%@", DocumentsPath, ImagePath];
+    filePath = [[NSString alloc] initWithFormat:@"%@%@",DocumentsPath, ImagePath];
     return filePath;
 }
 
-- (NSInteger)getNowTimestamp{
+- (NSString *)getNowTimestamp{
     
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     
-    [formatter setDateFormat:@"YYYYMMddHHmmss"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
     
     //设置时区,这个对于时间的处理有时很重要
     
-    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     
     [formatter setTimeZone:timeZone];
     
-    NSDate *datenow = [NSDate date];//现在时间
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
     
-    //时间转时间戳的方法:
-    NSInteger timeSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
-
+    NSString *timeSp = [NSString stringWithFormat:@"%u%ld",arc4random_uniform(100),(long)[datenow timeIntervalSince1970]*1000];
+    
     return timeSp;
     
 }

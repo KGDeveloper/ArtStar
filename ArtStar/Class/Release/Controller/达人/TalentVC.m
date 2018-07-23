@@ -12,8 +12,10 @@
 #import "TalentPushPhotosTableViewCell.h"
 #import "YourLocationVC.h"
 #import <Photos/Photos.h>
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchAPI.h>
 
-@interface TalentVC ()<UITableViewDelegate,UITableViewDataSource,TlentIntroudceTableViewCellDelegate,UITextFieldDelegate,KGCameraDelegate,TalentPushPhotosTableViewCellDelegate>
+@interface TalentVC ()<UITableViewDelegate,UITableViewDataSource,TlentIntroudceTableViewCellDelegate,UITextFieldDelegate,KGCameraDelegate,TalentPushPhotosTableViewCellDelegate,AMapSearchDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,copy) NSArray *plholderArr;
@@ -24,7 +26,10 @@
 
 @property (nonatomic,strong) NSMutableArray *imageArr;
 @property (nonatomic,strong) NSMutableArray *dataImageArr;
+@property (nonatomic,strong) NSURL *videoStr;
 @property (nonatomic,assign) BOOL videoIsUlLoad;
+
+@property (nonatomic,strong) AMapSearchAPI *search;
 
 @end
 
@@ -40,9 +45,10 @@
     
     _parasmart = [NSMutableDictionary dictionary];
     _imageArr = [NSMutableArray array];
-    _videoIsUlLoad = NO;
+    _videoIsUlLoad = YES;
     
     [self setTableView];
+    [self initSearchApi];
 }
 
 - (void)leftNavBtuAction:(UIButton *)sender{
@@ -50,7 +56,6 @@
 }
 
 - (void)rightNavBtuAction:(UIButton *)sender{
-   
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (_parasmart[@"headline"]) {
         if (_parasmart[@"siteName"]) {
@@ -60,6 +65,7 @@
                         if (_parasmart[@"images"]) {
                             [self uploadImage];
                             if (_parasmart[@"siteVideo"]) {
+                                _videoIsUlLoad = NO;
                                 [self uploadVideo];
                             }
                         }else{
@@ -106,9 +112,7 @@
     dispatch_queue_t imageQueue = dispatch_queue_create("上传图片", DISPATCH_QUEUE_CONCURRENT);
     dispatch_sync(imageQueue, ^{
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSLog(@"%@",obj);
             [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:[[KGQiniuUploadManager shareInstance] getImagePath:obj] fileName:nil result:^(NSString *strPath) {
-                NSLog(@"%@",obj);
                 [mySelf.dataImageArr addObject:strPath];
                 [mySelf uploadData];
             }];
@@ -119,12 +123,23 @@
 - (void)uploadData{
     __weak typeof(self) mySelf = self;
     NSArray *arr = _parasmart[@"images"];
-    if (_dataImageArr.count == arr.count) {
+    if (_dataImageArr.count == arr.count && _videoIsUlLoad == YES) {
         [mySelf.parasmart setObject:_dataImageArr forKey:@"images"];
-        [KGRequestNetWorking postWothUrl:saveMerchantIssue parameters:mySelf.parasmart succ:^(id result) {
-            
+        [mySelf.parasmart setObject:[KGUserInfo shareInterace].userID forKey:@"uid"];
+        [KGRequestNetWorking postWothUrl:saveMerchantIssue parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"intelligentIssue":_parasmart} succ:^(id result) {
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
+            }else{
+                //:--防止再次提交的时候程序奔溃--
+                [mySelf.parasmart setObject:mySelf.imageArr forKey:@"images"];
+                [mySelf.parasmart setObject:mySelf.videoStr forKey:@"siteVideo"];
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
+            }
         } fail:^(NSError *error) {
+            //:--防止再次提交的时候程序奔溃--
+            [mySelf.parasmart setObject:mySelf.imageArr forKey:@"images"];
+            [mySelf.parasmart setObject:mySelf.videoStr forKey:@"siteVideo"];
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         }];
     }
@@ -240,9 +255,31 @@
         [_parasmart setObject:textField.text forKey:@"siteName"];
     }else if (textField.tag == 102){
         [_parasmart setObject:textField.text forKey:@"siteAddress"];
+        [self geoAddress:textField.text];
     }else if (textField.tag == 103){
         [_parasmart setObject:textField.text forKey:@"siteTelephone"];
     }
+}
+- (void)initSearchApi{
+    [AMapServices sharedServices].apiKey = GeocodeApiKey;
+    _search = [[AMapSearchAPI alloc]init];
+    _search.delegate = self;
+}
+- (void)geoAddress:(NSString *)str{
+    AMapGeocodeSearchRequest *request = [[AMapGeocodeSearchRequest alloc]init];
+    request.address = str;
+    [_search AMapGeocodeSearch:request];
+}
+
+- (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response{
+    if (response.geocodes.count == 0) {
+        return;
+    }
+    NSArray *locationArr = response.geocodes;
+    AMapGeocode *geoCode = [locationArr firstObject];
+    AMapGeoPoint *geoPoint = geoCode.location;
+    [_parasmart setObject:@(geoPoint.longitude) forKey:@"longitude"];
+    [_parasmart setObject:@(geoPoint.latitude) forKey:@"latitude"];
 }
 
 //MARK:--选择照片--
@@ -285,6 +322,7 @@
                 [manager requestAVAssetForVideo:phAsset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
                     AVURLAsset *urlAsset = (AVURLAsset *)asset;
                     [mySelf.parasmart setObject:urlAsset.URL forKey:@"siteVideo"];
+                    mySelf.videoStr = urlAsset.URL;
                     NSIndexPath *index = [NSIndexPath indexPathForRow:6 inSection:0];
                     [mySelf.listView reloadRowAtIndexPath:index withRowAnimation:UITableViewRowAnimationAutomatic];
                 }];
@@ -333,6 +371,7 @@
             }
         }else{
             [mySelf.parasmart setObject:videoUrl forKey:@"siteVideo"];
+            mySelf.videoStr = videoUrl;
             NSIndexPath *index = [NSIndexPath indexPathForRow:6 inSection:0];
             [mySelf.listView reloadRowAtIndexPath:index withRowAnimation:UITableViewRowAnimationAutomatic];
         }

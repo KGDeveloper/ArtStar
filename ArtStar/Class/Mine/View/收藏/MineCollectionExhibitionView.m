@@ -9,7 +9,7 @@
 #import "MineCollectionExhibitionView.h"
 #import "MineCollectionExibitionTableViewCell.h"
 
-@interface MineCollectionExhibitionView ()<UITableViewDelegate,UITableViewDataSource>
+@interface MineCollectionExhibitionView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 
@@ -28,6 +28,8 @@
     _listView = [[UITableView alloc]initWithFrame:self.bounds];
     _listView.dataSource = self;
     _listView.delegate = self;
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
     _listView.rowHeight = (kScreenWidth - 30)/690*400 + 100;
     _listView.tableFooterView = TabLeViewFootView;
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -55,6 +57,19 @@
     MineCollectionExibitionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineCollectionExibitionTableViewCell"];
     return cell;
 }
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"木有内容哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

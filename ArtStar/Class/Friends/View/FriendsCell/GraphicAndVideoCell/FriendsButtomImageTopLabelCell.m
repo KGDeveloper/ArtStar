@@ -24,11 +24,6 @@
         [self.delegate headerPushInfo:self.cellIndex];
     }
 }
-- (IBAction)lookAllImageClick:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(lookAllCellImage:)]) {
-        [self.delegate lookAllCellImage:self.cellIndex];
-    }
-}
 - (IBAction)playVideoClick:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(playCellVideo:)]) {
         [self.delegate playCellVideo:self.cellIndex];
@@ -58,14 +53,12 @@
 - (void)showVideo{
     self.countView.hidden = YES;
     self.countLab.hidden = YES;
-    self.imageBtu.hidden = YES;
     self.playView.hidden = NO;
     self.playBtu.hidden = NO;
 }
 - (void)showGraphic{
     self.countView.hidden = NO;
     self.countLab.hidden = NO;
-    self.imageBtu.hidden = NO;
     self.playView.hidden = YES;
     self.playBtu.hidden = YES;
 }

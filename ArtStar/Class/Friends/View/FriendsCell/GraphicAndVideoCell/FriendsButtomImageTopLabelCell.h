@@ -12,7 +12,6 @@
 
 - (void)deleteCell:(NSInteger)index;
 - (void)headerPushInfo:(NSInteger)index;
-- (void)lookAllCellImage:(NSInteger)index;
 - (void)playCellVideo:(NSInteger)index;
 - (void)commentCell:(NSInteger)index;
 - (void)zansCell:(NSInteger)index;
@@ -26,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nikName;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIImageView *topImage;
-@property (weak, nonatomic) IBOutlet UIButton *imageBtu;
 @property (weak, nonatomic) IBOutlet UIView *playView;
 @property (weak, nonatomic) IBOutlet UIButton *playBtu;
 @property (weak, nonatomic) IBOutlet UIView *countView;

@@ -68,10 +68,5 @@
         [self.delegate playCellVideo:self.cellIndex];
     }
 }
-- (IBAction)lookAllImage:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(lookAllCellImage:)]) {
-        [self.delegate lookAllCellImage:self.cellIndex];
-    }
-}
 
 @end

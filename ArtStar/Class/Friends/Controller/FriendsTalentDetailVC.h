@@ -10,4 +10,7 @@
 
 @interface FriendsTalentDetailVC : BaseVC
 
+@property (nonatomic,copy) NSString *ID;
+@property (nonatomic,copy) NSNumber *msgID;
+
 @end

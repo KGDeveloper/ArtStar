@@ -418,18 +418,47 @@ FriendsMessageViewDelegate>
     }else{
         //MARK:--------------------------------------------达人发布的内容--------------------------------------------
         FriendsTalentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsTalentTableViewCell"];
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikName.text = dic[@"username"];
+        cell.titleLab.text = model.title;
+        cell.detailLab.attributedText = [TransformChineseToPinying string:model.content font:SYFont(12) space:10];;
+        NSArray *arr = model.images;
+        NSDictionary *imageDic = [arr firstObject];
+        [cell.topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
+        cell.videoBack.hidden = YES;
+        cell.videoPlay.hidden = YES;
+        cell.locationLab.text = model.location;
+        cell.countLab.text = [NSString stringWithFormat:@"1/%lu",(unsigned long)arr.count];
+        [cell.commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
+        [cell.zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    FriendsModel *model = _dataArr[indexPath.row];
-//    if ([model.composing isEqualToString:@"10"]) {
+    FriendsModel *model = _dataArr[indexPath.row];
+    if ([model.composing integerValue] == 11) {
         FriendsTalentDetailVC *vc = [[FriendsTalentDetailVC alloc]init];
+        vc.ID = model.issId;
+        vc.msgID = model.ID;
         [self pushNoTabBarViewController:vc animated:YES];
-//    }else{
-//
-//    }
+    }else{
+        if ([model.type integerValue] == 0 || [model.type integerValue] == 1) {
+            FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
+            if ([model.composing integerValue] == 3 || [model.composing integerValue] == 4) {
+                vc.type = 0;
+            }else{
+                vc.type = 1;
+            }
+            vc.rfimd = model.ID;
+            [self pushNoTabBarViewController:vc animated:YES];
+        }else if ([model.type integerValue] == 2){
+            FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
+            vc.type = 1;
+            [self pushNoTabBarViewController:vc animated:YES];
+        }
+    }
 }
 
 //MARK:--横排文字改变排版--
@@ -449,16 +478,6 @@ FriendsMessageViewDelegate>
 - (void)deleteCell:(NSInteger)index{
     NSLog(@"点击删除%ld",(long)index);
 }
-- (void)lookAllCellImage:(NSInteger)index{
-    FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
-    vc.type = 1;
-    [self pushNoTabBarViewController:vc animated:YES];
-}
-- (void)playCellVideo:(NSInteger)index{
-    FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
-    vc.type = 0;
-    [self pushNoTabBarViewController:vc animated:YES];
-}
 - (void)zansCell:(NSInteger)index{
     FriendsModel *model = _dataArr[index];
     [KGRequestNetWorking postWothUrl:firendlikeCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":model.ID} succ:^(id result) {
@@ -474,10 +493,6 @@ FriendsMessageViewDelegate>
     } fail:^(NSError *error) {
         
     }];
-    
-//    FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
-//    vc.type = 2;
-//    [self pushNoTabBarViewController:vc animated:YES];
 }
 - (void)shareCell:(NSInteger)index{
     DXShareView *shareView = [[DXShareView alloc] init];

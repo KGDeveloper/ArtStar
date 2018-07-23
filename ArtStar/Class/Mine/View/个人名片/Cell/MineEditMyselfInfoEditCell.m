@@ -46,8 +46,12 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField == self.nikNameTF) {
-        if ([self.delegate respondsToSelector:@selector(sendNikNameToController:)]) {
-            [self.delegate sendNikNameToController:textField.text];
+        if (textField.text == nil || textField.text.length == 0) {
+            [[MBProgressHUD showHUDAddedTo:self animated:YES] bwm_hideWithTitle:@"昵称不能为空" hideAfter:1];
+        }else{
+            if ([self.delegate respondsToSelector:@selector(sendNikNameToController:)]) {
+                [self.delegate sendNikNameToController:textField.text];
+            }
         }
     }else{
         if ([self.delegate respondsToSelector:@selector(sendIntroudceToController:)]) {

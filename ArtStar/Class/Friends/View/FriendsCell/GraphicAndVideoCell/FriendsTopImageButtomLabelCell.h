@@ -12,7 +12,6 @@
 
 - (void)deleteCell:(NSInteger)index;
 - (void)headerPushInfo:(NSInteger)index;
-- (void)lookAllCellImage:(NSInteger)index;
 - (void)playCellVideo:(NSInteger)index;
 - (void)commentCell:(NSInteger)index;
 - (void)zansCell:(NSInteger)index;

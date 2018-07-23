@@ -9,7 +9,8 @@
 #import "MineCollectionInstitutionView.h"
 #import "MineCollectionInstitutionViewCell.h"
 
-@interface MineCollectionInstitutionView ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface MineCollectionInstitutionView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 
@@ -26,6 +27,8 @@
 }
 - (void)setTableView{
     _listView = [[UITableView alloc]initWithFrame:self.bounds];
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
     _listView.dataSource = self;
     _listView.delegate = self;
     _listView.rowHeight = 130;
@@ -46,12 +49,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineCollectionInstitutionViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineCollectionInstitutionViewCell"];
     return cell;
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"木有内容哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
 }
 
 /*

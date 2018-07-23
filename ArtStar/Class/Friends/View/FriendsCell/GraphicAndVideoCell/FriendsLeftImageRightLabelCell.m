@@ -88,9 +88,6 @@
     _topImage.image = Image(@"2");
     _topImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(_headerImage, 15).widthIs(kScreenWidth - 165).heightIs((kScreenWidth - 165)/450*690);
     
-    [_topBtu addTarget:self action:@selector(allIamgeClick:) forControlEvents:UIControlEventTouchUpInside];
-    _topBtu.sd_layout.leftEqualToView(_topImage).topEqualToView(_topImage).widthIs(kScreenWidth - 165).heightIs((kScreenWidth - 165)/450*690);
-    
     _labBack.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     _labBack.alpha = 0.4;
     _labBack.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(27).heightIs(14);
@@ -102,7 +99,7 @@
     _countLab.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(27).heightIs(14);
     
     _textView.textColor = Color_333333;
-    _textView.userInteractionEnabled = YES;
+    _textView.editable = NO;
     _textView.sd_layout.topEqualToView(_topImage).rightSpaceToView(self.contentView, 15).widthIs(115).heightIs((kScreenWidth - 165)/450*690);
     
     [_shareBtu setImage:Image(@"分享") forState:UIControlStateNormal];
@@ -164,11 +161,6 @@
 - (void)deleteClick:(id)sender {
     if ([self.delegate respondsToSelector:@selector(deleteCell:)]) {
         [self.delegate deleteCell:self.cellIndex];
-    }
-}
-- (void)allIamgeClick:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(lookAllCellImage:)]) {
-        [self.delegate lookAllCellImage:self.cellIndex];
     }
 }
 - (void)shareClick:(id)sender {

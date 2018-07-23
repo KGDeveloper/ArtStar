@@ -9,7 +9,7 @@
 #import "MineCollectionThemeView.h"
 #import "MusicManagementMyThemeCell.h"
 
-@interface MineCollectionThemeView ()<UITableViewDelegate,UITableViewDataSource>
+@interface MineCollectionThemeView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 
@@ -28,6 +28,8 @@
     _listView = [[UITableView alloc]initWithFrame:self.bounds];
     _listView.dataSource = self;
     _listView.delegate = self;
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
     _listView.rowHeight = 60;
     _listView.tableFooterView = TabLeViewFootView;
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -53,6 +55,20 @@
     MusicManagementMyThemeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicManagementMyThemeCell"];
     return cell;
 }
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"木有内容哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

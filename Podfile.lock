@@ -24,6 +24,7 @@ PODS:
     - AMapFoundation (~> 1.5)
   - AMapSearch (6.1.1):
     - AMapFoundation (~> 1.4)
+  - DZNEmptyDataSet (1.8.1)
   - HappyDNS (0.3.14)
   - IQKeyboardManager (6.0.3)
   - MBProgressHUD (0.9.2)
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - AMapLocation (~> 2.6.0)
   - AMapNavi (~> 6.1.1)
   - AMapSearch (~> 6.1.1)
+  - DZNEmptyDataSet (~> 1.8.1)
   - IQKeyboardManager (~> 6.0.0)
   - "MBProgressHUD+BWMExtension (~> 1.0.1)"
   - MJExtension (~> 3.0.13)
@@ -86,6 +88,7 @@ SPEC REPOS:
     - AMapLocation
     - AMapNavi
     - AMapSearch
+    - DZNEmptyDataSet
     - HappyDNS
     - IQKeyboardManager
     - MBProgressHUD
@@ -106,6 +109,7 @@ SPEC CHECKSUMS:
   AMapLocation: 55116a2c8956eab7550cbb56e989aa5cdcc424e3
   AMapNavi: c02a60d4e0cd84cafd660bfd94c7378fac97170e
   AMapSearch: 3dcbf85c403a2a0fe0eda5318caabc272b31f5e1
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   HappyDNS: dc6a164ee81979093123c241c6353bcf0218add6
   IQKeyboardManager: c390e612f4b98c8fd748016470138537dc163ead
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -119,6 +123,6 @@ SPEC CHECKSUMS:
   XHWebImageAutoSize: 8e5d7bf036f960885769dbe3410579024d3ac1a1
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: f7aa8298f9aa56ece450b89700cf00b1d163bb77
+PODFILE CHECKSUM: 23ab8f9ca2808da104248274a990af5c156c5554
 
 COCOAPODS: 1.5.2

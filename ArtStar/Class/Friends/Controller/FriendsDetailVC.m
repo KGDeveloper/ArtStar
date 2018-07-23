@@ -24,18 +24,54 @@ FriendsSuspensionViewDelegate,
 FriendsPlayVideoViewdelegate>
 
 @property (nonatomic,strong) UIView *headerView;
+/**
+ 加载图片
+ */
 @property (nonatomic,strong) FriendsDetailScrollView *detailScrollView;
+/**
+ 竖排排盘
+ */
 @property (nonatomic,strong) FriendsDetailVericalView *veritocalView;
+/**
+ 显示时间
+ */
 @property (nonatomic,strong) FriendsDetailTimeComponentView *timeView;
+/**
+ 评论框
+ */
 @property (nonatomic,strong) FriendsCommentView *commentView;
+/**
+ 选择弹窗
+ */
 @property (nonatomic,strong) FriendsSuspensionView *suspensionView;
+/**
+ 控制视频播放
+ */
 @property (nonatomic,strong) FriendsPlayVideoView *playVideo;
+/**
+ 播放视频
+ */
 @property (nonatomic,strong) FriendsVideoView *videoView;
+/**
+ 评论
+ */
 @property (nonatomic,strong) UITableView *listView;
+/**
+ 头像
+ */
 @property (nonatomic,strong) UIImageView *userImage;
+/**
+ 昵称
+ */
 @property (nonatomic,strong) UILabel *nikName;
+/**
+ 删除按钮
+ */
 @property (nonatomic,strong) UIButton *deleteBtu;
-@property (nonatomic,assign) BOOL isAttention;
+/**
+ 解析数据
+ */
+@property (nonatomic,strong) FriendsModel *model;
 
 @end
 
@@ -45,20 +81,39 @@ FriendsPlayVideoViewdelegate>
     [super viewDidLoad];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"动态详情" image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
-    _isAttention = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if (self.type == 1) {
+    [self createDate];
+}
+
+/**
+ 数据拉取
+ */
+- (void)createDate{
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:friendViews parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_rfimd} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            NSDictionary *dic = [arr firstObject];
+            mySelf.model = [FriendsModel mj_objectWithKeyValues:dic];
+            [mySelf changeUI];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+}
+- (void)changeUI{
+    if (self.type == 1) {//:--横排--
         [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
-        self.detailScrollView.photosArr = @[@"1",@"2",@"3",@"4",@"5"];
+        self.detailScrollView.photosArr = _model.images;
         self.veritocalView.textAlinment = NSTextAlignmentCenter;
         self.veritocalView.isVertical = NO;
         self.veritocalView.textStr = @"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯";
-    }else if(self.type == 0){
+    }else if(self.type == 0){//:--竖排--
         [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 165)/450*690 + 65 + 58)];
         
         self.detailScrollView.frame = CGRectMake(15, 58, kScreenWidth - 30 - 115 - 20, (kScreenWidth - 165)/450*690);
-        self.detailScrollView.photosArr = @[@"1",@"2",@"3",@"4",@"5"];
+        self.detailScrollView.photosArr = _model.images;
         
         self.veritocalView.frame = CGRectMake(ViewWidth(self.detailScrollView) + 35,58, 115, (kScreenWidth - 165)/450*690);
         self.veritocalView.isVertical = YES;
@@ -77,7 +132,6 @@ FriendsPlayVideoViewdelegate>
     self.timeView.timeStr = @"2018-05-22";
     self.timeView.locationStr = @"北京";
 }
-
 - (void)settableViewFrame:(CGRect)frame{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
     _listView.delegate = self;
@@ -218,12 +272,10 @@ FriendsPlayVideoViewdelegate>
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)rightNavBtuAction:(UIButton *)sender{
-    if (_isAttention == NO) {
-        [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"已关注" image:nil];
-        _isAttention = YES;
+    if ([sender.currentTitle isEqualToString:@"已关注"]) {
+        [sender setTitle:@"关注" forState:UIControlStateNormal];
     }else{
-        [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
-        _isAttention = NO;
+        [sender setTitle:@"已关注" forState:UIControlStateNormal];
     }
 }
 

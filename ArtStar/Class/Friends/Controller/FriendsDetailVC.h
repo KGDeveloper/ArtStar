@@ -11,5 +11,6 @@
 @interface FriendsDetailVC : BaseVC
 
 @property (nonatomic,assign) NSInteger type;
+@property (nonatomic,copy) NSNumber *rfimd;
 
 @end

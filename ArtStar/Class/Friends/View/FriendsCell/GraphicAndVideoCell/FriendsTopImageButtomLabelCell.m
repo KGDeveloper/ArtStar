@@ -23,11 +23,6 @@
         [self.delegate headerPushInfo:self.cellIndex];
     }
 }
-- (IBAction)allImageClick:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(lookAllCellImage:)]) {
-        [self.delegate lookAllCellImage:self.cellIndex];
-    }
-}
 - (IBAction)playClick:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(playCellVideo:)]) {
         [self.delegate playCellVideo:self.cellIndex];

@@ -55,10 +55,40 @@
 //#define serverIP @"http://192.168.1.5/"
 //#define serverIP @"http://192.168.1.4/"
 //MARK:----------------------------------------注册登录------------------------------------------------
+/**
+ 短信发送
+
+ @param 包括自己 短信发送
+ @return 短信发送
+ */
 #define sendMsgAuthCode [serverIP stringByAppendingString:@"sendMsgAuthCode"]
+/**
+ 判断验证码是否正确（只有注册时使用）
+
+ @param 包括自己 判断验证码是否正确（只有注册时使用）
+ @return 判断验证码是否正确（只有注册时使用）
+ */
 #define judgeMsgAuthCode [serverIP stringByAppendingString:@"judgeMsgAuthCode"]
+/**
+ 注册
+
+ @param 包括自己 注册
+ @return 注册
+ */
 #define registServer [serverIP stringByAppendingString:@"regist"]
+/**
+ 登陆
+
+ @param 包括自己 登陆
+ @return 登陆
+ */
 #define loginServer [serverIP stringByAppendingString:@"login"]
+/**
+ 跟新融云token的方法
+
+ @param 包括自己 跟新融云token的方法
+ @return 跟新融云token的方法
+ */
 #define toSetPayrollPwd [serverIP stringByAppendingString:@"toSetPayrollPwd"]
 //MARK:-----------------------------------------社区-----------------------------------------------
 #define communityServer [serverIP stringByAppendingString:@"community/ntvBynews"]
@@ -72,9 +102,6 @@
 #define commentNewsByUid [serverIP stringByAppendingString:@"community/commentNewsByUid"]
 #define closeNewsByNid [serverIP stringByAppendingString:@"community/closeNewsByNid"]
 #define ntvByTopic [serverIP stringByAppendingString:@"community/ntvByTopic"]
-
-//MARK:-------------------------------------------个人中心---------------------------------------------
-#define editPerBnsCard [serverIP stringByAppendingString:@"personalBusinessCard/editPerBnsCard"]
 
 //MARK:--------------------------------------------发布模块--------------------------------------------
 #define ReleaseFriendTimelineAddfriendMessage [serverIP stringByAppendingString:@"ReleaseFriendTimeline/addfriendMessage"]
@@ -129,6 +156,20 @@
  @return 消息评论或者回复评论
  */
 #define commentOrReply [serverIP stringByAppendingString:@"friendComment/commentOrReply"]
+/**
+ 点击消息查看详情页
+
+ @return 点击消息查看详情页
+ */
+#define friendViews [serverIP stringByAppendingString:@"ReleaseFriendTimeline/friendViews"]
+/**
+ 消息评论或者回复评论
+
+ @return 消息评论或者回复评论
+ */
+#define commentOrReply [serverIP stringByAppendingString:@"friendComment/commentOrReply"]
+
+//MARK:----------------------------------------个人中心------------------------------------------------
 /**
  我的中，查看个人名片
 
@@ -225,7 +266,12 @@
  @return 删除喜欢的书籍
  */
 #define deleteBook [serverIP stringByAppendingString:@"userbook/deleteBook"]
+/**
+ 编辑/完善个人资料
 
+ @return 编辑/完善个人资料
+ */
+#define editPerBnsCard [serverIP stringByAppendingString:@"personalBusinessCard/editPerBnsCard"]
 
 
 

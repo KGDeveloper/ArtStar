@@ -21,6 +21,7 @@ pod 'AMap3DMap', '~> 6.2.0'
 pod 'AMapSearch', '~> 6.1.1'
 pod 'AMapLocation', '~> 2.6.0'
 pod 'AMapNavi', '~> 6.1.1'
+pod 'DZNEmptyDataSet', '~> 1.8.1'
 
   use_frameworks!
 

@@ -165,6 +165,7 @@
 		283484A420C66D6700AB6E9A /* ReadIngRecommendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283484A320C66D6700AB6E9A /* ReadIngRecommendView.m */; };
 		283484A920C6757800AB6E9A /* ReadBooksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 283484A720C6757800AB6E9A /* ReadBooksCell.m */; };
 		283484AA20C6757800AB6E9A /* ReadBooksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283484A820C6757800AB6E9A /* ReadBooksCell.xib */; };
+		2834E21D210588670071BFA7 /* FriendsTalentsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2834E21C210588670071BFA7 /* FriendsTalentsCommentModel.m */; };
 		283EBAD220CF6A3F006C28C0 /* MineWordLoveFoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EBAD020CF6A3F006C28C0 /* MineWordLoveFoodsCell.m */; };
 		283EBAD320CF6A3F006C28C0 /* MineWordLoveFoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283EBAD120CF6A3F006C28C0 /* MineWordLoveFoodsCell.xib */; };
 		283EBAD620CF70C0006C28C0 /* MineCardLoadFriendCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EBAD520CF70C0006C28C0 /* MineCardLoadFriendCoverView.m */; };
@@ -307,6 +308,7 @@
 		2875DABC20D3C87200D6CAFE /* MineAddBaseInfoChooseIDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875DABA20D3C87200D6CAFE /* MineAddBaseInfoChooseIDTableViewCell.m */; };
 		2875DABD20D3C87200D6CAFE /* MineAddBaseInfoChooseIDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2875DABB20D3C87200D6CAFE /* MineAddBaseInfoChooseIDTableViewCell.xib */; };
 		2875DAC120D3CBCC00D6CAFE /* MineChooseCardTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875DAC020D3CBCC00D6CAFE /* MineChooseCardTypeView.m */; };
+		287C65AF2101D02900FE47F1 /* FriendsTalentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 287C65AE2101D02900FE47F1 /* FriendsTalentModel.m */; };
 		287D2CEB20BE4EB400500156 /* HotMoviesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D2CE920BE4EB400500156 /* HotMoviesCell.m */; };
 		287D2CEC20BE4EB400500156 /* HotMoviesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287D2CEA20BE4EB400500156 /* HotMoviesCell.xib */; };
 		287D2CEF20BE577800500156 /* HotMoviesDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D2CEE20BE577800500156 /* HotMoviesDetailVC.m */; };
@@ -820,6 +822,8 @@
 		283484A620C6757800AB6E9A /* ReadBooksCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadBooksCell.h; sourceTree = "<group>"; };
 		283484A720C6757800AB6E9A /* ReadBooksCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadBooksCell.m; sourceTree = "<group>"; };
 		283484A820C6757800AB6E9A /* ReadBooksCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadBooksCell.xib; sourceTree = "<group>"; };
+		2834E21B210588670071BFA7 /* FriendsTalentsCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsTalentsCommentModel.h; sourceTree = "<group>"; };
+		2834E21C210588670071BFA7 /* FriendsTalentsCommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsTalentsCommentModel.m; sourceTree = "<group>"; };
 		283EBACF20CF6A3E006C28C0 /* MineWordLoveFoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineWordLoveFoodsCell.h; sourceTree = "<group>"; };
 		283EBAD020CF6A3F006C28C0 /* MineWordLoveFoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineWordLoveFoodsCell.m; sourceTree = "<group>"; };
 		283EBAD120CF6A3F006C28C0 /* MineWordLoveFoodsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineWordLoveFoodsCell.xib; sourceTree = "<group>"; };
@@ -1063,6 +1067,8 @@
 		2875DABB20D3C87200D6CAFE /* MineAddBaseInfoChooseIDTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineAddBaseInfoChooseIDTableViewCell.xib; sourceTree = "<group>"; };
 		2875DABF20D3CBCC00D6CAFE /* MineChooseCardTypeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineChooseCardTypeView.h; sourceTree = "<group>"; };
 		2875DAC020D3CBCC00D6CAFE /* MineChooseCardTypeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineChooseCardTypeView.m; sourceTree = "<group>"; };
+		287C65AD2101D02900FE47F1 /* FriendsTalentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsTalentModel.h; sourceTree = "<group>"; };
+		287C65AE2101D02900FE47F1 /* FriendsTalentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsTalentModel.m; sourceTree = "<group>"; };
 		287D2CE820BE4EB400500156 /* HotMoviesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotMoviesCell.h; sourceTree = "<group>"; };
 		287D2CE920BE4EB400500156 /* HotMoviesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotMoviesCell.m; sourceTree = "<group>"; };
 		287D2CEA20BE4EB400500156 /* HotMoviesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotMoviesCell.xib; sourceTree = "<group>"; };
@@ -2933,6 +2939,10 @@
 			children = (
 				2823124A20E639520026904E /* FriendsModel.h */,
 				2823124B20E639520026904E /* FriendsModel.m */,
+				287C65AD2101D02900FE47F1 /* FriendsTalentModel.h */,
+				287C65AE2101D02900FE47F1 /* FriendsTalentModel.m */,
+				2834E21B210588670071BFA7 /* FriendsTalentsCommentModel.h */,
+				2834E21C210588670071BFA7 /* FriendsTalentsCommentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4097,6 +4107,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ArtStar/Pods-ArtStar-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/HappyDNS/HappyDNS.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -4112,6 +4123,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HappyDNS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
@@ -4266,6 +4278,7 @@
 				2814620B20B3E6D7000C5E47 /* FriendsDetailScrollView.m in Sources */,
 				28A6C9D520D8A60400ECBF4F /* MineUnitAndPositionTableViewCell.m in Sources */,
 				287D2CEB20BE4EB400500156 /* HotMoviesCell.m in Sources */,
+				287C65AF2101D02900FE47F1 /* FriendsTalentModel.m in Sources */,
 				2804BEB020E0DF12007E33DE /* MineSystemVC.m in Sources */,
 				28E56FD220AA8A1000203D1E /* KGTextField.m in Sources */,
 				287D2D0020BE8C1800500156 /* HotMoviesDetailCommentNormalCell.m in Sources */,
@@ -4424,6 +4437,7 @@
 				286C902020BCFF53004EBA67 /* MusicBuyTicketCell.m in Sources */,
 				2820B07120B5452C00EA1DAC /* DXShareModel.m in Sources */,
 				28D09E0620C00B2100FA45A2 /* MyselfCenterVC.m in Sources */,
+				2834E21D210588670071BFA7 /* FriendsTalentsCommentModel.m in Sources */,
 				28F996A620A43E2600678494 /* UIButton+EnlargeTouchArea.m in Sources */,
 				2874726320CA78D8004317A5 /* FocusViewChatFocusCell.m in Sources */,
 				286C905220BD5C6E004EBA67 /* MusicSimilarToRecommendCell.m in Sources */,

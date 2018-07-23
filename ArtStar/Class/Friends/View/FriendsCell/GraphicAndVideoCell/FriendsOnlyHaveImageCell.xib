@@ -180,17 +180,10 @@
                             <action selector="headerClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="h2V-h6-wh9"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQ8-o3-hFm">
-                        <rect key="frame" x="129" y="214" width="46" height="30"/>
-                        <connections>
-                            <action selector="lookAllImage:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1Cz-cF-Kc9"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="69i-Dm-7pQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="2Ca-3e-au2"/>
-                    <constraint firstItem="wQ8-o3-hFm" firstAttribute="leading" secondItem="SCQ-SL-1uj" secondAttribute="leading" id="2dH-L4-9Dl"/>
                     <constraint firstAttribute="trailing" secondItem="OS9-sY-kY5" secondAttribute="trailing" constant="15" id="2l4-2x-Uhj"/>
                     <constraint firstAttribute="trailing" secondItem="Aec-xp-Xiq" secondAttribute="trailing" constant="15" id="4DE-Mr-KLR"/>
                     <constraint firstItem="hs5-5i-QlK" firstAttribute="top" secondItem="SCQ-SL-1uj" secondAttribute="bottom" constant="25" id="8Sr-LC-6Cj"/>
@@ -200,7 +193,6 @@
                     <constraint firstItem="69i-Dm-7pQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Fl8-Pa-pV4"/>
                     <constraint firstItem="YVq-7z-OLj" firstAttribute="height" secondItem="69i-Dm-7pQ" secondAttribute="height" id="IWg-wb-hrw"/>
                     <constraint firstItem="gyv-oB-1gZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="JmZ-R8-yJe"/>
-                    <constraint firstItem="wQ8-o3-hFm" firstAttribute="height" secondItem="SCQ-SL-1uj" secondAttribute="height" id="Jt5-b8-4AL"/>
                     <constraint firstItem="3yS-By-RbN" firstAttribute="centerY" secondItem="69i-Dm-7pQ" secondAttribute="centerY" id="KYE-zh-QKE"/>
                     <constraint firstItem="OS9-sY-kY5" firstAttribute="centerY" secondItem="69i-Dm-7pQ" secondAttribute="centerY" id="Mn8-RW-4O8"/>
                     <constraint firstItem="Cix-ff-p5f" firstAttribute="centerY" secondItem="Rcq-bQ-M9T" secondAttribute="centerY" id="NKb-92-R0W"/>
@@ -224,11 +216,9 @@
                     <constraint firstItem="06h-4N-Ntr" firstAttribute="bottom" secondItem="SCQ-SL-1uj" secondAttribute="bottom" id="maK-AS-zjN"/>
                     <constraint firstAttribute="trailing" secondItem="SCQ-SL-1uj" secondAttribute="trailing" constant="15" id="n9M-Jc-ZHc"/>
                     <constraint firstItem="Cix-ff-p5f" firstAttribute="height" secondItem="Rcq-bQ-M9T" secondAttribute="height" id="pfg-pO-lVV"/>
-                    <constraint firstItem="wQ8-o3-hFm" firstAttribute="top" secondItem="SCQ-SL-1uj" secondAttribute="top" id="qKf-75-slz"/>
                     <constraint firstItem="6se-vw-QEF" firstAttribute="centerY" secondItem="SCQ-SL-1uj" secondAttribute="centerY" id="tJv-m3-Zsl"/>
                     <constraint firstItem="hs5-5i-QlK" firstAttribute="leading" secondItem="gyv-oB-1gZ" secondAttribute="trailing" constant="10" id="wVN-Lg-t4N"/>
                     <constraint firstAttribute="bottom" secondItem="SCQ-SL-1uj" secondAttribute="bottom" constant="65" id="y7I-hH-HZl"/>
-                    <constraint firstItem="wQ8-o3-hFm" firstAttribute="width" secondItem="SCQ-SL-1uj" secondAttribute="width" id="yII-Ky-ZZg"/>
                     <constraint firstItem="Aec-xp-Xiq" firstAttribute="top" secondItem="SCQ-SL-1uj" secondAttribute="bottom" constant="20" id="z0i-Pd-EkQ"/>
                 </constraints>
             </tableViewCellContentView>
@@ -242,7 +232,6 @@
                 <outlet property="labView" destination="06h-4N-Ntr" id="yOk-Md-zpQ"/>
                 <outlet property="locationLab" destination="hs5-5i-QlK" id="Jyr-MG-xLy"/>
                 <outlet property="locationWidth" destination="Cvr-YF-Vtl" id="s1c-oY-3Qc"/>
-                <outlet property="lookAllImageBtu" destination="wQ8-o3-hFm" id="fOq-gJ-pC5"/>
                 <outlet property="nikNameLab" destination="3yS-By-RbN" id="Kss-lh-f08"/>
                 <outlet property="playBtu" destination="6se-vw-QEF" id="4Mb-0O-KRe"/>
                 <outlet property="shareBtu" destination="Aec-xp-Xiq" id="a8S-O5-cGi"/>

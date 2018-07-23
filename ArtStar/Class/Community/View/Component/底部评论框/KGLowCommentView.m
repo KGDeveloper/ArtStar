@@ -81,6 +81,11 @@
     if (self.actionWithTitle) {
         self.actionWithTitle(@"点赞", nil);
     }
+    if ([sender.currentImage isEqual:Image(@"点赞选中")]) {
+        [_zansBtu setImage:Image(@"点赞") forState:UIControlStateNormal];
+    }else{
+        [_zansBtu setImage:Image(@"点赞选中") forState:UIControlStateNormal];
+    }
 }
 
 /*
