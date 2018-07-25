@@ -26,11 +26,44 @@
 @property (nonatomic,strong) UIButton *deleteBtu;
 @property (nonatomic,strong) UIView *labBack;
 @property (nonatomic,strong) UIView *line;
+@property (nonatomic,copy) NSNumber *rfuid;
 
 @end
 
-
 @implementation FriendsThemeLeftImageCell
+
+- (void)fillCellWithModel:(FriendsModel *)model{
+    NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
+    NSString *str = dataArr[0];
+    for (int i = 1; i < dataArr.count; i++) {
+        str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];
+    }
+    if ([model.composing integerValue] == 3) {
+        [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentTop];
+    }else if ([model.composing integerValue] == 4){
+        [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentCenter];
+    }
+    if ([model.type integerValue] == 2) {
+        _themeLab.hidden = YES;
+    }else if ([model.type integerValue] == 1){
+        _themeLab.text = model.title;
+    }else{
+        _themeLab.hidden = YES;
+    }
+    NSDictionary *imageDic = [model.images firstObject];
+    [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
+    
+    NSDictionary *dic = model.user;
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+    _nikNameLab.text = dic[@"username"];
+    _locationLab.text = model.location;
+    _timeLab.text = model.createTimeStr;
+    
+    [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
+    [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -88,9 +121,6 @@
     _topImage.image = Image(@"2");
     _topImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(_headerImage, 15).widthIs(kScreenWidth - 165).heightIs((kScreenWidth - 165)/450*690);
     
-    [_topBtu addTarget:self action:@selector(allIamgeClick:) forControlEvents:UIControlEventTouchUpInside];
-    _topBtu.sd_layout.leftEqualToView(_topImage).topEqualToView(_topImage).widthIs(kScreenWidth - 165).heightIs((kScreenWidth - 165)/450*690);
-    
     _labBack.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     _labBack.alpha = 0.4;
     _labBack.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(27).heightIs(14);
@@ -126,7 +156,7 @@
     [_commentBtu setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 5)];
     _commentBtu.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [_commentBtu addTarget:self action:@selector(commentClick:) forControlEvents:UIControlEventTouchUpInside];
-    _commentBtu.sd_layout.rightSpaceToView(_shareBtu, 25).centerYEqualToView(_shareBtu).widthIs(70).heightIs(30);
+    _commentBtu.sd_layout.rightSpaceToView(_shareBtu, 25).centerYEqualToView(_shareBtu).widthIs(50).heightIs(30);
     
     [_zansBtu setTitle:@"123万" forState:UIControlStateNormal];
     [_zansBtu setTitleColor:[UIColor colorWithHexString:@"#b3b3b3"] forState:UIControlStateNormal];
@@ -135,7 +165,7 @@
     [_zansBtu setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 5)];
     _zansBtu.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [_zansBtu addTarget:self action:@selector(zansClick:) forControlEvents:UIControlEventTouchUpInside];
-    _zansBtu.sd_layout.rightSpaceToView(_commentBtu, 25).centerYEqualToView(_shareBtu).widthIs(70).heightIs(30);
+    _zansBtu.sd_layout.rightSpaceToView(_commentBtu, 25).centerYEqualToView(_shareBtu).widthIs(50).heightIs(30);
     
     _timeLab.textColor = Color_b3b3b3;
     _timeLab.font = FZFont(12);
@@ -147,7 +177,7 @@
     _locationLab.font = FZFont(12);
     _locationLab.text = @"北京";
     _locationLab.textAlignment = NSTextAlignmentLeft;
-    _locationLab.sd_layout.leftSpaceToView(_timeLab, 10).centerYEqualToView(_shareBtu).widthIs(70).heightIs(20);
+    _locationLab.sd_layout.leftSpaceToView(_timeLab, 10).centerYEqualToView(_shareBtu).widthIs(150).heightIs(20);
     
     _line.backgroundColor = Color_fafafa;
     _line.sd_layout.leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0).heightIs(10);
@@ -167,28 +197,23 @@
 
 - (void)headerClick:(UIButton *)sender{
     if ([self.delegate respondsToSelector:@selector(headerPushInfo:)]) {
-        [self.delegate headerPushInfo:self.cellIndex];
+        [self.delegate headerPushInfo:self.rfuid.integerValue];
     }
 }
 
 - (void)deleteClick:(id)sender {
     if ([self.delegate respondsToSelector:@selector(deleteCell:)]) {
-        [self.delegate deleteCell:self.cellIndex];
-    }
-}
-- (void)allIamgeClick:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(lookAllCellImage:)]) {
-        [self.delegate lookAllCellImage:self.cellIndex];
+        [self.delegate deleteCell:self.rfuid.integerValue];
     }
 }
 - (void)shareClick:(id)sender {
     if ([self.delegate respondsToSelector:@selector(shareCell:)]) {
-        [self.delegate shareCell:self.cellIndex];
+        [self.delegate shareCell:self.rfuid.integerValue];
     }
 }
 - (void)commentClick:(id)sender {
     if ([self.delegate respondsToSelector:@selector(commentCell:)]) {
-        [self.delegate commentCell:self.cellIndex];
+        [self.delegate commentCell:self.rfuid.integerValue];
     }
 }
 - (void)zansClick:(UIButton *)sender {
@@ -198,7 +223,7 @@
         [sender setImage:Image(@"点赞") forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(zansCell:)]) {
-        [self.delegate zansCell:self.cellIndex];
+        [self.delegate zansCell:self.rfuid.integerValue];
     }
 }
 

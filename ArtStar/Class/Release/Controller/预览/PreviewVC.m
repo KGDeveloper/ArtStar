@@ -73,14 +73,27 @@
     __weak typeof(self) mySelf = self;
     if (_model.imageURLs.count > 0) {
         __block NSMutableArray *imageArr = [NSMutableArray array];
-        [_model.imageURLs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            UIImage *image = obj;
-            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:[[KGQiniuUploadManager shareInstance] getImagePath:image] fileName:nil result:^(NSString *strPath) {
-                [imageArr addObject:strPath];
-                [parameters setObject:imageArr forKey:@"imageURLs"];
-                [mySelf requestDataWithArr:imageArr dic:parameters];
-            }];
-        }];
+        if (_model.imageURLs.count == 1) {
+            dispatch_queue_t imageQueue = dispatch_queue_create("上传图片", DISPATCH_QUEUE_CONCURRENT);
+            dispatch_sync(imageQueue, ^{
+                [[KGQiniuUploadManager shareInstance] uploadDataToQiniuWithData:[mySelf.model.imageURLs firstObject] result:^(NSString *strPath) {
+                    [imageArr addObject:strPath];
+                    [parameters setObject:imageArr forKey:@"imageURLs"];
+                    [mySelf requestDataWithArr:imageArr dic:parameters];
+                }];
+            });
+        }else{
+            dispatch_queue_t imageQueue = dispatch_queue_create("上传图片", DISPATCH_QUEUE_CONCURRENT);
+            dispatch_sync(imageQueue, ^{
+                [mySelf.model.imageURLs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:[[KGQiniuUploadManager shareInstance] getImagePath:obj] fileName:nil result:^(NSString *strPath) {
+                        [imageArr addObject:strPath];
+                        [parameters setObject:imageArr forKey:@"imageURLs"];
+                        [mySelf requestDataWithArr:imageArr dic:parameters];
+                    }];
+                }];
+            });
+        }
     }else{
         [parameters setObject:@[] forKey:@"imageURLs"];
         [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:parameters succ:^(id result) {
@@ -281,14 +294,14 @@
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, photoViewHeight + 50) type:VideoViewTextTypeOnlyVideo];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.themeStr = _model.title;
+            self.videoView.playVideo = [_model.imageURLs firstObject];
             break;
         case EditVideoTypeTopLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopLeftText];
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.themeStr = _model.title;
+            self.videoView.playVideo = [_model.imageURLs firstObject];
             self.videoView.type = TextAlignmentLeft;
             break;
         case EditVideoTypeTopCenter:
@@ -296,7 +309,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.themeStr = _model.title;
+            self.videoView.playVideo = [_model.imageURLs firstObject];
             self.videoView.type = TextAlignmentCenter;
             break;
         case EditVideoTypeTopRight:
@@ -304,7 +317,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.themeStr = _model.title;
+            self.videoView.playVideo = [_model.imageURLs firstObject];
             self.videoView.type = TextAlignmentRight;
             break;
         case EditVideoTypeLeft:
@@ -312,7 +325,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.themeStr = _model.title;
+            self.videoView.playVideo = [_model.imageURLs firstObject];
             self.videoView.type = TextAlignmentLeft;
             break;
         case EditVideoTypeCenter:
@@ -320,7 +333,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.themeStr = _model.title;
+            self.videoView.playVideo = [_model.imageURLs firstObject];
             self.videoView.type = TextAlignmentTypeCenter;
             break;
         default:
@@ -328,7 +341,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.themeStr = _model.title;
+            self.videoView.playVideo = [_model.imageURLs firstObject];
             self.videoView.type = TextAlignmentRight;
             break;
     }
@@ -449,7 +462,7 @@
     [self.view addSubview:_videoView];
 }
 - (void)playVideoOnController{
-//    self.playVideo.videoUrl = [NSURL URLWithString:self.model.videoData];
+    self.playVideo.videoUrl = [self.model.imageURLs firstObject];
     self.playVideo.hidden = NO;
     [self.playVideo play];
     self.navigationController.navigationBar.hidden = YES;

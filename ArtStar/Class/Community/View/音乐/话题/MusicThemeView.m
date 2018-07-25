@@ -9,7 +9,7 @@
 #import "MusicThemeView.h"
 #import "MusicThemeMyThemeCell.h"
 
-@interface MusicThemeView ()<UITableViewDelegate,UITableViewDataSource,FriendsButtomImageTopLabelCellDelegate>
+@interface MusicThemeView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) HeaderScrollAndPageView *pageView;
 @property (nonatomic,strong) UITableView *listView;
@@ -63,17 +63,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
+//    if (indexPath.row == 0) {
         MusicThemeMyThemeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicThemeMyThemeCell"];
         cell.themeArr = @[@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640369&di=903a99d98547a695c786e3718b1c9a02&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F151016%2F258164-15101609241916.jpg",@"name":@"这是一个小狗"},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640369&di=8f3266cf5947806adaabf568802d12b6&imgtype=0&src=http%3A%2F%2Fpic42.photophoto.cn%2F20170201%2F1155116821643442_b.jpg",@"name":@"哇，瓢虫"},@{@"image":@"",@"name":@""},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640369&di=c116d5e5ffc94acd9d5a6d627da85e35&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F151214%2F258052-15121405593069.jpg",@"name":@"傻鸟"},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640368&di=d53e3f37caa107249f37cc3a80f8a6e1&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F131213%2F259971-131213213A114.jpg",@"name":@"绿衣服的大象"},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640367&di=a76963382f721e8746224da3b4c4642a&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F151103%2F258121-15110315561382.jpg",@"name":@"鹰头小眼神"},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640367&di=aaead6d97ff11f82c77d99edea015594&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F151214%2F258052-151214061A055.jpg",@"name":@"圣诞鸟"},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640364&di=5afc4e1cc21028d1cfdada87f6f16a19&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F151016%2F258164-151016091I962.jpg",@"name":@"国王狗"},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640364&di=e525fa35b17a0c197e6529aa57f36300&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F151214%2F258052-1512140HR770.jpg",@"name":@"狼图腾"},@{@"image":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527684640361&di=8de71d47cc2cd3550a6b4aead84a079b&imgtype=0&src=http%3A%2F%2Fpic36.photophoto.cn%2F20150721%2F1155115613576871_b.jpg",@"name":@"大老虎"}];
         return cell;
-    }else{
-        FriendsButtomImageTopLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsButtomImageTopLabelCell"];
-        cell.delegate = self;
-        [cell showGraphic];
-        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentCenter];
-        return cell;
-    }
+//    }else{
+//        FriendsButtomImageTopLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsButtomImageTopLabelCell"];
+//        cell.delegate = self;
+//        [cell showGraphic];
+//        [self changeTextViewLineSpace:cell.textView string:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:NSTextAlignmentCenter];
+//        return cell;
+//    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {

@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
 @property (nonatomic,assign) BOOL isMask;
 
 //:--接受视频--
-@property (nonatomic,copy) NSString *videoURL;
+@property (nonatomic,copy) NSURL *videoUrlStr;
 @property (nonatomic,strong) UIButton *themetypeBtu;
 
 @property (nonatomic,strong) ReleaseChooseThemeTypeView *chooseThemeTypeView;
@@ -217,6 +217,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     }else{
         _pictureView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(_photoView), ViewHeight(_photoView))];
     }
+    _pictureView.contentMode = UIViewContentModeScaleAspectFit;
     switch (type) {
         case EditTypeVideo:
             _pictureView.image = Image(@"video");
@@ -302,7 +303,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 PHImageManager *manager = [PHImageManager defaultManager];
                 [manager requestAVAssetForVideo:phAsset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
                     AVURLAsset *urlAsset = (AVURLAsset *)asset;
-                    mySelf.videoURL = [NSString stringWithFormat:@"%@",urlAsset.URL];
+                    mySelf.imageArr = [NSMutableArray arrayWithObject:urlAsset.URL];
                 }];
             }
         }
@@ -332,11 +333,26 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     [[NSUserDefaults standardUserDefaults] synchronize];
     camera.doneBlock = ^(UIImage *image, NSURL *videoUrl) {
         mySelf.pictureView.image = image;
-        mySelf.videoURL = [NSString stringWithFormat:@"%@",videoUrl];
+        mySelf.videoUrlStr = videoUrl;
+        UIImageWriteToSavedPhotosAlbum(image,mySelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        UISaveVideoAtPathToSavedPhotosAlbum([videoUrl path], mySelf, @selector(video:didFinishSavingWithError:contextInfo:), nil);
         
     };
     [[self pushViewController] presentViewController:camera animated:YES completion:nil];
     self.cameraView.hidden = YES;
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    if (self.imageArr.count > 0) {
+        [self.imageArr addObject:image];
+    }else{
+        self.imageArr = [NSMutableArray arrayWithObject:image];
+    }
+    
+}
+- (void)video:(NSString *)videoUrl didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    if (!error) {
+        _imageArr = [NSMutableArray arrayWithObject:_videoUrlStr];
+    }
 }
 //MARK:--KGAlertViewDelegate--
 - (void)defult{

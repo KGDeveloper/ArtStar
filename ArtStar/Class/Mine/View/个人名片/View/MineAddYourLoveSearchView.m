@@ -14,9 +14,6 @@
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) MineTextField *searchTF;
-@property (nonatomic,strong) MineLoveMoviesModel *movie;
-@property (nonatomic,strong) MineLoveMusicModel *music;
-@property (nonatomic,strong) MineLoveBookModel *book;
 @property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
@@ -85,7 +82,7 @@
         cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.movieName,model.director];
     }else if (_type == LoveMusic){
         MineLoveMusicModel *model = _dataArr[indexPath.row];
-        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
+        cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.musicName,model.singer];
     }else if (_type == LoveBook){
         MineLoveBookModel *model = _dataArr[indexPath.row];
         cell.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.bookName,model.writer];
@@ -100,7 +97,7 @@
                 self.sendChoose(_dataArr[indexPath.row], nil, nil);
                 break;
             case LoveMusic:
-                self.sendChoose(nil, _music, nil);
+                self.sendChoose(nil, _dataArr[indexPath.row], nil);
                 break;
             case LoveBook:
                 self.sendChoose(nil, nil, _dataArr[indexPath.row]);
@@ -144,7 +141,11 @@
                     [mySelf.dataArr addObject:model];
                 }
             }else if (mySelf.type == LoveMusic){
-                
+                for (int i = 0; i < arr.count; i++) {
+                    NSDictionary *dic = arr[i];
+                    MineLoveMusicModel *model = [MineLoveMusicModel mj_objectWithKeyValues:dic];
+                    [mySelf.dataArr addObject:model];
+                }
             }else if (mySelf.type == LoveBook){
                 for (int i = 0; i < arr.count; i++) {
                     NSDictionary *dic = arr[i];

@@ -32,11 +32,11 @@
 @interface MineLoveMusicModel : NSObject
 
 @property (nonatomic,copy) NSString *region;
-@property (nonatomic,copy) NSString *writer;
+@property (nonatomic,copy) NSString *singer;
 @property (nonatomic,copy) NSNumber *userId;
 @property (nonatomic,copy) NSNumber *ID;
-@property (nonatomic,assign) double bookGrade;
-@property (nonatomic,copy) NSString *bookName;
+@property (nonatomic,assign) double musicGrade;
+@property (nonatomic,copy) NSString *musicName;
 @property (nonatomic,copy) NSString *imageUrl;
 @property (nonatomic,copy) NSString *createTime;
 

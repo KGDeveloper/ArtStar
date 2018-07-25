@@ -13,14 +13,6 @@
 #import "FriendsOnlyHaveLabelCell.h"
 //:--只有图片Cell--
 #import "FriendsOnlyHaveImageCell.h"
-//:--文字在下图片在上--
-#import "FriendsTopImageButtomLabelCell.h"
-//:--文字在上图片在下--
-#import "FriendsButtomImageTopLabelCell.h"
-//:--竖排文字展示--
-#import "FriendsLeftImageRightLabelCell.h"
-//:--圆形图片展示--
-#import "FriendsCurilerImageCell.h"
 //:--话题图片在上--
 #import "FriendsThemeTopImageCell.h"
 //:--话题图片在下--
@@ -39,8 +31,7 @@
 #import "FriendsCommentView.h"
 //:--分享--
 #import "DXShareView.h"
-
-
+//:--首页解析数据模型，通用--
 #import "FriendsModel.h"
 
 #endif /* FriendsHeader_h */

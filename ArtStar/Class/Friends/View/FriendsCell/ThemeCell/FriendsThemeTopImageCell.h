@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class FriendsModel;
 @protocol FriendsThemeTopImageCellDelegate <NSObject>
 
 - (void)deleteCell:(NSInteger)index;
 - (void)headerPushInfo:(NSInteger)index;
-- (void)lookAllCellImage:(NSInteger)index;
 - (void)commentCell:(NSInteger)index;
 - (void)zansCell:(NSInteger)index;
 - (void)shareCell:(NSInteger)index;
@@ -31,12 +31,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *commentBtu;
 @property (weak, nonatomic) IBOutlet UIButton *zansBtu;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
+@property (weak, nonatomic) IBOutlet UIView *playView;
 @property (weak, nonatomic) IBOutlet UILabel *locationLab;
+@property (weak, nonatomic) IBOutlet UIImageView *playImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *zansWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationWidth;
 @property (nonatomic,weak) id<FriendsThemeTopImageCellDelegate>delegate;
-@property (nonatomic,assign) NSInteger cellIndex;
+
+- (void)fillCellWithModel:(FriendsModel *)model;
 
 @end

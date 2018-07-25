@@ -9,8 +9,9 @@
 #import "FriendsMessageVC.h"
 #import "FriednsMessageCell.h"
 #import "FriendsDeleteAllMessageView.h"
+#import "FriendsMessageModel.h"
 
-@interface FriendsMessageVC ()<UITableViewDelegate,UITableViewDataSource,FriendsDeleteAllMessageViewDelegate>
+@interface FriendsMessageVC ()<UITableViewDelegate,UITableViewDataSource,FriendsDeleteAllMessageViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) FriendsDeleteAllMessageView *deleteView;
@@ -35,11 +36,18 @@
 }
 
 - (void)createData{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     _dataArr = [NSMutableArray array];
+    __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:pushUnreadMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"informQuery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
-        
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            mySelf.dataArr = [FriendsMessageModel mj_objectArrayWithKeyValuesArray:arr];
+            [mySelf.listView reloadData];
+        }
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     } fail:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     }];
 }
 
@@ -47,6 +55,8 @@
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
     _listView.delegate = self;
     _listView.dataSource = self;
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
     _listView.rowHeight = 75;
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _listView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -64,8 +74,10 @@
 }
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    __weak typeof(self) mySelf = self;
     UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
+        [mySelf.dataArr removeObjectAtIndex:indexPath.row];
+        [mySelf.listView reloadData];
     }];
     
     UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"屏蔽" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -76,13 +88,26 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FriednsMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriednsMessageCell"];
-    if (indexPath.row %2 == 0) {
+    FriendsMessageModel *model = _dataArr[indexPath.row];
+    if ([model.islikeCount integerValue] == 1) {
         [cell showZansImage];
+    }else{
+        cell.detaialLab.text = model.content;
     }
+    if (model.images.count > 0) {
+        NSDictionary *imagedic = [model.images firstObject];
+        [cell.rightImage sd_setImageWithURL:[NSURL URLWithString:imagedic[@"imageURL"]]];
+    }else{
+        cell.rightImage.hidden = YES;
+    }
+    NSDictionary *dic = model.userInfor;
+    [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+    cell.nikName.text = dic[@"username"];
+    cell.timeLab.text = model.createTimeStr;
     return cell;
 }
 
@@ -96,7 +121,20 @@
 }
 //MARK:--FriendsDeleteAllMessageViewDelegate--
 - (void)deleteAllMessage{
-    
+    [_dataArr removeAllObjects];
+    [_listView reloadData];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"木有内容哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
 }
 
 - (void)didReceiveMemoryWarning {

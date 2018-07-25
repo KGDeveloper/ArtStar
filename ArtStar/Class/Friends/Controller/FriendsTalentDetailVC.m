@@ -31,10 +31,9 @@
     [self setLeftBtuWithFrame:CGRectMake(15, 0, kScreenWidth - 30, 30) title:@"798:那些不被人发现的好地方" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在加载..."];
     _dataArr = [NSMutableArray array];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self createData];
-    [self setTableView];
     [self createLowCommentView];
 }
 
@@ -82,6 +81,7 @@
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:friendViews parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_msgID,@"issId":@([_ID integerValue])} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
+            [mySelf setTableView];
             NSArray *arr = result[@"data"];
             NSDictionary *dic = [arr firstObject];
             mySelf.model = [FriendsTalentModel mj_objectWithKeyValues:dic];
@@ -91,9 +91,9 @@
             [mySelf setLeftBtuWithFrame:CGRectMake(15, 0, kScreenWidth - 30, 30) title:mySelf.model.headline image:Image(@"back")];
             [mySelf.listView reloadData];
         }
-        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
     } fail:^(NSError *error) {
-        
+        [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
     }];
 }
 

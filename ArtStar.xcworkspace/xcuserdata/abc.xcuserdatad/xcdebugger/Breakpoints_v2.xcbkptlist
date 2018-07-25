@@ -19,70 +19,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ArtStar/Class/Friends/Controller/FriendsMessageVC.m"
-            timestampString = "553170467.631703"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-createData"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[FriendsMessageVC createData]_block_invoke"
-                  moduleName = "ArtStar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Friends/Controller/FriendsMessageVC.m"
-                  timestampString = "554035174.981586"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[FriendsMessageVC createData]_block_invoke_2"
-                  moduleName = "ArtStar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Friends/Controller/FriendsMessageVC.m"
-                  timestampString = "554035174.9865119"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ArtStar/Class/Friends/Controller/FriendsMessageVC.m"
-            timestampString = "553170467.63178"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-createData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ArtStar/Class/Community/Controller/&#x8bdd;&#x9898;/CommunityThemeVC.m"
             timestampString = "553170467.631943"
             startingColumnNumber = "9223372036854775807"
@@ -100,7 +36,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AF%9D%E9%A2%98/CommunityThemeVC.m"
-                  timestampString = "554035175.002845"
+                  timestampString = "554182830.374836"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "101"
@@ -115,7 +51,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AF%9D%E9%A2%98/CommunityThemeVC.m"
-                  timestampString = "554035175.005888"
+                  timestampString = "554182830.3811229"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "103"
@@ -164,7 +100,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%94%B5%E5%BD%B1/MoviesVC.m"
-                  timestampString = "554035175.021184"
+                  timestampString = "554182830.405"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "217"
@@ -179,7 +115,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%94%B5%E5%BD%B1/MoviesVC.m"
-                  timestampString = "554035175.025593"
+                  timestampString = "554182830.409398"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "219"
@@ -228,7 +164,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%9C%BA%E6%9E%84/CommunityInstitutionsVC.m"
-                  timestampString = "554035175.0581729"
+                  timestampString = "554182830.421278"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "145"
@@ -243,7 +179,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%9C%BA%E6%9E%84/CommunityInstitutionsVC.m"
-                  timestampString = "554035175.063197"
+                  timestampString = "554182830.4242949"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -292,7 +228,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E4%BA%A4%E5%8F%8B/CommunityFriendsVC.m"
-                  timestampString = "554035175.089467"
+                  timestampString = "554182830.435908"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "118"
@@ -307,7 +243,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E4%BA%A4%E5%8F%8B/CommunityFriendsVC.m"
-                  timestampString = "554035175.094084"
+                  timestampString = "554182830.4389369"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "120"
@@ -356,7 +292,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%96%87%E5%AD%A6/CommunityLiteratureVC.m"
-                  timestampString = "554035175.1146049"
+                  timestampString = "554182830.450707"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "221"
@@ -371,7 +307,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%96%87%E5%AD%A6/CommunityLiteratureVC.m"
-                  timestampString = "554035175.1205781"
+                  timestampString = "554182830.453445"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "223"
@@ -420,7 +356,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%88%8F%E5%89%A7/CommunityDramaVC.m"
-                  timestampString = "554035175.141819"
+                  timestampString = "554182830.465482"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "232"
@@ -435,7 +371,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%88%8F%E5%89%A7/CommunityDramaVC.m"
-                  timestampString = "554035175.147348"
+                  timestampString = "554182830.4682"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "234"
@@ -484,7 +420,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E5%B1%95%E8%A7%88/CommunityExhibitionVC.m"
-                  timestampString = "554035175.170119"
+                  timestampString = "554182830.4803751"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "109"
@@ -499,7 +435,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E5%B1%95%E8%A7%88/CommunityExhibitionVC.m"
-                  timestampString = "554035175.174919"
+                  timestampString = "554182830.483361"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
@@ -548,7 +484,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%91%84%E5%BD%B1/CommunityVideoVC.m"
-                  timestampString = "554035175.197047"
+                  timestampString = "554182830.495306"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "232"
@@ -563,7 +499,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E6%91%84%E5%BD%B1/CommunityVideoVC.m"
-                  timestampString = "554035175.202773"
+                  timestampString = "554182830.498198"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "234"
@@ -612,7 +548,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AE%BE%E8%AE%A1/CommunityDesigVC.m"
-                  timestampString = "554035175.22359"
+                  timestampString = "554182830.510012"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "232"
@@ -627,7 +563,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AE%BE%E8%AE%A1/CommunityDesigVC.m"
-                  timestampString = "554035175.232806"
+                  timestampString = "554182830.513009"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "234"
@@ -676,7 +612,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%BE%8E%E6%9C%AF/CommunityArtsVC.m"
-                  timestampString = "554035175.32428"
+                  timestampString = "554182830.527528"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "231"
@@ -691,7 +627,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%BE%8E%E6%9C%AF/CommunityArtsVC.m"
-                  timestampString = "554035175.331328"
+                  timestampString = "554182830.530466"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "233"
@@ -740,7 +676,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%BE%8E%E9%A3%9F/CommunityGoodFoodVC.m"
-                  timestampString = "554035175.352863"
+                  timestampString = "554182830.547044"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "178"
@@ -755,7 +691,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%BE%8E%E9%A3%9F/CommunityGoodFoodVC.m"
-                  timestampString = "554035175.3593971"
+                  timestampString = "554182830.5521719"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
@@ -804,7 +740,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E4%B9%A6%E7%B1%8D/CommunityBooksVC.m"
-                  timestampString = "554035175.384894"
+                  timestampString = "554182830.570787"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "168"
@@ -819,7 +755,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E4%B9%A6%E7%B1%8D/CommunityBooksVC.m"
-                  timestampString = "554035175.393536"
+                  timestampString = "554182830.574919"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "170"
@@ -853,6 +789,101 @@
             continueAfterRunningActions = "No"
             scope = "0"
             stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtStar/Class/Mine/Controller/&#x4e2a;&#x4eba;&#x540d;&#x7247;/&#x7f16;&#x8f91;&#x5361;&#x7247;/MineEditMyselfCardVC.m"
+            timestampString = "554182830.245608"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-uploadData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtStar/Class/Mine/Controller/&#x4e2a;&#x4eba;&#x540d;&#x7247;/&#x7f16;&#x8f91;&#x5361;&#x7247;/MineEditMyselfCardVC.m"
+            timestampString = "554182830.2460279"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "-uploadData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtStar/Class/Mine/Controller/&#x4e2a;&#x4eba;&#x540d;&#x7247;/&#x7f16;&#x8f91;&#x5361;&#x7247;/MineEditMyselfCardVC.m"
+            timestampString = "554183698.314512"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "-uploadData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MineEditMyselfCardVC uploadData]"
+                  moduleName = "ArtStar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Mine/Controller/%E4%B8%AA%E4%BA%BA%E5%90%8D%E7%89%87/%E7%BC%96%E8%BE%91%E5%8D%A1%E7%89%87/MineEditMyselfCardVC.m"
+                  timestampString = "554183698.657268"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "1108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__34-[MineEditMyselfCardVC uploadData]_block_invoke"
+                  moduleName = "ArtStar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Mine/Controller/%E4%B8%AA%E4%BA%BA%E5%90%8D%E7%89%87/%E7%BC%96%E8%BE%91%E5%8D%A1%E7%89%87/MineEditMyselfCardVC.m"
+                  timestampString = "554183698.663238"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.128"
+                  moduleName = "ArtStar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abc/Desktop/ArtStar/ArtStar/Class/Mine/Controller/%E4%B8%AA%E4%BA%BA%E5%90%8D%E7%89%87/%E7%BC%96%E8%BE%91%E5%8D%A1%E7%89%87/MineEditMyselfCardVC.m"
+                  timestampString = "554183698.6674269"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

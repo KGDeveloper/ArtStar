@@ -67,7 +67,6 @@
 		2813DB8320C7BDA8004CD973 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2813DB8220C7BDA8004CD973 /* SystemConfiguration.framework */; };
 		2813DB8520C7BDB1004CD973 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2813DB8420C7BDB1004CD973 /* UIKit.framework */; };
 		2813DB8720C7BDBD004CD973 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2813DB8620C7BDBD004CD973 /* Photos.framework */; };
-		281461FC20B3BDB7000C5E47 /* FriendsLeftImageRightLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 281461FB20B3BDB7000C5E47 /* FriendsLeftImageRightLabelCell.m */; };
 		281461FF20B3BF8C000C5E47 /* FriendsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 281461FE20B3BF8C000C5E47 /* FriendsDetailVC.m */; };
 		2814620B20B3E6D7000C5E47 /* FriendsDetailScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2814620A20B3E6D7000C5E47 /* FriendsDetailScrollView.m */; };
 		2814620E20B3F1D1000C5E47 /* FriendsDetailVericalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2814620D20B3F1D1000C5E47 /* FriendsDetailVericalView.m */; };
@@ -205,9 +204,8 @@
 		28577B7620D11B860082075D /* MineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 28577B7520D11B860082075D /* MineTextField.m */; };
 		28577B7A20D125060082075D /* MineSearchYourLoveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28577B7820D125060082075D /* MineSearchYourLoveCell.m */; };
 		28577B7B20D125060082075D /* MineSearchYourLoveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28577B7920D125060082075D /* MineSearchYourLoveCell.xib */; };
+		285BAEEA2106C950005A1CCD /* FriendsMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 285BAEE92106C950005A1CCD /* FriendsMessageModel.m */; };
 		28636D7A20F4BCE900DE0926 /* MineSelfMyLabelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */; };
-		2868407720B279D100441926 /* FriendsCurilerImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2868407520B279D100441926 /* FriendsCurilerImageCell.m */; };
-		2868407820B279D100441926 /* FriendsCurilerImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868407620B279D100441926 /* FriendsCurilerImageCell.xib */; };
 		2868407C20B287D100441926 /* FriendsThemeTopImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2868407A20B287D100441926 /* FriendsThemeTopImageCell.m */; };
 		2868407D20B287D100441926 /* FriendsThemeTopImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868407B20B287D100441926 /* FriendsThemeTopImageCell.xib */; };
 		2868408120B287E800441926 /* FriendsThemeButtomImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2868407F20B287E800441926 /* FriendsThemeButtomImageCell.m */; };
@@ -367,10 +365,6 @@
 		28A6CA0F20D9104100ECBF4F /* MineFeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A6CA0E20D9104100ECBF4F /* MineFeedBackVC.m */; };
 		28A6CA1420D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A6CA1220D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.m */; };
 		28A6CA1520D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6CA1320D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.xib */; };
-		28B21A9320AEA13B00108F50 /* FriendsTopImageButtomLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B21A9120AEA13B00108F50 /* FriendsTopImageButtomLabelCell.m */; };
-		28B21A9420AEA13B00108F50 /* FriendsTopImageButtomLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B21A9220AEA13B00108F50 /* FriendsTopImageButtomLabelCell.xib */; };
-		28B21A9820AECF8300108F50 /* FriendsButtomImageTopLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B21A9620AECF8300108F50 /* FriendsButtomImageTopLabelCell.m */; };
-		28B21A9920AECF8300108F50 /* FriendsButtomImageTopLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B21A9720AECF8300108F50 /* FriendsButtomImageTopLabelCell.xib */; };
 		28BF33CD20C4EDA800598919 /* MyselfWordUploadingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF33CC20C4EDA800598919 /* MyselfWordUploadingVC.m */; };
 		28BF33D120C4EF5500598919 /* MyselfWordWorksUploadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF33CF20C4EF5500598919 /* MyselfWordWorksUploadingCell.m */; };
 		28BF33D220C4EF5500598919 /* MyselfWordWorksUploadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BF33D020C4EF5500598919 /* MyselfWordWorksUploadingCell.xib */; };
@@ -637,8 +631,6 @@
 		2813DB8220C7BDA8004CD973 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2813DB8420C7BDB1004CD973 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2813DB8620C7BDBD004CD973 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		281461FA20B3BDB7000C5E47 /* FriendsLeftImageRightLabelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsLeftImageRightLabelCell.h; sourceTree = "<group>"; };
-		281461FB20B3BDB7000C5E47 /* FriendsLeftImageRightLabelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsLeftImageRightLabelCell.m; sourceTree = "<group>"; };
 		281461FD20B3BF8C000C5E47 /* FriendsDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsDetailVC.h; sourceTree = "<group>"; };
 		281461FE20B3BF8C000C5E47 /* FriendsDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsDetailVC.m; sourceTree = "<group>"; };
 		2814620920B3E6D7000C5E47 /* FriendsDetailScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsDetailScrollView.h; sourceTree = "<group>"; };
@@ -892,11 +884,10 @@
 		28577B7720D125060082075D /* MineSearchYourLoveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineSearchYourLoveCell.h; sourceTree = "<group>"; };
 		28577B7820D125060082075D /* MineSearchYourLoveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineSearchYourLoveCell.m; sourceTree = "<group>"; };
 		28577B7920D125060082075D /* MineSearchYourLoveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineSearchYourLoveCell.xib; sourceTree = "<group>"; };
+		285BAEE82106C950005A1CCD /* FriendsMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsMessageModel.h; sourceTree = "<group>"; };
+		285BAEE92106C950005A1CCD /* FriendsMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsMessageModel.m; sourceTree = "<group>"; };
 		28636D7820F4BCE900DE0926 /* MineSelfMyLabelsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineSelfMyLabelsModel.h; sourceTree = "<group>"; };
 		28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineSelfMyLabelsModel.m; sourceTree = "<group>"; };
-		2868407420B279D100441926 /* FriendsCurilerImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsCurilerImageCell.h; sourceTree = "<group>"; };
-		2868407520B279D100441926 /* FriendsCurilerImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsCurilerImageCell.m; sourceTree = "<group>"; };
-		2868407620B279D100441926 /* FriendsCurilerImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsCurilerImageCell.xib; sourceTree = "<group>"; };
 		2868407920B287D100441926 /* FriendsThemeTopImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsThemeTopImageCell.h; sourceTree = "<group>"; };
 		2868407A20B287D100441926 /* FriendsThemeTopImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsThemeTopImageCell.m; sourceTree = "<group>"; };
 		2868407B20B287D100441926 /* FriendsThemeTopImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsThemeTopImageCell.xib; sourceTree = "<group>"; };
@@ -1171,12 +1162,6 @@
 		28A6CA1120D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineFeedBackChooseTableViewCell.h; sourceTree = "<group>"; };
 		28A6CA1220D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineFeedBackChooseTableViewCell.m; sourceTree = "<group>"; };
 		28A6CA1320D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineFeedBackChooseTableViewCell.xib; sourceTree = "<group>"; };
-		28B21A9020AEA13B00108F50 /* FriendsTopImageButtomLabelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsTopImageButtomLabelCell.h; sourceTree = "<group>"; };
-		28B21A9120AEA13B00108F50 /* FriendsTopImageButtomLabelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsTopImageButtomLabelCell.m; sourceTree = "<group>"; };
-		28B21A9220AEA13B00108F50 /* FriendsTopImageButtomLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsTopImageButtomLabelCell.xib; sourceTree = "<group>"; };
-		28B21A9520AECF8300108F50 /* FriendsButtomImageTopLabelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsButtomImageTopLabelCell.h; sourceTree = "<group>"; };
-		28B21A9620AECF8300108F50 /* FriendsButtomImageTopLabelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsButtomImageTopLabelCell.m; sourceTree = "<group>"; };
-		28B21A9720AECF8300108F50 /* FriendsButtomImageTopLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsButtomImageTopLabelCell.xib; sourceTree = "<group>"; };
 		28BF33CB20C4EDA800598919 /* MyselfWordUploadingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfWordUploadingVC.h; sourceTree = "<group>"; };
 		28BF33CC20C4EDA800598919 /* MyselfWordUploadingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselfWordUploadingVC.m; sourceTree = "<group>"; };
 		28BF33CE20C4EF5500598919 /* MyselfWordWorksUploadingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfWordWorksUploadingCell.h; sourceTree = "<group>"; };
@@ -2837,30 +2822,6 @@
 			path = "问题反馈";
 			sourceTree = "<group>";
 		};
-		28B21A8E20AE72F500108F50 /* GraphicAndVideoCell */ = {
-			isa = PBXGroup;
-			children = (
-				28C7756A20AD7A73001F472B /* FriendsOnlyHaveImageCell.h */,
-				28C7756B20AD7A73001F472B /* FriendsOnlyHaveImageCell.m */,
-				28C7756C20AD7A73001F472B /* FriendsOnlyHaveImageCell.xib */,
-				28B21A9020AEA13B00108F50 /* FriendsTopImageButtomLabelCell.h */,
-				28B21A9120AEA13B00108F50 /* FriendsTopImageButtomLabelCell.m */,
-				28B21A9220AEA13B00108F50 /* FriendsTopImageButtomLabelCell.xib */,
-				28B21A9520AECF8300108F50 /* FriendsButtomImageTopLabelCell.h */,
-				28B21A9620AECF8300108F50 /* FriendsButtomImageTopLabelCell.m */,
-				28B21A9720AECF8300108F50 /* FriendsButtomImageTopLabelCell.xib */,
-				281461FA20B3BDB7000C5E47 /* FriendsLeftImageRightLabelCell.h */,
-				281461FB20B3BDB7000C5E47 /* FriendsLeftImageRightLabelCell.m */,
-				2868407420B279D100441926 /* FriendsCurilerImageCell.h */,
-				2868407520B279D100441926 /* FriendsCurilerImageCell.m */,
-				2868407620B279D100441926 /* FriendsCurilerImageCell.xib */,
-				2868408D20B2889F00441926 /* FriendsOnlyHaveLabelCell.h */,
-				2868408E20B2889F00441926 /* FriendsOnlyHaveLabelCell.m */,
-				2868408F20B2889F00441926 /* FriendsOnlyHaveLabelCell.xib */,
-			);
-			path = GraphicAndVideoCell;
-			sourceTree = "<group>";
-		};
 		28B21A8F20AE731500108F50 /* ThemeCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2875,6 +2836,12 @@
 				2868408820B2881A00441926 /* FriendsThemeCirulerImageCell.h */,
 				2868408920B2881A00441926 /* FriendsThemeCirulerImageCell.m */,
 				2868408A20B2881A00441926 /* FriendsThemeCirulerImageCell.xib */,
+				28C7756A20AD7A73001F472B /* FriendsOnlyHaveImageCell.h */,
+				28C7756B20AD7A73001F472B /* FriendsOnlyHaveImageCell.m */,
+				28C7756C20AD7A73001F472B /* FriendsOnlyHaveImageCell.xib */,
+				2868408D20B2889F00441926 /* FriendsOnlyHaveLabelCell.h */,
+				2868408E20B2889F00441926 /* FriendsOnlyHaveLabelCell.m */,
+				2868408F20B2889F00441926 /* FriendsOnlyHaveLabelCell.xib */,
 			);
 			path = ThemeCell;
 			sourceTree = "<group>";
@@ -2943,6 +2910,8 @@
 				287C65AE2101D02900FE47F1 /* FriendsTalentModel.m */,
 				2834E21B210588670071BFA7 /* FriendsTalentsCommentModel.h */,
 				2834E21C210588670071BFA7 /* FriendsTalentsCommentModel.m */,
+				285BAEE82106C950005A1CCD /* FriendsMessageModel.h */,
+				285BAEE92106C950005A1CCD /* FriendsMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2953,7 +2922,6 @@
 				2806481320E4E0CC00BB7DD2 /* TalentCell */,
 				2814620320B3CBB0000C5E47 /* DetaialCell */,
 				28B21A8F20AE731500108F50 /* ThemeCell */,
-				28B21A8E20AE72F500108F50 /* GraphicAndVideoCell */,
 			);
 			path = FriendsCell;
 			sourceTree = "<group>";
@@ -4005,7 +3973,6 @@
 				28C7756E20AD7A73001F472B /* FriendsOnlyHaveImageCell.xib in Resources */,
 				2874726420CA78D8004317A5 /* FocusViewChatFocusCell.xib in Resources */,
 				2875DA9720D3B67800D6CAFE /* MineJointalentTopTableViewCell.xib in Resources */,
-				28B21A9920AECF8300108F50 /* FriendsButtomImageTopLabelCell.xib in Resources */,
 				28CA5BE420CE651000D38F1F /* MineEditMyselfInfoEditCell.xib in Resources */,
 				2874724D20CA6186004317A5 /* FocusViewNickNameCell.xib in Resources */,
 				2870B74120C69EEC00133D1A /* BuyBooksCell.xib in Resources */,
@@ -4041,13 +4008,11 @@
 				2875DA7A20D39FCA00D6CAFE /* MineReleaseArticleTableViewCell.xib in Resources */,
 				2875DA9C20D3B91D00D6CAFE /* MineJoinTalentSHowLowTableViewCell.xib in Resources */,
 				28D09E0320C0043900FA45A2 /* MusicChooseTypeCell.xib in Resources */,
-				2868407820B279D100441926 /* FriendsCurilerImageCell.xib in Resources */,
 				281DF70620D25FFA0086030E /* MineCollectionExibitionTableViewCell.xib in Resources */,
 				28F996A920A43E2600678494 /* ZLPhotoBrowserCell.xib in Resources */,
 				28F996A720A43E2600678494 /* ZLPhotoBrowser.bundle in Resources */,
 				2807C76A20E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib in Resources */,
 				28FDAC4D20C11DE900531597 /* TheEndCell.xib in Resources */,
-				28B21A9420AEA13B00108F50 /* FriendsTopImageButtomLabelCell.xib in Resources */,
 				283EBAD320CF6A3F006C28C0 /* MineWordLoveFoodsCell.xib in Resources */,
 				286C904A20BD464F004EBA67 /* MusicPhotosCell.xib in Resources */,
 				286C902120BCFF53004EBA67 /* MusicBuyTicketCell.xib in Resources */,
@@ -4301,7 +4266,6 @@
 				2820B06020B5368E00EA1DAC /* FriednsMessageCell.m in Sources */,
 				28577B6B20D112690082075D /* MineMyselfWordChooseYourLoveVC.m in Sources */,
 				282E071C20C8D3C600A9B2E1 /* MineHeaderView.m in Sources */,
-				28B21A9320AEA13B00108F50 /* FriendsTopImageButtomLabelCell.m in Sources */,
 				A8FD4F3C20884396008B53FC /* AppDelegate.m in Sources */,
 				2807C76D20E1EA85007C1740 /* YourFriendsCenterVC.m in Sources */,
 				284C8D7520BFB09100487225 /* CALayer+KGLayerColor.m in Sources */,
@@ -4350,7 +4314,6 @@
 				286A2E9A20DBB80300D3994C /* MapTypeChooseView.m in Sources */,
 				286A2E9420DBB7DA00D3994C /* MapSpaceToYourView.m in Sources */,
 				28FDAC4720C1151F00531597 /* MySelfWordHomeTableViewHeaderView.m in Sources */,
-				281461FC20B3BDB7000C5E47 /* FriendsLeftImageRightLabelCell.m in Sources */,
 				28577B5D20D0BE220082075D /* MineChooseMyHomeVC.m in Sources */,
 				287D2CF320BE586200500156 /* HotMoviesDetailHeaderView.m in Sources */,
 				281DF6DE20D23C490086030E /* MineIntegralHeaderView.m in Sources */,
@@ -4366,6 +4329,7 @@
 				28E8E87F20B69A87002E10FC /* HeadLinesTableViewCell.m in Sources */,
 				2823124920E613A60026904E /* CommenityModel.m in Sources */,
 				28F9962020A41ACF00678494 /* CustomTextField.m in Sources */,
+				285BAEEA2106C950005A1CCD /* FriendsMessageModel.m in Sources */,
 				A8FD4F87208896F7008B53FC /* ForgetVC.m in Sources */,
 				28E8E88320B6A86E002E10FC /* HeadLinesVideoPlayVide.m in Sources */,
 				282E073720C941E700A9B2E1 /* LoginUserRongInfo.m in Sources */,
@@ -4457,7 +4421,6 @@
 				A86D9AF02089D7DC002E3F3D /* KGAlertView.m in Sources */,
 				28F996A520A43E2600678494 /* ZLNoAuthorityViewController.m in Sources */,
 				A81C961E2099C4A500E6D223 /* ChooseModelVC.m in Sources */,
-				2868407720B279D100441926 /* FriendsCurilerImageCell.m in Sources */,
 				28FDAC6320C14F4700531597 /* MyselfPerformanViewCell.m in Sources */,
 				28E33AAF20BBCB05009F9382 /* HeadLinesVC.m in Sources */,
 				2813DB5620C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.m in Sources */,
@@ -4513,7 +4476,6 @@
 				281DF71520D269640086030E /* MineCollectionArticleTableViewCell.m in Sources */,
 				28EC5F8920DA068B0019D4C1 /* MineHelpChooseTableViewCell.m in Sources */,
 				2875DA8720D3AEE800D6CAFE /* MineTalentShowVC.m in Sources */,
-				28B21A9820AECF8300108F50 /* FriendsButtomImageTopLabelCell.m in Sources */,
 				28A6C9FD20D8F6D500ECBF4F /* MineChangePhoneWithPassWordVC.m in Sources */,
 				28F0BC7520E5DA7C006A090A /* HeadLineImageNewsTableViewCell.m in Sources */,
 				282BA90B20E38A4C00FF3119 /* KGUserInfo.m in Sources */,

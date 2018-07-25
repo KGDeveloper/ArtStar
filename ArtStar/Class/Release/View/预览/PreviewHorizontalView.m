@@ -216,6 +216,7 @@
     for (int i = 0; i < imageArr.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(_imageBack)*i, 0,ViewWidth(_imageBack), photoViewHeight)];
         imageView.image = imageArr[i];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         if (_isMask == YES) {
             imageView.layer.cornerRadius = photoViewHeight/2;
             imageView.layer.masksToBounds = YES;

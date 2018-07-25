@@ -67,6 +67,28 @@
     }
 }
 
+- (void)setMusicArr:(NSArray *)musicArr{
+    _musicArr = musicArr;
+    if (musicArr.count > 0) {
+        _musicView.contentSize = CGSizeMake(120*musicArr.count, ViewHeight(_musicView));
+        for (int i = 0; i < musicArr.count; i++) {
+            NSDictionary *dic = musicArr[i];
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(120*i, 0, 100, 100)];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageUrl"]]];
+            imageView.layer.cornerRadius = 50;
+            imageView.layer.masksToBounds = YES;
+            [_musicView addSubview:imageView];
+            
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(120*i, 120, 100, ViewHeight(_musicView) - 120)];
+            lab.text = dic[@"movieName"];
+            lab.textColor = Color_333333;
+            lab.textAlignment = NSTextAlignmentCenter;
+            lab.font = SYFont(12);
+            [_musicView addSubview:lab];
+        }
+    }
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

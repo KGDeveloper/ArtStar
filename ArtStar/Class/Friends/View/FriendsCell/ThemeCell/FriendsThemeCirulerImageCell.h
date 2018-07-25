@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class FriendsModel;
 @protocol FriendsThemeCirulerImageCellDelegate <NSObject>
 
 - (void)deleteCell:(NSInteger)index;
 - (void)headerPushInfo:(NSInteger)index;
-- (void)lookAllCellImage:(NSInteger)index;
 - (void)commentCell:(NSInteger)index;
 - (void)zansCell:(NSInteger)index;
 - (void)shareCell:(NSInteger)index;
@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *zansWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentWidth;
 @property (nonatomic,weak) id<FriendsThemeCirulerImageCellDelegate>delegate;
-@property (nonatomic,assign) NSInteger cellIndex;
+
+- (void)fillCellWithModel:(FriendsModel *)model;
 
 @end

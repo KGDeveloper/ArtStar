@@ -85,6 +85,30 @@
                 [dic setObject:model.createTime forKey:@"createTime"];
             }
             [arr addObject:dic];
+        }else if ([_titleStr isEqualToString:@"喜欢的音乐"]){
+            MineLoveMusicModel *model = _dataArr[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:model.region forKey:@"region"];
+            [dic setObject:model.singer forKey:@"singer"];
+            if (model.userId == nil) {
+                [dic setObject:@"" forKey:@"userId"];
+            }else{
+                [dic setObject:model.userId forKey:@"userId"];
+            }
+            if (model.ID == nil) {
+                [dic setObject:@"" forKey:@"id"];
+            }else{
+                [dic setObject:model.ID forKey:@"id"];
+            }
+            [dic setObject:@(model.musicGrade) forKey:@"musicGrade"];
+            [dic setObject:model.musicName forKey:@"musicName"];
+            [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            if (model.createTime == nil) {
+                [dic setObject:@"暂无" forKey:@"createTime"];
+            }else{
+                [dic setObject:model.createTime forKey:@"createTime"];
+            }
+            [arr addObject:dic];
         }
     }
     if (self.sendYourLoveArr) {
@@ -183,6 +207,11 @@
         [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
         cell.titleLab.text = model.movieName;
         cell.detailLab.text = [NSString stringWithFormat:@"%f/%@/%@",model.movieGrade,model.director,model.createTime];
+    }else{
+        MineLoveMusicModel *model = _dataArr[indexPath.row];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+        cell.titleLab.text = model.musicName;
+        cell.detailLab.text = [NSString stringWithFormat:@"%f/%@/%@",model.musicGrade,model.singer,model.createTime];
     }
     
     return cell;
@@ -275,6 +304,11 @@
                 [mySelf.listView reloadData];
             }else if (mySelf.searchView.type == LoveMovie){
                 [mySelf.dataArr addObject:movies];
+                [mySelf.headerView removeFromSuperview];
+                mySelf.headerView.frame = CGRectMake(0, 0, 0, 0);
+                [mySelf.listView reloadData];
+            }else{
+                [mySelf.dataArr addObject:music];
                 [mySelf.headerView removeFromSuperview];
                 mySelf.headerView.frame = CGRectMake(0, 0, 0, 0);
                 [mySelf.listView reloadData];

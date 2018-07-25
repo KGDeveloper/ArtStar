@@ -108,7 +108,13 @@ FriendsPlayVideoViewdelegate>
         self.detailScrollView.photosArr = _model.images;
         self.veritocalView.textAlinment = NSTextAlignmentCenter;
         self.veritocalView.isVertical = NO;
-        self.veritocalView.textStr = @"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯";
+        NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 1; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        self.veritocalView.textStr = str;
     }else if(self.type == 0){//:--竖排--
         [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 165)/450*690 + 65 + 58)];
         
@@ -118,7 +124,13 @@ FriendsPlayVideoViewdelegate>
         self.veritocalView.frame = CGRectMake(ViewWidth(self.detailScrollView) + 35,58, 115, (kScreenWidth - 165)/450*690);
         self.veritocalView.isVertical = YES;
         self.veritocalView.yyAlignment = YYTextVerticalAlignmentCenter;
-        self.veritocalView.textStr = @"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯";
+        NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 1; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        self.veritocalView.textStr = str;
     }else{
         [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
         
@@ -127,7 +139,13 @@ FriendsPlayVideoViewdelegate>
         
         self.veritocalView.textAlinment = NSTextAlignmentCenter;
         self.veritocalView.isVertical = NO;
-        self.veritocalView.textStr = @"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯";
+        NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
+        NSString *str = strArr[0];
+        for (int i = 1; i < strArr.count; i++) {
+            str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
+        }
+        self.veritocalView.textStr = str;
     }
     self.timeView.timeStr = @"2018-05-22";
     self.timeView.locationStr = @"北京";
@@ -186,9 +204,9 @@ FriendsPlayVideoViewdelegate>
 
 - (UIView *)setHeaderViewWithFrame:(CGRect)frame{
     self.headerView = [[UIView alloc]initWithFrame:frame];
-    
+    NSDictionary *dic = _model.user;
     _userImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 28, 28)];
-    _userImage.image = Image(@"1");
+    [_userImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _userImage.layer.cornerRadius = 14;
     _userImage.layer.masksToBounds = YES;
     [self.headerView addSubview:_userImage];
@@ -197,7 +215,7 @@ FriendsPlayVideoViewdelegate>
     _nikName.textColor = Color_333333;
     _nikName.textAlignment = NSTextAlignmentLeft;
     _nikName.font = SYFont(15);
-    _nikName.text = @"巴啦啦能量";
+    _nikName.text = dic[@"username"];
     [self.headerView addSubview:_nikName];
     
     _deleteBtu = [UIButton buttonWithType:UIButtonTypeCustom];

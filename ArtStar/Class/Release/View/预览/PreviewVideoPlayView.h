@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger,TextAlignment){
 @interface PreviewVideoPlayView : UIView
 
 @property (nonatomic,copy) NSArray *titleArr;
-@property (nonatomic,copy) NSString *playVideo;
+@property (nonatomic,copy) NSURL *playVideo;
 @property (nonatomic,copy) NSString *timeStr;
 @property (nonatomic,copy) NSString *locationStr;
 @property (nonatomic,copy) NSString *themeStr;

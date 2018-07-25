@@ -13,9 +13,8 @@
 
 + (UITextView *)changeTextView:(UITextView *)textView text:(NSString *)text alignment:(NSTextAlignment)alignment{
     
-    
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-    paragraphStyle.lineSpacing = 10;
+    paragraphStyle.lineSpacing = 7;
     paragraphStyle.alignment = alignment;
     NSDictionary *attributes = @{NSFontAttributeName:FZFont(12),NSParagraphStyleAttributeName:paragraphStyle};
     textView.attributedText = [[NSAttributedString alloc]initWithString:text attributes:attributes];

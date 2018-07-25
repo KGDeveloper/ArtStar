@@ -34,9 +34,13 @@
 - (void)rightNavBtuAction:(UIButton *)sender{
     PreviewVC *vc = [[PreviewVC alloc]init];
     vc.model = _modelView.model;
-    vc.type = EditTypeVideo;
-    vc.videoType = _modelView.videoType;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([_modelView.model.location isEqualToString:@"你在哪里？"]) {
+        [[MBProgressHUD showHUDAddedTo:self.view animated:YES] bwm_hideWithTitle:@"请选择你的位置" hideAfter:1];
+    }else{
+        vc.type = EditTypeTheme;
+        vc.themeType = _modelView.themeType;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 //MARK:--ChangeTheModelViewDelegate--
 - (void)pushViewControllerWithVC:(YourLocationVC *)vc{

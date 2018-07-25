@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class FriendsModel;
 @protocol FriendsThemeLeftImageCellDelegate <NSObject>
 
 - (void)deleteCell:(NSInteger)index;
 - (void)headerPushInfo:(NSInteger)index;
-- (void)lookAllCellImage:(NSInteger)index;
 - (void)commentCell:(NSInteger)index;
 - (void)zansCell:(NSInteger)index;
 - (void)shareCell:(NSInteger)index;
@@ -22,6 +22,6 @@
 @interface FriendsThemeLeftImageCell: UITableViewCell
 
 @property (nonatomic,weak) id<FriendsThemeLeftImageCellDelegate>delegate;
-@property (nonatomic,assign) NSInteger cellIndex;
+- (void)fillCellWithModel:(FriendsModel *)model;
 
 @end

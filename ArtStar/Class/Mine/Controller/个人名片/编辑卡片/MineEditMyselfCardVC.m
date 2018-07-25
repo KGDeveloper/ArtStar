@@ -61,6 +61,7 @@ UITextFieldDelegate>
 //MARK:--------------------------------------喜欢的--------------------------------------------------
 @property (nonatomic,strong) NSMutableArray *loveBooks;//:--我的标签--
 @property (nonatomic,strong) NSMutableArray *loveMovies;//:--我的标签--
+@property (nonatomic,strong) NSMutableArray *loveMusics;//:--我的标签--
 
 
 @end
@@ -85,6 +86,7 @@ UITextFieldDelegate>
     _mylabelArr = [NSMutableArray array];
     _loveBooks = [NSMutableArray array];
     _loveMovies = [NSMutableArray array];
+    _loveMusics = [NSMutableArray array];
     NSArray *array = _model.mylabels;
     for (int i = 0; i < array.count; i++) {
         NSDictionary *dic = array[i];
@@ -138,7 +140,7 @@ UITextFieldDelegate>
     if (_model.school != nil || _model.school != NULL) {
         [_userInfoDic setObject:_model.school forKey:@"school"];
     }
-    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userInfoDic,@"userMovice":_loveMovies,@"userMusic":_userMusicDic,@"userBook":_loveBooks} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:editPerBnsCard parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"user":_userInfoDic,@"userMovice":_loveMovies,@"userMusic":_loveMusics,@"userBook":_loveBooks} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             if (mySelf.refreshCenterListView) {
                 mySelf.refreshCenterListView();
@@ -265,6 +267,7 @@ UITextFieldDelegate>
         MineLoveMoviesAndMusicAndBooksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineLoveMoviesAndMusicAndBooksCell"];
         cell.bookArr = _model.userBooks;
         cell.moviesArr = _model.userMovices;
+        cell.musicArr = _model.userMusics;
         cell.delegate = self;
         return cell;
     }else{
@@ -617,6 +620,34 @@ UITextFieldDelegate>
         };
     }else if ([title isEqualToString:@"音乐"]){
         chooseVC.titleStr = @"喜欢的音乐";
+        chooseVC.oldArr = _model.userMusics;
+        chooseVC.sendYourLoveArr = ^(NSArray *dataArr) {
+            for (int i = 0; i < dataArr.count; i++) {
+                NSDictionary *dic = dataArr[i];
+                if (mySelf.model.userMusics.count > 0) {
+                    for (NSDictionary *obj in mySelf.model.userMusics) {
+                        if ([dic isEqual:obj]) {break;}else{
+                            if (mySelf.loveMusics.count > 0) {
+                                for (NSDictionary *newObj in mySelf.loveMusics) {
+                                    if ([dic isEqual:newObj]) {break;}else{[mySelf.loveMusics addObject:dic];}
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if (mySelf.loveMusics.count > 0) {
+                        [mySelf.loveMusics enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            if ([dic isEqual:obj]) {*stop = YES;}else{[mySelf.loveMusics addObject:dic];}
+                        }];
+                    }else{
+                        [mySelf.loveMusics addObject:dic];
+                    }
+                }
+            }
+            mySelf.model.userMusics = dataArr;
+            NSIndexPath *dex = [NSIndexPath indexPathForRow:4 inSection:0];
+            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
+        };
     }else{
         chooseVC.titleStr = @"喜欢的书籍";
         chooseVC.oldArr = _model.userBooks;
