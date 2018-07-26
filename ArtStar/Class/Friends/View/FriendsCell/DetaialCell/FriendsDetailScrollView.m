@@ -7,6 +7,7 @@
 //
 
 #import "FriendsDetailScrollView.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface FriendsDetailScrollView ()<UIScrollViewDelegate>{
     NSInteger number;

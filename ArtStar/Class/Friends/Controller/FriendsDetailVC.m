@@ -11,8 +11,9 @@
 #import "FriendsDetailZansCell.h"
 #import "FriendsDetailCommentCell.h"
 #import "FriendsSuspensionView.h"
+#import "ZLPlayer.h"
 #import "FriendsPlayVideoView.h"
-#import "FriendsVideoView.h"
+#import <AVKit/AVKit.h>
 
 
 @interface FriendsDetailVC ()
@@ -47,11 +48,11 @@ FriendsPlayVideoViewdelegate>
 /**
  控制视频播放
  */
-@property (nonatomic,strong) FriendsPlayVideoView *playVideo;
+@property (nonatomic,strong) FriendsPlayVideoView *videoView;
 /**
  播放视频
  */
-@property (nonatomic,strong) FriendsVideoView *videoView;
+@property (nonatomic,strong) ZLPlayer *playVideo;
 /**
  评论
  */
@@ -104,9 +105,15 @@ FriendsPlayVideoViewdelegate>
 }
 - (void)changeUI{
     if (self.type == 1) {//:--横排--
-        [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+        if ([_model.composing integerValue] == 0) {
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 65 + 58)];
+        }else if ([_model.composing integerValue] == 1){
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
+        }else{
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+        }
         self.detailScrollView.photosArr = _model.images;
-        self.veritocalView.textAlinment = NSTextAlignmentCenter;
+        self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model.composing integerValue]];
         self.veritocalView.isVertical = NO;
         NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
         NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
@@ -132,11 +139,16 @@ FriendsPlayVideoViewdelegate>
         }
         self.veritocalView.textStr = str;
     }else{
-        [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
-        
-        self.playVideo.hidden = NO;
+        if ([_model.composing integerValue] == 0) {
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 65 + 58)];
+        }else if ([_model.composing integerValue] == 1){
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
+        }else{
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+        }
+        NSDictionary *dic = [_model.images firstObject];
+        self.videoView.videoIamge = [self thumbnailImageForUrl:dic[@"imageURL"]];
         self.detailScrollView.hidden = YES;
-        
         self.veritocalView.textAlinment = NSTextAlignmentCenter;
         self.veritocalView.isVertical = NO;
         NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
@@ -147,8 +159,8 @@ FriendsPlayVideoViewdelegate>
         }
         self.veritocalView.textStr = str;
     }
-    self.timeView.timeStr = @"2018-05-22";
-    self.timeView.locationStr = @"北京";
+    self.timeView.timeStr = _model.createTimeStr;
+    self.timeView.locationStr = _model.location;
 }
 - (void)settableViewFrame:(CGRect)frame{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
@@ -162,7 +174,6 @@ FriendsPlayVideoViewdelegate>
     [_listView registerClass:[FriendsDetailZansCell class] forCellReuseIdentifier:@"FriendsDetailZansCell"];
     [_listView registerClass:[FriendsDetailCommentCell class] forCellReuseIdentifier:@"FriendsDetailCommentCell"];
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         return 50;
@@ -170,11 +181,9 @@ FriendsPlayVideoViewdelegate>
         return 55;
     }
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         FriendsDetailZansCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsDetailZansCell"];
@@ -192,7 +201,6 @@ FriendsPlayVideoViewdelegate>
     }
     
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row > 0) {
         CGRect rect = [tableView rectForRowAtIndexPath:indexPath];
@@ -202,6 +210,12 @@ FriendsPlayVideoViewdelegate>
     }
 }
 
+/**
+ 动态消息视图
+
+ @param frame 动态消息视图
+ @return 动态消息视图
+ */
 - (UIView *)setHeaderViewWithFrame:(CGRect)frame{
     self.headerView = [[UIView alloc]initWithFrame:frame];
     NSDictionary *dic = _model.user;
@@ -234,6 +248,11 @@ FriendsPlayVideoViewdelegate>
     
 }
 
+/**
+ 图片加载
+
+ @return 图片加载
+ */
 - (FriendsDetailScrollView *)detailScrollView{
     if (!_detailScrollView) {
         _detailScrollView = [[FriendsDetailScrollView alloc]initWithFrame:CGRectMake(15,58, kScreenWidth - 30, (kScreenWidth - 30)/690*468)];
@@ -242,6 +261,11 @@ FriendsPlayVideoViewdelegate>
     return _detailScrollView;
 }
 
+/**
+ 文字排版
+
+ @return 文字排版
+ */
 - (FriendsDetailVericalView *)veritocalView{
     if (!_veritocalView) {
         _veritocalView = [[FriendsDetailVericalView alloc]initWithFrame:CGRectMake(15,58 + ViewHeight(self.detailScrollView) + 20, kScreenWidth - 30, 115)];
@@ -249,7 +273,11 @@ FriendsPlayVideoViewdelegate>
     }
     return _veritocalView;
 }
+/**
+ 底部时间点赞评论收藏界面
 
+ @return 底部时间点赞评论收藏界面
+ */
 - (FriendsDetailTimeComponentView *)timeView{
     if (!_timeView) {
         _timeView = [[FriendsDetailTimeComponentView alloc]initWithFrame:CGRectMake(15, ViewHeight(self.headerView) - 65, kScreenWidth - 30, 65)];
@@ -258,7 +286,11 @@ FriendsPlayVideoViewdelegate>
     }
     return _timeView;
 }
+/**
+ 评论弹窗
 
+ @return 评论弹窗
+ */
 - (FriendsCommentView *)commentView{
     if (!_commentView) {
         _commentView = [[FriendsCommentView alloc]initWithFrame:CGRectMake(0,kScreenHeight - 45, kScreenWidth, 45)];
@@ -268,16 +300,11 @@ FriendsPlayVideoViewdelegate>
     }
     return _commentView;
 }
+/**
+ 赋值删除按钮悬浮窗
 
-- (FriendsPlayVideoView *)playVideo{
-    if (!_playVideo) {
-        _playVideo = [[FriendsPlayVideoView alloc]initWithFrame:CGRectMake(15,58, kScreenWidth - 30, (kScreenWidth - 30)/690*468)];
-        _playVideo.delegate = self;
-        [self.headerView addSubview:_playVideo];
-    }
-    return _playVideo;
-}
-
+ @return  赋值删除按钮悬浮窗
+ */
 - (FriendsSuspensionView *)suspensionView{
     if (!_suspensionView) {
         _suspensionView = [[FriendsSuspensionView alloc]initWithFrame:CGRectMake(0, 0, 110, 33)];
@@ -286,9 +313,19 @@ FriendsPlayVideoViewdelegate>
     }
     return _suspensionView;
 }
+/**
+ 返回按钮点击事件
+
+ @param sender 返回按钮点击事件
+ */
 - (void)leftNavBtuAction:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+/**
+ 右侧关注按钮惦记时间
+
+ @param sender 右侧关注按钮惦记时间
+ */
 - (void)rightNavBtuAction:(UIButton *)sender{
     if ([sender.currentTitle isEqualToString:@"已关注"]) {
         [sender setTitle:@"关注" forState:UIControlStateNormal];
@@ -314,6 +351,9 @@ FriendsPlayVideoViewdelegate>
 - (void)zansAction{
     
 }
+/**
+ 评论弹窗
+ */
 - (void)commentAction{
     self.commentView.hidden = NO;
     [self.commentView.commnetView becomeFirstResponder];
@@ -331,20 +371,104 @@ FriendsPlayVideoViewdelegate>
 - (void)rightAction:(NSInteger)index{
     
 }
-//MARK:--FriendsPlayVideoViewdelegate--
+/**
+ 在当前界面播放视频
+ */
 - (void)playModelVideo{
-    self.videoView.hidden = NO;
-    [self.videoView playWith:[NSURL URLWithString:@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"]];
+    
+    NSArray *imageArr = _model.images;
+    NSDictionary *dic = [imageArr firstObject];
+    self.playVideo.videoUrl = [NSURL URLWithString:dic[@"imageURL"]];
+    self.playVideo.hidden = NO;
+    [self.playVideo play];
+    self.navigationController.navigationBar.hidden = YES;
 }
+/**
+ 创建播放视频界面
 
-- (FriendsVideoView *)videoView{
+ @return 视频播放器
+ */
+- (ZLPlayer *)playVideo{
+    if (!_playVideo) {
+        _playVideo = [[ZLPlayer alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        [self.view insertSubview:_playVideo belowSubview:self.view];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchVideoPlay)];
+        [_playVideo addGestureRecognizer:tap];
+    }
+    return _playVideo;
+}
+/**
+ 点击播放视频
+ */
+- (void)touchVideoPlay{
+    [self.playVideo reset];
+    self.playVideo.hidden = YES;
+    self.navigationController.navigationBar.hidden = NO;
+}
+- (FriendsPlayVideoView *)videoView{
     if (!_videoView) {
-        _videoView = [[FriendsVideoView alloc]initWithFrame:CGRectMake(0, NavTopHeight - 44, kScreenWidth, kScreenHeight - NavTopHeight + 44)];
-        [self.navigationController.view addSubview:_videoView];
+        _videoView = [[FriendsPlayVideoView alloc]initWithFrame:CGRectMake(15,58, kScreenWidth - 30, (kScreenWidth - 30)/690*468)];
+        _videoView.delegate = self;
+        [self.headerView addSubview:_videoView];
     }
     return _videoView;
 }
 
+/**
+ 根据模型排版数据判断文字对齐方式
+
+ @param composing 根据模型排版数据判断文字对齐方式
+ @return 根据模型排版数据判断文字对齐方式
+ */
+- (NSTextAlignment)textAlignmentWithModelComposing:(NSInteger)composing{
+    switch (composing) {
+        case 0:
+            return NSTextAlignmentCenter;
+            break;
+        case 2:
+            return NSTextAlignmentCenter;
+            break;
+        case 5:
+            return NSTextAlignmentLeft;
+            break;
+        case 6:
+            return NSTextAlignmentCenter;
+            break;
+        case 7:
+            return NSTextAlignmentRight;
+            break;
+        case 8:
+            return NSTextAlignmentLeft;
+            break;
+        case 9:
+            return NSTextAlignmentCenter;
+            break;
+        default:
+            return NSTextAlignmentRight;
+            break;
+    }
+}
+/**
+ 获取视频第一帧图片
+
+ @param url 获取视频第一帧图片
+ @return 获取视频第一帧图片
+ */
+- (UIImage *)thumbnailImageForUrl:(NSString *)url{
+    AVURLAsset *asset = [[AVURLAsset alloc]initWithURL:[NSURL URLWithString:url] options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImagegenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetImagegenerator.appliesPreferredTrackTransform = YES;
+    assetImagegenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTile = 1;
+    NSError *error = nil;
+    thumbnailImageRef = [assetImagegenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTile, 60) actualTime:NULL error:&error];
+    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
+    return thumbnailImage;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

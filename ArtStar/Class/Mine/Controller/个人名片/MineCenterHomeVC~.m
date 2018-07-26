@@ -206,7 +206,7 @@
         [cell.bookImage sd_setImageWithURL:[NSURL URLWithString:booksDic[@"imageUrl"]]];
         NSDictionary *musicDic = [_model.userMusics firstObject];
         cell.musicName.text = musicDic[@"musicName"];
-        [cell.musicImage sd_setImageWithURL:[NSURL URLWithString:musicDic[@"imageUrl"]]];
+        [cell.musicImage sd_setImageWithURL:[NSURL URLWithString:booksDic[@"imageUrl"]]];
         NSDictionary *moviesDic = [_model.userMovices firstObject];
         cell.movieName.text = moviesDic[@"movieName"];
         [cell.movieImage sd_setImageWithURL:[NSURL URLWithString:moviesDic[@"imageUrl"]]];

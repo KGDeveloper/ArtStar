@@ -24,7 +24,7 @@
         UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(130*i, 120, 110, 15)];
         nameLab.textColor = Color_333333;
         nameLab.font = SYFont(14);
-        nameLab.text = dic[@"musicsName"];
+        nameLab.text = dic[@"musicName"];
         nameLab.textAlignment = NSTextAlignmentCenter;
         [_scrollView addSubview:nameLab];
     }

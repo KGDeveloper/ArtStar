@@ -57,13 +57,13 @@
         return cell;
     }else if(indexPath.row == 0){
         MyselfLoveMoviesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfLoveMoviesCell"];
-        cell.imageArr = _userMovies;
         cell.titleLab.text = @"喜欢的电影";
+        cell.imageArr = _userMovies;
         return cell;
     }else{
         MyselfLoveMoviesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyselfLoveMoviesCell"];
-        cell.imageArr = _userBooks;
         cell.titleLab.text = @"喜欢的书籍";
+        cell.imageArr = _userBooks;
         return cell;
     }
 }

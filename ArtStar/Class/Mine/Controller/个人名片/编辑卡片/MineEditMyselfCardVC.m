@@ -62,6 +62,9 @@ UITextFieldDelegate>
 @property (nonatomic,strong) NSMutableArray *loveBooks;//:--我的标签--
 @property (nonatomic,strong) NSMutableArray *loveMovies;//:--我的标签--
 @property (nonatomic,strong) NSMutableArray *loveMusics;//:--我的标签--
+@property (nonatomic,copy) NSArray *oldBooks;
+@property (nonatomic,copy) NSArray *oldMovies;
+@property (nonatomic,copy) NSArray *oldMusics;
 
 
 @end
@@ -87,6 +90,11 @@ UITextFieldDelegate>
     _loveBooks = [NSMutableArray array];
     _loveMovies = [NSMutableArray array];
     _loveMusics = [NSMutableArray array];
+    
+    _oldBooks = _model.userBooks;
+    _oldMovies = _model.userMovices;
+    _oldMusics = _model.userMusics;
+    
     NSArray *array = _model.mylabels;
     for (int i = 0; i < array.count; i++) {
         NSDictionary *dic = array[i];
@@ -582,105 +590,78 @@ UITextFieldDelegate>
         chooseVC.titleStr = @"喜欢的电影";
         chooseVC.oldArr = _model.userMovices;
         chooseVC.sendYourLoveArr = ^(NSArray *dataArr) {
-            for (int i = 0; i < dataArr.count; i++) {
-                NSDictionary *dic = dataArr[i];
-                if (mySelf.model.userMovices.count > 0) {
-                    for (NSDictionary *obj in mySelf.model.userMovices) {
-                        if ([dic isEqual:obj]) {
-                            break;
-                        }else{
-                            if (mySelf.loveMovies.count > 0) {
-                                for (NSDictionary *tmpObj in mySelf.loveMovies) {
-                                    if ([dic isEqual:tmpObj]) {
-                                        break;
-                                    }else{
-                                        [mySelf.loveMovies addObject:dic];
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }else{
-                    if (mySelf.loveMovies.count > 0) {
-                        [mySelf.loveMovies enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                            if ([dic isEqual:obj]) {
-                                *stop = YES;
-                            }else{
-                                [mySelf.loveMovies addObject:dic];
-                            }
-                        }];
-                    }else{
-                        [mySelf.loveMovies addObject:dic];
-                    }
-                }
-            }
-            mySelf.model.userMovices = dataArr;
-            NSIndexPath *dex = [NSIndexPath indexPathForRow:4 inSection:0];
-            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
+            [mySelf addObjectoldArr:mySelf.oldMovies newArr:dataArr type:0];
         };
     }else if ([title isEqualToString:@"音乐"]){
         chooseVC.titleStr = @"喜欢的音乐";
         chooseVC.oldArr = _model.userMusics;
         chooseVC.sendYourLoveArr = ^(NSArray *dataArr) {
-            for (int i = 0; i < dataArr.count; i++) {
-                NSDictionary *dic = dataArr[i];
-                if (mySelf.model.userMusics.count > 0) {
-                    for (NSDictionary *obj in mySelf.model.userMusics) {
-                        if ([dic isEqual:obj]) {break;}else{
-                            if (mySelf.loveMusics.count > 0) {
-                                for (NSDictionary *newObj in mySelf.loveMusics) {
-                                    if ([dic isEqual:newObj]) {break;}else{[mySelf.loveMusics addObject:dic];}
-                                }
-                            }
-                        }
-                    }
-                }else{
-                    if (mySelf.loveMusics.count > 0) {
-                        [mySelf.loveMusics enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                            if ([dic isEqual:obj]) {*stop = YES;}else{[mySelf.loveMusics addObject:dic];}
-                        }];
-                    }else{
-                        [mySelf.loveMusics addObject:dic];
-                    }
-                }
-            }
-            mySelf.model.userMusics = dataArr;
-            NSIndexPath *dex = [NSIndexPath indexPathForRow:4 inSection:0];
-            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
+            [mySelf addObjectoldArr:mySelf.oldMusics newArr:dataArr type:1];
         };
     }else{
         chooseVC.titleStr = @"喜欢的书籍";
         chooseVC.oldArr = _model.userBooks;
         chooseVC.sendYourLoveArr = ^(NSArray *dataArr) {
-            for (int i = 0; i < dataArr.count; i++) {
-                NSDictionary *dic = dataArr[i];
-                if (mySelf.model.userBooks.count > 0) {
-                    for (NSDictionary *obj in mySelf.model.userBooks) {
-                        if ([dic isEqual:obj]) {break;}else{
-                            if (mySelf.loveBooks.count > 0) {
-                                for (NSDictionary *newObj in mySelf.loveBooks) {
-                                    if ([dic isEqual:newObj]) {break;}else{[mySelf.loveBooks addObject:dic];}
-                                }
-                            }
-                        }
-                    }
-                }else{
-                    if (mySelf.loveBooks.count > 0) {
-                        [mySelf.loveBooks enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                            if ([dic isEqual:obj]) {*stop = YES;}else{[mySelf.loveBooks addObject:dic];}
-                        }];
-                    }else{
-                        [mySelf.loveBooks addObject:dic];
-                    }
-                }
-            }
-            mySelf.model.userBooks = dataArr;
-            NSIndexPath *dex = [NSIndexPath indexPathForRow:4 inSection:0];
-            [mySelf.listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
+            [mySelf addObjectoldArr:mySelf.oldBooks newArr:dataArr type:2];
         };
     }
     [self pushNoTabBarViewController:chooseVC animated:YES];
 }
+
+- (void)addObjectoldArr:(NSArray *)oldArr newArr:(NSArray *)newArr type:(NSInteger)index{
+    switch (index) {
+        case 0:
+            _loveMovies = [NSMutableArray array];
+            break;
+        case 1:
+            _loveMusics = [NSMutableArray array];
+            break;
+        case 2:
+            _loveBooks = [NSMutableArray array];
+            break;
+            
+        default:
+            break;
+    }
+    __weak typeof(self) mySelf = self;
+    [newArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dic = obj;
+        if ([[NSString stringWithFormat:@"%@",dic[@"id"]] isEqualToString:@""]) {
+            switch (index) {
+                case 0:
+                    [mySelf.loveMovies addObject:dic];
+                    break;
+                case 1:
+                    [mySelf.loveMusics addObject:dic];
+                    break;
+                case 2:
+                    [mySelf.loveBooks addObject:dic];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }];
+    
+    switch (index) {
+        case 0:
+            _model.userMovices = newArr;
+            break;
+        case 1:
+            _model.userMusics = newArr;
+            break;
+        case 2:
+            _model.userBooks = newArr;
+            break;
+            
+        default:
+            break;
+    }
+    NSIndexPath *dex = [NSIndexPath indexPathForRow:4 inSection:0];
+    [_listView reloadRowAtIndexPath:dex withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -197,6 +197,12 @@
                             <constraint firstItem="WHc-0F-Ada" firstAttribute="centerY" secondItem="AQq-Th-3dF" secondAttribute="centerY" id="gv9-zs-OgX"/>
                             <constraint firstItem="WHc-0F-Ada" firstAttribute="centerX" secondItem="AQq-Th-3dF" secondAttribute="centerX" id="rRj-rI-dCg"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>

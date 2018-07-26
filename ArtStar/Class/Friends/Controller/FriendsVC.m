@@ -297,7 +297,8 @@ DZNEmptyDataSetSource
             [self pushNoTabBarViewController:vc animated:YES];
         }else if ([model.type integerValue] == 2){
             FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
-            vc.type = 1;
+            vc.type = 2;
+            vc.rfimd = model.ID;
             [self pushNoTabBarViewController:vc animated:YES];
         }
     }

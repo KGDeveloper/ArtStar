@@ -79,8 +79,8 @@
             imageView.layer.masksToBounds = YES;
             [_musicView addSubview:imageView];
             
-            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(120*i, 120, 100, ViewHeight(_musicView) - 120)];
-            lab.text = dic[@"movieName"];
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(120*i, 120, 100, ViewHeight(_musicView) - 100)];
+            lab.text = dic[@"musicName"];
             lab.textColor = Color_333333;
             lab.textAlignment = NSTextAlignmentCenter;
             lab.font = SYFont(12);

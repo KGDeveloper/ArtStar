@@ -98,7 +98,7 @@
 
 - (void)collectionClick:(UIButton *)sender{
     if ([sender.currentImage isEqual:Image(@"collection")]) {
-        [sender setImage:Image(@"shoucang") forState:UIControlStateNormal];
+        [sender setImage:Image(@"收藏") forState:UIControlStateNormal];
     }else{
         [sender setImage:Image(@"collection") forState:UIControlStateNormal];
     }

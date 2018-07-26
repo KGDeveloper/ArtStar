@@ -199,6 +199,12 @@
                             <constraint firstItem="hFO-P9-bm8" firstAttribute="centerX" secondItem="QvB-IU-2aq" secondAttribute="centerX" id="1lu-yu-EcG"/>
                             <constraint firstItem="hFO-P9-bm8" firstAttribute="centerY" secondItem="QvB-IU-2aq" secondAttribute="centerY" id="PW6-Xt-GJp"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>

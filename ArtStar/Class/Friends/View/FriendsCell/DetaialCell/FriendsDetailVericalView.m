@@ -43,8 +43,9 @@
 
 - (void)setTextStr:(NSString *)textStr{
     _textStr = textStr;
-    
-    [self changeYYTextView:_textView text:textStr];
+    if (textStr.length > 0 && textStr != nil) {
+        [self changeYYTextView:_textView text:textStr];
+    }
 }
 
 - (void)setYyAlignment:(YYTextVerticalAlignment)yyAlignment{
