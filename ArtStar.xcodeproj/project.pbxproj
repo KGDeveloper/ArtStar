@@ -131,6 +131,8 @@
 		2823124C20E639520026904E /* FriendsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2823124B20E639520026904E /* FriendsModel.m */; };
 		2825F6CC20B6B2AB0076B71B /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */; };
 		28283F6720E23B71008D1224 /* KGTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28283F6620E23B71008D1224 /* KGTicketView.m */; };
+		282975D72109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 282975D52109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.m */; };
+		282975D82109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282975D62109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.xib */; };
 		282BA8FE20E33C9700FF3119 /* MovieNewsDetaialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */; };
 		282BA90520E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA90420E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m */; };
 		282BA90B20E38A4C00FF3119 /* KGUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BA90A20E38A4C00FF3119 /* KGUserInfo.m */; };
@@ -751,6 +753,9 @@
 		2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		28283F6520E23B71008D1224 /* KGTicketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGTicketView.h; sourceTree = "<group>"; };
 		28283F6620E23B71008D1224 /* KGTicketView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGTicketView.m; sourceTree = "<group>"; };
+		282975D42109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsDetailCommentTableViewCell.h; sourceTree = "<group>"; };
+		282975D52109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsDetailCommentTableViewCell.m; sourceTree = "<group>"; };
+		282975D62109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsDetailCommentTableViewCell.xib; sourceTree = "<group>"; };
 		282BA8FC20E33C9700FF3119 /* MovieNewsDetaialVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieNewsDetaialVC.h; sourceTree = "<group>"; };
 		282BA8FD20E33C9700FF3119 /* MovieNewsDetaialVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieNewsDetaialVC.m; sourceTree = "<group>"; };
 		282BA90320E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadLineNotTitleNewsTableViewCell.h; sourceTree = "<group>"; };
@@ -1620,6 +1625,9 @@
 				2814621320B40AC0000C5E47 /* FriendsDetailZansCell.m */,
 				2814621520B414F0000C5E47 /* FriendsDetailCommentCell.h */,
 				2814621620B414F0000C5E47 /* FriendsDetailCommentCell.m */,
+				282975D42109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.h */,
+				282975D52109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.m */,
+				282975D62109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.xib */,
 				2820B05D20B5368E00EA1DAC /* FriednsMessageCell.h */,
 				2820B05E20B5368E00EA1DAC /* FriednsMessageCell.m */,
 				2820B05F20B5368E00EA1DAC /* FriednsMessageCell.xib */,
@@ -4025,6 +4033,7 @@
 				28F996A820A43E2600678494 /* ZLPhotoActionSheet.xib in Resources */,
 				287D2CEC20BE4EB400500156 /* HotMoviesCell.xib in Resources */,
 				283482C720DC97960026DD83 /* MapTypePlist.plist in Resources */,
+				282975D82109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.xib in Resources */,
 				28A6C9EE20D8EA1F00ECBF4F /* MineSetUpTopTableViewCell.xib in Resources */,
 				284C8D8C20BFDF1700487225 /* KGCityChooseCell.xib in Resources */,
 				2804BEA520E09970007E33DE /* TlentIntroudceTableViewCell.xib in Resources */,
@@ -4569,6 +4578,7 @@
 				2870B73420C68BCB00133D1A /* ReadBooksDetailVC.m in Sources */,
 				280601B320B804CE0090254E /* KGCommentTF.m in Sources */,
 				281DF6FE20D25DE10086030E /* MineCollectionThemeView.m in Sources */,
+				282975D72109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.m in Sources */,
 				287D2D0520BE9DDE00500156 /* HotmoviesActorCell.m in Sources */,
 				28E33AB720BBCF8E009F9382 /* MusicPerformanceView.m in Sources */,
 				28A6C9F220D8EB9F00ECBF4F /* MineSetUpPushTableViewCell.m in Sources */,
