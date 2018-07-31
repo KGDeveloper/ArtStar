@@ -36,7 +36,7 @@
     }
     NSDictionary *imageDic = [model.images firstObject];
     [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
-    
+    _countLab.text = [NSString stringWithFormat:@"1/%lu",(unsigned long)model.images.count];
     NSDictionary *dic = model.user;
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];

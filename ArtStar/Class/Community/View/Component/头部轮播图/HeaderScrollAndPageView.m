@@ -93,6 +93,9 @@
         }
     }
     [sender setTitleColor:Color_333333 forState:UIControlStateNormal];
+    if (self.classTypeAction) {
+        self.classTypeAction(sender.currentTitle);
+    }
 }
 
 - (void)setImageArr:(NSArray *)imageArr{

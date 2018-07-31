@@ -493,6 +493,7 @@
 		28FDAC6720C1533200531597 /* MyselfWordWorksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FDAC6620C1533200531597 /* MyselfWordWorksView.m */; };
 		28FDAC6C20C1562D00531597 /* MyselfWordWorksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FDAC6A20C1562D00531597 /* MyselfWordWorksCell.m */; };
 		28FDAC6D20C1562D00531597 /* MyselfWordWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FDAC6B20C1562D00531597 /* MyselfWordWorksCell.xib */; };
+		5A1C18FE2110020F00E6CCFF /* CommunityExhibitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C18FD2110020F00E6CCFF /* CommunityExhibitionModel.m */; };
 		9CF50ABF4E7729A6E18D4F9F /* Pods_ArtStar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1D66E743F1A18D94DF1F1E /* Pods_ArtStar.framework */; };
 		A81C960A2099B32900E6D223 /* ReleaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = A81C96092099B32900E6D223 /* ReleaseView.m */; };
 		A81C96122099B50800E6D223 /* ReleaseIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A81C96112099B50800E6D223 /* ReleaseIcon.xcassets */; };
@@ -1387,6 +1388,10 @@
 		28FDAC6920C1562D00531597 /* MyselfWordWorksCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfWordWorksCell.h; sourceTree = "<group>"; };
 		28FDAC6A20C1562D00531597 /* MyselfWordWorksCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselfWordWorksCell.m; sourceTree = "<group>"; };
 		28FDAC6B20C1562D00531597 /* MyselfWordWorksCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyselfWordWorksCell.xib; sourceTree = "<group>"; };
+		5A1C18FC2110020F00E6CCFF /* CommunityExhibitionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionModel.h; sourceTree = "<group>"; };
+		5A1C18FD2110020F00E6CCFF /* CommunityExhibitionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionModel.m; sourceTree = "<group>"; };
+		5A1C18FF2110124700E6CCFF /* CommuntityHttpsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommuntityHttpsDefine.h; sourceTree = "<group>"; };
+		5A1C1900211012AD00E6CCFF /* MineHttpsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHttpsDefine.h; sourceTree = "<group>"; };
 		5AE2FE7658F18639AE622B3C /* Pods-ArtStarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtStarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArtStarTests/Pods-ArtStarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		717434F6CBE1BDD58DFCAB4B /* Pods_ArtStarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtStarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1D66E743F1A18D94DF1F1E /* Pods_ArtStar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtStar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1870,6 +1875,7 @@
 		2820B07A20B55FB600EA1DAC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5A1C18FB211001CB00E6CCFF /* 展览 */,
 				287D7D5920ECD25700AD749E /* 头条 */,
 			);
 			path = Model;
@@ -3449,6 +3455,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		5A1C18FB211001CB00E6CCFF /* 展览 */ = {
+			isa = PBXGroup;
+			children = (
+				5A1C18FC2110020F00E6CCFF /* CommunityExhibitionModel.h */,
+				5A1C18FD2110020F00E6CCFF /* CommunityExhibitionModel.m */,
+			);
+			path = "展览";
+			sourceTree = "<group>";
+		};
 		5DBDAC9073BE60E74FC6E0E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -3731,6 +3746,8 @@
 				A8FD4F7E20885EEE008B53FC /* ArtStar.pch */,
 				A8FD4F7F20885FBD008B53FC /* FileHeader.h */,
 				A8FD4F8020885FD9008B53FC /* FileDefine.h */,
+				5A1C18FF2110124700E6CCFF /* CommuntityHttpsDefine.h */,
+				5A1C1900211012AD00E6CCFF /* MineHttpsDefine.h */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -4553,6 +4570,7 @@
 				28577B7320D11A040082075D /* MineAddYourLoveSearchView.m in Sources */,
 				28F996AA20A43E2600678494 /* ZLShowBigImgViewController.m in Sources */,
 				28F996AB20A43E2600678494 /* ZLThumbnailViewController.m in Sources */,
+				5A1C18FE2110020F00E6CCFF /* CommunityExhibitionModel.m in Sources */,
 				280601AB20B7FF790090254E /* HeadLinesNormalCell.m in Sources */,
 				28BF33D520C51C7000598919 /* MyselfWordArticleView.m in Sources */,
 				2868408120B287E800441926 /* FriendsThemeButtomImageCell.m in Sources */,

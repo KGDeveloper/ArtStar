@@ -1319,14 +1319,14 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = self.imageArr.copy;
+                model.imageURLs = @[_videoUrlStr];
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = self.imageArr.copy;
+                model.imageURLs = @[_videoUrlStr];
             }
             model.typeStr = @"2";
             model.composing = [self returnVType:self.videoType];

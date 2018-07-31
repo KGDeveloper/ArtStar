@@ -875,7 +875,6 @@
     if (self.doneBlock) {
         self.doneBlock(self.takedImage, self.videoUrl);
     }
-    
     [self onDismiss];
 }
 
@@ -941,7 +940,6 @@
         [self onTakePicture];
         return;
     }
-    
     self.videoUrl = outputFileURL;
     self.takedImage = [self getScreenShotImageFromVideo];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

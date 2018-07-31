@@ -14,6 +14,7 @@
 #import "ZLPlayer.h"
 #import "FriendsPlayVideoView.h"
 #import <AVKit/AVKit.h>
+#import "FriendsTalentsCommentModel.h"
 
 
 @interface FriendsDetailVC ()
@@ -73,6 +74,10 @@ FriendsPlayVideoViewdelegate>
  解析数据
  */
 @property (nonatomic,strong) FriendsModel *model;
+/**
+ 评论数据
+ */
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -83,6 +88,8 @@ FriendsPlayVideoViewdelegate>
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"动态详情" image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    _dataArr = [NSMutableArray array];
     
     [self createDate];
 }
@@ -97,6 +104,7 @@ FriendsPlayVideoViewdelegate>
             NSArray *arr = result[@"data"];
             NSDictionary *dic = [arr firstObject];
             mySelf.model = [FriendsModel mj_objectWithKeyValues:dic];
+            mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model.rccomment];
             [mySelf changeUI];
         }
     } fail:^(NSError *error) {
@@ -107,12 +115,14 @@ FriendsPlayVideoViewdelegate>
     if (self.type == 1) {//:--横排--
         if ([_model.composing integerValue] == 0) {
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 65 + 58)];
+            self.detailScrollView.size = CGSizeMake(kScreenWidth, 0);
         }else if ([_model.composing integerValue] == 1){
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
+            self.detailScrollView.photosArr = _model.images;
         }else{
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+            self.detailScrollView.photosArr = _model.images;
         }
-        self.detailScrollView.photosArr = _model.images;
         self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model.composing integerValue]];
         self.veritocalView.isVertical = NO;
         NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
@@ -182,12 +192,12 @@ FriendsPlayVideoViewdelegate>
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count + 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         FriendsDetailZansCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsDetailZansCell"];
-        cell.zansArr = @[@"1",@"2",@"3",@"4",@"5",@"1",@"2",@"3",@"4",@"5",@"1",@"2",@"3",@"4",@"5",@"1",@"2",@"3",@"4",@"5"];
+        cell.zansArr = _model.praPrtraitUri;
         return cell;
     }else{
         FriendsDetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsDetailCommentCell"];
@@ -196,7 +206,13 @@ FriendsPlayVideoViewdelegate>
         }else{
             cell.isShowCommentBtu = YES;
         }
-        [cell valuenikName:@"轩哥哥" comment:@"这是一个富文本的信息"];
+        FriendsTalentsCommentModel *model = _dataArr[indexPath.row - 1];
+        NSDictionary *dic = model.user;
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikName.text = dic[@"username"];
+        cell.timeLab.text = model.createTimeStr;
+        cell.commentLab.text = model.content;
+//        [cell valuenikName:@"轩哥哥" comment:@"这是一个富文本的信息"];
         return cell;
     }
     
@@ -327,11 +343,24 @@ FriendsPlayVideoViewdelegate>
  @param sender 右侧关注按钮惦记时间
  */
 - (void)rightNavBtuAction:(UIButton *)sender{
-    if ([sender.currentTitle isEqualToString:@"已关注"]) {
-        [sender setTitle:@"关注" forState:UIControlStateNormal];
-    }else{
-        [sender setTitle:@"已关注" forState:UIControlStateNormal];
-    }
+    NSDictionary *userDic = _model.user;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":userDic[@"id"]} succ:^(id result) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 420) {
+            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"亲，不能自己关注自己哦！" animated:YES] hide:YES afterDelay:1];
+        }else if ([result[@"code"] integerValue] == 410){
+            [sender setTitle:@"已关注" forState:UIControlStateNormal];
+            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
+        }else if ([result[@"code"] integerValue] == 411){
+            [sender setTitle:@"关注" forState:UIControlStateNormal];
+            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"操作失败" animated:YES] hide:YES afterDelay:1];
+    }];
 }
 
 //MARK:--FriendsDetailTimeComponentViewDelegate代理--
@@ -345,24 +374,71 @@ FriendsPlayVideoViewdelegate>
     shareModel.thumbImage = thumbImage;
     [shareView showShareViewWithDXShareModel:shareModel shareContentType:DXShareContentTypeImage];
 }
+/**
+ 收藏
+ */
 - (void)collectionAction{
-    
+    __weak typeof(self) weakSelf = self;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:[KGUserInfo shareInterace].userTokenCode forKey:@"tokenCode"];
+    [parameters setObject:_model.ID forKey:@"businessId"];
+    if ([_model.type integerValue] == 1) {
+        [parameters setObject:@"3" forKey:@"collectType"];
+        [parameters setObject:_model.title forKey:@"topictitle"];
+        [parameters setObject:_model.content forKey:@"topicContent"];
+        if (_model.images.count > 0) {
+            NSDictionary *imageDic = [_model.images firstObject];
+            [parameters setObject:imageDic[@"imageURL"] forKey:@"topicImg"];
+        }
+    }else{
+        NSDictionary *userDic = _model.user;
+        [parameters setObject:@"2" forKey:@"collectType"];
+        [parameters setObject:userDic[@"username"] forKey:@"username"];
+        [parameters setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
+        [parameters setObject:_model.content forKey:@"content"];
+        if (_model.images.count > 0) {
+            NSDictionary *imageDic = [_model.images firstObject];
+            [parameters setObject:imageDic[@"imageURL"] forKey:@"friendImg"];
+        }
+    }
+    [KGRequestNetWorking postWothUrl:addPersonCollect parameters:parameters succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"操作成功" toView:weakSelf.view hideAfter:1];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"收藏失败" toView:weakSelf.view hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD bwm_showTitle:@"请求失败" toView:weakSelf.view hideAfter:1];
+    }];
 }
 - (void)zansAction{
-    
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:firendlikeCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_model.ID} succ:^(id result) {
+        [MBProgressHUD bwm_showTitle:result[@"message"] toView:weakSelf.view hideAfter:1];
+    } fail:^(NSError *error) {
+        [MBProgressHUD bwm_showTitle:@"请求失败" toView:weakSelf.view hideAfter:1];
+    }];
 }
 /**
  评论弹窗
  */
 - (void)commentAction{
     self.commentView.hidden = NO;
-    [self.commentView.commnetView becomeFirstResponder];
     self.commentView.commnetView.text = @"";
     self.commentView.plholder = @"评论:";
 }
 //MARK:--FriendsCommentViewDelegate--
 - (void)releaseComment:(NSString *)comment{
-    
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:commentOrReply parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_model.ID,@"content":comment} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"评论成功" toView:weakSelf.view hideAfter:1];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"评论失败" toView:weakSelf.view hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD bwm_showTitle:@"请求失败" toView:weakSelf.view hideAfter:1];
+    }];
 }
 //MARK:--FriendsSuspensionViewDelegate--
 - (void)leftAction:(NSInteger)index{

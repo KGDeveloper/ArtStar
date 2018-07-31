@@ -11,7 +11,7 @@
 #import "CommenityModel.h"
 #import "CommenityNewsDetailModel.h"
 
-@interface HeadlinesView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,HeadLinesTableViewCellDelagate,CommunityShieldingViewDelegate>
+@interface HeadlinesView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,HeadLinesTableViewCellDelagate,CommunityShieldingViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) HeaderScrollAndPageView *pageView;
@@ -41,10 +41,10 @@
 //MARK:---------------------------------------创建列表视图------------------------------------------
 - (void)setUI{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(self), ViewHeight(self))];
-    _listView.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
-    _listView.backgroundView = [[UIImageView alloc]initWithImage:Image(@"空空如也")];
     _listView.delegate = self;
     _listView.dataSource = self;
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
     _listView.tableHeaderView = [self tableViewHeaderView];
     _listView.tableFooterView = TabLeViewFootView;
     _listView.rowHeight = (kScreenWidth-30)/690*400 + 120;
@@ -157,6 +157,18 @@
         }
     }
     return nil;
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"木有内容哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
 }
 
 /*

@@ -10,14 +10,6 @@
 
 @interface MusicPerformanceCell ()
 
-@property (nonatomic,strong) UIImageView *topImage;
-@property (nonatomic,strong) UIButton *hotBtu;
-@property (nonatomic,strong) UIView *backView;
-@property (nonatomic,strong) UILabel *timeLab;
-@property (nonatomic,strong) UILabel *titleLab;
-@property (nonatomic,strong) UILabel *locationLab;
-@property (nonatomic,strong) UILabel *priceLab;
-@property (nonatomic,strong) UIButton *buyBtu;
 @property (nonatomic,strong) UIView *line;
 
 @end
@@ -63,13 +55,13 @@
     
     _backView.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     _backView.alpha = 0.4;
-    _backView.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(70).heightIs(25);
+    _backView.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).leftEqualToView(_topImage).heightIs(25);
     
     _timeLab.text = @"两天后结束";
     _timeLab.textColor = [UIColor whiteColor];
     _timeLab.font = SYFont(12);
-    _timeLab.textAlignment = NSTextAlignmentCenter;
-    _timeLab.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(70).heightIs(25);
+    _timeLab.textAlignment = NSTextAlignmentRight;
+    _timeLab.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).leftEqualToView(_topImage).heightIs(25);
     
     _titleLab.text = @"张云逸“回归自然”雕塑设计展";
     _titleLab.textColor = Color_333333;

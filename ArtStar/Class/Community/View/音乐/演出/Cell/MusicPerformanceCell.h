@@ -17,6 +17,15 @@
 
 @interface MusicPerformanceCell : UITableViewCell
 
+@property (nonatomic,strong) UIImageView *topImage;
+@property (nonatomic,strong) UIButton *hotBtu;
+@property (nonatomic,strong) UIView *backView;
+@property (nonatomic,strong) UILabel *timeLab;
+@property (nonatomic,strong) UILabel *titleLab;
+@property (nonatomic,strong) UILabel *locationLab;
+@property (nonatomic,strong) UILabel *priceLab;
+@property (nonatomic,strong) UIButton *buyBtu;
+
 - (void)willStarStatus;
 - (void)willEndStatus;
 - (void)normalStatus;

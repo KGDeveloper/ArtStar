@@ -10,4 +10,6 @@
 
 @interface PerformanceDetailVC : BaseVC
 
+@property (nonatomic,copy) NSString *ID;
+
 @end

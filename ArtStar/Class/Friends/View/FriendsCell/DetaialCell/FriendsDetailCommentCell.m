@@ -11,10 +11,6 @@
 @interface FriendsDetailCommentCell ()
 
 @property (nonatomic,strong) UIImageView *commnetImage;
-@property (nonatomic,strong) UIImageView *headerImage;
-@property (nonatomic,strong) UILabel *nikName;
-@property (nonatomic,strong) UILabel *timeLab;
-@property (nonatomic,strong) YYLabel *commentLab;
 @property (nonatomic,strong) UIView *line;
 
 @end

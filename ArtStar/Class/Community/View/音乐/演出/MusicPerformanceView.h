@@ -10,6 +10,10 @@
 
 @interface MusicPerformanceView : UIView
 
-@property (nonatomic,copy) void (^pushToDetaialVC)(void);
+@property (nonatomic,copy) void (^pushToDetaialVC)(NSString *ID);
+@property (nonatomic,copy) void (^classTypeAction)(NSString *classStr);
+@property (nonatomic,copy) NSArray *dataArr;
+@property (nonatomic,copy) void (^refreshHeader)(void);
+@property (nonatomic,copy) void (^reloadFoot)(NSInteger page);
 
 @end

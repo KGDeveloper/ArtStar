@@ -692,7 +692,7 @@ static BOOL _sortAscending;
 {
     NSTimeInterval interval = [[[NSDate alloc] init] timeIntervalSince1970];
     
-    NSString *exportFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%f.mov", interval]];
+    NSString *exportFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%f.mp4", interval]];
     
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
     
@@ -706,29 +706,20 @@ static BOOL _sortAscending;
         
         switch ([exportSession status]) {
             case AVAssetExportSessionStatusFailed:
-                NSLog(@"Export failed: %@", [[exportSession error] localizedDescription]);
                 break;
             case AVAssetExportSessionStatusCancelled:
-                NSLog(@"Export canceled");
                 break;
                 
             case AVAssetExportSessionStatusCompleted:{
-                NSLog(@"Export completed");
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self saveVideoToAblum:exportFileUrl completion:^(BOOL isSuc, PHAsset *asset) {
                         if (complete) complete(isSuc, asset);
-                        if (isSuc) {
-                            NSLog(@"导出的的视频路径: %@", exportFilePath);
-                        } else {
-                            NSLog(@"导出视频失败");
-                        }
                     }];
                 });
             }
                 break;
                 
             default:
-                NSLog(@"Export other");
                 break;
         }
     }];

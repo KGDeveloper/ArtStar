@@ -118,7 +118,7 @@
     __weak typeof(self) mySelf = self;
     if (!_performanceView) {
         _performanceView = [[MusicPerformanceView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
-        _performanceView.pushToDetaialVC = ^{
+        _performanceView.pushToDetaialVC = ^(NSString *ID) {
             [mySelf pushNoTabBarViewController:[[PerformanceDetailVC alloc]init] animated:YES];
         };
         [self.view addSubview:_performanceView];

@@ -51,9 +51,9 @@
 
 
 //MARK:---------------------------------------登录模块-------------------------------------------------
-#define serverIP @"http://192.168.1.119:80/"
+//#define serverIP @"http://192.168.1.119:80/"
 //#define serverIP @"http://192.168.1.5/"
-//#define serverIP @"http://192.168.1.4/"
+#define serverIP @"http://192.168.1.3/"
 //MARK:----------------------------------------注册登录------------------------------------------------
 /**
  短信发送
@@ -90,29 +90,21 @@
  @return 跟新融云token的方法
  */
 #define toSetPayrollPwd [serverIP stringByAppendingString:@"toSetPayrollPwd"]
-//MARK:-----------------------------------------社区-----------------------------------------------
-#define communityServer [serverIP stringByAppendingString:@"community/ntvBynews"]
-#define friendComment [serverIP stringByAppendingString:@"friendComment/commentOrReply"]
-#define newsSearch [serverIP stringByAppendingString:@"community/newsSearch"]
-#define hotSearch [serverIP stringByAppendingString:@"community/hotSearch"]
-#define oldSearch [serverIP stringByAppendingString:@"community/oldSearch"]
-#define deleteSearchNews [serverIP stringByAppendingString:@"community/deleteSearchNews"]
-#define selectNewsByUid [serverIP stringByAppendingString:@"community/selectNewsByUid"]
-#define commentNews [serverIP stringByAppendingString:@"community/commentNews"]
-#define commentNewsByUid [serverIP stringByAppendingString:@"community/commentNewsByUid"]
-#define closeNewsByNid [serverIP stringByAppendingString:@"community/closeNewsByNid"]
-#define ntvByTopic [serverIP stringByAppendingString:@"community/ntvByTopic"]
-
 //MARK:--------------------------------------------发布模块--------------------------------------------
+/**
+ 发布朋友圈消息包括动态、话题、和达人
+ 
+ @param 包括自己 发布朋友圈消息包括动态、话题、和达人
+ @return 发布朋友圈消息包括动态、话题、和达人
+ */
 #define ReleaseFriendTimelineAddfriendMessage [serverIP stringByAppendingString:@"ReleaseFriendTimeline/addfriendMessage"]
 /**
  发布：我要做达人
-
+ 
  @param 包括自己 发布：我要做达人
  @return 发布：我要做达人
  */
 #define saveMerchantIssue [serverIP stringByAppendingString:@"Issue/saveMerchantIssue"]
-
 //MARK:---------------------------------------------朋友圈-------------------------------------------
 /**
  查询朋友圈消息(自己刷圈）
@@ -163,117 +155,17 @@
  */
 #define friendViews [serverIP stringByAppendingString:@"ReleaseFriendTimeline/friendViews"]
 /**
- 消息评论或者回复评论
+ 添加收藏的接口
 
- @return 消息评论或者回复评论
+ @return 添加收藏的接口
  */
-#define commentOrReply [serverIP stringByAppendingString:@"friendComment/commentOrReply"]
-
-//MARK:----------------------------------------个人中心------------------------------------------------
+#define addPersonCollect [serverIP stringByAppendingString:@"personCollect/addPersonCollect"]
 /**
- 我的中，查看个人名片
+ 关注
 
- @return 我的中，查看个人名片
+ @return 关注
  */
-#define seachUserInforMore [serverIP stringByAppendingString:@"personalBusinessCard/seachUserInforMore"]
-/**
- 填写个人资料时,查看我的标签
-
- @return 填写个人资料时,查看我的标签
- */
-#define showMyLabels [serverIP stringByAppendingString:@"myLabel/showMyLabels"]
-/**
- 填写个人资料时，从数据库中查询世界
-
- @return 填写个人资料时，从数据库中查询世界
- */
-#define getMyWordByPid [serverIP stringByAppendingString:@"myWord/getMyWordByPid"]
-/**
- 填写个人资料时，从数据库中查询身体部位
-
- @return 填写个人资料时，从数据库中查询身体部位
- */
-#define mineGetAll [serverIP stringByAppendingString:@"BodyPart/getAll"]
-/**
- 搜索喜欢的书籍
-
- @return 搜索喜欢的书籍
- */
-#define likeBookName [serverIP stringByAppendingString:@"userbook/likeBookName"]
-/**
- 搜索喜欢的音乐
-
- @return 搜索喜欢的音乐
- */
-#define likeMusicName [serverIP stringByAppendingString:@"userMusic/likeMusicName"]
-/**
- 搜索喜欢的电影
-
- @return 搜索喜欢的电影
- */
-#define likeMoviceName [serverIP stringByAppendingString:@"userMovice/likeMoviceName"]
-/**
- 删除图片
-
- @return 删除图片
- */
-#define deleteImage [serverIP stringByAppendingString:@"image/deleteImage"]
-/**
- 删除我的标签
-
- @return 删除我的标签
- */
-#define deleteMyLabel [serverIP stringByAppendingString:@"myLabel/deleteMyLabel"]
-/**
- 删除喜欢的行业
-
- @return 删除喜欢的行业
- */
-#define industrydeleteByid [serverIP stringByAppendingString:@"industry/deleteByid"]
-/**
- 获取七牛云token
-
- @return 获取七牛云token
- */
-#define qiniuToken [serverIP stringByAppendingString:@"ReleaseFriendTimeline/searchreturnToken"]
-/**
- 获取融云用户信息
-
- @return 获取融云用户信息
- */
-#define rongUserID [serverIP stringByAppendingString:@"user/getInforById"]
-/**
- 删除我的世界
-
- @return 删除我的世界
- */
-#define deleteMyWord [serverIP stringByAppendingString:@"myWord/deleteMyWord"]
-/**
- 删除喜欢的电影
-
- @return 删除喜欢的电影
- */
-#define deleteMovice [serverIP stringByAppendingString:@"userMovice/deleteMovice"]
-/**
- 删除喜欢的音乐
-
- @return 删除喜欢的音乐
- */
-#define deleteMusic [serverIP stringByAppendingString:@"userMusic/deleteMusic"]
-/**
- 删除喜欢的书籍
-
- @return 删除喜欢的书籍
- */
-#define deleteBook [serverIP stringByAppendingString:@"userbook/deleteBook"]
-/**
- 编辑/完善个人资料
-
- @return 编辑/完善个人资料
- */
-#define editPerBnsCard [serverIP stringByAppendingString:@"personalBusinessCard/editPerBnsCard"]
-
-
+#define attorcel [serverIP stringByAppendingString:@"attention/attorcel"]
 
 
 #endif /* FileDefine_h */

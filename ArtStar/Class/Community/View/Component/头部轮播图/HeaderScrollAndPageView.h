@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger,HeaderStyle){
 @interface HeaderScrollAndPageView : UIView
 
 @property (nonatomic,copy) NSArray *imageArr;
+@property (nonatomic,copy) void(^classTypeAction)(NSString *type);
 
 - (instancetype)initWithFrame:(CGRect)frame style:(HeaderStyle)style;
 

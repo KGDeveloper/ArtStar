@@ -42,6 +42,8 @@
 #import "KGUserInfo.h"
 #import "KGSearchBarTF.h"
 #import "KGQiniuUploadManager.h"
+#import "CommuntityHttpsDefine.h"
+#import "MineHttpsDefine.h"
 
 #endif
 

@@ -7,6 +7,7 @@
 //
 
 #import "FriendsDetailZansCell.h"
+#import "FriendsTalentsCommentModel.h"
 
 @interface FriendsDetailZansCell ()
 
@@ -60,7 +61,8 @@
     _headerImageScroll.contentSize = CGSizeMake(30*zansArr.count + (zansArr.count - 1)*15, 30);
     for (int i = 0; i < zansArr.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(30*i + 15*i, 0, 30, 30)];
-        imageView.image = Image(zansArr[i]);
+        NSDictionary *dic = zansArr[i];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
         imageView.layer.cornerRadius = 15;
         imageView.layer.masksToBounds = YES;
         [_headerImageScroll addSubview:imageView];
