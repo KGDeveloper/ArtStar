@@ -31,7 +31,10 @@
 @property (nonatomic,copy) NSString *hh;
 @property (nonatomic,copy) NSString *pjsum;
 @property (nonatomic,copy) NSString *showname;
-@property (nonatomic,copy) NSString *worksList;
+/**
+ 展览介绍图
+ */
+@property (nonatomic,copy) NSArray *worksList;
 @property (nonatomic,copy) NSString *showplace;
 @property (nonatomic,copy) NSString *pingfen;
 @property (nonatomic,copy) NSString *relatedList;

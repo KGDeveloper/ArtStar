@@ -96,7 +96,7 @@
 }
 
 - (void)createData{
-    KGRequestNetWorking postWothUrl:<#(NSString *)#> parameters:<#(NSDictionary *)#> succ:<#^(id result)succ#> fail:<#^(NSError *error)fail#>
+    
 }
 
 - (void)didReceiveMemoryWarning {

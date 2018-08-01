@@ -10,4 +10,6 @@
 
 @interface CommunityExhibitionDetailVC : BaseVC
 
+@property (nonatomic,copy) NSString *ID;
+
 @end

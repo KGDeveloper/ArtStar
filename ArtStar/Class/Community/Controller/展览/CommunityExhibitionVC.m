@@ -11,6 +11,7 @@
 #import "MusicPerformanceView.h"
 #import "PerformanceDetailVC.h"
 #import "CommunityExhibitionModel.h"
+#import "CommunityExhibitionDetailVC.h"
 
 @interface CommunityExhibitionVC ()<UITextFieldDelegate>
 
@@ -80,7 +81,7 @@
         _performanceView = [[MusicPerformanceView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
         // TODO: --点击cell进行页面跳转--
         _performanceView.pushToDetaialVC = ^(NSString *ID) {
-            PerformanceDetailVC *vc = [[PerformanceDetailVC alloc]init];
+            CommunityExhibitionDetailVC *vc = [[CommunityExhibitionDetailVC alloc]init];
             vc.ID = ID;
             [mySelf pushNoTabBarViewController:vc animated:YES];
         };
