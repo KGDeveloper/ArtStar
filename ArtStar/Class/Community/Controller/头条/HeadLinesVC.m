@@ -28,7 +28,7 @@
 @end
 
 @implementation HeadLinesVC
-
+// MARK: --搜索框--
 - (void)setSearchBar{
     _searchTF = [[KGSearchBarTF alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth - 75, 30)];
     _searchTF.placeholder = @"搜索";
@@ -42,11 +42,10 @@
     _searchTF.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
     [self setNavTitleView:_searchTF];
 }
-
+// MARK: --导航栏右侧按钮--
 - (void)rightNavBtuAction:(UIButton *)sender{
     [self pushNoTabBarViewController:[[MIneMessageVC alloc]init] animated:YES];
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
@@ -69,14 +68,16 @@
     //:--顶部滚动条--
     [self setTopView];
 }
-
+// MARK: --创建顶部滚动视图--
 - (void)setTopView{
     __weak typeof(self) mySelf = self;
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
     scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影",@"图书",@"餐饮",@"摄影",@"文学"];
+    // !!!: --右侧筛选按钮点击事件--
     scrollerView.rightAction = ^(NSString *title) {
         
     };
+    // !!!: --标题按钮点击事件--
     scrollerView.titleAction = ^(NSString *title) {
         if ([title isEqualToString:@"全部"]) {
             mySelf.typeName = @"";
@@ -91,15 +92,17 @@
     };
     [self.view addSubview:scrollerView];
 }
-
+// MARK: --创建数据加载界面--
 - (void)setViewUI{
     _headLinesView = [[HeadlinesView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
     __weak typeof(self) mySelf = self;
+    // !!!: --点击新闻跳转详情页--
     _headLinesView.pushViewController = ^(NSString *ID) {
         MovieNewsDetaialVC *vc = [[MovieNewsDetaialVC alloc]init];
         vc.ID = ID;
         [mySelf pushNoTabBarViewController:vc animated:YES];
     };
+    // !!!: --下拉刷新以及上拉加载更多--
     _headLinesView.requestNewData = ^(NSString *type) {
         if ([type isEqualToString:@"下拉"]) {
             mySelf.page = 0;
@@ -110,6 +113,7 @@
             [mySelf createDataArr];
         }
     };
+    // !!!: --关闭新闻--
     _headLinesView.closeNewsWithReson = ^(NSArray *resonArr,NSString *ID) {
         [mySelf requestCloseNews:resonArr nid:ID];
     };
@@ -151,6 +155,7 @@
     }];
     
 }
+// MARK: --拉取顶部5条滚动新闻--
 - (void)createHeaderData{
     __weak typeof(self) weakSelf = self;
     [KGRequestNetWorking postWothUrl:hotnews parameters:@{@"uid":[KGUserInfo shareInterace].userID} succ:^(id result) {
@@ -161,7 +166,7 @@
         
     }];
 }
-
+// MARK: --改变textfield的键盘监听事件，弹出搜索页面--
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (textField == _searchTF) {
         [_searchTF resignFirstResponder];
@@ -170,14 +175,16 @@
         self.searchView.historyArr = _hoistryArr;
     }
 }
-
+// MARK: --搜索页面--
 - (KGSearchBarAndSearchView *)searchView{
     if (!_searchView) {
         _searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         __weak typeof(self) mySelf = self;
+        // !!!: --搜索新闻--
         _searchView.searchResult = ^(NSString *result) {
             [mySelf createNewsData:result];
         };
+        // !!!: --点击搜索历史，直接快速搜索--
         _searchView.clickSearchTitle = ^(NSString *title) {
             [mySelf createNewsData:title];
         };

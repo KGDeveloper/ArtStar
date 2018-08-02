@@ -30,7 +30,7 @@
 /**
  评分最高
  */
-@property (nonatomic,copy) NSString *commentmax;
+@property (nonatomic,copy) NSDictionary *commentmax;
 @property (nonatomic,copy) NSString *mm;
 @property (nonatomic,copy) NSString *day;
 /**
