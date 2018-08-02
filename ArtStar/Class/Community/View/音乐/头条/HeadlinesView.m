@@ -13,9 +13,21 @@
 
 @interface HeadlinesView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,HeadLinesTableViewCellDelagate,CommunityShieldingViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
+/**
+ 新闻加载列表
+ */
 @property (nonatomic,strong) UITableView *listView;
+/**
+ 顶部新闻滚动视图以及页码
+ */
 @property (nonatomic,strong) HeaderScrollAndPageView *pageView;
+/**
+ 新闻加载列表头视图
+ */
 @property (nonatomic,strong) UIView *headerView;
+/**
+ 新闻屏蔽页
+ */
 @property (nonatomic,strong) CommunityShieldingView *shieldingView;
 
 @end
