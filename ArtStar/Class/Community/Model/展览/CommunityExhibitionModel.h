@@ -59,7 +59,7 @@
 /**
  对展馆的评价总数
  */
-@property (nonatomic,copy) NSString *pjsum;
+@property (nonatomic,copy) NSNumber *pjsum;
 /**
  展览标题
  */
@@ -112,6 +112,9 @@
  评价对象
  */
 @property (nonatomic,copy) NSString *pjComment;
+/**
+ 评论时间
+ */
 @property (nonatomic,copy) NSString *pltime;
 /**
  已经开始多少天
