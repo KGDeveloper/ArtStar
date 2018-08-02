@@ -52,6 +52,8 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self createHeaderData];
     //:--设置搜索框--
     [self setSearchBar];
     //:--初始化--
@@ -148,6 +150,16 @@
         
     }];
     
+}
+- (void)createHeaderData{
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:hotnews parameters:@{@"uid":[KGUserInfo shareInterace].userID} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            weakSelf.headLinesView.headerArr = result[@"data"];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

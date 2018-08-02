@@ -103,14 +103,19 @@
     _scrollerView.contentSize = CGSizeMake(ViewWidth(self)*imageArr.count, ViewHeight(_scrollerView));
     _pageControl.numberOfPages = imageArr.count;
     for (int i = 0; i < imageArr.count; i++) {
+        NSDictionary *dic = imageArr[i];
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(_scrollerView))];
-        imageView.image = Image(imageArr[i]);
+        [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"locationimg"]]];
         [_scrollerView addSubview:imageView];
     }
+    NSDictionary *titleDic = [imageArr firstObject];
+    _titleLab.text = titleDic[@"title"];
 }
 //MARK:--------------------------------headerView根据scrollview控制pagecontorl---------------------
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     int page = scrollView.contentOffset.x/ViewWidth(_scrollerView);
+    NSDictionary *dic = _imageArr[page];
+    _titleLab.text = dic[@"title"];
     _pageControl.currentPage = page;
 }
 

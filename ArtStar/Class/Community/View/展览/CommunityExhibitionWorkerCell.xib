@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="287" id="KGk-i7-Jjw" customClass="CommunityExhibitionWorkerCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="286.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w11-qk-o3v">
+                        <rect key="frame" x="15" y="0.0" width="384" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Lz8-Iu-C2C"/>
+                        </constraints>
+                    </scrollView>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Am-cb-D8D">
+                        <rect key="frame" x="15" y="50" width="384" height="168"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="168" id="Wex-on-AMi"/>
+                        </constraints>
+                    </scrollView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H33-UB-Glo">
+                        <rect key="frame" x="0.0" y="276.5" width="414" height="10"/>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="aM8-sH-7Kr"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="4Am-cb-D8D" secondAttribute="trailing" constant="15" id="11s-u1-Bd1"/>
+                    <constraint firstItem="H33-UB-Glo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8aA-LN-lJA"/>
+                    <constraint firstItem="w11-qk-o3v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="9LV-Xe-61B"/>
+                    <constraint firstAttribute="trailing" secondItem="H33-UB-Glo" secondAttribute="trailing" id="9pJ-Sf-Wf6"/>
+                    <constraint firstItem="4Am-cb-D8D" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Hvi-5q-BSf"/>
+                    <constraint firstAttribute="trailing" secondItem="w11-qk-o3v" secondAttribute="trailing" constant="15" id="ImU-p1-mpV"/>
+                    <constraint firstAttribute="bottom" secondItem="H33-UB-Glo" secondAttribute="bottom" id="MRk-Hz-yGa"/>
+                    <constraint firstItem="w11-qk-o3v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="qou-kM-GkH"/>
+                    <constraint firstItem="4Am-cb-D8D" firstAttribute="top" secondItem="w11-qk-o3v" secondAttribute="bottom" id="wiy-7X-2JZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="centerScrollView" destination="4Am-cb-D8D" id="6wS-Hz-JGw"/>
+                <outlet property="topScrollView" destination="w11-qk-o3v" id="bX6-vZ-hje"/>
+            </connections>
+            <point key="canvasLocation" x="81" y="175.5"/>
+        </tableViewCell>
+    </objects>
+</document>

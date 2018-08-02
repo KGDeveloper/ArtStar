@@ -8,6 +8,10 @@
 
 #import "CommunityExhibitionDetailVC.h"
 #import "CommunityExhibitionModel.h"
+#import "CommunityExhibitionDetailTimeAndAddressCell.h"
+#import "CommunityExhibitionIntrouceCell.h"
+#import "CommunityExhibitionProductionCell.h"
+#import "CommunityExhibitionWorkerCell.h"
 
 @interface CommunityExhibitionDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -44,46 +48,109 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self createData];
-    [self setDetailView];
 }
 // FIXME: --数据请求--
 - (void)createData{
     __weak typeof(self) weakSelf = self;
+    [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在加载中..." animated:YES];
     [KGRequestNetWorking postWothUrl:selectShowBySid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"id":_ID,@"query":@{@"page":@"0",@"rows":@"5"}} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf setDetailView];
         weakSelf.model = [CommunityExhibitionModel mj_objectWithKeyValues:result];
-        [weakSelf createScrollViewImageAndButtonWithArray:weakSelf.model.worksList];
+        [weakSelf createScrollViewImageAndButtonWithArray:weakSelf.model.imgList];
         [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 250, 30) title:weakSelf.model.showname image:Image(@"back")];
         [weakSelf.detaiView reloadData];
     } fail:^(NSError *error) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD bwm_showTitle:@"加载失败，请退出重新请求！" toView:weakSelf.view hideAfter:2];
     }];
 }
 // FIXME: --详情页加载数据视图--
 - (void)setDetailView{
     _detaiView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
-//    [<#UITableView#> registerNib:<#(nullable UINib *)#> forCellReuseIdentifier:<#(nonnull NSString *)#>];
-//    [<#UITableView#> registerClass:<#(nullable Class)#> forCellReuseIdentifier:<#(nonnull NSString *)#>];
+    [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionDetailTimeAndAddressCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionDetailTimeAndAddressCell"];
+    [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionIntrouceCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionIntrouceCell"];
+    [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionProductionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionProductionCell"];
+    [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionWorkerCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionWorkerCell"];
     _detaiView.delegate = self;
     _detaiView.dataSource = self;
     _detaiView.bounces = NO;
+    _detaiView.showsVerticalScrollIndicator = NO;
+    _detaiView.showsHorizontalScrollIndicator = NO;
     _detaiView.tableHeaderView = [self headerViewAddScrollView];
     _detaiView.tableFooterView = TabLeViewFootView;
+    _detaiView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_detaiView];
 }
 // MARK: --UITableViewDelegate--
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        return [TransformChineseToPinying heightWithText:_model.showtime font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight] + 210;
+    }else if (indexPath.row == 1){
+        return 165;
+    }else if (indexPath.row == 2){
+        return 185;
+    }else if (indexPath.row == 3){
+        return 246;
+    }
     return 10;
 }
 // MARK :--UITableViewDataSource--
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 9;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+    if (indexPath.row == 0) {
+        CommunityExhibitionDetailTimeAndAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionDetailTimeAndAddressCell" forIndexPath:indexPath];
+        cell.titleLab.text = _model.showname;
+        if ([_model.avgpingfen doubleValue] == 0.0) {
+            [cell changeImageWithScoreNumber:0.0];
+        }else{
+            [cell changeImageWithScoreNumber:[_model.avgpingfen doubleValue]];
+        }
+        cell.scoreLab.text = [NSString stringWithFormat:@"%.1f",[_model.avgpingfen doubleValue]];
+        NSData *timeData = [_model.showtime dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *error = nil;
+        NSArray *timeArr = [NSJSONSerialization JSONObjectWithData:timeData options:NSJSONReadingMutableContainers error:&error];
+        NSString *timeStr = [timeArr firstObject];
+        for (int i = 1; i < timeArr.count; i++) {
+            timeStr = [NSString stringWithFormat:@"%@\n%@",timeStr,timeArr[i]];
+        }
+        cell.timeViewHeight.constant = [TransformChineseToPinying heightWithText:_model.showtime font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight];
+        cell.timeLab.text = timeStr;
+        cell.orgzanizationLab.text = _model.showplace;
+        cell.addressLab.text = _model.showaddress;
+        cell.hostUnitLab.text = _model.hostunit;
+        if (_model.showprice == nil) {
+            cell.priceLab.text = @"暂无价格";
+        }else{
+            cell.priceLab.text = _model.showprice;
+        }
+        return cell;
+    }else if (indexPath.row == 1){
+        CommunityExhibitionIntrouceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionIntrouceCell" forIndexPath:indexPath];
+        cell.detailLab.attributedText = [TransformChineseToPinying string:[NSString stringWithFormat:@"%@%@",@"简介：",_model.recommend] font:SYFont(13) space:10];
+        return cell;
+    }else if (indexPath.row == 2){
+        CommunityExhibitionProductionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionProductionCell" forIndexPath:indexPath];
+        if (_model.worksList.count > 0) {
+            cell.productionLab.text = [NSString stringWithFormat:@"作品介绍（%lu）",(unsigned long)_model.worksList.count];
+            [cell addProductionToScrollViewWithArray:_model.worksList];
+        }else{
+            cell.productionLab.text = @"作品介绍（0）";
+        }
+        return cell;
+    }else if (indexPath.row == 3){
+        CommunityExhibitionWorkerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionWorkerCell" forIndexPath:indexPath];
+        [cell changeScrollViewWithArray:_model.artistList];
+        return cell;
+    }else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+        }
+        return cell;
     }
-    return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

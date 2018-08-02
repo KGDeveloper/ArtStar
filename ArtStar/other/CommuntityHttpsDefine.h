@@ -129,5 +129,11 @@
  @return 根据展览id查看展览详情
  */
 #define selectShowBySid [serverIP stringByAppendingString:@"community/selectShowBySid"]
+/**
+ 热搜新闻5条
+
+ @return 热搜新闻5条
+ */
+#define hotnews [serverIP stringByAppendingString:@"community/hotnews"]
 
 #endif /* CommuntityHttpsDefine_h */

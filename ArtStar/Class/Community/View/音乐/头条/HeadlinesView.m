@@ -66,7 +66,6 @@
     _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(self),ViewWidth(self)/750*500 + 50)];
     _headerView.backgroundColor = Color_fafafa;
     _pageView = [[HeaderScrollAndPageView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(_headerView), ViewHeight(_headerView) - 10) style:HeaderStyleHeadLines];
-    _pageView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
     [_headerView addSubview:_pageView];
     
     return _headerView;
@@ -157,6 +156,10 @@
         }
     }
     return nil;
+}
+- (void)setHeaderArr:(NSArray *)headerArr{
+    _headerArr = headerArr;
+    _pageView.imageArr = headerArr;
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{

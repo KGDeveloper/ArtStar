@@ -14,6 +14,7 @@
 @property (nonatomic,copy) void(^requestNewData)(NSString *type);
 @property (nonatomic,copy) void(^closeNewsWithReson)(NSArray *resonArr,NSString *ID);
 @property (nonatomic,copy) NSArray *dataArr;
+@property (nonatomic,copy) NSArray *headerArr;
 
 - (void)showHeaderView;
 - (void)hideHeaderView;
