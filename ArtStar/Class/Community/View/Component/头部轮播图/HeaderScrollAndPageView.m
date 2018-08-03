@@ -104,12 +104,23 @@
     _pageControl.numberOfPages = imageArr.count;
     for (int i = 0; i < imageArr.count; i++) {
         NSDictionary *dic = imageArr[i];
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(_scrollerView))];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"locationimg"]]];
-        [_scrollerView addSubview:imageView];
+        
+        UIButton *imageBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+        imageBtu.frame = CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(_scrollerView));
+        imageBtu.backgroundColor = ImageBackColor;
+        imageBtu.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [imageBtu setImageWithURL:[NSURL URLWithString:[[dic[@"locationimg"] componentsSeparatedByString:@"?"] firstObject]] forState:UIControlStateNormal placeholder:Image(@"图片加载失败")];
+        [imageBtu addTarget:self action:@selector(imageDicSelect:) forControlEvents:UIControlEventTouchUpInside];
+        imageBtu.tag = [dic[@"id"] integerValue];
+        [_scrollerView addSubview:imageBtu];
     }
     NSDictionary *titleDic = [imageArr firstObject];
     _titleLab.text = titleDic[@"title"];
+}
+- (void)imageDicSelect:(UIButton *)sender{
+    if (self.selectImageLoadNewsDetailWithID) {
+        self.selectImageLoadNewsDetailWithID([NSString stringWithFormat:@"%ld",(long)sender.tag]);
+    }
 }
 //MARK:--------------------------------headerView根据scrollview控制pagecontorl---------------------
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

@@ -149,7 +149,8 @@
             [norBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
         }
     }
-    _resonLab.text = @"已举报";
+    _resonLab.text = @"已举报  淫秽信息";
+    _resonTV.text = @"";
     _report.frame = CGRectMake(0, ViewHeight(self) - 315,ViewWidth(self), 315);
     _resonTV.frame = CGRectMake(25, ViewHeight(_report) - 45, ViewWidth(self) - 50,0);
     [_talkBtu setImage:Image(@"report open") forState:UIControlStateNormal];
@@ -157,7 +158,12 @@
     _lowline.hidden = YES;
 }
 - (void)finishClick{
-    
+    if ([self.delegate respondsToSelector:@selector(sendReportResonToServer:)]) {
+        [self.delegate sendReportResonToServer:_resonLab.text];
+    }
+    _resonTV.text = @"";
+    _resonLab.text = @"已举报  淫秽信息";
+    self.hidden = YES;
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     self.hidden = YES;
@@ -168,7 +174,10 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     _report.frame = CGRectMake(0, ViewHeight(self) - 380,ViewWidth(self), 380);
 }
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//    return YES;
+//}
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     _resonLab.text = [NSString stringWithFormat:@"已举报  %@",textField.text];
     return YES;
 }

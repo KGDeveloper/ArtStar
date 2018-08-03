@@ -39,10 +39,10 @@
     [_topImage sd_setImageWithURL:[NSURL URLWithString:model.locationimg]];
     _titleLab.text = model.title;
     _nameLab.text = model.sitename;
-    if (model.zantype.integerValue == 0) {
-        [_zansBtu setImage:Image(@"点赞") forState:UIControlStateNormal];
-    }else{
+    if (model.zantype.integerValue == 1) {
         [_zansBtu setImage:Image(@"点赞选中") forState:UIControlStateNormal];
+    }else{
+        [_zansBtu setImage:Image(@"点赞") forState:UIControlStateNormal];
     }
     [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.goodsum.integerValue] forState:UIControlStateNormal];
     [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.plsum.integerValue] forState:UIControlStateNormal];

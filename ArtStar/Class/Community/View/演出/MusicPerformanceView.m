@@ -75,7 +75,7 @@
             weakSelf.classTypeAction(type);
         }
     };
-    _pageView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
+//    _pageView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
     [_headerView addSubview:_pageView];
     
     return _headerView;
@@ -124,6 +124,15 @@
 
 - (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
+    if (_dataArr.count == 0) {
+        _headerView.size = CGSizeMake(kScreenWidth, 0);
+        _pageView.hidden = YES;
+        _lietView.mj_footer.hidden = YES;
+    }else{
+        _headerView.size = CGSizeMake(ViewWidth(self), ViewWidth(self)/750*500 + 40 + 60);
+        _pageView.hidden = NO;
+        _lietView.mj_footer.hidden = NO;
+    }
     [_lietView.mj_header endRefreshing];
     [_lietView.mj_footer endRefreshing];
     [_lietView reloadData];

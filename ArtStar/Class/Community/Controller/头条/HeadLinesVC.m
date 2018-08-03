@@ -8,7 +8,7 @@
 
 #import "HeadLinesVC.h"
 #import "CommenityModel.h"
-#import "MovieNewsDetaialVC.h"
+#import "HeadLinesNewsDetailAndCommentVC.h"
 #import "CommenityHotSearchModel.h"
 #import "CommenityHoistorySearchModel.h"
 #import <objc/runtime.h>
@@ -58,7 +58,6 @@
     //:--初始化--
     _page = 0;
     _typeName = @"";
-    _dataArr = [NSMutableArray array];
     _hotArr = [NSMutableArray array];
     _hoistryArr = [NSMutableArray array];
     //:--搜索记录数据--
@@ -72,7 +71,7 @@
 - (void)setTopView{
     __weak typeof(self) mySelf = self;
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
-    scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影",@"图书",@"餐饮",@"摄影",@"文学"];
+    scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影",@"书籍",@"美食",@"摄影",@"文学",@"设计"];
     // !!!: --右侧筛选按钮点击事件--
     scrollerView.rightAction = ^(NSString *title) {
         
@@ -98,7 +97,7 @@
     __weak typeof(self) mySelf = self;
     // !!!: --点击新闻跳转详情页--
     _headLinesView.pushViewController = ^(NSString *ID) {
-        MovieNewsDetaialVC *vc = [[MovieNewsDetaialVC alloc]init];
+        HeadLinesNewsDetailAndCommentVC *vc = [[HeadLinesNewsDetailAndCommentVC alloc]init];
         vc.ID = ID;
         [mySelf pushNoTabBarViewController:vc animated:YES];
     };
@@ -130,7 +129,6 @@
     [KGRequestNetWorking postWothUrl:closeNewsByNid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"nid":model.ID,@"backname":backname} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             mySelf.page = 0;
-            [mySelf.dataArr removeAllObjects];
             [mySelf.headLinesView starRefrash];
         }
     } fail:^(NSError *error) {
@@ -142,6 +140,7 @@
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":_typeName,@"query":@{@"page":[NSString stringWithFormat:@"%ld",(long)self.page],@"rows":@"15"}} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
+            mySelf.dataArr = [NSMutableArray array];
             NSArray *dataArray = result[@"data"];
             for (int i = 0; i < dataArray.count; i++) {
                 NSDictionary *dic = dataArray[i];

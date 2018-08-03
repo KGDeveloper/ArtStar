@@ -52,7 +52,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%94%B5%E5%BD%B1/MoviesVC.m"
-                  timestampString = "554892702.201028"
+                  timestampString = "554977960.252787"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "218"
@@ -67,7 +67,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%94%B5%E5%BD%B1/MoviesVC.m"
-                  timestampString = "554892702.203923"
+                  timestampString = "554977960.255617"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "220"
@@ -116,7 +116,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AF%9D%E9%A2%98/CommunityThemeVC.m"
-                  timestampString = "554892702.218784"
+                  timestampString = "554977960.267413"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "101"
@@ -131,7 +131,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AF%9D%E9%A2%98/CommunityThemeVC.m"
-                  timestampString = "554892702.221598"
+                  timestampString = "554977960.270359"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "103"
@@ -154,6 +154,22 @@
             startingLineNumber = "102"
             endingLineNumber = "102"
             landmarkName = "-createHeadLineData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtStar/Class/Community/Controller/&#x5934;&#x6761;/HeadLinesVC.m"
+            timestampString = "554978132.928514"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "-createHeaderData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

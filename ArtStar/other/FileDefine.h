@@ -23,6 +23,7 @@
 #define Color_fafafa [UIColor colorWithHexString:@"#fafafa"]
 #define Color_Boy [UIColor colorWithHexString:@"#A9D9F6"]
 #define Color_Girl [UIColor colorWithHexString:@"#FFC4C4"]
+#define ImageBackColor [UIColor colorWithHexString:@"#f0f0f0"]
 
 #define ViewX(view) view.frame.origin.x
 #define ViewY(view) view.frame.origin.y

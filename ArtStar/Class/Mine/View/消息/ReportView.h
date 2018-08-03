@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ReportViewDelegate <NSObject>
+
+- (void)sendReportResonToServer:(NSString *)reson;
+
+@end
+
 @interface ReportView : UIView
+
+@property (nonatomic,weak) id<ReportViewDelegate>delegate;
 
 @end

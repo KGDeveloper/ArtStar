@@ -135,5 +135,11 @@
  @return 热搜新闻5条
  */
 #define hotnews [serverIP stringByAppendingString:@"community/hotnews"]
+/**
+ 新闻点赞接口
+
+ @return 新闻点赞接口
+ */
+#define diannews [serverIP stringByAppendingString:@"community/diannews"]
 
 #endif /* CommuntityHttpsDefine_h */

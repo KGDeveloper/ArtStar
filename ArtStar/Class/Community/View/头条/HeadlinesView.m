@@ -41,7 +41,7 @@
     }
     return self;
 }
-//MARK:---------------------------------------创建筛选view-----------------------------------------
+//MARK:--创建筛选view--
 - (CommunityShieldingView *)shieldingView{
     if (!_shieldingView) {
         _shieldingView = [[CommunityShieldingView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
@@ -50,7 +50,7 @@
     }
     return _shieldingView;
 }
-//MARK:---------------------------------------创建列表视图------------------------------------------
+//MARK:--创建列表视图--
 - (void)setUI{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(self), ViewHeight(self))];
     _listView.delegate = self;
@@ -73,20 +73,27 @@
     
     [_listView registerClass:[HeadLinesTableViewCell class] forCellReuseIdentifier:@"HeadLinesTableViewCell"];
 }
-//MARK:---------------------------------------创建头视图------------------------------------------
+//MARK:--创建头视图--
 - (UIView *)tableViewHeaderView{
     _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(self),ViewWidth(self)/750*500 + 50)];
     _headerView.backgroundColor = Color_fafafa;
     _pageView = [[HeaderScrollAndPageView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(_headerView), ViewHeight(_headerView) - 10) style:HeaderStyleHeadLines];
+    // !!!: --点击新闻轮播图，查看详情--
+    __weak typeof(self) weakSelf = self;
+    _pageView.selectImageLoadNewsDetailWithID = ^(NSString *ID) {
+        if (weakSelf.pushViewController) {
+            weakSelf.pushViewController(ID);
+        }
+    };
     [_headerView addSubview:_pageView];
     
     return _headerView;
 }
-//MARK:---------------------------------------dataSoucre------------------------------------------
+//MARK:--dataSoucre--
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataArr.count;
 }
-//MARK:---------------------------------------dataSoucre------------------------------------------
+//MARK:--dataSoucre--
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HeadLinesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLinesTableViewCell"];
     CommenityModel *model = _dataArr[indexPath.row];
@@ -145,10 +152,17 @@
     self.shieldingView.shieldingOrigin = [self convertRect:[_listView rectForRowAtIndexPath:[_listView indexPathForCell:cell]] toView:self].origin.y - _listView.contentOffset.y + 20 + NavTopHeight + 40;
 }
 - (void)touchCellButtonWithTitle:(NSString *)title cellIndex:(NSInteger)cellIndex{
+    __weak typeof(self) weakSelf = self;
+    CommenityModel *model = _dataArr[cellIndex];
     if ([title isEqualToString:@"分享"]) {
         
     }else if ([title isEqualToString:@"点赞"]){
-        
+        [MBProgressHUD showHUDAddedTo:self animated:YES];
+        [KGRequestNetWorking postWothUrl:diannews parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"nid":model.ID,@"zantype":model.zantype} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        }];
     }else if ([title isEqualToString:@"评论"]){
         
     }

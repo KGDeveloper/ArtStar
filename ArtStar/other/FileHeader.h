@@ -44,6 +44,7 @@
 #import "KGQiniuUploadManager.h"
 #import "CommuntityHttpsDefine.h"
 #import "MineHttpsDefine.h"
+#import "ReportView.h"
 
 #endif
 

@@ -493,6 +493,7 @@
 		28FDAC6720C1533200531597 /* MyselfWordWorksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FDAC6620C1533200531597 /* MyselfWordWorksView.m */; };
 		28FDAC6C20C1562D00531597 /* MyselfWordWorksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FDAC6A20C1562D00531597 /* MyselfWordWorksCell.m */; };
 		28FDAC6D20C1562D00531597 /* MyselfWordWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FDAC6B20C1562D00531597 /* MyselfWordWorksCell.xib */; };
+		5A05B063211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */; };
 		5A1A14322111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */; };
 		5A1A14332111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */; };
 		5A1C18FE2110020F00E6CCFF /* CommunityExhibitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C18FD2110020F00E6CCFF /* CommunityExhibitionModel.m */; };
@@ -1397,6 +1398,8 @@
 		28FDAC6920C1562D00531597 /* MyselfWordWorksCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfWordWorksCell.h; sourceTree = "<group>"; };
 		28FDAC6A20C1562D00531597 /* MyselfWordWorksCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselfWordWorksCell.m; sourceTree = "<group>"; };
 		28FDAC6B20C1562D00531597 /* MyselfWordWorksCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyselfWordWorksCell.xib; sourceTree = "<group>"; };
+		5A05B061211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadLinesNewsDetailAndCommentVC.h; sourceTree = "<group>"; };
+		5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadLinesNewsDetailAndCommentVC.m; sourceTree = "<group>"; };
 		5A1A142F2111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionDetailTimeAndAddressCell.h; sourceTree = "<group>"; };
 		5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionDetailTimeAndAddressCell.m; sourceTree = "<group>"; };
 		5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionDetailTimeAndAddressCell.xib; sourceTree = "<group>"; };
@@ -1886,6 +1889,11 @@
 		2820B07920B55FB100EA1DAC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				286C902220BD01D5004EBA67 /* 机构 */,
+				28E33AB420BBCF4F009F9382 /* 演出 */,
+				287D2D0B20BEA8A000500156 /* 话题 */,
+				28BF33DC20C520EE00598919 /* 交友 */,
+				28E8E87920B69313002E10FC /* 头条 */,
 				5A1A142E2111C2010077AAE7 /* 展览 */,
 				282BA8FF20E33DCD00FF3119 /* 新闻详情 */,
 				2834849E20C66B1D00AB6E9A /* 读书 */,
@@ -2237,21 +2245,6 @@
 				2813DB5520C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.m */,
 				2807C76B20E1EA85007C1740 /* YourFriendsCenterVC.h */,
 				2807C76C20E1EA85007C1740 /* YourFriendsCenterVC.m */,
-			);
-			path = "音乐人";
-			sourceTree = "<group>";
-		};
-		284C8D6920BFA47100487225 /* 音乐人 */ = {
-			isa = PBXGroup;
-			children = (
-				284C8D6A20BFA4A100487225 /* MusicMusiciansView.h */,
-				284C8D6B20BFA4A100487225 /* MusicMusiciansView.m */,
-				2807C77020E1EEA0007C1740 /* MyselfCenterYourFriendsView.h */,
-				2807C77120E1EEA0007C1740 /* MyselfCenterYourFriendsView.m */,
-				2807C76E20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib */,
-				28D09E0720C00C4400FA45A2 /* 资料中心 */,
-				284C8D7620BFC7B700487225 /* 筛选 */,
-				284C8D6D20BFA5CB00487225 /* Cell */,
 			);
 			path = "音乐人";
 			sourceTree = "<group>";
@@ -3084,6 +3077,8 @@
 			children = (
 				28E33AAD20BBCB05009F9382 /* HeadLinesVC.h */,
 				28E33AAE20BBCB05009F9382 /* HeadLinesVC.m */,
+				5A05B061211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.h */,
+				5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */,
 			);
 			path = "头条";
 			sourceTree = "<group>";
@@ -3091,12 +3086,14 @@
 		28E33AB320BBCF3F009F9382 /* 音乐 */ = {
 			isa = PBXGroup;
 			children = (
-				28BF33DC20C520EE00598919 /* 交友 */,
-				284C8D6920BFA47100487225 /* 音乐人 */,
-				287D2D0B20BEA8A000500156 /* 话题 */,
-				286C902220BD01D5004EBA67 /* 机构 */,
-				28E33AB420BBCF4F009F9382 /* 演出 */,
-				28E8E87920B69313002E10FC /* 头条 */,
+				284C8D6A20BFA4A100487225 /* MusicMusiciansView.h */,
+				284C8D6B20BFA4A100487225 /* MusicMusiciansView.m */,
+				2807C77020E1EEA0007C1740 /* MyselfCenterYourFriendsView.h */,
+				2807C77120E1EEA0007C1740 /* MyselfCenterYourFriendsView.m */,
+				2807C76E20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib */,
+				28D09E0720C00C4400FA45A2 /* 资料中心 */,
+				284C8D7620BFC7B700487225 /* 筛选 */,
+				284C8D6D20BFA5CB00487225 /* Cell */,
 			);
 			path = "音乐";
 			sourceTree = "<group>";
@@ -4315,6 +4312,7 @@
 				A82ED36920943AC40066EA5E /* BaseVC.m in Sources */,
 				28C7756520AD6F9B001F472B /* FriendsVC.m in Sources */,
 				A82ED3CF209472670066EA5E /* TabBarVC.m in Sources */,
+				5A05B063211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m in Sources */,
 				287D7D4720EA127A00AD749E /* MyselfWorksDetaialVC.m in Sources */,
 				28A6CA1420D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.m in Sources */,
 				2814620B20B3E6D7000C5E47 /* FriendsDetailScrollView.m in Sources */,

@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger,HeaderStyle){
 
 @property (nonatomic,copy) NSArray *imageArr;
 @property (nonatomic,copy) void(^classTypeAction)(NSString *type);
+@property (nonatomic,copy) void(^selectImageLoadNewsDetailWithID)(NSString *ID);
 
 - (instancetype)initWithFrame:(CGRect)frame style:(HeaderStyle)style;
 
