@@ -495,6 +495,11 @@
 		28FDAC6D20C1562D00531597 /* MyselfWordWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FDAC6B20C1562D00531597 /* MyselfWordWorksCell.xib */; };
 		5A05B063211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */; };
 		5A05B0AE21145A9900D1F876 /* ReleaseTaskVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B0AD21145A9900D1F876 /* ReleaseTaskVC.m */; };
+		5A05B0B12114619700D1F876 /* ReleaseTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B0B02114619700D1F876 /* ReleaseTaskView.m */; };
+		5A05B0B5211463AE00D1F876 /* ReleaseTaskWriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B0B3211463AE00D1F876 /* ReleaseTaskWriteCell.m */; };
+		5A05B0B6211463AE00D1F876 /* ReleaseTaskWriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A05B0B4211463AE00D1F876 /* ReleaseTaskWriteCell.xib */; };
+		5A05B0BA2114676C00D1F876 /* ReleaseTaskIntrduiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B0B82114676C00D1F876 /* ReleaseTaskIntrduiceCell.m */; };
+		5A05B0BB2114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A05B0B92114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib */; };
 		5A1A14322111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */; };
 		5A1A14332111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */; };
 		5A1C18FE2110020F00E6CCFF /* CommunityExhibitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C18FD2110020F00E6CCFF /* CommunityExhibitionModel.m */; };
@@ -1403,6 +1408,14 @@
 		5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadLinesNewsDetailAndCommentVC.m; sourceTree = "<group>"; };
 		5A05B0AC21145A9900D1F876 /* ReleaseTaskVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskVC.h; sourceTree = "<group>"; };
 		5A05B0AD21145A9900D1F876 /* ReleaseTaskVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskVC.m; sourceTree = "<group>"; };
+		5A05B0AF2114619700D1F876 /* ReleaseTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskView.h; sourceTree = "<group>"; };
+		5A05B0B02114619700D1F876 /* ReleaseTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskView.m; sourceTree = "<group>"; };
+		5A05B0B2211463AE00D1F876 /* ReleaseTaskWriteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskWriteCell.h; sourceTree = "<group>"; };
+		5A05B0B3211463AE00D1F876 /* ReleaseTaskWriteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskWriteCell.m; sourceTree = "<group>"; };
+		5A05B0B4211463AE00D1F876 /* ReleaseTaskWriteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReleaseTaskWriteCell.xib; sourceTree = "<group>"; };
+		5A05B0B72114676C00D1F876 /* ReleaseTaskIntrduiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskIntrduiceCell.h; sourceTree = "<group>"; };
+		5A05B0B82114676C00D1F876 /* ReleaseTaskIntrduiceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskIntrduiceCell.m; sourceTree = "<group>"; };
+		5A05B0B92114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReleaseTaskIntrduiceCell.xib; sourceTree = "<group>"; };
 		5A1A142F2111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionDetailTimeAndAddressCell.h; sourceTree = "<group>"; };
 		5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionDetailTimeAndAddressCell.m; sourceTree = "<group>"; };
 		5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionDetailTimeAndAddressCell.xib; sourceTree = "<group>"; };
@@ -3802,6 +3815,14 @@
 		5A05B0A921145A4900D1F876 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5A05B0AF2114619700D1F876 /* ReleaseTaskView.h */,
+				5A05B0B02114619700D1F876 /* ReleaseTaskView.m */,
+				5A05B0B72114676C00D1F876 /* ReleaseTaskIntrduiceCell.h */,
+				5A05B0B82114676C00D1F876 /* ReleaseTaskIntrduiceCell.m */,
+				5A05B0B92114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib */,
+				5A05B0B2211463AE00D1F876 /* ReleaseTaskWriteCell.h */,
+				5A05B0B3211463AE00D1F876 /* ReleaseTaskWriteCell.m */,
+				5A05B0B4211463AE00D1F876 /* ReleaseTaskWriteCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4353,6 +4374,7 @@
 				28F996A720A43E2600678494 /* ZLPhotoBrowser.bundle in Resources */,
 				5A1A14332111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib in Resources */,
 				2807C76A20E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib in Resources */,
+				5A05B0B6211463AE00D1F876 /* ReleaseTaskWriteCell.xib in Resources */,
 				28FDAC4D20C11DE900531597 /* TheEndCell.xib in Resources */,
 				283EBAD320CF6A3F006C28C0 /* MineWordLoveFoodsCell.xib in Resources */,
 				286C904A20BD464F004EBA67 /* MusicPhotosCell.xib in Resources */,
@@ -4364,6 +4386,7 @@
 				28577B6220D0CA770082075D /* MineChooseMyHomeCell.xib in Resources */,
 				2875DAA520D3BD1A00D6CAFE /* MineTheIdentityTableViewCell.xib in Resources */,
 				28F996A820A43E2600678494 /* ZLPhotoActionSheet.xib in Resources */,
+				5A05B0BB2114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib in Resources */,
 				287D2CEC20BE4EB400500156 /* HotMoviesCell.xib in Resources */,
 				283482C720DC97960026DD83 /* MapTypePlist.plist in Resources */,
 				282975D82109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.xib in Resources */,
@@ -4868,6 +4891,7 @@
 				2834849020C63E0100AB6E9A /* CommunityVideoVC.m in Sources */,
 				28A3DC7B20A05AA700FEDD62 /* TalentVC.m in Sources */,
 				28E8E87C20B69342002E10FC /* HeadlinesView.m in Sources */,
+				5A05B0B12114619700D1F876 /* ReleaseTaskView.m in Sources */,
 				281DF6F220D251C20086030E /* MineCollectionHeaderScrollView.m in Sources */,
 				28D09E0A20C00C6B00FA45A2 /* MyselfCenterHeaderView.m in Sources */,
 				28F9969920A43E2600678494 /* ZLBigImageCell.m in Sources */,
@@ -4886,6 +4910,7 @@
 				2868409520B2B4EC00441926 /* ChangeTextViewTextStyle.m in Sources */,
 				28E8E88720B6A8D0002E10FC /* HeadLinesDetailVC.m in Sources */,
 				28F996A120A43E2600678494 /* ZLPlayer.m in Sources */,
+				5A05B0B5211463AE00D1F876 /* ReleaseTaskWriteCell.m in Sources */,
 				2887886220F8AAEA0025515A /* MineMyWordsModel.m in Sources */,
 				287D7D4A20EA1C4000AD749E /* FoodDetailVC.m in Sources */,
 				281DF6FA20D257EE0086030E /* MineCollectionInstitutionViewCell.m in Sources */,
@@ -4900,6 +4925,7 @@
 				2820B08A20B57CEA00EA1DAC /* CommunityShieldingView.m in Sources */,
 				2870B74020C69EEC00133D1A /* BuyBooksCell.m in Sources */,
 				2820B07420B5467000EA1DAC /* FriendsPlayVideoView.m in Sources */,
+				5A05B0BA2114676C00D1F876 /* ReleaseTaskIntrduiceCell.m in Sources */,
 				28A6C9F720D8F18A00ECBF4F /* MineSetUpChangePhoneTableViewCell.m in Sources */,
 				28577B6520D0F7440082075D /* MineMySelfWordVC.m in Sources */,
 				286C905520BD61C3004EBA67 /* HotMoviesVC.m in Sources */,

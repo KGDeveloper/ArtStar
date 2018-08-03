@@ -25,6 +25,7 @@
 #import "VideoVC.h"
 #import "ThemeVC.h"
 #import "TalentVC.h"
+#import "ReleaseTaskVC.h"
 
 @interface ReleaseView ()
 //MARK:--顶部布局--
@@ -132,7 +133,7 @@
     //:--创建话题按钮--
     _camcareBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(100 + btuWidth * 3, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"任务" image:Image(@"任务")];
     _camcareBtu.action = ^(NSString *str) {
-//        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[ThemeVC alloc]init]] animated:YES completion:nil];
+        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[ReleaseTaskVC alloc]init]] animated:YES completion:nil];
     };
     [self addSubview:_camcareBtu];
     //:--创建底部直线--
