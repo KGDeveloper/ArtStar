@@ -494,6 +494,7 @@
 		28FDAC6C20C1562D00531597 /* MyselfWordWorksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FDAC6A20C1562D00531597 /* MyselfWordWorksCell.m */; };
 		28FDAC6D20C1562D00531597 /* MyselfWordWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FDAC6B20C1562D00531597 /* MyselfWordWorksCell.xib */; };
 		5A05B063211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */; };
+		5A05B0AE21145A9900D1F876 /* ReleaseTaskVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B0AD21145A9900D1F876 /* ReleaseTaskVC.m */; };
 		5A1A14322111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */; };
 		5A1A14332111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */; };
 		5A1C18FE2110020F00E6CCFF /* CommunityExhibitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C18FD2110020F00E6CCFF /* CommunityExhibitionModel.m */; };
@@ -1400,6 +1401,8 @@
 		28FDAC6B20C1562D00531597 /* MyselfWordWorksCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyselfWordWorksCell.xib; sourceTree = "<group>"; };
 		5A05B061211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadLinesNewsDetailAndCommentVC.h; sourceTree = "<group>"; };
 		5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadLinesNewsDetailAndCommentVC.m; sourceTree = "<group>"; };
+		5A05B0AC21145A9900D1F876 /* ReleaseTaskVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskVC.h; sourceTree = "<group>"; };
+		5A05B0AD21145A9900D1F876 /* ReleaseTaskVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskVC.m; sourceTree = "<group>"; };
 		5A1A142F2111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionDetailTimeAndAddressCell.h; sourceTree = "<group>"; };
 		5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionDetailTimeAndAddressCell.m; sourceTree = "<group>"; };
 		5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionDetailTimeAndAddressCell.xib; sourceTree = "<group>"; };
@@ -1543,22 +1546,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2804BE9B20E0953D007E33DE /* 达人 */ = {
-			isa = PBXGroup;
-			children = (
-				2804BE9C20E0955B007E33DE /* TelentTitleTableViewCell.h */,
-				2804BE9D20E0955B007E33DE /* TelentTitleTableViewCell.m */,
-				2804BE9E20E0955B007E33DE /* TelentTitleTableViewCell.xib */,
-				2804BEA120E09970007E33DE /* TlentIntroudceTableViewCell.h */,
-				2804BEA220E09970007E33DE /* TlentIntroudceTableViewCell.m */,
-				2804BEA320E09970007E33DE /* TlentIntroudceTableViewCell.xib */,
-				2804BEA620E09BD3007E33DE /* TalentPushPhotosTableViewCell.h */,
-				2804BEA720E09BD3007E33DE /* TalentPushPhotosTableViewCell.m */,
-				2804BEA820E09BD3007E33DE /* TalentPushPhotosTableViewCell.xib */,
-			);
-			path = "达人";
-			sourceTree = "<group>";
-		};
 		280601A320B7B6A80090254E /* ShrinkageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1571,6 +1558,11 @@
 		280601A720B7FF540090254E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				282BA90320E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.h */,
+				282BA90420E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m */,
+				28F0BC7220E5DA7C006A090A /* HeadLineImageNewsTableViewCell.h */,
+				28F0BC7320E5DA7C006A090A /* HeadLineImageNewsTableViewCell.m */,
+				28F0BC7420E5DA7C006A090A /* HeadLineImageNewsTableViewCell.xib */,
 				280601A820B7FF790090254E /* HeadLinesNormalCell.h */,
 				280601A920B7FF790090254E /* HeadLinesNormalCell.m */,
 				280601AA20B7FF790090254E /* HeadLinesNormalCell.xib */,
@@ -1595,13 +1587,9 @@
 		280601B920B81C270090254E /* 音乐 */ = {
 			isa = PBXGroup;
 			children = (
-				280601BA20B81C560090254E /* KGMusicVC.h */,
-				280601BB20B81C560090254E /* KGMusicVC.m */,
-				284C8D6820BFA44A00487225 /* 音乐人 */,
-				287D2D0A20BEA88900500156 /* 话题 */,
-				286C902D20BD2FB3004EBA67 /* 机构 */,
-				28E33AC520BBF448009F9382 /* 演出 */,
-				28E8E88420B6A8AD002E10FC /* 头条 */,
+				5A05B07E2114559400D1F876 /* Controller */,
+				5A05B07D2114558F00D1F876 /* Model */,
+				5A05B07C2114558700D1F876 /* View */,
 			);
 			path = "音乐";
 			sourceTree = "<group>";
@@ -1690,8 +1678,9 @@
 		281DF6D020D23A6E0086030E /* 收藏 */ = {
 			isa = PBXGroup;
 			children = (
-				281DF6EC20D250FB0086030E /* MineCollentionVC.h */,
-				281DF6ED20D250FB0086030E /* MineCollentionVC.m */,
+				5A05B09B2114583700D1F876 /* Controller */,
+				5A05B09A2114583300D1F876 /* Model */,
+				5A05B0992114582E00D1F876 /* View */,
 			);
 			path = "收藏";
 			sourceTree = "<group>";
@@ -1699,10 +1688,9 @@
 		281DF6D120D23A760086030E /* 积分 */ = {
 			isa = PBXGroup;
 			children = (
-				281DF6D820D23B040086030E /* MineIntegralVC.h */,
-				281DF6D920D23B040086030E /* MineIntegralVC.m */,
-				281DF6E420D24DBA0086030E /* MineIntegralDetailVC.h */,
-				281DF6E520D24DBA0086030E /* MineIntegralDetailVC.m */,
+				5A05B0982114580A00D1F876 /* Controller */,
+				5A05B0972114580500D1F876 /* Model */,
+				5A05B096211457FE00D1F876 /* View */,
 			);
 			path = "积分";
 			sourceTree = "<group>";
@@ -1710,8 +1698,9 @@
 		281DF6D220D23A890086030E /* 通讯录 */ = {
 			isa = PBXGroup;
 			children = (
-				281DF71F20D2700A0086030E /* MineTheAddressBookVC.h */,
-				281DF72020D2700A0086030E /* MineTheAddressBookVC.m */,
+				5A05B09E2114586200D1F876 /* Controller */,
+				5A05B09D2114585D00D1F876 /* Model */,
+				5A05B09C2114585700D1F876 /* View */,
 			);
 			path = "通讯录";
 			sourceTree = "<group>";
@@ -1719,8 +1708,9 @@
 		281DF6D320D23A930086030E /* 问题求助 */ = {
 			isa = PBXGroup;
 			children = (
-				28EC5F8220DA04000019D4C1 /* MineQuestionHelpVC.h */,
-				28EC5F8320DA04000019D4C1 /* MineQuestionHelpVC.m */,
+				5A05B095211457DD00D1F876 /* Controller */,
+				5A05B094211457D800D1F876 /* Model */,
+				5A05B093211457D300D1F876 /* View */,
 			);
 			path = "问题求助";
 			sourceTree = "<group>";
@@ -1728,8 +1718,9 @@
 		281DF6D420D23A9A0086030E /* 发布记录 */ = {
 			isa = PBXGroup;
 			children = (
-				2875DA6020D38F8A00D6CAFE /* MineReleaseHistoryVC.h */,
-				2875DA6120D38F8A00D6CAFE /* MineReleaseHistoryVC.m */,
+				5A05B0A12114588800D1F876 /* Controller */,
+				5A05B0A02114588300D1F876 /* Model */,
+				5A05B09F2114587F00D1F876 /* View */,
 			);
 			path = "发布记录";
 			sourceTree = "<group>";
@@ -1737,18 +1728,9 @@
 		281DF6D520D23AA10086030E /* 我的达人 */ = {
 			isa = PBXGroup;
 			children = (
-				2875DA8520D3AEE800D6CAFE /* MineTalentShowVC.h */,
-				2875DA8620D3AEE800D6CAFE /* MineTalentShowVC.m */,
-				2875DA8F20D3B60D00D6CAFE /* MineJoinTalentShowVC.h */,
-				2875DA9020D3B60D00D6CAFE /* MineJoinTalentShowVC.m */,
-				2875DA9D20D3BC0800D6CAFE /* MineTheIdentityAuthenticationVC.h */,
-				2875DA9E20D3BC0800D6CAFE /* MineTheIdentityAuthenticationVC.m */,
-				2875DAAB20D3C34500D6CAFE /* MineJoinAddBaseInfoVC.h */,
-				2875DAAC20D3C34500D6CAFE /* MineJoinAddBaseInfoVC.m */,
-				28A6C9C920D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.h */,
-				28A6C9CA20D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.m */,
-				28A6C9DE20D8DAD700ECBF4F /* MineMyselfTalentAuditVC.h */,
-				28A6C9DF20D8DAD700ECBF4F /* MineMyselfTalentAuditVC.m */,
+				5A05B0A6211458DC00D1F876 /* Controller */,
+				5A05B0A7211458E300D1F876 /* Model */,
+				5A05B0A5211458D700D1F876 /* View */,
 			);
 			path = "我的达人";
 			sourceTree = "<group>";
@@ -1756,12 +1738,9 @@
 		281DF6D620D23AAC0086030E /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
-				28A6C9E620D8E7F900ECBF4F /* MineSetUpTheAppVC.h */,
-				28A6C9E720D8E7F900ECBF4F /* MineSetUpTheAppVC.m */,
-				28A6CA0C20D90E4000ECBF4F /* 问题反馈 */,
-				28A6CA0820D9085900ECBF4F /* 修改密码 */,
-				28A6C9FA20D8F6B300ECBF4F /* 验证码认证 */,
-				28A6C9F920D8F6A800ECBF4F /* 密码认证 */,
+				5A05B0A4211458B500D1F876 /* Controller */,
+				5A05B0A3211458B000D1F876 /* Model */,
+				5A05B0A2211458AB00D1F876 /* View */,
 			);
 			path = "设置";
 			sourceTree = "<group>";
@@ -1771,43 +1750,6 @@
 			children = (
 			);
 			path = "我的店铺";
-			sourceTree = "<group>";
-		};
-		281DF6DB20D23C280086030E /* 积分 */ = {
-			isa = PBXGroup;
-			children = (
-				281DF6DC20D23C490086030E /* MineIntegralHeaderView.h */,
-				281DF6DD20D23C490086030E /* MineIntegralHeaderView.m */,
-				281DF6DF20D246270086030E /* MineIntegraltableViewCell.h */,
-				281DF6E020D246270086030E /* MineIntegraltableViewCell.m */,
-				281DF6E120D246270086030E /* MineIntegraltableViewCell.xib */,
-				281DF6E720D24EA40086030E /* MineIntegralDetailCell.h */,
-				281DF6E820D24EA40086030E /* MineIntegralDetailCell.m */,
-				281DF6E920D24EA40086030E /* MineIntegralDetailCell.xib */,
-			);
-			path = "积分";
-			sourceTree = "<group>";
-		};
-		281DF6EF20D2519C0086030E /* 收藏 */ = {
-			isa = PBXGroup;
-			children = (
-				281DF6F020D251C20086030E /* MineCollectionHeaderScrollView.h */,
-				281DF6F120D251C20086030E /* MineCollectionHeaderScrollView.m */,
-				281DF6F320D257310086030E /* MineCollectionInstitutionView.h */,
-				281DF6F420D257310086030E /* MineCollectionInstitutionView.m */,
-				281DF6FC20D25DE10086030E /* MineCollectionThemeView.h */,
-				281DF6FD20D25DE10086030E /* MineCollectionThemeView.m */,
-				281DF6FF20D25F3F0086030E /* MineCollectionExhibitionView.h */,
-				281DF70020D25F3F0086030E /* MineCollectionExhibitionView.m */,
-				281DF70720D2652A0086030E /* MineCollectionStarcircleView.h */,
-				281DF70820D2652A0086030E /* MineCollectionStarcircleView.m */,
-				281DF70F20D268EA0086030E /* MineControllerArticleView.h */,
-				281DF71020D268EA0086030E /* MineControllerArticleView.m */,
-				281DF71720D26D3C0086030E /* MineCollectionBookView.h */,
-				281DF71820D26D3C0086030E /* MineCollectionBookView.m */,
-				281DF6F620D257CE0086030E /* Cell */,
-			);
-			path = "收藏";
 			sourceTree = "<group>";
 		};
 		281DF6F620D257CE0086030E /* Cell */ = {
@@ -1832,22 +1774,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		281DF72220D270F10086030E /* 通讯录 */ = {
-			isa = PBXGroup;
-			children = (
-				281DF72320D2710E0086030E /* MineBookButtonView.h */,
-				281DF72420D2710E0086030E /* MineBookButtonView.m */,
-				281DF72720D27D7A0086030E /* MineBooksFriendsView.h */,
-				281DF72820D27D7A0086030E /* MineBooksFriendsView.m */,
-				281DF72A20D27DF40086030E /* MineBooksFocusView.h */,
-				281DF72B20D27DF40086030E /* MineBooksFocusView.m */,
-				281DF72D20D27E170086030E /* MineBooksFansView.h */,
-				281DF72E20D27E170086030E /* MineBooksFansView.m */,
-				2875DA5A20D35FA500D6CAFE /* Cell */,
-			);
-			path = "通讯录";
-			sourceTree = "<group>";
-		};
 		2820B06520B5452C00EA1DAC /* DXShareView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1861,71 +1787,6 @@
 				2820B06D20B5452C00EA1DAC /* DXShareView.h */,
 			);
 			path = DXShareView;
-			sourceTree = "<group>";
-		};
-		2820B07820B55FA900EA1DAC /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2820B07B20B55FDB00EA1DAC /* CommunityVC.h */,
-				2820B07C20B55FDB00EA1DAC /* CommunityVC.m */,
-				2834846A20C63C6600AB6E9A /* 电影 */,
-				2834846B20C63C7500AB6E9A /* 话题 */,
-				2834846C20C63C7A00AB6E9A /* 机构 */,
-				2834846D20C63C8000AB6E9A /* 交友 */,
-				2834846E20C63C8800AB6E9A /* 美食 */,
-				2834846F20C63C8D00AB6E9A /* 美术 */,
-				2834847020C63C9300AB6E9A /* 设计 */,
-				2834847120C63C9900AB6E9A /* 摄影 */,
-				2834847220C63C9F00AB6E9A /* 书籍 */,
-				28E33AAC20BBCAE8009F9382 /* 头条 */,
-				2834847320C63CA700AB6E9A /* 文学 */,
-				2834847420C63CB100AB6E9A /* 戏剧 */,
-				280601B920B81C270090254E /* 音乐 */,
-				2834847520C63CBA00AB6E9A /* 展览 */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		2820B07920B55FB100EA1DAC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				286C902220BD01D5004EBA67 /* 机构 */,
-				28E33AB420BBCF4F009F9382 /* 演出 */,
-				287D2D0B20BEA8A000500156 /* 话题 */,
-				28BF33DC20C520EE00598919 /* 交友 */,
-				28E8E87920B69313002E10FC /* 头条 */,
-				5A1A142E2111C2010077AAE7 /* 展览 */,
-				282BA8FF20E33DCD00FF3119 /* 新闻详情 */,
-				2834849E20C66B1D00AB6E9A /* 读书 */,
-				28E33AB320BBCF3F009F9382 /* 音乐 */,
-				28E8E88820B6AD33002E10FC /* 活动 */,
-				2820B07E20B5602000EA1DAC /* Component */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2820B07A20B55FB600EA1DAC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5A1C18FB211001CB00E6CCFF /* 展览 */,
-				287D7D5920ECD25700AD749E /* 头条 */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2820B07E20B5602000EA1DAC /* Component */ = {
-			isa = PBXGroup;
-			children = (
-				28283F6420E23AFD008D1224 /* 买票 */,
-				28FDAC3820C0F01A00531597 /* 个人中心顶部滚动条 */,
-				28E33AC020BBF0CD009F9382 /* 头部轮播图 */,
-				28E33ABF20BBF0B3009F9382 /* 屏蔽框 */,
-				28E33ABE20BBF099009F9382 /* 筛选框 */,
-				28E33ABD20BBF081009F9382 /* 顶部滚动条 */,
-				280601B020B802B40090254E /* 底部评论框 */,
-				28E8E87020B6653C002E10FC /* KGSearchView */,
-			);
-			path = Component;
 			sourceTree = "<group>";
 		};
 		28211C8120A58B76009C8E49 /* 预览 */ = {
@@ -1944,8 +1805,9 @@
 		28211C8520A593E5009C8E49 /* 预览 */ = {
 			isa = PBXGroup;
 			children = (
-				28211C8220A58BBD009C8E49 /* PreviewVC.h */,
-				28211C8320A58BBD009C8E49 /* PreviewVC.m */,
+				5A05B08A2114569500D1F876 /* Controller */,
+				5A05B0892114569100D1F876 /* Model */,
+				5A05B0882114568B00D1F876 /* View */,
 			);
 			path = "预览";
 			sourceTree = "<group>";
@@ -1959,63 +1821,15 @@
 			path = "买票";
 			sourceTree = "<group>";
 		};
-		282BA8FF20E33DCD00FF3119 /* 新闻详情 */ = {
-			isa = PBXGroup;
-			children = (
-				282BA90320E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.h */,
-				282BA90420E3639600FF3119 /* HeadLineNotTitleNewsTableViewCell.m */,
-				28F0BC7220E5DA7C006A090A /* HeadLineImageNewsTableViewCell.h */,
-				28F0BC7320E5DA7C006A090A /* HeadLineImageNewsTableViewCell.m */,
-				28F0BC7420E5DA7C006A090A /* HeadLineImageNewsTableViewCell.xib */,
-			);
-			path = "新闻详情";
-			sourceTree = "<group>";
-		};
 		282E071720C8D38300A9B2E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				282E071A20C8D3C600A9B2E1 /* MineHeaderView.h */,
-				282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */,
-				28EC5F8520DA06730019D4C1 /* 问题求助 */,
-				28A6C9E920D8E9FC00ECBF4F /* 设置 */,
-				2875DA8820D3B1D200D6CAFE /* 我的达人 */,
-				2875DA6320D392AE00D6CAFE /* 发布记录 */,
-				281DF72220D270F10086030E /* 通讯录 */,
-				281DF6EF20D2519C0086030E /* 收藏 */,
-				281DF6DB20D23C280086030E /* 积分 */,
-				28CA5BD520CE57C800D38F1F /* 个人名片 */,
-				282E073020C91DF400A9B2E1 /* 消息 */,
 				282E072620C90CB000A9B2E1 /* 顶部头视图组件 */,
 				282E072520C90C8D00A9B2E1 /* Cell */,
+				282E071A20C8D3C600A9B2E1 /* MineHeaderView.h */,
+				282E071B20C8D3C600A9B2E1 /* MineHeaderView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		282E071820C8D38900A9B2E1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				286A0A7820EF789B00F4EB17 /* 个人中心 */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		282E071920C8D38F00A9B2E1 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				A82ED3D3209476750066EA5E /* MineVC.h */,
-				A82ED3D4209476750066EA5E /* MineVC.m */,
-				281DF6D720D23AB30086030E /* 我的店铺 */,
-				281DF6D620D23AAC0086030E /* 设置 */,
-				281DF6D520D23AA10086030E /* 我的达人 */,
-				281DF6D420D23A9A0086030E /* 发布记录 */,
-				281DF6D320D23A930086030E /* 问题求助 */,
-				281DF6D220D23A890086030E /* 通讯录 */,
-				281DF6D120D23A760086030E /* 积分 */,
-				281DF6D020D23A6E0086030E /* 收藏 */,
-				282E072C20C911DA00A9B2E1 /* 消息 */,
-				28CA5BD120CE44D500D38F1F /* 个人名片 */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		282E072520C90C8D00A9B2E1 /* Cell */ = {
@@ -2042,36 +1856,9 @@
 		282E072C20C911DA00A9B2E1 /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
-				282E072D20C911F600A9B2E1 /* MIneMessageVC.h */,
-				282E072E20C911F600A9B2E1 /* MIneMessageVC.m */,
-				2807C76620E1DCD8007C1740 /* MineChatDetaialViewController.h */,
-				2807C76720E1DCD8007C1740 /* MineChatDetaialViewController.m */,
-				2804BEAE20E0DF12007E33DE /* MineSystemVC.h */,
-				2804BEAF20E0DF12007E33DE /* MineSystemVC.m */,
-				2874724E20CA676A004317A5 /* MsgTapCellHeaderPushFocusVC.h */,
-				2874724F20CA676A004317A5 /* MsgTapCellHeaderPushFocusVC.m */,
-				2874726520CA8094004317A5 /* MsgTapNoteVC.h */,
-				2874726620CA8094004317A5 /* MsgTapNoteVC.m */,
-			);
-			path = "消息";
-			sourceTree = "<group>";
-		};
-		282E073020C91DF400A9B2E1 /* 消息 */ = {
-			isa = PBXGroup;
-			children = (
-				2874726B20CA9111004317A5 /* ReportView.h */,
-				2874726C20CA9111004317A5 /* ReportView.m */,
-				282E073120C91E1700A9B2E1 /* MineMessageHeaderView.h */,
-				282E073220C91E1700A9B2E1 /* MineMessageHeaderView.m */,
-				2874724520CA5AF4004317A5 /* FocusView.h */,
-				2874724620CA5AF4004317A5 /* FocusView.m */,
-				2874726820CA8B6F004317A5 /* CancelFocusView.h */,
-				2874726920CA8B6F004317A5 /* CancelFocusView.m */,
-				2807C76920E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib */,
-				2874724820CA604A004317A5 /* 点击头像页面cell */,
-				287471E820CA313C004317A5 /* Cell */,
-				287D7D4220EA096400AD749E /* KGSearchChatHistoryView.h */,
-				287D7D4320EA096400AD749E /* KGSearchChatHistoryView.m */,
+				5A05B0902114573500D1F876 /* Controller */,
+				5A05B08F2114573100D1F876 /* Model */,
+				5A05B08E2114572C00D1F876 /* View */,
 			);
 			path = "消息";
 			sourceTree = "<group>";
@@ -2090,8 +1877,9 @@
 		2834846B20C63C7500AB6E9A /* 话题 */ = {
 			isa = PBXGroup;
 			children = (
-				2834847C20C63D6500AB6E9A /* CommunityThemeVC.h */,
-				2834847D20C63D6500AB6E9A /* CommunityThemeVC.m */,
+				5A05B0732114545900D1F876 /* Controller */,
+				5A05B0752114546800D1F876 /* Model */,
+				5A05B0742114546100D1F876 /* View */,
 			);
 			path = "话题";
 			sourceTree = "<group>";
@@ -2099,10 +1887,9 @@
 		2834846C20C63C7A00AB6E9A /* 机构 */ = {
 			isa = PBXGroup;
 			children = (
-				2834847F20C63D8600AB6E9A /* CommunityInstitutionsVC.h */,
-				2834848020C63D8600AB6E9A /* CommunityInstitutionsVC.m */,
-				287D7D4820EA1C4000AD749E /* FoodDetailVC.h */,
-				287D7D4920EA1C4000AD749E /* FoodDetailVC.m */,
+				5A05B072211453C500D1F876 /* Controller */,
+				5A05B071211453C000D1F876 /* Model */,
+				5A05B070211453BB00D1F876 /* View */,
 			);
 			path = "机构";
 			sourceTree = "<group>";
@@ -2110,8 +1897,9 @@
 		2834846D20C63C8000AB6E9A /* 交友 */ = {
 			isa = PBXGroup;
 			children = (
-				2834848220C63D9D00AB6E9A /* CommunityFriendsVC.h */,
-				2834848320C63D9D00AB6E9A /* CommunityFriendsVC.m */,
+				5A05B0762114549700D1F876 /* Controller */,
+				5A05B077211454A300D1F876 /* Model */,
+				5A05B078211454A900D1F876 /* View */,
 			);
 			path = "交友";
 			sourceTree = "<group>";
@@ -2155,14 +1943,9 @@
 		2834847220C63C9F00AB6E9A /* 书籍 */ = {
 			isa = PBXGroup;
 			children = (
-				2834849120C63E1100AB6E9A /* CommunityBooksVC.h */,
-				2834849220C63E1100AB6E9A /* CommunityBooksVC.m */,
-				2870B72F20C6879200133D1A /* ReadBooksHotVC.h */,
-				2870B73020C6879200133D1A /* ReadBooksHotVC.m */,
-				2870B73220C68BCB00133D1A /* ReadBooksDetailVC.h */,
-				2870B73320C68BCB00133D1A /* ReadBooksDetailVC.m */,
-				287D7D5620EC957C00AD749E /* ReadBooksWriteYourIdeaVC.h */,
-				287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */,
+				5A05B079211454F200D1F876 /* Controller */,
+				5A05B07B211454FD00D1F876 /* Model */,
+				5A05B07A211454F800D1F876 /* View */,
 			);
 			path = "书籍";
 			sourceTree = "<group>";
@@ -2188,29 +1971,18 @@
 		2834847520C63CBA00AB6E9A /* 展览 */ = {
 			isa = PBXGroup;
 			children = (
-				2834849A20C63E7D00AB6E9A /* CommunityExhibitionVC.h */,
-				2834849B20C63E7D00AB6E9A /* CommunityExhibitionVC.m */,
-				5AB355D721105E9C00E10353 /* CommunityExhibitionDetailVC.h */,
-				5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */,
+				5A05B06F2114538B00D1F876 /* Controller */,
+				5A05B06E2114538600D1F876 /* Model */,
+				5A05B06D2114538000D1F876 /* View */,
 			);
 			path = "展览";
-			sourceTree = "<group>";
-		};
-		2834849E20C66B1D00AB6E9A /* 读书 */ = {
-			isa = PBXGroup;
-			children = (
-				2834849F20C66CC300AB6E9A /* ReadBooksView.h */,
-				283484A020C66CC300AB6E9A /* ReadBooksView.m */,
-				283484A220C66D6700AB6E9A /* ReadIngRecommendView.h */,
-				283484A320C66D6700AB6E9A /* ReadIngRecommendView.m */,
-				283484A520C6755600AB6E9A /* Cell */,
-			);
-			path = "读书";
 			sourceTree = "<group>";
 		};
 		283484A520C6755600AB6E9A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				2825F6CA20B6B2AB0076B71B /* ActivityTableViewCell.h */,
+				2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */,
 				283484A620C6757800AB6E9A /* ReadBooksCell.h */,
 				283484A720C6757800AB6E9A /* ReadBooksCell.m */,
 				283484A820C6757800AB6E9A /* ReadBooksCell.xib */,
@@ -2228,25 +2000,6 @@
 				2813DB5120C78ACA004CD973 /* BooksYourLoveCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		284C8D6820BFA44A00487225 /* 音乐人 */ = {
-			isa = PBXGroup;
-			children = (
-				28D09E0420C00B2100FA45A2 /* MyselfCenterVC.h */,
-				28D09E0520C00B2100FA45A2 /* MyselfCenterVC.m */,
-				28FDAC3520C0EF9600531597 /* MyselfWordVC.h */,
-				28FDAC3620C0EF9600531597 /* MyselfWordVC.m */,
-				287D7D4520EA127A00AD749E /* MyselfWorksDetaialVC.h */,
-				287D7D4620EA127A00AD749E /* MyselfWorksDetaialVC.m */,
-				28BF33CB20C4EDA800598919 /* MyselfWordUploadingVC.h */,
-				28BF33CC20C4EDA800598919 /* MyselfWordUploadingVC.m */,
-				2813DB5420C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.h */,
-				2813DB5520C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.m */,
-				2807C76B20E1EA85007C1740 /* YourFriendsCenterVC.h */,
-				2807C76C20E1EA85007C1740 /* YourFriendsCenterVC.m */,
-			);
-			path = "音乐人";
 			sourceTree = "<group>";
 		};
 		284C8D6D20BFA5CB00487225 /* Cell */ = {
@@ -2327,25 +2080,6 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		286A0A7820EF789B00F4EB17 /* 个人中心 */ = {
-			isa = PBXGroup;
-			children = (
-				286A0A6B20EF185500F4EB17 /* MineMyselfCenterInfoModel.h */,
-				286A0A6C20EF185500F4EB17 /* MineMyselfCenterInfoModel.m */,
-				286A0A7520EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.h */,
-				286A0A7620EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.m */,
-				286A0A7920EF78F400F4EB17 /* MineCenterHometownModel.h */,
-				286A0A7A20EF78F400F4EB17 /* MineCenterHometownModel.m */,
-				28636D7820F4BCE900DE0926 /* MineSelfMyLabelsModel.h */,
-				28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */,
-				2847BC8320F60B090052EE19 /* MineSelfMyLabelsDetailModel.h */,
-				2847BC8420F60B090052EE19 /* MineSelfMyLabelsDetailModel.m */,
-				2887886020F8AAEA0025515A /* MineMyWordsModel.h */,
-				2887886120F8AAEA0025515A /* MineMyWordsModel.m */,
-			);
-			path = "个人中心";
-			sourceTree = "<group>";
-		};
 		286A2E8120DB785C00D3994C /* 引导页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2392,20 +2126,6 @@
 			path = "特色";
 			sourceTree = "<group>";
 		};
-		286C902220BD01D5004EBA67 /* 机构 */ = {
-			isa = PBXGroup;
-			children = (
-				286C902320BD01F9004EBA67 /* HotMoviesView.h */,
-				286C902420BD01F9004EBA67 /* HotMoviesView.m */,
-				286C902620BD06D3004EBA67 /* MusicInstitutionsView.h */,
-				286C902720BD06D3004EBA67 /* MusicInstitutionsView.m */,
-				287D2CF020BE583100500156 /* 热门电影详情 */,
-				286C903120BD3260004EBA67 /* 机构详情 */,
-				286C902920BD1D0A004EBA67 /* cell */,
-			);
-			path = "机构";
-			sourceTree = "<group>";
-		};
 		286C902920BD1D0A004EBA67 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2416,21 +2136,6 @@
 				287D2CEA20BE4EB400500156 /* HotMoviesCell.xib */,
 			);
 			path = cell;
-			sourceTree = "<group>";
-		};
-		286C902D20BD2FB3004EBA67 /* 机构 */ = {
-			isa = PBXGroup;
-			children = (
-				286C902E20BD2FDE004EBA67 /* InstitutionsVC.h */,
-				286C902F20BD2FDE004EBA67 /* InstitutionsVC.m */,
-				286C905320BD61C3004EBA67 /* HotMoviesVC.h */,
-				286C905420BD61C3004EBA67 /* HotMoviesVC.m */,
-				287D2CED20BE577800500156 /* HotMoviesDetailVC.h */,
-				287D2CEE20BE577800500156 /* HotMoviesDetailVC.m */,
-				287D2D0720BEA5B000500156 /* HotInstitutionsDetailVC.h */,
-				287D2D0820BEA5B000500156 /* HotInstitutionsDetailVC.m */,
-			);
-			path = "机构";
 			sourceTree = "<group>";
 		};
 		286C903120BD3260004EBA67 /* 机构详情 */ = {
@@ -2514,22 +2219,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		2875DA6320D392AE00D6CAFE /* 发布记录 */ = {
-			isa = PBXGroup;
-			children = (
-				2875DA6420D392D100D6CAFE /* MineReleasePictureView.h */,
-				2875DA6520D392D100D6CAFE /* MineReleasePictureView.m */,
-				2875DA6720D393A900D6CAFE /* MineReleaseVideoView.h */,
-				2875DA6820D393A900D6CAFE /* MineReleaseVideoView.m */,
-				2875DA6A20D393B400D6CAFE /* MineReleaseThemeView.h */,
-				2875DA6B20D393B400D6CAFE /* MineReleaseThemeView.m */,
-				2875DA6D20D393C000D6CAFE /* MineReleaseArticleView.h */,
-				2875DA6E20D393C000D6CAFE /* MineReleaseArticleView.m */,
-				2875DA7020D393C800D6CAFE /* Cell */,
-			);
-			path = "发布记录";
-			sourceTree = "<group>";
-		};
 		2875DA7020D393C800D6CAFE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2547,18 +2236,6 @@
 				2875DA8220D3A82200D6CAFE /* MineReleaseVideoTableViewCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		2875DA8820D3B1D200D6CAFE /* 我的达人 */ = {
-			isa = PBXGroup;
-			children = (
-				28A6C9CC20D8A2BD00ECBF4F /* 填写认证信息 */,
-				2875DAAE20D3C3F300D6CAFE /* 补充基本信息 */,
-				2875DAA020D3BCF100D6CAFE /* 身份认证 */,
-				2875DA9220D3B64600D6CAFE /* 星球认证 */,
-				2875DA8E20D3B1F200D6CAFE /* cell */,
-			);
-			path = "我的达人";
 			sourceTree = "<group>";
 		};
 		2875DA8E20D3B1F200D6CAFE /* cell */ = {
@@ -2653,25 +2330,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		287D2D0A20BEA88900500156 /* 话题 */ = {
-			isa = PBXGroup;
-			children = (
-				287D2D1520BEB36B00500156 /* MusicManagementMyThemeVC.h */,
-				287D2D1620BEB36B00500156 /* MusicManagementMyThemeVC.m */,
-			);
-			path = "话题";
-			sourceTree = "<group>";
-		};
-		287D2D0B20BEA8A000500156 /* 话题 */ = {
-			isa = PBXGroup;
-			children = (
-				287D2D0C20BEA8F300500156 /* MusicThemeView.h */,
-				287D2D0D20BEA8F300500156 /* MusicThemeView.m */,
-				287D2D0F20BEAA9100500156 /* Cell */,
-			);
-			path = "话题";
-			sourceTree = "<group>";
-		};
 		287D2D0F20BEAA9100500156 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2685,29 +2343,25 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		287D7D5920ECD25700AD749E /* 头条 */ = {
-			isa = PBXGroup;
-			children = (
-				2823124720E613A60026904E /* CommenityModel.h */,
-				2823124820E613A60026904E /* CommenityModel.m */,
-				287D7D5A20ECD28500AD749E /* CommenityHotSearchModel.h */,
-				287D7D5B20ECD28500AD749E /* CommenityHotSearchModel.m */,
-				287D7D5D20ECD29C00AD749E /* CommenityHoistorySearchModel.h */,
-				287D7D5E20ECD29C00AD749E /* CommenityHoistorySearchModel.m */,
-				283F8F3020EDBBBE0085D6B5 /* CommenityNewsDetailModel.h */,
-				283F8F3120EDBBBE0085D6B5 /* CommenityNewsDetailModel.m */,
-				283F8F3320EE05680085D6B5 /* CommenityDetailCommentModel.h */,
-				283F8F3420EE05680085D6B5 /* CommenityDetailCommentModel.m */,
-			);
-			path = "头条";
-			sourceTree = "<group>";
-		};
 		28A3DC6A20A0029F00FEDD62 /* Community */ = {
 			isa = PBXGroup;
 			children = (
-				2820B07820B55FA900EA1DAC /* Controller */,
-				2820B07A20B55FB600EA1DAC /* Model */,
-				2820B07920B55FB100EA1DAC /* View */,
+				2820B07B20B55FDB00EA1DAC /* CommunityVC.h */,
+				2820B07C20B55FDB00EA1DAC /* CommunityVC.m */,
+				2834846A20C63C6600AB6E9A /* 电影 */,
+				2834846B20C63C7500AB6E9A /* 话题 */,
+				2834846C20C63C7A00AB6E9A /* 机构 */,
+				2834846D20C63C8000AB6E9A /* 交友 */,
+				2834846E20C63C8800AB6E9A /* 美食 */,
+				2834846F20C63C8D00AB6E9A /* 美术 */,
+				2834847020C63C9300AB6E9A /* 设计 */,
+				2834847120C63C9900AB6E9A /* 摄影 */,
+				2834847220C63C9F00AB6E9A /* 书籍 */,
+				28E33AAC20BBCAE8009F9382 /* 头条 */,
+				2834847320C63CA700AB6E9A /* 文学 */,
+				2834847420C63CB100AB6E9A /* 戏剧 */,
+				280601B920B81C270090254E /* 音乐 */,
+				2834847520C63CBA00AB6E9A /* 展览 */,
 				2820B08220B5665F00EA1DAC /* CommenityHeader.h */,
 				2820B08320B5677A00EA1DAC /* CommenityMedia.xcassets */,
 			);
@@ -2734,8 +2388,9 @@
 		28A3DC7320A05A4600FEDD62 /* 话题 */ = {
 			isa = PBXGroup;
 			children = (
-				28A3DC7C20A05AB500FEDD62 /* ThemeVC.h */,
-				28A3DC7D20A05AB500FEDD62 /* ThemeVC.m */,
+				5A05B0812114561E00D1F876 /* Controller */,
+				5A05B0802114561900D1F876 /* Model */,
+				5A05B07F2114561300D1F876 /* View */,
 			);
 			path = "话题";
 			sourceTree = "<group>";
@@ -2743,8 +2398,9 @@
 		28A3DC7420A05A4C00FEDD62 /* 达人 */ = {
 			isa = PBXGroup;
 			children = (
-				28A3DC7920A05AA700FEDD62 /* TalentVC.h */,
-				28A3DC7A20A05AA700FEDD62 /* TalentVC.m */,
+				5A05B0842114565400D1F876 /* Controller */,
+				5A05B0832114564F00D1F876 /* Model */,
+				5A05B0822114564900D1F876 /* View */,
 			);
 			path = "达人";
 			sourceTree = "<group>";
@@ -2752,8 +2408,9 @@
 		28A3DC7520A05A5700FEDD62 /* 视频 */ = {
 			isa = PBXGroup;
 			children = (
-				28A3DC7620A05A7E00FEDD62 /* VideoVC.h */,
-				28A3DC7720A05A7E00FEDD62 /* VideoVC.m */,
+				5A05B0872114567F00D1F876 /* Controller */,
+				5A05B0862114567A00D1F876 /* Model */,
+				5A05B0852114567100D1F876 /* View */,
 			);
 			path = "视频";
 			sourceTree = "<group>";
@@ -2772,17 +2429,6 @@
 				28A6C9D920D8A82900ECBF4F /* MinePushIDCardTableViewCell.xib */,
 			);
 			path = "填写认证信息";
-			sourceTree = "<group>";
-		};
-		28A6C9E920D8E9FC00ECBF4F /* 设置 */ = {
-			isa = PBXGroup;
-			children = (
-				28A6CA1020D9134D00ECBF4F /* 问题反馈 */,
-				28A6C9FE20D8F77800ECBF4F /* Cell */,
-				28A6C9FF20D8F7BA00ECBF4F /* MinePasswordTF.h */,
-				28A6CA0020D8F7BA00ECBF4F /* MinePasswordTF.m */,
-			);
-			path = "设置";
 			sourceTree = "<group>";
 		};
 		28A6C9F920D8F6A800ECBF4F /* 密码认证 */ = {
@@ -2889,23 +2535,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		28BF33DC20C520EE00598919 /* 交友 */ = {
-			isa = PBXGroup;
-			children = (
-				28BF33DD20C5210D00598919 /* MusicFoundFriendsView.h */,
-				28BF33DE20C5210D00598919 /* MusicFoundFriendsView.m */,
-				28BF33E020C528B800598919 /* MusicFriendsInfoView.h */,
-				28BF33E120C528B800598919 /* MusicFriendsInfoView.m */,
-				28BF33E320C53E1E00598919 /* FoundFriendsScreeningView.h */,
-				28BF33E420C53E1E00598919 /* FoundFriendsScreeningView.m */,
-				28BF33E620C5492300598919 /* KGSliderView.h */,
-				28BF33E720C5492300598919 /* KGSliderView.m */,
-				2834846720C62DA000AB6E9A /* KGSlider.h */,
-				2834846820C62DA000AB6E9A /* KGSlider.m */,
-			);
-			path = "交友";
-			sourceTree = "<group>";
-		};
 		28C7756620AD6FDC001F472B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2962,18 +2591,9 @@
 		28CA5BD120CE44D500D38F1F /* 个人名片 */ = {
 			isa = PBXGroup;
 			children = (
-				28CA5BCE20CE448E00D38F1F /* MineCenterHomeVC.h */,
-				28CA5BCF20CE448E00D38F1F /* MineCenterHomeVC.m */,
-				281DF6CF20D23A4E0086030E /* 编辑卡片 */,
-			);
-			path = "个人名片";
-			sourceTree = "<group>";
-		};
-		28CA5BD520CE57C800D38F1F /* 个人名片 */ = {
-			isa = PBXGroup;
-			children = (
-				28CA5BDC20CE5BCA00D38F1F /* View */,
-				28CA5BD620CE584A00D38F1F /* Cell */,
+				5A05B08B211456DD00D1F876 /* Controller */,
+				5A05B08D211456F200D1F876 /* Model */,
+				5A05B08C211456EB00D1F876 /* View */,
 			);
 			path = "个人名片";
 			sourceTree = "<group>";
@@ -3009,26 +2629,6 @@
 				28577B7920D125060082075D /* MineSearchYourLoveCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		28CA5BDC20CE5BCA00D38F1F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				28CA5BDD20CE5BFB00D38F1F /* MineEditVCChooseImageView.h */,
-				28CA5BDE20CE5BFB00D38F1F /* MineEditVCChooseImageView.m */,
-				283EBAD420CF70C0006C28C0 /* MineCardLoadFriendCoverView.h */,
-				283EBAD520CF70C0006C28C0 /* MineCardLoadFriendCoverView.m */,
-				283EBADA20CFA5FE006C28C0 /* MineChooseWeightAndHeightView.h */,
-				283EBADB20CFA5FE006C28C0 /* MineChooseWeightAndHeightView.m */,
-				283EBADD20CFC81B006C28C0 /* MineWorksIndustryView.h */,
-				283EBADE20CFC81B006C28C0 /* MineWorksIndustryView.m */,
-				28577B7120D11A040082075D /* MineAddYourLoveSearchView.h */,
-				28577B7220D11A040082075D /* MineAddYourLoveSearchView.m */,
-				28577B7420D11B860082075D /* MineTextField.h */,
-				28577B7520D11B860082075D /* MineTextField.m */,
-				28A6C9DC20D8B2E000ECBF4F /* KGIndustryPlist.plist */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		28CA77A420F36D9900B73084 /* CTMbase64 */ = {
@@ -3075,38 +2675,11 @@
 		28E33AAC20BBCAE8009F9382 /* 头条 */ = {
 			isa = PBXGroup;
 			children = (
-				28E33AAD20BBCB05009F9382 /* HeadLinesVC.h */,
-				28E33AAE20BBCB05009F9382 /* HeadLinesVC.m */,
-				5A05B061211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.h */,
-				5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */,
+				5A05B06C2114534300D1F876 /* Controller */,
+				5A05B06B2114533C00D1F876 /* Model */,
+				5A05B06A2114533600D1F876 /* View */,
 			);
 			path = "头条";
-			sourceTree = "<group>";
-		};
-		28E33AB320BBCF3F009F9382 /* 音乐 */ = {
-			isa = PBXGroup;
-			children = (
-				284C8D6A20BFA4A100487225 /* MusicMusiciansView.h */,
-				284C8D6B20BFA4A100487225 /* MusicMusiciansView.m */,
-				2807C77020E1EEA0007C1740 /* MyselfCenterYourFriendsView.h */,
-				2807C77120E1EEA0007C1740 /* MyselfCenterYourFriendsView.m */,
-				2807C76E20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib */,
-				28D09E0720C00C4400FA45A2 /* 资料中心 */,
-				284C8D7620BFC7B700487225 /* 筛选 */,
-				284C8D6D20BFA5CB00487225 /* Cell */,
-			);
-			path = "音乐";
-			sourceTree = "<group>";
-		};
-		28E33AB420BBCF4F009F9382 /* 演出 */ = {
-			isa = PBXGroup;
-			children = (
-				28E33AB520BBCF8E009F9382 /* MusicPerformanceView.h */,
-				28E33AB620BBCF8E009F9382 /* MusicPerformanceView.m */,
-				28E33ABC20BBF06E009F9382 /* 演出详情 */,
-				28E33AB820BBDD1C009F9382 /* Cell */,
-			);
-			path = "演出";
 			sourceTree = "<group>";
 		};
 		28E33AB820BBDD1C009F9382 /* Cell */ = {
@@ -3115,7 +2688,8 @@
 				28E33AB920BBDD48009F9382 /* MusicPerformanceCell.h */,
 				28E33ABA20BBDD48009F9382 /* MusicPerformanceCell.m */,
 			);
-			path = Cell;
+			name = Cell;
+			path = "../../View/演出/Cell";
 			sourceTree = "<group>";
 		};
 		28E33ABC20BBF06E009F9382 /* 演出详情 */ = {
@@ -3172,15 +2746,6 @@
 			path = "头部导航";
 			sourceTree = "<group>";
 		};
-		28E33AC520BBF448009F9382 /* 演出 */ = {
-			isa = PBXGroup;
-			children = (
-				28E33AC620BBF47F009F9382 /* PerformanceDetailVC.h */,
-				28E33AC720BBF47F009F9382 /* PerformanceDetailVC.m */,
-			);
-			path = "演出";
-			sourceTree = "<group>";
-		};
 		28E33AC920BC0200009F9382 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -3217,20 +2782,6 @@
 			path = KGSearchView;
 			sourceTree = "<group>";
 		};
-		28E8E87920B69313002E10FC /* 头条 */ = {
-			isa = PBXGroup;
-			children = (
-				280601A720B7FF540090254E /* Cell */,
-				280601A320B7B6A80090254E /* ShrinkageView */,
-				28E8E88020B6A81A002E10FC /* Video */,
-				28E8E87A20B69342002E10FC /* HeadlinesView.h */,
-				28E8E87B20B69342002E10FC /* HeadlinesView.m */,
-				28E8E87D20B69A87002E10FC /* HeadLinesTableViewCell.h */,
-				28E8E87E20B69A87002E10FC /* HeadLinesTableViewCell.m */,
-			);
-			path = "头条";
-			sourceTree = "<group>";
-		};
 		28E8E88020B6A81A002E10FC /* Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -3238,47 +2789,6 @@
 				28E8E88220B6A86E002E10FC /* HeadLinesVideoPlayVide.m */,
 			);
 			path = Video;
-			sourceTree = "<group>";
-		};
-		28E8E88420B6A8AD002E10FC /* 头条 */ = {
-			isa = PBXGroup;
-			children = (
-				28E8E88520B6A8D0002E10FC /* HeadLinesDetailVC.h */,
-				28E8E88620B6A8D0002E10FC /* HeadLinesDetailVC.m */,
-				28E33AA920BBB20E009F9382 /* HeadLinesDetaialAllCommentVC.h */,
-				28E33AAA20BBB20E009F9382 /* HeadLinesDetaialAllCommentVC.m */,
-			);
-			path = "头条";
-			sourceTree = "<group>";
-		};
-		28E8E88820B6AD33002E10FC /* 活动 */ = {
-			isa = PBXGroup;
-			children = (
-				28E8E88920B6AD59002E10FC /* ActivityView.h */,
-				28E8E88A20B6AD59002E10FC /* ActivityView.m */,
-				2825F6CA20B6B2AB0076B71B /* ActivityTableViewCell.h */,
-				2825F6CB20B6B2AB0076B71B /* ActivityTableViewCell.m */,
-			);
-			path = "活动";
-			sourceTree = "<group>";
-		};
-		28EC5F8520DA06730019D4C1 /* 问题求助 */ = {
-			isa = PBXGroup;
-			children = (
-				28EC5F8620DA068B0019D4C1 /* MineHelpChooseTableViewCell.h */,
-				28EC5F8720DA068B0019D4C1 /* MineHelpChooseTableViewCell.m */,
-				28EC5F8820DA068B0019D4C1 /* MineHelpChooseTableViewCell.xib */,
-			);
-			path = "问题求助";
-			sourceTree = "<group>";
-		};
-		28EC5F8E20DA524A0019D4C1 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				28EC5F8B20DA09D50019D4C1 /* MapVC.h */,
-				28EC5F8C20DA09D50019D4C1 /* MapVC.m */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		28EC5F8F20DA52520019D4C1 /* Model */ = {
@@ -3478,7 +2988,101 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		5A1A142E2111C2010077AAE7 /* 展览 */ = {
+		5A05B0642114525800D1F876 /* 文化场所 */ = {
+			isa = PBXGroup;
+			children = (
+				5A05B066211452EA00D1F876 /* Controller */,
+				28EC5F8F20DA52520019D4C1 /* Model */,
+				28EC5F9020DA52580019D4C1 /* View */,
+			);
+			path = "文化场所";
+			sourceTree = "<group>";
+		};
+		5A05B065211452CA00D1F876 /* 文化消费 */ = {
+			isa = PBXGroup;
+			children = (
+				5A05B067211452F400D1F876 /* Controller */,
+				5A05B0692114530200D1F876 /* Model */,
+				5A05B068211452FB00D1F876 /* View */,
+			);
+			path = "文化消费";
+			sourceTree = "<group>";
+		};
+		5A05B066211452EA00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B067211452F400D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B068211452FB00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0692114530200D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B06A2114533600D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				280601A720B7FF540090254E /* Cell */,
+				280601A320B7B6A80090254E /* ShrinkageView */,
+				28E8E88020B6A81A002E10FC /* Video */,
+				28E8E87A20B69342002E10FC /* HeadlinesView.h */,
+				28E8E87B20B69342002E10FC /* HeadlinesView.m */,
+				28E8E87D20B69A87002E10FC /* HeadLinesTableViewCell.h */,
+				28E8E87E20B69A87002E10FC /* HeadLinesTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B06B2114533C00D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2823124720E613A60026904E /* CommenityModel.h */,
+				2823124820E613A60026904E /* CommenityModel.m */,
+				287D7D5A20ECD28500AD749E /* CommenityHotSearchModel.h */,
+				287D7D5B20ECD28500AD749E /* CommenityHotSearchModel.m */,
+				287D7D5D20ECD29C00AD749E /* CommenityHoistorySearchModel.h */,
+				287D7D5E20ECD29C00AD749E /* CommenityHoistorySearchModel.m */,
+				283F8F3020EDBBBE0085D6B5 /* CommenityNewsDetailModel.h */,
+				283F8F3120EDBBBE0085D6B5 /* CommenityNewsDetailModel.m */,
+				283F8F3320EE05680085D6B5 /* CommenityDetailCommentModel.h */,
+				283F8F3420EE05680085D6B5 /* CommenityDetailCommentModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B06C2114534300D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28E8E88520B6A8D0002E10FC /* HeadLinesDetailVC.h */,
+				28E8E88620B6A8D0002E10FC /* HeadLinesDetailVC.m */,
+				28E33AA920BBB20E009F9382 /* HeadLinesDetaialAllCommentVC.h */,
+				28E33AAA20BBB20E009F9382 /* HeadLinesDetaialAllCommentVC.m */,
+				28E33AAD20BBCB05009F9382 /* HeadLinesVC.h */,
+				28E33AAE20BBCB05009F9382 /* HeadLinesVC.m */,
+				5A05B061211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.h */,
+				5A05B062211433E200D1F876 /* HeadLinesNewsDetailAndCommentVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B06D2114538000D1F876 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				5A1A142F2111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.h */,
@@ -3494,16 +3098,728 @@
 				5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */,
 				5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */,
 			);
-			path = "展览";
+			path = View;
 			sourceTree = "<group>";
 		};
-		5A1C18FB211001CB00E6CCFF /* 展览 */ = {
+		5A05B06E2114538600D1F876 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				5A1C18FC2110020F00E6CCFF /* CommunityExhibitionModel.h */,
 				5A1C18FD2110020F00E6CCFF /* CommunityExhibitionModel.m */,
 			);
-			path = "展览";
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B06F2114538B00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2834849A20C63E7D00AB6E9A /* CommunityExhibitionVC.h */,
+				2834849B20C63E7D00AB6E9A /* CommunityExhibitionVC.m */,
+				5AB355D721105E9C00E10353 /* CommunityExhibitionDetailVC.h */,
+				5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B070211453BB00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				286C902320BD01F9004EBA67 /* HotMoviesView.h */,
+				286C902420BD01F9004EBA67 /* HotMoviesView.m */,
+				286C902620BD06D3004EBA67 /* MusicInstitutionsView.h */,
+				286C902720BD06D3004EBA67 /* MusicInstitutionsView.m */,
+				287D2CF020BE583100500156 /* 热门电影详情 */,
+				286C903120BD3260004EBA67 /* 机构详情 */,
+				286C902920BD1D0A004EBA67 /* cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B071211453C000D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B072211453C500D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2834847F20C63D8600AB6E9A /* CommunityInstitutionsVC.h */,
+				2834848020C63D8600AB6E9A /* CommunityInstitutionsVC.m */,
+				287D7D4820EA1C4000AD749E /* FoodDetailVC.h */,
+				287D7D4920EA1C4000AD749E /* FoodDetailVC.m */,
+				286C902E20BD2FDE004EBA67 /* InstitutionsVC.h */,
+				286C902F20BD2FDE004EBA67 /* InstitutionsVC.m */,
+				286C905320BD61C3004EBA67 /* HotMoviesVC.h */,
+				286C905420BD61C3004EBA67 /* HotMoviesVC.m */,
+				287D2CED20BE577800500156 /* HotMoviesDetailVC.h */,
+				287D2CEE20BE577800500156 /* HotMoviesDetailVC.m */,
+				287D2D0720BEA5B000500156 /* HotInstitutionsDetailVC.h */,
+				287D2D0820BEA5B000500156 /* HotInstitutionsDetailVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0732114545900D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2834847C20C63D6500AB6E9A /* CommunityThemeVC.h */,
+				2834847D20C63D6500AB6E9A /* CommunityThemeVC.m */,
+				287D2D1520BEB36B00500156 /* MusicManagementMyThemeVC.h */,
+				287D2D1620BEB36B00500156 /* MusicManagementMyThemeVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0742114546100D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				287D2D0C20BEA8F300500156 /* MusicThemeView.h */,
+				287D2D0D20BEA8F300500156 /* MusicThemeView.m */,
+				287D2D0F20BEAA9100500156 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0752114546800D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0762114549700D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2834848220C63D9D00AB6E9A /* CommunityFriendsVC.h */,
+				2834848320C63D9D00AB6E9A /* CommunityFriendsVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B077211454A300D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B078211454A900D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28BF33DD20C5210D00598919 /* MusicFoundFriendsView.h */,
+				28BF33DE20C5210D00598919 /* MusicFoundFriendsView.m */,
+				28BF33E020C528B800598919 /* MusicFriendsInfoView.h */,
+				28BF33E120C528B800598919 /* MusicFriendsInfoView.m */,
+				28BF33E320C53E1E00598919 /* FoundFriendsScreeningView.h */,
+				28BF33E420C53E1E00598919 /* FoundFriendsScreeningView.m */,
+				28BF33E620C5492300598919 /* KGSliderView.h */,
+				28BF33E720C5492300598919 /* KGSliderView.m */,
+				2834846720C62DA000AB6E9A /* KGSlider.h */,
+				2834846820C62DA000AB6E9A /* KGSlider.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B079211454F200D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2834849120C63E1100AB6E9A /* CommunityBooksVC.h */,
+				2834849220C63E1100AB6E9A /* CommunityBooksVC.m */,
+				2870B72F20C6879200133D1A /* ReadBooksHotVC.h */,
+				2870B73020C6879200133D1A /* ReadBooksHotVC.m */,
+				2870B73220C68BCB00133D1A /* ReadBooksDetailVC.h */,
+				2870B73320C68BCB00133D1A /* ReadBooksDetailVC.m */,
+				287D7D5620EC957C00AD749E /* ReadBooksWriteYourIdeaVC.h */,
+				287D7D5720EC957C00AD749E /* ReadBooksWriteYourIdeaVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B07A211454F800D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2834849F20C66CC300AB6E9A /* ReadBooksView.h */,
+				283484A020C66CC300AB6E9A /* ReadBooksView.m */,
+				283484A220C66D6700AB6E9A /* ReadIngRecommendView.h */,
+				283484A320C66D6700AB6E9A /* ReadIngRecommendView.m */,
+				28E8E88920B6AD59002E10FC /* ActivityView.h */,
+				28E8E88A20B6AD59002E10FC /* ActivityView.m */,
+				283484A520C6755600AB6E9A /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B07B211454FD00D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B07C2114558700D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28283F6420E23AFD008D1224 /* 买票 */,
+				28FDAC3820C0F01A00531597 /* 个人中心顶部滚动条 */,
+				28E33AC020BBF0CD009F9382 /* 头部轮播图 */,
+				28E33ABF20BBF0B3009F9382 /* 屏蔽框 */,
+				28E33ABE20BBF099009F9382 /* 筛选框 */,
+				28E33ABD20BBF081009F9382 /* 顶部滚动条 */,
+				280601B020B802B40090254E /* 底部评论框 */,
+				28E8E87020B6653C002E10FC /* KGSearchView */,
+				28E33AB520BBCF8E009F9382 /* MusicPerformanceView.h */,
+				28E33AB620BBCF8E009F9382 /* MusicPerformanceView.m */,
+				28E33ABC20BBF06E009F9382 /* 演出详情 */,
+				28E33AB820BBDD1C009F9382 /* Cell */,
+				284C8D6A20BFA4A100487225 /* MusicMusiciansView.h */,
+				284C8D6B20BFA4A100487225 /* MusicMusiciansView.m */,
+				2807C77020E1EEA0007C1740 /* MyselfCenterYourFriendsView.h */,
+				2807C77120E1EEA0007C1740 /* MyselfCenterYourFriendsView.m */,
+				2807C76E20E1ED0D007C1740 /* MyselfCenterYourFriendsView.xib */,
+				28D09E0720C00C4400FA45A2 /* 资料中心 */,
+				284C8D7620BFC7B700487225 /* 筛选 */,
+				284C8D6D20BFA5CB00487225 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B07D2114558F00D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B07E2114559400D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				280601BA20B81C560090254E /* KGMusicVC.h */,
+				280601BB20B81C560090254E /* KGMusicVC.m */,
+				28D09E0420C00B2100FA45A2 /* MyselfCenterVC.h */,
+				28D09E0520C00B2100FA45A2 /* MyselfCenterVC.m */,
+				28FDAC3520C0EF9600531597 /* MyselfWordVC.h */,
+				28FDAC3620C0EF9600531597 /* MyselfWordVC.m */,
+				287D7D4520EA127A00AD749E /* MyselfWorksDetaialVC.h */,
+				287D7D4620EA127A00AD749E /* MyselfWorksDetaialVC.m */,
+				28BF33CB20C4EDA800598919 /* MyselfWordUploadingVC.h */,
+				28BF33CC20C4EDA800598919 /* MyselfWordUploadingVC.m */,
+				2813DB5420C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.h */,
+				2813DB5520C7936E004CD973 /* MyselfCenterVideo+Music+BookVC.m */,
+				2807C76B20E1EA85007C1740 /* YourFriendsCenterVC.h */,
+				2807C76C20E1EA85007C1740 /* YourFriendsCenterVC.m */,
+				28E33AC620BBF47F009F9382 /* PerformanceDetailVC.h */,
+				28E33AC720BBF47F009F9382 /* PerformanceDetailVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B07F2114561300D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28E2AECA20A9762100ACC119 /* Cell */,
+				28211C8120A58B76009C8E49 /* 预览 */,
+				28F9966D20A43E2500678494 /* PhotoBrowser */,
+				284D45FA20A19249008633DB /* 编辑卡片 */,
+				28A3DC6B20A02BF900FEDD62 /* Component */,
+				A81C96082099B32900E6D223 /* ReleaseView.h */,
+				A81C96092099B32900E6D223 /* ReleaseView.m */,
+				A81C96162099BA4800E6D223 /* HW3DBannerView.h */,
+				A81C96182099BA4900E6D223 /* HW3DBannerView.m */,
+				A81C96172099BA4900E6D223 /* UIView+Banner.h */,
+				A81C96192099BA4900E6D223 /* UIView+Banner.m */,
+				A89E355E209AB7B900D871D7 /* EditReleaseCard.h */,
+				A89E355F209AB7B900D871D7 /* EditReleaseCard.m */,
+				A89E3561209ABEF100D871D7 /* PictureDispose.h */,
+				A89E3562209ABEF100D871D7 /* PictureDispose.m */,
+				28E2AED020A98DE500ACC119 /* SearchBarView.h */,
+				28E2AED120A98DE500ACC119 /* SearchBarView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0802114561900D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				286A0A7220EF47DF00F4EB17 /* ReleaseLineModel.h */,
+				286A0A7320EF47DF00F4EB17 /* ReleaseLineModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0812114561E00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A81C961C2099C4A500E6D223 /* ChooseModelVC.h */,
+				A81C961D2099C4A500E6D223 /* ChooseModelVC.m */,
+				28E2AECD20A97F8800ACC119 /* YourLocationVC.h */,
+				28E2AECE20A97F8800ACC119 /* YourLocationVC.m */,
+				28A3DC7C20A05AB500FEDD62 /* ThemeVC.h */,
+				28A3DC7D20A05AB500FEDD62 /* ThemeVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0822114564900D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2804BE9C20E0955B007E33DE /* TelentTitleTableViewCell.h */,
+				2804BE9D20E0955B007E33DE /* TelentTitleTableViewCell.m */,
+				2804BE9E20E0955B007E33DE /* TelentTitleTableViewCell.xib */,
+				2804BEA120E09970007E33DE /* TlentIntroudceTableViewCell.h */,
+				2804BEA220E09970007E33DE /* TlentIntroudceTableViewCell.m */,
+				2804BEA320E09970007E33DE /* TlentIntroudceTableViewCell.xib */,
+				2804BEA620E09BD3007E33DE /* TalentPushPhotosTableViewCell.h */,
+				2804BEA720E09BD3007E33DE /* TalentPushPhotosTableViewCell.m */,
+				2804BEA820E09BD3007E33DE /* TalentPushPhotosTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0832114564F00D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0842114565400D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28A3DC7920A05AA700FEDD62 /* TalentVC.h */,
+				28A3DC7A20A05AA700FEDD62 /* TalentVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0852114567100D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0862114567A00D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0872114567F00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28A3DC7620A05A7E00FEDD62 /* VideoVC.h */,
+				28A3DC7720A05A7E00FEDD62 /* VideoVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0882114568B00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0892114569100D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B08A2114569500D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28211C8220A58BBD009C8E49 /* PreviewVC.h */,
+				28211C8320A58BBD009C8E49 /* PreviewVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B08B211456DD00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28CA5BCE20CE448E00D38F1F /* MineCenterHomeVC.h */,
+				28CA5BCF20CE448E00D38F1F /* MineCenterHomeVC.m */,
+				281DF6CF20D23A4E0086030E /* 编辑卡片 */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B08C211456EB00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28CA5BDD20CE5BFB00D38F1F /* MineEditVCChooseImageView.h */,
+				28CA5BDE20CE5BFB00D38F1F /* MineEditVCChooseImageView.m */,
+				283EBAD420CF70C0006C28C0 /* MineCardLoadFriendCoverView.h */,
+				283EBAD520CF70C0006C28C0 /* MineCardLoadFriendCoverView.m */,
+				283EBADA20CFA5FE006C28C0 /* MineChooseWeightAndHeightView.h */,
+				283EBADB20CFA5FE006C28C0 /* MineChooseWeightAndHeightView.m */,
+				283EBADD20CFC81B006C28C0 /* MineWorksIndustryView.h */,
+				283EBADE20CFC81B006C28C0 /* MineWorksIndustryView.m */,
+				28577B7120D11A040082075D /* MineAddYourLoveSearchView.h */,
+				28577B7220D11A040082075D /* MineAddYourLoveSearchView.m */,
+				28577B7420D11B860082075D /* MineTextField.h */,
+				28577B7520D11B860082075D /* MineTextField.m */,
+				28A6C9DC20D8B2E000ECBF4F /* KGIndustryPlist.plist */,
+				28CA5BD620CE584A00D38F1F /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B08D211456F200D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				286A0A6B20EF185500F4EB17 /* MineMyselfCenterInfoModel.h */,
+				286A0A6C20EF185500F4EB17 /* MineMyselfCenterInfoModel.m */,
+				286A0A7520EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.h */,
+				286A0A7620EF74DA00F4EB17 /* MineSelfCenterImageLIstModel.m */,
+				286A0A7920EF78F400F4EB17 /* MineCenterHometownModel.h */,
+				286A0A7A20EF78F400F4EB17 /* MineCenterHometownModel.m */,
+				28636D7820F4BCE900DE0926 /* MineSelfMyLabelsModel.h */,
+				28636D7920F4BCE900DE0926 /* MineSelfMyLabelsModel.m */,
+				2847BC8320F60B090052EE19 /* MineSelfMyLabelsDetailModel.h */,
+				2847BC8420F60B090052EE19 /* MineSelfMyLabelsDetailModel.m */,
+				2887886020F8AAEA0025515A /* MineMyWordsModel.h */,
+				2887886120F8AAEA0025515A /* MineMyWordsModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B08E2114572C00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2874726B20CA9111004317A5 /* ReportView.h */,
+				2874726C20CA9111004317A5 /* ReportView.m */,
+				282E073120C91E1700A9B2E1 /* MineMessageHeaderView.h */,
+				282E073220C91E1700A9B2E1 /* MineMessageHeaderView.m */,
+				2874724520CA5AF4004317A5 /* FocusView.h */,
+				2874724620CA5AF4004317A5 /* FocusView.m */,
+				2874726820CA8B6F004317A5 /* CancelFocusView.h */,
+				2874726920CA8B6F004317A5 /* CancelFocusView.m */,
+				2807C76920E1E1B1007C1740 /* MineMessageFirstIntoShowView.xib */,
+				2874724820CA604A004317A5 /* 点击头像页面cell */,
+				287471E820CA313C004317A5 /* Cell */,
+				287D7D4220EA096400AD749E /* KGSearchChatHistoryView.h */,
+				287D7D4320EA096400AD749E /* KGSearchChatHistoryView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B08F2114573100D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0902114573500D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				282E072D20C911F600A9B2E1 /* MIneMessageVC.h */,
+				282E072E20C911F600A9B2E1 /* MIneMessageVC.m */,
+				2807C76620E1DCD8007C1740 /* MineChatDetaialViewController.h */,
+				2807C76720E1DCD8007C1740 /* MineChatDetaialViewController.m */,
+				2804BEAE20E0DF12007E33DE /* MineSystemVC.h */,
+				2804BEAF20E0DF12007E33DE /* MineSystemVC.m */,
+				2874724E20CA676A004317A5 /* MsgTapCellHeaderPushFocusVC.h */,
+				2874724F20CA676A004317A5 /* MsgTapCellHeaderPushFocusVC.m */,
+				2874726520CA8094004317A5 /* MsgTapNoteVC.h */,
+				2874726620CA8094004317A5 /* MsgTapNoteVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0912114577900D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				281DF6D720D23AB30086030E /* 我的店铺 */,
+				281DF6D620D23AAC0086030E /* 设置 */,
+				281DF6D520D23AA10086030E /* 我的达人 */,
+				281DF6D420D23A9A0086030E /* 发布记录 */,
+				281DF6D320D23A930086030E /* 问题求助 */,
+				281DF6D220D23A890086030E /* 通讯录 */,
+				281DF6D120D23A760086030E /* 积分 */,
+				281DF6D020D23A6E0086030E /* 收藏 */,
+				282E072C20C911DA00A9B2E1 /* 消息 */,
+				28CA5BD120CE44D500D38F1F /* 个人名片 */,
+				A82ED3D3209476750066EA5E /* MineVC.h */,
+				A82ED3D4209476750066EA5E /* MineVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B092211457A400D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B093211457D300D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28EC5F8620DA068B0019D4C1 /* MineHelpChooseTableViewCell.h */,
+				28EC5F8720DA068B0019D4C1 /* MineHelpChooseTableViewCell.m */,
+				28EC5F8820DA068B0019D4C1 /* MineHelpChooseTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B094211457D800D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B095211457DD00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28EC5F8220DA04000019D4C1 /* MineQuestionHelpVC.h */,
+				28EC5F8320DA04000019D4C1 /* MineQuestionHelpVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B096211457FE00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				281DF6DC20D23C490086030E /* MineIntegralHeaderView.h */,
+				281DF6DD20D23C490086030E /* MineIntegralHeaderView.m */,
+				281DF6DF20D246270086030E /* MineIntegraltableViewCell.h */,
+				281DF6E020D246270086030E /* MineIntegraltableViewCell.m */,
+				281DF6E120D246270086030E /* MineIntegraltableViewCell.xib */,
+				281DF6E720D24EA40086030E /* MineIntegralDetailCell.h */,
+				281DF6E820D24EA40086030E /* MineIntegralDetailCell.m */,
+				281DF6E920D24EA40086030E /* MineIntegralDetailCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0972114580500D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0982114580A00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				281DF6D820D23B040086030E /* MineIntegralVC.h */,
+				281DF6D920D23B040086030E /* MineIntegralVC.m */,
+				281DF6E420D24DBA0086030E /* MineIntegralDetailVC.h */,
+				281DF6E520D24DBA0086030E /* MineIntegralDetailVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0992114582E00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				281DF6F020D251C20086030E /* MineCollectionHeaderScrollView.h */,
+				281DF6F120D251C20086030E /* MineCollectionHeaderScrollView.m */,
+				281DF6F320D257310086030E /* MineCollectionInstitutionView.h */,
+				281DF6F420D257310086030E /* MineCollectionInstitutionView.m */,
+				281DF6FC20D25DE10086030E /* MineCollectionThemeView.h */,
+				281DF6FD20D25DE10086030E /* MineCollectionThemeView.m */,
+				281DF6FF20D25F3F0086030E /* MineCollectionExhibitionView.h */,
+				281DF70020D25F3F0086030E /* MineCollectionExhibitionView.m */,
+				281DF70720D2652A0086030E /* MineCollectionStarcircleView.h */,
+				281DF70820D2652A0086030E /* MineCollectionStarcircleView.m */,
+				281DF70F20D268EA0086030E /* MineControllerArticleView.h */,
+				281DF71020D268EA0086030E /* MineControllerArticleView.m */,
+				281DF71720D26D3C0086030E /* MineCollectionBookView.h */,
+				281DF71820D26D3C0086030E /* MineCollectionBookView.m */,
+				281DF6F620D257CE0086030E /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B09A2114583300D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B09B2114583700D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				281DF6EC20D250FB0086030E /* MineCollentionVC.h */,
+				281DF6ED20D250FB0086030E /* MineCollentionVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B09C2114585700D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				281DF72320D2710E0086030E /* MineBookButtonView.h */,
+				281DF72420D2710E0086030E /* MineBookButtonView.m */,
+				281DF72720D27D7A0086030E /* MineBooksFriendsView.h */,
+				281DF72820D27D7A0086030E /* MineBooksFriendsView.m */,
+				281DF72A20D27DF40086030E /* MineBooksFocusView.h */,
+				281DF72B20D27DF40086030E /* MineBooksFocusView.m */,
+				281DF72D20D27E170086030E /* MineBooksFansView.h */,
+				281DF72E20D27E170086030E /* MineBooksFansView.m */,
+				2875DA5A20D35FA500D6CAFE /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B09D2114585D00D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B09E2114586200D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				281DF71F20D2700A0086030E /* MineTheAddressBookVC.h */,
+				281DF72020D2700A0086030E /* MineTheAddressBookVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B09F2114587F00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2875DA6420D392D100D6CAFE /* MineReleasePictureView.h */,
+				2875DA6520D392D100D6CAFE /* MineReleasePictureView.m */,
+				2875DA6720D393A900D6CAFE /* MineReleaseVideoView.h */,
+				2875DA6820D393A900D6CAFE /* MineReleaseVideoView.m */,
+				2875DA6A20D393B400D6CAFE /* MineReleaseThemeView.h */,
+				2875DA6B20D393B400D6CAFE /* MineReleaseThemeView.m */,
+				2875DA6D20D393C000D6CAFE /* MineReleaseArticleView.h */,
+				2875DA6E20D393C000D6CAFE /* MineReleaseArticleView.m */,
+				2875DA7020D393C800D6CAFE /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0A02114588300D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0A12114588800D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2875DA6020D38F8A00D6CAFE /* MineReleaseHistoryVC.h */,
+				2875DA6120D38F8A00D6CAFE /* MineReleaseHistoryVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0A2211458AB00D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28A6CA1020D9134D00ECBF4F /* 问题反馈 */,
+				28A6C9FE20D8F77800ECBF4F /* Cell */,
+				28A6C9FF20D8F7BA00ECBF4F /* MinePasswordTF.h */,
+				28A6CA0020D8F7BA00ECBF4F /* MinePasswordTF.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0A3211458B000D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0A4211458B500D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28A6C9E620D8E7F900ECBF4F /* MineSetUpTheAppVC.h */,
+				28A6C9E720D8E7F900ECBF4F /* MineSetUpTheAppVC.m */,
+				28A6CA0C20D90E4000ECBF4F /* 问题反馈 */,
+				28A6CA0820D9085900ECBF4F /* 修改密码 */,
+				28A6C9FA20D8F6B300ECBF4F /* 验证码认证 */,
+				28A6C9F920D8F6A800ECBF4F /* 密码认证 */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0A5211458D700D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28A6C9CC20D8A2BD00ECBF4F /* 填写认证信息 */,
+				2875DAAE20D3C3F300D6CAFE /* 补充基本信息 */,
+				2875DAA020D3BCF100D6CAFE /* 身份认证 */,
+				2875DA9220D3B64600D6CAFE /* 星球认证 */,
+				2875DA8E20D3B1F200D6CAFE /* cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0A6211458DC00D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2875DA8520D3AEE800D6CAFE /* MineTalentShowVC.h */,
+				2875DA8620D3AEE800D6CAFE /* MineTalentShowVC.m */,
+				2875DA8F20D3B60D00D6CAFE /* MineJoinTalentShowVC.h */,
+				2875DA9020D3B60D00D6CAFE /* MineJoinTalentShowVC.m */,
+				2875DA9D20D3BC0800D6CAFE /* MineTheIdentityAuthenticationVC.h */,
+				2875DA9E20D3BC0800D6CAFE /* MineTheIdentityAuthenticationVC.m */,
+				2875DAAB20D3C34500D6CAFE /* MineJoinAddBaseInfoVC.h */,
+				2875DAAC20D3C34500D6CAFE /* MineJoinAddBaseInfoVC.m */,
+				28A6C9C920D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.h */,
+				28A6C9CA20D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.m */,
+				28A6C9DE20D8DAD700ECBF4F /* MineMyselfTalentAuditVC.h */,
+				28A6C9DF20D8DAD700ECBF4F /* MineMyselfTalentAuditVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A05B0A7211458E300D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0A821145A3D00D1F876 /* 任务 */ = {
+			isa = PBXGroup;
+			children = (
+				5A05B0AB21145A5400D1F876 /* Controller */,
+				5A05B0AA21145A4E00D1F876 /* Model */,
+				5A05B0A921145A4900D1F876 /* View */,
+			);
+			path = "任务";
+			sourceTree = "<group>";
+		};
+		5A05B0A921145A4900D1F876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A05B0AA21145A4E00D1F876 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A05B0AB21145A5400D1F876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5A05B0AC21145A9900D1F876 /* ReleaseTaskVC.h */,
+				5A05B0AD21145A9900D1F876 /* ReleaseTaskVC.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		5DBDAC9073BE60E74FC6E0E1 /* Frameworks */ = {
@@ -3568,9 +3884,10 @@
 		A81C95E4209995C500E6D223 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				28EC5F9020DA52580019D4C1 /* View */,
-				28EC5F8F20DA52520019D4C1 /* Model */,
-				28EC5F8E20DA524A0019D4C1 /* Controller */,
+				28EC5F8B20DA09D50019D4C1 /* MapVC.h */,
+				28EC5F8C20DA09D50019D4C1 /* MapVC.m */,
+				5A05B065211452CA00D1F876 /* 文化消费 */,
+				5A05B0642114525800D1F876 /* 文化场所 */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -3578,62 +3895,15 @@
 		A81C96072099B2E200E6D223 /* Release */ = {
 			isa = PBXGroup;
 			children = (
-				A81C960D2099B43A00E6D223 /* Controller */,
-				A81C960C2099B43300E6D223 /* Model */,
-				A81C960B2099B42A00E6D223 /* View */,
-				A81C96112099B50800E6D223 /* ReleaseIcon.xcassets */,
-				284D45F920A1789C008633DB /* Release.h */,
-			);
-			path = Release;
-			sourceTree = "<group>";
-		};
-		A81C960B2099B42A00E6D223 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2804BE9B20E0953D007E33DE /* 达人 */,
-				28E2AECA20A9762100ACC119 /* Cell */,
-				28211C8120A58B76009C8E49 /* 预览 */,
-				28F9966D20A43E2500678494 /* PhotoBrowser */,
-				284D45FA20A19249008633DB /* 编辑卡片 */,
-				28A3DC6B20A02BF900FEDD62 /* Component */,
-				A81C96082099B32900E6D223 /* ReleaseView.h */,
-				A81C96092099B32900E6D223 /* ReleaseView.m */,
-				A81C96162099BA4800E6D223 /* HW3DBannerView.h */,
-				A81C96182099BA4900E6D223 /* HW3DBannerView.m */,
-				A81C96172099BA4900E6D223 /* UIView+Banner.h */,
-				A81C96192099BA4900E6D223 /* UIView+Banner.m */,
-				A89E355E209AB7B900D871D7 /* EditReleaseCard.h */,
-				A89E355F209AB7B900D871D7 /* EditReleaseCard.m */,
-				A89E3561209ABEF100D871D7 /* PictureDispose.h */,
-				A89E3562209ABEF100D871D7 /* PictureDispose.m */,
-				28E2AED020A98DE500ACC119 /* SearchBarView.h */,
-				28E2AED120A98DE500ACC119 /* SearchBarView.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		A81C960C2099B43300E6D223 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				286A0A7220EF47DF00F4EB17 /* ReleaseLineModel.h */,
-				286A0A7320EF47DF00F4EB17 /* ReleaseLineModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		A81C960D2099B43A00E6D223 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
+				5A05B0A821145A3D00D1F876 /* 任务 */,
 				28211C8520A593E5009C8E49 /* 预览 */,
 				28A3DC7520A05A5700FEDD62 /* 视频 */,
 				28A3DC7420A05A4C00FEDD62 /* 达人 */,
 				28A3DC7320A05A4600FEDD62 /* 话题 */,
-				A81C961C2099C4A500E6D223 /* ChooseModelVC.h */,
-				A81C961D2099C4A500E6D223 /* ChooseModelVC.m */,
-				28E2AECD20A97F8800ACC119 /* YourLocationVC.h */,
-				28E2AECE20A97F8800ACC119 /* YourLocationVC.m */,
+				A81C96112099B50800E6D223 /* ReleaseIcon.xcassets */,
+				284D45F920A1789C008633DB /* Release.h */,
 			);
-			path = Controller;
+			path = Release;
 			sourceTree = "<group>";
 		};
 		A82ED3CC209467600066EA5E /* Tabbar */ = {
@@ -3651,8 +3921,8 @@
 		A82ED3D2209476650066EA5E /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				282E071920C8D38F00A9B2E1 /* Controller */,
-				282E071820C8D38900A9B2E1 /* Model */,
+				5A05B0912114577900D1F876 /* Controller */,
+				5A05B092211457A400D1F876 /* Model */,
 				282E071720C8D38300A9B2E1 /* View */,
 				282E072320C8FAAD00A9B2E1 /* MineMedia.xcassets */,
 				282E073420C93C7100A9B2E1 /* MineHeader.h */,
@@ -4368,6 +4638,7 @@
 				28E33ABB20BBDD48009F9382 /* MusicPerformanceCell.m in Sources */,
 				2875DAC120D3CBCC00D6CAFE /* MineChooseCardTypeView.m in Sources */,
 				283484A920C6757800AB6E9A /* ReadBooksCell.m in Sources */,
+				5A05B0AE21145A9900D1F876 /* ReleaseTaskVC.m in Sources */,
 				282E072F20C911F600A9B2E1 /* MIneMessageVC.m in Sources */,
 				2875DA9620D3B67800D6CAFE /* MineJointalentTopTableViewCell.m in Sources */,
 				287D2D1320BEAAB200500156 /* MusicThemeMyThemeCell.m in Sources */,
