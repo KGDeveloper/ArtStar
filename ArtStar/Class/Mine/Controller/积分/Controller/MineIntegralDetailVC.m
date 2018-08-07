@@ -8,10 +8,12 @@
 
 #import "MineIntegralDetailVC.h"
 #import "MineIntegralDetailCell.h"
+#import "MineIntefralModel.h"
 
 @interface MineIntegralDetailVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -23,6 +25,8 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"积分明细" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _dataArr = [NSMutableArray array];
+    [self createData];
     [self setTableView];
 }
 
@@ -39,11 +43,31 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return _dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineIntegralDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineIntegralDetailCell"];
+    if (_dataArr.count > 0) {
+        MineIntefralModel *model = _dataArr[indexPath.row];
+        cell.titleLab.text = model.details;
+        cell.timeLab.text = model.time;
+        cell.countLab.text = [NSString stringWithFormat:@"+%@",model.number];
+    }
     return cell;
+}
+// MARK: --积分明细--
+- (void)createData{
+    [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在加载..."];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:findAllUserIntegral parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            weakSelf.dataArr = [MineIntefralModel mj_objectArrayWithKeyValuesArray:result[@"data"]];
+            [weakSelf.listView reloadData];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -14,10 +14,11 @@
 #import "MineChooseCardTypeView.h"
 #import "MineWriteTheIdentityInfoVC.h"
 
-@interface MineJoinAddBaseInfoVC ()<UITableViewDelegate,UITableViewDataSource,MineAddBaseInfoChooseIDTableViewCellDelegate>
+@interface MineJoinAddBaseInfoVC ()<UITableViewDelegate,UITableViewDataSource,MineAddBaseInfoChooseIDTableViewCellDelegate,MineAddBaseNameAndPhoneTableViewCellDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) MineChooseCardTypeView *chooseCardView;
+@property (nonatomic,strong) NSMutableDictionary *infoDic;
 
 @end
 
@@ -29,6 +30,9 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"补充基本信息" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _infoDic = [NSMutableDictionary dictionary];
+    [_infoDic setObject:@"二代身份证" forKey:@"papersType"];
+    [_infoDic setObject:[KGUserInfo shareInterace].userName forKey:@"UserNickname"];
     [self setTableView];
 }
 
@@ -66,12 +70,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0){
         MineAddBaseInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineAddBaseInfoTableViewCell"];
+        cell.detailLab.text = [KGUserInfo shareInterace].userName;
         return cell;
     }else if (indexPath.row == 1){
         MineAddBaseNameAndPhoneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineAddBaseNameAndPhoneTableViewCell"];
+        cell.delegate = self;
         return cell;
     }else if (indexPath.row == 2){
         MineAddBaseInfoChooseIDTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineAddBaseInfoChooseIDTableViewCell"];
+        cell.carfLab.text = _infoDic[@"papersType"];
         cell.delegate = self;
         return cell;
     }else{
@@ -80,24 +87,56 @@
         return cell;
     }
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 3) {
-        MineWriteTheIdentityInfoVC *identity = [[MineWriteTheIdentityInfoVC alloc]init];
-        [self pushNoTabBarViewController:identity animated:YES];
+        if (_infoDic[@"userName"]) {
+            if (_infoDic[@"tel"]) {
+                if (_infoDic[@"papersType"]) {
+                    if (_infoDic[@"identityCardId"]) {
+                        MineWriteTheIdentityInfoVC *identity = [[MineWriteTheIdentityInfoVC alloc]init];
+                        identity.msgDic = _infoDic.copy;
+                        [self pushNoTabBarViewController:identity animated:YES];
+                    }else{
+                        [MBProgressHUD bwm_showTitle:@"请填证件号码" toView:self.view hideAfter:1];
+                    }
+                }else{
+                    [MBProgressHUD bwm_showTitle:@"请选择证件类型" toView:self.view hideAfter:1];
+                }
+            }else{
+                [MBProgressHUD bwm_showTitle:@"请填写手机号" toView:self.view hideAfter:1];
+            }
+        }else{
+            [MBProgressHUD bwm_showTitle:@"请填写真实姓名" toView:self.view hideAfter:1];
+        }
     }
 }
-
+// MARK: --MineAddBaseNameAndPhoneTableViewCellDelegate--
+- (void)sendYourNameTelephone:(NSString *)name phone:(NSString *)phone{
+    if (name != nil) {
+        [_infoDic setObject:name forKey:@"userName"];
+    }else{
+        [_infoDic setObject:phone forKey:@"tel"];
+    }
+}
 - (MineChooseCardTypeView *)chooseCardView{
     if (!_chooseCardView) {
         _chooseCardView = [[MineChooseCardTypeView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        __weak typeof(self) weakSelf = self;
+        _chooseCardView.sendIDcardType = ^(NSString *type) {
+            [weakSelf.infoDic setObject:type forKey:@"papersType"];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            [weakSelf.listView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationAutomatic];
+        };
         [self.navigationController.view addSubview:_chooseCardView];
     }
     return _chooseCardView;
 }
-//MARK:-------------------------------------MineAddBaseInfoChooseIDTableViewCellDelegate---------------------------------------------------
+//MARK:--MineAddBaseInfoChooseIDTableViewCellDelegate--
 - (void)showChooseCardView{
     self.chooseCardView.hidden = NO;
+}
+- (void)sendIDCardNumber:(NSString *)idCard{
+    [_infoDic setObject:idCard forKey:@"identityCardId"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

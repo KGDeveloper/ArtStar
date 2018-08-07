@@ -18,6 +18,22 @@
     // Initialization code
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if ([textField.placeholder isEqualToString:@"请选择任务开始时间"] || [textField.placeholder isEqualToString:@"请选择任务结束时间"]) {
+        [textField resignFirstResponder];
+        [textField endEditing:YES];
+        textField.enabled = NO;
+        if ([self.delegate respondsToSelector:@selector(changeTextFieldEditStyleWithString:)]) {
+            [self.delegate changeTextFieldEditStyleWithString:textField.placeholder];
+        }
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([self.delegate respondsToSelector:@selector(whenTextFieldEndEditSendContentTextToTheUIView:placeholder:)]) {
+        [self.delegate whenTextFieldEndEditSendContentTextToTheUIView:textField.text placeholder:textField.placeholder];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

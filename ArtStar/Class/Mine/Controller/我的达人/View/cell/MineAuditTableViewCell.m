@@ -16,6 +16,17 @@
 }
 
 - (IBAction)editClick:(UIButton *)sender {
+    if ([sender.currentImage isEqual:Image(@"编辑选中状态")]) {
+        [sender setImage:Image(@"编辑未选中状态") forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(changeTalentStatusWithID:status:)]) {
+            [self.delegate changeTalentStatusWithID:_cellID status:@"取消"];
+        }
+    }else{
+        [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(changeTalentStatusWithID:status:)]) {
+            [self.delegate changeTalentStatusWithID:_cellID status:@"添加"];
+        }
+    }
 }
 - (IBAction)playClick:(UIButton *)sender {
     

@@ -14,6 +14,20 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)leftAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(chooseImage:)]) {
+        if ([_titleLab.text isEqualToString:@"上传以下证件材料(例如工牌等)"]) {
+            [self.delegate chooseImage:@"证明"];
+        }else{
+            [self.delegate chooseImage:@"正面"];
+        }
+    }
+}
+- (IBAction)rightAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(chooseImage:)]) {
+        [self.delegate chooseImage:@"反面"];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -11,4 +11,6 @@
 @interface HeadLineImageNewsTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *topImage;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labHeight;
 @end

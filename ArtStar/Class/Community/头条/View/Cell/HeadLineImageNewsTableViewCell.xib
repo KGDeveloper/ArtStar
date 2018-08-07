@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,32 +9,51 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Regular.otf">
+            <string>SourceHanSansCN-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="326" id="KGk-i7-Jjw" customClass="HeadLineImageNewsTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="354" height="326"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="382" id="KGk-i7-Jjw" customClass="HeadLineImageNewsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="382"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="354" height="325.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="352" height="381.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Ry-5D-oUU">
-                        <rect key="frame" x="15" y="0.0" width="324" height="325.5"/>
+                        <rect key="frame" x="15" y="0.0" width="322" height="366.5"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygA-9O-XbI">
+                        <rect key="frame" x="0.0" y="366.5" width="352" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="A4H-dg-EBI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Regular" family="Source Han Sans CN" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="6Ry-5D-oUU" secondAttribute="trailing" constant="15" id="3xn-Yz-2sK"/>
-                    <constraint firstAttribute="bottom" secondItem="6Ry-5D-oUU" secondAttribute="bottom" id="bHW-X2-CLQ"/>
-                    <constraint firstItem="6Ry-5D-oUU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="d3A-Bl-VxA"/>
-                    <constraint firstItem="6Ry-5D-oUU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qlD-UK-vf7"/>
+                    <constraint firstItem="ygA-9O-XbI" firstAttribute="top" secondItem="6Ry-5D-oUU" secondAttribute="bottom" id="0N1-Sd-7ay"/>
+                    <constraint firstItem="6Ry-5D-oUU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4Cb-6c-KtA"/>
+                    <constraint firstItem="ygA-9O-XbI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5lk-fx-K8f"/>
+                    <constraint firstAttribute="trailing" secondItem="6Ry-5D-oUU" secondAttribute="trailing" constant="15" id="ITZ-q2-cYB"/>
+                    <constraint firstAttribute="trailing" secondItem="ygA-9O-XbI" secondAttribute="trailing" id="QZj-U2-EC2"/>
+                    <constraint firstItem="6Ry-5D-oUU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ago-Kw-4Hd"/>
+                    <constraint firstAttribute="bottom" secondItem="ygA-9O-XbI" secondAttribute="bottom" id="lDn-MA-Tfy"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="labHeight" destination="A4H-dg-EBI" id="Kse-Ui-MZN"/>
+                <outlet property="titleLab" destination="ygA-9O-XbI" id="LX0-c3-Wii"/>
                 <outlet property="topImage" destination="6Ry-5D-oUU" id="gAp-SD-1yp"/>
             </connections>
-            <point key="canvasLocation" x="51" y="195"/>
+            <point key="canvasLocation" x="50" y="223"/>
         </tableViewCell>
     </objects>
 </document>

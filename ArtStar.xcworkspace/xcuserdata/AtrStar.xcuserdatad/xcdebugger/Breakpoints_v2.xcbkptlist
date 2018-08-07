@@ -43,38 +43,6 @@
             endingLineNumber = "217"
             landmarkName = "-createHeadLineData"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[MoviesVC createHeadLineData]_block_invoke"
-                  moduleName = "ArtStar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%94%B5%E5%BD%B1/MoviesVC.m"
-                  timestampString = "554977960.252787"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[MoviesVC createHeadLineData]_block_invoke_2"
-                  moduleName = "ArtStar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E7%94%B5%E5%BD%B1/MoviesVC.m"
-                  timestampString = "554977960.255617"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "220"
-                  endingLineNumber = "220"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -107,38 +75,6 @@
             endingLineNumber = "100"
             landmarkName = "-createHeadLineData"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__38-[CommunityThemeVC createHeadLineData]_block_invoke"
-                  moduleName = "ArtStar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AF%9D%E9%A2%98/CommunityThemeVC.m"
-                  timestampString = "554977960.267413"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__38-[CommunityThemeVC createHeadLineData]_block_invoke_2"
-                  moduleName = "ArtStar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Community/Controller/%E8%AF%9D%E9%A2%98/CommunityThemeVC.m"
-                  timestampString = "554977960.270359"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "103"
-                  endingLineNumber = "103"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,6 +106,70 @@
             startingLineNumber = "161"
             endingLineNumber = "161"
             landmarkName = "-createHeaderData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtStar/Class/Mine/Controller/&#x6211;&#x7684;&#x8fbe;&#x4eba;/Controller/MineWriteTheIdentityInfoVC.m"
+            timestampString = "555331478.672029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-requestData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[MineWriteTheIdentityInfoVC requestData]_block_invoke"
+                  moduleName = "ArtStar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Mine/Controller/%E6%88%91%E7%9A%84%E8%BE%BE%E4%BA%BA/Controller/MineWriteTheIdentityInfoVC.m"
+                  timestampString = "555331479.02895"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "148"
+                  endingLineNumber = "148"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[MineWriteTheIdentityInfoVC requestData]_block_invoke_2"
+                  moduleName = "ArtStar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/Class/Mine/Controller/%E6%88%91%E7%9A%84%E8%BE%BE%E4%BA%BA/Controller/MineWriteTheIdentityInfoVC.m"
+                  timestampString = "555331479.0331531"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtStar/Class/Mine/Controller/&#x6211;&#x7684;&#x8fbe;&#x4eba;/Controller/MineWriteTheIdentityInfoVC.m"
+            timestampString = "555331478.6721621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-requestData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

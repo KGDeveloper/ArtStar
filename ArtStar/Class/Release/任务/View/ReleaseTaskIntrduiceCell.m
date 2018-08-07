@@ -12,7 +12,26 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.writeLab.delegate = self;
     // Initialization code
+}
+// FIXME: ----
+- (IBAction)releaseBtuAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(releaseTask)]) {
+        [self.delegate releaseTask];
+    }
+}
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    self.placehodleLab.hidden = YES;
+}
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    if (textView.text.length < 1) {
+        self.placehodleLab.hidden = NO;
+    }
+    if ([self.delegate respondsToSelector:@selector(sendTaskDescribe:)]) {
+        [self.delegate sendTaskDescribe:textView.text];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

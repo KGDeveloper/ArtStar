@@ -64,17 +64,47 @@
         NSDictionary *dic = _dataArr[indexPath.row];
         cell.iconImage.image = Image(dic[@"icon"]);
         cell.textLab.text = dic[@"title"];
-        cell.statusLab.text = dic[@"status"];
+        if ([dic[@"status"] integerValue] == 0) {
+            cell.statusLab.text = @"未满足";
+        }else{
+            cell.statusLab.text = @"已满足";
+        }
         return cell;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 3) {
-        MineJoinAddBaseInfoVC *join = [[MineJoinAddBaseInfoVC alloc]init];
-        [self pushNoTabBarViewController:join animated:YES];
+        __block BOOL isOK = NO;
+        [_dataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *dic = obj;
+            if ([dic[@"status"] integerValue] == 0) {
+                *stop = YES;
+            }
+            isOK = YES;
+        }];
+        if (isOK == YES) {
+            MineJoinAddBaseInfoVC *join = [[MineJoinAddBaseInfoVC alloc]init];
+            [self pushNoTabBarViewController:join animated:YES];
+        }else{
+            [[MBProgressHUD bwm_showHUDAddedTo:self.view title:@"您还不满足条件，请努力"] hide:YES afterDelay:1];
+        }
     }
 }
 - (void)createData{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:celestialBodyAttestation parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"uid":[KGUserInfo shareInterace].userID} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSDictionary *tmpDic = [result[@"data"] firstObject];
+            [weakSelf createUIDataWithDic:tmpDic];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
+}
+
+- (void)createUIDataWithDic:(NSDictionary *)tmpDic{
     _dataArr = [NSMutableArray array];
     NSArray *iconArr = @[@"绑定手机号",@"粉丝数量",@"关注数量"];
     NSArray *titleArr = @[@"绑定手机号",@"粉丝数量≥50",@"关注数量≥50"];
@@ -82,9 +112,16 @@
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:iconArr[i] forKey:@"icon"];
         [dic setObject:titleArr[i] forKey:@"title"];
-        [dic setObject:@"已满足" forKey:@"status"];
+        if (i == 0) {
+            [dic setObject:tmpDic[@"手机号"] forKey:@"status"];
+        }else if (i == 1){
+            [dic setObject:tmpDic[@"关注"] forKey:@"status"];
+        }else{
+            [dic setObject:tmpDic[@"粉丝"] forKey:@"status"];
+        }
         [_dataArr addObject:dic];
     }
+    [_listView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

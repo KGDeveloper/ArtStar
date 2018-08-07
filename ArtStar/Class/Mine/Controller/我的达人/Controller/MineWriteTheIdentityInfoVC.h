@@ -10,4 +10,6 @@
 
 @interface MineWriteTheIdentityInfoVC : BaseVC
 
+@property (nonatomic,copy) NSDictionary *msgDic;
+
 @end

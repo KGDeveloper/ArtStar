@@ -10,4 +10,6 @@
 
 @interface MineChooseCardTypeView : UIView
 
+@property (nonatomic,copy) void(^sendIDcardType)(NSString *type);
+
 @end

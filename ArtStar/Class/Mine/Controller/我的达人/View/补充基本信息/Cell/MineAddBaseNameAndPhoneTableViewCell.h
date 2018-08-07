@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineAddBaseNameAndPhoneTableViewCell : UITableViewCell
+@protocol MineAddBaseNameAndPhoneTableViewCellDelegate <NSObject>
+
+- (void)sendYourNameTelephone:(NSString *)name phone:(NSString *)phone;
+
+@end
+
+@interface MineAddBaseNameAndPhoneTableViewCell : UITableViewCell<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLab;
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+
+@property (weak, nonatomic) id<MineAddBaseNameAndPhoneTableViewCellDelegate>delegate;
 
 
 @end

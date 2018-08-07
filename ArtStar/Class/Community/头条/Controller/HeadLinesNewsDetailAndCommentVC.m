@@ -37,7 +37,7 @@
 /**
  详情
  */
-@property (nonatomic,strong) CommenityNewsDetailModel *model;
+@property (nonatomic,strong) NSDictionary *model;
 /**
  举报页面
  */
@@ -87,11 +87,8 @@
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:selectNewsByUid parameters:@{@"nid":_ID} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
-        NSDictionary *dic = result;
-        mySelf.model = [CommenityNewsDetailModel mj_objectWithKeyValues:dic];
-        NSData *data = [mySelf.model.content dataUsingEncoding:NSUTF8StringEncoding];
-        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        mySelf.dataArr = [NSMutableArray arrayWithArray:array];
+        mySelf.model = result;
+        mySelf.dataArr = [NSMutableArray arrayWithArray:mySelf.model[@"contentImg"]];
         mySelf.listView.tableHeaderView = [mySelf tableViewHeader];
         [mySelf.listView reloadData];
     } fail:^(NSError *error) {
@@ -186,12 +183,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         NSDictionary *dic = _dataArr[indexPath.row];
-        NSArray *arr = dic.allKeys;
-        if ([arr[0] isEqualToString:@"img"]) {
-            return [XHWebImageAutoSize imageHeightForURL:[NSURL URLWithString:dic[@"img"]] layoutWidth:kScreenWidth - 30 estimateHeight:300];
-        }else{
+        if ([dic[@"img"] isKindOfClass:[NSNull class]]) {
             HeadLineNotTitleNewsTableViewCell *cell = [HeadLineNotTitleNewsTableViewCell new];
             return [cell tableViewCellRowHeight:dic[@"content"]];
+        }else{
+            if ([dic[@"content"] isKindOfClass:[NSNull class]]) {
+                return [XHWebImageAutoSize imageHeightForURL:[NSURL URLWithString:dic[@"img"]] layoutWidth:kScreenWidth - 30 estimateHeight:300];
+            }else{
+                return [XHWebImageAutoSize imageHeightForURL:[NSURL URLWithString:dic[@"img"]] layoutWidth:kScreenWidth - 30 estimateHeight:300] + 15;
+            }
         }
     }else{
         return 145;
@@ -201,8 +201,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {//:--详情--
         NSDictionary *dic = _dataArr[indexPath.row];
-        NSArray *arr = dic.allKeys;
-        if ([arr[0] isEqualToString:@"img"]) {
+        if ([dic[@"img"] isKindOfClass:[NSNull class]]) {
+            HeadLineNotTitleNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLineNotTitleNewsTableViewCell"];
+            cell.detailStr = dic[@"content"];
+            return cell;
+        }else{
             HeadLineImageNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLineImageNewsTableViewCell"];
             [cell.topImage sd_setImageWithURL:[NSURL URLWithString:dic[@"img"]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 [XHWebImageAutoSize storeImageSize:image forURL:imageURL completed:^(BOOL result) {
@@ -211,10 +214,12 @@
                     }
                 }];
             }];
-            return cell;
-        }else{
-            HeadLineNotTitleNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLineNotTitleNewsTableViewCell"];
-            cell.detailStr = dic[@"content"];
+            if ([dic[@"content"] isKindOfClass:[NSNull class]]) {
+                cell.labHeight.constant = 0;
+            }else{
+                cell.labHeight.constant = 15;
+                cell.titleLab.text = dic[@"content"];
+            }
             return cell;
         }
     }else{//:--评论--
@@ -236,7 +241,7 @@
     _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(30, 30, kScreenWidth - 60, 15)];
     for (int i = 0 ; i < 5; i++) {
-        if ([self attributedStringWithString:_model.title].size.width - labwidth > kScreenWidth - 60) {
+        if ([self attributedStringWithString:self.model[@"title"]].size.width - labwidth > kScreenWidth - 60) {
             labHeight = labHeight + 25;
         }else{
             break;
@@ -244,7 +249,7 @@
     }
     //:--标题--
     titleLab.size = CGSizeMake(kScreenWidth - 60, labHeight);
-    titleLab.attributedText = [self attributedStringWithString:_model.title];
+    titleLab.attributedText = [self attributedStringWithString:self.model[@"title"]];
     titleLab.textColor = Color_333333;
     titleLab.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:titleLab];
@@ -253,14 +258,14 @@
     detailLab.textColor = Color_999999;
     detailLab.font = SYFont(13);
     detailLab.textAlignment = NSTextAlignmentCenter;
-    detailLab.text = _model.sitename;
+    detailLab.text = self.model[@"sitename"];
     [_headerView addSubview:detailLab];
     //:--时间--
     UILabel *timeLab = [[UILabel alloc]initWithFrame:CGRectMake(0, labHeight + 73, kScreenWidth, 11)];
     timeLab.textColor = Color_999999;
     timeLab.font = SYFont(11);
     timeLab.textAlignment = NSTextAlignmentCenter;
-    timeLab.text = _model.newstime;
+    timeLab.text = self.model[@"newstime"];
     [_headerView addSubview:timeLab];
     //:--动态计算头视图大小--
     _headerView.size = CGSizeMake(kScreenWidth,labHeight + 134);

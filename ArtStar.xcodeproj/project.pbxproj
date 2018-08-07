@@ -509,7 +509,11 @@
 		5A1DF6C22112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C02112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib */; };
 		5A1DF6C62112E80000D1FCDF /* CommunityExhibitionWorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */; };
 		5A1DF6C72112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */; };
+		5A7C7D9221181EB400B3F261 /* MineIntefralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */; };
+		5A7C7D9521183EF600B3F261 /* MineTalentInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */; };
 		5AB355D921105E9C00E10353 /* CommunityExhibitionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */; };
+		5AFDEE6A21193EDF003AA016 /* MineTalentPassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDEE6921193EDF003AA016 /* MineTalentPassModel.m */; };
+		5AFDEE6E21194AA0003AA016 /* MineTalentLowEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDEE6D21194AA0003AA016 /* MineTalentLowEditView.m */; };
 		9CF50ABF4E7729A6E18D4F9F /* Pods_ArtStar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1D66E743F1A18D94DF1F1E /* Pods_ArtStar.framework */; };
 		A81C960A2099B32900E6D223 /* ReleaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = A81C96092099B32900E6D223 /* ReleaseView.m */; };
 		A81C96122099B50800E6D223 /* ReleaseIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A81C96112099B50800E6D223 /* ReleaseIcon.xcassets */; };
@@ -1432,9 +1436,17 @@
 		5A1DF6C32112E80000D1FCDF /* CommunityExhibitionWorkerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionWorkerCell.h; sourceTree = "<group>"; };
 		5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionWorkerCell.m; sourceTree = "<group>"; };
 		5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionWorkerCell.xib; sourceTree = "<group>"; };
+		5A7C7D9021181EB400B3F261 /* MineIntefralModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineIntefralModel.h; sourceTree = "<group>"; };
+		5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineIntefralModel.m; sourceTree = "<group>"; };
+		5A7C7D9321183EF600B3F261 /* MineTalentInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTalentInfoModel.h; sourceTree = "<group>"; };
+		5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTalentInfoModel.m; sourceTree = "<group>"; };
 		5AB355D721105E9C00E10353 /* CommunityExhibitionDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionDetailVC.h; sourceTree = "<group>"; };
 		5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionDetailVC.m; sourceTree = "<group>"; };
 		5AE2FE7658F18639AE622B3C /* Pods-ArtStarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtStarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArtStarTests/Pods-ArtStarTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5AFDEE6821193EDF003AA016 /* MineTalentPassModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTalentPassModel.h; sourceTree = "<group>"; };
+		5AFDEE6921193EDF003AA016 /* MineTalentPassModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTalentPassModel.m; sourceTree = "<group>"; };
+		5AFDEE6C21194AA0003AA016 /* MineTalentLowEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTalentLowEditView.h; sourceTree = "<group>"; };
+		5AFDEE6D21194AA0003AA016 /* MineTalentLowEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTalentLowEditView.m; sourceTree = "<group>"; };
 		717434F6CBE1BDD58DFCAB4B /* Pods_ArtStarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtStarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1D66E743F1A18D94DF1F1E /* Pods_ArtStar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtStar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E7BC327458C3005006A82BC /* Pods-ArtStarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtStarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArtStarTests/Pods-ArtStarTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -3616,6 +3628,8 @@
 		5A05B0972114580500D1F876 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5A7C7D9021181EB400B3F261 /* MineIntefralModel.h */,
+				5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3767,6 +3781,7 @@
 		5A05B0A5211458D700D1F876 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5AFDEE6B21194A3D003AA016 /* 组件 */,
 				28A6C9CC20D8A2BD00ECBF4F /* 填写认证信息 */,
 				2875DAAE20D3C3F300D6CAFE /* 补充基本信息 */,
 				2875DAA020D3BCF100D6CAFE /* 身份认证 */,
@@ -3798,6 +3813,10 @@
 		5A05B0A7211458E300D1F876 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5A7C7D9321183EF600B3F261 /* MineTalentInfoModel.h */,
+				5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */,
+				5AFDEE6821193EDF003AA016 /* MineTalentPassModel.h */,
+				5AFDEE6921193EDF003AA016 /* MineTalentPassModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3841,6 +3860,15 @@
 				5A05B0AD21145A9900D1F876 /* ReleaseTaskVC.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		5AFDEE6B21194A3D003AA016 /* 组件 */ = {
+			isa = PBXGroup;
+			children = (
+				5AFDEE6C21194AA0003AA016 /* MineTalentLowEditView.h */,
+				5AFDEE6D21194AA0003AA016 /* MineTalentLowEditView.m */,
+			);
+			path = "组件";
 			sourceTree = "<group>";
 		};
 		5DBDAC9073BE60E74FC6E0E1 /* Frameworks */ = {
@@ -4749,6 +4777,7 @@
 				28A6C9E820D8E7F900ECBF4F /* MineSetUpTheAppVC.m in Sources */,
 				28A6CA0420D9022300ECBF4F /* MineChangePhoneWithPassFinishVC.m in Sources */,
 				283EBAD920CF7539006C28C0 /* MineLoadCoverVC.m in Sources */,
+				5AFDEE6E21194AA0003AA016 /* MineTalentLowEditView.m in Sources */,
 				2874726D20CA9111004317A5 /* ReportView.m in Sources */,
 				28F996AD20A43E2600678494 /* ZLPhotoModel.m in Sources */,
 				281DF72C20D27DF40086030E /* MineBooksFocusView.m in Sources */,
@@ -4774,6 +4803,7 @@
 				28D09E0620C00B2100FA45A2 /* MyselfCenterVC.m in Sources */,
 				2834E21D210588670071BFA7 /* FriendsTalentsCommentModel.m in Sources */,
 				28F996A620A43E2600678494 /* UIButton+EnlargeTouchArea.m in Sources */,
+				5A7C7D9521183EF600B3F261 /* MineTalentInfoModel.m in Sources */,
 				2874726320CA78D8004317A5 /* FocusViewChatFocusCell.m in Sources */,
 				286C905220BD5C6E004EBA67 /* MusicSimilarToRecommendCell.m in Sources */,
 				2834847820C63D1200AB6E9A /* MoviesVC.m in Sources */,
@@ -4801,6 +4831,7 @@
 				2875DAA920D3BFEC00D6CAFE /* MineTheIdentityJoinTableViewCell.m in Sources */,
 				28F9969B20A43E2600678494 /* ZLForceTouchPreviewController.m in Sources */,
 				2814621A20B426B6000C5E47 /* FriendsCommentView.m in Sources */,
+				5A7C7D9221181EB400B3F261 /* MineIntefralModel.m in Sources */,
 				5A1DF6BC2112D90300D1FCDF /* CommunityExhibitionIntrouceCell.m in Sources */,
 				28CA5BDA20CE587D00D38F1F /* MineCenterMyCoverCell.m in Sources */,
 				28A6C9D020D8A33700ECBF4F /* MineChooseIndustryTableViewCell.m in Sources */,
@@ -4837,6 +4868,7 @@
 				28CA5BD420CE4A1800D38F1F /* MineEditMyselfCardVC.m in Sources */,
 				2820B08120B5608900EA1DAC /* CommunityHeaderScrollView.m in Sources */,
 				2804BEB420E0E384007E33DE /* MessageSystemActivityCell.m in Sources */,
+				5AFDEE6A21193EDF003AA016 /* MineTalentPassModel.m in Sources */,
 				28A3DC8420A05EE300FEDD62 /* ChangeModelView.m in Sources */,
 				2834849620C63E2E00AB6E9A /* CommunityLiteratureVC.m in Sources */,
 				28EC5F8420DA04000019D4C1 /* MineQuestionHelpVC.m in Sources */,

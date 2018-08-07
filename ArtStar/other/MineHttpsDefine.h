@@ -112,6 +112,54 @@
  @return 编辑/完善个人资料
  */
 #define editPerBnsCard [serverIP stringByAppendingString:@"personalBusinessCard/editPerBnsCard"]
+/**
+ 用户查询自己的积分明细
+
+ @return 用户查询自己的积分明细
+ */
+#define findAllUserIntegral [serverIP stringByAppendingString:@"Collect/findAllUserIntegral"]
+/**
+  做达人审核中的数据
+
+ @return  做达人审核中的数据
+ */
+#define checkunderReviewIssue [serverIP stringByAppendingString:@"mytalent/checkunderReviewIssue"]
+/**
+ 做达人审核通过的数据
+
+ @return 做达人审核通过的数据
+ */
+#define checkPassIssue [serverIP stringByAppendingString:@"mytalent/checkPassIssue"]
+/**
+ 做达人审核未通过的数据
+
+ @return 做达人审核未通过的数据
+ */
+#define checkNoPassIssue [serverIP stringByAppendingString:@"mytalent/checkNoPassIssue"]
+/**
+ 改变做达人发布的信息，在审核中的信息变为审核失败
+
+ @return 改变做达人发布的信息，在审核中的信息变为审核失败
+ */
+#define UpdateunderReviewIssue [serverIP stringByAppendingString:@"mytalent/UpdateunderReviewIssue"]
+/**
+ 批量删除从朋友圈的发布记录表中查出审核通过的达人发布
+
+ @return 批量删除从朋友圈的发布记录表中查出审核通过的达人发布
+ */
+#define deletePassIssue [serverIP stringByAppendingString:@"mytalent/deletePassIssue"]
+/**
+ 星球认证中的身份认证
+
+ @return 星球认证中的身份认证
+ */
+#define celestialBodyAttestation [serverIP stringByAppendingString:@"mytalent/celestialBodyAttestation"]
+/**
+ 对星球认证的数据进行保存
+
+ @return 对星球认证的数据进行保存
+ */
+#define saveCelestialBodyAttestation [serverIP stringByAppendingString:@"mytalent/saveCelestialBodyAttestation"]
 
 
 

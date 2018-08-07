@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineUnitAndPositionTableViewCell : UITableViewCell
+@protocol MineUnitAndPositionTableViewCellDelegate <NSObject>
+
+- (void)sendUnitPosition:(NSString *)unit position:(NSString *)position;
+
+@end
+
+@interface MineUnitAndPositionTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *unitTF;
 @property (weak, nonatomic) IBOutlet UITextField *positionTF;
 
-
+@property (weak, nonatomic) id<MineUnitAndPositionTableViewCellDelegate>delegate;
 
 @end

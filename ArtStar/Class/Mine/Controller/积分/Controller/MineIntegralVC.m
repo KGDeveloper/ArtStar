@@ -15,6 +15,7 @@
 
 @property (nonatomic,strong) MineIntegralHeaderView *headerView;
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,copy) NSArray *dataArr;
 
 @end
 

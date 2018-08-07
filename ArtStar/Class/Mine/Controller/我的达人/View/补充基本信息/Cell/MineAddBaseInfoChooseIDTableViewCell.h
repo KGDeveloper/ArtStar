@@ -11,10 +11,11 @@
 @protocol MineAddBaseInfoChooseIDTableViewCellDelegate <NSObject>
 
 - (void)showChooseCardView;
+- (void)sendIDCardNumber:(NSString *)idCard;
 
 @end
 
-@interface MineAddBaseInfoChooseIDTableViewCell : UITableViewCell
+@interface MineAddBaseInfoChooseIDTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *topLab;
 @property (weak, nonatomic) IBOutlet UILabel *carfLab;

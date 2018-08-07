@@ -11,6 +11,7 @@
 @interface MineChooseCardTypeView ()<UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic,strong) UIPickerView *chooseView;
+@property (nonatomic,copy) NSString *status;
 
 @end
 
@@ -19,6 +20,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+        _status = @"港澳身份证";
         [self setView];
     }
     return self;
@@ -78,7 +80,10 @@
     lab.text = [self pickerView:pickerView titleForRow:row forComponent:component];
     return lab;
 }
-
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    NSArray *arr = @[@"港澳身份证",@"二代身份证",@"台湾身份证"];
+    _status = arr[row];
+}
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     NSArray *arr = @[@"港澳身份证",@"二代身份证",@"台湾身份证"];
     return arr[row];
@@ -89,6 +94,9 @@
 }
 
 - (void)shureClick{
+    if (self.sendIDcardType) {
+        self.sendIDcardType(_status);
+    }
     self.hidden = YES;
 }
 
