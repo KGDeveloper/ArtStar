@@ -87,6 +87,7 @@
         return cell;
     }else if (indexPath.row == 1){
         MineUnitAndPositionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineUnitAndPositionTableViewCell"];
+        cell.delegate = self;
         return cell;
     }else if (indexPath.row == 2){
         MinePushIDCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MinePushIDCardTableViewCell"];
@@ -138,15 +139,21 @@
     }
 }
 - (void)requestData{
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:_dataDic options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *jsonStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在保存上传..."];
+    __weak typeof(self) weakSelf = self;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:[KGUserInfo shareInterace].userTokenCode forKey:@"tokenCode"];
     [parameters setObject:_dataDic forKey:@"authentication"];
     [KGRequestNetWorking postWothUrl:saveCelestialBodyAttestation parameters:parameters succ:^(id result) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"codeo"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"保存成功,请等待审核！" toView:weakSelf.view hideAfter:1];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"保存失败,请查看填写内容" toView:weakSelf.view hideAfter:1];
+        }
     } fail:^(NSError *error) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD bwm_showTitle:@"网络出错" toView:weakSelf.view hideAfter:1];
     }];
 }
 // MARK: --选择行业--
@@ -170,7 +177,7 @@
     if (unit != nil) {
         [_dataDic setObject:unit forKey:@"companyName"];
     }else{
-        [_dataDic setObject:unit forKey:@"position"];
+        [_dataDic setObject:position forKey:@"position"];
     }
 }
 //MARK:--MineChooseIndustryTableViewCellDelegate--

@@ -23,26 +23,44 @@
 - (IBAction)oneClick:(UIButton *)sender {
     [self changeButtonTitle];
     [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+    if ([self.delegate respondsToSelector:@selector(sendChooseResonToController:)]) {
+        [self.delegate sendChooseResonToController:sender.currentTitle];
+    }
 }
 - (IBAction)twoClick:(UIButton *)sender {
     [self changeButtonTitle];
     [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+    if ([self.delegate respondsToSelector:@selector(sendChooseResonToController:)]) {
+        [self.delegate sendChooseResonToController:sender.currentTitle];
+    }
 }
 - (IBAction)threeClick:(UIButton *)sender {
     [self changeButtonTitle];
     [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+    if ([self.delegate respondsToSelector:@selector(sendChooseResonToController:)]) {
+        [self.delegate sendChooseResonToController:sender.currentTitle];
+    }
 }
 - (IBAction)fourClick:(UIButton *)sender {
     [self changeButtonTitle];
     [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+    if ([self.delegate respondsToSelector:@selector(sendChooseResonToController:)]) {
+        [self.delegate sendChooseResonToController:sender.currentTitle];
+    }
 }
 - (IBAction)fiveClick:(UIButton *)sender {
     [self changeButtonTitle];
     [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+    if ([self.delegate respondsToSelector:@selector(sendChooseResonToController:)]) {
+        [self.delegate sendChooseResonToController:sender.currentTitle];
+    }
 }
 - (IBAction)otherClick:(UIButton *)sender {
     [self changeButtonTitle];
     [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+    if ([self.delegate respondsToSelector:@selector(sendChooseResonToController:)]) {
+        [self.delegate sendChooseResonToController:sender.currentTitle];
+    }
 }
 
 - (void)changeButtonTitle{

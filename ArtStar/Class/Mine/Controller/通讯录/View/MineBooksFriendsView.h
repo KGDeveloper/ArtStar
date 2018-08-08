@@ -10,4 +10,6 @@
 
 @interface MineBooksFriendsView : UIView
 
+@property (nonatomic,copy) NSArray *dataArr;
+
 @end

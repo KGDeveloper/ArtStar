@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MineFeedBackChooseTableViewCellDelegate <NSObject>
+
+- (void)sendChooseResonToController:(NSString *)reson;
+
+@end
+
 @interface MineFeedBackChooseTableViewCell : UITableViewCell
+
+@property (nonatomic,weak) id<MineFeedBackChooseTableViewCellDelegate>delegate;
 
 @end

@@ -60,6 +60,7 @@
     _netBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     _netBtu.frame = CGRectMake(50, NavTopHeight + 190, kScreenWidth - 100, 40);
     _netBtu.backgroundColor = Color_999999;
+    _netBtu.enabled = NO;
     [_netBtu setTitle:@"下一步" forState:UIControlStateNormal];
     [_netBtu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _netBtu.titleLabel.font = SYFont(16);
@@ -71,8 +72,25 @@
 }
 
 - (void)nextTouchUpInSide:(UIButton *)sender{
-    _errorLab.hidden = NO;
-    [self pushNoTabBarViewController:[[MineChangePhoneWithPassFinishVC alloc]init] animated:YES];
+//    _errorLab.hidden = NO;
+    if (_passTF.text.length > 1) {
+        __weak typeof(self) weakSelf = self;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [KGRequestNetWorking postWothUrl:checkPasswords parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"password":_passTF.text} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                [weakSelf pushNoTabBarViewController:[[MineChangePhoneWithPassFinishVC alloc]init] animated:YES];
+            }else{
+                weakSelf.errorLab.hidden = NO;
+                [MBProgressHUD bwm_showTitle:@"密码错误" toView:weakSelf.view hideAfter:1];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf.view hideAfter:1];
+        }];
+    }else{
+        [MBProgressHUD bwm_showTitle:@"请输入密码" toView:self.view hideAfter:1];
+    }
 }
 
 - (UIImageView *)setLeftView{
@@ -99,8 +117,9 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField.text.length > 6) {
+    if (textField.text.length > 0) {
         _netBtu.backgroundColor = Color_333333;
+        _netBtu.enabled = YES;
     }
 }
 

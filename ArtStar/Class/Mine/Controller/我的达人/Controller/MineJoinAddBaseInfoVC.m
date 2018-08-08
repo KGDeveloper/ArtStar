@@ -32,7 +32,7 @@
     
     _infoDic = [NSMutableDictionary dictionary];
     [_infoDic setObject:@"二代身份证" forKey:@"papersType"];
-    [_infoDic setObject:[KGUserInfo shareInterace].userName forKey:@"UserNickname"];
+    [_infoDic setObject:[KGUserInfo shareInterace].userName forKey:@"userNickname"];
     [self setTableView];
 }
 

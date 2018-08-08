@@ -160,6 +160,42 @@
  @return 对星球认证的数据进行保存
  */
 #define saveCelestialBodyAttestation [serverIP stringByAppendingString:@"mytalent/saveCelestialBodyAttestation"]
+/**
+ 接收页面传过来的密码去数据库查询该密码是否正确
+
+ @return 接收页面传过来的密码去数据库查询该密码是否正确
+ */
+#define checkPasswords [serverIP stringByAppendingString:@"Setting/checkPasswords"]
+/**
+ 接收页面的验证码，判断验证码是否正确
+
+ @return 接收页面的验证码，判断验证码是否正确
+ */
+#define SendVerificationNumbers [serverIP stringByAppendingString:@"Setting/SendVerificationNumbers"]
+/**
+ 对用户密码进行修改
+
+ @return 对用户密码进行修改
+ */
+#define SendPassWords [serverIP stringByAppendingString:@"Setting/SendPassWords"]
+/**
+ 对反馈进行保存
+
+ @return 对反馈进行保存
+ */
+#define AddRetroactions [serverIP stringByAppendingString:@"Setting/AddRetroactions"]
+/**
+ 我的——通讯录
+
+ @return 我的——通讯录
+ */
+#define findAllUserAssociated [serverIP stringByAppendingString:@"Collect/findAllUserAssociated"]
+/**
+ 置顶好友的方法
+
+ @return 置顶好友的方法
+ */
+#define topfriends [serverIP stringByAppendingString:@"Collect/topfriends"]
 
 
 

@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MineFeedBackPictureTableViewCellDelegate <NSObject>
+
+- (void)chooseImage;
+
+@end
+
 @interface MineFeedBackPictureTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIScrollView *backView;
 @property (weak, nonatomic) IBOutlet UILabel *countLab;
 @property (nonatomic,copy) NSArray *photosArr;
+
+@property (nonatomic,weak) id<MineFeedBackPictureTableViewCellDelegate>delegate;
 
 @end

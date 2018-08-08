@@ -9,7 +9,7 @@
 #import "MineBooksFocusView.h"
 #import "MineBooksFriendsTableViewCell.h"
 
-@interface MineBooksFocusView ()<UITableViewDelegate,UITableViewDataSource>
+@interface MineBooksFocusView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) UIButton *leftBtu;
@@ -60,6 +60,8 @@
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 50, ViewWidth(self), ViewHeight(self) - 50)];
     _listView.delegate = self;
     _listView.dataSource = self;
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
     _listView.rowHeight = 70;
     _listView.tableFooterView = TabLeViewFootView;
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -69,7 +71,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    if (_isNews == YES) {
+        return _newsArr.count;
+    }else{
+        return _peopleArr.count;
+    }
 }
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -123,6 +129,27 @@
         self.line.centerX = sender.centerX;
     }];
     _isNews = YES;
+    [_listView reloadData];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"没有数据哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
+}
+
+- (void)setPeopleArr:(NSArray *)peopleArr{
+    _peopleArr = peopleArr;
+    [_listView reloadData];
+}
+- (void)setNewsArr:(NSArray *)newsArr{
+    _newsArr = newsArr;
     [_listView reloadData];
 }
 

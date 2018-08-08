@@ -19,12 +19,20 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField isEqual:_unitTF]) {
-        if ([self.delegate respondsToSelector:@selector(sendUnitPosition:position:)]) {
-            [self.delegate sendUnitPosition:nil position:textField.text];
+        if (textField.text.length < 1) {
+            [MBProgressHUD bwm_showTitle:@"请输入单位名称" toView:self hideAfter:1];
+        }else{
+            if ([self.delegate respondsToSelector:@selector(sendUnitPosition:position:)]) {
+                [self.delegate sendUnitPosition:textField.text position:nil];
+            }
         }
     }else{
-        if ([self.delegate respondsToSelector:@selector(sendUnitPosition:position:)]) {
-            [self.delegate sendUnitPosition:textField.text position:nil];
+        if (textField.text.length < 1) {
+            [MBProgressHUD bwm_showTitle:@"请输入职位名称" toView:self hideAfter:1];
+        }else{
+            if ([self.delegate respondsToSelector:@selector(sendUnitPosition:position:)]) {
+                [self.delegate sendUnitPosition:nil position:textField.text];
+            }
         }
     }
 }

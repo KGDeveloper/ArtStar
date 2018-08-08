@@ -15,14 +15,43 @@
 @interface MineTheAddressBookVC ()
 
 @property (nonatomic,strong) UIView *topView;
+/**
+ 好友按钮
+ */
 @property (nonatomic,strong) MineBookButtonView *leftBtu;
+/**
+ 关注按钮
+ */
 @property (nonatomic,strong) MineBookButtonView *centerBtu;
+/**
+ 粉丝按钮
+ */
 @property (nonatomic,strong) MineBookButtonView *rightBtu;
 @property (nonatomic,strong) UIView *line;
-
+/**
+ 好友列表
+ */
 @property (nonatomic,strong) MineBooksFriendsView *friendsView;
+/**
+ 关注列表
+ */
 @property (nonatomic,strong) MineBooksFansView *fansView;
+/**
+ 粉丝列表
+ */
 @property (nonatomic,strong) MineBooksFocusView *foucsView;
+/**
+ 保存粉丝数据
+ */
+@property (nonatomic,copy) NSArray *fansArr;
+/**
+ 保存好友数据
+ */
+@property (nonatomic,copy) NSArray *friendArr;
+/**
+ 保存关注数据
+ */
+@property (nonatomic,copy) NSArray *attentionArr;
 
 
 @end
@@ -35,7 +64,33 @@
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"搜索")];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self createData];
     [self setTopTouchView];
+}
+// MARK: --请求好友列表--
+- (void)createData{
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:findAllUserAssociated parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmpArr = result[@"data"];
+            NSDictionary *dic = [tmpArr firstObject];
+            if (dic[@"fans"]) {
+                weakSelf.fansArr = dic[@"fans"];
+                weakSelf.rightBtu.count = [NSString stringWithFormat:@"%li",weakSelf.fansArr.count];
+            }
+            if (dic[@"attention"]) {
+                weakSelf.attentionArr = dic[@"attention"];
+                weakSelf.centerBtu.count = [NSString stringWithFormat:@"%li",weakSelf.attentionArr.count];
+            }
+            if (dic[@"friend"]) {
+                weakSelf.friendArr = dic[@"friend"];
+                weakSelf.leftBtu.count = [NSString stringWithFormat:@"%li",weakSelf.friendArr.count];
+                weakSelf.friendsView.dataArr = weakSelf.friendArr.copy;
+            }
+        }
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 - (void)setTopTouchView{

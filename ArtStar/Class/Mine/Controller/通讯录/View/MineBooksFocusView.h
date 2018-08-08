@@ -10,4 +10,7 @@
 
 @interface MineBooksFocusView : UIView
 
+@property (nonatomic,copy) NSArray *peopleArr;
+@property (nonatomic,copy) NSArray *newsArr;
+
 @end

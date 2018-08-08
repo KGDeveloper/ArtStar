@@ -38,7 +38,7 @@
 }
 
 - (void)setUI{
-    
+    //:--旧密码输入框--
     _oldPass = [[MinePasswordTF alloc]initWithFrame:CGRectMake(50, NavTopHeight + 100, kScreenWidth - 100, 30)];
     _oldPass.leftView = [self setLeftView];
     _oldPass.rightView = [self setRightView];
@@ -54,7 +54,7 @@
     UIView *topline = [[UIView alloc]initWithFrame:CGRectMake(50, NavTopHeight + 140, kScreenWidth - 100, 1)];
     topline.backgroundColor = Color_ededed;
     [self.view addSubview:topline];
-    
+    //:--新密码输入框--
     _firstNewPass = [[MinePasswordTF alloc]initWithFrame:CGRectMake(50, NavTopHeight + 150, kScreenWidth - 100, 30)];
     _firstNewPass.leftView = [self setLeftView];
     _firstNewPass.rightView = [self setRightView];
@@ -70,7 +70,7 @@
     UIView *centerline = [[UIView alloc]initWithFrame:CGRectMake(50, NavTopHeight + 190, kScreenWidth - 100, 1)];
     centerline.backgroundColor = Color_ededed;
     [self.view addSubview:centerline];
-    
+    //:--新密码确认输入框--
     _secondNewPass = [[MinePasswordTF alloc]initWithFrame:CGRectMake(50, NavTopHeight + 200, kScreenWidth - 100, 30)];
     _secondNewPass.leftView = [self setLeftView];
     _secondNewPass.rightView = [self setRightView];
@@ -86,17 +86,18 @@
     UIView *lowline = [[UIView alloc]initWithFrame:CGRectMake(50, NavTopHeight + 240, kScreenWidth - 100, 1)];
     lowline.backgroundColor = Color_ededed;
     [self.view addSubview:lowline];
-    
+    //:--提示文字--
     _errorLab = [[UILabel alloc]initWithFrame:CGRectMake(50, NavTopHeight + 245, kScreenWidth - 100, 11)];
     _errorLab.text = @"新密码输入错误";
     _errorLab.font = SYFont(11);
     _errorLab.textColor = [UIColor colorWithHexString:@"#ff6666"];
     _errorLab.hidden = YES;
     [self.view addSubview:_errorLab];
-    
+    //:--下一步按钮，在这里先关闭交互，防止程序请求奔溃--
     _finishBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishBtu.frame = CGRectMake(50, NavTopHeight + 290, kScreenWidth - 100, 40);
     _finishBtu.backgroundColor = Color_999999;
+    _finishBtu.enabled = NO;
     [_finishBtu setTitle:@"提交" forState:UIControlStateNormal];
     [_finishBtu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _finishBtu.titleLabel.font = SYFont(16);
@@ -147,9 +148,60 @@
         }
     }
 }
-
+// MARK: --先请求旧密码是否正确--
 - (void)nextTouchUpInSide:(UIButton *)sender{
-    
+    if ([_firstNewPass.text isEqualToString:_secondNewPass.text]) {
+        __weak typeof(self) weakSelf = self;
+        [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在验证旧密码..."];
+        [KGRequestNetWorking postWothUrl:checkPasswords parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"password":_oldPass.text} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                [weakSelf questChangePassWord];
+            }else{
+                [MBProgressHUD bwm_showTitle:@"旧密码错误" toView:weakSelf.view hideAfter:1];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf.view hideAfter:1];
+        }];
+    }else{
+        [MBProgressHUD bwm_showTitle:@"新密码两次输入不一致" toView:self.view hideAfter:1];
+    }
+}
+// MARK: --旧密码验证通过后，修改新密码--
+- (void)questChangePassWord{
+    __weak typeof(self) weakSelf = self;
+    [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在修改密码..."];
+    [KGRequestNetWorking postWothUrl:SendPassWords parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"password":_firstNewPass.text} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"您的登录密码已修改，请下次使用新的登录密码" toView:weakSelf.view hideAfter:1];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"修改失败" toView:weakSelf.view hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf.view hideAfter:1];
+    }];
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (_oldPass.text.length > 1) {
+        if (_firstNewPass.text.length > 1) {
+            if (_secondNewPass.text.length > 1) {
+                _finishBtu.backgroundColor = Color_333333;
+                _finishBtu.enabled = YES;
+            }else{
+                _finishBtu.backgroundColor = Color_999999;
+                _finishBtu.enabled = NO;
+            }
+        }else{
+            _finishBtu.backgroundColor = Color_999999;
+            _finishBtu.enabled = NO;
+        }
+    }else{
+        _finishBtu.backgroundColor = Color_999999;
+        _finishBtu.enabled = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
