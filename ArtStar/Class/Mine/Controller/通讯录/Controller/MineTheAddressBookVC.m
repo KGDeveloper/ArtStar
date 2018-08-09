@@ -121,6 +121,7 @@
         mySelf.rightBtu.btuColor = Color_999999;
         [mySelf changeLineOriginX:mySelf.centerBtu];
         [mySelf.view bringSubviewToFront:mySelf.foucsView];
+        mySelf.foucsView.peopleArr = mySelf.attentionArr;
     };
     [_topView addSubview:_centerBtu];
     
@@ -134,6 +135,7 @@
         mySelf.leftBtu.btuColor = Color_999999;
         [mySelf changeLineOriginX:mySelf.rightBtu];
         [mySelf.view bringSubviewToFront:mySelf.fansView];
+        mySelf.fansView.dataArr = mySelf.fansArr;
     };
     [_topView addSubview:_rightBtu];
     

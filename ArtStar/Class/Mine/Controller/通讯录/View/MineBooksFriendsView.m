@@ -12,6 +12,7 @@
 @interface MineBooksFriendsView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) NSMutableArray *friendsArr;
 
 @end
 
@@ -19,6 +20,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        _friendsArr = [NSMutableArray array];
         [self setTableView];
     }
     return self;
@@ -39,19 +41,35 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _dataArr.count;
+    return _friendsArr.count;
 }
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    NSDictionary *dic = _dataArr[indexPath.row];
+    __block NSDictionary *dic = _friendsArr[indexPath.row];
     __weak typeof(self) weakSelf = self;
-    UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        [KGRequestNetWorking postWothUrl:topfriends parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"zid":dic[@"id"]} succ:^(id result) {
-            
-        } fail:^(NSError *error) {
-            
-        }];
-    }];
-    topAction.backgroundColor = Color_999999;
+//    if (indexPath.row == 0) {
+//        UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//            [KGRequestNetWorking postWothUrl:topfriends parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"zid":dic[@"id"]} succ:^(id result) {
+//                if ([result[@"code"] integerValue] == 200) {
+//                    [weakSelf.friendsArr objectAtIndex:0];
+//                    [weakSelf.listView reloadData];
+//                }
+//            } fail:^(NSError *error) {
+//
+//            }];
+//        }];
+//    }else{
+//        UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//            [KGRequestNetWorking postWothUrl:topfriends parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"zid":dic[@"id"]} succ:^(id result) {
+//                if ([result[@"code"] integerValue] == 200) {
+//                    [weakSelf.friendsArr objectAtIndex:0];
+//                    [weakSelf.listView reloadData];
+//                }
+//            } fail:^(NSError *error) {
+//
+//            }];
+//        }];
+//    }
+//    topAction.backgroundColor = Color_999999;
     
     UITableViewRowAction *nikeNameAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"备注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
@@ -62,12 +80,12 @@
         
     }];
     cancleAction.backgroundColor = Color_333333;
-    return @[cancleAction,nikeNameAction,topAction];
+    return @[cancleAction,nikeNameAction];//topAction
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineBooksFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineBooksFriendsTableViewCell"];
     cell.foucsBtu.hidden = YES;
-    NSDictionary *dic = _dataArr[indexPath.row];
+    NSDictionary *dic = _friendsArr[indexPath.row];
     cell.nameLab.text = dic[@"username"];
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     return cell;
@@ -86,6 +104,7 @@
 
 - (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
+    _friendsArr = [NSMutableArray arrayWithArray:dataArr];
     [_listView reloadData];
 }
 

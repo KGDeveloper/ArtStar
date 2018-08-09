@@ -12,7 +12,7 @@
 #import "HeadLinesDetaialCommentCell.h"
 #import "CommenityDetailCommentModel.h"
 
-@interface HeadLinesNewsDetailAndCommentVC ()<UITableViewDelegate,UITableViewDataSource,ReportViewDelegate>
+@interface HeadLinesNewsDetailAndCommentVC ()<UITableViewDelegate,UITableViewDataSource,ReportViewDelegate,HeadLinesDetaialCommentCellDelegate>
 
 /**
  筛选框
@@ -74,7 +74,7 @@
                 NSDictionary *dic = arr[i];
                 CommenityDetailCommentModel *model = [CommenityDetailCommentModel mj_objectWithKeyValues:dic];
                 [mySelf.commentArr addObject:model];
-                [mySelf.listView reloadData];
+                [mySelf.listView reloadSection:1 withRowAnimation:UITableViewRowAnimationAutomatic];
             }
         }
     } fail:^(NSError *error) {
@@ -85,12 +85,14 @@
 - (void)createData{
     [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在加载详情..."];
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:selectNewsByUid parameters:@{@"nid":_ID} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:selectNewsByUid parameters:@{@"nid":_ID,@"uid":[KGUserInfo shareInterace].userID} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
-        mySelf.model = result;
-        mySelf.dataArr = [NSMutableArray arrayWithArray:mySelf.model[@"contentImg"]];
-        mySelf.listView.tableHeaderView = [mySelf tableViewHeader];
-        [mySelf.listView reloadData];
+        if ([result[@"code"] integerValue] == 200) {
+            mySelf.model = [result[@"data"] firstObject];
+            mySelf.dataArr = [NSMutableArray arrayWithArray:mySelf.model[@"contentImg"]];
+            mySelf.listView.tableHeaderView = [mySelf tableViewHeader];
+            [mySelf.listView reloadData];
+        }
     } fail:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
     }];
@@ -229,9 +231,21 @@
         cell.nikName.text = model.username;
         cell.timeLab.text = model.pltime;
         cell.commentLab.text = model.pinglun;
+        cell.delegate = self;
+        cell.cellID = [model.ID integerValue];
         [cell.zansBtu setTitle:[NSString stringWithFormat:@"%@",model.zansum] forState:UIControlStateNormal];
         return cell;
     }
+}
+// MARK: --HeadLinesDetaialCommentCellDelegate--
+- (void)zansCommentWithID:(NSInteger)ID withStyle:(NSString *)style{
+    [KGRequestNetWorking postWothUrl:dianComment parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"cid":[NSString stringWithFormat:@"%li",ID],@"zantype":style} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            [self createCommentArrData];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
 }
 //:--新闻详情头--
 - (UIView *)tableViewHeader{

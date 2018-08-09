@@ -104,6 +104,9 @@
     }else{
         cell.foucsBtu.hidden = YES;
         cell.imageWidth.constant = 40;
+        NSDictionary *dic = _peopleArr[indexPath.row];
+        cell.nameLab.text = dic[@"username"];
+        [cell.headImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     }
     return cell;
 }

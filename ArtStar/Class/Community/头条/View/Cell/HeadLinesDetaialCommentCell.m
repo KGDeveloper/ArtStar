@@ -14,8 +14,14 @@
 - (IBAction)zansAction:(UIButton *)sender {
     if ([sender.currentImage isEqual:Image(@"点赞")]) {
         [sender setImage:Image(@"点赞选中") forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(zansCommentWithID:withStyle:)]) {
+            [self.delegate zansCommentWithID:_cellID withStyle:@"1"];
+        }
     }else{
         [sender setImage:Image(@"点赞") forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(zansCommentWithID:withStyle:)]) {
+            [self.delegate zansCommentWithID:_cellID withStyle:@"0"];
+        }
     }
 }
 
