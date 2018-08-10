@@ -15,6 +15,11 @@
     
     // Initialization code
 }
+- (IBAction)foucsAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(foucsActionWithID:)]) {
+        [self.delegate foucsActionWithID:_ID];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

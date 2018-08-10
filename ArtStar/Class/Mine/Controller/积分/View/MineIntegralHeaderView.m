@@ -78,6 +78,10 @@
     _integralBtu.sd_layout.leftSpaceToView(self, ViewWidth(self)/2 - 52).topSpaceToView(_integralLab,25).widthIs(105).heightIs(28);
     
 }
+- (void)setCount:(NSInteger)count{
+    _count = count;
+    _integralLab.text = [NSString stringWithFormat:@"%li",count];
+}
 - (void)leftAction{
     if (self.doTaskWithTitle) {
         self.doTaskWithTitle(@"返回");

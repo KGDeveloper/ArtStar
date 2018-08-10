@@ -11,6 +11,9 @@
 @implementation MineIntegraltableViewCell
 
 - (IBAction)doTask:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(clickBtuToDoSomeThing:)]) {
+        [self.delegate clickBtuToDoSomeThing:[[_titleLab.text componentsSeparatedByString:@" "] firstObject]];
+    }
 }
 
 

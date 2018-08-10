@@ -10,4 +10,6 @@
 
 @interface TalentVC : BaseVC
 
+@property (nonatomic,copy) NSString *status;
+
 @end

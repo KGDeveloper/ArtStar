@@ -8,6 +8,7 @@
 
 #import "MineBooksFriendsView.h"
 #import "MineBooksFriendsTableViewCell.h"
+#import "AppDelegate.h"
 
 @interface MineBooksFriendsView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -44,43 +45,23 @@
     return _friendsArr.count;
 }
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    __block NSDictionary *dic = _friendsArr[indexPath.row];
     __weak typeof(self) weakSelf = self;
-//    if (indexPath.row == 0) {
-//        UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-//            [KGRequestNetWorking postWothUrl:topfriends parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"zid":dic[@"id"]} succ:^(id result) {
-//                if ([result[@"code"] integerValue] == 200) {
-//                    [weakSelf.friendsArr objectAtIndex:0];
-//                    [weakSelf.listView reloadData];
-//                }
-//            } fail:^(NSError *error) {
-//
-//            }];
-//        }];
-//    }else{
-//        UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-//            [KGRequestNetWorking postWothUrl:topfriends parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID,@"zid":dic[@"id"]} succ:^(id result) {
-//                if ([result[@"code"] integerValue] == 200) {
-//                    [weakSelf.friendsArr objectAtIndex:0];
-//                    [weakSelf.listView reloadData];
-//                }
-//            } fail:^(NSError *error) {
-//
-//            }];
-//        }];
-//    }
-//    topAction.backgroundColor = Color_999999;
-    
-    UITableViewRowAction *nikeNameAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"备注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
-    }];
-    nikeNameAction.backgroundColor = Color_999999;
     
     UITableViewRowAction *cancleAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
+        NSDictionary *dic = weakSelf.dataArr[indexPath.row];
+        [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":dic[@"id"]} succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                [MBProgressHUD bwm_showTitle:@"操作成功" toView:weakSelf hideAfter:1];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshBooks" object:@{@"type":@"1"}];
+            }else{
+                [MBProgressHUD bwm_showTitle:@"操作失败" toView:weakSelf hideAfter:1];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf hideAfter:1];
+        }];
     }];
     cancleAction.backgroundColor = Color_333333;
-    return @[cancleAction,nikeNameAction];//topAction
+    return @[cancleAction];//topAction
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineBooksFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineBooksFriendsTableViewCell"];
@@ -106,6 +87,17 @@
     _dataArr = dataArr;
     _friendsArr = [NSMutableArray arrayWithArray:dataArr];
     [_listView reloadData];
+}
+// MARK: --获取控制器--
+- (UIViewController *)supViewController{
+    id target = self;
+    while (target) {
+        target = ((UIResponder *)target).nextResponder;
+        if ([target isKindOfClass:[UIViewController class]]) {
+            break;
+        }
+    }
+    return target;
 }
 
 

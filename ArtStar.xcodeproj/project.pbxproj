@@ -509,6 +509,7 @@
 		5A1DF6C22112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C02112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib */; };
 		5A1DF6C62112E80000D1FCDF /* CommunityExhibitionWorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */; };
 		5A1DF6C72112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */; };
+		5A618874211D44AC002E7E51 /* MineReleaseHositryPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */; };
 		5A7C7D9221181EB400B3F261 /* MineIntefralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */; };
 		5A7C7D9521183EF600B3F261 /* MineTalentInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */; };
 		5AB355D921105E9C00E10353 /* CommunityExhibitionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */; };
@@ -1436,6 +1437,8 @@
 		5A1DF6C32112E80000D1FCDF /* CommunityExhibitionWorkerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionWorkerCell.h; sourceTree = "<group>"; };
 		5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionWorkerCell.m; sourceTree = "<group>"; };
 		5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionWorkerCell.xib; sourceTree = "<group>"; };
+		5A618872211D44AC002E7E51 /* MineReleaseHositryPictureModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineReleaseHositryPictureModel.h; sourceTree = "<group>"; };
+		5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineReleaseHositryPictureModel.m; sourceTree = "<group>"; };
 		5A7C7D9021181EB400B3F261 /* MineIntefralModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineIntefralModel.h; sourceTree = "<group>"; };
 		5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineIntefralModel.m; sourceTree = "<group>"; };
 		5A7C7D9321183EF600B3F261 /* MineTalentInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTalentInfoModel.h; sourceTree = "<group>"; };
@@ -3734,6 +3737,8 @@
 		5A05B0A02114588300D1F876 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5A618872211D44AC002E7E51 /* MineReleaseHositryPictureModel.h */,
+				5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4952,6 +4957,7 @@
 				28F996AB20A43E2600678494 /* ZLThumbnailViewController.m in Sources */,
 				5A1C18FE2110020F00E6CCFF /* CommunityExhibitionModel.m in Sources */,
 				280601AB20B7FF790090254E /* HeadLinesNormalCell.m in Sources */,
+				5A618874211D44AC002E7E51 /* MineReleaseHositryPictureModel.m in Sources */,
 				28BF33D520C51C7000598919 /* MyselfWordArticleView.m in Sources */,
 				2868408120B287E800441926 /* FriendsThemeButtomImageCell.m in Sources */,
 				2820B08A20B57CEA00EA1DAC /* CommunityShieldingView.m in Sources */,

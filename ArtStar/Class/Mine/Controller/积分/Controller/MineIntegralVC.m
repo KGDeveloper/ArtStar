@@ -10,12 +10,13 @@
 #import "MineIntegralHeaderView.h"
 #import "MineIntegraltableViewCell.h"
 #import "MineIntegralDetailVC.h"
+#import "TalentVC.h"
 
-@interface MineIntegralVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface MineIntegralVC ()<UITableViewDelegate,UITableViewDataSource,MineIntegraltableViewCellDelegate>
 
 @property (nonatomic,strong) MineIntegralHeaderView *headerView;
 @property (nonatomic,strong) UITableView *listView;
-@property (nonatomic,copy) NSArray *dataArr;
+@property (nonatomic,copy) NSDictionary *dataDic;
 
 @end
 
@@ -34,7 +35,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self createData];
     [self setTableView];
+}
+
+- (void)createData{
+    __weak typeof(self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [KGRequestNetWorking postWothUrl:findUserIntegral parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            weakSelf.dataDic = [tmp firstObject];
+            weakSelf.headerView.count = [weakSelf.dataDic[@"count"] integerValue];
+            [weakSelf.listView reloadData];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
 }
 
 - (void)setTableView{
@@ -70,7 +88,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40;
@@ -88,7 +106,27 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineIntegraltableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineIntegraltableViewCell"];
+    if (indexPath.row == 0) {
+        cell.titleLab.text = @"登录  +2";
+        [cell.statusBtu setTitle:_dataDic[@"long"] forState:UIControlStateNormal];
+    }else if (indexPath.row == 1){
+        cell.titleLab.text = @"做达人  +100";
+        [cell.statusBtu setTitle:@"去完成" forState:UIControlStateNormal];
+    }else{
+        cell.titleLab.text = @"发布  +10";
+        [cell.statusBtu setTitle:_dataDic[@"fabu"] forState:UIControlStateNormal];
+    }
+    cell.delegate = self;
     return cell;
+}
+// MARK: --MineIntegraltableViewCellDelegate--
+- (void)clickBtuToDoSomeThing:(NSString *)someThing{
+    if ([someThing isEqualToString:@"做达人"]) {
+        TalentVC *vc = [[TalentVC alloc] init];
+        [self pushNoTabBarViewController:vc animated:YES];
+    }else if ([someThing isEqualToString:@"发布"]){
+        [MBProgressHUD bwm_showTitle:@"请点击主界面中间的加号选择发布类型" toView:self.view hideAfter:1];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

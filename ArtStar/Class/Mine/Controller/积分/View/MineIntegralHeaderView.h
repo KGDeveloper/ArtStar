@@ -10,6 +10,7 @@
 
 @interface MineIntegralHeaderView : UIView
 
+@property (nonatomic,assign) NSInteger count;
 @property (nonatomic,copy) void(^doTaskWithTitle)(NSString *title);
 
 @end

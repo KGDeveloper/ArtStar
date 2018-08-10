@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MineIntegraltableViewCellDelegate <NSObject>
+
+- (void)clickBtuToDoSomeThing:(NSString *)someThing;
+
+@end
+
 @interface MineIntegraltableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIButton *statusBtu;
+@property (nonatomic,weak) id<MineIntegraltableViewCellDelegate>delegate;
 
 
 @end

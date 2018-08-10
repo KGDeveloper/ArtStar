@@ -14,7 +14,9 @@
 #import "ReportView.h"
 
 
-//MARK:----------------------------------------------------------------------------------------
+//MARK:--查找聊天记录--
 #import "KGSearchChatHistoryView.h"
+// MARK: --设置备注--
+#import "MsgTapNoteVC.h"
 
 #endif /* MineHeader_h */

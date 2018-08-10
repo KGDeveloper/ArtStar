@@ -191,12 +191,29 @@
  */
 #define findAllUserAssociated [serverIP stringByAppendingString:@"Collect/findAllUserAssociated"]
 /**
- 置顶好友的方法
+ 积分的首页
 
- @return 置顶好友的方法
+ @return 积分的首页
  */
-#define topfriends [serverIP stringByAppendingString:@"Collect/topfriends"]
+#define findUserIntegral [serverIP stringByAppendingString:@"Collect/findUserIntegral"]
+/**
+ 发布记录
 
+ @return 发布记录
+ */
+#define seachIssueRecord [serverIP stringByAppendingString:@"issueRecord/seachIssueRecord"]
+/**
+ 设置好友的备注
+
+ @return 设置好友的备注
+ */
+#define friendRemarks [serverIP stringByAppendingString:@"Collect/friendRemarks"]
+/**
+ 关注
+
+ @return 关注
+ */
+#define attorcel [serverIP stringByAppendingString:@"attention/attorcel"]
 
 
 #endif /* MineHttpsDefine_h */

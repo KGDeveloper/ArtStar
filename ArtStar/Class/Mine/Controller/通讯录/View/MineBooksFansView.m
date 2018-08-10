@@ -9,7 +9,7 @@
 #import "MineBooksFansView.h"
 #import "MineBooksFriendsTableViewCell.h"
 
-@interface MineBooksFansView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+@interface MineBooksFansView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,MineBooksFriendsTableViewCellDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 
@@ -48,9 +48,24 @@
     NSDictionary *dic = _dataArr[indexPath.row];
     cell.nameLab.text = dic[@"username"];
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+    cell.delegate = self;
+    cell.ID = [NSString stringWithFormat:@"%@",dic[@"id"]];
     return cell;
 }
-
+// MARK: --MineBooksFriendsTableViewCellDelegate--
+- (void)foucsActionWithID:(NSString *)ID{
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":ID} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"操作成功" toView:weakSelf hideAfter:1];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshBooks" object:@{@"type":@"4"}];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"操作失败" toView:weakSelf hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf hideAfter:1];
+    }];
+}
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return Image(@"空空如也");
 }
@@ -66,6 +81,18 @@
 - (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
     [_listView reloadData];
+}
+
+// MARK: --获取控制器--
+- (UIViewController *)supViewController{
+    id target = self;
+    while (target) {
+        target = ((UIResponder *)target).nextResponder;
+        if ([target isKindOfClass:[UIViewController class]]) {
+            break;
+        }
+    }
+    return target;
 }
 
 /*

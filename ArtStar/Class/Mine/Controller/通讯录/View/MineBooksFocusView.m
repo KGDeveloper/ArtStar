@@ -78,21 +78,38 @@
     }
 }
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
-    }];
-    topAction.backgroundColor = Color_999999;
-    
-    UITableViewRowAction *nikeNameAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"备注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
-    }];
-    nikeNameAction.backgroundColor = Color_999999;
+
+    __weak typeof(self) weakSelf = self;
     
     UITableViewRowAction *cancleAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
+        if (weakSelf.isNews == YES) {
+            NSDictionary *dic = weakSelf.newsArr[indexPath.row];
+            [KGRequestNetWorking postWothUrl:delAttentions parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"zid":dic[@"id"]} succ:^(id result) {
+                if ([result[@"code"] integerValue] == 200) {
+                    [MBProgressHUD bwm_showTitle:@"操作成功" toView:weakSelf hideAfter:1];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshBooks" object:@{@"type":@"3"}];
+                }else{
+                    [MBProgressHUD bwm_showTitle:@"操作失败" toView:weakSelf hideAfter:1];
+                }
+            } fail:^(NSError *error) {
+                [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf hideAfter:1];
+            }];
+        }else{
+            NSDictionary *dic = weakSelf.peopleArr[indexPath.row];
+            [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":dic[@"id"]} succ:^(id result) {
+                if ([result[@"code"] integerValue] == 200) {
+                    [MBProgressHUD bwm_showTitle:@"操作成功" toView:weakSelf hideAfter:1];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshBooks" object:@{@"type":@"2"}];
+                }else{
+                    [MBProgressHUD bwm_showTitle:@"操作失败" toView:weakSelf hideAfter:1];
+                }
+            } fail:^(NSError *error) {
+                [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf hideAfter:1];
+            }];
+        }
     }];
     cancleAction.backgroundColor = Color_333333;
-    return @[cancleAction,nikeNameAction,topAction];
+    return @[cancleAction];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineBooksFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineBooksFriendsTableViewCell"];
@@ -154,6 +171,18 @@
 - (void)setNewsArr:(NSArray *)newsArr{
     _newsArr = newsArr;
     [_listView reloadData];
+}
+
+// MARK: --获取控制器--
+- (UIViewController *)supViewController{
+    id target = self;
+    while (target) {
+        target = ((UIResponder *)target).nextResponder;
+        if ([target isKindOfClass:[UIViewController class]]) {
+            break;
+        }
+    }
+    return target;
 }
 
 /*

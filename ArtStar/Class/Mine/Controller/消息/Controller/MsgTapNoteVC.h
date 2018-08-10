@@ -10,6 +10,8 @@
 
 @interface MsgTapNoteVC : BaseVC
 
+@property (nonatomic,copy) NSString *userID;
+@property (nonatomic,copy) NSString *type;
 @property (nonatomic,copy) void(^sendNoteName)(NSString *noteName);
 
 @end

@@ -161,13 +161,17 @@
         _stutaView = [[MineOnlineOrStealthView alloc]initWithFrame:CGRectMake(ViewWidth(self) - 55, NavTopHeight + 16, 40, 40)];
         __weak typeof(self) mySelf = self;
         _stutaView.touchUpBtu = ^(NSString *status) {
-            [mySelf.statuBtu setTitle:status forState:UIControlStateNormal];
+            [mySelf changeStatusWithStatus:status];
         };
         [self insertSubview:_stutaView atIndex:99];
     }
     return _stutaView;
 }
-
+- (void)changeStatusWithStatus:(NSString *)status{
+    __weak typeof(self) weakSelf = self;
+//    KGRequestNetWorking postWothUrl:<#(NSString *)#> parameters:<#(NSDictionary *)#> succ:<#^(id result)succ#> fail:<#^(NSError *error)fail#>
+//    [mySelf.statuBtu setTitle:status forState:UIControlStateNormal];
+}
 - (void)intoMySelfCenter{
     if (self.pushIntoMyselfCenter) {
         self.pushIntoMyselfCenter();

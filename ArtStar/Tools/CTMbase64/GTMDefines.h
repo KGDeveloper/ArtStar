@@ -104,35 +104,9 @@
 #define GTM_UNUSED(x) ((void)(x))
 #endif
 
-// _GTMDevLog & _GTMDevAssert
-//
-// _GTMDevLog & _GTMDevAssert are meant to be a very lightweight shell for
-// developer level errors.  This implementation simply macros to NSLog/NSAssert.
-// It is not intended to be a general logging/reporting system.
-//
-// Please see http://code.google.com/p/google-toolbox-for-mac/wiki/DevLogNAssert
-// for a little more background on the usage of these macros.
-//
-//    _GTMDevLog           log some error/problem in debug builds
-//    _GTMDevAssert        assert if conditon isn't met w/in a method/function
-//                           in all builds.
-//
-// To replace this system, just provide different macro definitions in your
-// prefix header.  Remember, any implementation you provide *must* be thread
-// safe since this could be called by anything in what ever situtation it has
-// been placed in.
-//
+
 
 // We only define the simple macros if nothing else has defined this.
-#ifndef _GTMDevLog
-
-#ifdef DEBUG
-#define _GTMDevLog(...) NSLog(__VA_ARGS__)
-#else
-#define _GTMDevLog(...) do { } while (0)
-#endif
-
-#endif // _GTMDevLog
 
 #ifndef _GTMDevAssert
 // we directly invoke the NSAssert handler so we can pass on the varargs

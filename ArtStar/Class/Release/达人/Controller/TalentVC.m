@@ -18,17 +18,45 @@
 @interface TalentVC ()<UITableViewDelegate,UITableViewDataSource,TlentIntroudceTableViewCellDelegate,UITextFieldDelegate,KGCameraDelegate,TalentPushPhotosTableViewCellDelegate,AMapSearchDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
+/**
+ cell的标题数组
+ */
 @property (nonatomic,copy) NSArray *plholderArr;
+/**
+ 请求参数
+ */
 @property (nonatomic,strong) NSMutableDictionary *parasmart;
+/**
+ 用来监测点击的是哪个cell上的输入框
+ */
 @property (nonatomic,strong) UITextField *cellTF;
+/**
+ 选择拍摄还是选择的弹窗
+ */
 @property (nonatomic,strong) KGCamera *cameraView;
+/**
+ 用来区分选择照片以及拍摄时时视频还是照片
+ */
 @property (nonatomic,assign) NSInteger type;
-
+/**
+ 保存选择或者拍摄的照片的数组
+ */
 @property (nonatomic,strong) NSMutableArray *imageArr;
+/**
+ 保存选择或者拍摄的照片上传完成后的地址的数组
+ */
 @property (nonatomic,strong) NSMutableArray *dataImageArr;
+/**
+ 视频原路径
+ */
 @property (nonatomic,strong) NSURL *videoStr;
+/**
+ 判断视频是否上传完成
+ */
 @property (nonatomic,assign) BOOL videoIsUlLoad;
-
+/**
+ 高德地图搜索APi
+ */
 @property (nonatomic,strong) AMapSearchAPI *search;
 
 @end
@@ -40,7 +68,7 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"我要做达人" image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"提交" image:nil];
     self.view.backgroundColor = Color_f2f2f2;
-    
+    // !!!: --每个Cell的标题--
     _plholderArr = @[@"请输入标题",@"请输入机构/场所名称",@"请输入地址",@"请输入场所电话(选填)",@"请对你上传的地标做一番介绍吧！"];
     
     _parasmart = [NSMutableDictionary dictionary];
@@ -50,21 +78,25 @@
     [self setTableView];
     [self initSearchApi];
 }
-
+// MARK: --得区分消失动画，因为有两种方式跳转过来，第一种就是发布view通过pre方式，第二种通过push方式--
 - (void)leftNavBtuAction:(UIButton *)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([_status isEqualToString:@"积分"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
-
+// MARK: --因为除了视频，其他都是必须填写的，所以要逐个排查是否按照规则填写--
 - (void)rightNavBtuAction:(UIButton *)sender{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if (_parasmart[@"headline"]) {
-        if (_parasmart[@"siteName"]) {
-            if (_parasmart[@"siteAddress"]) {
-                if (_parasmart[@"siteIntroduce"]) {
-                    if (_parasmart[@"location"]) {
-                        if (_parasmart[@"images"]) {
+    if (_parasmart[@"headline"]) {//:--是否填写标题--
+        if (_parasmart[@"siteName"]) {//:--场馆名称--
+            if (_parasmart[@"siteAddress"]) {//:--场馆地址--
+                if (_parasmart[@"siteIntroduce"]) {//:--场景介绍--
+                    if (_parasmart[@"location"]) {//:--拍摄位置--
+                        if (_parasmart[@"images"]) {//:--描述场景的照片数组--
                             [self uploadImage];
-                            if (_parasmart[@"siteVideo"]) {
+                            if (_parasmart[@"siteVideo"]) {//:--场景视频--
                                 _videoIsUlLoad = NO;
                                 [self uploadVideo];
                             }
@@ -93,7 +125,7 @@
         [[MBProgressHUD showHUDAddedTo:self.view animated:YES] bwm_hideWithTitle:@"请填写标题" hideAfter:1];
     }
 }
-
+// MARK: --上传视频，开启异步线程是为了减少用户等待时间--
 - (void)uploadVideo{
     __weak typeof(self) mySelf = self;
     dispatch_queue_t videoQueue = dispatch_queue_create("上传视频", DISPATCH_QUEUE_CONCURRENT);
@@ -105,6 +137,7 @@
         }];
     });
 }
+// MARK: --上传照片,异步上传是为了减少用户等待时间--
 - (void)uploadImage{
     __weak typeof(self) mySelf = self;
     __block NSArray *arr = _parasmart[@"images"];
@@ -119,7 +152,7 @@
         }];
     });
 }
-
+// MARK: --请求服务器保存数据--
 - (void)uploadData{
     __weak typeof(self) mySelf = self;
     NSArray *arr = _parasmart[@"images"];
@@ -144,7 +177,7 @@
         }];
     }
 }
-
+// MARK: --加载界面--
 - (void)setTableView{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
     _listView.dataSource = self;
@@ -158,7 +191,6 @@
     [_listView registerNib:[UINib nibWithNibName:@"TalentPushPhotosTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"TalentPushPhotosTableViewCell"];
     
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row < 4) {
         return 60;
@@ -175,11 +207,9 @@
         return 183;
     }
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 7;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row < 4) {
         TelentTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TelentTitleTableViewCell"];

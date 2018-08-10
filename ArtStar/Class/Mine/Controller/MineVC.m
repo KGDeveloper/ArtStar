@@ -107,7 +107,7 @@
         MineTalentShowVC *talentShow = [[MineTalentShowVC alloc]init];
         [self pushNoTabBarViewController:talentShow animated:YES];
     }else if ([dic[@"name"] isEqualToString:@"我的店铺"]){
-        
+        [MBProgressHUD bwm_showTitle:@"开发小哥哥正在努力工作中..." toView:self.view hideAfter:1];
     }else if ([dic[@"name"] isEqualToString:@"设置"]){
         [self pushNoTabBarViewController:[[MineSetUpTheAppVC alloc]init] animated:YES];
     }else if ([dic[@"name"] isEqualToString:@"问题求助"]){

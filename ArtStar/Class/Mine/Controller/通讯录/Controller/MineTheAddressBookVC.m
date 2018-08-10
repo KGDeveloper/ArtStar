@@ -58,6 +58,11 @@
 
 @implementation MineTheAddressBookVC
 
+- (void)leftNavBtuAction:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"通讯录" image:Image(@"back")];
@@ -66,11 +71,16 @@
     
     [self createData];
     [self setTopTouchView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBookListView:) name:@"RefreshBooks" object:nil];
 }
+
 // MARK: --请求好友列表--
 - (void)createData{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [KGRequestNetWorking postWothUrl:findAllUserAssociated parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if ([result[@"code"] integerValue] == 200) {
             NSArray *tmpArr = result[@"data"];
             NSDictionary *dic = [tmpArr firstObject];
@@ -89,7 +99,39 @@
             }
         }
     } fail:^(NSError *error) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
+}
+- (void)refreshBookListView:(NSNotification *)notification{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:findAllUserAssociated parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":[KGUserInfo shareInterace].userID} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmpArr = result[@"data"];
+            NSDictionary *dic = [tmpArr firstObject];
+            if (dic[@"fans"]) {
+                weakSelf.fansArr = dic[@"fans"];
+                weakSelf.rightBtu.count = [NSString stringWithFormat:@"%li",weakSelf.fansArr.count];
+                weakSelf.fansView.dataArr = weakSelf.fansArr.copy;
+            }
+            if (dic[@"attention"]) {
+                weakSelf.attentionArr = dic[@"attention"];
+                weakSelf.centerBtu.count = [NSString stringWithFormat:@"%li",weakSelf.attentionArr.count];
+                weakSelf.foucsView.peopleArr = weakSelf.attentionArr.copy;
+            }
+            if (dic[@"friend"]) {
+                weakSelf.friendArr = dic[@"friend"];
+                weakSelf.leftBtu.count = [NSString stringWithFormat:@"%li",weakSelf.friendArr.count];
+                weakSelf.friendsView.dataArr = weakSelf.friendArr.copy;
+            }
+            NSDictionary *obj = notification.object;
+            if ([obj[@"type"] integerValue] == 1) {
+                
+            }
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
 }
 
@@ -177,6 +219,10 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.line.centerX = sender.centerX;
     }];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
