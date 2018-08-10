@@ -84,7 +84,7 @@
     UITableViewRowAction *cancleAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         if (weakSelf.isNews == YES) {
             NSDictionary *dic = weakSelf.newsArr[indexPath.row];
-            [KGRequestNetWorking postWothUrl:delAttentions parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"zid":dic[@"id"]} succ:^(id result) {
+            [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"zid":dic[@"id"]} succ:^(id result) {
                 if ([result[@"code"] integerValue] == 200) {
                     [MBProgressHUD bwm_showTitle:@"操作成功" toView:weakSelf hideAfter:1];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshBooks" object:@{@"type":@"3"}];

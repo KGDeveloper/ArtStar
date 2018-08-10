@@ -19,13 +19,7 @@
 - (void)rightNavBtuAction:(UIButton *)sender{
     if (_userID != nil) {
         NSString *url = nil;
-        if ([_type isEqualToString:@"好友"]) {
-            url = friendRemarks;
-        }else if ([_type isEqualToString:@"粉丝"]){
-            url = FansRemarks;
-        }else if ([_type isEqualToString:@"关注"]){
-            url = AttentionRemarks;
-        }
+        
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [KGRequestNetWorking postWothUrl:url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"zid":_userID,@"remark":_textField.text} succ:^(id result) {

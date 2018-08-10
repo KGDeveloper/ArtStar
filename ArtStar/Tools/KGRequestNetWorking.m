@@ -56,8 +56,6 @@
         id respond = [KGRequestNetWorking responseConfiguration:responseObject];
         succ(respond);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
         fail(error);
     }];
 }
