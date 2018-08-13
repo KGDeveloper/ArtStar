@@ -100,7 +100,7 @@
     
     _headerImage.layer.cornerRadius = 14;
     _headerImage.layer.masksToBounds = YES;
-    _headerImage.image = Image(@"1");
+    _headerImage.image = Image(@"图片加载失败");
     _headerImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 15).widthIs(28).heightIs(28);
     
     [_headerBtu addTarget:self action:@selector(headerClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -118,7 +118,7 @@
     [_deleteBtu addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
     _deleteBtu.sd_layout.rightSpaceToView(self.contentView, 15).centerYEqualToView(_headerImage).widthIs(50).heightIs(30);
     
-    _topImage.image = Image(@"2");
+    _topImage.image = Image(@"图片加载失败");
     _topImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(_headerImage, 15).widthIs(kScreenWidth - 165).heightIs((kScreenWidth - 165)/450*690);
     
     _labBack.backgroundColor = [UIColor colorWithHexString:@"#000000"];

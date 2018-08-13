@@ -41,7 +41,7 @@
     
     [self.contentView sd_addSubviews:@[_bookImage,_bookNameLab,_timeLab,_locationLab,_priceLab,_ticketBtu,_line]];
     
-    _bookImage.image = Image(@"1");
+    _bookImage.image = Image(@"图片加载失败");
     _bookImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 15).widthIs(100).heightIs(140);
     
     _bookNameLab.text = @"这是轩哥哥";

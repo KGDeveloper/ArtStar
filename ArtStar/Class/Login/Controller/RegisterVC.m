@@ -143,22 +143,43 @@ KGCameraDelegate>
 //MARK:--下一步点击事件--
 - (IBAction)nextClick:(UIButton *)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) mySelf = self;
     if ([self toDetermineWhetherToComplete] == YES) {
-        __weak typeof(self) mySelf = self;
-        [KGRequestNetWorking postWothUrl:registServer parameters:@{@"telphone":_userPhoneStr,@"username":_nikNameTF.text,@"birthday":_birthday,@"password":_userPassStr,@"imageURL":@"http://p1.qzone.la/upload/20150222/yk961fx2.jpg",@"sex":_sexStr} succ:^(id result) {
-            if ([result[@"message"] isEqualToString:@"用户已存在"]) {
-                mySelf.errorLab.hidden = NO;
-            }else if ([result[@"message"] isEqualToString:@"操作成功！"]){
-                mySelf.errorLab.hidden = NO;
-                mySelf.errorLab.text = @"注册成功，2s后自动前往登录页面";
-                sleep(2);
-                LoginVC *loginVC = [[LoginVC alloc]init];
-                [mySelf presentViewController:loginVC animated:YES completion:nil];
-            }
-            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        } fail:^(NSError *error) {
-            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        }];
+        NSString *url = nil;
+        if ([_headerImage.image isEqual:Image(@"头像")]) {
+            url = @"http://p1.qzone.la/upload/20150222/yk961fx2.jpg";
+            [KGRequestNetWorking postWothUrl:registServer parameters:@{@"telphone":_userPhoneStr,@"username":_nikNameTF.text,@"birthday":_birthday,@"password":_userPassStr,@"imageURL":url,@"sex":_sexStr} succ:^(id result) {
+                if ([result[@"message"] isEqualToString:@"用户已存在"]) {
+                    mySelf.errorLab.hidden = NO;
+                }else if ([result[@"message"] isEqualToString:@"操作成功！"]){
+                    mySelf.errorLab.hidden = NO;
+                    mySelf.errorLab.text = @"注册成功，2s后自动前往登录页面";
+                    sleep(2);
+                    LoginVC *loginVC = [[LoginVC alloc]init];
+                    [mySelf presentViewController:loginVC animated:YES completion:nil];
+                }
+                [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+            } fail:^(NSError *error) {
+                [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+            }];
+        }else{
+            [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:[[KGQiniuUploadManager shareInstance] getImagePath:_headerImage.image] fileName:nil result:^(NSString *strPath) {
+                [KGRequestNetWorking postWothUrl:registServer parameters:@{@"telphone":mySelf.userPhoneStr,@"username":mySelf.nikNameTF.text,@"birthday":mySelf.birthday,@"password":mySelf.userPassStr,@"imageURL":url,@"sex":mySelf.sexStr} succ:^(id result) {
+                    if ([result[@"message"] isEqualToString:@"用户已存在"]) {
+                        mySelf.errorLab.hidden = NO;
+                    }else if ([result[@"message"] isEqualToString:@"操作成功！"]){
+                        mySelf.errorLab.hidden = NO;
+                        mySelf.errorLab.text = @"注册成功，2s后自动前往登录页面";
+                        sleep(2);
+                        LoginVC *loginVC = [[LoginVC alloc]init];
+                        [mySelf presentViewController:loginVC animated:YES completion:nil];
+                    }
+                    [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+                } fail:^(NSError *error) {
+                    [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+                }];
+            }];
+        }
     }
 }
 //MARK:--点击头像事件--
@@ -227,17 +248,37 @@ KGCameraDelegate>
     return _cameraView;
 }
 //MARK:--KGCameraDelegate--
-//MARK:--点击拍照上传--
-- (void)touchCamera{
-    self.cameraView.hidden = YES;
-}
 //MARK:--点击本地上传--
 - (void)touchPhoto{
+    ZLPhotoActionSheet *ac = [[ZLPhotoActionSheet alloc]init];
+    ac.maxSelectCount = 1;
+    ac.allowSelectGif = NO;
+    ac.allowSelectVideo = NO;
+    ac.allowSelectImage = YES;
+    ac.sender = self;
+    __weak typeof(self) mySelf = self;
+    [ac setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
+        mySelf.headerImage.image = [images firstObject];
+    }];
+    [ac showPhotoLibrary];
     self.cameraView.hidden = YES;
 }
-//MARK:--打开相机--
-
-//MARK:--打开相册，选择照片--
+/**
+ 拍照上传
+ */
+- (void)touchCamera{
+    __weak typeof(self) mySelf = self;
+    ZLCustomCamera *camera = [[ZLCustomCamera alloc]init];
+    camera.allowRecordVideo = NO;
+    camera.sessionPreset = ZLCaptureSessionPreset1280x720;
+    camera.maxRecordDuration = 10;
+    camera.circleProgressColor = [UIColor redColor];
+    camera.doneBlock = ^(UIImage *image , NSURL *videoUrl) {
+        mySelf.headerImage.image = image;
+    };
+    [self presentViewController:camera animated:YES completion:nil];
+    self.cameraView.hidden = YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

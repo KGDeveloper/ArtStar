@@ -28,18 +28,22 @@
     [self.window makeKeyAndVisible];
     /*设置全局输入框控制类*/
     [self setUpIQKeyboardManager];
-    [self registRongIM];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"RongLogin"]) {
+        [self registRongIM];
+    }
+
     sleep(3);
     
     [self cllLocation];
 
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LoginRongClond" object:nil];
-    
     return YES;
 }
-- (void)InfoNotificationAction:(NSNotification *)notification{
+
+- (void)registRongIM{
     
+    [[RCIM sharedRCIM] initWithAppKey:@"c9kqb3rdcmuej"];
+
     [[RCIM sharedRCIM] connectWithToken:[KGUserInfo shareInterace].userToken success:^(NSString *userId) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [RCIM sharedRCIM].userInfoDataSource = self;
@@ -53,27 +57,6 @@
     } tokenIncorrect:^{
         
     }];
-    
-}
-
-- (void)registRongIM{
-    
-    [[RCIM sharedRCIM] initWithAppKey:@"c9kqb3rdcmuej"];
-//    if ([KGUserInfo shareInterace].userToken.length > 0 && [KGUserInfo shareInterace].userToken != nil) {
-//        [[RCIM sharedRCIM] connectWithToken:[KGUserInfo shareInterace].userToken success:^(NSString *userId) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [RCIM sharedRCIM].userInfoDataSource = self;
-//                [RCIM sharedRCIM].groupInfoDataSource = self;
-//                [RCIM sharedRCIM].enableMessageRecall = YES;
-//                [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
-//                [RCIM sharedRCIM].enablePersistentUserInfoCache = YES;
-//            });
-//        } error:^(RCConnectErrorCode status) {
-//
-//        } tokenIncorrect:^{
-//
-//        }];
-//    }
 }
 
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion{

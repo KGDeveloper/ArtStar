@@ -167,6 +167,48 @@
  @return 关注
  */
 #define attorcel [serverIP stringByAppendingString:@"attention/attorcel"]
+/**
+ 用户自己发布任务
+
+ @return 用户自己发布任务
+ */
+#define saveUserTask [serverIP stringByAppendingString:@"task/saveUserTask"]
+/**
+ 查询自己所在城市的任务
+
+ @return 查询自己所在城市的任务
+ */
+#define checkUserTask [serverIP stringByAppendingString:@"task/checkUserTask"]
+/**
+ 查询自己接收的任务但未完成
+
+ @return 查询自己接收的任务但未完成
+ */
+#define MyreceptionUserTask [serverIP stringByAppendingString:@"task/MyreceptionUserTask"]
+/**
+ 查询自己接收并且完成的任务
+
+ @return 查询自己接收并且完成的任务
+ */
+#define MyreceptionOverUserTask [serverIP stringByAppendingString:@"task/MyreceptionOverUserTask"]
+/**
+ 查询自己发布的任务
+
+ @return 查询自己发布的任务
+ */
+#define MyreceptionAllUserTask [serverIP stringByAppendingString:@"task/MyreceptionAllUserTask"]
+/**
+ 取消任务路径
+
+ @return 取消任务路径
+ */
+#define delUserTask [serverIP stringByAppendingString:@"task/delUserTask"]
+/**
+ 根据Id 查看任务的详情
+
+ @return 根据Id 查看任务的详情
+ */
+#define checkOneUserTask [serverIP stringByAppendingString:@"task/checkOneUserTask"]
 
 
 #endif /* FileDefine_h */

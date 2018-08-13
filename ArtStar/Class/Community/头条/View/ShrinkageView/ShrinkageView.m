@@ -80,7 +80,7 @@
     _topLine.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     _topLine.sd_layout.leftEqualToView(_sourceLab).topSpaceToView(_sourceLab, 10).widthIs(25).heightIs(2);
     
-    _headerImage.image = Image(@"3");
+    _headerImage.image = Image(@"图片加载失败");
     _headerImage.layer.cornerRadius = 17.5;
     _headerImage.layer.masksToBounds = YES;
     _headerImage.sd_layout.leftSpaceToView(_backView, 15).topSpaceToView(_topLine, 20).widthIs(35).heightEqualToWidth();

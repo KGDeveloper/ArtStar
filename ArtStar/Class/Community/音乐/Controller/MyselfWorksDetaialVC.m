@@ -38,7 +38,7 @@
 
 - (void)setUI{
     _backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
-    _backImageView.image = Image(@"2");
+    _backImageView.image = Image(@"图片加载失败");
     _backImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:_backImageView];
     

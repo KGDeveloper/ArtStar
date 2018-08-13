@@ -510,6 +510,15 @@
 		5A1DF6C62112E80000D1FCDF /* CommunityExhibitionWorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */; };
 		5A1DF6C72112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */; };
 		5A618874211D44AC002E7E51 /* MineReleaseHositryPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */; };
+		5A6551CB21216DE500D65DBA /* PickUpTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551CA21216DE500D65DBA /* PickUpTaskView.m */; };
+		5A6551CF21216FA500D65DBA /* PickUpTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551CD21216FA500D65DBA /* PickUpTaskTableViewCell.m */; };
+		5A6551D021216FA500D65DBA /* PickUpTaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6551CE21216FA500D65DBA /* PickUpTaskTableViewCell.xib */; };
+		5A6551D321217E5500D65DBA /* TaskListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551D221217E5500D65DBA /* TaskListVC.m */; };
+		5A6551D7212182BC00D65DBA /* TaskListViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551D5212182BB00D65DBA /* TaskListViewTableViewCell.m */; };
+		5A6551D8212182BC00D65DBA /* TaskListViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6551D6212182BC00D65DBA /* TaskListViewTableViewCell.xib */; };
+		5A6551DB212192B300D65DBA /* TaskDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551DA212192B300D65DBA /* TaskDetailVC.m */; };
+		5A6551DF2121941400D65DBA /* TaskDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551DD2121941300D65DBA /* TaskDetailTableViewCell.m */; };
+		5A6551E02121941400D65DBA /* TaskDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6551DE2121941400D65DBA /* TaskDetailTableViewCell.xib */; };
 		5A7C7D9221181EB400B3F261 /* MineIntefralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */; };
 		5A7C7D9521183EF600B3F261 /* MineTalentInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */; };
 		5AB355D921105E9C00E10353 /* CommunityExhibitionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */; };
@@ -1439,6 +1448,21 @@
 		5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionWorkerCell.xib; sourceTree = "<group>"; };
 		5A618872211D44AC002E7E51 /* MineReleaseHositryPictureModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineReleaseHositryPictureModel.h; sourceTree = "<group>"; };
 		5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineReleaseHositryPictureModel.m; sourceTree = "<group>"; };
+		5A6551C921216DE500D65DBA /* PickUpTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickUpTaskView.h; sourceTree = "<group>"; };
+		5A6551CA21216DE500D65DBA /* PickUpTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickUpTaskView.m; sourceTree = "<group>"; };
+		5A6551CC21216FA500D65DBA /* PickUpTaskTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickUpTaskTableViewCell.h; sourceTree = "<group>"; };
+		5A6551CD21216FA500D65DBA /* PickUpTaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickUpTaskTableViewCell.m; sourceTree = "<group>"; };
+		5A6551CE21216FA500D65DBA /* PickUpTaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickUpTaskTableViewCell.xib; sourceTree = "<group>"; };
+		5A6551D121217E5500D65DBA /* TaskListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskListVC.h; sourceTree = "<group>"; };
+		5A6551D221217E5500D65DBA /* TaskListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskListVC.m; sourceTree = "<group>"; };
+		5A6551D4212182BB00D65DBA /* TaskListViewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskListViewTableViewCell.h; sourceTree = "<group>"; };
+		5A6551D5212182BB00D65DBA /* TaskListViewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskListViewTableViewCell.m; sourceTree = "<group>"; };
+		5A6551D6212182BC00D65DBA /* TaskListViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewTableViewCell.xib; sourceTree = "<group>"; };
+		5A6551D9212192B300D65DBA /* TaskDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskDetailVC.h; sourceTree = "<group>"; };
+		5A6551DA212192B300D65DBA /* TaskDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskDetailVC.m; sourceTree = "<group>"; };
+		5A6551DC2121941300D65DBA /* TaskDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskDetailTableViewCell.h; sourceTree = "<group>"; };
+		5A6551DD2121941300D65DBA /* TaskDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskDetailTableViewCell.m; sourceTree = "<group>"; };
+		5A6551DE2121941400D65DBA /* TaskDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskDetailTableViewCell.xib; sourceTree = "<group>"; };
 		5A7C7D9021181EB400B3F261 /* MineIntefralModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineIntefralModel.h; sourceTree = "<group>"; };
 		5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineIntefralModel.m; sourceTree = "<group>"; };
 		5A7C7D9321183EF600B3F261 /* MineTalentInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTalentInfoModel.h; sourceTree = "<group>"; };
@@ -3841,6 +3865,17 @@
 			children = (
 				5A05B0AF2114619700D1F876 /* ReleaseTaskView.h */,
 				5A05B0B02114619700D1F876 /* ReleaseTaskView.m */,
+				5A6551C921216DE500D65DBA /* PickUpTaskView.h */,
+				5A6551CA21216DE500D65DBA /* PickUpTaskView.m */,
+				5A6551DC2121941300D65DBA /* TaskDetailTableViewCell.h */,
+				5A6551DD2121941300D65DBA /* TaskDetailTableViewCell.m */,
+				5A6551DE2121941400D65DBA /* TaskDetailTableViewCell.xib */,
+				5A6551D4212182BB00D65DBA /* TaskListViewTableViewCell.h */,
+				5A6551D5212182BB00D65DBA /* TaskListViewTableViewCell.m */,
+				5A6551D6212182BC00D65DBA /* TaskListViewTableViewCell.xib */,
+				5A6551CC21216FA500D65DBA /* PickUpTaskTableViewCell.h */,
+				5A6551CD21216FA500D65DBA /* PickUpTaskTableViewCell.m */,
+				5A6551CE21216FA500D65DBA /* PickUpTaskTableViewCell.xib */,
 				5A05B0B72114676C00D1F876 /* ReleaseTaskIntrduiceCell.h */,
 				5A05B0B82114676C00D1F876 /* ReleaseTaskIntrduiceCell.m */,
 				5A05B0B92114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib */,
@@ -3863,6 +3898,10 @@
 			children = (
 				5A05B0AC21145A9900D1F876 /* ReleaseTaskVC.h */,
 				5A05B0AD21145A9900D1F876 /* ReleaseTaskVC.m */,
+				5A6551D121217E5500D65DBA /* TaskListVC.h */,
+				5A6551D221217E5500D65DBA /* TaskListVC.m */,
+				5A6551D9212192B300D65DBA /* TaskDetailVC.h */,
+				5A6551DA212192B300D65DBA /* TaskDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4318,6 +4357,7 @@
 				A82ED3D1209473D10066EA5E /* TabBarImage.xcassets in Resources */,
 				28A6C9D120D8A33700ECBF4F /* MineChooseIndustryTableViewCell.xib in Resources */,
 				28E2AED920A9959C00ACC119 /* YourLocationTableViewCell.xib in Resources */,
+				5A6551E02121941400D65DBA /* TaskDetailTableViewCell.xib in Resources */,
 				28577B7020D115130082075D /* MineMyselfWordChooseYourLoveCell.xib in Resources */,
 				2875DA8D20D3B1ED00D6CAFE /* MineTalentShowTableViewCell.xib in Resources */,
 				2806481820E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.xib in Resources */,
@@ -4425,6 +4465,7 @@
 				282975D82109D67500F8DCF4 /* FriendsDetailCommentTableViewCell.xib in Resources */,
 				28A6C9EE20D8EA1F00ECBF4F /* MineSetUpTopTableViewCell.xib in Resources */,
 				284C8D8C20BFDF1700487225 /* KGCityChooseCell.xib in Resources */,
+				5A6551D021216FA500D65DBA /* PickUpTaskTableViewCell.xib in Resources */,
 				2804BEA520E09970007E33DE /* TlentIntroudceTableViewCell.xib in Resources */,
 				280601AC20B7FF790090254E /* HeadLinesNormalCell.xib in Resources */,
 				280601B820B80C250090254E /* HeadLinesDetaialCommentCell.xib in Resources */,
@@ -4437,6 +4478,7 @@
 				28A6C9F320D8EB9F00ECBF4F /* MineSetUpPushTableViewCell.xib in Resources */,
 				28A6C9DB20D8A82900ECBF4F /* MinePushIDCardTableViewCell.xib in Resources */,
 				A8FD4F7C208844BE008B53FC /* LoginImage.xcassets in Resources */,
+				5A6551D8212182BC00D65DBA /* TaskListViewTableViewCell.xib in Resources */,
 				2874725F20CA75E8004317A5 /* FocusViewChatPermissionsCell.xib in Resources */,
 				287471ED20CA3168004317A5 /* MineSystemMessageListCell.xib in Resources */,
 				2868409120B2889F00441926 /* FriendsOnlyHaveLabelCell.xib in Resources */,
@@ -4613,6 +4655,7 @@
 				284C8D7120BFA5E300487225 /* MusicMusiciansCell.m in Sources */,
 				2875DAB220D3C42900D6CAFE /* MineAddBaseInfoTableViewCell.m in Sources */,
 				28D09DF720BFF22D00FA45A2 /* MusicChooseSexView.m in Sources */,
+				5A6551CB21216DE500D65DBA /* PickUpTaskView.m in Sources */,
 				28A6C9E420D8DF6E00ECBF4F /* MineAuditTableViewCell.m in Sources */,
 				281DF6F520D257310086030E /* MineCollectionInstitutionView.m in Sources */,
 				284D45F820A15535008633DB /* ModelFrameIndex.m in Sources */,
@@ -4633,6 +4676,7 @@
 				2813DB5F20C7AE8D004CD973 /* MyselfLoveMusicCell.m in Sources */,
 				28D09DFB20BFF29C00FA45A2 /* SexButton.m in Sources */,
 				282E071F20C8D57100A9B2E1 /* MineOnlineOrStealthView.m in Sources */,
+				5A6551D7212182BC00D65DBA /* TaskListViewTableViewCell.m in Sources */,
 				5A1DF6C12112DE4A00D1FCDF /* CommunityExhibitionProductionCell.m in Sources */,
 				2820B05C20B51DE000EA1DAC /* FriendsMessageVC.m in Sources */,
 				A82ED36920943AC40066EA5E /* BaseVC.m in Sources */,
@@ -4642,6 +4686,7 @@
 				287D7D4720EA127A00AD749E /* MyselfWorksDetaialVC.m in Sources */,
 				28A6CA1420D9136B00ECBF4F /* MineFeedBackChooseTableViewCell.m in Sources */,
 				2814620B20B3E6D7000C5E47 /* FriendsDetailScrollView.m in Sources */,
+				5A6551DB212192B300D65DBA /* TaskDetailVC.m in Sources */,
 				28A6C9D520D8A60400ECBF4F /* MineUnitAndPositionTableViewCell.m in Sources */,
 				287D2CEB20BE4EB400500156 /* HotMoviesCell.m in Sources */,
 				287C65AF2101D02900FE47F1 /* FriendsTalentModel.m in Sources */,
@@ -4737,6 +4782,7 @@
 				28E8E88320B6A86E002E10FC /* HeadLinesVideoPlayVide.m in Sources */,
 				282E073720C941E700A9B2E1 /* LoginUserRongInfo.m in Sources */,
 				283EBAD220CF6A3F006C28C0 /* MineWordLoveFoodsCell.m in Sources */,
+				5A6551DF2121941400D65DBA /* TaskDetailTableViewCell.m in Sources */,
 				287D7D5520EB864600AD749E /* KGQiniuUploadManager.m in Sources */,
 				2807C76820E1DCD8007C1740 /* MineChatDetaialViewController.m in Sources */,
 				280E752520C02F9500609736 /* MyselfCenterSchoolCell.m in Sources */,
@@ -4756,6 +4802,7 @@
 				28FDAC5B20C12DFF00531597 /* MyselfWordInfoHeaderView.m in Sources */,
 				28BF33E520C53E1E00598919 /* FoundFriendsScreeningView.m in Sources */,
 				2847BC8520F60B090052EE19 /* MineSelfMyLabelsDetailModel.m in Sources */,
+				5A6551CF21216FA500D65DBA /* PickUpTaskTableViewCell.m in Sources */,
 				5A1A14322111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m in Sources */,
 				28E33ACD20BC0234009F9382 /* PerFormanceIntorduceCell.m in Sources */,
 				28FDAC2E20C0E75900531597 /* MyselfCenterVideoAndVicesAndBooksCell.m in Sources */,
@@ -4836,6 +4883,7 @@
 				2875DAA920D3BFEC00D6CAFE /* MineTheIdentityJoinTableViewCell.m in Sources */,
 				28F9969B20A43E2600678494 /* ZLForceTouchPreviewController.m in Sources */,
 				2814621A20B426B6000C5E47 /* FriendsCommentView.m in Sources */,
+				5A6551D321217E5500D65DBA /* TaskListVC.m in Sources */,
 				5A7C7D9221181EB400B3F261 /* MineIntefralModel.m in Sources */,
 				5A1DF6BC2112D90300D1FCDF /* CommunityExhibitionIntrouceCell.m in Sources */,
 				28CA5BDA20CE587D00D38F1F /* MineCenterMyCoverCell.m in Sources */,

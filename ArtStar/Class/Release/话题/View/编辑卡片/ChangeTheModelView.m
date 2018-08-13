@@ -334,9 +334,12 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     camera.doneBlock = ^(UIImage *image, NSURL *videoUrl) {
         mySelf.pictureView.image = image;
         mySelf.videoUrlStr = videoUrl;
-        UIImageWriteToSavedPhotosAlbum(image,mySelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        UISaveVideoAtPathToSavedPhotosAlbum([videoUrl path], mySelf, @selector(video:didFinishSavingWithError:contextInfo:), nil);
-        
+        if (image != nil) {
+            UIImageWriteToSavedPhotosAlbum(image,mySelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+        if (videoUrl != nil) {
+            UISaveVideoAtPathToSavedPhotosAlbum([videoUrl path], mySelf, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+        }
     };
     [[self pushViewController] presentViewController:camera animated:YES completion:nil];
     self.cameraView.hidden = YES;
@@ -1265,7 +1268,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = self.imageArr.copy;
+                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
             }else if (self.themeType == EditThemeTypeOnlyTitle & self.themeType == EditThemeTypeOnlyPicture){
                 model.typeStr = @"0";
                 model.str1 = self.firstTextField.text;
@@ -1273,7 +1276,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = self.imageArr.copy;
+                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
             }else{
                 
                 if (_titleTF.text.length > 0 & _titleTF.text != nil) {
@@ -1289,7 +1292,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = self.imageArr.copy;
+                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
             }
             model.composing = [self returnTType:self.themeType];
             break;
@@ -1300,14 +1303,14 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = self.imageArr.copy;
+                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = self.imageArr.copy;
+                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
             }
             
             model.composing = [self returnGType:self.graphicType];
@@ -1319,14 +1322,14 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = @[_videoUrlStr];
+                model.imageURLs = @{@"image":_videoUrlStr,@"key":@"video"};
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @[_videoUrlStr];
+                model.imageURLs = @{@"image":_videoUrlStr,@"key":@"video"};
             }
             model.typeStr = @"2";
             model.composing = [self returnVType:self.videoType];

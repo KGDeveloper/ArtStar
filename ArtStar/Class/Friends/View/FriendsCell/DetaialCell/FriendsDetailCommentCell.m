@@ -45,7 +45,7 @@
     _commnetImage.image = Image(@"评论");
     _commnetImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 22.5).widthIs(10).heightIs(10);
     
-    _headerImage.image = Image(@"1");
+    _headerImage.image = Image(@"图片加载失败");
     _headerImage.layer.cornerRadius = 15;
     _headerImage.layer.masksToBounds = YES;
     _headerImage.sd_layout.leftSpaceToView(self.contentView, 40).topSpaceToView(self.contentView, 12.5).widthIs(30).heightIs(30);

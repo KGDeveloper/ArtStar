@@ -63,7 +63,7 @@
     
     [self.contentView sd_addSubviews:@[_topImage,_deleteBtu,_titleLab,_nameLab,_zansBtu,_commentBtu,_shareBtu,_playBtu,_backPlay,_line]];
     
-    _topImage.image = Image(@"2");
+    _topImage.image = Image(@"图片加载失败");
     _topImage.sd_layout.leftSpaceToView(self.contentView, 15).rightSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 40).heightIs((ViewWidth(self) - 30)/690*400);
     
     _backPlay.backgroundColor = [UIColor colorWithHexString:@"#000000"];

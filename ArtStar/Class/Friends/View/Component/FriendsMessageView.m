@@ -38,7 +38,7 @@
     [self addSubview:clickBtu];
     
     _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 30, 30)];
-    _headImage.image = Image(@"1");
+    _headImage.image = Image(@"图片加载失败");
     _headImage.layer.cornerRadius = 15;
     _headImage.layer.masksToBounds = YES;
     [backView addSubview:_headImage];

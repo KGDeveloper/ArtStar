@@ -28,7 +28,7 @@
 #import "GuidePageView.h"
 
 @interface LoginVC ()
-<UITextFieldDelegate>
+<UITextFieldDelegate,UIApplicationDelegate>
 /**
  头像
  */
@@ -135,12 +135,10 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"Guidepage"]) {
         self.guideView.hidden = NO;
         [[NSUserDefaults standardUserDefaults] setObject:@"启动页" forKey:@"Guidepage"];
     }
-    
     [self.seePassWord setTitle:nil forState:UIControlStateNormal];
     [self.seePassWord setImage:Image(@"输入密码不可见") forState:UIControlStateNormal];
 }
@@ -292,10 +290,12 @@
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                NSNotification *notification =[NSNotification notificationWithName:@"LoginRongClond" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 window.rootViewController = [[TabBarVC alloc]init];
+                //:--注册融云--
+                AppDelegate *app = [[UIApplication sharedApplication] delegate];
+                [app registRongIM];
+                
             }else if ([result[@"message"] isEqualToString:@"验证码有误"]){
                 mySelf.errorLab.hidden = NO;
                 mySelf.errorLab.text = @"验证码有误";
@@ -329,10 +329,11 @@
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                NSNotification *notification =[NSNotification notificationWithName:@"LoginRongClond" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 window.rootViewController = [[TabBarVC alloc]init];
+                //:--注册融云--
+                AppDelegate *app = [[UIApplication sharedApplication] delegate];
+                [app registRongIM];
             }else if ([result[@"message"] isEqualToString:@"用户未注册"]){
                 mySelf.errorLab.hidden = NO;
                 mySelf.errorLab.text = @"用户未注册,请先注册账号";

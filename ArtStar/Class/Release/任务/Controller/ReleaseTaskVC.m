@@ -8,6 +8,8 @@
 
 #import "ReleaseTaskVC.h"
 #import "ReleaseTaskView.h"
+#import "PickUpTaskView.h"
+#import "TaskListVC.h"
 
 @interface ReleaseTaskVC ()
 
@@ -27,6 +29,10 @@
  发布任务界面
  */
 @property (nonatomic,strong) ReleaseTaskView *releaseTaskView;
+/**
+ 接取任务
+ */
+@property (nonatomic,strong) PickUpTaskView *pickUpView;
 
 @end
 
@@ -34,6 +40,9 @@
 
 - (void)leftNavBtuAction:(UIButton *)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)rightNavBtuAction:(UIButton *)sender{
+    [self pushNoTabBarViewController:[[TaskListVC alloc]init] animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -79,6 +88,7 @@
     sender.titleLabel.font = SYFont(15);
     [_makeTaskBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
     _makeTaskBtu.titleLabel.font = SYFont(14);
+    [self.view bringSubviewToFront:self.releaseTaskView];
     [UIView animateWithDuration:0.2 animations:^{
         self.line.centerX = sender.centerX;
     }];
@@ -89,6 +99,8 @@
     sender.titleLabel.font = SYFont(15);
     [_releaseTaskBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
     _releaseTaskBtu.titleLabel.font = SYFont(14);
+    [self.view bringSubviewToFront:self.pickUpView];
+    [self.pickUpView reloadData];
     [UIView animateWithDuration:0.2 animations:^{
         self.line.centerX = sender.centerX;
     }];
@@ -101,7 +113,14 @@
     }
     return _releaseTaskView;
 }
-
+// MARK: --接取任务--
+- (PickUpTaskView *)pickUpView{
+    if (!_pickUpView) {
+        _pickUpView = [[PickUpTaskView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth, kScreenHeight - NavTopHeight - 50)];
+        [self.view addSubview:_pickUpView];
+    }
+    return _pickUpView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

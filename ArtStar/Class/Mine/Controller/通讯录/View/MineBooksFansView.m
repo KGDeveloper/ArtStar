@@ -50,6 +50,7 @@
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     cell.delegate = self;
     cell.ID = [NSString stringWithFormat:@"%@",dic[@"id"]];
+    
     return cell;
 }
 // MARK: --MineBooksFriendsTableViewCellDelegate--

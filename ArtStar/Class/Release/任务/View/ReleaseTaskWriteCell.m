@@ -25,6 +25,7 @@
         textField.enabled = NO;
         if ([self.delegate respondsToSelector:@selector(changeTextFieldEditStyleWithString:)]) {
             [self.delegate changeTextFieldEditStyleWithString:textField.placeholder];
+            textField.enabled = YES;
         }
     }
 }

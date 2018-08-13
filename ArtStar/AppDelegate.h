@@ -17,7 +17,10 @@ API_AVAILABLE(ios(10.0))
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 - (void)saveContext;
-
+/**
+ 注册融云
+ */
+- (void)registRongIM;
 
 @end
 

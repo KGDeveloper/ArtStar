@@ -113,21 +113,24 @@
             if (dic[@"fans"]) {
                 weakSelf.fansArr = dic[@"fans"];
                 weakSelf.rightBtu.count = [NSString stringWithFormat:@"%li",weakSelf.fansArr.count];
-                weakSelf.fansView.dataArr = weakSelf.fansArr.copy;
             }
             if (dic[@"attention"]) {
                 weakSelf.attentionArr = dic[@"attention"];
                 weakSelf.centerBtu.count = [NSString stringWithFormat:@"%li",weakSelf.attentionArr.count];
-                weakSelf.foucsView.peopleArr = weakSelf.attentionArr.copy;
             }
             if (dic[@"friend"]) {
                 weakSelf.friendArr = dic[@"friend"];
                 weakSelf.leftBtu.count = [NSString stringWithFormat:@"%li",weakSelf.friendArr.count];
-                weakSelf.friendsView.dataArr = weakSelf.friendArr.copy;
             }
             NSDictionary *obj = notification.object;
             if ([obj[@"type"] integerValue] == 1) {
+                weakSelf.friendsView.dataArr = weakSelf.friendArr.copy;
+            }else if ([obj[@"type"] integerValue] == 2){
+                weakSelf.foucsView.peopleArr = weakSelf.attentionArr.copy;
+            }else if ([obj[@"type"] integerValue] == 3){
                 
+            }else if ([obj[@"type"] integerValue] == 4){
+                weakSelf.fansView.dataArr = weakSelf.fansArr.copy;
             }
         }
     } fail:^(NSError *error) {

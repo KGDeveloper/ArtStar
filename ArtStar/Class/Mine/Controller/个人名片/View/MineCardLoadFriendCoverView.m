@@ -47,7 +47,7 @@
     _returnBtu.imageEdgeInsets = UIEdgeInsetsMake(7.5, 0, 7.5, 43);
     _returnBtu.sd_layout.leftSpaceToView(self, 15).topSpaceToView(self,NavTopHeight - 44 + 10).widthIs(50).heightIs(30);
     
-    [_headerImage sd_setImageWithURL:[NSURL URLWithString:[KGUserInfo shareInterace].portraitUri] placeholderImage:Image(@"1")];
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:[KGUserInfo shareInterace].portraitUri] placeholderImage:Image(@"图片加载失败")];
     _headerImage.layer.cornerRadius = 37.5;
     _headerImage.layer.borderColor = [UIColor whiteColor].CGColor;
     _headerImage.layer.borderWidth = 2;

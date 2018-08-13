@@ -25,7 +25,7 @@
 
 - (void)setUI{
     _topImage = [[UIImageView alloc]initWithFrame:self.bounds];
-    _topImage.image = Image(@"1");
+    _topImage.image = Image(@"图片加载失败");
     [self addSubview:_topImage];
     
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(ViewWidth(self)/2 - 20, ViewHeight(self)/2 - 20, 40, 40)];

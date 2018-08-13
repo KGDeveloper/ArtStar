@@ -26,7 +26,7 @@
 /**
  保存选择的照片数组
  */
-@property (nonatomic,copy) NSArray *imageURLs;
+@property (nonatomic,copy) NSDictionary *imageURLs;
 /**
  位置信息
  */

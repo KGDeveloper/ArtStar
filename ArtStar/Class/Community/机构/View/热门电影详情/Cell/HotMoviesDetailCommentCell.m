@@ -36,7 +36,7 @@
     
     [self.contentView sd_addSubviews:@[_headerImage,_nameLab,_starView,_commentLab,_timeLab,_zansBtu,_line]];
     
-    _headerImage.image = Image(@"1");
+    _headerImage.image = Image(@"图片加载失败");
     _headerImage.layer.cornerRadius = 10;
     _headerImage.layer.masksToBounds = YES;
     _headerImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 15).widthIs(20).heightIs(20);

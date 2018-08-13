@@ -45,7 +45,7 @@
     
     [self sd_addSubviews:@[_topImage,_titleLab,_timeLab,_placeLab,_locationLab,_priceLab,_mapBtu,_line]];
     
-    _topImage.image = Image(@"4");
+    _topImage.image = Image(@"图片加载失败");
     _topImage.sd_layout.leftSpaceToView(self, 0).topSpaceToView(self, 0).rightSpaceToView(self, 0).heightIs(ViewWidth(self)/750*500);
     
     _titleLab.textColor = Color_333333;
