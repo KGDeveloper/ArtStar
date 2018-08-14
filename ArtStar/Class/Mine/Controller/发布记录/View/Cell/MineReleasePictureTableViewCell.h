@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MineReleasePictureTableViewCellDelegate <NSObject>
+
+- (void)sendDeleteIDtoView:(NSInteger)ID style:(NSInteger)style;
+
+@end
+
 @interface MineReleasePictureTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *dayLab;
@@ -18,7 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIView *countView;
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtu;
-
+@property (nonatomic,assign) NSInteger ID;
+@property (nonatomic,weak) id<MineReleasePictureTableViewCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidth;
 @property (weak, nonatomic) IBOutlet UIView *leftView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageWidth;

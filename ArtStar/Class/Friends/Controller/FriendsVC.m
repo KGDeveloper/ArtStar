@@ -34,6 +34,8 @@ DZNEmptyDataSetSource
 @property (nonatomic,strong) UITableView *listView;//:--动态加载--
 @property (nonatomic,strong) UIView *headerView;//:--承载顶部滚动视图以及消息提示框--
 @property (nonatomic,strong) NSMutableArray *dataArr;//:--解析后的数据保存--
+@property (nonatomic,assign) NSInteger page;//:--页数--
+@property (nonatomic,assign) BOOL isFirst;//:--是否是第一次进入页面--
 
 
 @end
@@ -44,8 +46,9 @@ DZNEmptyDataSetSource
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     
-    if (_dataArr) {
+    if (_isFirst == YES) {
         _dataArr = [NSMutableArray array];
+        _page = 1;
         [self createData];
         [self createMsgArr];
     }
@@ -54,12 +57,15 @@ DZNEmptyDataSetSource
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     self.navigationController.navigationBar.hidden = NO;
+    _isFirst = YES;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
     
+    _page = 1;
+    _dataArr = [NSMutableArray array];
     [self createData];
     [self createMsgArr];
     [self setTableView];
@@ -87,10 +93,8 @@ DZNEmptyDataSetSource
 }
 //:--请求动态数据--
 - (void)createData{
-    
-    _dataArr = [NSMutableArray array];
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:searchfriendMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@"1",@"rows":@"15"},@"brushPerss":@"1"} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:searchfriendMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@(_page),@"rows":@"15"},@"brushPerss":@"1"} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *dataarray = result[@"data"];
             for (int i = 0; i <  dataarray.count; i++) {
@@ -100,6 +104,7 @@ DZNEmptyDataSetSource
             }
             [mySelf.listView reloadData];
             [mySelf.listView.mj_header endRefreshing];
+            [mySelf.listView.mj_footer endRefreshing];
         }
     } fail:^(NSError *error) {
 
@@ -119,9 +124,16 @@ DZNEmptyDataSetSource
     __weak typeof(self) mySelf = self;
     //:--在此处刷新的时候，不仅仅刷新动态，还要请求最新消息--
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        mySelf.page = 1;
+        mySelf.dataArr = [NSMutableArray array];
         [mySelf createData];
         [mySelf createMsgArr];
         [mySelf.listView.mj_header beginRefreshing];
+    }];
+    _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        mySelf.page ++;
+        [mySelf createData];
+        [mySelf.listView.mj_footer beginRefreshing];
     }];
     [self.view addSubview:_listView];
     //:--只有图片--
@@ -322,10 +334,24 @@ DZNEmptyDataSetSource
 //MARK:--竖排文字改变排版--
 //MARK:--FriendsOnlyHaveImageCellDelegate,FriendsTopImageButtomLabelCellDelegate,FriendsButtomImageTopLabelCellDelegate,FriendsLeftImageRightLabelCellDelegate,FriendsOnlyHaveLabelCellDelegate--
 - (void)headerPushInfo:(NSInteger)index{
-    NSLog(@"点击头像%ld",(long)index);
+    
 }
 - (void)deleteCell:(NSInteger)index{
-    NSLog(@"点击删除%ld",(long)index);
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:deleteFriendMsg parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":@(index)} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"删除成功" toView:weakSelf.view hideAfter:1];
+            [weakSelf createData];
+            [weakSelf createMsgArr];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"删除失败" toView:weakSelf.view hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD bwm_showTitle:@"删除失败" toView:weakSelf.view hideAfter:1];
+    }];
 }
 - (void)zansCell:(NSInteger)index{
     __weak typeof(self) mySelf = self;

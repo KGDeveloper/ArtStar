@@ -42,6 +42,7 @@
     _nikNameLab.text = dic[@"username"];
     _locationLab.text = model.location;
     _timeLab.text = model.createTimeStr;
+    _rfuid = model.ID;
     
     [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
     [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];

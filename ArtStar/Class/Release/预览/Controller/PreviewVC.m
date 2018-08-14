@@ -87,7 +87,7 @@
         }else{
             dispatch_queue_t imageQueue = dispatch_queue_create("上传视频", DISPATCH_QUEUE_CONCURRENT);
             dispatch_sync(imageQueue, ^{
-                [[KGQiniuUploadManager shareInstance] uploadDataToQiniuWithData:mySelf.model.imageURLs[@"image"] result:^(NSString *strPath) {
+                [[KGQiniuUploadManager shareInstance] uploadDataToQiniuWithData:[mySelf.model.imageURLs[@"image"] firstObject] result:^(NSString *strPath) {
                     [imageArr addObject:strPath];
                     [parameters setObject:imageArr forKey:@"imageURLs"];
                     [mySelf requestDataWithArr:imageArr dic:parameters];
@@ -295,14 +295,14 @@
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, photoViewHeight + 50) type:VideoViewTextTypeOnlyVideo];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.playVideo = _model.imageURLs[@"image"];
+            self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
             break;
         case EditVideoTypeTopLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopLeftText];
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.playVideo = _model.imageURLs[@"image"];
+            self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
             self.videoView.type = TextAlignmentLeft;
             break;
         case EditVideoTypeTopCenter:
@@ -310,7 +310,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.playVideo = _model.imageURLs[@"image"];
+            self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
             self.videoView.type = TextAlignmentCenter;
             break;
         case EditVideoTypeTopRight:
@@ -318,7 +318,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.playVideo = _model.imageURLs[@"image"];
+            self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
             self.videoView.type = TextAlignmentRight;
             break;
         case EditVideoTypeLeft:
@@ -326,7 +326,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.playVideo = _model.imageURLs[@"image"];
+            self.videoView.playVideo =[_model.imageURLs[@"image"] firstObject];
             self.videoView.type = TextAlignmentLeft;
             break;
         case EditVideoTypeCenter:
@@ -334,7 +334,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.playVideo = _model.imageURLs[@"image"];
+            self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
             self.videoView.type = TextAlignmentTypeCenter;
             break;
         default:
@@ -342,7 +342,7 @@
             self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
-            self.videoView.playVideo = _model.imageURLs[@"image"];
+            self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
             self.videoView.type = TextAlignmentRight;
             break;
     }
@@ -364,7 +364,7 @@
     [self.view addSubview:_videoView];
 }
 - (void)playVideoOnController{
-    self.playVideo.videoUrl = _model.imageURLs[@"image"];
+    self.playVideo.videoUrl = [_model.imageURLs[@"image"] firstObject];
     self.playVideo.hidden = NO;
     [self.playVideo play];
     self.navigationController.navigationBar.hidden = YES;

@@ -7,6 +7,7 @@
 //
 
 #import "FriendsThemeButtomImageCell.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface FriendsThemeButtomImageCell ()
 
@@ -42,7 +43,11 @@
         _themeLab.hidden = YES;
     }
     NSDictionary *imageDic = [model.images firstObject];
-    [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
+    if ([model.type integerValue] == 2) {
+        _topImage.image = [self thumbnailImageForVideo:[NSURL URLWithString:imageDic[@"imageURL"]]];
+    }else{
+        [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
+    }
     
     NSDictionary *dic = model.user;
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
@@ -99,6 +104,21 @@
         [self.delegate zansCell:self.rfuid.integerValue];
     }
 }
+
+- (UIImage *)thumbnailImageForVideo:(NSURL *)video{
+    AVURLAsset *asset = [[AVURLAsset alloc]initWithURL:video options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = 1;
+    NSError *error = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60) actualTime:NULL error:&error];
+    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
+    return thumbnailImage;
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

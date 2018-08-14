@@ -393,7 +393,6 @@
 		28CA5BEC20CE778E00D38F1F /* MineEditMyLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA5BEB20CE778E00D38F1F /* MineEditMyLabelCell.m */; };
 		28CA5BF020CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA5BEE20CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.m */; };
 		28CA5BF120CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28CA5BEF20CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.xib */; };
-		28CA77A920F36D9A00B73084 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA77A820F36D9900B73084 /* GTMBase64.m */; };
 		28D09DF720BFF22D00FA45A2 /* MusicChooseSexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D09DF620BFF22D00FA45A2 /* MusicChooseSexView.m */; };
 		28D09DFB20BFF29C00FA45A2 /* SexButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D09DFA20BFF29C00FA45A2 /* SexButton.m */; };
 		28D09DFE20C0014E00FA45A2 /* MusicChooseTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D09DFD20C0014E00FA45A2 /* MusicChooseTypeView.m */; };
@@ -1243,10 +1242,6 @@
 		28CA5BED20CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineLoveMoviesAndMusicAndBooksCell.h; sourceTree = "<group>"; };
 		28CA5BEE20CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineLoveMoviesAndMusicAndBooksCell.m; sourceTree = "<group>"; };
 		28CA5BEF20CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineLoveMoviesAndMusicAndBooksCell.xib; sourceTree = "<group>"; };
-		28CA77A520F36D9900B73084 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
-		28CA77A620F36D9900B73084 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		28CA77A720F36D9900B73084 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		28CA77A820F36D9900B73084 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		28D09DF520BFF22D00FA45A2 /* MusicChooseSexView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicChooseSexView.h; sourceTree = "<group>"; };
 		28D09DF620BFF22D00FA45A2 /* MusicChooseSexView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicChooseSexView.m; sourceTree = "<group>"; };
 		28D09DF920BFF29C00FA45A2 /* SexButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SexButton.h; sourceTree = "<group>"; };
@@ -2681,17 +2676,6 @@
 				28577B7920D125060082075D /* MineSearchYourLoveCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		28CA77A420F36D9900B73084 /* CTMbase64 */ = {
-			isa = PBXGroup;
-			children = (
-				28CA77A520F36D9900B73084 /* GTMBase64.h */,
-				28CA77A620F36D9900B73084 /* Common.h */,
-				28CA77A720F36D9900B73084 /* GTMDefines.h */,
-				28CA77A820F36D9900B73084 /* GTMBase64.m */,
-			);
-			path = CTMbase64;
 			sourceTree = "<group>";
 		};
 		28D09DF820BFF28500FA45A2 /* KGButton */ = {
@@ -4182,7 +4166,6 @@
 		A8FD4F8320886272008B53FC /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				28CA77A420F36D9900B73084 /* CTMbase64 */,
 				284C8D7A20BFD4D500487225 /* KGCity.plist */,
 				284C8D7320BFB09100487225 /* CALayer+KGLayerColor.h */,
 				284C8D7420BFB09100487225 /* CALayer+KGLayerColor.m */,
@@ -4928,7 +4911,6 @@
 				2806481720E4E0FA00BB7DD2 /* FriendsTalentTableViewCell.m in Sources */,
 				28E2AECF20A97F8800ACC119 /* YourLocationVC.m in Sources */,
 				281DF70120D25F3F0086030E /* MineCollectionExhibitionView.m in Sources */,
-				28CA77A920F36D9A00B73084 /* GTMBase64.m in Sources */,
 				286A0A7420EF47DF00F4EB17 /* ReleaseLineModel.m in Sources */,
 				281DF71520D269640086030E /* MineCollectionArticleTableViewCell.m in Sources */,
 				28EC5F8920DA068B0019D4C1 /* MineHelpChooseTableViewCell.m in Sources */,

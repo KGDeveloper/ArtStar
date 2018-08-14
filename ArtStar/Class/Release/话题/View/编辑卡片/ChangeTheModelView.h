@@ -11,8 +11,7 @@
 
 typedef NS_ENUM(NSInteger,EditType){
     EditTypeVideo,
-    EditTypeTheme,
-    EditTypeGraphic,
+    EditTypeTheme
 };
 
 @protocol ChangeTheModelViewDelegate <NSObject>
@@ -31,10 +30,6 @@ typedef NS_ENUM(NSInteger,EditType){
  传入视频模型
  */
 @property (nonatomic,assign) EditVideoType videoType;
-/**
- 传入图文模型
- */
-@property (nonatomic,assign) EditGraphicType graphicType;
 /**
  向外部发送数据
  */

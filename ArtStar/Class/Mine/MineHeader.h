@@ -18,5 +18,6 @@
 #import "KGSearchChatHistoryView.h"
 // MARK: --设置备注--
 #import "MsgTapNoteVC.h"
+#import "MineTalentLowEditView.h"
 
 #endif /* MineHeader_h */

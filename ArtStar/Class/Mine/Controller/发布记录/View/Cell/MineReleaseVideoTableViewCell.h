@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MineReleaseVideoTableViewCellDelegate <NSObject>
+
+- (void)sendDeleteIDtoView:(NSInteger)ID style:(NSInteger)style;
+
+@end
+
 @interface MineReleaseVideoTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *leftView;
@@ -22,5 +28,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *videoView;
 @property (weak, nonatomic) IBOutlet UIButton *playBtu;
+
+@property (nonatomic,assign) NSInteger ID;
+@property (nonatomic,weak) id<MineReleaseVideoTableViewCellDelegate>delegate;
 
 @end

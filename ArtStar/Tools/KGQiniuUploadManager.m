@@ -9,9 +9,6 @@
 #import "KGQiniuUploadManager.h"
 #include <CommonCrypto/CommonHMAC.h>
 #include <CommonCrypto/CommonDigest.h>
-#import "GTMBase64.h"
-#import "GTMDefines.h"
-#import "Common.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface KGQiniuUploadManager ()

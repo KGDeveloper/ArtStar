@@ -805,204 +805,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
             break;
     }
 }
-//MARK:--EditGraphicType--
-- (void)setGraphicType:(EditGraphicType)graphicType{
-    _graphicType = graphicType;
-    self.isMask = NO;
-    switch (graphicType) {
-        case EditGraphicTypeOnlyTitle:
-            //:--重新设置frame--
-            self.textView.hidden = NO;
-            self.photoView.hidden = YES;
-            self.vertivalView.hidden = YES;
-            self.textView.frame = CGRectMake(15, 58 + NavTopHeight, 281, textViewHeight);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + textViewHeight, kScreenWidth, 60);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, textViewHeight + 60 + 58);
-            break;
-        case EditGraphicTypeOnlyPicture:
-            //:--重新设置frame--
-            self.textView.hidden = YES;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
-            self.pictureView.image = Image(@"picture");
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight, kScreenWidth, 60);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + 60 + 58);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"横向";
-            [self isClipImageView:NO];
-            break;
-        case EditGraphicTypeCircular:
-            self.isMask = YES;
-            //:--重新设置frame--
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(self.frame.size.width/2 - photoViewHeight/2, 58 + NavTopHeight, photoViewHeight, photoViewHeight);
-            self.pictureView.image = Image(@"round");
-            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.textView.hidden = NO;
-            [self setTextFieldLocation:TextFieldTextTypeCenter];
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"圆形";
-            [self isClipImageView:YES];
-            break;
-        case EditGraphicTypeRightTop:
-            //:--重新设置frame--
-            self.textView.hidden = YES;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = NO;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight, self.frame.size.width - 30 - textViewHeight - 20, (self.frame.size.width - 30 - textViewHeight - 20)/225*345);
-            self.pictureView.image = Image(@"rectangle");
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.vertivalView.hidden = NO;
-            self.vertivalView.frame = CGRectMake(self.frame.size.width - 15 - textViewHeight - 20, 58 + NavTopHeight, textViewHeight + 20, 281);
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            [self setVertivalText:0];
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + (self.frame.size.width - 30 - textViewHeight - 20)/225*345, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, 58 + ViewHeight(self.pictureView) + 60);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"竖向";
-            [self isClipImageView:NO];
-            _placehodelLab.hidden = NO;
-            _placehodelLab.frame = CGRectMake(ViewWidth(_vertivalView) - 22, 0, 22, [TransformChineseToPinying stringWidthFromString:@"记录您的奇思妙想 ..." font:FZFont(12) height:281]);
-            break;
-        case EditGraphicTypeRightCenter:
-            //:--重新设置frame--
-            self.textView.hidden = YES;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = NO;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight, self.frame.size.width - 30 - textViewHeight - 20, (self.frame.size.width - 30 - textViewHeight - 20)/225*345);
-            self.pictureView.image = Image(@"rectangle");
-            self.textView.hidden = YES;
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.vertivalView.hidden = NO;
-            self.vertivalView.frame = CGRectMake(self.frame.size.width - 15 - textViewHeight - 20, 58 + NavTopHeight + ((self.frame.size.width - 30 - textViewHeight - 20)/225*345 - 281)/2, textViewHeight + 20, 281);
-            [self setTextFieldLocation:TextFieldTextTypeCenter];
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            [self setVertivalText:1];
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + (self.frame.size.width - 30 - textViewHeight - 20)/225*345, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, 58 + ViewHeight(self.pictureView) + 60);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"竖向";
-            [self isClipImageView:NO];
-            _placehodelLab.hidden = NO;
-            _placehodelLab.frame = CGRectMake(ViewWidth(_vertivalView) - 22, 0, 22, 281);
-            break;
-        case EditGraphicTypeTopLeft:
-            //:--重新设置frame--
-            self.textView.hidden = NO;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
-            self.pictureView.image = Image(@"picture");
-            self.textView.frame = CGRectMake(15, 58 + NavTopHeight, 281, textViewHeight);
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.textView.hidden = NO;
-            [self setTextFieldLocation:TextFieldTextTypeLeft];
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"横向";
-            [self isClipImageView:NO];
-            break;
-        case EditGraphicTypeTopCenter:
-            //:--重新设置frame--
-            self.textView.hidden = NO;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
-            self.pictureView.image = Image(@"picture");
-            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight, 281, textViewHeight);
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.textView.hidden = NO;
-            [self setTextFieldLocation:TextFieldTextTypeCenter];
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"横向";
-            [self isClipImageView:NO];
-            break;
-        case EditGraphicTypeTopRight:
-            //:--重新设置frame--
-            self.textView.hidden = NO;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight + textViewHeight + 20, kScreenWidth - 30, photoViewHeight);
-            self.pictureView.image = Image(@"picture");
-            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight, 281, textViewHeight);
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.textView.hidden = NO;
-            [self setTextFieldLocation:TextFieldTextTypeRight];
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"横向";
-            [self isClipImageView:NO];
-            break;
-        case EditGraphicTypeLeft:
-            //:--重新设置frame--
-            self.textView.hidden = NO;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
-            self.pictureView.image = Image(@"picture");
-            self.textView.frame = CGRectMake(15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.textView.hidden = NO;
-            [self setTextFieldLocation:TextFieldTextTypeLeft];
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"横向";
-            [self isClipImageView:NO];
-            break;
-        case EditGraphicTypeCenter:
-            //:--重新设置frame--
-            self.textView.hidden = NO;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
-            self.pictureView.image = Image(@"picture");
-            self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
-            self.lowView.frame = CGRectMake(0, self.frame.size.height - 180, kScreenWidth, 180);
-            self.textView.hidden = NO;
-            [self setTextFieldLocation:TextFieldTextTypeCenter];
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"横向";
-            [self isClipImageView:NO];
-            break;
-        default:
-            //:--重新设置frame--
-            self.textView.hidden = NO;
-            self.photoView.hidden = NO;
-            self.vertivalView.hidden = YES;
-            self.photoView.frame = CGRectMake(15, 58 + NavTopHeight, kScreenWidth - 30, photoViewHeight);
-            self.pictureView.image = Image(@"picture");
-            self.textView.frame = CGRectMake(self.frame.size.width - 281 - 15, 58 + NavTopHeight + photoViewHeight + 20, 281, textViewHeight);
-            self.textView.hidden = NO;
-            _backView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 120);
-            self.lowView.frame = CGRectMake(0, 58 + NavTopHeight + photoViewHeight + 20 + textViewHeight, kScreenWidth, 180);
-            self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + 20 + 60 + 58);
-            [self setTextFieldLocation:TextFieldTextTypeRight];
-            [self reloadPhotoViewSubViews];
-            self.clipType = @"横向";
-            [self isClipImageView:NO];
-            break;
-    }
-}
 //MARK:--设置输入框字体位置--
 - (void)setTextFieldLocation:(TextFieldTextType)type{
     switch (type) {
@@ -1072,11 +874,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         vc.imageArr = @[Image(@"B视频"),Image(@"B上左"),Image(@"B上中"),Image(@"B上右"),Image(@"B下左"),Image(@"B下中"),Image(@"B下右")];
         vc.sendModel = ^(NSInteger index) {
             mySelf.videoType = [[ModelFrameIndex shareInterace] videoTypeWithIndex:index];
-        };
-    }else{
-        vc.imageArr = @[Image(@"A文字"),Image(@"A图片"),Image(@"A圆形"),Image(@"A右上"),Image(@"A右中"),Image(@"A上左"),Image(@"A上中"),Image(@"A上右"),Image(@"A下左"),Image(@"A下中"),Image(@"A下右")];
-        vc.sendModel = ^(NSInteger index) {
-            mySelf.graphicType = [[ModelFrameIndex shareInterace] graphicTypeWithIndex:index];
         };
     }
     [[self pushViewController].navigationController pushViewController:vc animated:YES];
@@ -1156,41 +953,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
             }
             break;
         default:
-            switch (self.graphicType) {
-                case EditGraphicTypeOnlyTitle:
-                    [self textFieldString:string number:index];
-                    break;
-                case EditGraphicTypeOnlyPicture:
-                    
-                    break;
-                case EditGraphicTypeCircular:
-                    [self textFieldString:string number:index];
-                    break;
-                case EditGraphicTypeRightTop:
-                    [self textViewString:string number:index];
-                    break;
-                case EditGraphicTypeRightCenter:
-                    [self textViewString:string number:index];
-                    break;
-                case EditGraphicTypeTopLeft:
-                    [self textFieldString:string number:index];
-                    break;
-                case EditGraphicTypeTopCenter:
-                    [self textFieldString:string number:index];
-                    break;
-                case EditGraphicTypeTopRight:
-                    [self textFieldString:string number:index];
-                    break;
-                case EditGraphicTypeLeft:
-                    [self textFieldString:string number:index];
-                    break;
-                case EditGraphicTypeCenter:
-                    [self textFieldString:string number:index];
-                    break;
-                default:
-                    [self textFieldString:string number:index];
-                    break;
-            }
             break;
     }
 }
@@ -1296,25 +1058,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
             }
             model.composing = [self returnTType:self.themeType];
             break;
-        case EditTypeGraphic:
-            if (self.graphicType == EditGraphicTypeRightTop & self.graphicType == EditGraphicTypeRightCenter) {
-                model.str1 = self.oneTF.text;
-                model.str2 = self.twoTF.text;
-                model.str3 = self.threeTF.text;
-                model.str4 = self.fourTF.text;
-                model.str5 = self.fiveTF.text;
-                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
-            }else{
-                model.str1 = self.firstTextField.text;
-                model.str2 = self.sencedTF.text;
-                model.str3 = self.thirdTF.text;
-                model.str4 = self.fouceTF.text;
-                model.str5 = self.fifthTF.text;
-                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
-            }
-            
-            model.composing = [self returnGType:self.graphicType];
-            break;
         default:
             if (self.videoType == EditVideoTypeOnlyVideo) {
                 model.str1 = self.oneTF.text;
@@ -1322,14 +1065,14 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = @{@"image":_videoUrlStr,@"key":@"video"};
+                model.imageURLs = @{@"image":@[_videoUrlStr],@"key":@"video"};
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @{@"image":_videoUrlStr,@"key":@"video"};
+                model.imageURLs = @{@"image":@[_videoUrlStr],@"key":@"video"};
             }
             model.typeStr = @"2";
             model.composing = [self returnVType:self.videoType];

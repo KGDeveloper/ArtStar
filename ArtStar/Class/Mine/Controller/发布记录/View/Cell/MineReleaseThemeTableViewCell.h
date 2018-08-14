@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MineReleaseThemeTableViewCellDelegate <NSObject>
+
+- (void)sendDeleteIDtoView:(NSInteger)ID style:(NSInteger)style;
+
+@end
+
 @interface MineReleaseThemeTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *leftView;
@@ -23,4 +29,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidth;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageWidth;
+
+@property (nonatomic,assign) NSInteger ID;
+@property (nonatomic,weak) id<MineReleaseThemeTableViewCellDelegate>delegate;
+
 @end

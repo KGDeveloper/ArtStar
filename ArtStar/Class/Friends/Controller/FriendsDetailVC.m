@@ -261,7 +261,20 @@ FriendsPlayVideoViewdelegate>
 }
 
 - (void)deleteAction{
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:deleteFriendMsg parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_rfimd} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"删除成功" toView:weakSelf.view hideAfter:1];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"删除失败" toView:weakSelf.view hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD bwm_showTitle:@"删除失败" toView:weakSelf.view hideAfter:1];
+    }];
 }
 
 /**

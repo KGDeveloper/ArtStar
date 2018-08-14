@@ -5,7 +5,12 @@
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>zh_CN</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh_CN</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>LiteraryStar</string>
 	<key>CFBundleExecutable</key>

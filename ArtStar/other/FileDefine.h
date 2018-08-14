@@ -114,6 +114,13 @@
  */
 #define searchfriendMessages [serverIP stringByAppendingString:@"ReleaseFriendTimeline/searchfriendMessages"]
 /**
+ 朋友圈消息删除
+
+ @param 包括自己 朋友圈消息删除
+ @return 朋友圈消息删除
+ */
+#define deleteFriendMsg [serverIP stringByAppendingString:@"ReleaseFriendTimeline/deleteFriendMsg"]
+/**
  查看别人的朋友圈(包括自己)
 
  @return 查看别人的朋友圈(包括自己)

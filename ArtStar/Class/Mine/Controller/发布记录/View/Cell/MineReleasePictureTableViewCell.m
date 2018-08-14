@@ -14,6 +14,20 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)deleteAction:(UIButton *)sender {
+    if ([sender.currentImage isEqual:Image(@"编辑未选中状态")]) {
+        [sender setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(sendDeleteIDtoView:style:)]) {
+            [self.delegate sendDeleteIDtoView:_ID style:0];
+        }
+    }else{
+        [sender setImage:Image(@"编辑未选中状态") forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(sendDeleteIDtoView:style:)]) {
+            [self.delegate sendDeleteIDtoView:_ID style:1];
+        }
+    }
+    
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

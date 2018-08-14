@@ -7,7 +7,7 @@
 //
 
 #import "FriendsOnlyHaveImageCell.h"
-#import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface FriendsOnlyHaveImageCell ()
 
@@ -31,9 +31,7 @@
     }
     NSDictionary *imageDic = [model.images firstObject];
     if ([model.type integerValue] == 2) {
-        MPMoviePlayerController *player = [[MPMoviePlayerController alloc]initWithContentURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
-        UIImage *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
-        _topImage.image = thumbnail;
+        _topImage.image = [self thumbnailImageForVideo:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }else{
         [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }
@@ -100,6 +98,20 @@
     self.lookAllImageBtu.hidden = NO;
     self.btuView.hidden = YES;
     self.playBtu.hidden = YES;
+}
+
+- (UIImage *)thumbnailImageForVideo:(NSURL *)video{
+    AVURLAsset *asset = [[AVURLAsset alloc]initWithURL:video options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = 1;
+    NSError *error = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60) actualTime:NULL error:&error];
+    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
+    return thumbnailImage;
 }
 
 @end

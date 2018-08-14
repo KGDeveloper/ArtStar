@@ -14,6 +14,14 @@
 @interface TaskDetailVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,ReleaseTaskIntrduiceCellDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
+/**
+ 保存任务详情
+ */
+@property (nonatomic,copy) NSDictionary *dataDic;
+/**
+ 保存cell标题以及预留字
+ */
+@property (nonatomic,strong) NSArray *dataArr;
 
 @end
 
@@ -23,6 +31,7 @@
     [super viewDidLoad];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"任务详情" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
+    _dataArr = @[@{@"name":@"任务名称",@"title":@"请填写任务名称"},@{@"name":@"开始时间",@"title":@"请选择任务开始时间"},@{@"name":@"结束时间",@"title":@"请选择任务结束时间"},@{@"name":@"任务地点",@"title":@"请填写任务地点"},@{@"name":@"任务薪酬",@"title":@"请填写任务薪酬"},@{@"name":@"联系方式",@"title":@"请填写联系方式"},@{@"name":@"任务类型",@"title":@"请填写任务类型"}];
     [self createData];
     [self setTaskListView];
 }
@@ -56,13 +65,48 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         TaskDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TaskDetailTableViewCell" forIndexPath:indexPath];
+        NSDictionary *userDic = _dataDic[@"user"];
+        cell.nameLab.text = userDic[@"username"];
+        [cell.headerIamge sd_setImageWithURL:[NSURL URLWithString:userDic[@"portraitUri"]]];
         return cell;
-    }else if (indexPath.row > 0 & indexPath.row < 9){
+    }else if (indexPath.row > 0 & indexPath.row < 8){
         ReleaseTaskWriteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReleaseTaskWriteCell" forIndexPath:indexPath];
+        NSDictionary *dic = _dataArr[indexPath.row - 1];
+        cell.nameLab.text = dic[@"name"];
+        cell.titleText.placeholder = dic[@"title"];
+        if (indexPath.row == 1) {
+            cell.titleText.text = _dataDic[@"tname"];
+        }else if (indexPath.row == 2){
+            cell.titleText.text = _dataDic[@"btime"];
+        }else if (indexPath.row == 3){
+            cell.titleText.text = _dataDic[@"otime"];
+        }else if (indexPath.row == 4){
+            cell.titleText.text = _dataDic[@"tdrtess"];
+        }else if (indexPath.row == 5){
+            cell.titleText.text = [NSString stringWithFormat:@"%@/小时",_dataDic[@"money"]];
+        }else if (indexPath.row == 6){
+            cell.titleText.text = _dataDic[@"tel"];
+        }else if (indexPath.row == 7){
+            cell.titleText.text = _dataDic[@"type"];
+        }
+        cell.titleText.enabled = NO;
         return cell;
     }else{
         ReleaseTaskIntrduiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReleaseTaskIntrduiceCell" forIndexPath:indexPath];
-        cell.delegate = self;
+        cell.placehodleLab.hidden = YES;
+        cell.writeLab.text = _dataDic[@"describes"];
+        cell.writeLab.editable = NO;
+        if ([_dataDic[@"stuts"] integerValue] == 1) {
+            [cell.releaseBtu setTitle:@"待接取" forState:UIControlStateNormal];
+        }else if ([_dataDic[@"stuts"] integerValue] == 2){
+            [cell.releaseBtu setTitle:@"已接取" forState:UIControlStateNormal];
+            cell.releaseBtu.backgroundColor = Color_333333;
+        }else if ([_dataDic[@"stuts"] integerValue] == 3){
+            [cell.releaseBtu setTitle:@"待完成" forState:UIControlStateNormal];
+        }else if ([_dataDic[@"stuts"] integerValue] == 4){
+            [cell.releaseBtu setTitle:@"已完成" forState:UIControlStateNormal];
+            cell.releaseBtu.backgroundColor = Color_333333;
+        }
         return cell;
     }
 }
@@ -72,10 +116,20 @@
 }
 
 - (void)createData{
-    [KGRequestNetWorking postWothUrl:checkOneUserTask parameters:@{@"":[KGUserInfo shareInterace].userTokenCode,@"id":_tid} succ:^(id result) {
-        
+    __weak typeof(self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [KGRequestNetWorking postWothUrl:checkOneUserTask parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":_tid} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            weakSelf.dataDic = [tmp firstObject];
+            [weakSelf.listView reloadData];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf.view hideAfter:1];
+        }
     } fail:^(NSError *error) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD bwm_showTitle:@"请求出错" toView:weakSelf.view hideAfter:1];
     }];
 }
 
