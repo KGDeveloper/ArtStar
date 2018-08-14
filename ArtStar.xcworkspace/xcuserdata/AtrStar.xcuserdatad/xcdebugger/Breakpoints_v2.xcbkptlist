@@ -26,7 +26,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/AppDelegate.m"
-                  timestampString = "555936093.311394"
+                  timestampString = "555936301.402863"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "73"
@@ -41,7 +41,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/AppDelegate.m"
-                  timestampString = "555936093.31433"
+                  timestampString = "555936301.407387"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
@@ -90,7 +90,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/AppDelegate.m"
-                  timestampString = "555936093.32609"
+                  timestampString = "555936301.422937"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "71"
@@ -105,7 +105,7 @@
                   moduleName = "ArtStar"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/AtrStar/Desktop/ArtStar/ArtStar/AppDelegate.m"
-                  timestampString = "555936093.328876"
+                  timestampString = "555936301.425766"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "73"
@@ -154,22 +154,6 @@
             startingLineNumber = "82"
             endingLineNumber = "82"
             landmarkName = "-getGroupInfoWithGroupId:completion:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ArtStar/Class/Mine/Controller/&#x53d1;&#x5e03;&#x8bb0;&#x5f55;/View/MineReleasePictureView.m"
-            timestampString = "555936093.267259"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -95,7 +95,7 @@
             str = [NSString stringWithFormat:@"%@%@",str,dataArr[i]];
         }
         cell.detailLab.text = str;
-        cell.ID = [dic[@"id"] integerValue];
+        cell.ID = [dic[@"rfmId"] integerValue];
     }
     return cell;
 }
@@ -158,6 +158,7 @@
         _editView = [[MineTalentLowEditView alloc]initWithFrame:CGRectMake(0, ViewHeight(self) - 50, kScreenWidth, 50)];
         _editView.title = @"全选";
         _editView.detailStr = @"删除";
+        _editView.backgroundColor = [UIColor whiteColor];
         __weak typeof(self) weakSelf = self;
         // !!!: --点击全选按钮，选中所有--
         _editView.chooseAllCell = ^(NSString *clear) {
