@@ -30,7 +30,8 @@
     if ([model.type integerValue] == 2) {
         _themelab.hidden = YES;
     }else if ([model.type integerValue] == 1){
-        _themelab.text = model.title;
+        _themelab.hidden = NO;
+        _themelab.text = [NSString stringWithFormat:@"# %@ #",model.title];
     }else{
         _themelab.hidden = YES;
     }

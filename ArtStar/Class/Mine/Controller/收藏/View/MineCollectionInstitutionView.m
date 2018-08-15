@@ -21,6 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
+        [self createData];
         [self setTableView];
     }
     return self;
@@ -39,13 +40,12 @@
     [_listView registerNib:[UINib nibWithNibName:@"MineCollectionInstitutionViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MineCollectionInstitutionViewCell"];
 }
 
-- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
     }];
-    deleteAction.backgroundColor = [UIColor redColor];
-    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
-    return config;
+    deleteAction.backgroundColor = Color_333333;
+    return @[deleteAction];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -67,6 +67,16 @@
 }
 - (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
     return 25.0;
+}
+
+- (void)createData{
+    [KGRequestNetWorking postWothUrl:seachPersonCollect parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"collectType":@"0",@"pcquery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            
+        }
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 /*

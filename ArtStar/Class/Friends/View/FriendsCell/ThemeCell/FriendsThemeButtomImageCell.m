@@ -37,14 +37,15 @@
         _themeLab.hidden = YES;
     }else if ([model.type integerValue] == 1){
         [self hideVideo];
-        _themeLab.text = model.title;
+        _themeLab.hidden = NO;
+        _themeLab.text = [NSString stringWithFormat:@"# %@ #",model.title];
     }else{
         [self hideVideo];
         _themeLab.hidden = YES;
     }
     NSDictionary *imageDic = [model.images firstObject];
     if ([model.type integerValue] == 2) {
-        _topImage.image = [self thumbnailImageForVideo:[NSURL URLWithString:imageDic[@"imageURL"]]];
+        _topImage.image = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }else{
         [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }
@@ -103,20 +104,6 @@
     if ([self.delegate respondsToSelector:@selector(zansCell:)]) {
         [self.delegate zansCell:self.rfuid.integerValue];
     }
-}
-
-- (UIImage *)thumbnailImageForVideo:(NSURL *)video{
-    AVURLAsset *asset = [[AVURLAsset alloc]initWithURL:video options:nil];
-    NSParameterAssert(asset);
-    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
-    assetImageGenerator.appliesPreferredTrackTransform = YES;
-    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
-    CGImageRef thumbnailImageRef = NULL;
-    CFTimeInterval thumbnailImageTime = 1;
-    NSError *error = nil;
-    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60) actualTime:NULL error:&error];
-    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
-    return thumbnailImage;
 }
 
 

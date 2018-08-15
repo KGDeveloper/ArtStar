@@ -146,7 +146,7 @@
     [parameters setObject:_dataDic forKey:@"authentication"];
     [KGRequestNetWorking postWothUrl:saveCelestialBodyAttestation parameters:parameters succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        if ([result[@"codeo"] integerValue] == 200) {
+        if ([result[@"codo"] integerValue] == 200) {
             [MBProgressHUD bwm_showTitle:@"保存成功,请等待审核！" toView:weakSelf.view hideAfter:1];
         }else{
             [MBProgressHUD bwm_showTitle:@"保存失败,请查看填写内容" toView:weakSelf.view hideAfter:1];

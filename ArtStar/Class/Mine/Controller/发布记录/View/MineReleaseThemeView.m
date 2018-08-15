@@ -13,12 +13,12 @@
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,assign) NSInteger page;
-@property (nonatomic,copy) NSMutableArray *dataArr;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 /**
  选择以及删除弹窗
  */
 @property (nonatomic,strong) MineTalentLowEditView *editView;
-@property (nonatomic,copy) NSMutableArray *cellArr;
+@property (nonatomic,strong) NSMutableArray *cellArr;
 
 @end
 
@@ -66,19 +66,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineReleaseThemeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineReleaseThemeTableViewCell"];
     cell.delegate = self;
-    if (_isEditCell == YES) {
-        cell.viewWidth.constant = 30;
-        cell.deleteBtu.hidden = NO;
-        [_cellArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ((NSInteger)obj == cell.ID) {
-                [cell.deleteBtu setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
-                *stop = YES;
-            }
-        }];
-    }else{
-        cell.viewWidth.constant = 0;
-        cell.deleteBtu.hidden = YES;
-    }
     if (_dataArr.count > 0) {
         NSDictionary *dic = _dataArr[indexPath.row];
         NSString *timeStr = [[dic[@"createTime"] componentsSeparatedByString:@" "] firstObject];
@@ -98,7 +85,26 @@
         }
         cell.detailLab.text = str;
         cell.nameLab.text = [NSString stringWithFormat:@"#%@#",dic[@"title"]];
-        cell.ID = [dic[@"rfmId"] integerValue];
+        cell.ID = [dic[@"id"] integerValue];
+        if (_isEditCell == YES) {
+            cell.viewWidth.constant = 30;
+            cell.deleteBtu.hidden = NO;
+            __block BOOL isHave = NO;
+            [_cellArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj integerValue] == [dic[@"id"] integerValue]) {
+                    isHave = YES;
+                    *stop = YES;
+                }
+            }];
+            if (isHave == YES) {
+                [cell.deleteBtu setImage:Image(@"编辑选中状态") forState:UIControlStateNormal];
+            }else{
+                [cell.deleteBtu setImage:Image(@"编辑未选中状态") forState:UIControlStateNormal];
+            }
+        }else{
+            cell.viewWidth.constant = 0;
+            cell.deleteBtu.hidden = YES;
+        }
     }
     return cell;
 }
@@ -132,7 +138,14 @@
             if ([result[@"code"] integerValue] == 200) {
                 NSArray *tmp = result[@"data"];
                 if (tmp.count > 0) {
-                    [weakSelf.dataArr addObjectsFromArray:tmp];
+                    if (weakSelf.dataArr.count > 0) {
+                        for (int i = 0; i < tmp.count; i++) {
+                            NSDictionary *tmpDic = tmp[i];
+                            [weakSelf.dataArr addObject:tmpDic];
+                        }
+                    }else{
+                        weakSelf.dataArr = [NSMutableArray arrayWithArray:tmp];
+                    }
                 }
                 [weakSelf.listView.mj_header endRefreshing];
                 [weakSelf.listView.mj_footer endRefreshing];
@@ -171,13 +184,25 @@
                     NSDictionary *dic = obj;
                     [weakSelf.cellArr addObject:@([dic[@"id"] integerValue])];
                 }];
+                [weakSelf.listView reloadData];
             }else{
                 [weakSelf.listView reloadData];
             }
         };
         // !!!: --取消审核还是删除审核通过--
         _editView.deleteChooseCell = ^(NSString *deleteStr) {
-            
+            [MBProgressHUD showHUDAddedTo:weakSelf animated:YES];
+            [KGRequestNetWorking postWothUrl:deleteIssueRecord parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"ids":weakSelf.cellArr} succ:^(id result) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+                if ([result[@"code"] integerValue] == 200) {
+                    [weakSelf.listView.mj_header beginRefreshing];
+                }else{
+                    [MBProgressHUD bwm_showTitle:@"删除失败" toView:weakSelf hideAfter:1];
+                }
+            } fail:^(NSError *error) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+                [MBProgressHUD bwm_showTitle:@"删除失败" toView:weakSelf hideAfter:1];
+            }];
         };
         [self insertSubview:_editView atIndex:99];
     }

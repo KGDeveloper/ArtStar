@@ -246,7 +246,8 @@
         __weak typeof(self) weakSelf = self;
         [KGRequestNetWorking postWothUrl:seachIssueRecord parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"issueType":@"0",@"irQuery":@{@"page":@(0),@"rows":@"15"}} succ:^(id result) {
             if ([result[@"code"] integerValue] == 200) {
-                weakSelf.pictureBtu.count = [NSString stringWithFormat:@"%@",result[@"total"]];
+                NSArray *tmp = result[@"data"];
+                weakSelf.pictureBtu.count = [NSString stringWithFormat:@"%li",tmp.count];
             }
         } fail:^(NSError *error) {
             
@@ -258,7 +259,8 @@
         __weak typeof(self) weakSelf = self;
         [KGRequestNetWorking postWothUrl:seachIssueRecord parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"issueType":@"1",@"irQuery":@{@"page":@(2),@"rows":@"15"}} succ:^(id result) {
             if ([result[@"code"] integerValue] == 200) {
-                weakSelf.videoBtu.count = [NSString stringWithFormat:@"%@",result[@"total"]];
+                NSArray *tmp = result[@"data"];
+                weakSelf.videoBtu.count = [NSString stringWithFormat:@"%li",tmp.count];
             }
         } fail:^(NSError *error) {
             
@@ -270,7 +272,8 @@
         __weak typeof(self) weakSelf = self;
         [KGRequestNetWorking postWothUrl:seachIssueRecord parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"issueType":@"0",@"irQuery":@{@"page":@(1),@"rows":@"15"}} succ:^(id result) {
             if ([result[@"code"] integerValue] == 200) {
-                weakSelf.themeBtu.count = [NSString stringWithFormat:@"%@",result[@"total"]];
+                NSArray *tmp = result[@"data"];
+                weakSelf.themeBtu.count = [NSString stringWithFormat:@"%li",tmp.count];
             }
         } fail:^(NSError *error) {
             
@@ -282,7 +285,8 @@
         __weak typeof(self) weakSelf = self;
         [KGRequestNetWorking postWothUrl:seachIssueRecord parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"issueType":@"0",@"irQuery":@{@"page":@(3),@"rows":@"15"}} succ:^(id result) {
             if ([result[@"code"] integerValue] == 200) {
-                weakSelf.articleBtu.count = [NSString stringWithFormat:@"%@",result[@"total"]];
+                NSArray *tmp = result[@"data"];
+                weakSelf.articleBtu.count = [NSString stringWithFormat:@"%li",tmp.count];
             }
         } fail:^(NSError *error) {
             

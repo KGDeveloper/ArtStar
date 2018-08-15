@@ -214,6 +214,18 @@
  @return 关注
  */
 #define attorcel [serverIP stringByAppendingString:@"attention/attorcel"]
+/**
+ 删除发布记录（批量删除和单个删除）
+
+ @return 删除发布记录（批量删除和单个删除）
+ */
+#define deleteIssueRecord [serverIP stringByAppendingString:@"issueRecord/deleteIssueRecord"]
+/**
+ 查询收藏
+
+ @return 查询收藏
+ */
+#define seachPersonCollect [serverIP stringByAppendingString:@"personCollect/seachPersonCollect"]
 
 
 #endif /* MineHttpsDefine_h */

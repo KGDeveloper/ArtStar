@@ -12,6 +12,7 @@
 @interface MineCollectionStarcircleView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -20,6 +21,8 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
+        _dataArr = [NSMutableArray array];
+        [self createData];
         [self setTableView];
     }
     return self;
@@ -39,11 +42,20 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineCollectionStarCircleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineCollectionStarCircleTableViewCell"];
+    
+    /*
+     @property (weak, nonatomic) IBOutlet UIImageView *headImage;
+     @property (weak, nonatomic) IBOutlet UILabel *nameLab;
+     @property (weak, nonatomic) IBOutlet UIImageView *topImage;
+     @property (weak, nonatomic) IBOutlet UILabel *detailLab;
+     @property (weak, nonatomic) IBOutlet UILabel *timeLab;
+     @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topWidth;
+     */
     return cell;
 }
 
@@ -57,6 +69,22 @@
 }
 - (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
     return 25.0;
+}
+
+- (void)createData{
+    __weak typeof(self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    [KGRequestNetWorking postWothUrl:seachPersonCollect parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"collectType":@"2",@"pcquery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            if (tmp.count > 0) {
+                [weakSelf.dataArr addObjectsFromArray:tmp];
+            }
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+    }];
 }
 
 /*

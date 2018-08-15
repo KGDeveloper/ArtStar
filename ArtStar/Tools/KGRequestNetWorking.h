@@ -46,7 +46,13 @@
                  succ:(void(^)(id result))succ
                  fail:(void(^)(NSError *error))fail;
 
+/**
+ 根据视频url获取第一帧图片
 
+ @param video 视频url
+ @return 视频第一帧图片
+ */
+- (UIImage *)thumbnailImageForVideo:(NSURL *)video;
 
 
 @end

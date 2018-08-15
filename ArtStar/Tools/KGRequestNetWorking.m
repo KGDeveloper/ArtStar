@@ -7,6 +7,7 @@
 //
 
 #import "KGRequestNetWorking.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation KGRequestNetWorking
 
@@ -84,7 +85,7 @@
     AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [requestSerializer setValue:@"wyxq" forHTTPHeaderField:@"User-Agent"];
+    [requestSerializer setValue:@"wyxqIOS" forHTTPHeaderField:@"User-Agent"];
     manager.requestSerializer = requestSerializer;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
     
@@ -99,6 +100,22 @@
     return dic;
 }
 
+- (UIImage *)thumbnailImageForVideo:(NSURL *)video{
+    AVURLAsset *asset = [[AVURLAsset alloc]initWithURL:video options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = 1;
+    NSError *error = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60) actualTime:NULL error:&error];
+    if (!thumbnailImageRef) {
+        NSLog(@"%@",error);
+    }
+    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
+    return thumbnailImage;
+}
 
 
 
