@@ -114,7 +114,7 @@ FriendsPlayVideoViewdelegate>
 - (void)changeUI{
     if (self.type == 1) {//:--横排--
         if ([_model.composing integerValue] == 0) {
-            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 65 + 58)];
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 85 + 58)];
             self.detailScrollView.size = CGSizeMake(kScreenWidth, 0);
         }else if ([_model.composing integerValue] == 1){
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
@@ -157,7 +157,7 @@ FriendsPlayVideoViewdelegate>
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
         }
         NSDictionary *dic = [_model.images firstObject];
-        self.videoView.videoIamge = [self thumbnailImageForUrl:dic[@"imageURL"]];
+        self.videoView.videoIamge = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:[NSURL URLWithString:dic[@"imageURL"]]];
         self.detailScrollView.hidden = YES;
         self.veritocalView.textAlinment = NSTextAlignmentCenter;
         self.veritocalView.isVertical = NO;
@@ -538,26 +538,7 @@ FriendsPlayVideoViewdelegate>
             break;
     }
 }
-/**
- 获取视频第一帧图片
 
- @param url 获取视频第一帧图片
- @return 获取视频第一帧图片
- */
-- (UIImage *)thumbnailImageForUrl:(NSString *)url{
-    AVURLAsset *asset = [[AVURLAsset alloc]initWithURL:[NSURL URLWithString:url] options:nil];
-    NSParameterAssert(asset);
-    AVAssetImageGenerator *assetImagegenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    assetImagegenerator.appliesPreferredTrackTransform = YES;
-    assetImagegenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
-    
-    CGImageRef thumbnailImageRef = NULL;
-    CFTimeInterval thumbnailImageTile = 1;
-    NSError *error = nil;
-    thumbnailImageRef = [assetImagegenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTile, 60) actualTime:NULL error:&error];
-    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
-    return thumbnailImage;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

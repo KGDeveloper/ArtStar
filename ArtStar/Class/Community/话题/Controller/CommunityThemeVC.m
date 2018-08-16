@@ -43,7 +43,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
-    [self createHeadLineData];
+    
+    self.themeView.titleName = @"音乐";
     [self setSearchBar];
     [self setTopView];
     
@@ -52,29 +53,19 @@
     __weak typeof(self) mySelf = self;
     //MARK:-------------------------------------------顶部滚动条---------------------------------------------
     CommunityHeaderScrollView *scrollerView = [[CommunityHeaderScrollView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 40)];
-    scrollerView.itemArr = @[@"全部",@"美术",@"音乐",@"戏剧",@"电影"];
+    scrollerView.itemArr = @[@"音乐",@"美术",@"戏剧",@"电影",@"摄影",@"书籍",@"设计",@"美食",@"文学"];
     //MARK:---------------------------------------------滚动条按钮点击事件-------------------------------------------
     scrollerView.titleAction = ^(NSString *title) {
-        if ([title isEqualToString:@"全部"]) {
-            [mySelf.view bringSubviewToFront:self.themeView];
-        }else if([title isEqualToString:@"美术"]){
-            [mySelf.view bringSubviewToFront:self.themeView];
-        }else if ([title isEqualToString:@"音乐"]){
-            [mySelf.view bringSubviewToFront:self.themeView];
-        }else if ([title isEqualToString:@"戏剧"]){
-            [mySelf.view bringSubviewToFront:self.themeView];
-        }else{
-            [mySelf.view bringSubviewToFront:self.themeView];
-        }
+        mySelf.themeView.titleName = title;
     };
     [self.view addSubview:scrollerView];
     [self.view insertSubview:self.themeView atIndex:99];
 }
 //MARK:----------------------------------------------------------话题--------------------------------------------------------------
 - (MusicThemeView *)themeView{
-    __weak typeof(self) mySelf = self;
     if (!_themeView) {
         _themeView = [[MusicThemeView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 40, kScreenWidth, kScreenHeight - NavTopHeight - 40)];
+        __weak typeof(self) mySelf = self;
         _themeView.pushViewController = ^{
             [mySelf pushNoTabBarViewController:[[MusicManagementMyThemeVC alloc]init] animated:YES];
         };
@@ -93,14 +84,6 @@
         }
         
     }
-}
-
-- (void)createHeadLineData{
-    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":_titleName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
-        
-    } fail:^(NSError *error) {
-        
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

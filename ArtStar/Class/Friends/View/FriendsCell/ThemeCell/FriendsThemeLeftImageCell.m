@@ -32,38 +32,41 @@
 
 @implementation FriendsThemeLeftImageCell
 
-- (void)fillCellWithModel:(FriendsModel *)model{
-    NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+- (void)fillCellWithModel:(NSDictionary *)model{
+    NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
     NSString *str = dataArr[0];
     for (int i = 1; i < dataArr.count; i++) {
         str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];
     }
-    if ([model.composing integerValue] == 3) {
-        [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentTop];
-    }else if ([model.composing integerValue] == 4){
-        [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentCenter];
+    if (str != nil) {
+        if ([model[@"composing"] integerValue] == 3) {
+            [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentTop];
+        }else if ([model[@"composing"] integerValue] == 4){
+            [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentCenter];
+        }
     }
-    if ([model.type integerValue] == 2) {
+    if ([model[@"type"] integerValue] == 2) {
         _themeLab.hidden = YES;
-    }else if ([model.type integerValue] == 1){
+    }else if ([model[@"type"] integerValue] == 1){
         _themeLab.hidden = NO;
-        _themeLab.text = [NSString stringWithFormat:@"# %@ #",model.title];
+        _themeLab.text = [NSString stringWithFormat:@"# %@ #",model[@"title"]];
     }else{
         _themeLab.hidden = YES;
     }
-    NSDictionary *imageDic = [model.images firstObject];
+    NSArray *imageArr = model[@"images"];
+    NSDictionary *imageDic = [imageArr firstObject];
     [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
     
-    NSDictionary *dic = model.user;
+    NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
-    _locationLab.text = model.location;
-    _timeLab.text = model.createTimeStr;
+    _locationLab.text = model[@"location"];
+    _timeLab.text = model[@"createTimeStr"];
     
-    [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
-    [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
+    [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];
+    [_zansBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"likeCount"] integerValue]] forState:UIControlStateNormal];
 }
 
 - (void)awakeFromNib {
@@ -131,12 +134,9 @@
     _countLab.text = @"1/9";
     _countLab.textAlignment = NSTextAlignmentCenter;
     _countLab.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(27).heightIs(14);
-    
-//    _textView.verticalForm = YES;
-//    _textView.textVerticalAlignment = YYTextVerticalAlignmentCenter;
-//    _textView.font = FZFont(13);
+
     _textView.textColor = Color_333333;
-//    _textView.text = @"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯";
+
     [self changeYYTextView:_textView text:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:YYTextVerticalAlignmentCenter];
     _textView.sd_layout.topEqualToView(_topImage).rightSpaceToView(self.contentView, 15).widthIs(115).heightIs((kScreenWidth - 165)/450*690);
 

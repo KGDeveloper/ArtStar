@@ -1110,28 +1110,28 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
             return @"2";
             break;
         case EditThemeTypeRightTop:
-            return @"3";
-            break;
-        case EditThemeTypeRightCenter:
-            return @"4";
-            break;
-        case EditThemeTypeTopLeft:
-            return @"5";
-            break;
-        case EditThemeTypeTopCenter:
-            return @"6";
-            break;
-        case EditThemeTypeTopRight:
-            return @"7";
-            break;
-        case EditThemeTypeLeft:
-            return @"8";
-            break;
-        case EditThemeTypeCenter:
             return @"9";
             break;
-        case EditThemeTypeRight:
+        case EditThemeTypeRightCenter:
             return @"10";
+            break;
+        case EditThemeTypeTopLeft:
+            return @"3";
+            break;
+        case EditThemeTypeTopCenter:
+            return @"4";
+            break;
+        case EditThemeTypeTopRight:
+            return @"5";
+            break;
+        case EditThemeTypeLeft:
+            return @"6";
+            break;
+        case EditThemeTypeCenter:
+            return @"7";
+            break;
+        case EditThemeTypeRight:
+            return @"8";
             break;
         default:
             break;
@@ -1140,22 +1140,22 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
 - (NSString *)returnVType:(EditVideoType)type{
     switch (type) {
         case EditVideoTypeTopLeft:
-            return @"5";
+            return @"3";
             break;
         case EditVideoTypeTopCenter:
-            return @"6";
+            return @"4";
             break;
         case EditVideoTypeTopRight:
-            return @"7";
+            return @"5";
             break;
         case EditVideoTypeLeft:
-            return @"8";
+            return @"6";
             break;
         case EditVideoTypeCenter:
-            return @"9";
+            return @"7";
             break;
         case EditVideoTypeRight:
-            return @"10";
+            return @"8";
             break;
         case EditVideoTypeOnlyVideo:
             return @"1";
@@ -1170,28 +1170,28 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
             return @"2";
             break;
         case EditGraphicTypeRightTop:
-            return @"3";
-            break;
-        case EditGraphicTypeRightCenter:
-            return @"4";
-            break;
-        case EditGraphicTypeTopLeft:
-            return @"5";
-            break;
-        case EditGraphicTypeTopCenter:
-            return @"6";
-            break;
-        case EditGraphicTypeTopRight:
-            return @"7";
-            break;
-        case EditGraphicTypeLeft:
-            return @"8";
-            break;
-        case EditGraphicTypeCenter:
             return @"9";
             break;
-        case EditGraphicTypeRight:
+        case EditGraphicTypeRightCenter:
             return @"10";
+            break;
+        case EditGraphicTypeTopLeft:
+            return @"3";
+            break;
+        case EditGraphicTypeTopCenter:
+            return @"4";
+            break;
+        case EditGraphicTypeTopRight:
+            return @"5";
+            break;
+        case EditGraphicTypeLeft:
+            return @"6";
+            break;
+        case EditGraphicTypeCenter:
+            return @"7";
+            break;
+        case EditGraphicTypeRight:
+            return @"8";
             break;
         case EditGraphicTypeOnlyTitle:
             return @"0";

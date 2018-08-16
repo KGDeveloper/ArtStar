@@ -226,6 +226,18 @@
  @return 查询收藏
  */
 #define seachPersonCollect [serverIP stringByAppendingString:@"personCollect/seachPersonCollect"]
+/**
+ 删除收藏
+
+ @return 删除收藏
+ */
+#define deletePersonCollectByid [serverIP stringByAppendingString:@"personCollect/deletePersonCollectByid"]
+/**
+ 改变用户在线状态
+
+ @return 改变用户在线状态
+ */
+#define updateState [serverIP stringByAppendingString:@"user/updateState"]
 
 
 #endif /* MineHttpsDefine_h */

@@ -15,6 +15,9 @@
     // Initialization code
 }
 - (IBAction)deleteClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(deleteContellWithID:)]) {
+        [self.delegate deleteContellWithID:_cellId];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -16,8 +16,8 @@
 
 @implementation FriendsThemeCirulerImageCell
 
-- (void)fillCellWithModel:(FriendsModel *)model{
-    NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+- (void)fillCellWithModel:(NSDictionary *)model{
+    NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
     NSString *str = dataArr[0];
@@ -27,26 +27,27 @@
     
     [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
     
-    if ([model.type integerValue] == 2) {
+    if ([model[@"type"] integerValue] == 2) {
         _themelab.hidden = YES;
-    }else if ([model.type integerValue] == 1){
+    }else if ([model[@"type"] integerValue] == 1){
         _themelab.hidden = NO;
-        _themelab.text = [NSString stringWithFormat:@"# %@ #",model.title];
+        _themelab.text = [NSString stringWithFormat:@"# %@ #",model[@"title"]];
     }else{
         _themelab.hidden = YES;
     }
-    NSDictionary *imageDic = [model.images firstObject];
+    NSArray *imageArr = model[@"images"];
+    NSDictionary *imageDic = [imageArr firstObject];
     [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
-    _countLab.text = [NSString stringWithFormat:@"1/%lu",(unsigned long)model.images.count];
-    NSDictionary *dic = model.user;
+    _countLab.text = [NSString stringWithFormat:@"1/%li",imageArr.count];
+    NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
-    _locationLab.text = model.location;
-    _timeLab.text = model.createTimeStr;
-    _rfuid = model.ID;
+    _locationLab.text = model[@"location"];
+    _timeLab.text = model[@"createTimeStr"];
+    _rfuid = model[@"id"];
     
-    [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
-    [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
+    [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];
+    [_zansBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"likeCount"] integerValue]] forState:UIControlStateNormal];
 }
 
 - (void)awakeFromNib {

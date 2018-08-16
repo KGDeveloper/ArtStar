@@ -10,6 +10,4 @@
 
 @interface CommunityThemeVC : BaseVC
 
-@property (nonatomic,copy) NSString *titleName;
-
 @end

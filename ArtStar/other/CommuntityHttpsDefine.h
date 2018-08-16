@@ -141,5 +141,11 @@
  @return 新闻点赞接口
  */
 #define diannews [serverIP stringByAppendingString:@"community/diannews"]
+/**
+ 根据前台传过来的用户ID和用户对话题的关系值查询对应的话题集合
+
+ @return 根据前台传过来的用户ID和用户对话题的关系值查询对应的话题集合
+ */
+#define utBytopic [serverIP stringByAppendingString:@"community/utBytopic"]
 
 #endif /* CommuntityHttpsDefine_h */

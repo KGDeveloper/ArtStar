@@ -17,34 +17,34 @@
 
 @implementation FriendsOnlyHaveImageCell
 
-- (void)fillCellWithModel:(FriendsModel *)model{
+- (void)fillCellWithModel:(NSDictionary *)model{
     
-    if ([model.type integerValue] == 2) {
+    if ([model[@"type"] integerValue] == 2) {
         [self showVideo];
         _themeLab.hidden = YES;
-    }else if ([model.type integerValue] == 1){
+    }else if ([model[@"type"] integerValue] == 1){
         [self showGraphic];
         _themeLab.hidden = NO;
-        _themeLab.text = [NSString stringWithFormat:@"# %@ #",model.title];
+        _themeLab.text = [NSString stringWithFormat:@"# %@ #",model[@"title"]];
     }else{
         [self showGraphic];
         _themeLab.hidden = YES;
     }
-    NSDictionary *imageDic = [model.images firstObject];
-    if ([model.type integerValue] == 2) {
+    NSDictionary *imageDic = [model[@"images"] firstObject];
+    if ([model[@"type"] integerValue] == 2) {
         _topImage.image = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }else{
         [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }
     
-    NSDictionary *dic = model.user;
+    NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
-    _locationLab.text = model.location;
-    _timeLab.text = model.createTimeStr;
+    _locationLab.text = model[@"location"];
+    _timeLab.text = model[@"createTimeStr"];
     
-    [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
-    [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
+    [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];
+    [_zansBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"likeCount"] integerValue]] forState:UIControlStateNormal];
 }
 
 - (void)awakeFromNib {

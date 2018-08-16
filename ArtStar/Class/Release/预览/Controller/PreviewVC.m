@@ -117,8 +117,8 @@
     NSArray *tmpArr = _model.imageURLs[@"image"];
     if (arr.count == tmpArr.count) {
         [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:parameters succ:^(id result) {
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
             if ([result[@"code"] integerValue] == 200) {
-                [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
                 [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
                 [mySelf.navigationController popViewControllerAnimated:YES];
             }else{

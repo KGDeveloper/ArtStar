@@ -37,6 +37,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentWidth;
 @property (nonatomic,weak) id<FriendsThemeCirulerImageCellDelegate>delegate;
 
-- (void)fillCellWithModel:(FriendsModel *)model;
+- (void)fillCellWithModel:(NSDictionary *)model;
 
 @end

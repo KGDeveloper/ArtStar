@@ -42,12 +42,12 @@
     _timeLab.textColor = Color_999999;
     _timeLab.text = @"2018-06-23";
     _timeLab.font = FZFont(12);
-    _timeLab.sd_layout.leftSpaceToView(self, 0).topSpaceToView(self, 25).widthIs(100).heightIs(20);
+    _timeLab.sd_layout.leftSpaceToView(self, 0).topSpaceToView(self, 45).widthIs(100).heightIs(20);
     
     _locationLab.textColor = Color_999999;
     _locationLab.text = @"北京";
     _locationLab.font = FZFont(12);
-    _locationLab.sd_layout.leftSpaceToView(_timeLab, 15).topSpaceToView(self, 25).widthIs(100).heightIs(20);
+    _locationLab.sd_layout.leftSpaceToView(_timeLab, 15).topSpaceToView(self, 45).widthIs(100).heightIs(20);
     
     [_commentBtu setImage:Image(@"评论") forState:UIControlStateNormal];
     [_commentBtu addTarget:self action:@selector(commentClick:) forControlEvents:UIControlEventTouchUpInside];

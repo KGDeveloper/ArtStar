@@ -17,47 +17,48 @@
 
 @implementation FriendsThemeButtomImageCell
 
-- (void)fillCellWithModel:(FriendsModel *)model{
-    NSData *strData = [model.content dataUsingEncoding:NSUTF8StringEncoding];
+- (void)fillCellWithModel:(NSDictionary *)model{
+    NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
     NSString *str = dataArr[0];
     for (int i = 1; i < dataArr.count; i++) {
         str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];
     }
-    if ([model.composing integerValue] == 5) {
+    if ([model[@"composing"] integerValue] == 5) {
         [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentLeft];
-    }else if ([model.composing integerValue] == 6){
+    }else if ([model[@"composing"] integerValue] == 6){
         [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
-    }else if ([model.composing integerValue] == 7){
+    }else if ([model[@"composing"] integerValue] == 7){
         [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentRight];
     }
-    if ([model.type integerValue] == 2) {
+    if ([model[@"type"] integerValue] == 2) {
         [self showVideo];
         _themeLab.hidden = YES;
-    }else if ([model.type integerValue] == 1){
+    }else if ([model[@"type"] integerValue] == 1){
         [self hideVideo];
         _themeLab.hidden = NO;
-        _themeLab.text = [NSString stringWithFormat:@"# %@ #",model.title];
+        _themeLab.text = [NSString stringWithFormat:@"# %@ #",model[@"title"]];
     }else{
         [self hideVideo];
         _themeLab.hidden = YES;
     }
-    NSDictionary *imageDic = [model.images firstObject];
-    if ([model.type integerValue] == 2) {
+    NSArray *imageArr = model[@"images"];
+    NSDictionary *imageDic = [imageArr firstObject];
+    if ([model[@"type"] integerValue] == 2) {
         _topImage.image = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }else{
         [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }
     
-    NSDictionary *dic = model.user;
+    NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
-    _locationLab.text = model.location;
-    _timeLab.text = model.createTimeStr;
+    _locationLab.text = model[@"location"];
+    _timeLab.text = model[@"createTimeStr"];
     
-    [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
-    [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
+    [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];
+    [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",[model[@"likeCount"] integerValue]] forState:UIControlStateNormal];
 }
 
 - (void)showVideo{

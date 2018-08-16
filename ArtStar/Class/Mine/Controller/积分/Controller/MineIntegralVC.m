@@ -123,7 +123,7 @@
 - (void)clickBtuToDoSomeThing:(NSString *)someThing{
     if ([someThing isEqualToString:@"做达人"]) {
         TalentVC *vc = [[TalentVC alloc] init];
-        [self pushNoTabBarViewController:vc animated:YES];
+        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:YES completion:nil];
     }else if ([someThing isEqualToString:@"发布"]){
         [MBProgressHUD bwm_showTitle:@"请点击主界面中间的加号选择发布类型" toView:self.view hideAfter:1];
     }

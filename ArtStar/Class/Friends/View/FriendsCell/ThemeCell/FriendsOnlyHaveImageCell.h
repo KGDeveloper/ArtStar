@@ -40,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentWidth;
 @property (nonatomic,weak) id<FriendsOnlyHaveImageCellDelegate>delegate;
 
-- (void)fillCellWithModel:(FriendsModel *)model;
+- (void)fillCellWithModel:(NSDictionary *)model;
 
 - (void)showVideo;
 - (void)showGraphic;

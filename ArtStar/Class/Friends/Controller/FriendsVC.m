@@ -99,8 +99,7 @@ DZNEmptyDataSetSource
             NSArray *dataarray = result[@"data"];
             for (int i = 0; i <  dataarray.count; i++) {
                 NSDictionary *dic = dataarray[i];
-                FriendsModel *model = [FriendsModel mj_objectWithKeyValues:dic];
-                [mySelf.dataArr addObject:model];
+                [mySelf.dataArr addObject:dic];
             }
             [mySelf.listView reloadData];
             [mySelf.listView.mj_header endRefreshing];
@@ -179,28 +178,28 @@ DZNEmptyDataSetSource
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FriendsModel *model = _dataArr[indexPath.row];
-    if ([model.composing integerValue] == 0) {
+    NSDictionary *dic = _dataArr[indexPath.row];
+    if ([dic[@"composing"] integerValue] == 0) {
         return OnlyHaveTitleHeight + 40;
-    }else if ([model.composing integerValue] == 1){
+    }else if ([dic[@"composing"] integerValue] == 1){
         return OnlyHaveImageHeight + 40;
-    }else if ([model.composing integerValue] == 2){
+    }else if ([dic[@"composing"] integerValue] == 2){
         return curileImageHeight + 40;
-    }else if ([model.composing integerValue] == 3){
+    }else if ([dic[@"composing"] integerValue] == 3){
         return LeftAndRightHeight + 40;
-    }else if ([model.composing integerValue] == 4){
+    }else if ([dic[@"composing"] integerValue] == 4){
         return LeftAndRightHeight + 40;
-    }else if ([model.composing integerValue] == 5){
+    }else if ([dic[@"composing"] integerValue] == 5){
         return TopAndBottomHeight + 40;
-    }else if ([model.composing integerValue] == 6){
+    }else if ([dic[@"composing"] integerValue] == 6){
         return TopAndBottomHeight + 40;
-    }else if ([model.composing integerValue] == 7){
+    }else if ([dic[@"composing"] integerValue] == 7){
         return TopAndBottomHeight + 40;
-    }else if ([model.composing integerValue] == 8){
+    }else if ([dic[@"composing"] integerValue] == 8){
         return TopAndBottomHeight + 40;
-    }else if ([model.composing integerValue] == 9){
+    }else if ([dic[@"composing"] integerValue] == 9){
         return TopAndBottomHeight + 40;
-    }else if ([model.composing integerValue] == 10){
+    }else if ([dic[@"composing"] integerValue] == 10){
         return TopAndBottomHeight + 40;
     }else{
         return talentHeight;
@@ -208,115 +207,115 @@ DZNEmptyDataSetSource
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FriendsModel *model = _dataArr[indexPath.row];
+    NSDictionary *dic = _dataArr[indexPath.row];
     //MARK:----------------------------------------只有文字------------------------------------------------
-    if ([model.composing integerValue] == 0) {
+    if ([dic[@"composing"] integerValue] == 0) {
         FriendsOnlyHaveLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsOnlyHaveLabelCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:----------------------------------------只有图片------------------------------------------------
-    }else if ([model.composing integerValue] == 1){
+    }else if ([dic[@"composing"] integerValue] == 1){
         FriendsOnlyHaveImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsOnlyHaveImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:-----------------------------------------圆形图片-----------------------------------------------
-    }else if ([model.composing integerValue] == 2){
+    }else if ([dic[@"composing"] integerValue] == 2){
         FriendsThemeCirulerImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeCirulerImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:----------------------------------------文字居右居上------------------------------------------------
-    }else if ([model.composing integerValue] == 3){
+    }else if ([dic[@"composing"] integerValue] == 9){
         FriendsThemeLeftImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeLeftImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:------------------------------------------文字居右居中----------------------------------------------
-    }else if ([model.composing integerValue] == 4){
+    }else if ([dic[@"composing"] integerValue] == 10){
         FriendsThemeLeftImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeLeftImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:-------------------------------------------文字居上局座---------------------------------------------
-    }else if ([model.composing integerValue] == 5){
+    }else if ([dic[@"composing"] integerValue] == 3){
         FriendsThemeButtomImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeButtomImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:------------------------------------------文字居上居中----------------------------------------------
-    }else if ([model.composing integerValue] == 6){
+    }else if ([dic[@"composing"] integerValue] == 4){
         FriendsThemeButtomImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeButtomImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:-----------------------------------------文字居上居右-----------------------------------------------
-    }else if ([model.composing integerValue] == 7){
+    }else if ([dic[@"composing"] integerValue] == 5){
         FriendsThemeButtomImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeButtomImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:---------------------------------------------文字局下局座-------------------------------------------
-    }else if ([model.composing integerValue] == 8){
+    }else if ([dic[@"composing"] integerValue] == 6){
         FriendsThemeTopImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeTopImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:---------------------------------------------文字局下居中-------------------------------------------
-    }else if ([model.composing integerValue] == 9){
+    }else if ([dic[@"composing"] integerValue] == 7){
         FriendsThemeTopImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeTopImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
         //MARK:----------------------------------------------文字局下居右------------------------------------------
-    }else if ([model.composing integerValue] == 10){
+    }else if ([dic[@"composing"] integerValue] == 8){
         FriendsThemeTopImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsThemeTopImageCell"];
         cell.delegate = self;
-        [cell fillCellWithModel:model];
+        [cell fillCellWithModel:dic];
         return cell;
     }else{
         //MARK:--------------------------------------------达人发布的内容--------------------------------------------
         FriendsTalentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsTalentTableViewCell"];
-        NSDictionary *dic = model.user;
-        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
-        cell.nikName.text = dic[@"username"];
-        cell.titleLab.text = model.title;
-        cell.detailLab.attributedText = [TransformChineseToPinying string:model.content font:SYFont(12) space:10];;
-        NSArray *arr = model.images;
+        NSDictionary *userdic = dic[@"user"];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:userdic[@"portraitUri"]]];
+        cell.nikName.text = userdic[@"username"];
+        cell.titleLab.text = dic[@"title"];
+        cell.detailLab.attributedText = [TransformChineseToPinying string:dic[@"content"] font:SYFont(12) space:10];;
+        NSArray *arr = dic[@"images"];
         NSDictionary *imageDic = [arr firstObject];
         [cell.topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
         cell.videoBack.hidden = YES;
         cell.videoPlay.hidden = YES;
-        cell.locationLab.text = model.location;
+        cell.locationLab.text = dic[@"location"];
         cell.countLab.text = [NSString stringWithFormat:@"1/%lu",(unsigned long)arr.count];
-        [cell.commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.rccommentNum.integerValue] forState:UIControlStateNormal];
-        [cell.zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.likeCount.integerValue] forState:UIControlStateNormal];
+        [cell.commentBtu setTitle:[NSString stringWithFormat:@"%li",[dic[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];
+        [cell.zansBtu setTitle:[NSString stringWithFormat:@"%li",[dic[@"likeCount"] integerValue]] forState:UIControlStateNormal];
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FriendsModel *model = _dataArr[indexPath.row];
-    if ([model.composing integerValue] == 11) {
+    NSDictionary *dic = _dataArr[indexPath.row];
+    if ([dic[@"composing"] integerValue] == 11) {
         FriendsTalentDetailVC *vc = [[FriendsTalentDetailVC alloc]init];
-        vc.ID = model.issId;
-        vc.msgID = model.ID;
+        vc.ID = dic[@"issId"];
+        vc.msgID = dic[@"id"];
         [self pushNoTabBarViewController:vc animated:YES];
     }else{
-        if ([model.type integerValue] == 0 || [model.type integerValue] == 1) {
+        if ([dic[@"type"] integerValue] == 0 || [dic[@"type"] integerValue] == 1) {
             FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
-            if ([model.composing integerValue] == 3 || [model.composing integerValue] == 4) {
+            if ([dic[@"composing"] integerValue] == 3 || [dic[@"composing"] integerValue] == 4) {
                 vc.type = 0;
             }else{
                 vc.type = 1;
             }
-            vc.rfimd = model.ID;
+            vc.rfimd = dic[@"id"];
             [self pushNoTabBarViewController:vc animated:YES];
-        }else if ([model.type integerValue] == 2){
+        }else if ([dic[@"type"] integerValue] == 2){
             FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
             vc.type = 2;
-            vc.rfimd = model.ID;
+            vc.rfimd = dic[@"id"];
             [self pushNoTabBarViewController:vc animated:YES];
         }
     }

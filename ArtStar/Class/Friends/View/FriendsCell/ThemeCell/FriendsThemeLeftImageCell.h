@@ -22,6 +22,6 @@
 @interface FriendsThemeLeftImageCell: UITableViewCell
 
 @property (nonatomic,weak) id<FriendsThemeLeftImageCellDelegate>delegate;
-- (void)fillCellWithModel:(FriendsModel *)model;
+- (void)fillCellWithModel:(NSDictionary *)model;
 
 @end

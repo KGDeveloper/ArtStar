@@ -74,7 +74,6 @@
         return vc;
     }else if ([name isEqualToString:@"话题"]){
         CommunityThemeVC *vc = [[CommunityThemeVC alloc] init];
-        vc.titleName = @"话题";
         return vc;
     }else if ([name isEqualToString:@"机构"]){
         CommunityInstitutionsVC *vc = [[CommunityInstitutionsVC alloc]init];

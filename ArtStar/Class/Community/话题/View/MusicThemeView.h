@@ -11,5 +11,6 @@
 @interface MusicThemeView : UIView
 
 @property (nonatomic,copy) void(^pushViewController)(void);
+@property (nonatomic,copy) NSString *titleName;
 
 @end

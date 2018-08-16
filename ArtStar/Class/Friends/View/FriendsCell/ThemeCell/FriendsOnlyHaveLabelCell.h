@@ -40,6 +40,6 @@
 
 @property (nonatomic,weak) id<FriendsOnlyHaveLabelCellDelegate>delegate;
 
-- (void)fillCellWithModel:(FriendsModel *)model;
+- (void)fillCellWithModel:(NSDictionary *)model;
 
 @end

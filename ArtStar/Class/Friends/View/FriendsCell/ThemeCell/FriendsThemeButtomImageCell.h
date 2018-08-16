@@ -40,7 +40,7 @@
 
 @property (nonatomic,weak) id<FriendsThemeTopImageCellDelegate>delegate;
 
-- (void)fillCellWithModel:(FriendsModel *)model;
+- (void)fillCellWithModel:(NSDictionary *)model;
 
 @end
 

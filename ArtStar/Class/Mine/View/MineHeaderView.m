@@ -169,8 +169,26 @@
 }
 - (void)changeStatusWithStatus:(NSString *)status{
     __weak typeof(self) weakSelf = self;
-//    KGRequestNetWorking postWothUrl:<#(NSString *)#> parameters:<#(NSDictionary *)#> succ:<#^(id result)succ#> fail:<#^(NSError *error)fail#>
-//    [mySelf.statuBtu setTitle:status forState:UIControlStateNormal];
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    if ([status isEqualToString:@"在线"]) {
+        [KGRequestNetWorking postWothUrl:updateState parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"state":@"0"} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                [weakSelf.statuBtu setTitle:status forState:UIControlStateNormal];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        }];
+    }else{
+        [KGRequestNetWorking postWothUrl:updateState parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"state":@"-1"} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                [weakSelf.statuBtu setTitle:status forState:UIControlStateNormal];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        }];
+    }
 }
 - (void)intoMySelfCenter{
     if (self.pushIntoMyselfCenter) {
