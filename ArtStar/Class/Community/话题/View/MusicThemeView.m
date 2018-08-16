@@ -15,6 +15,7 @@
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) UIView *headerView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
+@property (nonatomic,strong) NSMutableArray *topArr;
 
 @end
 
@@ -24,6 +25,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         _dataArr = [NSMutableArray array];
+        _topArr = [NSMutableArray array];
         [self topCellData];
         [self setView];
     }
@@ -65,7 +67,11 @@
     return _headerView;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _dataArr.count;
+    if (_topArr.count > 0) {
+        return _dataArr.count + 1;
+    }else{
+        return _dataArr.count;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
@@ -101,6 +107,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         MusicThemeMyThemeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicThemeMyThemeCell"];
+        cell.themeArr = _topArr.copy;
         return cell;
     }
     NSDictionary *dic = _dataArr[indexPath.row];
@@ -215,8 +222,14 @@
     }];
 }
 - (void)topCellData{
+    __weak typeof(self) weakSelf = self;
     [KGRequestNetWorking postWothUrl:utBytopic parameters:@{@"query":@{@"page":@"1",@"rows":@"15"},@"uid":[KGUserInfo shareInterace].userID,@"utnexus":@"1"} succ:^(id result) {
-        
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            if (tmp.count > 0) {
+                weakSelf.topArr = [NSMutableArray arrayWithArray:tmp];
+            }
+        }
     } fail:^(NSError *error) {
         
     }];
