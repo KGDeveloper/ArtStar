@@ -94,7 +94,7 @@ DZNEmptyDataSetSource
 //:--请求动态数据--
 - (void)createData{
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:searchfriendMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@(_page),@"rows":@"15"},@"brushPerss":@"1"} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:searchfriendMessages parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfquery":@{@"page":@(_page),@"rows":@"15"},@"brushPerss":@"0"} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *dataarray = result[@"data"];
             for (int i = 0; i <  dataarray.count; i++) {
@@ -311,11 +311,13 @@ DZNEmptyDataSetSource
                 vc.type = 1;
             }
             vc.rfimd = dic[@"id"];
+            vc.url = friendViews;
             [self pushNoTabBarViewController:vc animated:YES];
         }else if ([dic[@"type"] integerValue] == 2){
             FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
             vc.type = 2;
             vc.rfimd = dic[@"id"];
+            vc.url = friendViews;
             [self pushNoTabBarViewController:vc animated:YES];
         }
     }

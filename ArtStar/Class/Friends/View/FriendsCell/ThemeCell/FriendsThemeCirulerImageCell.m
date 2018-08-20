@@ -27,17 +27,26 @@
     
     [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
     
-    if ([model[@"type"] integerValue] == 2) {
-        _themelab.hidden = YES;
-    }else if ([model[@"type"] integerValue] == 1){
-        _themelab.hidden = NO;
-        _themelab.text = [NSString stringWithFormat:@"# %@ #",model[@"title"]];
+    if (model[@"type"]) {
+        if ([model[@"type"] integerValue] == 2) {
+            _themelab.hidden = YES;
+        }else if ([model[@"type"] integerValue] == 1){
+            _themelab.hidden = NO;
+            _themelab.text = [NSString stringWithFormat:@"# %@ #",model[@"title"]];
+        }else{
+            _themelab.hidden = YES;
+        }
     }else{
-        _themelab.hidden = YES;
+        _themelab.text = [NSString stringWithFormat:@"# %@ #",model[@"topictitle"]];
     }
     NSArray *imageArr = model[@"images"];
-    NSDictionary *imageDic = [imageArr firstObject];
-    [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
+    NSDictionary *imageDic = [imageArr lastObject];
+    if (imageDic[@"imageURL"]) {
+        [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
+    }else{
+        [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"locationimg"]]];
+    }
+    
     _countLab.text = [NSString stringWithFormat:@"1/%li",imageArr.count];
     NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];

@@ -8,6 +8,7 @@
 
 #import "MusicThemeView.h"
 #import "MusicThemeMyThemeCell.h"
+#import "FriendsDetailVC.h"
 
 @interface MusicThemeView ()<UITableViewDelegate,UITableViewDataSource,FriendsThemeTopImageCellDelegate,FriendsThemeLeftImageCellDelegate,FriendsThemeCirulerImageCellDelegate,FriendsOnlyHaveImageCellDelegate,FriendsOnlyHaveLabelCellDelegate,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource>
 
@@ -77,7 +78,7 @@
     if (indexPath.row == 0) {
         return 140;
     }else{
-        NSDictionary *dic = _dataArr[indexPath.row];
+        NSDictionary *dic = _dataArr[indexPath.row - 1];
         if ([dic[@"makeup"] integerValue] == 0) {
             return OnlyHaveTitleHeight + 40;
         }else if ([dic[@"makeup"] integerValue] == 1){
@@ -110,7 +111,7 @@
         cell.themeArr = _topArr.copy;
         return cell;
     }
-    NSDictionary *dic = _dataArr[indexPath.row];
+    NSDictionary *dic = _dataArr[indexPath.row - 1];
     NSMutableDictionary *keyDic = [NSMutableDictionary dictionary];
     [keyDic setValuesForKeysWithDictionary:dic];
     NSString *value = [NSString stringWithFormat:@"%@",keyDic[@"makeup"]];
@@ -119,6 +120,7 @@
         [keyDic removeObjectForKey:@"imgList"];
         [keyDic setObject:tmp forKey:@"images"];
     }
+    [keyDic setObject:@{@"username":keyDic[@"username"],@"portraitUri":keyDic[@"portraitUri"]} forKey:@"user"];
     [keyDic removeObjectForKey:@"makeup"];
     [keyDic setObject:value forKey:@"composing"];
     
@@ -184,6 +186,17 @@
         if (self.pushViewController) {
             self.pushViewController();
         }
+    }else{
+        NSDictionary *dic = _dataArr[indexPath.row - 1];
+        FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
+        if ([dic[@"makeup"] integerValue] == 9 || [dic[@"makeup"] integerValue] == 10) {
+            vc.type = 0;
+        }else{
+            vc.type = 1;
+        }
+        vc.rfimd = dic[@"id"];
+        vc.url = selectTopicByUid;
+        [[self supViewController].navigationController pushViewController:vc animated:YES];
     }
 }
 //MARK:--横排文字改变排版--
@@ -197,6 +210,8 @@
 }
 - (void)setTitleName:(NSString *)titleName{
     _titleName = titleName;
+    _dataArr = [NSMutableArray array];
+    [self topCellData];
     [self createHeadLineData:titleName];
 }
 // MARK: --拉去数据--
@@ -230,8 +245,9 @@
                 weakSelf.topArr = [NSMutableArray arrayWithArray:tmp];
             }
         }
+        [weakSelf.listView reloadData];
     } fail:^(NSError *error) {
-        
+        [weakSelf.listView reloadData];
     }];
 }
 - (void)headerPushInfo:(NSInteger)index{
@@ -281,7 +297,16 @@
 - (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
     return 25.0;
 }
-
+- (UIViewController *)supViewController{
+    id target = self;
+    while (target) {
+        target = ((UIResponder *)target).nextResponder;
+        if ([target isKindOfClass:[UIViewController class]]) {
+            break;
+        }
+    }
+    return target;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

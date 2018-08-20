@@ -34,16 +34,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:2/255.0 green:10/255.0 blue:18/255.0 alpha:1];
     
+//    [self createWebView];
     _dataArr = @[@"音乐",@"书籍",@"交友",@"头条",@"展览",@"戏剧",@"摄影",@"文学",@"机构",@"电影",@"美术",@"设计",@"话题",@"美食"];
-    
+
     UITableView *listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavButtomHeight - NavTopHeight - 49)];
     listView.delegate = self;
     listView.dataSource = self;
     listView.rowHeight = 50;
     [self.view addSubview:listView];
     
+}
+
+- (void)createWebView{
+    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - NavButtomHeight)];
+    webView.dataDetectorTypes = UIDataDetectorTypeAll;
+    webView.scrollView.scrollEnabled = NO;
+    NSString *mainBoundPath = [[NSBundle mainBundle] bundlePath];
+    NSString *basePath = [NSString stringWithFormat:@"%@",mainBoundPath];
+    NSURL *baseUrl = [NSURL fileURLWithPath:basePath isDirectory:YES];
+    NSString *htmlPath = [NSString stringWithFormat:@"%@/index.html",basePath];
+    NSString *htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+    [webView loadHTMLString:htmlString baseURL:baseUrl];
+    [self.view addSubview:webView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

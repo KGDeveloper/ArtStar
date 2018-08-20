@@ -7,7 +7,6 @@
 //
 
 #import "BaseVC.h"
-#import "CommenityNewsDetailModel.h"
 
 @interface MovieNewsDetaialVC : BaseVC
 

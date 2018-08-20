@@ -12,5 +12,6 @@
 
 @property (nonatomic,assign) NSInteger type;
 @property (nonatomic,copy) NSNumber *rfimd;
+@property (nonatomic,copy) NSString *url;
 
 @end

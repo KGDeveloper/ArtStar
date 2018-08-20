@@ -10,7 +10,6 @@
 #import "HeadLineNotTitleNewsTableViewCell.h"
 #import "HeadLineImageNewsTableViewCell.h"
 #import "HeadLinesDetaialCommentCell.h"
-#import "CommenityDetailCommentModel.h"
 
 @interface MovieNewsDetaialVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -19,7 +18,7 @@
 @property (nonatomic,strong) UIView *headerView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,strong) NSMutableArray *commentArr;
-@property (nonatomic,strong) CommenityNewsDetailModel *model;
+@property (nonatomic,copy) NSDictionary *dataDic;
 
 @end
 
@@ -45,8 +44,7 @@
             NSArray *arr = result[@"data"];
             for (int i = 0; i < arr.count; i++) {
                 NSDictionary *dic = arr[i];
-                CommenityDetailCommentModel *model = [CommenityDetailCommentModel mj_objectWithKeyValues:dic];
-                [mySelf.commentArr addObject:model];
+                [mySelf.commentArr addObject:dic];
                 [mySelf.listView reloadData];
             }
         }
@@ -57,9 +55,8 @@
 - (void)createData{
     __weak typeof(self) mySelf = self;
     [KGRequestNetWorking postWothUrl:selectNewsByUid parameters:@{@"nid":_ID} succ:^(id result) {
-        NSDictionary *dic = result;
-        mySelf.model = [CommenityNewsDetailModel mj_objectWithKeyValues:dic];
-        NSData *data = [mySelf.model.content dataUsingEncoding:NSUTF8StringEncoding];
+        mySelf.dataDic = result;
+        NSData *data = [mySelf.dataDic[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
         NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         mySelf.dataArr = [NSMutableArray arrayWithArray:array];
         mySelf.listView.tableHeaderView = [mySelf tableViewHeader];
@@ -185,12 +182,12 @@
         }
     }else{
         HeadLinesDetaialCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLinesDetaialCommentCell"];
-        CommenityDetailCommentModel *model = _commentArr[indexPath.row];
-        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.portraitUri]];
-        cell.nikName.text = model.username;
-        cell.timeLab.text = model.pltime;
-        cell.commentLab.text = model.pinglun;
-        [cell.zansBtu setTitle:[NSString stringWithFormat:@"%@",model.zansum] forState:UIControlStateNormal];
+        NSDictionary *dic = _commentArr[indexPath.row];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikName.text = dic[@"username"];
+        cell.timeLab.text = dic[@"pltime"];
+        cell.commentLab.text = dic[@"pinglun"];
+        [cell.zansBtu setTitle:[NSString stringWithFormat:@"%@",dic[@"zansum"]] forState:UIControlStateNormal];
         return cell;
     }
 }
@@ -202,14 +199,14 @@
     _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(30, 30, kScreenWidth - 60, 15)];
     for (int i = 0 ; i < 5; i++) {
-        if ([self attributedStringWithString:_model.title].size.width - labwidth > kScreenWidth - 60) {
+        if ([self attributedStringWithString:_dataDic[@"title"]].size.width - labwidth > kScreenWidth - 60) {
             labHeight = labHeight + 25;
         }else{
             break;
         }
     }
     titleLab.size = CGSizeMake(kScreenWidth - 60, labHeight);
-    titleLab.attributedText = [self attributedStringWithString:_model.title];
+    titleLab.attributedText = [self attributedStringWithString:_dataDic[@"title"]];
     titleLab.textColor = Color_333333;
     titleLab.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:titleLab];
@@ -218,14 +215,14 @@
     detailLab.textColor = Color_999999;
     detailLab.font = SYFont(13);
     detailLab.textAlignment = NSTextAlignmentCenter;
-    detailLab.text = _model.sitename;
+    detailLab.text = _dataDic[@"sitename"];
     [_headerView addSubview:detailLab];
     
     UILabel *timeLab = [[UILabel alloc]initWithFrame:CGRectMake(0, labHeight + 73, kScreenWidth, 11)];
     timeLab.textColor = Color_999999;
     timeLab.font = SYFont(11);
     timeLab.textAlignment = NSTextAlignmentCenter;
-    timeLab.text = _model.newstime;
+    timeLab.text = _dataDic[@"newstime"];
     [_headerView addSubview:timeLab];
     
     _headerView.size = CGSizeMake(kScreenWidth,labHeight + 134);

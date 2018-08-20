@@ -10,7 +10,6 @@
 #import "HeadLinesDetailVC.h"
 #import "MusicPerformanceView.h"
 #import "PerformanceDetailVC.h"
-#import "CommunityExhibitionModel.h"
 #import "CommunityExhibitionDetailVC.h"
 
 @interface CommunityExhibitionVC ()<UITextFieldDelegate>
@@ -132,8 +131,7 @@
     [KGRequestNetWorking postWothUrl:selectSlistByTypename parameters:@{@"typename":_currtitleStr,@"navigation":_currClassStr,@"query":@{@"page":@(_page),@"rows":@"15"}} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if ([result[@"code"] integerValue] == 200) {
-            NSArray *arr = result[@"data"];
-            NSArray *tmpArr = [CommunityExhibitionModel mj_objectArrayWithKeyValuesArray:arr];
+            NSArray *tmpArr = result[@"data"];
             // TODO: --在这里不是直接copy而是遍历add的原因是，可能点击上拉加载更多的话数据一直是15条，而且开始的数据就会消失--
             for (int i = 0; i < tmpArr.count; i++) {
                 [weakSelf.dataArr addObject:tmpArr[i]];

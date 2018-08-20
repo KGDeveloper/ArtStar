@@ -77,6 +77,7 @@
     }else{
         _titleStr = @"3";
     }
+    _dataArr = [NSMutableArray array];
     [self createData];
     [sender setTitleColor:Color_333333 forState:UIControlStateNormal];
     sender.titleLabel.font = SYFont(15);

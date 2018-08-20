@@ -7,10 +7,7 @@
 //
 
 #import "HeadLinesVC.h"
-#import "CommenityModel.h"
 #import "HeadLinesNewsDetailAndCommentVC.h"
-#import "CommenityHotSearchModel.h"
-#import "CommenityHoistorySearchModel.h"
 #import <objc/runtime.h>
 
 @interface HeadLinesVC ()<UITextFieldDelegate>
@@ -52,14 +49,15 @@
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self createHeaderData];
-    //:--设置搜索框--
-    [self setSearchBar];
     //:--初始化--
-    _page = 0;
+    _page = 1;
     _typeName = @"";
     _hotArr = [NSMutableArray array];
     _hoistryArr = [NSMutableArray array];
+    _dataArr = [NSMutableArray array];
+    [self createHeaderData];
+    //:--设置搜索框--
+    [self setSearchBar];
     //:--搜索记录数据--
     [self craeteSeachArr];
     //:--搭建界面--
@@ -104,7 +102,7 @@
     // !!!: --下拉刷新以及上拉加载更多--
     _headLinesView.requestNewData = ^(NSString *type) {
         if ([type isEqualToString:@"下拉"]) {
-            mySelf.page = 0;
+            mySelf.page = 1;
             [mySelf.dataArr removeAllObjects];
             [mySelf createDataArr];
         }else{
@@ -121,38 +119,40 @@
 //MARK:-------------------------------------请求关闭新闻---------------------------------------------------
 - (void)requestCloseNews:(NSArray *)arr nid:(NSString *)ID{
     NSString *backname = @"";
-    CommenityModel *model = _dataArr[ID.integerValue];
+    NSDictionary *dic = _dataArr[ID.integerValue];
     for (int i = 0; i < arr.count; i++) {
         backname = [[backname stringByAppendingString:arr[0]] stringByAppendingString:@","];
     }
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:closeNewsByNid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"nid":model.ID,@"backname":backname} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:closeNewsByNid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"nid":dic[@"id"],@"backname":backname} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
-            mySelf.page = 0;
+            mySelf.page = 1;
             [mySelf.headLinesView starRefrash];
         }
     } fail:^(NSError *error) {
         
     }];
 }
+// !!!: --在这里最好是在view中传入一个关键词然后进行数据拉去，后期待优化--
 //MARK:-------------------------------------------拉首页数据---------------------------------------------
 - (void)createDataArr{
-    __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":_typeName,@"query":@{@"page":[NSString stringWithFormat:@"%ld",(long)self.page],@"rows":@"15"}} succ:^(id result) {
-        if ([result[@"code"] integerValue] == 200) {
-            mySelf.dataArr = [NSMutableArray array];
-            NSArray *dataArray = result[@"data"];
-            for (int i = 0; i < dataArray.count; i++) {
-                NSDictionary *dic = dataArray[i];
-                CommenityModel *model = [CommenityModel mj_objectWithKeyValues:dic];
-                [mySelf.dataArr addObject:model];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __weak typeof(self) mySelf = self;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [KGRequestNetWorking postWothUrl:communityServer parameters:@{@"uid":@([KGUserInfo shareInterace].userID.integerValue),@"typename":mySelf.typeName,@"page":[NSString stringWithFormat:@"%ld",(long)self.page],@"rows":@"15"} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                NSArray *dataArray = result[@"data"];
+                for (int i = 0; i < dataArray.count; i++) {
+                    NSDictionary *dic = dataArray[i];
+                    [mySelf.dataArr addObject:dic];
+                }
+                mySelf.headLinesView.dataArr = mySelf.dataArr;
             }
-            mySelf.headLinesView.dataArr = mySelf.dataArr;
-        }
-    } fail:^(NSError *error) {
-        
-    }];
-    
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
+        }];
+    });
 }
 // MARK: --拉取顶部5条滚动新闻--
 - (void)createHeaderData{
@@ -195,13 +195,12 @@
 - (void)createNewsData:(NSString *)searchStr{
     [_dataArr removeAllObjects];
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:newsSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"mohu":searchStr,@"query":@{@"page":[NSString stringWithFormat:@"%ld",(long)_page],@"rows":@"15"},@"typename":@""} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:newsSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"mohu":searchStr,@"page":[NSString stringWithFormat:@"%ld",(long)_page],@"rows":@"15",@"typename":@""} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *dataArray = result[@"data"];
             for (int i = 0; i < dataArray.count; i++) {
                 NSDictionary *dic = dataArray[i];
-                CommenityModel *model = [CommenityModel mj_objectWithKeyValues:dic];
-                [mySelf.dataArr addObject:model];
+                [mySelf.dataArr addObject:dic];
             }
             mySelf.headLinesView.dataArr = mySelf.dataArr;
             mySelf.searchView.hidden = YES;
@@ -218,27 +217,26 @@
             NSArray *arr = result[@"data"];
             for (int i = 0; i < arr.count; i++) {
                 NSDictionary *dic = arr[i];
-                CommenityHotSearchModel *model = [CommenityHotSearchModel mj_objectWithKeyValues:dic];
-                [mySelf.hotArr addObject:model];
+                [mySelf.hotArr addObject:dic];
             }
         }
     } fail:^(NSError *error) {
         
     }];
     
-    [KGRequestNetWorking postWothUrl:oldSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"query":@{@"page":@"0",@"rows":@"20"}} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:oldSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"page":@"1",@"rows":@"20"} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *arr = result[@"data"];
             for (int i = 0; i < arr.count; i++) {
                 NSDictionary *dic = arr[i];
-                CommenityHoistorySearchModel *model = [CommenityHoistorySearchModel mj_objectWithKeyValues:dic];
-                [mySelf.hoistryArr addObject:model];
+                [mySelf.hoistryArr addObject:dic];
             }
         }
     } fail:^(NSError *error) {
         
     }];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -8,7 +8,6 @@
 
 #import "MusicPerformanceView.h"
 #import "MusicPerformanceCell.h"
-#import "CommunityExhibitionModel.h"
 
 @interface MusicPerformanceView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource>
 
@@ -81,8 +80,8 @@
     return _headerView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CommunityExhibitionModel *model = _dataArr[indexPath.row];
-    if (model.showprice != nil) {
+    NSDictionary *dic = _dataArr[indexPath.row];
+    if (dic[@"showprice"] != nil) {
         return (ViewWidth(self) - 30)/690*400 + 105;// TODO: --有门票--
     }else{
         return (ViewWidth(self) - 30)/690*400 + 65;// TODO: --没有门票--
@@ -94,31 +93,31 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MusicPerformanceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicPerformanceCell"];
-    CommunityExhibitionModel *model = _dataArr[indexPath.row];
-    NSDictionary *imageDic = [model.imgList firstObject];
+    NSDictionary *dic = _dataArr[indexPath.row];
+    NSDictionary *imageDic = [dic[@"imgList"] firstObject];
     [cell.topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"locationimg"]]];
-    cell.titleLab.text = model.showname;
-    cell.locationLab.text = model.showaddress;
-    if (model.startday != nil) {
-        cell.timeLab.text = [NSString stringWithFormat:@"还有%@天开始",model.startday];
+    cell.titleLab.text = dic[@"showname"];
+    cell.locationLab.text = dic[@"showaddress"];
+    if (dic[@"startday"] != nil) {
+        cell.timeLab.text = [NSString stringWithFormat:@"还有%@天开始",dic[@"startday"]];
         [cell willStarStatus];
-    }else if (model.endday != nil){
-        cell.timeLab.text = [NSString stringWithFormat:@"还有%@天结束",model.endday];
+    }else if (dic[@"endday"] != nil){
+        cell.timeLab.text = [NSString stringWithFormat:@"还有%@天结束",dic[@"endday"]];
         [cell willEndStatus];
-    }else if (model.daingday != nil){
-        cell.timeLab.text = [NSString stringWithFormat:@"已经开始%@天",model.daingday];
+    }else if (dic[@"daingday"] != nil){
+        cell.timeLab.text = [NSString stringWithFormat:@"已经开始%@天",dic[@"daingday"]];
         [cell willEndStatus];
     }
-    if (model.showprice == nil) {
+    if (dic[@"showprice"] == nil) {
         [cell normalStatus];
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CommunityExhibitionModel *model = _dataArr[indexPath.row];
+    NSDictionary *dic = _dataArr[indexPath.row];
     if (self.pushToDetaialVC) {
-        self.pushToDetaialVC([NSString stringWithFormat:@"%@",model.ID]);
+        self.pushToDetaialVC([NSString stringWithFormat:@"%@",dic[@"id"]]);
     }
 }
 

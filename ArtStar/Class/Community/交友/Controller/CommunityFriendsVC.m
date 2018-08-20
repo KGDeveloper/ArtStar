@@ -113,11 +113,18 @@
 }
 
 - (void)createHeadLineData{
-    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":_titleName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+    
+    [KGRequestNetWorking postWothUrl:updatePipeiduByUid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"pipei":@"70"} succ:^(id result) {
         
     } fail:^(NSError *error) {
         
     }];
+    
+//    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":_titleName,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+//
+//    } fail:^(NSError *error) {
+//
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -147,5 +147,65 @@
  @return 根据前台传过来的用户ID和用户对话题的关系值查询对应的话题集合
  */
 #define utBytopic [serverIP stringByAppendingString:@"community/utBytopic"]
+/**
+ 点击查看话题详情和话题用户的关系改变
+
+ @return 点击查看话题详情和话题用户的关系改变
+ */
+#define selectTopicByUid [serverIP stringByAppendingString:@"community/selectTopicByUid"]
+/**
+ 根据分类查出对应的集合 交友
+
+ @return 根据分类查出对应的集合
+ */
+#define selectUserBytypename [serverIP stringByAppendingString:@"community/selectUserBytypename"]
+/**
+ 设置匹配度 交友
+ 
+ @return 设置匹配度
+ */
+#define updatePipeiduByUid [serverIP stringByAppendingString:@"community/updatePipeiduByUid"]
+/**
+ 根据类别名称查出对应的演出集合
+
+ @return 根据类别名称查出对应的演出集合
+ */
+#define selectPerformListByTypename [serverIP stringByAppendingString:@"community/selectPerformListByTypename"]
+/**
+ 根据分类查出对应的集合(交友)
+ 
+ @return 根据分类查出对应的集合(交友)
+ */
+#define selectUserBytypename [serverIP stringByAppendingString:@"community/selectUserBytypename"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* CommuntityHttpsDefine_h */

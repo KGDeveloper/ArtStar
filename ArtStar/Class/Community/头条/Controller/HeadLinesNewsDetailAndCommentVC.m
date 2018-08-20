@@ -10,7 +10,6 @@
 #import "HeadLineNotTitleNewsTableViewCell.h"
 #import "HeadLineImageNewsTableViewCell.h"
 #import "HeadLinesDetaialCommentCell.h"
-#import "CommenityDetailCommentModel.h"
 
 @interface HeadLinesNewsDetailAndCommentVC ()<UITableViewDelegate,UITableViewDataSource,ReportViewDelegate,HeadLinesDetaialCommentCellDelegate>
 
@@ -72,8 +71,7 @@
             NSArray *arr = result[@"data"];
             for (int i = 0; i < arr.count; i++) {
                 NSDictionary *dic = arr[i];
-                CommenityDetailCommentModel *model = [CommenityDetailCommentModel mj_objectWithKeyValues:dic];
-                [mySelf.commentArr addObject:model];
+                [mySelf.commentArr addObject:dic];
                 [mySelf.listView reloadSection:1 withRowAnimation:UITableViewRowAnimationAutomatic];
             }
         }
@@ -226,14 +224,14 @@
         }
     }else{//:--评论--
         HeadLinesDetaialCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLinesDetaialCommentCell"];
-        CommenityDetailCommentModel *model = _commentArr[indexPath.row];
-        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.portraitUri]];
-        cell.nikName.text = model.username;
-        cell.timeLab.text = model.pltime;
-        cell.commentLab.text = model.pinglun;
+        NSDictionary *dic = _commentArr[indexPath.row];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nikName.text = dic[@"username"];
+        cell.timeLab.text = dic[@"pltime"];
+        cell.commentLab.text = dic[@"pinglun"];
         cell.delegate = self;
-        cell.cellID = [model.ID integerValue];
-        [cell.zansBtu setTitle:[NSString stringWithFormat:@"%@",model.zansum] forState:UIControlStateNormal];
+        cell.cellID = [dic[@"id"] integerValue];
+        [cell.zansBtu setTitle:[NSString stringWithFormat:@"%@",dic[@"zansum"]] forState:UIControlStateNormal];
         return cell;
     }
 }

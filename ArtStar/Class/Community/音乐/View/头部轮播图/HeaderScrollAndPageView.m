@@ -109,7 +109,9 @@
         imageBtu.frame = CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(_scrollerView));
         imageBtu.backgroundColor = ImageBackColor;
         imageBtu.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [imageBtu setImageWithURL:[NSURL URLWithString:[[dic[@"locationimg"] componentsSeparatedByString:@"?"] firstObject]] forState:UIControlStateNormal placeholder:Image(@"图片加载失败")];
+        if (![dic[@"locationimg"] isKindOfClass:[NSNull class]]) {
+            [imageBtu setImageWithURL:[NSURL URLWithString:[[dic[@"locationimg"] componentsSeparatedByString:@"?"] firstObject]] forState:UIControlStateNormal placeholder:Image(@"图片加载失败")];
+        }
         [imageBtu addTarget:self action:@selector(imageDicSelect:) forControlEvents:UIControlEventTouchUpInside];
         imageBtu.tag = [dic[@"id"] integerValue];
         [_scrollerView addSubview:imageBtu];

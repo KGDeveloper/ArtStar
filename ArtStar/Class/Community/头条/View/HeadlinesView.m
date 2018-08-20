@@ -8,8 +8,6 @@
 
 #import "HeadlinesView.h"
 #import "HeadLinesTableViewCell.h"
-#import "CommenityModel.h"
-#import "CommenityNewsDetailModel.h"
 
 @interface HeadlinesView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,HeadLinesTableViewCellDelagate,CommunityShieldingViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -96,8 +94,8 @@
 //MARK:--dataSoucre--
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HeadLinesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeadLinesTableViewCell"];
-    CommenityModel *model = _dataArr[indexPath.row];
-    cell.model = model;
+    NSDictionary *dic = _dataArr[indexPath.row];
+    cell.dic = dic;
     cell.cellIndex = indexPath.row;
     cell.delegate = self;
     return cell;
@@ -127,9 +125,9 @@
 }
 //MARK:---------------------------------------delegate------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CommenityModel *model = _dataArr[indexPath.row];
+    NSDictionary *dic = _dataArr[indexPath.row];
     if (self.pushViewController) {
-        self.pushViewController([NSString stringWithFormat:@"%ld",(long)model.ID.integerValue]);
+        self.pushViewController([NSString stringWithFormat:@"%li",[dic[@"id"] integerValue]]);
     }
 }
 //MARK:---------------------------------------显示头视图------------------------------------------
@@ -153,13 +151,18 @@
 }
 - (void)touchCellButtonWithTitle:(NSString *)title cellIndex:(NSInteger)cellIndex{
     __weak typeof(self) weakSelf = self;
-    CommenityModel *model = _dataArr[cellIndex];
+    NSDictionary *dic = _dataArr[cellIndex];
     if ([title isEqualToString:@"分享"]) {
         
     }else if ([title isEqualToString:@"点赞"]){
         [MBProgressHUD showHUDAddedTo:self animated:YES];
-        [KGRequestNetWorking postWothUrl:diannews parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"nid":model.ID,@"zantype":model.zantype} succ:^(id result) {
+        [KGRequestNetWorking postWothUrl:diannews parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"nid":dic[@"id"],@"zantype":dic[@"zantype"]} succ:^(id result) {
             [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                if (weakSelf.requestNewData) {
+                    weakSelf.requestNewData(@"下拉");
+                }
+            });
         } fail:^(NSError *error) {
             [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
         }];

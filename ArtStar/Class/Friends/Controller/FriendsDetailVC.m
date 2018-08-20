@@ -73,7 +73,7 @@ FriendsPlayVideoViewdelegate>
 /**
  解析数据
  */
-@property (nonatomic,strong) FriendsModel *model;
+@property (nonatomic,strong) NSDictionary *model;
 /**
  评论数据
  */
@@ -99,33 +99,60 @@ FriendsPlayVideoViewdelegate>
  */
 - (void)createDate{
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:friendViews parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_rfimd} succ:^(id result) {
-        if ([result[@"code"] integerValue] == 200) {
-            NSArray *arr = result[@"data"];
-            NSDictionary *dic = [arr firstObject];
-            mySelf.model = [FriendsModel mj_objectWithKeyValues:dic];
-            mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model.rccomment];
-            [mySelf changeUI];
-        }
-    } fail:^(NSError *error) {
-        
-    }];
+    if ([_url isEqualToString:selectTopicByUid]) {
+        [KGRequestNetWorking postWothUrl:_url parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"tid":_rfimd} succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                NSArray *arr = result[@"data"];
+                mySelf.model = [arr firstObject];
+                mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model[@"rccomment"]];
+                [mySelf changeUI];
+            }
+        } fail:^(NSError *error) {
+            
+        }];
+    }else{
+        [KGRequestNetWorking postWothUrl:_url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_rfimd} succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                NSArray *arr = result[@"data"];
+                mySelf.model = [arr firstObject];
+                mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model[@"rccomment"]];
+                [mySelf changeUI];
+            }
+        } fail:^(NSError *error) {
+            
+        }];
+    }
 }
 - (void)changeUI{
     if (self.type == 1) {//:--横排--
-        if ([_model.composing integerValue] == 0) {
-            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 85 + 58)];
-            self.detailScrollView.size = CGSizeMake(kScreenWidth, 0);
-        }else if ([_model.composing integerValue] == 1){
-            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
-            self.detailScrollView.photosArr = _model.images;
+        if (_model[@"composing"]) {
+            if ([_model[@"composing"] integerValue] == 0) {
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 85 + 58)];
+                self.detailScrollView.size = CGSizeMake(kScreenWidth, 0);
+            }else if ([_model[@"composing"] integerValue] == 1){
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
+                self.detailScrollView.photosArr = _model[@"images"];
+            }else{
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+                self.detailScrollView.photosArr = _model[@"images"];
+            }
+            self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model[@"composing"] integerValue]];
+            self.veritocalView.isVertical = NO;
         }else{
-            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
-            self.detailScrollView.photosArr = _model.images;
+            if ([_model[@"makeup"] integerValue] == 0) {
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 85 + 58)];
+                self.detailScrollView.size = CGSizeMake(kScreenWidth, 0);
+            }else if ([_model[@"makeup"] integerValue] == 1){
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
+                self.detailScrollView.photosArr = _model[@"imgList"];
+            }else{
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+                self.detailScrollView.photosArr = _model[@"imgList"];
+            }
+            self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model[@"makeup"] integerValue]];
+            self.veritocalView.isVertical = NO;
         }
-        self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model.composing integerValue]];
-        self.veritocalView.isVertical = NO;
-        NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *strData = [_model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
         NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
         NSString *str = strArr[0];
         for (int i = 1; i < strArr.count; i++) {
@@ -136,12 +163,12 @@ FriendsPlayVideoViewdelegate>
         [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 165)/450*690 + 65 + 58)];
         
         self.detailScrollView.frame = CGRectMake(15, 58, kScreenWidth - 30 - 115 - 20, (kScreenWidth - 165)/450*690);
-        self.detailScrollView.photosArr = _model.images;
+        self.detailScrollView.photosArr = _model[@"images"];
         
         self.veritocalView.frame = CGRectMake(ViewWidth(self.detailScrollView) + 35,58, 115, (kScreenWidth - 165)/450*690);
         self.veritocalView.isVertical = YES;
         self.veritocalView.yyAlignment = YYTextVerticalAlignmentCenter;
-        NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *strData = [_model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
         NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
         NSString *str = strArr[0];
         for (int i = 1; i < strArr.count; i++) {
@@ -149,19 +176,19 @@ FriendsPlayVideoViewdelegate>
         }
         self.veritocalView.textStr = str;
     }else{
-        if ([_model.composing integerValue] == 0) {
+        if ([_model[@"composing"] integerValue] == 0) {
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 65 + 58)];
-        }else if ([_model.composing integerValue] == 1){
+        }else if ([_model[@"composing"] integerValue] == 1){
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
         }else{
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
         }
-        NSDictionary *dic = [_model.images firstObject];
+        NSDictionary *dic = [_model[@"images"] firstObject];
         self.videoView.videoIamge = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:[NSURL URLWithString:dic[@"imageURL"]]];
         self.detailScrollView.hidden = YES;
         self.veritocalView.textAlinment = NSTextAlignmentCenter;
         self.veritocalView.isVertical = NO;
-        NSData *strData = [_model.content dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *strData = [_model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
         NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
         NSString *str = strArr[0];
         for (int i = 1; i < strArr.count; i++) {
@@ -169,8 +196,16 @@ FriendsPlayVideoViewdelegate>
         }
         self.veritocalView.textStr = str;
     }
-    self.timeView.timeStr = _model.createTimeStr;
-    self.timeView.locationStr = _model.location;
+    if (_model[@"createTimeStr"]) {
+        self.timeView.timeStr = _model[@"createTimeStr"];
+    }else{
+        self.timeView.timeStr = [[_model[@"topictime"] componentsSeparatedByString:@" "] firstObject];
+    }
+    if (_model[@"location"]) {
+        self.timeView.locationStr = _model[@"location"];
+    }else{
+        self.timeView.locationStr = _model[@"address"];
+    }
 }
 - (void)settableViewFrame:(CGRect)frame{
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight)];
@@ -197,7 +232,7 @@ FriendsPlayVideoViewdelegate>
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         FriendsDetailZansCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsDetailZansCell"];
-        cell.zansArr = _model.praPrtraitUri;
+        cell.zansArr = _model[@"praPrtraitUri"];
         return cell;
     }else{
         FriendsDetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendsDetailCommentCell"];
@@ -234,9 +269,8 @@ FriendsPlayVideoViewdelegate>
  */
 - (UIView *)setHeaderViewWithFrame:(CGRect)frame{
     self.headerView = [[UIView alloc]initWithFrame:frame];
-    NSDictionary *dic = _model.user;
+    
     _userImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 28, 28)];
-    [_userImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _userImage.layer.cornerRadius = 14;
     _userImage.layer.masksToBounds = YES;
     [self.headerView addSubview:_userImage];
@@ -245,7 +279,6 @@ FriendsPlayVideoViewdelegate>
     _nikName.textColor = Color_333333;
     _nikName.textAlignment = NSTextAlignmentLeft;
     _nikName.font = SYFont(15);
-    _nikName.text = dic[@"username"];
     [self.headerView addSubview:_nikName];
     
     _deleteBtu = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -256,6 +289,15 @@ FriendsPlayVideoViewdelegate>
     [_deleteBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
     [_deleteBtu addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
     [self.headerView addSubview:_deleteBtu];
+    
+    if (_model[@"user"]) {
+        NSDictionary *dic = _model[@"user"];
+        [_userImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        _nikName.text = dic[@"username"];
+    }else{
+        [_userImage sd_setImageWithURL:[NSURL URLWithString:_model[@"portraitUri"]]];
+        _nikName.text = _model[@"username"];
+    }
     
     return self.headerView;
 }
@@ -356,24 +398,47 @@ FriendsPlayVideoViewdelegate>
  @param sender 右侧关注按钮惦记时间
  */
 - (void)rightNavBtuAction:(UIButton *)sender{
-    NSDictionary *userDic = _model.user;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    __weak typeof(self) weakSelf = self;
-    [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":userDic[@"id"]} succ:^(id result) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if ([result[@"code"] integerValue] == 420) {
-            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"亲，不能自己关注自己哦！" animated:YES] hide:YES afterDelay:1];
-        }else if ([result[@"code"] integerValue] == 410){
-            [sender setTitle:@"已关注" forState:UIControlStateNormal];
-            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
-        }else if ([result[@"code"] integerValue] == 411){
-            [sender setTitle:@"关注" forState:UIControlStateNormal];
-            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
-        }
-    } fail:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"操作失败" animated:YES] hide:YES afterDelay:1];
-    }];
+    if (_model[@"user"]) {
+        NSDictionary *userDic = _model[@"user"];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) weakSelf = self;
+        [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":userDic[@"id"]} succ:^(id result) {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 420) {
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"亲，不能自己关注自己哦！" animated:YES] hide:YES afterDelay:1];
+            }else if ([result[@"code"] integerValue] == 410){
+                [sender setTitle:@"已关注" forState:UIControlStateNormal];
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
+            }else if ([result[@"code"] integerValue] == 411){
+                [sender setTitle:@"关注" forState:UIControlStateNormal];
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"操作失败" animated:YES] hide:YES afterDelay:1];
+        }];
+    }else{
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) weakSelf = self;
+        [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":_model[@"id"]} succ:^(id result) {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 420) {
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"亲，不能自己关注自己哦！" animated:YES] hide:YES afterDelay:1];
+            }else if ([result[@"code"] integerValue] == 410){
+                [sender setTitle:@"已关注" forState:UIControlStateNormal];
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
+            }else if ([result[@"code"] integerValue] == 411){
+                [sender setTitle:@"关注" forState:UIControlStateNormal];
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
+            }
+            if ([result[@"code"] integerValue] == 200) {
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功！" animated:YES] hide:YES afterDelay:1];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"操作失败" animated:YES] hide:YES afterDelay:1];
+        }];
+    }
 }
 
 //MARK:--FriendsDetailTimeComponentViewDelegate代理--
@@ -394,26 +459,40 @@ FriendsPlayVideoViewdelegate>
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:[KGUserInfo shareInterace].userTokenCode forKey:@"tokenCode"];
-    [parameters setObject:_model.ID forKey:@"businessId"];
-    if ([_model.type integerValue] == 1) {
-        [parameters setObject:@"3" forKey:@"collectType"];
-        [parameters setObject:_model.title forKey:@"topictitle"];
-        [parameters setObject:_model.content forKey:@"topicContent"];
-        if (_model.images.count > 0) {
-            NSDictionary *imageDic = [_model.images firstObject];
-            [parameters setObject:imageDic[@"imageURL"] forKey:@"topicImg"];
+    [parameters setObject:_model[@"id"] forKey:@"businessId"];
+    if (_model[@"type"]) {
+        if ([_model[@"type"] integerValue] == 1) {
+            [parameters setObject:@"3" forKey:@"collectType"];
+            [parameters setObject:_model[@"title"] forKey:@"topictitle"];
+            [parameters setObject:_model[@"content"] forKey:@"topicContent"];
+            NSArray *imageArr = _model[@"images"];
+            if (imageArr.count > 0) {
+                NSDictionary *imageDic = [imageArr firstObject];
+                [parameters setObject:imageDic[@"imageURL"] forKey:@"topicImg"];
+            }
+        }else{
+            NSDictionary *userDic = _model[@"user"];
+            [parameters setObject:@"2" forKey:@"collectType"];
+            [parameters setObject:userDic[@"username"] forKey:@"username"];
+            [parameters setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
+            [parameters setObject:_model[@"content"] forKey:@"content"];
+            NSArray *imageArr = _model[@"images"];
+            if (imageArr.count > 0) {
+                NSDictionary *imageDic = [imageArr firstObject];
+                [parameters setObject:imageDic[@"imageURL"] forKey:@"friendImg"];
+            }
         }
     }else{
-        NSDictionary *userDic = _model.user;
-        [parameters setObject:@"2" forKey:@"collectType"];
-        [parameters setObject:userDic[@"username"] forKey:@"username"];
-        [parameters setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
-        [parameters setObject:_model.content forKey:@"content"];
-        if (_model.images.count > 0) {
-            NSDictionary *imageDic = [_model.images firstObject];
-            [parameters setObject:imageDic[@"imageURL"] forKey:@"friendImg"];
+        [parameters setObject:@"3" forKey:@"collectType"];
+        [parameters setObject:_model[@"topictitle"] forKey:@"topictitle"];
+        [parameters setObject:_model[@"content"] forKey:@"topicContent"];
+        NSArray *imageArr = _model[@"imgList"];
+        if (imageArr.count > 0) {
+            NSDictionary *imageDic = [imageArr firstObject];
+            [parameters setObject:imageDic[@"locationimg"] forKey:@"topicImg"];
         }
     }
+    
     [KGRequestNetWorking postWothUrl:addPersonCollect parameters:parameters succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             [MBProgressHUD bwm_showTitle:@"操作成功" toView:weakSelf.view hideAfter:1];
@@ -426,7 +505,7 @@ FriendsPlayVideoViewdelegate>
 }
 - (void)zansAction{
     __weak typeof(self) weakSelf = self;
-    [KGRequestNetWorking postWothUrl:firendlikeCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_model.ID} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:firendlikeCount parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_model[@"id"]} succ:^(id result) {
         [MBProgressHUD bwm_showTitle:result[@"message"] toView:weakSelf.view hideAfter:1];
     } fail:^(NSError *error) {
         [MBProgressHUD bwm_showTitle:@"请求失败" toView:weakSelf.view hideAfter:1];
@@ -443,7 +522,7 @@ FriendsPlayVideoViewdelegate>
 //MARK:--FriendsCommentViewDelegate--
 - (void)releaseComment:(NSString *)comment{
     __weak typeof(self) weakSelf = self;
-    [KGRequestNetWorking postWothUrl:commentOrReply parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_model.ID,@"content":comment} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:commentOrReply parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_model[@"id"],@"content":comment} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             [MBProgressHUD bwm_showTitle:@"评论成功" toView:weakSelf.view hideAfter:1];
         }else{
@@ -465,7 +544,7 @@ FriendsPlayVideoViewdelegate>
  */
 - (void)playModelVideo{
     
-    NSArray *imageArr = _model.images;
+    NSArray *imageArr = _model[@"images"];
     NSDictionary *dic = [imageArr firstObject];
     self.playVideo.videoUrl = [NSURL URLWithString:dic[@"imageURL"]];
     self.playVideo.hidden = NO;

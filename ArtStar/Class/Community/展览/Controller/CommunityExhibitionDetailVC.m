@@ -7,7 +7,6 @@
 //
 
 #import "CommunityExhibitionDetailVC.h"
-#import "CommunityExhibitionModel.h"
 #import "CommunityExhibitionDetailTimeAndAddressCell.h"
 #import "CommunityExhibitionIntrouceCell.h"
 #import "CommunityExhibitionProductionCell.h"
@@ -34,7 +33,7 @@
 /**
  详情页数据
  */
-@property (nonatomic,strong) CommunityExhibitionModel *model;
+@property (nonatomic,copy) NSDictionary *dataDic;
 
 @end
 
@@ -56,9 +55,9 @@
     [KGRequestNetWorking postWothUrl:selectShowBySid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"id":_ID,@"query":@{@"page":@"0",@"rows":@"5"}} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf setDetailView];
-        weakSelf.model = [CommunityExhibitionModel mj_objectWithKeyValues:result];
-        [weakSelf createScrollViewImageAndButtonWithArray:weakSelf.model.imgList];
-        [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 250, 30) title:weakSelf.model.showname image:Image(@"back")];
+        weakSelf.dataDic = result;
+        [weakSelf createScrollViewImageAndButtonWithArray:weakSelf.dataDic[@"imgList"]];
+        [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 250, 30) title:weakSelf.dataDic[@"showname"] image:Image(@"back")];
         [weakSelf.detaiView reloadData];
     } fail:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -85,7 +84,7 @@
 // MARK: --UITableViewDelegate--
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        return [TransformChineseToPinying heightWithText:_model.showtime font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight] + 210;
+    return [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight] + 210;
     }else if (indexPath.row == 1){
         return 165;
     }else if (indexPath.row == 2){
@@ -102,47 +101,48 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         CommunityExhibitionDetailTimeAndAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionDetailTimeAndAddressCell" forIndexPath:indexPath];
-        cell.titleLab.text = _model.showname;
-        if ([_model.avgpingfen doubleValue] == 0.0) {
+        cell.titleLab.text = _dataDic[@"showname"];
+        if ([_dataDic[@"avgpingfen"] doubleValue] == 0.0) {
             [cell changeImageWithScoreNumber:0.0];
         }else{
-            [cell changeImageWithScoreNumber:[_model.avgpingfen doubleValue]];
+            [cell changeImageWithScoreNumber:[_dataDic[@"avgpingfen"] doubleValue]];
         }
-        cell.scoreLab.text = [NSString stringWithFormat:@"%.1f",[_model.avgpingfen doubleValue]];
-        NSData *timeData = [_model.showtime dataUsingEncoding:NSUTF8StringEncoding];
+        cell.scoreLab.text = [NSString stringWithFormat:@"%.1f",[_dataDic[@"avgpingfen"] doubleValue]];
+        NSData *timeData = [_dataDic[@"showtime"] dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error = nil;
         NSArray *timeArr = [NSJSONSerialization JSONObjectWithData:timeData options:NSJSONReadingMutableContainers error:&error];
         NSString *timeStr = [timeArr firstObject];
         for (int i = 1; i < timeArr.count; i++) {
             timeStr = [NSString stringWithFormat:@"%@\n%@",timeStr,timeArr[i]];
         }
-        cell.timeViewHeight.constant = [TransformChineseToPinying heightWithText:_model.showtime font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight];
+        cell.timeViewHeight.constant = [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight];
         cell.timeLab.text = timeStr;
-        cell.orgzanizationLab.text = _model.showplace;
-        cell.addressLab.text = _model.showaddress;
-        cell.hostUnitLab.text = _model.hostunit;
-        if (_model.showprice == nil) {
+        cell.orgzanizationLab.text = _dataDic[@"showplace"];
+        cell.addressLab.text = _dataDic[@"showaddress"];
+        cell.hostUnitLab.text = _dataDic[@"hostunit"];
+        if (_dataDic[@"showprice"] == nil) {
             cell.priceLab.text = @"暂无价格";
         }else{
-            cell.priceLab.text = _model.showprice;
+            cell.priceLab.text = _dataDic[@"showprice"];
         }
         return cell;
     }else if (indexPath.row == 1){
         CommunityExhibitionIntrouceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionIntrouceCell" forIndexPath:indexPath];
-        cell.detailLab.attributedText = [TransformChineseToPinying string:[NSString stringWithFormat:@"%@%@",@"简介：",_model.recommend] font:SYFont(13) space:10];
+        cell.detailLab.attributedText = [TransformChineseToPinying string:[NSString stringWithFormat:@"%@%@",@"简介：",_dataDic[@"recommend"]] font:SYFont(13) space:10];
         return cell;
     }else if (indexPath.row == 2){
         CommunityExhibitionProductionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionProductionCell" forIndexPath:indexPath];
-        if (_model.worksList.count > 0) {
-            cell.productionLab.text = [NSString stringWithFormat:@"作品介绍（%lu）",(unsigned long)_model.worksList.count];
-            [cell addProductionToScrollViewWithArray:_model.worksList];
+        NSArray *tmpArr = _dataDic[@"worksList"];
+        if (tmpArr.count > 0) {
+            cell.productionLab.text = [NSString stringWithFormat:@"作品介绍（%lu）",(unsigned long)tmpArr.count];
+            [cell addProductionToScrollViewWithArray:tmpArr];
         }else{
             cell.productionLab.text = @"作品介绍（0）";
         }
         return cell;
     }else if (indexPath.row == 3){
         CommunityExhibitionWorkerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionWorkerCell" forIndexPath:indexPath];
-        [cell changeScrollViewWithArray:_model.artistList];
+        [cell changeScrollViewWithArray:_dataDic[@"artistList"]];
         return cell;
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];

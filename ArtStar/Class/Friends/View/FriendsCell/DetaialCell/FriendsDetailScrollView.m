@@ -65,7 +65,11 @@
     for (int i = 0; i < photosArr.count; i++) {
         NSDictionary *dic = photosArr[i];
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageURL"]]];
+        if (dic[@"imageURL"]) {
+            [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageURL"]]];
+        }else{
+            [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"locationimg"]]];
+        }
         [_scrollView addSubview:imageView];
     }
 }

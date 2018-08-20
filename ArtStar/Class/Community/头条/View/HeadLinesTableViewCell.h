@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommenityModel.h"
 
 @class HeadLinesTableViewCell;
 @protocol HeadLinesTableViewCellDelagate <NSObject>
@@ -22,6 +21,6 @@
 @property (nonatomic,assign) CGFloat btuOriginY;
 @property (nonatomic,assign) NSInteger cellIndex;
 @property (nonatomic,weak) id<HeadLinesTableViewCellDelagate>delegate;
-@property (nonatomic,strong) CommenityModel *model;
+@property (nonatomic,copy) NSDictionary *dic;
 
 @end

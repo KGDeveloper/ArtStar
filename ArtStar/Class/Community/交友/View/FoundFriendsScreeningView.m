@@ -145,7 +145,7 @@
         };
         [_leftView addSubview:sexView];
         
-        _dayView = [[UIView alloc]initWithFrame:CGRectMake(0, 420, ViewWidth(_leftView), 60)];
+        _dayView = [[UIView alloc]initWithFrame:CGRectMake(0, 430, ViewWidth(_leftView), 60)];
         [_leftView addSubview:_dayView];
         
         UILabel *dayLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 150, 15)];

@@ -8,8 +8,6 @@
 
 #import "KGSearchBarAndSearchView.h"
 #import "KGSearchViewCell.h"
-#import "CommenityHoistorySearchModel.h"
-#import "CommenityHotSearchModel.h"
 
 @interface KGSearchBarAndSearchView ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -119,15 +117,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     KGSearchViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KGSearchViewCell"];
-    CommenityHoistorySearchModel *model = _historyArr[indexPath.row];
-    cell.historyLab.text = model.searchfor;
+    NSDictionary *dic = _historyArr[indexPath.row];
+    cell.historyLab.text = dic[@"searchfor"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CommenityHoistorySearchModel *model = _historyArr[indexPath.row];
+    NSDictionary *dic = _historyArr[indexPath.row];
     if (self.clickSearchTitle) {
-        self.clickSearchTitle(model.searchfor);
+        self.clickSearchTitle(dic[@"searchfor"]);
     }
 }
 
@@ -137,14 +135,14 @@
     CGFloat height = 70;
     NSInteger count = 0;
     for (int i = 0; i < hotArr.count; i++) {
-        CommenityHotSearchModel *model = hotArr[i];
-        if (width + [TransformChineseToPinying stringWidthFromString:model.searchfor font:FZFont(15) width:ViewWidth(self)] > ViewWidth(self)) {
+        NSDictionary *dic = hotArr[i];
+        if (width + [TransformChineseToPinying stringWidthFromString:dic[@"searchfor"] font:FZFont(15) width:ViewWidth(self)] > ViewWidth(self)) {
             width = 15;
             count ++;
             height = 70 + 30*count;
         }
-        [_hotView addSubview:[self createButtonWithFrame:CGRectMake(width, height, [TransformChineseToPinying stringWidthFromString:model.searchfor font:FZFont(15) width:ViewWidth(self)], 15) title:model.searchfor font:SYFont(12) color:[UIColor colorWithHexString:@"#666666"]]];
-        width = width + 20 + [TransformChineseToPinying stringWidthFromString:model.searchfor font:FZFont(15) width:ViewWidth(self)];
+        [_hotView addSubview:[self createButtonWithFrame:CGRectMake(width, height, [TransformChineseToPinying stringWidthFromString:dic[@"searchfor"] font:FZFont(15) width:ViewWidth(self)], 15) title:dic[@"searchfor"] font:SYFont(12) color:[UIColor colorWithHexString:@"#666666"]]];
+        width = width + 20 + [TransformChineseToPinying stringWidthFromString:dic[@"searchfor"] font:FZFont(15) width:ViewWidth(self)];
     }
     
     _hotView.frame = CGRectMake(ViewX(_hotView), ViewY(_hotView), ViewWidth(_hotView), height + 40 + 50);

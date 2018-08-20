@@ -34,18 +34,24 @@
     return self;
 }
 
-- (void)setModel:(CommenityModel *)model{
-    _model = model;
-    [_topImage sd_setImageWithURL:[NSURL URLWithString:model.locationimg]];
-    _titleLab.text = model.title;
-    _nameLab.text = model.sitename;
-    if (model.zantype.integerValue == 1) {
+- (void)setDic:(NSDictionary *)dic{
+    _dic = dic;
+    if (![dic[@"locationimg"] isKindOfClass:[NSNull class]]) {
+        [_topImage sd_setImageWithURL:[NSURL URLWithString:dic[@"locationimg"]]];
+    }
+    if (![dic[@"title"] isKindOfClass:[NSNull class]]) {
+        _titleLab.text = dic[@"title"];
+    }
+    if (![dic[@"sitename"] isKindOfClass:[NSNull class]]) {
+        _nameLab.text = dic[@"sitename"];
+    }
+    if ([dic[@"zantype"] integerValue] == 1) {
         [_zansBtu setImage:Image(@"点赞选中") forState:UIControlStateNormal];
     }else{
         [_zansBtu setImage:Image(@"点赞") forState:UIControlStateNormal];
     }
-    [_zansBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.goodsum.integerValue] forState:UIControlStateNormal];
-    [_commentBtu setTitle:[NSString stringWithFormat:@"%ld",(long)model.plsum.integerValue] forState:UIControlStateNormal];
+    [_zansBtu setTitle:[NSString stringWithFormat:@"%li",[dic[@"goodsum"] integerValue]] forState:UIControlStateNormal];
+    [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[dic[@"plsum"] integerValue]] forState:UIControlStateNormal];
 }
 
 - (void)setUI{

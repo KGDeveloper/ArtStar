@@ -35,6 +35,17 @@
     [self cllLocation];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"筛选" image:nil];
     
+    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight - NavButtomHeight)];
+    webView.dataDetectorTypes = UIDataDetectorTypeAll;
+    webView.scrollView.scrollEnabled = NO;
+    NSString *mainBoundPath = [[NSBundle mainBundle] bundlePath];
+    NSString *basePath = [NSString stringWithFormat:@"%@/星球吸引",mainBoundPath];
+    NSURL *baseUrl = [NSURL fileURLWithPath:basePath isDirectory:YES];
+    NSString *htmlPath = [NSString stringWithFormat:@"%@/shandian.html",basePath];
+    NSString *htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+    [webView loadHTMLString:htmlString baseURL:baseUrl];
+    [self.view addSubview:webView];
+    
     [self setNavCenterView];
     
 }

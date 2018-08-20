@@ -124,7 +124,6 @@
             }else{
                 [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
             }
-            
         } fail:^(NSError *error) {
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
             [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
