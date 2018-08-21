@@ -116,7 +116,7 @@
     };
     [self.view addSubview:_headLinesView];
 }
-//MARK:-------------------------------------请求关闭新闻---------------------------------------------------
+//MARK:--请求关闭新闻--
 - (void)requestCloseNews:(NSArray *)arr nid:(NSString *)ID{
     NSString *backname = @"";
     NSDictionary *dic = _dataArr[ID.integerValue];
@@ -134,7 +134,7 @@
     }];
 }
 // !!!: --在这里最好是在view中传入一个关键词然后进行数据拉去，后期待优化--
-//MARK:-------------------------------------------拉首页数据---------------------------------------------
+//MARK:--拉首页数据--
 - (void)createDataArr{
     dispatch_async(dispatch_get_main_queue(), ^{
         __weak typeof(self) mySelf = self;
@@ -170,6 +170,7 @@
     if (textField == _searchTF) {
         [_searchTF resignFirstResponder];
         self.searchView.hidden = NO;
+        self.searchView.searchUrl = deleteSearchNews;
         self.searchView.hotArr = _hotArr;
         self.searchView.historyArr = _hoistryArr;
     }
@@ -191,7 +192,7 @@
     }
     return _searchView;
 }
-//MARK:-----------------------------------搜索新闻-----------------------------------------------------
+//MARK:--搜索新闻-----------------------------------------------------
 - (void)createNewsData:(NSString *)searchStr{
     [_dataArr removeAllObjects];
     __weak typeof(self) mySelf = self;

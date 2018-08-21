@@ -10,6 +10,7 @@
 
 @interface MusicChooseCityView : UIView
 
+@property (nonatomic,copy) NSString *titleStr;
 @property (nonatomic,copy) void(^sendProvinceNameAndCityName)(NSString *provinceName,NSString *cityName);
 
 @end

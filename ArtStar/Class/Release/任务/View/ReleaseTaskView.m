@@ -9,6 +9,7 @@
 #import "ReleaseTaskView.h"
 #import "ReleaseTaskWriteCell.h"
 #import "ReleaseTaskIntrduiceCell.h"
+#import "MusicChooseCityView.h"
 
 @interface ReleaseTaskView ()<UITableViewDelegate,UITableViewDataSource,ReleaseTaskWriteCellDelegate,ReleaseTaskIntrduiceCellDelegate>
 
@@ -40,6 +41,10 @@
  时间值
  */
 @property (nonatomic,copy) NSString *chooseTimeStr;
+/**
+ 选择任务发布城市
+ */
+@property (nonatomic,strong) MusicChooseCityView *cityView;
 
 @end
 
@@ -47,7 +52,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        _dataArr = @[@{@"name":@"任务名称",@"title":@"请填写任务名称"},@{@"name":@"开始时间",@"title":@"请选择任务开始时间"},@{@"name":@"结束时间",@"title":@"请选择任务结束时间"},@{@"name":@"任务地点",@"title":@"请填写任务地点"},@{@"name":@"任务薪酬",@"title":@"请填写任务薪酬"},@{@"name":@"联系方式",@"title":@"请填写联系方式"},@{@"name":@"任务类型",@"title":@"请填写任务类型"}];
+        _dataArr = @[@{@"name":@"任务名称",@"title":@"请填写任务名称"},@{@"name":@"开始时间",@"title":@"请选择任务开始时间"},@{@"name":@"结束时间",@"title":@"请选择任务结束时间"},@{@"name":@"任务地点",@"title":@"请填写任务地点"},@{@"name":@"任务城市",@"title":@"请填写任务城市"},@{@"name":@"任务薪酬",@"title":@"请填写任务薪酬"},@{@"name":@"联系方式",@"title":@"请填写联系方式"},@{@"name":@"任务类型",@"title":@"请填写任务类型"}];
         _dic = [NSMutableDictionary dictionary];
         _isStar = YES;
         [self setTaskListView];
@@ -69,7 +74,7 @@
 }
 // MARK: --UITableViewDelegate--
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row < 7) {
+    if (indexPath.row < 8) {
         return 50;
     }else{
         return 200;
@@ -77,10 +82,10 @@
 }
 // MARK :--UITableViewDataSource--
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 8;
+    return 9;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row < 7) {
+    if (indexPath.row < 8) {
         ReleaseTaskWriteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReleaseTaskWriteCell" forIndexPath:indexPath];
         NSDictionary *dic = _dataArr[indexPath.row];
         cell.nameLab.text = dic[@"name"];
@@ -96,6 +101,11 @@
                 cell.titleText.text = _dic[@"otime"];
             }
         }
+        if (_dic[@"city"]) {
+            if (indexPath.row == 4) {
+                cell.titleText.text = _dic[@"city"];
+            }
+        }
         return cell;
     }else{
         ReleaseTaskIntrduiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReleaseTaskIntrduiceCell" forIndexPath:indexPath];
@@ -107,10 +117,13 @@
 - (void)changeTextFieldEditStyleWithString:(NSString *)text{
     if ([text isEqualToString:@"请选择任务开始时间"]) {
         _isStar = YES;
-    }else{
+        self.chooseView.hidden = NO;
+    }else if ([text isEqualToString:@"请选择任务结束时间"]){
         _isStar = NO;
+        self.chooseView.hidden = NO;
+    }else{
+        self.cityView.hidden = NO;
     }
-    self.chooseView.hidden = NO;
 }
 - (void)whenTextFieldEndEditSendContentTextToTheUIView:(NSString *)text placeholder:(NSString *)placeholder{
     if ([placeholder isEqualToString:@"请填写任务名称"]) {
@@ -137,24 +150,25 @@
                     if (_dic[@"money"]) {
                         if (_dic[@"tel"]) {
                             if (_dic[@"type"]) {
-                                if (_dic[@"describe"]) {
-                                    [MBProgressHUD showHUDAddedTo:self animated:YES];
-                                    __weak typeof(self) weakSelf = self;
-                                    [_dic setObject:@([[KGUserInfo shareInterace].userID integerValue]) forKey:@"uid"];
-                                    [_dic setObject:@"北京市" forKey:@"city"];
-                                    NSDictionary *pamarters = _dic.copy;
-                                    [KGRequestNetWorking postWothUrl:saveUserTask parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"userTask":pamarters} succ:^(id result) {
-                                        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
-                                        if ([result[@"code"] integerValue] == 200) {
-                                            [MBProgressHUD bwm_showTitle:@"发布成功" toView:self hideAfter:1];
-                                        }else{
-                                            [MBProgressHUD bwm_showTitle:@"发布失败" toView:self hideAfter:1];
-                                        }
-                                    } fail:^(NSError *error) {
-                                        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
-                                        [MBProgressHUD bwm_showTitle:@"请求出错" toView:self hideAfter:1];
-                                    }];
-                                }else{[MBProgressHUD bwm_showTitle:@"请填写任务描述" toView:self hideAfter:1];}
+                                if (_dic[@"city"]) {
+                                    if (_dic[@"describe"]) {
+                                        [MBProgressHUD showHUDAddedTo:self animated:YES];
+                                        __weak typeof(self) weakSelf = self;
+                                        [_dic setObject:@([[KGUserInfo shareInterace].userID integerValue]) forKey:@"uid"];
+                                        NSDictionary *pamarters = _dic.copy;
+                                        [KGRequestNetWorking postWothUrl:saveUserTask parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"userTask":pamarters} succ:^(id result) {
+                                            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+                                            if ([result[@"code"] integerValue] == 200) {
+                                                [MBProgressHUD bwm_showTitle:@"发布成功" toView:self hideAfter:1];
+                                            }else{
+                                                [MBProgressHUD bwm_showTitle:@"发布失败" toView:self hideAfter:1];
+                                            }
+                                        } fail:^(NSError *error) {
+                                            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+                                            [MBProgressHUD bwm_showTitle:@"请求出错" toView:self hideAfter:1];
+                                        }];
+                                    }else{[MBProgressHUD bwm_showTitle:@"请填写任务描述" toView:self hideAfter:1];}
+                                }else{[MBProgressHUD bwm_showTitle:@"请填写任务城市" toView:self hideAfter:1];}
                             }else{[MBProgressHUD bwm_showTitle:@"请填写任务类型，如：导游" toView:self hideAfter:1];}
                         }else{[MBProgressHUD bwm_showTitle:@"请填写联系方式" toView:self hideAfter:1];}
                     }else{[MBProgressHUD bwm_showTitle:@"请填写任务薪酬" toView:self hideAfter:1];}
@@ -235,6 +249,22 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
         [_taskView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+}
+// MARK: --任务发布城市--
+- (MusicChooseCityView *)cityView{
+    if (!_cityView) {
+        _cityView = [[MusicChooseCityView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth,ViewHeight(self))];
+        __weak typeof(self) weakSelf = self;
+        _cityView.titleStr = @"发布任务";
+        _cityView.sendProvinceNameAndCityName = ^(NSString *provinceName, NSString *cityName) {
+            [weakSelf.dic setObject:cityName forKey:@"city"];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+            [weakSelf.taskView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+        };
+        [self addSubview:_cityView];
+    }
+    return _cityView;
 }
 
 /*

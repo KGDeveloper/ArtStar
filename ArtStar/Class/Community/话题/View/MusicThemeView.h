@@ -12,5 +12,6 @@
 
 @property (nonatomic,copy) void(^pushViewController)(void);
 @property (nonatomic,copy) NSString *titleName;
+@property (nonatomic,copy) NSArray *sendArr;
 
 @end

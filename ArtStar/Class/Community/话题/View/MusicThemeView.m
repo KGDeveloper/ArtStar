@@ -115,10 +115,16 @@
     NSMutableDictionary *keyDic = [NSMutableDictionary dictionary];
     [keyDic setValuesForKeysWithDictionary:dic];
     NSString *value = [NSString stringWithFormat:@"%@",keyDic[@"makeup"]];
-    if (![keyDic[@"imgList"] isKindOfClass:NSClassFromString(@"__NSSingleObjectArrayI")]) {
-        NSArray<NSDictionary *> *tmp = keyDic[@"imgList"];
-        [keyDic removeObjectForKey:@"imgList"];
-        [keyDic setObject:tmp forKey:@"images"];
+    if (![keyDic[@"imgList"] isKindOfClass:[NSNull class]]) {
+        if ([keyDic[@"imgList"] isKindOfClass:NSClassFromString(@"__NSSingleObjectArrayI")]) {
+            NSArray<NSDictionary *> *tmp = keyDic[@"imgList"];
+            [keyDic removeObjectForKey:@"imgList"];
+            [keyDic setObject:tmp forKey:@"images"];
+        }else{
+            NSArray<NSDictionary *> *tmp = keyDic[@"imgList"];
+            [keyDic removeObjectForKey:@"imgList"];
+            [keyDic setObject:tmp forKey:@"images"];
+        }
     }
     [keyDic setObject:@{@"username":keyDic[@"username"],@"portraitUri":keyDic[@"portraitUri"]} forKey:@"user"];
     [keyDic removeObjectForKey:@"makeup"];
@@ -218,7 +224,7 @@
 - (void)createHeadLineData:(NSString *)name{
     __weak typeof(self) weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self animated:YES];
-    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":name,@"uid":[KGUserInfo shareInterace].userID,@"query":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:ntvByTopic parameters:@{@"typename":name,@"uid":[KGUserInfo shareInterace].userID,@"page":@"1",@"rows":@"15"} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
         if ([result[@"code"] integerValue] == 200) {
             NSArray *tmp = result[@"data"];
@@ -306,6 +312,15 @@
         }
     }
     return target;
+}
+- (void)setSendArr:(NSArray *)sendArr{
+    _sendArr = sendArr;
+    if (sendArr.count > 0) {
+        _dataArr = [NSMutableArray arrayWithArray:sendArr];
+    }else{
+        _dataArr = [NSMutableArray array];
+    }
+    [_listView reloadData];
 }
 
 /*

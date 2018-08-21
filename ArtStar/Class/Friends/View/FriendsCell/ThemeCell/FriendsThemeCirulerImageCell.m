@@ -52,7 +52,11 @@
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
     _locationLab.text = model[@"location"];
-    _timeLab.text = model[@"createTimeStr"];
+    if (model[@"timeDiff "]) {
+        _timeLab.text = model[@"timeDiff "];
+    }else{
+        _timeLab.text = model[@"createTimeStr"];
+    }
     _rfuid = model[@"id"];
     
     [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];

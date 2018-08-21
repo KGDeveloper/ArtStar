@@ -14,6 +14,14 @@
 
 @property (nonatomic,strong) MusicThemeView *themeView;//:--话题--
 @property (nonatomic,strong) KGSearchBarTF *searchTF;
+/**
+ 搜索话题页面
+ */
+@property (nonatomic,strong) KGSearchBarAndSearchView *searchView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
+@property (nonatomic,strong) NSMutableArray *hotArr;
+@property (nonatomic,strong) NSMutableArray *hoistryArr;
+@property (nonatomic,copy) NSString *titleStr;
 
 @end
 
@@ -43,8 +51,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"more popup message")];
-    
+    _titleStr = @"音乐";
     self.themeView.titleName = @"音乐";
+    _dataArr = [NSMutableArray array];
+    _hotArr = [NSMutableArray array];
+    _hoistryArr = [NSMutableArray array];
+    [self createHotAndHoistryData];
     [self setSearchBar];
     [self setTopView];
     
@@ -57,6 +69,7 @@
     //MARK:---------------------------------------------滚动条按钮点击事件-------------------------------------------
     scrollerView.titleAction = ^(NSString *title) {
         mySelf.themeView.titleName = title;
+        mySelf.titleStr = title;
     };
     [self.view addSubview:scrollerView];
     [self.view insertSubview:self.themeView atIndex:99];
@@ -73,17 +86,76 @@
     }
     return _themeView;
 }
-
+// MARK: --改变textfield的键盘监听事件，弹出搜索页面--
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (textField == _searchTF) {
         [_searchTF resignFirstResponder];
-        KGSearchBarAndSearchView *searchView = nil;
-        if (!searchView) {
-            searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-            [self.navigationController.view addSubview:searchView];
-        }
-        
+        self.searchView.hidden = NO;
+        self.searchView.searchUrl = topicSearch;
+        self.searchView.hotArr = _hotArr;
+        self.searchView.historyArr = _hoistryArr;
     }
+}
+// MARK: --搜索页面--
+- (KGSearchBarAndSearchView *)searchView{
+    if (!_searchView) {
+        _searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        __weak typeof(self) mySelf = self;
+        // !!!: --搜索新闻--
+        _searchView.searchResult = ^(NSString *result) {
+            [mySelf createNewsData:result];
+        };
+        // !!!: --点击搜索历史，直接快速搜索--
+        _searchView.clickSearchTitle = ^(NSString *title) {
+            [mySelf createNewsData:title];
+        };
+        [self.navigationController.view addSubview:_searchView];
+    }
+    return _searchView;
+}
+//MARK:--搜索话题--
+- (void)createNewsData:(NSString *)searchStr{
+    [_dataArr removeAllObjects];
+    __weak typeof(self) mySelf = self;
+    [KGRequestNetWorking postWothUrl:topicSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"mohu":searchStr,@"page":@"1",@"rows":@"15",@"typename":_titleStr} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *dataArray = result[@"data"];
+            for (int i = 0; i < dataArray.count; i++) {
+                NSDictionary *dic = dataArray[i];
+                [mySelf.dataArr addObject:dic];
+            }
+            mySelf.themeView.sendArr = mySelf.dataArr.copy;
+            mySelf.searchView.hidden = YES;
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+}
+// MARK: --请求搜索历史以及热词--
+- (void)createHotAndHoistryData{
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:oldSearchTopic parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"query":@{@"page":@"0",@"rows":@"15"}} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            if (tmp.count > 0) {
+                weakSelf.hoistryArr = [NSMutableArray arrayWithArray:tmp];
+            }
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+    
+    [KGRequestNetWorking postWothUrl:hotSearchTopic parameters:@{} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            if (tmp.count > 0) {
+                weakSelf.hotArr = [NSMutableArray arrayWithArray:tmp];
+            }
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

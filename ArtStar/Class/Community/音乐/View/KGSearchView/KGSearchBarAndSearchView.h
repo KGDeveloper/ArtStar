@@ -10,6 +10,7 @@
 
 @interface KGSearchBarAndSearchView : UIView
 
+@property (nonatomic,copy) NSString *searchUrl;
 @property (nonatomic,copy) NSArray *hotArr;
 @property (nonatomic,copy) NSArray *historyArr;
 @property (nonatomic,copy) void(^searchResult)(NSString *result);

@@ -3760,7 +3760,6 @@
 			isa = PBXGroup;
 			children = (
 				5A05B0AB21145A5400D1F876 /* Controller */,
-				5A05B0AA21145A4E00D1F876 /* Model */,
 				5A05B0A921145A4900D1F876 /* View */,
 			);
 			path = "任务";
@@ -3790,13 +3789,6 @@
 				5A05B0B4211463AE00D1F876 /* ReleaseTaskWriteCell.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5A05B0AA21145A4E00D1F876 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		5A05B0AB21145A5400D1F876 /* Controller */ = {

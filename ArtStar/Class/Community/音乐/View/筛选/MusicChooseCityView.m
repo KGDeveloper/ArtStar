@@ -108,6 +108,9 @@
         if (self.sendProvinceNameAndCityName) {
             self.sendProvinceNameAndCityName(_provinceName,_cityName);
         }
+        if (_titleStr) {
+            self.hidden = YES;
+        }
     }
 }
 - (UIView *)tableViewWhiteBackView:(CGRect)frame{

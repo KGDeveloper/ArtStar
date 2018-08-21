@@ -19,7 +19,7 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if ([textField.placeholder isEqualToString:@"请选择任务开始时间"] || [textField.placeholder isEqualToString:@"请选择任务结束时间"]) {
+    if ([textField.placeholder isEqualToString:@"请选择任务开始时间"] || [textField.placeholder isEqualToString:@"请选择任务结束时间"] || [textField.placeholder isEqualToString:@"请填写任务城市"]) {
         [textField resignFirstResponder];
         [textField endEditing:YES];
         textField.enabled = NO;

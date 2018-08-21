@@ -104,7 +104,7 @@
 
 - (void)deleteBtuClick{
     __weak typeof(self) mySelf = self;
-    [KGRequestNetWorking postWothUrl:deleteSearchNews parameters:@{@"uid":[KGUserInfo shareInterace].userID} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:_searchUrl parameters:@{@"uid":[KGUserInfo shareInterace].userID} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             mySelf.historyArr = nil;
             [mySelf.listView reloadData];
@@ -127,6 +127,7 @@
     if (self.clickSearchTitle) {
         self.clickSearchTitle(dic[@"searchfor"]);
     }
+    self.hidden = YES;
 }
 
 - (void)setHotArr:(NSArray *)hotArr{

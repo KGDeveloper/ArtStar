@@ -21,12 +21,11 @@
         NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error = nil;
         NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
-        NSString *str = dataArr[0];
-        for (int i = 1; i < dataArr.count; i++) {
-            str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];
+        if (!error) {
+            NSString *str = dataArr[0];
+            for (int i = 1; i < dataArr.count; i++) {str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];}
+            [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
         }
-        
-        [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
     }
     if ([model[@"type"] integerValue] == 2) {
         _themeLab.hidden = YES;
@@ -43,7 +42,9 @@
     if (model[@"location"]) {
         _locationLab.text = model[@"location"];
     }
-    if (model[@"createTimeStr"]) {
+    if (model[@"timeDiff "]) {
+        _timeLab.text = model[@"timeDiff "];
+    }else{
         _timeLab.text = model[@"createTimeStr"];
     }
     [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];
