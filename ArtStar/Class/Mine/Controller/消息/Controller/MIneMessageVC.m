@@ -12,14 +12,14 @@
 #import "MineSystemMessageListCell.h"
 #import "MineChatDetaialViewController.h"
 
-@interface MIneMessageVC ()
+@interface MIneMessageVC ()<RCIMReceiveMessageDelegate>
 
 @property (nonatomic,strong) MineMessageHeaderView *headerView;
 
 @end
 
 @implementation MIneMessageVC
-//MARK:----------------------------左侧按钮------------------------------------------------------------
+//MARK:--左侧按钮--
 - (void)setLeftButton{
     UIButton *leftBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     leftBtu.frame = CGRectMake(15, 0, 120, 15);
@@ -34,7 +34,7 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithCustomView:leftBtu];
     self.navigationItem.leftBarButtonItem = leftItem;
 }
-//MARK:---------------------------------右侧按钮-------------------------------------------------------
+//MARK:--右侧按钮--
 - (void)setRightButton{
     UIButton *rightBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     rightBtu.frame = CGRectMake(15, 0, 120, 15);
@@ -45,13 +45,18 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtu];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
-//MARK:-----------------------------------右侧按钮点击事件-----------------------------------------------------
+//MARK:--右侧按钮点击事件--
 - (void)leftClick{
-    [self.navigationController popViewControllerAnimated:YES];
+    UIApplication *app = [UIApplication sharedApplication];
+    app.keyWindow.rootViewController = [[TabBarVC alloc]init];
 }
-//MARK:-----------------------------------左侧按钮点击事件-----------------------------------------------------
+//MARK:--左侧按钮点击事件--
 - (void)rightClick{
-    
+    [[RCIMClient sharedRCIMClient] sendMessage:ConversationType_PRIVATE targetId:@"54" content:[RCTextMessage messageWithContent:@"你好啊，赛利亚"] pushContent:nil pushData:nil success:^(long messageId) {
+        
+    } error:^(RCErrorCode nErrorCode, long messageId) {
+        
+    }];
 }
 
 - (void)viewDidLoad {
@@ -74,10 +79,16 @@
                                           @(ConversationType_GROUP)]];
     
     [self setTableView];
-    
+    // MARK: --设置监听消息--
+    [RCIM sharedRCIM].receiveMessageDelegate = self;
     
 }
-
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left{
+    if ([message.content isMemberOfClass:[RCTextMessage class]]) {
+        RCTextMessage *textMessage = (RCTextMessage *)message.content;
+        NSLog(@"%@",textMessage.content);
+    }
+}
 - (void)setTableView{
     self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.conversationListTableView.tableFooterView = TabLeViewFootView;
@@ -99,7 +110,6 @@
     return _headerView;
 }
 - (void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath{
-    
     MineChatDetaialViewController *chatVC = [[MineChatDetaialViewController alloc]init];
     chatVC.title = model.conversationTitle;
     chatVC.conversationType = model.conversationType;

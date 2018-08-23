@@ -277,8 +277,12 @@
     self.stillImageOutPut = [[AVCaptureStillImageOutput alloc] init];
     
     //这是输出流的设置参数AVVideoCodecJPEG参数表示以JPEG的图片格式输出图片
-    NSDictionary *dicOutputSetting = [NSDictionary dictionaryWithObject:AVVideoCodecTypeJPEG forKey:AVVideoCodecKey];
-    [self.stillImageOutPut setOutputSettings:dicOutputSetting];
+    if (@available(iOS 11.0, *)) {
+        NSDictionary *dicOutputSetting = [NSDictionary dictionaryWithObject:AVVideoCodecTypeJPEG forKey:AVVideoCodecKey];
+        [self.stillImageOutPut setOutputSettings:dicOutputSetting];
+    } else {
+        // Fallback on earlier versions
+    }
     
     if ([self.session canAddInput:self.videoInput]) {
         [self.session addInput:self.videoInput];

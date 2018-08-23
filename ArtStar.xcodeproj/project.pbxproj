@@ -172,7 +172,7 @@
 		283EBAD920CF7539006C28C0 /* MineLoadCoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EBAD820CF7539006C28C0 /* MineLoadCoverVC.m */; };
 		283EBADC20CFA5FE006C28C0 /* MineChooseWeightAndHeightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EBADB20CFA5FE006C28C0 /* MineChooseWeightAndHeightView.m */; };
 		283EBADF20CFC81B006C28C0 /* MineWorksIndustryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EBADE20CFC81B006C28C0 /* MineWorksIndustryView.m */; };
-		2840DF5020DCF2C00066E2C4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2840DF4F20DCF2C00066E2C4 /* UserNotifications.framework */; };
+		2840DF5020DCF2C00066E2C4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2840DF4F20DCF2C00066E2C4 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2847BC8520F60B090052EE19 /* MineSelfMyLabelsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2847BC8420F60B090052EE19 /* MineSelfMyLabelsDetailModel.m */; };
 		284C8D6620BF986A00487225 /* MusicManagementMyThemeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 284C8D6420BF986A00487225 /* MusicManagementMyThemeCell.m */; };
 		284C8D6720BF986A00487225 /* MusicManagementMyThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 284C8D6520BF986A00487225 /* MusicManagementMyThemeCell.xib */; };
@@ -1891,7 +1891,6 @@
 			isa = PBXGroup;
 			children = (
 				5A05B0902114573500D1F876 /* Controller */,
-				5A05B08F2114573100D1F876 /* Model */,
 				5A05B08E2114572C00D1F876 /* View */,
 			);
 			path = "消息";
@@ -3465,13 +3464,6 @@
 				287D7D4320EA096400AD749E /* KGSearchChatHistoryView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5A05B08F2114573100D1F876 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		5A05B0902114573500D1F876 /* Controller */ = {
@@ -5110,7 +5102,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ArtStar/other/ArtStar.pch";
 				INFOPLIST_FILE = ArtStar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5144,7 +5136,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ArtStar/other/ArtStar.pch";
 				INFOPLIST_FILE = ArtStar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

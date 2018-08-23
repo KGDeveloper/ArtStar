@@ -22,10 +22,10 @@
     [self leftNavButton];
     [self rightNavButton];
     
-    UIView *custom = [[[NSBundle mainBundle] loadNibNamed:@"MineMessageFirstIntoShowView" owner:self options:nil] lastObject];
-    custom.frame = CGRectMake(0,NavTopHeight + 20, 295, 185);
-    custom.centerX = kScreenWidth/2;
-    [self.view addSubview:custom];
+//    UIView *custom = [[[NSBundle mainBundle] loadNibNamed:@"MineMessageFirstIntoShowView" owner:self options:nil] lastObject];
+//    custom.frame = CGRectMake(0,NavTopHeight + 20, 295, 185);
+//    custom.centerX = kScreenWidth/2;
+//    [self.view addSubview:custom];
 }
 
 - (void)leftNavButton{
@@ -57,7 +57,10 @@
     self.navigationItem.rightBarButtonItem = right;
 }
 - (void)rightNavBtuAction:(UIButton *)sender{
-    [self.navigationController pushViewController:[[MsgTapCellHeaderPushFocusVC alloc]init] animated:YES];
+    MsgTapCellHeaderPushFocusVC *vc = [[MsgTapCellHeaderPushFocusVC alloc]init];
+    vc.userId = self.targetId;
+    vc.userName = self.navigationItem.title;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

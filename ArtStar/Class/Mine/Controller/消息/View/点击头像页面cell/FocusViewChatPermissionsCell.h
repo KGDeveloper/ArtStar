@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FocusViewChatPermissionsCellDelegate <NSObject>
+
+- (void)changeStatusWithName:(NSString *)name status:(NSString *)status;
+
+@end
+
 @interface FocusViewChatPermissionsCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
 @property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
-
+@property (nonatomic,weak) id<FocusViewChatPermissionsCellDelegate>delegate;
 
 @end

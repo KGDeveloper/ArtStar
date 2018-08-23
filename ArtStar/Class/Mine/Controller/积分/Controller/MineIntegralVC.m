@@ -108,7 +108,7 @@
     MineIntegraltableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineIntegraltableViewCell"];
     if (indexPath.row == 0) {
         cell.titleLab.text = @"登录  +2";
-        [cell.statusBtu setTitle:_dataDic[@"long"] forState:UIControlStateNormal];
+        [cell.statusBtu setTitle:_dataDic[@"login"] forState:UIControlStateNormal];
     }else if (indexPath.row == 1){
         cell.titleLab.text = @"做达人  +100";
         [cell.statusBtu setTitle:@"去完成" forState:UIControlStateNormal];

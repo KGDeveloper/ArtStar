@@ -278,7 +278,8 @@
     if (_isSMSLogin == YES) {
         [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"msgAuthCode":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
             if ([result[@"message"] isEqualToString:@"操作成功！"]) {
-                NSDictionary *userDic = result[@"data"];
+                NSArray *dataArr = result[@"data"];
+                NSDictionary *userDic = dataArr[0];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];//:--number类型--
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];//:--number类型--
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];//:--number类型--
@@ -286,7 +287,10 @@
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
+                id personSignature = userDic[@"personSignature"];
+                if (![personSignature isKindOfClass:[NSNull class]]) {
+                    [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
+                }
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];

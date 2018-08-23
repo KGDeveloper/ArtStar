@@ -10,4 +10,6 @@
 
 @interface MusicExhibitCell : UITableViewCell
 
+@property (nonatomic,copy) NSArray *dataArr;
+
 @end

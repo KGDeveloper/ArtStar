@@ -14,7 +14,7 @@
 #import "FocusViewChatFocusCell.h"
 #import "MsgTapNoteVC.h"
 
-@interface FocusView ()<UITableViewDelegate,UITableViewDataSource>
+@interface FocusView ()<UITableViewDelegate,UITableViewDataSource,FocusViewChatPermissionsCellDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) ReportView *reportView;
@@ -105,11 +105,27 @@
             FocusViewChatPermissionsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FocusViewChatPermissionsCell"];
             cell.titleLab.text = @"不让他看我的朋友圈";
             cell.detailLab.text = @"打开后,你在朋友圈发布的图文信息对方将无法看到";
+            if (_userInfo) {
+                if ([_userInfo[@"is_allow_look_other"] integerValue] == 0) {
+                    cell.statusSwitch.on = YES;
+                }else{
+                    cell.statusSwitch.on = NO;
+                }
+            }
+            cell.delegate = self;
             return cell;
         }else if (indexPath.row == 1){
             FocusViewChatPermissionsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FocusViewChatPermissionsCell"];
             cell.titleLab.text = @"不看他的朋友圈";
             cell.detailLab.text = @"打开后,对方在朋友圈发布的图文信息你将无法看到";
+            if (_userInfo) {
+                if ([_userInfo[@"is_look_other"] integerValue] == 0) {
+                    cell.statusSwitch.on = YES;
+                }else{
+                    cell.statusSwitch.on = NO;
+                }
+            }
+            cell.delegate = self;
             return cell;
         }else{
             FocusViewChatInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FocusViewChatInfoCell"];
@@ -126,7 +142,6 @@
         return cell;
     }
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
@@ -150,6 +165,11 @@
         }
     }
 }
+- (void)setUserInfo:(NSDictionary *)userInfo{
+    _userInfo = userInfo;
+    [_listView reloadData];
+}
+// MARK: --举报页面--
 - (ReportView *)reportView{
     if (!_reportView) {
         _reportView = [[ReportView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
@@ -157,7 +177,7 @@
     }
     return _reportView;
 }
-
+// MARK: --获取父视图--
 - (UIViewController *)rootViewCintroller{
     for (UIView* next = [self superview]; next; next = next.superview) {
         UIResponder *nextResponder = [next nextResponder];
@@ -166,6 +186,29 @@
         }
     }
     return nil;
+}
+// MARK: --FocusViewChatPermissionsCellDelegate--
+- (void)changeStatusWithName:(NSString *)name status:(NSString *)status{
+    if ([name isEqualToString:@"不让他看我的朋友圈"]) {
+        [self changeFriendIsSee:_userInfo[@"is_look_other"] allowSee:status];
+    }else{
+        [self changeFriendIsSee:status allowSee:_userInfo[@"is_allow_look_other"]];
+    }
+}
+- (void)changeFriendIsSee:(NSString *)see allowSee:(NSString *)allowSee{
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:setFriendCirclePermissions parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":_userId,@"is_look_other":see,@"is_allow_look_other":allowSee} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            [MBProgressHUD bwm_showTitle:@"设置成功" toView:weakSelf hideAfter:1];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"设置失败" toView:weakSelf hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        [MBProgressHUD bwm_showTitle:@"请求失败" toView:weakSelf hideAfter:1];
+    }];
 }
 
 /*

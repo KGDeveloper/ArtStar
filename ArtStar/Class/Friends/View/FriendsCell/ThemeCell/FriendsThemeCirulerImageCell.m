@@ -17,15 +17,16 @@
 @implementation FriendsThemeCirulerImageCell
 
 - (void)fillCellWithModel:(NSDictionary *)model{
-    NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
-    NSString *str = dataArr[0];
-    for (int i = 1; i < dataArr.count; i++) {
-        str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];
+    if (![model[@"content"] isKindOfClass:[NSNull class]]) {
+        NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *error = nil;
+        NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
+        if (!error) {
+            NSString *str = dataArr[0];
+            for (int i = 1; i < dataArr.count; i++) {str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];}
+            [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
+        }
     }
-    
-    [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
     
     if (model[@"type"]) {
         if ([model[@"type"] integerValue] == 2) {

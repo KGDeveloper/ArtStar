@@ -50,14 +50,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MusicExhibitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicExhibitTableViewCell"];
+    if (_dataArr.count > 0) {
+        NSDictionary *dic = _dataArr[indexPath.row];
+        cell.dataDic = dic;
+    }
     return cell;
 }
 
+- (void)setDataArr:(NSArray *)dataArr{
+    _dataArr = dataArr;
+    [_listView reloadData];
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

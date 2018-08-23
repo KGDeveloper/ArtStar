@@ -60,7 +60,6 @@
 }
 
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion{
-    
     if ([userId isEqualToString:[KGUserInfo shareInterace].userToken]) {
         RCUserInfo *userInfo = [[RCUserInfo alloc]init];
         userInfo.userId = userId;
@@ -69,7 +68,15 @@
         return completion(userInfo);
     }else{
         [KGRequestNetWorking postWothUrl:rongUserID parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"uid":userId} succ:^(id result) {
-            
+            if ([result[@"code"] integerValue] == 200) {
+                NSArray *dataArr = result[@"data"];
+                NSDictionary *dic = [dataArr firstObject];
+                RCUserInfo *userInfo = [[RCUserInfo alloc]init];
+                userInfo.userId = userId;
+                userInfo.name = dic[@"username"];
+                userInfo.portraitUri = dic[@"portraitUri"];
+                [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userId];
+            }
         } fail:^(NSError *error) {
             
         }];
@@ -77,7 +84,6 @@
         return completion(info);
     }
 }
-
 - (void)getGroupInfoWithGroupId:(NSString *)groupId completion:(void (^)(RCGroup *groupInfo))completion{
     
 }

@@ -238,6 +238,14 @@
  @return 改变用户在线状态
  */
 #define updateState [serverIP stringByAppendingString:@"user/updateState"]
+/**
+ 当前用户是否关注对方用户和当前用户对对方用户设置朋友圈权限的标识，聊天界面中跳到的管理界面需要调用此接口
+ */
+#define seachIsattOrFCPermissions [serverIP stringByAppendingString:@"FriendCirclePermissions/seachIsattOrFCPermissions"]
+/**
+ 设置朋友圈权限的接口
+ */
+#define setFriendCirclePermissions [serverIP stringByAppendingString:@"FriendCirclePermissions/setFriendCirclePermissions"]
 
 
 #endif /* MineHttpsDefine_h */

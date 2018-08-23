@@ -285,13 +285,6 @@
     shareModel.thumbImage = thumbImage;
     [shareView showShareViewWithDXShareModel:shareModel shareContentType:DXShareContentTypeImage];
 }
-
-//MARK:--FriendsMessageViewDelegate--
-- (void)loadMessage{
-//    FriendsMessageVC *vc = [[FriendsMessageVC alloc]init];
-//    [self pushNoTabBarViewController:vc animated:YES];
-}
-
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return Image(@"空空如也");
 }

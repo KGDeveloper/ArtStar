@@ -18,6 +18,7 @@
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) KGSearchChatHistoryView *searchView;
+@property (nonatomic,strong) ReportView *reportView;
 
 @end
 
@@ -88,7 +89,7 @@
     if (indexPath.section == 0) {
         self.searchView.hidden = YES;
     }else if (indexPath.section == 1){
-        
+        self.reportView.hidden = NO;
     }else{
         if (self.focusOn) {
             self.focusOn();
@@ -103,7 +104,13 @@
     }
     return _searchView;
 }
-
+- (ReportView *)reportView{
+    if (!_reportView) {
+        _reportView = [[ReportView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        [[self rootViewCintroller].navigationController.view addSubview:_reportView];
+    }
+    return _reportView;
+}
 - (UIViewController *)rootViewCintroller{
     for (UIView* next = [self superview]; next; next = next.superview) {
         UIResponder *nextResponder = [next nextResponder];

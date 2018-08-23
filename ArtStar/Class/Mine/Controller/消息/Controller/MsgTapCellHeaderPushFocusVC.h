@@ -10,4 +10,7 @@
 
 @interface MsgTapCellHeaderPushFocusVC : BaseVC
 
+@property (nonatomic,copy) NSString *userId;
+@property (nonatomic,copy) NSString *userName;
+
 @end

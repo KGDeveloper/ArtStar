@@ -52,7 +52,7 @@
     // TODO: --在这里初始化以及给定默认值--
     _currtitleStr = @"美术";
     _currClassStr = @"近期热门";
-    _page = 0;
+    _page = 1;
     _dataArr = [NSMutableArray array];
     // TODO: --先请求数据，然后加载页面，但是因为网速问题，可能页面加载出来，但是数据还没有显示，所以记得刷新--
     [self createHeadLineData];
@@ -92,7 +92,7 @@
         };
         // TODO: --下拉刷新列表--
         _performanceView.refreshHeader = ^{
-            mySelf.page = 0;
+            mySelf.page = 1;
             mySelf.dataArr = [NSMutableArray array];
             [mySelf createHeadLineData];
         };
@@ -128,7 +128,7 @@
 - (void)createHeadLineData{
     [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在努力加载中..."];
     __weak typeof(self) weakSelf = self;
-    [KGRequestNetWorking postWothUrl:selectSlistByTypename parameters:@{@"typename":_currtitleStr,@"navigation":_currClassStr,@"query":@{@"page":@(_page),@"rows":@"15"}} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:selectSlistByTypename parameters:@{@"typename":_currtitleStr,@"navigation":_currClassStr,@"page":@(_page),@"rows":@"15"} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if ([result[@"code"] integerValue] == 200) {
             NSArray *tmpArr = result[@"data"];

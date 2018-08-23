@@ -11,6 +11,8 @@
 #import "CommunityExhibitionIntrouceCell.h"
 #import "CommunityExhibitionProductionCell.h"
 #import "CommunityExhibitionWorkerCell.h"
+#import "MusicCommentCell.h"
+#import "MusicExhibitCell.h"
 
 @interface CommunityExhibitionDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -52,13 +54,16 @@
 - (void)createData{
     __weak typeof(self) weakSelf = self;
     [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在加载中..." animated:YES];
-    [KGRequestNetWorking postWothUrl:selectShowBySid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"id":_ID,@"query":@{@"page":@"0",@"rows":@"5"}} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:selectShowBySid parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"id":_ID,@"query":@{@"page":@"1",@"rows":@"5"}} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [weakSelf setDetailView];
-        weakSelf.dataDic = result;
-        [weakSelf createScrollViewImageAndButtonWithArray:weakSelf.dataDic[@"imgList"]];
-        [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 250, 30) title:weakSelf.dataDic[@"showname"] image:Image(@"back")];
-        [weakSelf.detaiView reloadData];
+        if ([result[@"code"] integerValue] == 200) {
+            [weakSelf setDetailView];
+            NSArray *tmp = result[@"data"];
+            weakSelf.dataDic = [tmp firstObject];
+            [weakSelf createScrollViewImageAndButtonWithArray:weakSelf.dataDic[@"worksList"]];
+            [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 250, 30) title:weakSelf.dataDic[@"showname"] image:Image(@"back")];
+            [weakSelf.detaiView reloadData];
+        }
     } fail:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [MBProgressHUD bwm_showTitle:@"加载失败，请退出重新请求！" toView:weakSelf.view hideAfter:2];
@@ -71,6 +76,8 @@
     [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionIntrouceCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionIntrouceCell"];
     [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionProductionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionProductionCell"];
     [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionWorkerCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionWorkerCell"];
+    [_detaiView registerNib:[UINib nibWithNibName:@"MusicCommentCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicCommentCell"];
+    [_detaiView registerClass:[MusicExhibitCell class] forCellReuseIdentifier:@"MusicExhibitCell"];
     _detaiView.delegate = self;
     _detaiView.dataSource = self;
     _detaiView.bounces = NO;
@@ -84,30 +91,35 @@
 // MARK: --UITableViewDelegate--
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-    return [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight] + 210;
+    return [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-150 height:kScreenHeight] + 210;
     }else if (indexPath.row == 1){
         return 165;
     }else if (indexPath.row == 2){
         return 185;
     }else if (indexPath.row == 3){
         return 246;
+    }else if (indexPath.row == 4){
+        return 220;
+    }else{
+        return 510;
     }
-    return 10;
 }
 // MARK :--UITableViewDataSource--
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 9;
+    return 6;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0) {//:--展览时间地点名称评分--
         CommunityExhibitionDetailTimeAndAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionDetailTimeAndAddressCell" forIndexPath:indexPath];
         cell.titleLab.text = _dataDic[@"showname"];
-        if ([_dataDic[@"avgpingfen"] doubleValue] == 0.0) {
-            [cell changeImageWithScoreNumber:0.0];
-        }else{
-            [cell changeImageWithScoreNumber:[_dataDic[@"avgpingfen"] doubleValue]];
+        if (![_dataDic[@"pingfen"] isKindOfClass:[NSNull class]]) {
+            if ([_dataDic[@"pingfen"] doubleValue] == 0.0) {
+                [cell changeImageWithScoreNumber:0.0];
+            }else{
+                [cell changeImageWithScoreNumber:[_dataDic[@"pingfen"] doubleValue]];
+            }
         }
-        cell.scoreLab.text = [NSString stringWithFormat:@"%.1f",[_dataDic[@"avgpingfen"] doubleValue]];
+        cell.scoreLab.text = [NSString stringWithFormat:@"%.1f",[_dataDic[@"pingfen"] doubleValue]];
         NSData *timeData = [_dataDic[@"showtime"] dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error = nil;
         NSArray *timeArr = [NSJSONSerialization JSONObjectWithData:timeData options:NSJSONReadingMutableContainers error:&error];
@@ -115,22 +127,31 @@
         for (int i = 1; i < timeArr.count; i++) {
             timeStr = [NSString stringWithFormat:@"%@\n%@",timeStr,timeArr[i]];
         }
-        cell.timeViewHeight.constant = [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-90 height:kScreenHeight];
+        cell.timeViewHeight.constant = [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-150 height:kScreenHeight];
         cell.timeLab.text = timeStr;
-        cell.orgzanizationLab.text = _dataDic[@"showplace"];
+        if (![_dataDic[@"showplace"] isKindOfClass:[NSNull class]]) {
+            cell.orgzanizationLab.text = _dataDic[@"showplace"];
+        }else{
+            cell.orgzanizationLab.text = @"暂无数据";
+        }
         cell.addressLab.text = _dataDic[@"showaddress"];
-        cell.hostUnitLab.text = _dataDic[@"hostunit"];
-        if (_dataDic[@"showprice"] == nil) {
+        if (![_dataDic[@"hostunit"] isKindOfClass:[NSNull class]]) {
+            cell.hostUnitLab.text = _dataDic[@"hostunit"];
+        }else{
+            cell.hostUnitLab.text = @"暂无数据";
+        }
+        
+        if ([_dataDic[@"showprice"] isKindOfClass:[NSNull class]]) {
             cell.priceLab.text = @"暂无价格";
         }else{
             cell.priceLab.text = _dataDic[@"showprice"];
         }
         return cell;
-    }else if (indexPath.row == 1){
+    }else if (indexPath.row == 1){//:--展览介绍--
         CommunityExhibitionIntrouceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionIntrouceCell" forIndexPath:indexPath];
         cell.detailLab.attributedText = [TransformChineseToPinying string:[NSString stringWithFormat:@"%@%@",@"简介：",_dataDic[@"recommend"]] font:SYFont(13) space:10];
         return cell;
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 2){//:--作品介绍--
         CommunityExhibitionProductionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionProductionCell" forIndexPath:indexPath];
         NSArray *tmpArr = _dataDic[@"worksList"];
         if (tmpArr.count > 0) {
@@ -142,13 +163,23 @@
         return cell;
     }else if (indexPath.row == 3){
         CommunityExhibitionWorkerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionWorkerCell" forIndexPath:indexPath];
-        [cell changeScrollViewWithArray:_dataDic[@"artistList"]];
+        if ([_dataDic[@"artistList"] isMemberOfClass:NSClassFromString(@"__NSSingleObjectArrayI")]) {
+            NSArray<NSDictionary *> *tmp = _dataDic[@"artistList"];
+            if (![[tmp firstObject] isKindOfClass:[NSNull class]]) {
+                [cell changeScrollViewWithArray:tmp];
+            }else{
+                [cell changeScrollViewWithArray:@[]];
+            }
+        }else{
+            [cell changeScrollViewWithArray:_dataDic[@"artistList"]];
+        }
+        return cell;
+    }else if (indexPath.row == 4){
+        MusicCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicCommentCell"];
         return cell;
     }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
-        }
+        MusicExhibitCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicExhibitCell"];
+        cell.dataArr = _dataDic[@"relatedList"];
         return cell;
     }
 }

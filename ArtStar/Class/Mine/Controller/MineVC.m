@@ -129,7 +129,9 @@
 //MARK:-------------------------------------------MineHeaderViewDelegate---------------------------------------------
 - (void)pushViewControllerViewTitle:(NSString *)title{
     if ([title isEqualToString:@"消息"]) {
-        [self pushNoTabBarViewController:[[MIneMessageVC alloc]init] animated:YES];
+        UIApplication *app = [UIApplication sharedApplication];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[MIneMessageVC alloc]init]];
+        app.keyWindow.rootViewController = nav;
     }else if ([title isEqualToString:@"积分"]){
         MineIntegralVC *integralVC = [[MineIntegralVC alloc]init];
         [self pushNoTabBarViewController:integralVC animated:YES];

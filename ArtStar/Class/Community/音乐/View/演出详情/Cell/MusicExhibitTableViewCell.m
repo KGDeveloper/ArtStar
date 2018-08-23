@@ -75,8 +75,15 @@
     _detailLab.lineBreakMode = NSLineBreakByTruncatingTail;
     _detailLab.sd_layout.topSpaceToView(_starView, 10).rightSpaceToView(self.contentView, 15).leftSpaceToView(_topImage, 15).heightIs(40);
     
-    
-    
+}
+
+- (void)setDataDic:(NSDictionary *)dataDic{
+    _dataDic = dataDic;
+    NSArray<NSDictionary *> *imageArr = dataDic[@"imgList"];
+    NSDictionary *imageDic = [imageArr firstObject];
+    [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"locationimg"]]];
+    _titleLab.text = dataDic[@"showname"];
+    _detailLab.attributedText = [TransformChineseToPinying string:dataDic[@"recommend"] font:SYFont(12) space:9];
 }
 
 - (void)awakeFromNib {

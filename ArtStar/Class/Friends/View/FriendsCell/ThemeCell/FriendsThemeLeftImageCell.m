@@ -33,18 +33,20 @@
 @implementation FriendsThemeLeftImageCell
 
 - (void)fillCellWithModel:(NSDictionary *)model{
-    NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
-    NSString *str = dataArr[0];
-    for (int i = 1; i < dataArr.count; i++) {
-        str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];
-    }
-    if (str != nil) {
-        if ([model[@"composing"] integerValue] == 3) {
-            [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentTop];
-        }else if ([model[@"composing"] integerValue] == 4){
-            [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentCenter];
+    if (![model[@"content"] isKindOfClass:[NSNull class]]) {
+        NSData *strData = [model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *error = nil;
+        NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
+        if (!error) {
+            NSString *str = dataArr[0];
+            for (int i = 1; i < dataArr.count; i++) {str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];}
+            if (str != nil) {
+                if ([model[@"composing"] integerValue] == 3) {
+                    [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentTop];
+                }else if ([model[@"composing"] integerValue] == 4){
+                    [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentCenter];
+                }
+            }
         }
     }
     if ([model[@"type"] integerValue] == 2) {

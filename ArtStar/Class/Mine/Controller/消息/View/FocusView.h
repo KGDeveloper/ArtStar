@@ -13,6 +13,8 @@
 
 @property (nonatomic,copy) void(^cancelFocus)(void);
 @property (nonatomic,copy) FocusViewModel *model;
+@property (nonatomic,copy) NSDictionary *userInfo;//:--设置权限问题--
+@property (nonatomic,copy) NSString *userId;
 
 @end
 

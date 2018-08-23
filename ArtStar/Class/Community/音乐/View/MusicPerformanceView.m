@@ -24,7 +24,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self setUI];
-        _page = 0;
+        _page = 1;
     }
     return self;
 }
@@ -41,7 +41,7 @@
     __weak typeof(self) weakSelf = self;
     // TODO: --下拉刷新数据，设置数据请求页为第一页--
     _lietView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        weakSelf.page = 0;
+        weakSelf.page = 1;
         if (weakSelf.refreshHeader) {
             weakSelf.refreshHeader();
         }
@@ -50,7 +50,7 @@
     }];
     // TODO: --上拉加载更多，设置数据请求页递增--
     _lietView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        weakSelf.page++;
+        weakSelf.page ++;
         if (weakSelf.reloadFoot) {
             weakSelf.reloadFoot(weakSelf.page);
         }
@@ -74,7 +74,6 @@
             weakSelf.classTypeAction(type);
         }
     };
-//    _pageView.imageArr = @[@"1",@"2",@"3",@"4",@"5"];
     [_headerView addSubview:_pageView];
     
     return _headerView;
@@ -98,18 +97,27 @@
     [cell.topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"locationimg"]]];
     cell.titleLab.text = dic[@"showname"];
     cell.locationLab.text = dic[@"showaddress"];
-    if (dic[@"startday"] != nil) {
+    if (![dic[@"startday"] isKindOfClass:[NSNull class]]) {
         cell.timeLab.text = [NSString stringWithFormat:@"还有%@天开始",dic[@"startday"]];
-        [cell willStarStatus];
-    }else if (dic[@"endday"] != nil){
+        if ([dic[@"showprice"] isKindOfClass:[NSNull class]]) {
+            [cell normalStatus];
+        }else{
+            [cell willStarStatus];
+        }
+    }else if (![dic[@"endday"] isKindOfClass:[NSNull class]]){
         cell.timeLab.text = [NSString stringWithFormat:@"还有%@天结束",dic[@"endday"]];
-        [cell willEndStatus];
-    }else if (dic[@"daingday"] != nil){
+        if ([dic[@"showprice"] isKindOfClass:[NSNull class]]) {
+            [cell normalStatus];
+        }else{
+            [cell willEndStatus];
+        }
+    }else if (![dic[@"daingday"] isKindOfClass:[NSNull class]]){
         cell.timeLab.text = [NSString stringWithFormat:@"已经开始%@天",dic[@"daingday"]];
-        [cell willEndStatus];
-    }
-    if (dic[@"showprice"] == nil) {
-        [cell normalStatus];
+        if ([dic[@"showprice"] isKindOfClass:[NSNull class]]) {
+            [cell normalStatus];
+        }else{
+            [cell willEndStatus];
+        }
     }
     return cell;
 }
@@ -124,12 +132,8 @@
 - (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
     if (_dataArr.count == 0) {
-        _headerView.size = CGSizeMake(kScreenWidth, 0);
-        _pageView.hidden = YES;
         _lietView.mj_footer.hidden = YES;
     }else{
-        _headerView.size = CGSizeMake(ViewWidth(self), ViewWidth(self)/750*500 + 40 + 60);
-        _pageView.hidden = NO;
         _lietView.mj_footer.hidden = NO;
     }
     [_lietView.mj_header endRefreshing];

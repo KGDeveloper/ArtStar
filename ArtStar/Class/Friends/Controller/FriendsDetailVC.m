@@ -136,8 +136,6 @@ FriendsPlayVideoViewdelegate>
                 [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
                 self.detailScrollView.photosArr = _model[@"images"];
             }
-            self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model[@"composing"] integerValue]];
-            self.veritocalView.isVertical = NO;
         }else{
             if ([_model[@"makeup"] integerValue] == 0) {
                 [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 85 + 58)];
@@ -149,8 +147,6 @@ FriendsPlayVideoViewdelegate>
                 [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
                 self.detailScrollView.photosArr = _model[@"imgList"];
             }
-            self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model[@"makeup"] integerValue]];
-            self.veritocalView.isVertical = NO;
         }
         NSData *strData = [_model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
         NSArray *strArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:nil];
@@ -158,7 +154,13 @@ FriendsPlayVideoViewdelegate>
         for (int i = 1; i < strArr.count; i++) {
             str = [NSString stringWithFormat:@"%@\n%@",str,strArr[i]];
         }
+        self.veritocalView.isVertical = NO;
         self.veritocalView.textStr = str;
+        if (_model[@"composing"]) {
+            self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model[@"composing"] integerValue]];
+        }else{
+            self.veritocalView.textAlinment = [self textAlignmentWithModelComposing:[_model[@"makeup"] integerValue]];
+        }
     }else if(self.type == 0){//:--竖排--
         [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 165)/450*690 + 65 + 58)];
         
@@ -409,9 +411,11 @@ FriendsPlayVideoViewdelegate>
             }else if ([result[@"code"] integerValue] == 410){
                 [sender setTitle:@"已关注" forState:UIControlStateNormal];
                 [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
+                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"已关注" image:nil];
             }else if ([result[@"code"] integerValue] == 411){
                 [sender setTitle:@"关注" forState:UIControlStateNormal];
                 [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
+                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
             }
         } fail:^(NSError *error) {
             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -427,9 +431,11 @@ FriendsPlayVideoViewdelegate>
             }else if ([result[@"code"] integerValue] == 410){
                 [sender setTitle:@"已关注" forState:UIControlStateNormal];
                 [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
+                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"已关注" image:nil];
             }else if ([result[@"code"] integerValue] == 411){
                 [sender setTitle:@"关注" forState:UIControlStateNormal];
                 [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
+                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
             }
             if ([result[@"code"] integerValue] == 200) {
                 [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功！" animated:YES] hide:YES afterDelay:1];
@@ -597,19 +603,19 @@ FriendsPlayVideoViewdelegate>
         case 2:
             return NSTextAlignmentCenter;
             break;
-        case 5:
+        case 3:
             return NSTextAlignmentLeft;
             break;
-        case 6:
+        case 4:
             return NSTextAlignmentCenter;
             break;
-        case 7:
+        case 5:
             return NSTextAlignmentRight;
             break;
-        case 8:
+        case 6:
             return NSTextAlignmentLeft;
             break;
-        case 9:
+        case 7:
             return NSTextAlignmentCenter;
             break;
         default:
