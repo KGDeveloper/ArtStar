@@ -1030,15 +1030,28 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
-            }else if (self.themeType == EditThemeTypeOnlyTitle & self.themeType == EditThemeTypeOnlyPicture){
+                if (self.imageArr.count > 0) {
+                    model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
+                    model.isShure = YES;
+                }else{
+                    model.isShure = NO;
+                }
+            }else if (self.themeType == EditThemeTypeOnlyTitle){
                 model.typeStr = @"0";
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
+                model.isShure = YES;
+            }else if (self.themeType == EditThemeTypeOnlyPicture){
+                model.typeStr = @"0";
+                if (self.imageArr.count > 0) {
+                    model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
+                    model.isShure = YES;
+                }else{
+                    model.isShure = NO;
+                }
             }else{
                 
                 if (_titleTF.text.length > 0 & _titleTF.text != nil) {
@@ -1054,7 +1067,12 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
+                if (self.imageArr.count > 0) {
+                    model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
+                    model.isShure = YES;
+                }else{
+                    model.isShure = NO;
+                }
             }
             model.composing = [self returnTType:self.themeType];
             break;
@@ -1065,14 +1083,24 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str3 = self.threeTF.text;
                 model.str4 = self.fourTF.text;
                 model.str5 = self.fiveTF.text;
-                model.imageURLs = @{@"image":@[_videoUrlStr],@"key":@"video"};
+                if (self.imageArr.count > 0) {
+                    model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
+                    model.isShure = YES;
+                }else{
+                    model.isShure = NO;
+                }
             }else{
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
                 model.str4 = self.fouceTF.text;
                 model.str5 = self.fifthTF.text;
-                model.imageURLs = @{@"image":@[_videoUrlStr],@"key":@"video"};
+                if (self.imageArr.count > 0) {
+                    model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
+                    model.isShure = YES;
+                }else{
+                    model.isShure = NO;
+                }
             }
             model.typeStr = @"2";
             model.composing = [self returnVType:self.videoType];

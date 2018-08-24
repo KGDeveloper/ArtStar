@@ -314,6 +314,7 @@
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
         }];
     }else{
+        NSLog(@"_userTF.text%@  _passWordTF.text%@",_userTF.text,_passWordTF.text);
         [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"password":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
             mySelf.errorLab.hidden = YES;
             if ([result[@"message"] isEqualToString:@"操作成功！"]) {

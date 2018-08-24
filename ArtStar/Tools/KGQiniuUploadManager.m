@@ -45,7 +45,7 @@
             NSDictionary *dic = [arr firstObject];
             [upManager putFile:filePath key:[[NSString alloc] initWithFormat:@"%@.png",[self getNowTimestamp]] token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                 if (info.statusCode == 200) {
-                    NSString *path = @"http://pbl758zx4.bkt.clouddn.com/";
+                    NSString *path = @"http://pdyasqvph.bkt.clouddn.com/";
                     path = [path stringByAppendingString:resp[@"key"]];
                     uploadData(path);
                 }
@@ -73,7 +73,7 @@
             NSData *videoData = [NSData dataWithContentsOfURL:url];
             [upManager putData:videoData key:failName token:dic[@"tokencode"] complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                 if (info.statusCode == 200) {
-                    NSString *path = @"http://pbl758zx4.bkt.clouddn.com/";
+                    NSString *path = @"http://pdyasqvph.bkt.clouddn.com/";
                     path = [path stringByAppendingString:resp[@"key"]];
                     uploadData(path);
                 }

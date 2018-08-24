@@ -101,7 +101,7 @@
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     } fail:^(NSError *error) {
         mySelf.buttomErrorBtu.hidden = NO;
-        mySelf.buttomErrorBtu.text = @"验证码错误";
+        mySelf.buttomErrorBtu.text = @"请求超时";
         [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
     }];
 }
@@ -118,6 +118,9 @@
         if ([result[@"message"] isEqualToString:@"发送短信失败"]) {
             mySelf.topErrorLab.hidden = NO;
             mySelf.topErrorLab.text = @"验证码发送失败";
+            [mySelf.timer invalidate];
+            mySelf.timer = nil;
+            mySelf.number = 60;
         }else{
             mySelf.topErrorLab.hidden = YES;
         }

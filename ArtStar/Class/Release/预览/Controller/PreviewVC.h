@@ -60,6 +60,7 @@
  @人集合
  */
 @property (nonatomic,copy) NSArray *ids;
+@property (nonatomic,assign) BOOL isShure;
 
 @end
 

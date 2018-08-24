@@ -73,10 +73,12 @@
     __weak typeof(self) mySelf = self;
     if (_model.imageURLs.count > 0) {
         __block NSMutableArray *imageArr = [NSMutableArray array];
-        if ([_model.imageURLs[@"key"] isEqualToString:@"image"]) {
+        NSDictionary *imageDic = _model.imageURLs;
+        if ([imageDic[@"key"] isEqualToString:@"image"]) {
             dispatch_queue_t imageQueue = dispatch_queue_create("上传图片", DISPATCH_QUEUE_CONCURRENT);
             dispatch_sync(imageQueue, ^{
-                [mySelf.model.imageURLs[@"image"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSArray *imageTmpArr = mySelf.model.imageURLs[@"image"];
+                [imageTmpArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     [[KGQiniuUploadManager shareInstance] uploadImageToQiniuWithFile:[[KGQiniuUploadManager shareInstance] getImagePath:obj] fileName:nil result:^(NSString *strPath) {
                         [imageArr addObject:strPath];
                         [parameters setObject:imageArr forKey:@"imageURLs"];
@@ -97,8 +99,8 @@
     }else{
         [parameters setObject:@[] forKey:@"imageURLs"];
         [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:parameters succ:^(id result) {
+            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
             if ([result[@"code"] integerValue] == 200) {
-                [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
                 [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
                 [mySelf.navigationController popViewControllerAnimated:YES];
             }else{
@@ -190,7 +192,7 @@
     switch (_themeType) {
         case EditThemeTypeOnlyTitle:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeOnlyLabel];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -199,7 +201,7 @@
             break;
         case EditThemeTypeOnlyPicture:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeOnlyImage];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -208,7 +210,7 @@
             break;
         case EditThemeTypeCircular:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeCircular];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -217,7 +219,7 @@
             break;
         case EditThemeTypeRightTop:
             [self setUpVerticalView:LabelTextLocationTypeTop];
-            self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.verticalView.titleArr = [self returnWithModel:_model];
             self.verticalView.imageArr = _model.imageURLs[@"image"];
             self.verticalView.timeStr = @"5分钟前";
             self.verticalView.locationStr = _model.location;
@@ -225,7 +227,7 @@
             break;
         case EditThemeTypeRightCenter:
             [self setUpVerticalView:LabelTextLocationTypeCenter];
-            self.verticalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.verticalView.titleArr = [self returnWithModel:_model];
             self.verticalView.imageArr = _model.imageURLs[@"image"];
             self.verticalView.timeStr = @"5分钟前";
             self.verticalView.locationStr = _model.location;
@@ -233,7 +235,7 @@
             break;
         case EditThemeTypeTopLeft:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -242,7 +244,7 @@
             break;
         case EditThemeTypeTopCenter:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -251,7 +253,7 @@
             break;
         case EditThemeTypeTopRight:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeLabelTop];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -260,7 +262,7 @@
             break;
         case EditThemeTypeLeft:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -269,7 +271,7 @@
             break;
         case EditThemeTypeCenter:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -278,7 +280,7 @@
             break;
         default:
             [self setHViewfrmae:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:LabelAndImageTypeImageTop];
-            self.horizontalView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.horizontalView.titleArr = [self returnWithModel:_model];
             self.horizontalView.imageArr = _model.imageURLs[@"image"];
             self.horizontalView.timeStr = @"5分钟前";
             self.horizontalView.locationStr = _model.location;
@@ -298,7 +300,7 @@
             break;
         case EditVideoTypeTopLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopLeftText];
-            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.videoView.titleArr = [self returnWithModel:_model];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
             self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
@@ -306,7 +308,7 @@
             break;
         case EditVideoTypeTopCenter:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopCenterText];
-            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.videoView.titleArr = [self returnWithModel:_model];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
             self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
@@ -314,7 +316,7 @@
             break;
         case EditVideoTypeTopRight:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeTopRightText];
-            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.videoView.titleArr = [self returnWithModel:_model];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
             self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
@@ -322,7 +324,7 @@
             break;
         case EditVideoTypeLeft:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomLeftText];
-            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.videoView.titleArr = [self returnWithModel:_model];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
             self.videoView.playVideo =[_model.imageURLs[@"image"] firstObject];
@@ -330,7 +332,7 @@
             break;
         case EditVideoTypeCenter:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomCenterText];
-            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.videoView.titleArr = [self returnWithModel:_model];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
             self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
@@ -338,7 +340,7 @@
             break;
         default:
             [self setUpVideoViewframe:CGRectMake(0, _height, kScreenWidth, 220 + photoViewHeight) type:VideoViewTextTypeButtomRightText];
-            self.videoView.titleArr = @[_model.str1,_model.str2,_model.str3,_model.str4,_model.str5];
+            self.videoView.titleArr = [self returnWithModel:_model];
             self.videoView.timeStr = @"5分钟前";
             self.videoView.locationStr = _model.location;
             self.videoView.playVideo = [_model.imageURLs[@"image"] firstObject];
@@ -383,6 +385,27 @@
     self.playVideo.hidden = YES;
     self.navigationController.navigationBar.hidden = NO;
 }
+
+- (NSArray *)returnWithModel:(PreviewVCModel *)model{
+    NSMutableArray *tmp = [NSMutableArray array];
+    if (model.str1) {
+        [tmp addObject:model.str1];
+    }
+    if (model.str2) {
+        [tmp addObject:model.str2];
+    }
+    if (model.str3) {
+        [tmp addObject:model.str3];
+    }
+    if (model.str4) {
+        [tmp addObject:model.str4];
+    }
+    if (model.str5) {
+        [tmp addObject:model.str5];
+    }
+    return tmp.copy;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -12,6 +12,7 @@
 @interface HotInstitutionsDetailVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -19,9 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"全部评论（300）" image:Image(@"back")];
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 250, 30) title:@"全部评论（300）" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _dataArr = [NSMutableArray array];
+    [self createData];
     [self setTbaleView];
     [self setBottomCommentView];
 }
@@ -29,7 +32,9 @@
 - (void)setBottomCommentView{
     KGLowCommentView *commentView = [[KGLowCommentView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 50, kScreenWidth, 50)];
     commentView.actionWithTitle = ^(NSString *title, NSString *text) {
-        
+        if ([title isEqualToString:@"评论"]) {
+            
+        }
     };
     [self.view addSubview:commentView];
 }
@@ -46,12 +51,30 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    return _dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HotMoviesDetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HotMoviesDetailCommentCell"];
     return cell;
+}
+// MARK: --请求所有评论--
+- (void)createData{
+    __weak typeof(self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [KGRequestNetWorking postWothUrl:selectShowPlistjById parameters:@{@"id":_userId,@"query":@{@"rows":@"15",@"page":@"1"}} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            if (tmp.count > 0) {
+                [weakSelf.dataArr addObjectsFromArray:tmp];
+            }
+        }
+        [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 250, 30) title:[NSString stringWithFormat:@"全部评论（%li）",weakSelf.dataArr.count] image:Image(@"back")];
+        [weakSelf.listView reloadData];
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

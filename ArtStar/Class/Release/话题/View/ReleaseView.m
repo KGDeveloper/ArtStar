@@ -121,7 +121,8 @@
     //:--创建拍摄按钮--
     _videoBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(50 + btuWidth, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"拍摄" image:Image(@"发布拍摄")];
     _videoBtu.action = ^(NSString *str) {
-        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[VideoVC alloc]init]] animated:YES completion:nil];
+        [MBProgressHUD bwm_showTitle:@"小哥哥正在努力，请给点时间..." toView:weakSelf hideAfter:1];
+//        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[VideoVC alloc]init]] animated:YES completion:nil];
     };
     [self addSubview:_videoBtu];
     //:--创建达人按钮--

@@ -227,10 +227,7 @@
 }
 - (void)setPlayVideo:(NSURL *)playVideo{
     _playVideo = playVideo;
-    MPMoviePlayerController *player = [[MPMoviePlayerController alloc]initWithContentURL:playVideo];
-    UIImage *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
-    self.imageView.image = thumbnail;
-    player = nil;
+    self.imageView.image = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:playVideo];
 }
 - (void)setVideoImage:(UIImage *)videoImage{
     _videoImage = videoImage;

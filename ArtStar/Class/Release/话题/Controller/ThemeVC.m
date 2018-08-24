@@ -38,9 +38,13 @@
     if ([_modelView.model.location isEqualToString:@"你在哪里？"]) {
         [[MBProgressHUD showHUDAddedTo:self.view animated:YES] bwm_hideWithTitle:@"请选择你的位置" hideAfter:1];
     }else{
-        vc.type = EditTypeTheme;
-        vc.themeType = _modelView.themeType;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (_modelView.model.isShure == YES) {
+            vc.type = EditTypeTheme;
+            vc.themeType = _modelView.themeType;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD bwm_showTitle:@"请填写完成信息" toView:self.view hideAfter:1];
+        }
     }
 }
 //MARK:--ChangeTheModelViewDelegate--

@@ -117,15 +117,7 @@
  */
 #define dianTopicBypid [serverIP stringByAppendingString:@"community/dianTopicBypid"]
 // MARK: --社区话题接口到这里结束--
-
-
-
-
-
-
-
-
-
+// MARK: --社区展览接口从这里开始--
 /**
  根据类别名称查出对应的展览
  */
@@ -134,6 +126,13 @@
  根据展览id查看展览详情
  */
 #define selectShowBySid [serverIP stringByAppendingString:@"community/selectShowBySid"]
+/**
+ 根据场所ID查出对应的评价信息集合
+ */
+#define selectShowPlistjById [serverIP stringByAppendingString:@"community/selectShowPlistjById"]
+
+
+
 /**
  根据分类查出对应的集合 交友
  */

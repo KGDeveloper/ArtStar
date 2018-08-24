@@ -32,9 +32,13 @@
     _locationManager = [[CLLocationManager alloc]init];
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    _locationManager.distanceFilter = 100.0f;
+    _locationManager.distanceFilter = 10.0f;
+    if (![CLLocationManager locationServicesEnabled]) {
+        
+    }
     if ([[[UIDevice currentDevice]systemVersion]doubleValue] > 8.0) {
         [_locationManager requestWhenInUseAuthorization];
+        [_locationManager requestAlwaysAuthorization];
     }
     if ([[UIDevice currentDevice].systemVersion floatValue] > 8.0) {
         _locationManager.allowsBackgroundLocationUpdates = YES;
@@ -46,18 +50,24 @@
     switch (status) {
         case kCLAuthorizationStatusNotDetermined:
             if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-                [_locationManager requestWhenInUseAuthorization];
+                [_locationManager requestAlwaysAuthorization];
             }
             break;
             
         default:
+            if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                [_locationManager requestWhenInUseAuthorization];
+            }
             break;
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations{
     CLLocation *newLocation = locations[0];
-    [manager stopUpdatingLocation];
+    CLLocationCoordinate2D coordinate = newLocation.coordinate;
+    if (self.ToObtainYourLocation) {
+        self.ToObtainYourLocation(@"",coordinate.latitude,coordinate.longitude);
+    }
     CLGeocoder *geocder = [[CLGeocoder alloc]init];
     [geocder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         for (CLPlacemark *place in placemarks) {

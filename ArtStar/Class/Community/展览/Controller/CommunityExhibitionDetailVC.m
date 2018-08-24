@@ -13,6 +13,8 @@
 #import "CommunityExhibitionWorkerCell.h"
 #import "MusicCommentCell.h"
 #import "MusicExhibitCell.h"
+#import "HotInstitutionsDetailVC.h"
+#import "MusicRelatedArticlesCell.h"
 
 @interface CommunityExhibitionDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -77,6 +79,7 @@
     [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionProductionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionProductionCell"];
     [_detaiView registerNib:[UINib nibWithNibName:@"CommunityExhibitionWorkerCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CommunityExhibitionWorkerCell"];
     [_detaiView registerNib:[UINib nibWithNibName:@"MusicCommentCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicCommentCell"];
+    [_detaiView registerNib:[UINib nibWithNibName:@"MusicRelatedArticlesCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicRelatedArticlesCell"];
     [_detaiView registerClass:[MusicExhibitCell class] forCellReuseIdentifier:@"MusicExhibitCell"];
     _detaiView.delegate = self;
     _detaiView.dataSource = self;
@@ -90,23 +93,47 @@
 }
 // MARK: --UITableViewDelegate--
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-    return [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-150 height:kScreenHeight] + 210;
-    }else if (indexPath.row == 1){
-        return 165;
-    }else if (indexPath.row == 2){
-        return 185;
-    }else if (indexPath.row == 3){
-        return 246;
-    }else if (indexPath.row == 4){
-        return 220;
+    NSArray<NSDictionary *> *tmp = _dataDic[@"articleList"];
+    if (tmp.count > 0) {
+        if (indexPath.row == 0) {
+            return [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-150 height:kScreenHeight] + 210;
+        }else if (indexPath.row == 1){
+            return 165;
+        }else if (indexPath.row == 2){
+            return 185;
+        }else if (indexPath.row == 3){
+            return 246;
+        }else if (indexPath.row == 4){
+            return 180 + (kScreenWidth-30)/690*380;
+        }else if (indexPath.row == 5){
+            return 220;
+        }else{
+            return 510;
+        }
     }else{
-        return 510;
+        if (indexPath.row == 0) {
+            return [TransformChineseToPinying heightWithText:_dataDic[@"showtime"] font:SYFont(12) width:kScreenWidth-150 height:kScreenHeight] + 210;
+        }else if (indexPath.row == 1){
+            return 165;
+        }else if (indexPath.row == 2){
+            return 185;
+        }else if (indexPath.row == 3){
+            return 246;
+        }else if (indexPath.row == 4){
+            return 220;
+        }else{
+            return 510;
+        }
     }
 }
 // MARK :--UITableViewDataSource--
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    NSArray<NSDictionary *> *tmp = _dataDic[@"articleList"];
+    if (tmp.count > 0) {
+        return 7;
+    }else{
+        return 6;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {//:--展览时间地点名称评分--
@@ -174,16 +201,51 @@
             [cell changeScrollViewWithArray:_dataDic[@"artistList"]];
         }
         return cell;
-    }else if (indexPath.row == 4){
-        MusicCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicCommentCell"];
-        return cell;
     }else{
-        MusicExhibitCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicExhibitCell"];
-        cell.dataArr = _dataDic[@"relatedList"];
-        return cell;
+        NSArray<NSDictionary *> *tmp = _dataDic[@"articleList"];
+        if (tmp.count > 0) {
+            if (indexPath.row == 4) {
+                NSDictionary *articleList = [tmp firstObject];
+                MusicRelatedArticlesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicRelatedArticlesCell"];
+                [cell.topImage sd_setImageWithURL:[NSURL URLWithString:articleList[@""]]];
+                cell.titleLab.text = articleList[@"articlename"];
+                cell.detaialLab.text = articleList[@"articlecontent"];
+                return cell;
+            }else if (indexPath.row == 5){
+                MusicCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicCommentCell"];
+                return cell;
+            }else{
+                MusicExhibitCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicExhibitCell"];
+                cell.dataArr = _dataDic[@"relatedList"];
+                return cell;
+            }
+        }else{
+            if (indexPath.row == 4) {
+                MusicCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicCommentCell"];
+                return cell;
+            }else{
+                MusicExhibitCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicExhibitCell"];
+                cell.dataArr = _dataDic[@"relatedList"];
+                return cell;
+            }
+        }
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray<NSDictionary *> *tmp = _dataDic[@"articleList"];
+    if (tmp.count > 0) {
+        if (indexPath.row == 5) {
+            HotInstitutionsDetailVC *vc = [[HotInstitutionsDetailVC alloc]init];
+            vc.userId = _ID;
+            [self pushNoTabBarViewController:vc animated:YES];
+        }
+    }else{
+        if (indexPath.row == 4) {
+            HotInstitutionsDetailVC *vc = [[HotInstitutionsDetailVC alloc]init];
+            vc.userId = _ID;
+            [self pushNoTabBarViewController:vc animated:YES];
+        }
+    }
     
 }
 // MARK: --头视图中加载的滚动视图--
@@ -257,43 +319,6 @@
 // TODO: --还没有处理详情页的相关文章，评论，以及推荐--
 // TODO: --还没有处理详情页的相关文章，评论，以及推荐--
 // TODO: --还没有处理详情页的相关文章，评论，以及推荐--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

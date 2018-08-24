@@ -33,6 +33,7 @@
         titleLab.text = @"参展艺术家(0)";
         [_topScrollView addSubview:titleLab];
     }else{
+        _centerScrollView.contentSize = CGSizeMake(117*arr.count, 140);
         UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 110, 50)];
         titleLab.textColor = Color_999999;
         titleLab.textAlignment = NSTextAlignmentCenter;
@@ -42,22 +43,22 @@
         
         for (int i = 0; i < arr.count ; i++) {
             NSDictionary *dic = arr[i];
-            [self createArtistViewWIth:dic[@"artist"] heardimage:dic[@"artistimg"] frame:CGRectMake(117*i, 0, 110, 155)];
+            [self createArtistViewWIth:dic[@"artist"] heardimage:dic[@"artistimg"] frame:CGRectMake(117*i, 0, 110, 168)];
         }
     }
 }
 
 - (void)createArtistViewWIth:(NSString *)name heardimage:(NSString *)headerimage frame:(CGRect)frame{
-    UIImageView *headView = [[UIImageView alloc]initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)];
+    UIImageView *headView = [[UIImageView alloc]initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - 20)];
     [headView sd_setImageWithURL:[NSURL URLWithString:headerimage]];
-    [self.contentView addSubview:headView];
+    [self.centerScrollView addSubview:headView];
     
     UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(frame.origin.x, frame.size.height - 15, frame.size.width, 15)];
     nameLab.textColor = Color_333333;
     nameLab.textAlignment = NSTextAlignmentCenter;
     nameLab.font = SYFont(12);
     nameLab.text = name;
-    [self.contentView addSubview:nameLab];
+    [self.centerScrollView addSubview:nameLab];
     
 }
 

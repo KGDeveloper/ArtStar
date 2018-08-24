@@ -10,4 +10,6 @@
 
 @interface HotInstitutionsDetailVC : BaseVC
 
+@property (nonatomic,copy) NSString *userId;
+
 @end

@@ -31,12 +31,8 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"RongLogin"]) {
         [self registRongIM];
     }
-
-    sleep(3);
-    
     [self cllLocation];
-
-    
+    sleep(3);
     return YES;
 }
 
