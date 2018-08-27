@@ -38,7 +38,7 @@
 
 - (void)registRongIM{
     
-    [[RCIM sharedRCIM] initWithAppKey:@"c9kqb3rdcmuej"];
+    [[RCIM sharedRCIM] initWithAppKey:@"qd46yzrfqimtf"];
 
     [[RCIM sharedRCIM] connectWithToken:[KGUserInfo shareInterace].userToken success:^(NSString *userId) {
         dispatch_async(dispatch_get_main_queue(), ^{

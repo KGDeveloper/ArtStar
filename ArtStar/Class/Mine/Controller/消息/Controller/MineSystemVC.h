@@ -10,4 +10,6 @@
 
 @interface MineSystemVC : BaseVC
 
+@property (nonatomic,copy) NSArray *dataArr;
+
 @end

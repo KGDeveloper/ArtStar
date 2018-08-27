@@ -15,8 +15,9 @@
 #import "MusicExhibitCell.h"
 #import "HotInstitutionsDetailVC.h"
 #import "MusicRelatedArticlesCell.h"
+#import "ScoreViewController.h"
 
-@interface CommunityExhibitionDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface CommunityExhibitionDetailVC ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,CommunityExhibitionDetailTimeAndAddressCellDelegate>
 
 /**
  详情页面数据加载视图
@@ -173,6 +174,7 @@
         }else{
             cell.priceLab.text = _dataDic[@"showprice"];
         }
+        cell.delegate = self;
         return cell;
     }else if (indexPath.row == 1){//:--展览介绍--
         CommunityExhibitionIntrouceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommunityExhibitionIntrouceCell" forIndexPath:indexPath];
@@ -306,19 +308,20 @@
 // MARK: --3D演示以及AR展示按钮点击事件--
 - (void)actionClick:(UIButton *)sender{
     if ([sender.currentTitle isEqualToString:@"AR展示"]) {
-        
+        [MBProgressHUD bwm_showTitle:@"开发小哥哥在努力..." toView:self.view hideAfter:1];
     }else{
-        
+        [MBProgressHUD bwm_showTitle:@"开发小哥哥在努力..." toView:self.view hideAfter:1];
     }
 }
-// FIXME: --还没有处理详情页的相关文章，评论，以及推荐--
-// FIXME: --还没有处理详情页的相关文章，评论，以及推荐--
-// FIXME: --还没有处理详情页的相关文章，评论，以及推荐--
-// FIXME: --还没有处理详情页的相关文章，评论，以及推荐--
-// TODO: --还没有处理详情页的相关文章，评论，以及推荐--
-// TODO: --还没有处理详情页的相关文章，评论，以及推荐--
-// TODO: --还没有处理详情页的相关文章，评论，以及推荐--
-// TODO: --还没有处理详情页的相关文章，评论，以及推荐--
+// MARK: --CommunityExhibitionDetailTimeAndAddressCellDelegate--
+- (void)buyTicket{
+    [MBProgressHUD bwm_showTitle:@"开发小哥哥在努力..." toView:self.view hideAfter:1];
+}
+- (void)editScore{
+    ScoreViewController *vc = [[ScoreViewController alloc]init];
+    vc.newsID = _ID;
+    [self pushNoTabBarViewController:vc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

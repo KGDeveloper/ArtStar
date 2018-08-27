@@ -58,6 +58,7 @@
         _themeLab.hidden = YES;
     }
     NSArray *imageArr = model[@"images"];
+    _countLab.text = [NSString stringWithFormat:@"1/%li",imageArr.count];
     NSDictionary *imageDic = [imageArr firstObject];
     [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];
     
@@ -184,7 +185,7 @@
     _locationLab.font = FZFont(12);
     _locationLab.text = @"北京";
     _locationLab.textAlignment = NSTextAlignmentLeft;
-    _locationLab.sd_layout.leftSpaceToView(_timeLab, 10).centerYEqualToView(_shareBtu).widthIs(150).heightIs(20);
+    _locationLab.sd_layout.leftSpaceToView(_timeLab, 10).centerYEqualToView(_shareBtu).widthIs(100).heightIs(20);
     
     _line.backgroundColor = Color_fafafa;
     _line.sd_layout.leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0).heightIs(10);
@@ -194,6 +195,7 @@
 - (YYTextView *)changeYYTextView:(YYTextView *)textView text:(NSString *)text alignment:(YYTextVerticalAlignment)alignment{
     textView.font = FZFont(13);
     textView.verticalForm = YES;
+    textView.editable = NO;
     textView.textVerticalAlignment = alignment;
     NSMutableParagraphStyle *paragrapStyle = [[NSMutableParagraphStyle alloc]init];
     paragrapStyle.lineSpacing = 7;

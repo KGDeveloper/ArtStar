@@ -128,6 +128,7 @@
         self.clickSearchTitle(dic[@"searchfor"]);
     }
     self.hidden = YES;
+    [self.searchTF resignFirstResponder];
 }
 
 - (void)setHotArr:(NSArray *)hotArr{
@@ -182,6 +183,7 @@
     if (self.searchResult) {
         self.searchResult(textField.text);
     }
+    [self.searchTF resignFirstResponder];
     return YES;
 }
 

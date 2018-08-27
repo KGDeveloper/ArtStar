@@ -20,6 +20,7 @@
 @property (nonatomic,copy) NSString *currClassStr;//:--当前中间分类--
 @property (nonatomic,strong) NSMutableArray *dataArr;//:--保存数据--
 @property (nonatomic,assign) NSInteger page;//:--页数--
+@property (nonatomic,strong) KGSearchBarAndSearchView *searchView;
 
 @end
 
@@ -113,13 +114,8 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (textField == _searchTF) {
         [_searchTF resignFirstResponder];
-        KGSearchBarAndSearchView *searchView = nil;
         // TODO: --代替textfield的编辑事件，直接弹出搜索页面--
-        if (!searchView) {
-            searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-            [self.navigationController.view addSubview:searchView];
-        }
-        
+        self.searchView.hidden = NO;
     }
 }
 /**
@@ -136,6 +132,46 @@
             for (int i = 0; i < tmpArr.count; i++) {
                 [weakSelf.dataArr addObject:tmpArr[i]];
             }
+            weakSelf.performanceView.dataArr = weakSelf.dataArr.copy;
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
+}
+// MARK: --搜索页面--
+- (KGSearchBarAndSearchView *)searchView{
+    if (!_searchView) {
+        _searchView = [[KGSearchBarAndSearchView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        __weak typeof(self) mySelf = self;
+        // !!!: --搜索新闻--
+        _searchView.searchResult = ^(NSString *result) {
+            [mySelf searchExhibition:result];
+            mySelf.searchView.hidden = YES;
+        };
+        // !!!: --点击搜索历史，直接快速搜索--
+        _searchView.clickSearchTitle = ^(NSString *title) {
+            [mySelf searchExhibition:title];
+            mySelf.searchView.hidden = YES;
+        };
+        [self.navigationController.view addSubview:_searchView];
+    }
+    return _searchView;
+}
+// MARK: --搜索展览--
+- (void)searchExhibition:(NSString *)title{
+    _dataArr = [NSMutableArray array];
+    [MBProgressHUD bwm_showHUDAddedTo:self.view title:@"正在努力加载中..."];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:showSearch parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"typename":_currClassStr,@"page":@(_page),@"rows":@"15"} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmpArr = result[@"data"];
+            // TODO: --在这里不是直接copy而是遍历add的原因是，可能点击上拉加载更多的话数据一直是15条，而且开始的数据就会消失--
+            for (int i = 0; i < tmpArr.count; i++) {
+                [weakSelf.dataArr addObject:tmpArr[i]];
+            }
+            weakSelf.performanceView.dataArr = weakSelf.dataArr.copy;
+        }else{
             weakSelf.performanceView.dataArr = weakSelf.dataArr.copy;
         }
     } fail:^(NSError *error) {

@@ -47,7 +47,7 @@
     _locationLab.textColor = Color_999999;
     _locationLab.text = @"北京";
     _locationLab.font = FZFont(12);
-    _locationLab.sd_layout.leftSpaceToView(_timeLab, 15).topSpaceToView(self, 45).widthIs(100).heightIs(20);
+    _locationLab.sd_layout.leftSpaceToView(_timeLab, 15).topSpaceToView(self, 45).widthIs(150).heightIs(20);
     
     [_commentBtu setImage:Image(@"评论") forState:UIControlStateNormal];
     [_commentBtu addTarget:self action:@selector(commentClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -76,7 +76,6 @@
 - (void)setLocationStr:(NSString *)locationStr{
     _locationStr = locationStr;
     _locationLab.text = locationStr;
-    _locationLab.sd_layout.widthIs([TransformChineseToPinying stringWidthFromString:locationStr font:FZFont(12) width:kScreenWidth]);
 }
 
 - (void)commentClick:(UIButton *)sender{

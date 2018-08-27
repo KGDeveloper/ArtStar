@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -28,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="473" height="720.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="JKO-qi-Nqe">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JKO-qi-Nqe">
                         <rect key="frame" x="15" y="15" width="28" height="28"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="2yK-ae-K9A"/>
@@ -71,7 +70,7 @@
                             <action selector="deleteClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="G1g-e1-YVO"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="Lly-MC-PBy">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lly-MC-PBy">
                         <rect key="frame" x="15" y="59" width="443" height="300.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Lly-MC-PBy" secondAttribute="height" multiplier="690:468" id="Eb2-85-HEf"/>
@@ -167,10 +166,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国.帝都" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgJ-82-Nxg">
-                        <rect key="frame" x="95" y="534.5" width="150" height="20"/>
+                        <rect key="frame" x="95" y="534.5" width="100" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="28w-wO-LdI"/>
-                            <constraint firstAttribute="width" constant="150" id="Hlo-fw-n7c"/>
+                            <constraint firstAttribute="width" constant="100" id="Hlo-fw-n7c"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZYINGXUEJW--GB1-0" family="FZYingXueS-R-GB" pointSize="12"/>
                         <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -270,8 +269,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="2" width="324" height="220"/>
-        <image name="3" width="324" height="220"/>
         <image name="分享" width="15" height="15"/>
         <image name="播放按钮" width="40" height="40"/>
         <image name="点赞" width="14" height="15"/>

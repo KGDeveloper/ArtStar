@@ -56,6 +56,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HotMoviesDetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HotMoviesDetailCommentCell"];
+    if (_dataArr.count > 0) {
+        NSDictionary *dic = _dataArr[indexPath.row];
+        [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
+        cell.nameLab.text = dic[@"username"];
+        cell.commentLab.text = dic[@"pingjia"];
+        cell.timeLab.text = dic[@"pltime"];
+        if (![dic[@"pingfen"] isKindOfClass:[NSNull class]]) {
+            cell.pingfen = [dic[@"pingfen"] integerValue];
+        }
+    }
     return cell;
 }
 // MARK: --请求所有评论--

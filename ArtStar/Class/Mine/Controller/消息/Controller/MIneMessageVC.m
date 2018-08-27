@@ -15,6 +15,7 @@
 @interface MIneMessageVC ()<RCIMReceiveMessageDelegate>
 
 @property (nonatomic,strong) MineMessageHeaderView *headerView;
+@property (nonatomic,strong) NSMutableArray *newsArr;
 
 @end
 
@@ -63,6 +64,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    _newsArr = [NSMutableArray array];
     [self setLeftButton];
     [self setRightButton];
     
@@ -104,6 +106,7 @@
         __weak typeof(self) mySelf = self;
         _headerView.pushSystemViewConreoller = ^{
             MineSystemVC *chatVC = [[MineSystemVC alloc]init];
+            chatVC.dataArr = mySelf.newsArr.copy;
             [mySelf.navigationController pushViewController:chatVC animated:YES];
         };
     }
@@ -120,9 +123,11 @@
     
 }
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource{
+    __weak typeof(self) weakSelf = self;
     [dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         RCConversationModel *model = obj;
-        if ([model.targetId isEqualToString:@"文艺星球官方"]) {
+        if ([model.targetId isEqualToString:@"wyxqAdministrator"]) {
+            [weakSelf.newsArr addObject:model];
             [dataSource removeObject:model];
         }
     }];

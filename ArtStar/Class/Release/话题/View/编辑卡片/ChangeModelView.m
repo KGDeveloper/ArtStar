@@ -105,10 +105,14 @@
 //MARK:--TextFieldDelegate--
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (textField.text.length >= 20) {
-        if ([self.delegate respondsToSelector:@selector(textFieldLenght)]) {
-            [self.delegate textFieldLenght];
+        if (string.length > 0) {
+            if ([self.delegate respondsToSelector:@selector(textFieldLenght)]) {
+                [self.delegate textFieldLenght];
+            }
+            return NO;
+        }else{
+            return YES;
         }
-        return NO;
     }else{
         if ([self.delegate respondsToSelector:@selector(sendStringToView:index:)]) {
             [self.delegate sendStringToView:textField.text index:self.index];

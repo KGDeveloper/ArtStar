@@ -41,6 +41,7 @@
         _themelab.text = [NSString stringWithFormat:@"# %@ #",model[@"topictitle"]];
     }
     NSArray *imageArr = model[@"images"];
+    _countLab.text = [NSString stringWithFormat:@"1/%li",imageArr.count];
     NSDictionary *imageDic = [imageArr lastObject];
     if (imageDic[@"imageURL"]) {
         [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"imageURL"]]];

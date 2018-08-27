@@ -111,7 +111,7 @@ FriendsPlayVideoViewdelegate>
             
         }];
     }else{
-        [KGRequestNetWorking postWothUrl:_url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_rfimd} succ:^(id result) {
+        [KGRequestNetWorking postWothUrl:friendViews parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_rfimd} succ:^(id result) {
             if ([result[@"code"] integerValue] == 200) {
                 NSArray *arr = result[@"data"];
                 mySelf.model = [arr firstObject];

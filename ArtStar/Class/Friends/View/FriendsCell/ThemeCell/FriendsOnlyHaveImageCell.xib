@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,10 +26,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="439" height="391.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="SCQ-SL-1uj">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SCQ-SL-1uj">
                         <rect key="frame" x="15" y="58" width="409" height="228.5"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="69i-Dm-7pQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="69i-Dm-7pQ">
                         <rect key="frame" x="15" y="15" width="28" height="28"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="QQp-VK-FqU"/>
@@ -187,10 +186,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京.望春园" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hs5-5i-QlK">
-                        <rect key="frame" x="75" y="331" width="150" height="15"/>
+                        <rect key="frame" x="75" y="331" width="100" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="0iX-gB-phu"/>
-                            <constraint firstAttribute="width" constant="150" id="KCC-tr-1W3"/>
+                            <constraint firstAttribute="width" constant="100" id="KCC-tr-1W3"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZYINGXUEJW--GB1-0" family="FZYingXueS-R-GB" pointSize="12"/>
                         <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -259,8 +258,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="1" width="324" height="220"/>
-        <image name="5" width="324" height="220"/>
         <image name="share" width="15" height="15"/>
         <image name="播放按钮" width="40" height="40"/>
         <image name="点赞" width="14" height="15"/>

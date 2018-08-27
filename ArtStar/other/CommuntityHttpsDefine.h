@@ -130,6 +130,14 @@
  根据场所ID查出对应的评价信息集合
  */
 #define selectShowPlistjById [serverIP stringByAppendingString:@"community/selectShowPlistjById"]
+/**
+ 用户对展览的评价
+ */
+#define addCommentByUidSid [serverIP stringByAppendingString:@"community/addCommentByUidSid"]
+/**
+ 展览搜索
+ */
+#define showSearch [serverIP stringByAppendingString:@"community/showSearch"]
 
 
 

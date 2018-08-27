@@ -64,6 +64,18 @@
     }
 }
 
+- (IBAction)editScoreAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(editScore)]) {
+        [self.delegate editScore];
+    }
+}
+- (IBAction)buyTicketAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(buyTicket)]) {
+        [self.delegate buyTicket];
+    }
+}
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

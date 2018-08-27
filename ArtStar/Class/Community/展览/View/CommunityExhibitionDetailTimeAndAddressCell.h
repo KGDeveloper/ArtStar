@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CommunityExhibitionDetailTimeAndAddressCellDelegate <NSObject>
+
+- (void)buyTicket;
+- (void)editScore;
+
+@end
+
 @interface CommunityExhibitionDetailTimeAndAddressCell : UITableViewCell
 
 /**
@@ -70,6 +77,7 @@
  预定门票
  */
 @property (weak, nonatomic) IBOutlet UIButton *buyBtu;
+@property (weak ,nonatomic) id<CommunityExhibitionDetailTimeAndAddressCellDelegate>delegate;
 
 /**
  根据评分加载变化星星颜色

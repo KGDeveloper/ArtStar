@@ -502,6 +502,7 @@
 		5A1DF6C22112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C02112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib */; };
 		5A1DF6C62112E80000D1FCDF /* CommunityExhibitionWorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */; };
 		5A1DF6C72112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */; };
+		5A3397C82133E33D006F5844 /* ScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3397C72133E33D006F5844 /* ScoreViewController.m */; };
 		5A45A63B212A6EAF00727446 /* 星球吸引 in Resources */ = {isa = PBXBuildFile; fileRef = 5A45A63A212A6EAF00727446 /* 星球吸引 */; };
 		5A45A63D212AAA0500727446 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 5A45A63C212AAA0400727446 /* index.html */; };
 		5A45A63F212AAB0200727446 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 5A45A63E212AAB0200727446 /* images */; };
@@ -1426,6 +1427,8 @@
 		5A1DF6C32112E80000D1FCDF /* CommunityExhibitionWorkerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionWorkerCell.h; sourceTree = "<group>"; };
 		5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionWorkerCell.m; sourceTree = "<group>"; };
 		5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionWorkerCell.xib; sourceTree = "<group>"; };
+		5A3397C62133E33D006F5844 /* ScoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreViewController.h; sourceTree = "<group>"; };
+		5A3397C72133E33D006F5844 /* ScoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreViewController.m; sourceTree = "<group>"; };
 		5A45A63A212A6EAF00727446 /* 星球吸引 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "星球吸引"; sourceTree = "<group>"; };
 		5A45A63C212AAA0400727446 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		5A45A63E212AAB0200727446 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
@@ -3109,6 +3112,8 @@
 				2834849B20C63E7D00AB6E9A /* CommunityExhibitionVC.m */,
 				5AB355D721105E9C00E10353 /* CommunityExhibitionDetailVC.h */,
 				5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */,
+				5A3397C62133E33D006F5844 /* ScoreViewController.h */,
+				5A3397C72133E33D006F5844 /* ScoreViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4697,6 +4702,7 @@
 				28E33ACD20BC0234009F9382 /* PerFormanceIntorduceCell.m in Sources */,
 				28FDAC2E20C0E75900531597 /* MyselfCenterVideoAndVicesAndBooksCell.m in Sources */,
 				28BF33E820C5492300598919 /* KGSliderView.m in Sources */,
+				5A3397C82133E33D006F5844 /* ScoreViewController.m in Sources */,
 				2823124C20E639520026904E /* FriendsModel.m in Sources */,
 				2875DA5E20D3601A00D6CAFE /* MineBooksFriendsTableViewCell.m in Sources */,
 				28577B6120D0CA770082075D /* MineChooseMyHomeCell.m in Sources */,

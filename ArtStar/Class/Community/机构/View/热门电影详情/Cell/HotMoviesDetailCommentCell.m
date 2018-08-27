@@ -78,6 +78,15 @@
     
 }
 
+- (void)setPingfen:(NSInteger)pingfen{
+    _pingfen = pingfen;
+    for (int i = 0; i < pingfen; i++) {
+        UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(17*i, 1, 12, 12)];
+        image.image = Image(@"star");
+        [_starView addSubview:image];
+    }
+}
+
 - (void)zansClick:(UIButton *)sender{
     
 }

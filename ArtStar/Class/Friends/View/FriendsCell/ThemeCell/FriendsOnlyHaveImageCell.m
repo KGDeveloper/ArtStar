@@ -30,7 +30,9 @@
         [self showGraphic];
         _themeLab.hidden = YES;
     }
-    NSDictionary *imageDic = [model[@"images"] firstObject];
+    NSArray *imageArr = model[@"images"];
+    _countLab.text = [NSString stringWithFormat:@"1/%li",imageArr.count];
+    NSDictionary *imageDic = [imageArr firstObject];
     if ([model[@"type"] integerValue] == 2) {
         _topImage.image = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:[NSURL URLWithString:imageDic[@"imageURL"]]];
     }else{

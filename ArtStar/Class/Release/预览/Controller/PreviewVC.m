@@ -101,7 +101,8 @@
         [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:parameters succ:^(id result) {
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
             if ([result[@"code"] integerValue] == 200) {
-                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:2];
+                sleep(2);
                 [mySelf.navigationController popViewControllerAnimated:YES];
             }else{
                 [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];
@@ -121,7 +122,8 @@
         [KGRequestNetWorking postWothUrl:ReleaseFriendTimelineAddfriendMessage parameters:parameters succ:^(id result) {
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
             if ([result[@"code"] integerValue] == 200) {
-                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
+                [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:2];
+                sleep(2);
                 [mySelf.navigationController popViewControllerAnimated:YES];
             }else{
                 [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布失败" hideAfter:1];

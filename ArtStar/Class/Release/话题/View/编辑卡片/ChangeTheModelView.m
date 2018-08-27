@@ -1037,7 +1037,13 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                     model.isShure = NO;
                 }
             }else if (self.themeType == EditThemeTypeOnlyTitle){
-                model.typeStr = @"0";
+                if (_titleTF.text.length > 0 & _titleTF.text != nil) {
+                    model.title = _titleTF.text;
+                    model.topicType = _themetypeBtu.currentTitle;
+                    model.typeStr = @"1";
+                }else{
+                    model.typeStr = @"0";
+                }
                 model.str1 = self.firstTextField.text;
                 model.str2 = self.sencedTF.text;
                 model.str3 = self.thirdTF.text;
@@ -1045,7 +1051,13 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 model.str5 = self.fifthTF.text;
                 model.isShure = YES;
             }else if (self.themeType == EditThemeTypeOnlyPicture){
-                model.typeStr = @"0";
+                if (_titleTF.text.length > 0 & _titleTF.text != nil) {
+                    model.title = _titleTF.text;
+                    model.topicType = _themetypeBtu.currentTitle;
+                    model.typeStr = @"1";
+                }else{
+                    model.typeStr = @"0";
+                }
                 if (self.imageArr.count > 0) {
                     model.imageURLs = @{@"image":self.imageArr.copy,@"key":@"image"};
                     model.isShure = YES;

@@ -16,5 +16,6 @@
 @property (nonatomic,strong) UILabel *commentLab;
 @property (nonatomic,strong) UILabel *timeLab;
 @property (nonatomic,strong) UIButton *zansBtu;
+@property (nonatomic,assign) NSInteger pingfen;
 
 @end
