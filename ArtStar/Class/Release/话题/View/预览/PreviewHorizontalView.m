@@ -21,7 +21,6 @@
 @property (nonatomic,strong) UIView *textView;
 @property (nonatomic,strong) UIView *lowView;
 @property (nonatomic,strong) UIScrollView *imageBack;
-@property (nonatomic,strong) UILabel *timelab;
 @property (nonatomic,strong) UILabel *locationLab;
 @property (nonatomic,strong) UILabel *themeLab;
 @property (nonatomic,strong) UIView *photoView;
@@ -157,11 +156,6 @@
     //:--加载view--
     _lowView = [[UIView alloc]initWithFrame:frame];
     [self addSubview:_lowView];
-    //:--时间标签--
-    _timelab = [[UILabel alloc]initWithFrame:CGRectMake(0, 25, 0, 0)];
-    _timelab.textColor = Color_999999;
-    _timelab.font = FZFont(12);
-    [_lowView addSubview:_timelab];
     //:--位置标签--
     _locationLab = [[UILabel alloc]initWithFrame:CGRectMake(0,25, 0, 0)];
     _locationLab.textColor = Color_999999;
@@ -173,13 +167,6 @@
     _themeLab.textColor = Color_333333;
     _themeLab.font = FZFont(12);
     [_lowView addSubview:_themeLab];
-}
-//MARK:--给时间label赋值--
-- (void)setTimeStr:(NSString *)timeStr{
-    _timeStr = timeStr;
-    _timeWidth = [TransformChineseToPinying stringWidthFromString:timeStr font:FZFont(12) width:kScreenWidth];
-    _timelab.frame = CGRectMake(0, 25, _timeWidth, 15);
-    _timelab.text = timeStr;
 }
 //MARK:--给位置信息label赋值--
 - (void)setLocationStr:(NSString *)locationStr{

@@ -7,7 +7,7 @@
 //
 
 #import "CommunityVC.h"
-
+#import <JavaScriptCore/JavaScriptCore.h>
 #import "KGMusicVC.h"
 #import "MoviesVC.h"
 #import "CommunityGoodFoodVC.h"
@@ -23,9 +23,16 @@
 #import "CommunityInstitutionsVC.h"
 #import "CommunityThemeVC.h"
 
-@interface CommunityVC ()<UITableViewDelegate,UITableViewDataSource>
+@protocol JSObjcDelegate <JSExport>
+
+- (void)clackBall;
+
+@end
+
+@interface CommunityVC ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 
 @property (nonatomic,copy) NSArray *dataArr;
+@property (nonatomic,strong) JSContext *jsContext;
 
 @end
 
@@ -37,19 +44,20 @@
     self.view.backgroundColor = [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:2/255.0 green:10/255.0 blue:18/255.0 alpha:1];
     
-//    [self createWebView];
-    _dataArr = @[@"音乐",@"书籍",@"交友",@"头条",@"展览",@"戏剧",@"摄影",@"文学",@"机构",@"电影",@"美术",@"设计",@"话题",@"美食"];
-
-    UITableView *listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavButtomHeight - NavTopHeight - 49)];
-    listView.delegate = self;
-    listView.dataSource = self;
-    listView.rowHeight = 50;
-    [self.view addSubview:listView];
+    [self createWebView];
+//    _dataArr = @[@"音乐",@"书籍",@"交友",@"头条",@"展览",@"戏剧",@"摄影",@"文学",@"机构",@"电影",@"美术",@"设计",@"话题",@"美食"];
+//
+//    UITableView *listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavButtomHeight - NavTopHeight - 49)];
+//    listView.delegate = self;
+//    listView.dataSource = self;
+//    listView.rowHeight = 50;
+//    [self.view addSubview:listView];
     
 }
 
 - (void)createWebView{
     UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - NavButtomHeight)];
+    webView.delegate = self;
     webView.dataDetectorTypes = UIDataDetectorTypeAll;
     webView.scrollView.scrollEnabled = NO;
     NSString *mainBoundPath = [[NSBundle mainBundle] bundlePath];
@@ -59,6 +67,20 @@
     NSString *htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
     [webView loadHTMLString:htmlString baseURL:baseUrl];
     [self.view addSubview:webView];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    self.jsContext[@"clicks"] = ^(){
+        NSArray *args = [JSContext currentArguments];
+        for (id obj in args) {
+            NSLog(@"%@",obj);
+        }
+    };
+}
+
+- (void)clackBall{
+    NSLog(@"212");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

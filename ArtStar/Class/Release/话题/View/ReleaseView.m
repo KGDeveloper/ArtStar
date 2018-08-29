@@ -26,6 +26,7 @@
 #import "ThemeVC.h"
 #import "TalentVC.h"
 #import "ReleaseTaskVC.h"
+#import "ChooseModelVC.h"
 
 @interface ReleaseView ()
 //MARK:--顶部布局--
@@ -115,7 +116,10 @@
     //:--创建图文按钮--
     _topicBtu = [[CustomBtu alloc]initWithFrame:CGRectMake(25, ViewHeight(self)- 155 - NavButtomHeight - btuWidth, btuWidth, btuWidth) title:@"图文" image:Image(@"图文")];
     _topicBtu.action = ^(NSString *str) {
-        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:[[ThemeVC alloc]init]] animated:YES completion:nil];
+        ChooseModelVC *vc = [[ChooseModelVC alloc]init];
+        vc.imageArr = @[Image(@"A文字"),Image(@"A图片"),Image(@"C圆形"),Image(@"C右上"),Image(@"C右中"),Image(@"C上左"),Image(@"C上中"),Image(@"C上右"),Image(@"C下左"),Image(@"C下中"),Image(@"C下右")];
+        vc.typeName = @"话题";
+        [[weakSelf pushViewController] presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:YES completion:nil];
     };
     [self addSubview:_topicBtu];
     //:--创建拍摄按钮--

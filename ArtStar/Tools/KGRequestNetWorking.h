@@ -53,6 +53,7 @@
  @return 视频第一帧图片
  */
 - (UIImage *)thumbnailImageForVideo:(NSURL *)video;
++ (UIImage *)fixOrientation:(UIImage *)aImage;
 
 
 @end

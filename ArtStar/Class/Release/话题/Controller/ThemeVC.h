@@ -10,4 +10,6 @@
 
 @interface ThemeVC : BaseVC
 
+@property (nonatomic,assign) NSInteger typeName;
+
 @end

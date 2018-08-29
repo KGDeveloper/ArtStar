@@ -41,9 +41,9 @@
             NSString *str = dataArr[0];
             for (int i = 1; i < dataArr.count; i++) {str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];}
             if (str != nil) {
-                if ([model[@"composing"] integerValue] == 3) {
+                if ([model[@"composing"] integerValue] == 9) {
                     [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentTop];
-                }else if ([model[@"composing"] integerValue] == 4){
+                }else if ([model[@"composing"] integerValue] == 10){
                     [self changeYYTextView:_textView text:str alignment:YYTextVerticalAlignmentCenter];
                 }
             }
@@ -65,7 +65,11 @@
     NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
-    _locationLab.text = model[@"location"];
+    if (![model[@"location"] isKindOfClass:[NSNull class]]) {
+        _locationLab.text = model[@"location"];
+    }else{
+        _locationLab.text = @"";
+    }
     if (model[@"timeDiff "]) {
         _timeLab.text = model[@"timeDiff "];
     }else{
@@ -130,6 +134,8 @@
     _deleteBtu.sd_layout.rightSpaceToView(self.contentView, 15).centerYEqualToView(_headerImage).widthIs(50).heightIs(30);
     
     _topImage.image = Image(@"图片加载失败");
+    _topImage.clipsToBounds = YES;
+    _topImage.contentMode = UIViewContentModeScaleAspectFill;
     _topImage.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(_headerImage, 15).widthIs(kScreenWidth - 165).heightIs((kScreenWidth - 165)/450*690);
     
     _labBack.backgroundColor = [UIColor colorWithHexString:@"#000000"];

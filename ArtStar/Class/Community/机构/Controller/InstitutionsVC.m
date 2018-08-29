@@ -16,6 +16,7 @@
 #import "MusicSimilarToRecommendCell.h"
 #import "HotInstitutionsDetailVC.h"
 #import "KGTicketView.h"
+#import "InstittutionsExbitionTableViewCell.h"
 
 @interface InstitutionsVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -64,6 +65,7 @@
     [_listView registerNib:[UINib nibWithNibName:@"MusicPhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicPhotosCell"];
     [_listView registerNib:[UINib nibWithNibName:@"MusicCommentCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicCommentCell"];
     [_listView registerClass:[MusicSimilarToRecommendCell class] forCellReuseIdentifier:@"MusicSimilarToRecommendCell"];
+    [_listView registerClass:[InstittutionsExbitionTableViewCell class] forCellReuseIdentifier:@"InstittutionsExbitionTableViewCell"];
 }
 
 - (InstitutionsDetailHeaderView *)tabViewHeaderView{
@@ -80,7 +82,7 @@
     if (indexPath.row == 0) {
         return 235;
     }else if(indexPath.row == 1){
-        return 60;
+        return (kScreenWidth - 30)/690*280*3 + 196;
     }else if (indexPath.row == 2){
         return 220;
     }else if (indexPath.row == 3){
@@ -96,7 +98,7 @@
         cell.detailLab.attributedText = [TransformChineseToPinying string:@"迪拜位于阿拉伯半岛中部、阿拉伯湾南岸，是海湾地区中心。与南亚次大陆隔海相望，与卡塔尔为邻、与沙特阿拉伯交界、与阿曼毗连。迪拜常住人口约280万人，本地人口占15%左右，外籍人士来自全球200多个国家和地区。常住迪拜的华人有约34万人，其他外籍人士来自诸如埃及、黎巴嫩、约旦、伊朗、印度、巴基斯坦、菲律宾等" font:SYFont(14) space:10];
         return cell;
     }else if(indexPath.row == 1){
-        MusicAboutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicAboutCell"];
+        InstittutionsExbitionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InstittutionsExbitionTableViewCell"];
         return cell;
     }else if (indexPath.row == 2){
         MusicPhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicPhotosCell"];

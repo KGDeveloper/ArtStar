@@ -11,12 +11,13 @@
 #import "InstittutionsCell.h"
 
 
-@interface MusicInstitutionsView ()<UITableViewDelegate,UITableViewDataSource>
+@interface MusicInstitutionsView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) HotMoviesView *hotView;
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) UIView *headerView;
 @property (nonatomic,assign) BOOL isChoose;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -26,6 +27,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = Color_fafafa;
         _isChoose = NO;
+        _dataArr = [NSMutableArray array];
         [self setView];
     }
     return self;
@@ -36,6 +38,8 @@
     _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(self), ViewHeight(self))];
     _listView.delegate = self;
     _listView.dataSource = self;
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
     _listView.rowHeight = 140;
     _listView.tableFooterView = TabLeViewFootView;
     _listView.tableHeaderView = [self setTbaleViewHeader];
@@ -63,7 +67,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -91,6 +95,36 @@
     }
     
     [_listView reloadData];
+}
+
+- (void)setUrlName:(NSString *)urlName{
+    _urlName = urlName;
+    if ([urlName isEqualToString:@"全部"]) {
+        urlName = @"";
+    }
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:selectPlistByTid parameters:@{@"query":@{@"page":@"1",@"rows":@"15"},@"navigation":@"距离最近",@"userlatitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"],@"userLongitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"typename":urlName,@"city":[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"]} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            if (tmp.count > 0) {
+                [weakSelf.dataArr addObjectsFromArray:tmp];
+            }
+            [weakSelf.listView reloadData];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+}
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"木有内容哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
 }
 
 /*

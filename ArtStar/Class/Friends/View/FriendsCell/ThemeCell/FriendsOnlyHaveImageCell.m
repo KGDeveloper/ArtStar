@@ -42,7 +42,11 @@
     NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
-    _locationLab.text = model[@"location"];
+    if (![model[@"location"] isKindOfClass:[NSNull class]]) {
+        _locationLab.text = model[@"location"];
+    }else{
+        _locationLab.text = @"";
+    }
     if (model[@"timeDiff "]) {
         _timeLab.text = model[@"timeDiff "];
     }else{

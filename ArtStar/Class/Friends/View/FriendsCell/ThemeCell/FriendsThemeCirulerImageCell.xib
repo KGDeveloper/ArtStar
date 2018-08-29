@@ -69,7 +69,7 @@
                             <action selector="deleteClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1AQ-vx-fTb"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S8a-dv-yge">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S8a-dv-yge">
                         <rect key="frame" x="61.5" y="58" width="250" height="250"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="250" id="18h-Td-4W4"/>

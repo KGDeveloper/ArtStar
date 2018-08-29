@@ -17,6 +17,8 @@
 @property (nonatomic,strong) UIView *line;
 @property (nonatomic,assign) CGFloat rowHeight;
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) NSMutableArray *listArr;
+
 
 @end
 
@@ -27,9 +29,12 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"系统通知" image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _listArr = [NSMutableArray arrayWithArray:_dataArr];
     [self setUI];
     _rowHeight = 197;
     [self setTableView];
+    NSArray *tmp = [self returnHistoryMessage];
+    
 }
 
 - (void)setUI{
@@ -111,7 +116,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _listArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -122,6 +127,11 @@
         MessageSystemActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageSystemActivityCell"];
         return cell;
     }
+}
+
+- (NSArray *)returnHistoryMessage{
+    RCConversationModel *model = [_listArr lastObject];
+    return [[RCIMClient sharedRCIMClient] getHistoryMessages:ConversationType_SYSTEM targetId:@"wyxqAdministrator" objectName:nil baseMessageId:model.lastestMessageId isForward:NO count:15];
 }
 
 - (void)didReceiveMemoryWarning {

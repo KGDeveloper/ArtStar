@@ -46,12 +46,12 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtu];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
-//MARK:--右侧按钮点击事件--
+//MARK:--左侧按钮点击事件--
 - (void)leftClick{
     UIApplication *app = [UIApplication sharedApplication];
     app.keyWindow.rootViewController = [[TabBarVC alloc]init];
 }
-//MARK:--左侧按钮点击事件--
+//MARK:--右侧按钮点击事件--
 - (void)rightClick{
     [[RCIMClient sharedRCIMClient] sendMessage:ConversationType_PRIVATE targetId:@"54" content:[RCTextMessage messageWithContent:@"你好啊，赛利亚"] pushContent:nil pushData:nil success:^(long messageId) {
         

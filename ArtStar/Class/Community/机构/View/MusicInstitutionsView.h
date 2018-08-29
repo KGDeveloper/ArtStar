@@ -16,6 +16,7 @@
 
 @interface MusicInstitutionsView : UIView
 
+@property (nonatomic,copy) NSString *urlName;
 @property (nonatomic,copy) NSString *chooseStyle;
 @property (nonatomic,copy) void (^pushViewController)(void);
 @property (nonatomic,weak) id<MusicInstitutionsViewDelegate>delegate;

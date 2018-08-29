@@ -80,7 +80,7 @@
                         <fontDescription key="fontDescription" name="FZYINGXUEJW--GB1-0" family="FZYingXueS-R-GB" pointSize="13"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kxy-xb-sZ8">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kxy-xb-sZ8">
                         <rect key="frame" x="15" y="193" width="392" height="266"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Kxy-xb-sZ8" secondAttribute="height" multiplier="690:468" id="PC6-lo-Kgg"/>

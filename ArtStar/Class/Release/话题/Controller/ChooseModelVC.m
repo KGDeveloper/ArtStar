@@ -21,6 +21,7 @@
 
 #import "ChooseModelVC.h"
 #import "HW3DBannerView.h"
+#import "ThemeVC.h"
 
 @interface ChooseModelVC ()
 /**
@@ -72,11 +73,28 @@
         mySelf.curModelTag = currentIndex;
     };
 }
-- (void)rightNavBtuAction:(UIButton *)sender{
-    if (self.sendModel) {
-        self.sendModel(self.curModelTag);
+- (void)leftNavBtuAction:(UIButton *)sender{
+    if (_typeName) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)rightNavBtuAction:(UIButton *)sender{
+    if (_typeName) {
+        if ([_typeName isEqualToString:@"话题"]) {
+            ThemeVC *vc = [[ThemeVC alloc]init];
+            vc.typeName = _curModelTag;
+            [self pushNoTabBarViewController:vc animated:YES];
+        }else{
+            
+        }
+    }else{
+        if (self.sendModel) {
+            self.sendModel(self.curModelTag);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

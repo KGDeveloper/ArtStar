@@ -77,7 +77,9 @@
                 }
             }
         }else if ([view isEqual:self.centerBtu]){
-            view.frame = CGRectMake(self.frame.size.width/2 - width/2,view.frame.origin.y - 15, width, width*69/62);
+            view.centerX = self.centerX;
+            view.centerY = 20;
+            view.size = CGSizeMake(width, width*69/62);
         }
     }
 }

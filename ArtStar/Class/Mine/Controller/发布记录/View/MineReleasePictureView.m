@@ -72,7 +72,11 @@
         NSArray *timeArr = [timeStr componentsSeparatedByString:@"-"];
         cell.dayLab.text = [NSString stringWithFormat:@"%@",timeArr[2]];
         cell.mouthLab.text = [NSString stringWithFormat:@"%@月",timeArr[1]];
-        cell.locationLab.text = dic[@"location"];
+        if (![dic[@"location"] isKindOfClass:[NSNull class]]) {
+            cell.locationLab.text = dic[@"location"];
+        }else{
+            cell.locationLab.text = @"";
+        }
         NSArray *imageArr = dic[@"imageUrl"];
         [cell.topImage sd_setImageWithURL:[NSURL URLWithString:[imageArr firstObject]] placeholderImage:Image(@"空空如也")];
         cell.countLab.text = [NSString stringWithFormat:@"共%li张",imageArr.count];

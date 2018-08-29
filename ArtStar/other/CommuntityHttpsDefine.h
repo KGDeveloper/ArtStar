@@ -138,8 +138,25 @@
  展览搜索
  */
 #define showSearch [serverIP stringByAppendingString:@"community/showSearch"]
+/**
+ 展览搜索历史
+ */
+#define oldSearchShow [serverIP stringByAppendingString:@"community/oldSearchShow"]
+/**
+ 展览热门词搜索
+ */
+#define hotSearchShow [serverIP stringByAppendingString:@"community/hotSearchShow"]
+/**
+ 展览清空历史搜索
+ */
+#define deleteSearchShow [serverIP stringByAppendingString:@"community/deleteSearchShow"]
+// MARK: --展览接口到这里结束--
 
-
+// MARK: --机构几口从这里开始--
+/**
+ 根据类别查出对应的场所信息集合
+ */
+#define selectPlistByTid [serverIP stringByAppendingString:@"community/selectPlistByTid"]
 
 /**
  根据分类查出对应的集合 交友

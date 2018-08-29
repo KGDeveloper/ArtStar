@@ -12,33 +12,31 @@
 #import "PerformanceDetailVC.h"
 #import "CommunityExhibitionDetailVC.h"
 
-@interface CommunityExhibitionVC ()<UITextFieldDelegate>
+@interface CommunityExhibitionVC ()
 
 @property (nonatomic,strong) MusicPerformanceView *performanceView;//:--演出--
-@property (nonatomic,strong) KGSearchBarTF *searchTF;
 @property (nonatomic,copy) NSString *currtitleStr;//:--当前顶部标题--
 @property (nonatomic,copy) NSString *currClassStr;//:--当前中间分类--
 @property (nonatomic,strong) NSMutableArray *dataArr;//:--保存数据--
 @property (nonatomic,assign) NSInteger page;//:--页数--
 @property (nonatomic,strong) KGSearchBarAndSearchView *searchView;
+@property (nonatomic,copy) NSArray *historyArr;
+@property (nonatomic,copy) NSArray *hotArr;
 
 @end
 
 @implementation CommunityExhibitionVC
 
 - (void)setSearchBar{
-    _searchTF = [[KGSearchBarTF alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth - 75, 30)];
-    _searchTF.placeholder = @"搜索";
-    _searchTF.leftView = [[UIImageView alloc]initWithImage:Image(@"search")];
-    _searchTF.leftViewMode = UITextFieldViewModeAlways;
-    _searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _searchTF.delegate = self;
-    _searchTF.font = SYFont(12);
-    _searchTF.layer.cornerRadius = 5;
-    _searchTF.layer.masksToBounds = YES;
-    _searchTF.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
-    _searchTF.returnKeyType = UIReturnKeySearch;
-    [self setNavTitleView:_searchTF];
+    UIButton *searchBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtu.frame = CGRectMake(0, 0, kScreenWidth - 75, 30);
+    searchBtu.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
+    [searchBtu setImage:Image(@"search") forState:UIControlStateNormal];
+    [searchBtu setTitle:@"搜索" forState:UIControlStateNormal];
+    searchBtu.titleLabel.font = SYFont(12);
+    [searchBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
+    [searchBtu addTarget:self action:@selector(searchAction) forControlEvents:UIControlEventTouchUpInside];
+    [self setNavTitleView:searchBtu];
 }
 
 - (void)rightNavBtuAction:(UIButton *)sender{
@@ -56,6 +54,7 @@
     _page = 1;
     _dataArr = [NSMutableArray array];
     // TODO: --先请求数据，然后加载页面，但是因为网速问题，可能页面加载出来，但是数据还没有显示，所以记得刷新--
+    [self searchHistory];
     [self createHeadLineData];
     [self setSearchBar];
     [self setTopView];
@@ -108,15 +107,12 @@
 }
 /**
  监听导航栏的输入框，替换事件
-
- @param textField 监听导航栏的输入框，替换事件
  */
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == _searchTF) {
-        [_searchTF resignFirstResponder];
-        // TODO: --代替textfield的编辑事件，直接弹出搜索页面--
-        self.searchView.hidden = NO;
-    }
+- (void)searchAction{
+    self.searchView.hidden = NO;
+    self.searchView.historyArr = _historyArr;
+    self.searchView.hotArr = _hotArr;
+    self.searchView.searchUrl = deleteSearchShow;
 }
 /**
  数据请求
@@ -178,7 +174,26 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
 }
-
+// MARK: --展览搜索历史--
+- (void)searchHistory{
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:oldSearchShow parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"query":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            weakSelf.historyArr = result[@"data"];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+    
+    [KGRequestNetWorking postWothUrl:hotSearchShow parameters:@{} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            weakSelf.hotArr = result[@"data"];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

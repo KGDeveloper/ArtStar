@@ -27,17 +27,15 @@
 @implementation HeadLinesVC
 // MARK: --搜索框--
 - (void)setSearchBar{
-    _searchTF = [[KGSearchBarTF alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth - 75, 30)];
-    _searchTF.placeholder = @"搜索";
-    _searchTF.leftView = [[UIImageView alloc]initWithImage:Image(@"search")];
-    _searchTF.leftViewMode = UITextFieldViewModeAlways;
-    _searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _searchTF.delegate = self;
-    _searchTF.font = SYFont(12);
-    _searchTF.layer.cornerRadius = 5;
-    _searchTF.layer.masksToBounds = YES;
-    _searchTF.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
-    [self setNavTitleView:_searchTF];
+    UIButton *searchBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBtu.frame = CGRectMake(0, 0, kScreenWidth - 75, 30);
+    searchBtu.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
+    [searchBtu setImage:Image(@"search") forState:UIControlStateNormal];
+    [searchBtu setTitle:@"搜索" forState:UIControlStateNormal];
+    searchBtu.titleLabel.font = SYFont(12);
+    [searchBtu setTitleColor:Color_999999 forState:UIControlStateNormal];
+    [searchBtu addTarget:self action:@selector(searchAction) forControlEvents:UIControlEventTouchUpInside];
+    [self setNavTitleView:searchBtu];
 }
 // MARK: --导航栏右侧按钮--
 - (void)rightNavBtuAction:(UIButton *)sender{
@@ -166,14 +164,11 @@
     }];
 }
 // MARK: --改变textfield的键盘监听事件，弹出搜索页面--
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == _searchTF) {
-        [_searchTF resignFirstResponder];
-        self.searchView.hidden = NO;
-        self.searchView.searchUrl = deleteSearchNews;
-        self.searchView.hotArr = _hotArr;
-        self.searchView.historyArr = _hoistryArr;
-    }
+- (void)searchAction{
+    self.searchView.hidden = NO;
+    self.searchView.searchUrl = deleteSearchNews;
+    self.searchView.hotArr = _hotArr;
+    self.searchView.historyArr = _hoistryArr;
 }
 // MARK: --搜索页面--
 - (KGSearchBarAndSearchView *)searchView{

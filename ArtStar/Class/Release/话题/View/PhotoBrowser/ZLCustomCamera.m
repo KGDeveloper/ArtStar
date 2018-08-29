@@ -826,7 +826,7 @@
         }
         NSData * imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
         UIImage * image = [UIImage imageWithData:imageData];
-        weakSelf.takedImage = image;
+        weakSelf.takedImage = [KGRequestNetWorking fixOrientation:image];
         weakSelf.takedImageView.hidden = NO;
         weakSelf.takedImageView.image = image;
         [weakSelf.session stopRunning];

@@ -30,6 +30,8 @@
     _textView = [YYTextView new];
     
     [self sd_addSubviews:@[_textView]];
+    _textView.editable = NO;
+    _textView.scrollEnabled = NO;
     _textView.sd_layout.leftSpaceToView(self, 0).rightSpaceToView(self, 0).topSpaceToView(self, 0).bottomSpaceToView(self, 0);
     
 }

@@ -26,6 +26,7 @@ typedef void(^SendModelToRootView)(NSInteger index);
 @interface ChooseModelVC : BaseVC
 
 @property (nonatomic,copy) SendModelToRootView sendModel;
+@property (nonatomic,copy) NSString *typeName;
 
 @property (nonatomic,strong) NSArray *imageArr;
 

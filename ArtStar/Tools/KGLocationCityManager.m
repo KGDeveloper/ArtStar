@@ -78,6 +78,10 @@
             if (self.ToObtainYourLocation) {
                 self.ToObtainYourLocation(city,newLocation.coordinate.latitude,newLocation.coordinate.longitude);
             }
+            [[NSUserDefaults standardUserDefaults] setObject:city forKey:@"yourLocationCity"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:@"YourLocationLatitude"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:@"YourLocationLongitude"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }];
 }

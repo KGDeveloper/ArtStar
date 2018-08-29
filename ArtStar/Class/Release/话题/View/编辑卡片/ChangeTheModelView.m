@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
                 self.backView.frame = CGRectMake(0,NavTopHeight, kScreenWidth, photoViewHeight + textViewHeight + NavTopHeight + 60);
                 self.textView.hidden = NO;
                 self.textView.frame = CGRectMake(ViewWidth(self)/2 - 281/2, 58 + NavTopHeight + photoViewHeight + 20,281, 115);
-                [self setIdeaViewUI:0];
+                [self setIdeaViewUI:1];
                 break;
             case EditTypeVideo:
                 self.clipType = @"横向";
@@ -217,7 +217,6 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     }else{
         _pictureView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ViewWidth(_photoView), ViewHeight(_photoView))];
     }
-    _pictureView.contentMode = UIViewContentModeScaleAspectFit;
     switch (type) {
         case EditTypeVideo:
             _pictureView.image = Image(@"video");
@@ -309,6 +308,8 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         }
         mySelf.imageArr = [NSMutableArray arrayWithArray:images];
         mySelf.pictureView.image = [mySelf.imageArr firstObject];
+        mySelf.pictureView.clipsToBounds = YES;
+        mySelf.pictureView.contentMode = UIViewContentModeScaleAspectFill;
         mySelf.countLab.text = [NSString stringWithFormat:@"1/%lu",images.count];
         mySelf.labMaskView.hidden = YES;
     }];
@@ -333,6 +334,8 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     [[NSUserDefaults standardUserDefaults] synchronize];
     camera.doneBlock = ^(UIImage *image, NSURL *videoUrl) {
         mySelf.pictureView.image = image;
+        mySelf.pictureView.clipsToBounds = YES;
+        mySelf.pictureView.contentMode = UIViewContentModeScaleAspectFill;
         mySelf.videoUrlStr = videoUrl;
         if (image != nil) {
             UIImageWriteToSavedPhotosAlbum(image,mySelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);

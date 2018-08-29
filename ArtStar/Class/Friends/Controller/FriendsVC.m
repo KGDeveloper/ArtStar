@@ -305,7 +305,7 @@ DZNEmptyDataSetSource
     }else{
         if ([dic[@"type"] integerValue] == 0 || [dic[@"type"] integerValue] == 1) {
             FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];
-            if ([dic[@"composing"] integerValue] == 3 || [dic[@"composing"] integerValue] == 4) {
+            if ([dic[@"composing"] integerValue] == 9 || [dic[@"composing"] integerValue] == 10) {
                 vc.type = 0;
             }else{
                 vc.type = 1;

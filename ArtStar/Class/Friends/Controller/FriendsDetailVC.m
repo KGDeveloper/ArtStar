@@ -86,7 +86,6 @@ FriendsPlayVideoViewdelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"动态详情" image:Image(@"back")];
-    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _dataArr = [NSMutableArray array];
@@ -104,6 +103,10 @@ FriendsPlayVideoViewdelegate>
             if ([result[@"code"] integerValue] == 200) {
                 NSArray *arr = result[@"data"];
                 mySelf.model = [arr firstObject];
+                NSDictionary *userDic = mySelf.model[@"user"];
+                if ([userDic[@"id"] integerValue] != [[KGUserInfo shareInterace].userID integerValue]) {
+                    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
+                }
                 mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model[@"rccomment"]];
                 [mySelf changeUI];
             }
@@ -115,6 +118,10 @@ FriendsPlayVideoViewdelegate>
             if ([result[@"code"] integerValue] == 200) {
                 NSArray *arr = result[@"data"];
                 mySelf.model = [arr firstObject];
+                NSDictionary *userDic = mySelf.model[@"user"];
+                if ([userDic[@"id"] integerValue] != [[KGUserInfo shareInterace].userID integerValue]) {
+                    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
+                }
                 mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model[@"rccomment"]];
                 [mySelf changeUI];
             }
@@ -127,24 +134,31 @@ FriendsPlayVideoViewdelegate>
     if (self.type == 1) {//:--横排--
         if (_model[@"composing"]) {
             if ([_model[@"composing"] integerValue] == 0) {
-                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 85 + 58)];
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,125 + 85 + 58)];
                 self.detailScrollView.size = CGSizeMake(kScreenWidth, 0);
             }else if ([_model[@"composing"] integerValue] == 1){
                 [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
                 self.detailScrollView.photosArr = _model[@"images"];
             }else{
-                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 125 + 65 + 58)];
                 self.detailScrollView.photosArr = _model[@"images"];
+                if ([_model[@"composing"] integerValue] < 6) {
+                    self.detailScrollView.frame = CGRectMake(15,58 + 125 + 20, kScreenWidth - 30, (kScreenWidth - 30)/690*468);
+                    self.veritocalView.frame = CGRectMake(15,58, kScreenWidth - 30, 125);
+                }else{
+                    self.detailScrollView.frame = CGRectMake(15,58, kScreenWidth - 30, (kScreenWidth - 30)/690*468);
+                    self.veritocalView.frame = CGRectMake(15,58 + ViewHeight(self.detailScrollView) + 20, kScreenWidth - 30, 125);
+                }
             }
         }else{
             if ([_model[@"makeup"] integerValue] == 0) {
-                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 85 + 58)];
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,125 + 85 + 58)];
                 self.detailScrollView.size = CGSizeMake(kScreenWidth, 0);
             }else if ([_model[@"makeup"] integerValue] == 1){
                 [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
                 self.detailScrollView.photosArr = _model[@"imgList"];
             }else{
-                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+                [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 125 + 65 + 58)];
                 self.detailScrollView.photosArr = _model[@"imgList"];
             }
         }
@@ -164,10 +178,10 @@ FriendsPlayVideoViewdelegate>
     }else if(self.type == 0){//:--竖排--
         [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 165)/450*690 + 65 + 58)];
         
-        self.detailScrollView.frame = CGRectMake(15, 58, kScreenWidth - 30 - 115 - 20, (kScreenWidth - 165)/450*690);
+        self.detailScrollView.frame = CGRectMake(15, 58, kScreenWidth - 30 - 125 - 20, (kScreenWidth - 165)/450*690);
         self.detailScrollView.photosArr = _model[@"images"];
         
-        self.veritocalView.frame = CGRectMake(ViewWidth(self.detailScrollView) + 35,58, 115, (kScreenWidth - 165)/450*690);
+        self.veritocalView.frame = CGRectMake(ViewWidth(self.detailScrollView) + 35,58, 125, (kScreenWidth - 165)/450*690);
         self.veritocalView.isVertical = YES;
         self.veritocalView.yyAlignment = YYTextVerticalAlignmentCenter;
         NSData *strData = [_model[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
@@ -179,11 +193,11 @@ FriendsPlayVideoViewdelegate>
         self.veritocalView.textStr = str;
     }else{
         if ([_model[@"composing"] integerValue] == 0) {
-            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,115 + 65 + 58)];
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,125 + 65 + 58)];
         }else if ([_model[@"composing"] integerValue] == 1){
             [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 65 + 58)];
         }else{
-            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 115 + 65 + 58)];
+            [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 125 + 65 + 58)];
         }
         NSDictionary *dic = [_model[@"images"] firstObject];
         self.videoView.videoIamge = [[KGRequestNetWorking shareIntance] thumbnailImageForVideo:[NSURL URLWithString:dic[@"imageURL"]]];
@@ -204,7 +218,11 @@ FriendsPlayVideoViewdelegate>
         self.timeView.timeStr = [[_model[@"topictime"] componentsSeparatedByString:@" "] firstObject];
     }
     if (_model[@"location"]) {
-        self.timeView.locationStr = _model[@"location"];
+        if (![_model[@"location"] isKindOfClass:[NSNull class]]) {
+            self.timeView.locationStr = _model[@"location"];
+        }else{
+            self.timeView.locationStr = @"";
+        }
     }else{
         self.timeView.locationStr = _model[@"address"];
     }

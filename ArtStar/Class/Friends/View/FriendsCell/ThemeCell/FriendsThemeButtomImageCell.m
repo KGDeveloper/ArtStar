@@ -25,11 +25,11 @@
         if (!error) {
             NSString *str = dataArr[0];
             for (int i = 1; i < dataArr.count; i++) {str = [NSString stringWithFormat:@"%@\n%@",str,dataArr[i]];}
-            if ([model[@"composing"] integerValue] == 5) {
+            if ([model[@"composing"] integerValue] == 3) {
                 [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentLeft];
-            }else if ([model[@"composing"] integerValue] == 6){
+            }else if ([model[@"composing"] integerValue] == 4){
                 [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentCenter];
-            }else if ([model[@"composing"] integerValue] == 7){
+            }else if ([model[@"composing"] integerValue] == 5){
                 [ChangeTextViewTextStyle changeTextView:_textView text:str alignment:NSTextAlignmentRight];
             }
         }
@@ -57,7 +57,11 @@
     NSDictionary *dic = model[@"user"];
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikNameLab.text = dic[@"username"];
-    _locationLab.text = model[@"location"];
+    if (![model[@"location"] isKindOfClass:[NSNull class]]) {
+        _locationLab.text = model[@"location"];
+    }else{
+        _locationLab.text = @"";
+    }
     if (model[@"timeDiff "]) {
         _timeLab.text = model[@"timeDiff "];
     }else{
