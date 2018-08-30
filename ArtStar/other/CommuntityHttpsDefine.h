@@ -199,7 +199,15 @@
 
 
 
-
+// MARK: --广告接口--
+/**
+ 根据类别名称查询不同的广告集合
+ */
+#define seleteMerchantsListByAid [serverIP stringByAppendingString:@"communityAdvertising/seleteMerchantsListByAid"]
+/**
+ 根据广告ID查看场所机构集合
+ */
+#define selectAdvertisingListByAdvertisingPosition [serverIP stringByAppendingString:@"communityAdvertising/selectAdvertisingListByAdvertisingPosition"]
 
 
 #endif /* CommuntityHttpsDefine_h */

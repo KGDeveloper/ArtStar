@@ -36,9 +36,20 @@
     PreviewVC *vc = [[PreviewVC alloc]init];
     vc.model = _modelView.model;
     if (_modelView.model.isShure == YES) {
-        vc.type = EditTypeTheme;
-        vc.themeType = _modelView.themeType;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (_modelView.model.title != nil) {
+            if (![_modelView.model.topicType isEqualToString:@"请选择话题类型"]) {
+                vc.type = EditTypeTheme;
+                vc.themeType = _modelView.themeType;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                [MBProgressHUD bwm_showTitle:@"请选择话题类型" toView:self.view hideAfter:1];
+            }
+        }else{
+            vc.type = EditTypeTheme;
+            vc.themeType = _modelView.themeType;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
     }else{
         [MBProgressHUD bwm_showTitle:@"请填写完成信息" toView:self.view hideAfter:1];
     }

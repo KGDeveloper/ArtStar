@@ -38,28 +38,24 @@
 
 @implementation CommunityVC
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self setNavBackGroundClearColor];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor blackColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:2/255.0 green:10/255.0 blue:18/255.0 alpha:1];
-    
     [self createWebView];
-//    _dataArr = @[@"音乐",@"书籍",@"交友",@"头条",@"展览",@"戏剧",@"摄影",@"文学",@"机构",@"电影",@"美术",@"设计",@"话题",@"美食"];
-//
-//    UITableView *listView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavButtomHeight - NavTopHeight - 49)];
-//    listView.delegate = self;
-//    listView.dataSource = self;
-//    listView.rowHeight = 50;
-//    [self.view addSubview:listView];
-    
 }
 
 - (void)createWebView{
-    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - NavButtomHeight)];
+    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, -NavTopHeight, kScreenWidth, kScreenHeight - NavButtomHeight + NavTopHeight)];
     webView.delegate = self;
     webView.dataDetectorTypes = UIDataDetectorTypeAll;
     webView.scrollView.scrollEnabled = NO;
+    [webView sizeToFit];
     NSString *mainBoundPath = [[NSBundle mainBundle] bundlePath];
     NSString *basePath = [NSString stringWithFormat:@"%@",mainBoundPath];
     NSURL *baseUrl = [NSURL fileURLWithPath:basePath isDirectory:YES];
@@ -71,33 +67,16 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    __weak typeof(self) weakSelf = self;
     self.jsContext[@"clicks"] = ^(){
         NSArray *args = [JSContext currentArguments];
-        for (id obj in args) {
-            NSLog(@"%@",obj);
-        }
+        [args enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf pushNoTabBarViewController:[weakSelf pushController:[NSString stringWithFormat:@"%@",[args firstObject]]] animated:YES];
+            });
+            *stop = YES;
+        }];
     };
-}
-
-- (void)clackBall{
-    NSLog(@"212");
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _dataArr.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:0 reuseIdentifier:@"Cell"];
-    }
-    cell.textLabel.text = _dataArr[indexPath.row];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self pushNoTabBarViewController:[self pushController:_dataArr[indexPath.row]] animated:YES];
 }
 
 - (BaseVC *)pushController:(NSString *)name{

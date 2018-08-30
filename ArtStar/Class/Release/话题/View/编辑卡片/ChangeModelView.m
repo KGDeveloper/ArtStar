@@ -106,9 +106,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (textField.text.length >= 20) {
         if (string.length > 0) {
-            if ([self.delegate respondsToSelector:@selector(textFieldLenght)]) {
-                [self.delegate textFieldLenght];
-            }
+            [MBProgressHUD bwm_showTitle:@"最大字数不能超过20" toView:self hideAfter:1];
             return NO;
         }else{
             return YES;

@@ -168,35 +168,35 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         _firstTextField.font = FZFont(12);
         _firstTextField.placeholder = @"记录您的奇思妙想 ...";
         _firstTextField.textAlignment = NSTextAlignmentCenter;
-//        _firstTextField.enabled = NO;
+        _firstTextField.enabled = NO;
         [_textView addSubview:_firstTextField];
         //:--第二行--
         _sencedTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 23, 281, 22)];
         _sencedTF.delegate = self;
         _sencedTF.font = FZFont(12);
         _sencedTF.textAlignment = NSTextAlignmentCenter;
-//        _sencedTF.enabled = NO;
+        _sencedTF.enabled = NO;
         [_textView addSubview:_sencedTF];
         //:--第三行--
         _thirdTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 46, 281, 22)];
         _thirdTF.delegate = self;
         _thirdTF.font = FZFont(12);
         _thirdTF.textAlignment = NSTextAlignmentCenter;
-//        _thirdTF.enabled = NO;
+        _thirdTF.enabled = NO;
         [_textView addSubview:_thirdTF];
         //:--第四行--
         _fouceTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 69, 281, 22)];
         _fouceTF.delegate = self;
         _fouceTF.font = FZFont(12);
         _fouceTF.textAlignment = NSTextAlignmentCenter;
-//        _fouceTF.enabled = NO;
+        _fouceTF.enabled = NO;
         [_textView addSubview:_fouceTF];
         //:--第五行--
         _fifthTF = [[UITextField alloc]initWithFrame:CGRectMake(0, 92, 281 , 22)];
         _fifthTF.delegate = self;
         _fifthTF.font = FZFont(12);
         _fifthTF.textAlignment = NSTextAlignmentCenter;
-//        _fifthTF.enabled = NO;
+        _fifthTF.enabled = NO;
         [_textView addSubview:_fifthTF];
         
         for (int i = 0; i < 5; i++) {
@@ -206,6 +206,12 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         }
     }
     return _textView;
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (textField == _titleTF) {
+        return YES;
+    }
+    return NO;
 }
 //MARK:--搭建选择图片模块--
 - (void)setUpPicture:(EditType)type{
@@ -443,31 +449,31 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
         
         _oneTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 22, 0, 22, ViewHeight(_vertivalView))];
         _oneTF.font = FZFont(12);
-//        _oneTF.editable = NO;
+        _oneTF.editable = NO;
         _oneTF.delegate = self;
         [_vertivalView addSubview:_oneTF];
         
         _twoTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 45, 0, 22, ViewHeight(_vertivalView))];
         _twoTF.font = FZFont(12);
-//        _twoTF.editable = NO;
+        _twoTF.editable = NO;
         _twoTF.delegate = self;
         [_vertivalView addSubview:_twoTF];
         
         _threeTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 68, 0, 22, ViewHeight(_vertivalView))];
         _threeTF.font = FZFont(12);
-//        _threeTF.editable = NO;
+        _threeTF.editable = NO;
         _threeTF.delegate = self;
         [_vertivalView addSubview:_threeTF];
         
         _fourTF = [[UITextView alloc]initWithFrame:CGRectMake(ViewWidth(_vertivalView) - 91, 0, 22, ViewHeight(_vertivalView))];
         _fourTF.font = FZFont(12);
-//        _fourTF.editable = NO;
+        _fourTF.editable = NO;
         _fourTF.delegate = self;
         [_vertivalView addSubview:_fourTF];
         
         _fiveTF = [[UITextView alloc]initWithFrame:CGRectMake(20, 0, 22, ViewHeight(_vertivalView))];
         _fiveTF.font = FZFont(12);
-//        _fiveTF.editable = NO;
+        _fiveTF.editable = NO;
         _fiveTF.delegate = self;
         [_vertivalView addSubview:_fiveTF];
         

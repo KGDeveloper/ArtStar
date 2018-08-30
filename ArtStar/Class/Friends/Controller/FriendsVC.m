@@ -184,11 +184,11 @@ DZNEmptyDataSetSource
     }else if ([dic[@"composing"] integerValue] == 1){
         return OnlyHaveImageHeight + 40;
     }else if ([dic[@"composing"] integerValue] == 2){
-        return curileImageHeight + 40;
+        return TopAndBottomHeight + 40;
     }else if ([dic[@"composing"] integerValue] == 3){
-        return LeftAndRightHeight + 40;
+        return TopAndBottomHeight + 40;
     }else if ([dic[@"composing"] integerValue] == 4){
-        return LeftAndRightHeight + 40;
+        return TopAndBottomHeight + 40;
     }else if ([dic[@"composing"] integerValue] == 5){
         return TopAndBottomHeight + 40;
     }else if ([dic[@"composing"] integerValue] == 6){
@@ -198,9 +198,9 @@ DZNEmptyDataSetSource
     }else if ([dic[@"composing"] integerValue] == 8){
         return TopAndBottomHeight + 40;
     }else if ([dic[@"composing"] integerValue] == 9){
-        return TopAndBottomHeight + 40;
+        return LeftAndRightHeight + 40;
     }else if ([dic[@"composing"] integerValue] == 10){
-        return TopAndBottomHeight + 40;
+        return LeftAndRightHeight + 40;
     }else{
         return talentHeight;
     }

@@ -146,7 +146,8 @@
     _imageBackView.contentSize = CGSizeMake(ViewWidth(_imageBackView)*imageArr.count, ViewHeight(_imageBackView));
     for (int i = 0; i < imageArr.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(_imageBackView)*i, 0,ViewWidth(_imageBackView), ViewWidth(_imageBackView))];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.clipsToBounds = YES;
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.image = imageArr[i];
         [_imageBackView addSubview:imageView];
     }

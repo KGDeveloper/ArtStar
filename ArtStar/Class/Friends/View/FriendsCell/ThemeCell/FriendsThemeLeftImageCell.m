@@ -149,7 +149,8 @@
     _countLab.sd_layout.rightEqualToView(_topImage).bottomEqualToView(_topImage).widthIs(27).heightIs(14);
 
     _textView.textColor = Color_333333;
-
+    _textView.editable = NO;
+    _textView.scrollEnabled = NO;
     [self changeYYTextView:_textView text:@"君不见，黄河之水天上来，奔流到海不复回\n君不见，高堂明镜悲白发，朝成青丝暮成雪\n人生得意须尽欢，莫使金樽空对月\n天生我材必有用，千金散尽还复来\n烹羊宰牛且为乐，会须一饮三百杯" alignment:YYTextVerticalAlignmentCenter];
     _textView.sd_layout.topEqualToView(_topImage).rightSpaceToView(self.contentView, 15).widthIs(115).heightIs((kScreenWidth - 165)/450*690);
 
@@ -204,7 +205,7 @@
     textView.editable = NO;
     textView.textVerticalAlignment = alignment;
     NSMutableParagraphStyle *paragrapStyle = [[NSMutableParagraphStyle alloc]init];
-    paragrapStyle.lineSpacing = 7;
+    paragrapStyle.lineSpacing = 5;
     NSDictionary *attributes = @{NSFontAttributeName:FZFont(13),NSParagraphStyleAttributeName:paragrapStyle};
     textView.attributedText = [[NSAttributedString alloc]initWithString:text attributes:attributes];
     return textView;

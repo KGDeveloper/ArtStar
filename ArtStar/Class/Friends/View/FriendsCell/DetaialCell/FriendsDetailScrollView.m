@@ -63,14 +63,33 @@
     number = photosArr.count;
     _scrollView.contentSize = CGSizeMake(self.frame.size.width * photosArr.count, _scrollView.frame.size.height);
     for (int i = 0; i < photosArr.count; i++) {
-        NSDictionary *dic = photosArr[i];
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
-        if (dic[@"imageURL"]) {
-            [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageURL"]]];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ClipImage"]) {
+            NSDictionary *dic = photosArr[i];
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width/2 - self.frame.size.height/2 + self.frame.size.width*i, 0, self.frame.size.height, self.frame.size.height)];
+            imageView.clipsToBounds = YES;
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            if (dic[@"imageURL"]) {
+                [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageURL"]]];
+            }else{
+                [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"locationimg"]]];
+            }
+            imageView.layer.cornerRadius = self.frame.size.height/2;
+            imageView.layer.masksToBounds = YES;
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ClipImage"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [_scrollView addSubview:imageView];
         }else{
-            [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"locationimg"]]];
+            NSDictionary *dic = photosArr[i];
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
+            imageView.clipsToBounds = YES;
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            if (dic[@"imageURL"]) {
+                [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageURL"]]];
+            }else{
+                [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"locationimg"]]];
+            }
+            [_scrollView addSubview:imageView];
         }
-        [_scrollView addSubview:imageView];
     }
 }
 

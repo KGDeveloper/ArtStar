@@ -11,5 +11,6 @@
 @interface FriendsDetailScrollView : UIView
 
 @property (nonatomic,copy) NSArray *photosArr;
+@property (nonatomic,assign) NSInteger typeClip;
 
 @end

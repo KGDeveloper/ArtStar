@@ -143,8 +143,15 @@ FriendsPlayVideoViewdelegate>
                 [self settableViewFrame:CGRectMake(0, 0, kScreenWidth,(kScreenWidth - 30)/690*468 + 20 + 125 + 65 + 58)];
                 self.detailScrollView.photosArr = _model[@"images"];
                 if ([_model[@"composing"] integerValue] < 6) {
-                    self.detailScrollView.frame = CGRectMake(15,58 + 125 + 20, kScreenWidth - 30, (kScreenWidth - 30)/690*468);
-                    self.veritocalView.frame = CGRectMake(15,58, kScreenWidth - 30, 125);
+                    if ([_model[@"composing"] integerValue] == 2) {
+                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"ClipImage"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        self.detailScrollView.frame = CGRectMake(15,58, kScreenWidth - 30, (kScreenWidth - 30)/690*468);
+                        self.veritocalView.frame = CGRectMake(15,58 + ViewHeight(self.detailScrollView) + 20, kScreenWidth - 30, 125);
+                    }else{
+                        self.detailScrollView.frame = CGRectMake(15,58 + 125 + 20, kScreenWidth - 30, (kScreenWidth - 30)/690*468);
+                        self.veritocalView.frame = CGRectMake(15,58, kScreenWidth - 30, 125);
+                    }
                 }else{
                     self.detailScrollView.frame = CGRectMake(15,58, kScreenWidth - 30, (kScreenWidth - 30)/690*468);
                     self.veritocalView.frame = CGRectMake(15,58 + ViewHeight(self.detailScrollView) + 20, kScreenWidth - 30, 125);
