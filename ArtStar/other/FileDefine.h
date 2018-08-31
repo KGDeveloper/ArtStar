@@ -217,6 +217,10 @@
  @return 根据Id 查看任务的详情
  */
 #define checkOneUserTask [serverIP stringByAppendingString:@"task/checkOneUserTask"]
+/**
+ 删除评论
+ */
+#define deleteCommentById [serverIP stringByAppendingString:@"friendComment/deleteCommentById"]
 
 
 #endif /* FileDefine_h */

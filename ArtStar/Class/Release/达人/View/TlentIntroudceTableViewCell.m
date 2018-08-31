@@ -13,11 +13,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _introudceTV.delegate = self;
-    if (_introudceTV.text.length > 0) {
-        _plholderLab.hidden = YES;
-    }else{
-        _plholderLab.hidden = NO;
-    }
     // Initialization code
 }
 

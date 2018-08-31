@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title>Document</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			height: 100%;
+		}
+		body {
+			height: 100%;
+			background: url(images/2018812.png) no-repeat center center / 100% 100%;
+		}
+		.main {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			transform-style: preserve-3d;
+			-webkit-transform-style: preserve-3d;
+			-webkit-perspective: 800px;
+			perspective:800px;
+			transform: rotateX(10deg)translateZ(20px);
+			-webkit-transform: rotateX(10deg) translateZ(20px);
+			height: 300px;
+			perspective-origin:center;
+			-webkit-perspective-origin:center;
+		}
+		.ball-wrapper {
+			position: absolute;
+			transition: all 1s linear;
+			-webkit-transition: all 1s linear;
+			text-align: center;
+		}
+		.ball-wrapper.stop {
+			transition: none;
+			-webkit-transition: none;
+		}
+		.ball-item {
+			width: 100%;
+			padding-top: 100%;
+			background: url(images/20180802170005.png) no-repeat center center / 100% 100%;
+
+		}
+		.ball-wrapper .text {
+			width: 5px;
+			margin: 0 auto;
+			margin-top: 15px;
+			font-size: 13px;
+			transform: rotateY(50deg);
+		}
+		.ball-wrapper:nth-child(15) {
+			top:117px;
+			left: -35px;
+			width: 22px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.3)
+		}
+		.ball-wrapper:nth-child(2) {
+			top: 176px;
+			left: 0;
+			width: 90px;
+			font-size: 10px;
+			color: #fff;
+		}
+		.ball-wrapper:nth-child(3) {
+			top: 169px;
+			left: 96px;
+			width: 75px;
+			font-size: 10px;
+			color: #fff;
+		}
+		.ball-wrapper:nth-child(4) {
+			top: 163px;
+			left: 175px;
+			width: 64px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.8);
+		}
+		.ball-wrapper:nth-child(5) {
+			top: 145px;
+			left: 225px;
+			width: 50px;
+			font-size: 10px;
+			color: #fff;
+		}
+		.ball-wrapper:nth-child(6) {
+			top: 130px;
+			left: 233px;
+			width: 35px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.6);
+		}
+		.ball-wrapper:nth-child(7) {
+			top:122px;
+			left: 204px;
+			width: 26px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.5);
+		}
+		.ball-wrapper:nth-child(8) {
+			top: 120px;
+			left: 176px;
+			width: 22px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.3);
+		}
+		.ball-wrapper:nth-child(9) {
+			top: 118px;
+			left: 145px;
+			width: 22px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.3)
+		}
+		.ball-wrapper:nth-child(10) {
+			top:116px;
+			left: 113px;
+			width: 22px;
+			font-size: 10px;;
+			color: rgba(255,255,255,0.3)
+		}
+		.ball-wrapper:nth-child(11) {
+			top:116px;
+			left: 85px;
+			width: 22px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.3)
+		}
+		.ball-wrapper:nth-child(12) {
+			top: 116px;
+			left: 55px;
+			width: 22px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.3)
+		}
+		.ball-wrapper:nth-child(13) {
+			top:116px;
+			left: 26px;
+			width: 22px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.3)
+		}
+		.ball-wrapper:nth-child(14) {
+			top:116px;
+			left: 0px;
+			width: 22px;
+			font-size: 10px;
+			color: rgba(255,255,255,0.3)
+		}
+
+		.ball-wrapper:nth-child(1) {
+			top: 177px;
+			left: -120px;
+			width: 90px;
+			font-size: 10px;
+		}
+		.ball-wrapper:nth-child(5) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(6) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(7) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(8) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(9) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(10) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(11) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(12) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+		.ball-wrapper:nth-child(13) p{
+			 transform: scale(0.4);
+			 -webkit-transform: scale(0.4);
+		 }
+		.ball-wrapper:nth-child(14) p{
+			transform: scale(0.4);
+			-webkit-transform: scale(0.4);
+		}
+        .pause{
+			width: 100px;
+			height: 30px;
+			background: rgb(24,21,55);
+			color: #fff;
+			line-height: 30px;
+			text-align: center;
+			font-size: 12px;
+			position: absolute;
+			bottom: 120px;
+			left: 50%;
+			border-radius: 8px;
+			transform: translateX(-50%);
+		}
+
+	</style>
+</head>     
+<body>
+	<div class="main">
+		<div class="ball-wrapper">
+			<div class="ball-item 14" id="美术" onclick="clicks(this.id)"></div>
+			<p class="text">美术 </p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 1" id="设计" onclick="clicks(this.id)"></div>
+			<p class="text">设计</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 2" id="戏剧" onclick="clicks(this.id)"></div>
+			<p class="text">戏剧</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 3" id="摄影" onclick="clicks(this.id)"></div>
+			<p class="text">摄影</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 4" id="电影" onclick="clicks(this.id)"></div>
+			<p class="text">电影 </p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 5" id="音乐" onclick="clicks(this.id)"></div>
+			<p class="text">音乐</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 6" id="书籍" onclick="clicks(this.id)"></div>
+			<p class="text">书籍</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 7" id="美食" onclick="clicks(this.id)"></div>
+			<p class="text">美食</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 8" id="文学" onclick="clicks(this.id)"></div>
+			<p class="text">文学</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 9" id="头条" onclick="clicks(this.id)"></div>
+			<p class="text">头条</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 10" id="展览" onclick="clicks(this.id)"></div>
+			<p class="text">展览</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 11" id="机构" onclick="clicks(this.id)"></div>
+			<p class="text">机构</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 12" id="话题" onclick="clicks(this.id)"></div>
+			<p class="text">话题</p>
+		</div>
+		<div class="ball-wrapper">
+			<div class="ball-item 13" id="交友" onclick="clicks(this.id)"></div>
+			<p class="text">交友</p>
+		</div>
+		<div class="ball-wrapper" >
+			<div class="ball-item 14" id="其他" onclick="clicks(this.id)"></div>
+			<p class="text">其他 </p>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var main = document.querySelector('.main');
+		var ball_items = document.querySelectorAll('.ball-wrapper');
+		var balls = document.querySelectorAll('.ball-item');
+		var pauseBtn = document.querySelector('.pause');
+		var move_direction = 'left'; // 默认向左
+		var continue_falg = true; // 是否继续执行回调方法的标志
+		var position_arr = [];
+		var pause = false;
+		for (var i = 0, len = ball_items.length; i < len; i++) {
+			var item = ball_items[i];
+            var text = item.querySelector('.text');
+            var propertyObj = window.getComputedStyle(item, null);
+            var textProperty = window.getComputedStyle(text, null);
+			item.style.zIndex = len - i;
+			position_arr.push({
+				top: propertyObj.top,
+				left: propertyObj.left,
+				width: propertyObj.width,
+				height: propertyObj.height,
+				zIndex: propertyObj.zIndex,
+				fontSize: propertyObj.fontSize,
+				color: propertyObj.color,
+                transform: textProperty.transform || textProperty.webkitTransform,
+			});
+
+			// 背景随机旋转角度
+			var random_deg = parseInt(Math.random() * 360);
+			balls[i].style.transform = 'rotate('+ random_deg +'deg)';
+			balls[i].style.webkitTransform = 'rotate('+ random_deg +'deg)';
+		}
+
+		// 开始运动
+		// 下一个
+		function nextArr () {
+			position_arr.unshift(position_arr.pop());
+            handleStyle();
+		}
+		// 上一个
+		function prevArr () {
+			position_arr.push(position_arr.shift());
+            handleStyle();
+		}
+
+		// 处理样式
+		function handleStyle(){
+            for (var i = 0; i < position_arr.length; i++) {
+                var item = ball_items[i];
+                var text = item.querySelector('.text');
+                var eh = ball_items[i].offsetHeight;
+                item.style.top = position_arr[i].top;
+                item.style.left = position_arr[i].left;
+                item.style.width = position_arr[i].width;
+                item.style.height = position_arr[i].height;
+                item.style.zIndex = position_arr[i].zIndex;
+                item.style.fontSize = position_arr[i].fontSize;
+                item.style.color = position_arr[i].color;
+                text.style.transform = position_arr[i].transform;
+                text.style.webkitTransform = position_arr[i].transform;
+            }
+		}
+		 nextArr();
+
+		ball_items[0].addEventListener('transitionEnd', transitionEndHandle);
+		ball_items[0].addEventListener('webkitTransitionEnd', transitionEndHandle);
+		function transitionEndHandle (e) {
+			if (continue_falg) {
+				continue_falg = false;
+
+				if (pause) return false;
+
+
+				// 不是手指混动直接进行下一轮
+				if (move_direction === 'left') {
+					nextArr();
+				} else {
+					prevArr();
+				}
+			}
+
+			setTimeout(function () {
+				continue_falg = true;
+			}, 0);
+		}
+
+		var startX, endY, moveing_flag = false, distance = 50, timer;
+
+		// 手指触摸屏幕
+		main.addEventListener('touchstart', function (e) {
+			startX = e.targetTouches[0].clientX;
+		});
+
+		main.addEventListener('touchmove', function (e) {
+			e.preventDefault();
+		});
+
+		// 手指离开屏幕
+		main.addEventListener('touchend', function (e) {
+			endX = e.changedTouches[0].clientX;
+
+			if (endX - startX <= -distance) { // 从右向左 next
+				move_direction = 'left';
+				// nextArr();
+			} else if (endX - startX >= distance) { // 从左向右 prev
+				move_direction = 'right';
+				// prevArr();
+			}
+		});
+        /*
+        pauseBtn.addEventListener('click',function () {
+            if(pause){
+                this.innerHTML = '暂停';
+                pause = false;
+                
+                if (move_direction === 'left') {
+					nextArr();
+				} else {
+					prevArr();
+				}
+			}else{
+                this.innerHTML = '开始';
+				pause = true;
+			}
+
+        },false)
+        */
+    //在282行删除一行代码 <div class="pause">暂停</div>
+        function clicks(values){
+        	alert(values);
+        	//document.location = "clickBall://values:values";
+        	location.href="/clickBall?values="+values;
+        	
+		}
+	</script>
+</body>
+</html>

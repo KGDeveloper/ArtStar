@@ -90,13 +90,13 @@ FriendsPlayVideoViewdelegate>
     
     _dataArr = [NSMutableArray array];
     
-    [self createDate];
+    [self createDate:0];
 }
 
 /**
  数据拉取
  */
-- (void)createDate{
+- (void)createDate:(NSInteger)type{
     __weak typeof(self) mySelf = self;
     if ([_url isEqualToString:selectTopicByUid]) {
         [KGRequestNetWorking postWothUrl:_url parameters:@{@"uid":[KGUserInfo shareInterace].userID,@"tid":_rfimd} succ:^(id result) {
@@ -108,7 +108,9 @@ FriendsPlayVideoViewdelegate>
                     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
                 }
                 mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model[@"rccomment"]];
-                [mySelf changeUI];
+                if (type == 0) {
+                    [mySelf changeUI];
+                }
             }
         } fail:^(NSError *error) {
             
@@ -123,7 +125,9 @@ FriendsPlayVideoViewdelegate>
                     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
                 }
                 mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model[@"rccomment"]];
-                [mySelf changeUI];
+                if (type == 0) {
+                    [mySelf changeUI];
+                }
             }
         } fail:^(NSError *error) {
             
@@ -284,6 +288,7 @@ FriendsPlayVideoViewdelegate>
         CGRect rect = [tableView rectForRowAtIndexPath:indexPath];
         CGRect fatherRact = [tableView convertRect:rect toView:[tableView superview]];
         self.suspensionView.hidden = NO;
+        self.suspensionView.tag = indexPath.row - 1;
         self.suspensionView.frame = CGRectMake(kScreenWidth/2 - 55, fatherRact.origin.y - 38, 110, 33);
     }
 }
@@ -431,16 +436,15 @@ FriendsPlayVideoViewdelegate>
         __weak typeof(self) weakSelf = self;
         [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":userDic[@"id"]} succ:^(id result) {
             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-            if ([result[@"code"] integerValue] == 420) {
-                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"亲，不能自己关注自己哦！" animated:YES] hide:YES afterDelay:1];
-            }else if ([result[@"code"] integerValue] == 410){
-                [sender setTitle:@"已关注" forState:UIControlStateNormal];
-                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
-                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"已关注" image:nil];
-            }else if ([result[@"code"] integerValue] == 411){
-                [sender setTitle:@"关注" forState:UIControlStateNormal];
-                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
-                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
+            if ([result[@"code"] integerValue] == 200) {
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:result[@"message"] animated:YES] hide:YES afterDelay:1];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if ([result[@"message"] isEqualToString:@"关注成功!"]) {
+                        [sender setTitle:@"已关注" forState:UIControlStateNormal];
+                    }else if ([result[@"message"] isEqualToString:@"取消关注成功!"]){
+                        [sender setTitle:@"关注" forState:UIControlStateNormal];
+                    }
+                });
             }
         } fail:^(NSError *error) {
             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -451,19 +455,15 @@ FriendsPlayVideoViewdelegate>
         __weak typeof(self) weakSelf = self;
         [KGRequestNetWorking postWothUrl:attorcel parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"toId":_model[@"id"]} succ:^(id result) {
             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-            if ([result[@"code"] integerValue] == 420) {
-                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"亲，不能自己关注自己哦！" animated:YES] hide:YES afterDelay:1];
-            }else if ([result[@"code"] integerValue] == 410){
-                [sender setTitle:@"已关注" forState:UIControlStateNormal];
-                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功" animated:YES] hide:YES afterDelay:1];
-                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"已关注" image:nil];
-            }else if ([result[@"code"] integerValue] == 411){
-                [sender setTitle:@"关注" forState:UIControlStateNormal];
-                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"取消关注成功" animated:YES] hide:YES afterDelay:1];
-                [weakSelf setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
-            }
             if ([result[@"code"] integerValue] == 200) {
-                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:@"关注成功！" animated:YES] hide:YES afterDelay:1];
+                [[MBProgressHUD bwm_showHUDAddedTo:weakSelf.view title:result[@"message"] animated:YES] hide:YES afterDelay:1];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if ([result[@"message"] isEqualToString:@"关注成功!"]) {
+                        [sender setTitle:@"已关注" forState:UIControlStateNormal];
+                    }else if ([result[@"message"] isEqualToString:@"取消关注成功!"]){
+                        [sender setTitle:@"关注" forState:UIControlStateNormal];
+                    }
+                });
             }
         } fail:^(NSError *error) {
             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -555,6 +555,10 @@ FriendsPlayVideoViewdelegate>
     __weak typeof(self) weakSelf = self;
     [KGRequestNetWorking postWothUrl:commentOrReply parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"rfmid":_model[@"id"],@"content":comment} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
+            NSArray *arr = result[@"data"];
+            NSDictionary *dic = [arr firstObject];
+            weakSelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:dic[@"rccomment"]];
+            [weakSelf.listView reloadData];
             [MBProgressHUD bwm_showTitle:@"评论成功" toView:weakSelf.view hideAfter:1];
         }else{
             [MBProgressHUD bwm_showTitle:@"评论失败" toView:weakSelf.view hideAfter:1];
@@ -566,9 +570,21 @@ FriendsPlayVideoViewdelegate>
 //MARK:--FriendsSuspensionViewDelegate--
 - (void)leftAction:(NSInteger)index{
     
+    
 }
 - (void)rightAction:(NSInteger)index{
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) weakSelf = self;
+    FriendsTalentsCommentModel *model = _dataArr[index];
+    [KGRequestNetWorking postWothUrl:deleteCommentById parameters:@{@"tokenCode":[KGUserInfo shareInterace].userToken,@"id":model.ID} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD bwm_showTitle:result[@"message"] toView:weakSelf.view hideAfter:1];
+        if ([result[@"code"] integerValue] == 200) {
+            [weakSelf createDate:1];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
 }
 /**
  在当前界面播放视频

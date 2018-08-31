@@ -505,6 +505,8 @@
 		5A2B87BB2136402700E2288A /* InstittutionsExbitionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B87BA2136402700E2288A /* InstittutionsExbitionTableViewCell.m */; };
 		5A2B87C12136A62B00E2288A /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 5A2B87C02136A62A00E2288A /* index.html */; };
 		5A3397C82133E33D006F5844 /* ScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3397C72133E33D006F5844 /* ScoreViewController.m */; };
+		5A34C0B32138092D0007643A /* ViewForActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A34C0B22138092D0007643A /* ViewForActivity.m */; };
+		5A34C0B5213809940007643A /* Activity.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A34C0B4213809940007643A /* Activity.xcassets */; };
 		5A45A63B212A6EAF00727446 /* 星球吸引 in Resources */ = {isa = PBXBuildFile; fileRef = 5A45A63A212A6EAF00727446 /* 星球吸引 */; };
 		5A45A63F212AAB0200727446 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 5A45A63E212AAB0200727446 /* images */; };
 		5A618874211D44AC002E7E51 /* MineReleaseHositryPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */; };
@@ -517,6 +519,7 @@
 		5A6551DB212192B300D65DBA /* TaskDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551DA212192B300D65DBA /* TaskDetailVC.m */; };
 		5A6551DF2121941400D65DBA /* TaskDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551DD2121941300D65DBA /* TaskDetailTableViewCell.m */; };
 		5A6551E02121941400D65DBA /* TaskDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6551DE2121941400D65DBA /* TaskDetailTableViewCell.xib */; };
+		5A69126821392903003E5907 /* AcitivityForViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A69126721392903003E5907 /* AcitivityForViewController.m */; };
 		5A7C7D9221181EB400B3F261 /* MineIntefralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */; };
 		5A7C7D9521183EF600B3F261 /* MineTalentInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */; };
 		5AB355D921105E9C00E10353 /* CommunityExhibitionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */; };
@@ -1433,6 +1436,9 @@
 		5A2B87C02136A62A00E2288A /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = "../../../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/e853942fdd24caf35fa67383eab5c44a/Message/MessageTemp/856129230c0f2253745b1df986dab080/File/ball - 副本/index.html"; sourceTree = "<group>"; };
 		5A3397C62133E33D006F5844 /* ScoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreViewController.h; sourceTree = "<group>"; };
 		5A3397C72133E33D006F5844 /* ScoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreViewController.m; sourceTree = "<group>"; };
+		5A34C0B12138092D0007643A /* ViewForActivity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewForActivity.h; sourceTree = "<group>"; };
+		5A34C0B22138092D0007643A /* ViewForActivity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewForActivity.m; sourceTree = "<group>"; };
+		5A34C0B4213809940007643A /* Activity.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Activity.xcassets; sourceTree = "<group>"; };
 		5A45A63A212A6EAF00727446 /* 星球吸引 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "星球吸引"; sourceTree = "<group>"; };
 		5A45A63E212AAB0200727446 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		5A618872211D44AC002E7E51 /* MineReleaseHositryPictureModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineReleaseHositryPictureModel.h; sourceTree = "<group>"; };
@@ -1452,6 +1458,8 @@
 		5A6551DC2121941300D65DBA /* TaskDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskDetailTableViewCell.h; sourceTree = "<group>"; };
 		5A6551DD2121941300D65DBA /* TaskDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskDetailTableViewCell.m; sourceTree = "<group>"; };
 		5A6551DE2121941400D65DBA /* TaskDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskDetailTableViewCell.xib; sourceTree = "<group>"; };
+		5A69126621392903003E5907 /* AcitivityForViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcitivityForViewController.h; sourceTree = "<group>"; };
+		5A69126721392903003E5907 /* AcitivityForViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcitivityForViewController.m; sourceTree = "<group>"; };
 		5A7C7D9021181EB400B3F261 /* MineIntefralModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineIntefralModel.h; sourceTree = "<group>"; };
 		5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineIntefralModel.m; sourceTree = "<group>"; };
 		5A7C7D9321183EF600B3F261 /* MineTalentInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTalentInfoModel.h; sourceTree = "<group>"; };
@@ -3806,6 +3814,34 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		5A34C0AE213808C60007643A /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				5A34C0AF213808E70007643A /* Controller */,
+				5A34C0B0213808F00007643A /* View */,
+				5A34C0B4213809940007643A /* Activity.xcassets */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		5A34C0AF213808E70007643A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5A69126621392903003E5907 /* AcitivityForViewController.h */,
+				5A69126721392903003E5907 /* AcitivityForViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A34C0B0213808F00007643A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5A34C0B12138092D0007643A /* ViewForActivity.h */,
+				5A34C0B22138092D0007643A /* ViewForActivity.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5AFDEE6B21194A3D003AA016 /* 组件 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4018,6 +4054,7 @@
 		A8FD4F6F208843CE008B53FC /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				5A34C0AE213808C60007643A /* Activity */,
 				A8FD4F70208843D8008B53FC /* Login */,
 				A81C95E4209995C500E6D223 /* Map */,
 				28A3DC6A20A0029F00FEDD62 /* Community */,
@@ -4362,6 +4399,7 @@
 				284C8D8C20BFDF1700487225 /* KGCityChooseCell.xib in Resources */,
 				5A6551D021216FA500D65DBA /* PickUpTaskTableViewCell.xib in Resources */,
 				2804BEA520E09970007E33DE /* TlentIntroudceTableViewCell.xib in Resources */,
+				5A34C0B5213809940007643A /* Activity.xcassets in Resources */,
 				280601AC20B7FF790090254E /* HeadLinesNormalCell.xib in Resources */,
 				280601B820B80C250090254E /* HeadLinesDetaialCommentCell.xib in Resources */,
 				2875DAB820D3C5F600D6CAFE /* MineAddBaseNameAndPhoneTableViewCell.xib in Resources */,
@@ -4603,6 +4641,7 @@
 				2820B07020B5452C00EA1DAC /* DXShareButton.m in Sources */,
 				28F9969E20A43E2600678494 /* NSBundle+ZLPhotoBrowser.m in Sources */,
 				28F996A020A43E2600678494 /* ZLCustomCamera.m in Sources */,
+				5A34C0B32138092D0007643A /* ViewForActivity.m in Sources */,
 				2820B06020B5368E00EA1DAC /* FriednsMessageCell.m in Sources */,
 				28577B6B20D112690082075D /* MineMyselfWordChooseYourLoveVC.m in Sources */,
 				282E071C20C8D3C600A9B2E1 /* MineHeaderView.m in Sources */,
@@ -4611,6 +4650,7 @@
 				284C8D7520BFB09100487225 /* CALayer+KGLayerColor.m in Sources */,
 				28CA5BF020CE84A600D38F1F /* MineLoveMoviesAndMusicAndBooksCell.m in Sources */,
 				28A6C9CB20D8A1C800ECBF4F /* MineWriteTheIdentityInfoVC.m in Sources */,
+				5A69126821392903003E5907 /* AcitivityForViewController.m in Sources */,
 				287D2CF720BE833D00500156 /* HotMoviesDetailIntroudceCell.m in Sources */,
 				2870B73B20C68C8A00133D1A /* ReadBooksHeaderViewCell.m in Sources */,
 				2875DA9F20D3BC0800D6CAFE /* MineTheIdentityAuthenticationVC.m in Sources */,

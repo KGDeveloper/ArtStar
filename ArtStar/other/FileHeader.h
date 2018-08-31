@@ -45,6 +45,7 @@
 #import "CommuntityHttpsDefine.h"
 #import "MineHttpsDefine.h"
 #import "ReportView.h"
+#import "ViewForActivity.h"
 
 #endif
 

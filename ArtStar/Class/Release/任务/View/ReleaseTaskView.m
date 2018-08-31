@@ -203,22 +203,23 @@
         _datePick = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 50, kScreenWidth, 200)];
         //:--设置日期选择器的地区--
         [_datePick setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"]];
-        //:--设置默认时间为当天--
-        [_datePick setCalendar:[NSCalendar currentCalendar]];
-        //:--设置日期--
-        [_datePick setDate:[NSDate date]];
-        //:--设置日期值--
-        NSCalendar *canender = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        //:--当前时间--
-        NSDate *currentDate = [NSDate date];
-        NSDateComponents *comps = [[NSDateComponents alloc]init];
-        //:--设置最大时间为当前推后60天--
-        [comps setDay:60];
-        NSDate *maxDate = [canender dateByAddingComponents:comps toDate:currentDate options:0];
-        [comps setDay:0];
-        NSDate *minDate = [canender dateByAddingComponents:comps toDate:currentDate options:0];
-        [_datePick setMaximumDate:maxDate];
-        [_datePick setMinimumDate:minDate];
+        [_datePick setDatePickerMode:UIDatePickerModeDateAndTime];
+//        //:--设置默认时间为当天--
+//        [_datePick setCalendar:[NSCalendar currentCalendar]];
+//        //:--设置日期--
+//        [_datePick setDate:[NSDate date]];
+//        //:--设置日期值--
+//        NSCalendar *canender = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//        //:--当前时间--
+//        NSDate *currentDate = [NSDate date];
+//        NSDateComponents *comps = [[NSDateComponents alloc]init];
+//        //:--设置最大时间为当前推后60天--
+//        [comps setDay:60];
+//        NSDate *maxDate = [canender dateByAddingComponents:comps toDate:currentDate options:0];
+//        [comps setDay:0];
+//        NSDate *minDate = [canender dateByAddingComponents:comps toDate:currentDate options:0];
+        [_datePick setMaximumDate:[NSDate dateWithTimeIntervalSinceNow:360*24*60*60]];
+        [_datePick setMinimumDate:[NSDate dateWithTimeIntervalSinceNow:0]];
         [_datePick setDatePickerMode:UIDatePickerModeDateAndTime];
         [_datePick addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
         [_chooseView addSubview:_datePick];
@@ -226,8 +227,16 @@
     return _chooseView;
 }
 - (void)dateChange:(UIDatePicker *)sender{
-    _chooseTimeStr = [NSString stringWithFormat:@"%@",sender.date];
-    _chooseTimeStr = [_chooseTimeStr substringWithRange:NSMakeRange(0, 19)];
+    NSTimeZone *timeZone=[NSTimeZone systemTimeZone];
+    NSInteger seconds=[timeZone secondsFromGMTForDate:sender.date];
+    NSDate *newDate=[sender.date dateByAddingTimeInterval:seconds];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    [formatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    _chooseTimeStr=[formatter stringFromDate:newDate];
 }
 - (void)cancelAction{
     self.chooseView.hidden = YES;
@@ -236,7 +245,7 @@
     self.chooseView.hidden = YES;
     if (_chooseTimeStr == nil) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
         NSDate *nowDate = [NSDate date];
         _chooseTimeStr = [formatter stringFromDate:nowDate];
     }

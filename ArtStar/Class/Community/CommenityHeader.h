@@ -31,5 +31,7 @@
 #import "HeaderScrollAndPageView.h"
 //:--头条新闻详情页--
 #import "MovieNewsDetaialVC.h"
+//:--活动主页--
+#import "AcitivityForViewController.h"
 
 #endif /* CommenityHeader_h */

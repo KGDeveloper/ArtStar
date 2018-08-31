@@ -228,6 +228,9 @@
         if ([result[@"code"] integerValue] == 200) {
             weakSelf.dataArr = [NSMutableArray arrayWithArray:result[@"data"]];
             [weakSelf.listView reloadData];
+        }else{
+            weakSelf.dataArr = [NSMutableArray array];
+            [weakSelf.listView reloadData];
         }
     } fail:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -242,6 +245,9 @@
         if ([result[@"code"] integerValue] == 200) {
             weakSelf.dataArr = [NSMutableArray arrayWithArray:result[@"data"]];
             [weakSelf.listView reloadData];
+        }else{
+            weakSelf.dataArr = [NSMutableArray array];
+            [weakSelf.listView reloadData];
         }
     } fail:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -255,6 +261,9 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if ([result[@"code"] integerValue] == 200) {
             weakSelf.dataArr = [NSMutableArray arrayWithArray:result[@"data"]];
+            [weakSelf.listView reloadData];
+        }else{
+            weakSelf.dataArr = [NSMutableArray array];
             [weakSelf.listView reloadData];
         }
     } fail:^(NSError *error) {

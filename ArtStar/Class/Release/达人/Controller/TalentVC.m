@@ -163,6 +163,10 @@
             [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
             if ([result[@"code"] integerValue] == 200) {
                 [[MBProgressHUD showHUDAddedTo:mySelf.view animated:YES] bwm_hideWithTitle:@"发布成功" hideAfter:1];
+                UIApplication *app = [UIApplication sharedApplication];
+                TabBarVC *vc =  [[TabBarVC alloc]init];
+                vc.selectedIndex = 2;
+                app.keyWindow.rootViewController = vc;
             }else{
                 //:--防止再次提交的时候程序奔溃--
                 [mySelf.parasmart setObject:mySelf.imageArr forKey:@"images"];
@@ -232,6 +236,7 @@
         cell.delegate = self;
         if (_parasmart[@"siteIntroduce"]) {
             cell.introudceTV.text = _parasmart[@"siteIntroduce"];
+            cell.plholderLab.hidden = YES;
         }
         if (_parasmart[@"location"]) {
             [cell.locationBtu setTitle:_parasmart[@"location"] forState:UIControlStateNormal];

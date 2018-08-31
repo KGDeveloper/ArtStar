@@ -48,6 +48,12 @@
     
     [self setNavCenterView];
     
+//    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"XianActivity"]) {
+//        ViewForActivity *view = [[ViewForActivity alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+//        [self.tabBarController.view addSubview:view];
+//        
+//    }
+    
 }
 
 - (void)setNavCenterView{
@@ -104,8 +110,9 @@
 }
 
 - (void)leftNavBtuAction:(UIButton *)sender{
-    [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
-    [self cllLocation];
+    [self pushNoTabBarViewController:[[AcitivityForViewController alloc]init] animated:YES];
+//    [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
+//    [self cllLocation];
 }
 
 - (void)rightNavBtuAction:(UIButton *)sender{

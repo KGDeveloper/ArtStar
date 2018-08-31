@@ -354,11 +354,7 @@ typedef NS_ENUM(NSInteger,TextFieldTextType){
     self.cameraView.hidden = YES;
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
-    if (self.imageArr.count > 0) {
-        [self.imageArr addObject:image];
-    }else{
-        self.imageArr = [NSMutableArray arrayWithObject:image];
-    }
+    self.imageArr = [NSMutableArray arrayWithObject:image];
     
 }
 - (void)video:(NSString *)videoUrl didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{

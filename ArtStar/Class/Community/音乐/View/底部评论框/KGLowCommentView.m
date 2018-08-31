@@ -71,10 +71,14 @@
 }
 
 - (void)commentAction{
-    if (self.actionWithTitle) {
-        self.actionWithTitle(@"评论", _commentTF.text);
+    if (_commentTF.text.length > 0) {
+        if (self.actionWithTitle) {
+            self.actionWithTitle(@"评论", _commentTF.text);
+        }
+        _commentTF.text = @"";
+    }else{
+        [MBProgressHUD bwm_showTitle:@"请写评论内容" toView:self hideAfter:1];
     }
-    _commentTF.text = @"";
 }
 
 - (void)zansAction:(UIButton *)sender{
