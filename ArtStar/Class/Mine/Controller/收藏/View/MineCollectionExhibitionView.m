@@ -12,6 +12,7 @@
 @interface MineCollectionExhibitionView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -20,6 +21,8 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
+        _dataArr = [NSMutableArray array];
+        [self requestData];
         [self setTableView];
     }
     return self;
@@ -39,7 +42,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArr.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 30;
@@ -68,6 +71,14 @@
 }
 - (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
     return 25.0;
+}
+
+- (void)requestData{
+    [KGRequestNetWorking postWothUrl:seachPersonCollect parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"collectType":@"1",@"pcquery":@{@"page":@"1",@"rows":@"15"}} succ:^(id result) {
+        
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 

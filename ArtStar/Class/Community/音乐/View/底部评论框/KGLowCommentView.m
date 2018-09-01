@@ -9,7 +9,7 @@
 #import "KGLowCommentView.h"
 #import "KGCommentTF.h"
 
-@interface KGLowCommentView ()
+@interface KGLowCommentView ()<UITextFieldDelegate>
 
 @property (nonatomic,strong) UIView *line;
 @property (nonatomic,strong) KGCommentTF *commentTF;
@@ -44,6 +44,8 @@
     _commentTF.placeholder = @"写一个评论 ...";
     _commentTF.font = SYFont(12);
     _commentTF.textColor = Color_333333;
+    _commentTF.delegate = self;
+    _commentTF.returnKeyType = UIReturnKeySend;
     _commentTF.layer.cornerRadius = 5;
     _commentTF.layer.borderColor = Color_cccccc.CGColor;
     _commentTF.layer.borderWidth = 1;
@@ -54,8 +56,8 @@
     [_shareBtu addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
     _shareBtu.sd_layout.rightSpaceToView(self, 15).centerYEqualToView(self).widthIs(16).heightIs(16);
     
-    [_commentBtu setImage:Image(@"评论") forState:UIControlStateNormal];
-    [_commentBtu addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
+    [_commentBtu setImage:Image(@"collection") forState:UIControlStateNormal];
+    [_commentBtu addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
     _commentBtu.sd_layout.rightSpaceToView(_shareBtu, 25).centerYEqualToView(self).widthIs(18).heightIs(16);
     
     [_zansBtu setImage:Image(@"点赞") forState:UIControlStateNormal];
@@ -63,24 +65,24 @@
     _zansBtu.sd_layout.rightSpaceToView(_commentBtu, 25).centerYEqualToView(self).widthIs(15).heightIs(16);
     
 }
-
+// MARK: --分享--
 - (void)shareAction{
     if (self.actionWithTitle) {
         self.actionWithTitle(@"分享", nil);
     }
 }
-
-- (void)commentAction{
-    if (_commentTF.text.length > 0) {
-        if (self.actionWithTitle) {
-            self.actionWithTitle(@"评论", _commentTF.text);
-        }
-        _commentTF.text = @"";
+// MARK: --收藏--
+- (void)commentAction:(UIButton *)sender{
+    if ([sender.currentImage isEqual:Image(@"collection")]) {
+        [sender setImage:Image(@"shoucang") forState:UIControlStateNormal];
     }else{
-        [MBProgressHUD bwm_showTitle:@"请写评论内容" toView:self hideAfter:1];
+        [sender setImage:Image(@"collection") forState:UIControlStateNormal];
+    }
+    if (self.actionWithTitle) {
+        self.actionWithTitle(@"收藏", _commentTF.text);
     }
 }
-
+// MARK: --点赞--
 - (void)zansAction:(UIButton *)sender{
     if (self.actionWithTitle) {
         self.actionWithTitle(@"点赞", nil);
@@ -90,6 +92,17 @@
     }else{
         [_zansBtu setImage:Image(@"点赞选中") forState:UIControlStateNormal];
     }
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (_commentTF.text.length > 0) {
+        if (self.actionWithTitle) {
+            self.actionWithTitle(@"评论", _commentTF.text);
+        }
+        _commentTF.text = @"";
+    }else{
+        [MBProgressHUD bwm_showTitle:@"请写评论内容" toView:self hideAfter:1];
+    }
+    return YES;
 }
 
 /*

@@ -9,13 +9,25 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger,ActivityType){
-    ActivityTypeAlert = 0,
-    ActivityTypeList,
-    ActivityTypeAbout,
+    ActivityTypeRules = 0,
+    ActivityTypePrize,
+    ActivityTypeClick,
+    ActivityTypeMapShow,
 };
 
 @interface ViewForActivity : UIView
 
+/**
+ 页面类型
+ */
 @property (nonatomic,assign) NSInteger alertType;
+/**
+ 加载展示图
+ */
+@property (nonatomic,copy) UIImage *showImage;
+/**
+ 首页展示活动入口
+ */
+@property (nonatomic,copy) void(^mapShowPushActivityController)(void);
 
 @end

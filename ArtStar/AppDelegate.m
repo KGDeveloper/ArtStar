@@ -138,8 +138,9 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
+    //:--在这里删除标记，下次运行App再次显示活动入口--
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IntoAcitivitry"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self saveContext];
 }
 

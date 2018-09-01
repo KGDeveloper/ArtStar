@@ -57,7 +57,7 @@
     self.institutionView.hidden = NO;
     
 }
-
+// MARK: --机构--
 - (MineCollectionInstitutionView *)institutionView{
     if (!_institutionView) {
         _institutionView = [[MineCollectionInstitutionView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth,kScreenHeight - NavTopHeight - 50)];
@@ -65,7 +65,7 @@
     }
     return _institutionView;
 }
-
+// MARK: --话题--
 - (MineCollectionThemeView *)themeView{
     if (!_themeView) {
         _themeView = [[MineCollectionThemeView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth,kScreenHeight - NavTopHeight - 50)];
@@ -73,7 +73,7 @@
     }
     return _themeView;
 }
-
+// MARK: --展览--
 - (MineCollectionExhibitionView *)exhibitionView{
     if (!_exhibitionView) {
         _exhibitionView = [[MineCollectionExhibitionView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth,kScreenHeight - NavTopHeight - 50)];
@@ -81,7 +81,7 @@
     }
     return _exhibitionView;
 }
-
+// MARK: --星圈--
 - (MineCollectionStarcircleView *)starCircleView{
     if (!_starCircleView) {
         _starCircleView = [[MineCollectionStarcircleView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth,kScreenHeight - NavTopHeight - 50)];
@@ -89,7 +89,7 @@
     }
     return _starCircleView;
 }
-
+// MARK: --文章--
 - (MineControllerArticleView *)articleView{
     if (!_articleView) {
         _articleView = [[MineControllerArticleView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth,kScreenHeight - NavTopHeight - 50)];
@@ -97,7 +97,7 @@
     }
     return _articleView;
 }
-
+// MARK: --图书--
 - (MineCollectionBookView *)bookView{
     if (!_bookView) {
         _bookView = [[MineCollectionBookView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 50, kScreenWidth,kScreenHeight - NavTopHeight - 50)];

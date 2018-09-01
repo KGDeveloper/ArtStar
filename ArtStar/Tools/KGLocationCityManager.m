@@ -66,7 +66,11 @@
     CLLocation *newLocation = locations[0];
     CLLocationCoordinate2D coordinate = newLocation.coordinate;
     if (self.ToObtainYourLocation) {
-        self.ToObtainYourLocation(@"",coordinate.latitude,coordinate.longitude);
+        self.ToObtainYourLocation(@"北京市",coordinate.latitude,coordinate.longitude);
+        [[NSUserDefaults standardUserDefaults] setObject:@"北京市" forKey:@"yourLocationCity"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",coordinate.latitude] forKey:@"YourLocationLatitude"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",coordinate.longitude] forKey:@"YourLocationLongitude"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     CLGeocoder *geocder = [[CLGeocoder alloc]init];
     [geocder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {

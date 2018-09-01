@@ -103,7 +103,11 @@
         urlName = @"";
     }
     __weak typeof(self) weakSelf = self;
-    [KGRequestNetWorking postWothUrl:selectPlistByTid parameters:@{@"query":@{@"page":@"1",@"rows":@"15"},@"navigation":@"距离最近",@"userlatitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"],@"userLongitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"typename":urlName,@"city":[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"]} succ:^(id result) {
+    NSString *city = @"北京";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"]) {
+        city = [[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"];
+    }
+    [KGRequestNetWorking postWothUrl:selectPlistByTid parameters:@{@"query":@{@"page":@"1",@"rows":@"15"},@"navigation":@"距离最近",@"userlatitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"],@"userLongitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"typename":urlName,@"city":city} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *tmp = result[@"data"];
             if (tmp.count > 0) {

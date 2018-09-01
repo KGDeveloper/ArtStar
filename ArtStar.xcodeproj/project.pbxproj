@@ -502,6 +502,8 @@
 		5A1DF6C22112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C02112DE4A00D1FCDF /* CommunityExhibitionProductionCell.xib */; };
 		5A1DF6C62112E80000D1FCDF /* CommunityExhibitionWorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */; };
 		5A1DF6C72112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */; };
+		5A1F3FD2213A72B2004C15AE /* ConsumptionOfLiteratureAndArtVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F3FD1213A72B2004C15AE /* ConsumptionOfLiteratureAndArtVC.m */; };
+		5A1F3FD5213A72ED004C15AE /* LiteratureAndArtVenuesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F3FD4213A72ED004C15AE /* LiteratureAndArtVenuesVC.m */; };
 		5A2B87BB2136402700E2288A /* InstittutionsExbitionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B87BA2136402700E2288A /* InstittutionsExbitionTableViewCell.m */; };
 		5A2B87C12136A62B00E2288A /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 5A2B87C02136A62A00E2288A /* index.html */; };
 		5A3397C82133E33D006F5844 /* ScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3397C72133E33D006F5844 /* ScoreViewController.m */; };
@@ -523,6 +525,8 @@
 		5A7C7D9221181EB400B3F261 /* MineIntefralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9121181EB400B3F261 /* MineIntefralModel.m */; };
 		5A7C7D9521183EF600B3F261 /* MineTalentInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */; };
 		5AB355D921105E9C00E10353 /* CommunityExhibitionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */; };
+		5ABD7208213AA1B600258997 /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABD7207213AA1B600258997 /* CustomCalloutView.m */; };
+		5ABD720B213AA66900258997 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABD720A213AA66900258997 /* CustomAnnotationView.m */; };
 		5AFDEE6A21193EDF003AA016 /* MineTalentPassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDEE6921193EDF003AA016 /* MineTalentPassModel.m */; };
 		5AFDEE6E21194AA0003AA016 /* MineTalentLowEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDEE6D21194AA0003AA016 /* MineTalentLowEditView.m */; };
 		9CF50ABF4E7729A6E18D4F9F /* Pods_ArtStar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1D66E743F1A18D94DF1F1E /* Pods_ArtStar.framework */; };
@@ -1431,6 +1435,10 @@
 		5A1DF6C32112E80000D1FCDF /* CommunityExhibitionWorkerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionWorkerCell.h; sourceTree = "<group>"; };
 		5A1DF6C42112E80000D1FCDF /* CommunityExhibitionWorkerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionWorkerCell.m; sourceTree = "<group>"; };
 		5A1DF6C52112E80000D1FCDF /* CommunityExhibitionWorkerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionWorkerCell.xib; sourceTree = "<group>"; };
+		5A1F3FD0213A72B2004C15AE /* ConsumptionOfLiteratureAndArtVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConsumptionOfLiteratureAndArtVC.h; sourceTree = "<group>"; };
+		5A1F3FD1213A72B2004C15AE /* ConsumptionOfLiteratureAndArtVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConsumptionOfLiteratureAndArtVC.m; sourceTree = "<group>"; };
+		5A1F3FD3213A72ED004C15AE /* LiteratureAndArtVenuesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiteratureAndArtVenuesVC.h; sourceTree = "<group>"; };
+		5A1F3FD4213A72ED004C15AE /* LiteratureAndArtVenuesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiteratureAndArtVenuesVC.m; sourceTree = "<group>"; };
 		5A2B87B92136402700E2288A /* InstittutionsExbitionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstittutionsExbitionTableViewCell.h; sourceTree = "<group>"; };
 		5A2B87BA2136402700E2288A /* InstittutionsExbitionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstittutionsExbitionTableViewCell.m; sourceTree = "<group>"; };
 		5A2B87C02136A62A00E2288A /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = "../../../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/e853942fdd24caf35fa67383eab5c44a/Message/MessageTemp/856129230c0f2253745b1df986dab080/File/ball - 副本/index.html"; sourceTree = "<group>"; };
@@ -1466,6 +1474,10 @@
 		5A7C7D9421183EF600B3F261 /* MineTalentInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTalentInfoModel.m; sourceTree = "<group>"; };
 		5AB355D721105E9C00E10353 /* CommunityExhibitionDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionDetailVC.h; sourceTree = "<group>"; };
 		5AB355D821105E9C00E10353 /* CommunityExhibitionDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionDetailVC.m; sourceTree = "<group>"; };
+		5ABD7206213AA1B600258997 /* CustomCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
+		5ABD7207213AA1B600258997 /* CustomCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
+		5ABD7209213AA66900258997 /* CustomAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		5ABD720A213AA66900258997 /* CustomAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		5AE2FE7658F18639AE622B3C /* Pods-ArtStarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtStarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArtStarTests/Pods-ArtStarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5AFDEE6821193EDF003AA016 /* MineTalentPassModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTalentPassModel.h; sourceTree = "<group>"; };
 		5AFDEE6921193EDF003AA016 /* MineTalentPassModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTalentPassModel.m; sourceTree = "<group>"; };
@@ -3045,6 +3057,8 @@
 		5A05B066211452EA00D1F876 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5A1F3FD3213A72ED004C15AE /* LiteratureAndArtVenuesVC.h */,
+				5A1F3FD4213A72ED004C15AE /* LiteratureAndArtVenuesVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3052,6 +3066,8 @@
 		5A05B067211452F400D1F876 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5A1F3FD0213A72B2004C15AE /* ConsumptionOfLiteratureAndArtVC.h */,
+				5A1F3FD1213A72B2004C15AE /* ConsumptionOfLiteratureAndArtVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3838,6 +3854,10 @@
 			children = (
 				5A34C0B12138092D0007643A /* ViewForActivity.h */,
 				5A34C0B22138092D0007643A /* ViewForActivity.m */,
+				5ABD7206213AA1B600258997 /* CustomCalloutView.h */,
+				5ABD7207213AA1B600258997 /* CustomCalloutView.m */,
+				5ABD7209213AA66900258997 /* CustomAnnotationView.h */,
+				5ABD720A213AA66900258997 /* CustomAnnotationView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4848,7 +4868,9 @@
 				A8FD4F792088443A008B53FC /* LoginVC.m in Sources */,
 				28BF33DA20C51D4900598919 /* MyselfWordArticleCell.m in Sources */,
 				287D2D1720BEB36C00500156 /* MusicManagementMyThemeVC.m in Sources */,
+				5A1F3FD5213A72ED004C15AE /* LiteratureAndArtVenuesVC.m in Sources */,
 				2804BEAD20E0D037007E33DE /* YourLocationModel.m in Sources */,
+				5ABD7208213AA1B600258997 /* CustomCalloutView.m in Sources */,
 				280601B720B80C250090254E /* HeadLinesDetaialCommentCell.m in Sources */,
 				28A3DC7120A04BD100FEDD62 /* CustomBtu.m in Sources */,
 				28CA5BD420CE4A1800D38F1F /* MineEditMyselfCardVC.m in Sources */,
@@ -4905,6 +4927,7 @@
 				283482CA20DC9BD80026DD83 /* MapTopScreeningView.m in Sources */,
 				2834849020C63E0100AB6E9A /* CommunityVideoVC.m in Sources */,
 				28A3DC7B20A05AA700FEDD62 /* TalentVC.m in Sources */,
+				5ABD720B213AA66900258997 /* CustomAnnotationView.m in Sources */,
 				28E8E87C20B69342002E10FC /* HeadlinesView.m in Sources */,
 				5A05B0B12114619700D1F876 /* ReleaseTaskView.m in Sources */,
 				281DF6F220D251C20086030E /* MineCollectionHeaderScrollView.m in Sources */,
@@ -4938,6 +4961,7 @@
 				28BF33D520C51C7000598919 /* MyselfWordArticleView.m in Sources */,
 				2868408120B287E800441926 /* FriendsThemeButtomImageCell.m in Sources */,
 				2820B08A20B57CEA00EA1DAC /* CommunityShieldingView.m in Sources */,
+				5A1F3FD2213A72B2004C15AE /* ConsumptionOfLiteratureAndArtVC.m in Sources */,
 				2870B74020C69EEC00133D1A /* BuyBooksCell.m in Sources */,
 				2820B07420B5467000EA1DAC /* FriendsPlayVideoView.m in Sources */,
 				5A05B0BA2114676C00D1F876 /* ReleaseTaskIntrduiceCell.m in Sources */,
