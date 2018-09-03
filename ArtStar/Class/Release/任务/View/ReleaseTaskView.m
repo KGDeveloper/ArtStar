@@ -142,7 +142,7 @@
 - (void)sendTaskDescribe:(NSString *)describe{
     [_dic setObject:describe forKey:@"describe"];
 }
-- (void)releaseTask{
+- (void)releaseTask:(NSString *)type taskId:(NSInteger)taskID{
     if (_dic[@"tname"]) {
         if (_dic[@"btime"]) {
             if (_dic[@"otime"]) {

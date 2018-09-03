@@ -52,7 +52,7 @@
 
 - (void)setTableView{
     
-    _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    _listView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 50)];
     _listView.delegate = self;
     _listView.dataSource = self;
     _listView.tableFooterView = TabLeViewFootView;
@@ -123,8 +123,9 @@
 
 - (void)setTicket{
     _ticketView = [[KGTicketView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 50, kScreenWidth, 50)];
+    __weak typeof(self) weakSelf = self;
     _ticketView.theTicketAction = ^{
-        
+        [MBProgressHUD bwm_showTitle:@"尚未开放哦~" toView:weakSelf.view hideAfter:1];
     };
     _ticketView.backgroundColor = [UIColor colorWithHexString:@"#4d4d4d"];
     [self.view insertSubview:_ticketView atIndex:99];

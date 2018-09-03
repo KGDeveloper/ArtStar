@@ -38,6 +38,8 @@
     [AMapServices sharedServices].enableHTTPS = YES;
     MAMapView *mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     mapView.delegate = self;
+    mapView.showsIndoorMap = YES;
+    mapView.touchPOIEnabled = YES;
     [self.view addSubview:mapView];
     
     MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc]init];
@@ -54,46 +56,12 @@
         if (annotationView == nil) {
             annotationView = [[CustomAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
         }
-//        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
-//        titleLab.text = @"这是艺术馆";
-//        titleLab.font = SYFont(12);
-//        titleLab.textColor = Color_333333;
-//        titleLab.textAlignment = NSTextAlignmentCenter;
-        NSString *string = @"这是艺术馆";
-        NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-        [paragraphStyle setAlignment:NSTextAlignmentCenter];
-        [paragraphStyle setLineBreakMode:NSLineBreakByCharWrapping];
-        [paragraphStyle setLineSpacing:2.0f];  //行间距
-        [paragraphStyle setParagraphSpacing:2.f];//字符间距
-        NSDictionary *attributes = @{NSFontAttributeName            : [UIFont systemFontOfSize:12],
-                                     NSForegroundColorAttributeName : [UIColor blueColor],
-                                     NSBackgroundColorAttributeName : [UIColor clearColor],
-                                     NSParagraphStyleAttributeName : paragraphStyle, };
-
-        annotationView.image = [self imageFromString:string attributes:attributes size:CGSizeMake(40, 20)];
+        annotationView.image = Image(@"定位场所");
         annotationView.canShowCallout = NO;
         annotationView.centerOffset = CGPointMake(0, -20);
         return annotationView;
     }
     return nil;
-}
-- (UIImage *)imageFromString:(NSString *)string attributes:(NSDictionary *)attributes size:(CGSize)size{
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    [string drawInRect:CGRectMake(0, 0, size.width, size.height) withAttributes:attributes];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-- (UIImage *)imageForView:(UIView *)view{
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0);
-    if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)])
-        [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
-    else
-        [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
 }
 
 // MARK: --创建右侧点击按钮--

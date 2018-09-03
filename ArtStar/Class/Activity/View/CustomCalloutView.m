@@ -100,7 +100,6 @@
     CGContextAddArcToPoint(context, maxx, miny, maxx, maxx, radius);
     CGContextAddArcToPoint(context, maxx, maxy, midx, maxy, radius);
     CGContextClosePath(context);
-    
 }
 
 @end

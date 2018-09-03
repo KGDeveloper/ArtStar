@@ -21,6 +21,11 @@
 @property (nonatomic,strong) MapTypeChooseView *chooseType;
 @property (nonatomic,strong) MapFeaturesView *featureView;
 @property (nonatomic,copy) NSString *locationCityName;
+//
+//@property (nonatomic,copy) NSString *district;
+//@property (nonatomic,copy) NSString *typeID;
+//@property (nonatomic,copy) NSString *space;
+//@property (nonatomic,copy) NSString *chooseStr;
 
 @end
 
@@ -34,7 +39,6 @@
     }
     return self;
 }
-
 - (void)cllLocation{
     KGLocationCityManager *manager = [KGLocationCityManager shareManager];
     [manager obtainYourLocation];
@@ -43,7 +47,6 @@
         mySelf.locationCityName = city;
     };
 }
-
 - (void)setNavCenterView{
     
     _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, NavTopHeight)];
@@ -64,7 +67,7 @@
     [_titleView addSubview:_line];
     
 }
-//MARK:--------------------------------------创建公共按钮--------------------------------------------------
+//MARK:--创建公共按钮--
 - (UIButton *)createButtonWithFram:(CGRect)frame title:(NSString *)title color:(UIColor *)color font:(UIFont *)font{
     UIButton *norBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     norBtu.frame = frame;
@@ -95,7 +98,6 @@
             self.line.centerX = sender.centerX;
         }];
     }
-    
     if ([sender.currentTitle isEqualToString:@"全城"]) {
         self.cityScreeningView.cityName = _locationCityName;
         self.cityScreeningView.hidden = NO;
@@ -120,34 +122,62 @@
         self.chooseType.hidden = YES;
     }
 }
-
+// MARK: --选择地区--
 - (MapAllCityScreeningView *)cityScreeningView{
     if (!_cityScreeningView) {
         _cityScreeningView = [[MapAllCityScreeningView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight/3*2)];
+        __weak typeof(self) weakSelf = self;
+        _cityScreeningView.sendCityDis = ^(NSString *cityName) {
+            //:--在这里获取选择地区--
+            if ([weakSelf.delegate respondsToSelector:@selector(sendChooseToVCType:chooseStr:)]) {
+                [weakSelf.delegate sendChooseToVCType:@"地区" chooseStr:cityName];
+            }
+        };
         [self addSubview:_cityScreeningView];
     }
     return _cityScreeningView;
 }
-
+// MARK: --选择的距离--
 - (MapSpaceToYourView *)distanceView{
     if (!_distanceView) {
         _distanceView = [[MapSpaceToYourView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight/3*2)];
+        __weak typeof(self) weakSelf = self;
+        _distanceView.sendSpace = ^(NSString *space) {
+            //:--在这里获取距离--
+            if ([weakSelf.delegate respondsToSelector:@selector(sendChooseToVCType:chooseStr:)]) {
+                [weakSelf.delegate sendChooseToVCType:@"距离" chooseStr:space];
+            }
+        };
         [self addSubview:_distanceView];
     }
     return _distanceView;
 }
-
+// MARK: --选择的类型--
 - (MapTypeChooseView *)chooseType{
     if (!_chooseType) {
         _chooseType = [[MapTypeChooseView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight/3*2) type:MapTypeInstitutions];
+        __weak typeof(self) weakSelf = self;
+        _chooseType.sendChooseTypeID = ^(NSString *typeID) {
+            //:--在这里获取选择的类型--
+            if ([weakSelf.delegate respondsToSelector:@selector(sendChooseToVCType:chooseStr:)]) {
+                [weakSelf.delegate sendChooseToVCType:@"类型" chooseStr:typeID];
+            }
+        };
         [self addSubview:_chooseType];
     }
     return _chooseType;
 }
-
+// MARK: --特色--
 - (MapFeaturesView *)featureView{
     if (!_featureView) {
         _featureView = [[MapFeaturesView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, 75)];
+        __weak typeof(self) weakSelf = self;
+        _featureView.sendChoose = ^(NSString *chooseStr) {
+            //:--在这里获取选择的特色--
+            if ([weakSelf.delegate respondsToSelector:@selector(sendChooseToVCType:chooseStr:)]) {
+                [weakSelf.delegate sendChooseToVCType:@"特色" chooseStr:chooseStr];
+            }
+        };
         [self addSubview:_featureView];
     }
     return _featureView;

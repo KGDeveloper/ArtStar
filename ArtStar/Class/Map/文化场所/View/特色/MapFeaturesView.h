@@ -10,4 +10,6 @@
 
 @interface MapFeaturesView : UIView
 
+@property (nonatomic,copy) void(^sendChoose)(NSString *chooseStr);
+
 @end

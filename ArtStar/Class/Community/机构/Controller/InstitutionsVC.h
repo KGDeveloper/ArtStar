@@ -10,4 +10,6 @@
 
 @interface InstitutionsVC : BaseVC
 
+@property (nonatomic,copy) NSString *postID;
+
 @end

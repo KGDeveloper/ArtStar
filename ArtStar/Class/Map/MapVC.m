@@ -12,7 +12,7 @@
 #import "LiteratureAndArtVenuesVC.h"
 #import "ConsumptionOfLiteratureAndArtVC.h"
 
-@interface MapVC ()
+@interface MapVC ()<MapTopScreeningViewDelegate>
 
 @property (nonatomic,strong) UIView *titleView;
 @property (nonatomic,strong) UIView *line;
@@ -34,17 +34,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"]) {
+        [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"] image:Image(@"loc")];
+    }else{
+        [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
+    }
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"筛选" image:nil];
-    [self cllLocation];
     [self loadHTMLFaile];
     [self setNavCenterView];
-    // !!!: --判断是否是刚打开APP，如果是从其他页面跳转过来不显示活动入口，只在第一次进入才显示--
+//     !!!: --判断是否是刚打开APP，如果是从其他页面跳转过来不显示活动入口，只在第一次进入才显示--
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"IntoAcitivitry"]) {
         [self intoAcitivityView];
 //        [[NSUserDefaults standardUserDefaults] setObject:@"已加载过" forKey:@"IntoAcitivitry"];
 //        [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+- (void)yourLocation{
+    
 }
 // MARK: --初始化文化消费页面--
 - (ConsumptionOfLiteratureAndArtVC *)consumptionOfLiteratureAndArtVC{
@@ -152,7 +158,9 @@
 // MARK: --导航栏左侧按钮--
 - (void)leftNavBtuAction:(UIButton *)sender{
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
-    [self cllLocation];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"]) {
+        [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"] image:Image(@"loc")];
+    }
 }
 // MARK: --导航栏右侧按钮--
 - (void)rightNavBtuAction:(UIButton *)sender{
@@ -166,22 +174,18 @@
         self.fuzzyScreeningView.hidden = NO;
     }
 }
-// MARK: --获取当前位置以及城市名--
-- (void)cllLocation{
-    KGLocationCityManager *manager = [KGLocationCityManager shareManager];
-    [manager obtainYourLocation];
-    __weak typeof(self) mySelf = self;
-    manager.ToObtainYourLocation = ^(NSString *city, double latitude, double longitude) {
-        [mySelf setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:city image:Image(@"loc")];
-    };
-}
 // MARK: --创建筛选页面--
 - (MapTopScreeningView *)screeningView{
     if (!_screeningView) {
         _screeningView = [[MapTopScreeningView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _screeningView.delegate = self;
         [self.navigationController.view addSubview:_screeningView];
     }
     return _screeningView;
+}
+// MARK: --MapTopScreeningViewDelegate--
+- (void)sendChooseToVCType:(NSString *)type chooseStr:(NSString *)chooseStr{
+    
 }
 // MARK: --创建筛选附近的人筛选页面--
 - (MapAccurateAndFuzzyScreeningView *)fuzzyScreeningView{

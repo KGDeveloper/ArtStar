@@ -10,7 +10,7 @@
 #import "PickUpTaskTableViewCell.h"
 #import "TaskDetailVC.h"
 
-@interface PickUpTaskView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+@interface PickUpTaskView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,PickUpTaskTableViewCellDelegate>
 
 @property (nonatomic,strong) UITableView *listView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
@@ -51,6 +51,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     PickUpTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PickUpTaskTableViewCell" forIndexPath:indexPath];
     NSDictionary *dic = _dataArr[indexPath.row];
+    cell.delegate = self;
+    cell.taskID = [dic[@"tid"] integerValue];
     cell.titleLab.text = dic[@"tname"];
     cell.detailLab.text = [NSString stringWithFormat:@"报酬：%@/小时",dic[@"money"]];
     return cell;
@@ -61,6 +63,18 @@
     vc.tid = dic[@"tid"];
     [[self supViewController].navigationController pushViewController:vc animated:YES];
 }
+// MARK: --PickUpTaskTableViewCellDelegate--
+- (void)todoTaskWithID:(NSInteger)taskID{
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:receptionUserTask parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":@(taskID)} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        [MBProgressHUD bwm_showTitle:result[@"message"] toView:weakSelf hideAfter:1];
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+    }];
+}
+// MARK: --空数据填充--
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return Image(@"空空如也");
 }

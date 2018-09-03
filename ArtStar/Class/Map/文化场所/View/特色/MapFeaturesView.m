@@ -58,6 +58,10 @@
     
     _rightBtu.backgroundColor = [UIColor whiteColor];
     [_rightBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    
+    if (self.sendChoose) {
+        self.sendChoose(sender.currentTitle);
+    }
 }
 - (void)rightAction:(UIButton *)sender{
     sender.backgroundColor = Color_333333;
@@ -65,6 +69,10 @@
     
     _leftBtu.backgroundColor = [UIColor whiteColor];
     [_leftBtu setTitleColor:Color_333333 forState:UIControlStateNormal];
+    
+    if (self.sendChoose) {
+        self.sendChoose(sender.currentTitle);
+    }
 }
 
 

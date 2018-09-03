@@ -15,6 +15,9 @@
     // Initialization code
 }
 - (IBAction)doTask:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(todoTaskWithID:)]) {
+        [self.delegate todoTaskWithID:_taskID];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

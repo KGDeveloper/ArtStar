@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger,MapType){MapTypeInstitutions = 0,MapTypeConsumption};
 @interface MapTypeChooseView : UIView
 
 @property (nonatomic,assign) MapType mytype;
+@property (nonatomic,copy) void(^sendChooseTypeID)(NSString *typeID);
 
 - (instancetype)initWithFrame:(CGRect)frame type:(MapType)type;
 

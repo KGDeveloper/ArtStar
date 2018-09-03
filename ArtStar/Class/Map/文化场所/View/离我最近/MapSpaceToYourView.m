@@ -56,7 +56,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (self.sendSpace) {
+        self.sendSpace(_countryArr[indexPath.row]);
+    }
 }
 
 - (UIView *)tableViewWhiteBackView:(CGRect)frame{

@@ -18,8 +18,8 @@
 }
 // FIXME: ----
 - (IBAction)releaseBtuAction:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(releaseTask)]) {
-        [self.delegate releaseTask];
+    if ([self.delegate respondsToSelector:@selector(releaseTask:taskId:)]) {
+        [self.delegate releaseTask:_type taskId:_taskID];
     }
 }
 - (void)textViewDidBeginEditing:(UITextView *)textView{

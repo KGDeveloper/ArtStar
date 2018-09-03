@@ -11,5 +11,6 @@
 @interface MapAllCityScreeningView : UIView
 
 @property (nonatomic,copy) NSString *cityName;
+@property (nonatomic,copy) void(^sendCityDis)(NSString *cityName);
 
 @end

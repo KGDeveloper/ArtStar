@@ -246,6 +246,11 @@
  设置朋友圈权限的接口
  */
 #define setFriendCirclePermissions [serverIP stringByAppendingString:@"FriendCirclePermissions/setFriendCirclePermissions"]
+///文化场所首页
+#define findAllMerchant [serverIP stringByAppendingString:@"merchants/findAllMerchant"]
+///文艺消费
+#define findAllMerchants [serverIP stringByAppendingString:@"merchants/findAllMerchants"]
+
 
 
 #endif /* MineHttpsDefine_h */

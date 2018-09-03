@@ -95,25 +95,59 @@
         ReleaseTaskIntrduiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReleaseTaskIntrduiceCell" forIndexPath:indexPath];
         cell.placehodleLab.hidden = YES;
         cell.writeLab.text = _dataDic[@"describes"];
-        cell.writeLab.editable = NO;
+        cell.writeLab.editable = YES;
+        cell.delegate = self;
+        cell.taskID = [_dataDic[@"tid"] integerValue];
         if ([_dataDic[@"stuts"] integerValue] == 1) {
+            cell.type = @"待接取";
             [cell.releaseBtu setTitle:@"待接取" forState:UIControlStateNormal];
         }else if ([_dataDic[@"stuts"] integerValue] == 2){
+            cell.type = @"已接取";
+            cell.writeLab.editable = NO;
             [cell.releaseBtu setTitle:@"已接取" forState:UIControlStateNormal];
             cell.releaseBtu.backgroundColor = Color_333333;
         }else if ([_dataDic[@"stuts"] integerValue] == 3){
+            if ([_dataDic[@"uid"] integerValue] == [[KGUserInfo shareInterace].userID integerValue]) {
+                cell.type = @"能确认";
+            }else{
+                cell.type = @"没有权限";
+            }
             [cell.releaseBtu setTitle:@"待完成" forState:UIControlStateNormal];
         }else if ([_dataDic[@"stuts"] integerValue] == 4){
             [cell.releaseBtu setTitle:@"已完成" forState:UIControlStateNormal];
+            cell.writeLab.editable = NO;
             cell.releaseBtu.backgroundColor = Color_333333;
         }
         return cell;
     }
 }
 // MARK: --ReleaseTaskIntrduiceCellDelegate--
-- (void)releaseTask{
+- (void)releaseTask:(NSString *)type taskId:(NSInteger)taskID{
+    if ([type isEqualToString:@"待接取"]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) weakSelf = self;
+        [KGRequestNetWorking postWothUrl:receptionUserTask parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":@(taskID)} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD bwm_showTitle:result[@"message"] toView:weakSelf.view hideAfter:1];
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        }];
+    }else if ([type isEqualToString:@"能确认"]){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) weakSelf = self;
+        [KGRequestNetWorking postWothUrl:overUserTask parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":@(taskID)} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [MBProgressHUD bwm_showTitle:result[@"message"] toView:weakSelf.view hideAfter:1];
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        }];
+    }
+}
+
+- (void)sendTaskDescribe:(NSString *)describe {
     
 }
+
 
 - (void)createData{
     __weak typeof(self) weakSelf = self;
@@ -139,13 +173,14 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

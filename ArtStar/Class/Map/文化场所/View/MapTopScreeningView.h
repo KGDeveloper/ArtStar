@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MapTopScreeningViewDelegate <NSObject>
+
+- (void)sendChooseToVCType:(NSString *)type chooseStr:(NSString *)chooseStr;
+
+@end
+
 @interface MapTopScreeningView : UIView
 
 @property (nonatomic,assign) NSInteger mapType;
+@property (nonatomic,weak) id<MapTopScreeningViewDelegate>delegate;
 
 @end

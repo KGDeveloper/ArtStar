@@ -10,4 +10,6 @@
 
 @interface MapSpaceToYourView : UIView
 
+@property (nonatomic,copy) void(^sendSpace)(NSString *space);
+
 @end

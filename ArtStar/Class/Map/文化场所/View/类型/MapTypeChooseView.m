@@ -121,7 +121,9 @@
             NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MapTypePlist" ofType:@"plist"];
             NSDictionary *dic = [[NSDictionary alloc]initWithContentsOfFile:filePath];
             NSDictionary *tmpDic = dic[@"文化场所"];
-            NSLog(@"%@",tmpDic[_countryArr[indexPath.row]][@"id"]);
+            if (self.sendChooseTypeID) {
+                self.sendChooseTypeID(tmpDic[_countryArr[indexPath.row]][@"id"]);
+            }
         }
     }else{
         if (tableView == _leftView) {
@@ -130,7 +132,9 @@
             NSDictionary *tmpDic = dic[@"文化消费"];
             NSDictionary *detailDic = tmpDic[_countryArr[indexPath.row]];
             NSDictionary *dataDic = detailDic[@"data"];
-            NSLog(@"detailDic = %@",detailDic[@"id"]);
+            if (self.sendChooseTypeID) {
+                self.sendChooseTypeID(detailDic[@"id"]);
+            }
             _leftStr = _countryArr[indexPath.row];
             _addressArr = dataDic.allKeys.copy;
             [_rightView reloadData];
@@ -141,7 +145,9 @@
             NSDictionary *detailDic = tmpDic[_leftStr];
             NSDictionary *dataDic = detailDic[@"data"];
             NSDictionary *tmp = dataDic[_addressArr[indexPath.row]];
-            NSLog(@"tmp = %@",tmp[@"id"]);
+            if (self.sendChooseTypeID) {
+                self.sendChooseTypeID(tmp[@"id"]);
+            }
         }
     }
 }

@@ -18,7 +18,7 @@
 /**
  发布任务
  */
-- (void)releaseTask;
+- (void)releaseTask:(NSString *)type taskId:(NSInteger)taskID;
 
 @end
 
@@ -44,6 +44,8 @@
  发送任务描述到view
  */
 @property (weak, nonatomic) id <ReleaseTaskIntrduiceCellDelegate>delegate;
+@property (nonatomic,assign) NSInteger taskID;
+@property (nonatomic,copy) NSString *type;
 
 
 @end

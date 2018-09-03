@@ -27,9 +27,11 @@
                                                   -CGRectGetHeight(self.calloutView.bounds) / 2.f + self.calloutOffset.y);
         }
         
-        self.calloutView.image = Image(@"独有标识");
-        self.calloutView.title = self.annotation.title;
+        self.calloutView.image = Image(@"地图测试数据");
+        self.calloutView.userInteractionEnabled = YES;
+        self.calloutView.title = [[self.annotation.title componentsSeparatedByString:@"-"] firstObject];
         self.calloutView.subtitle = self.annotation.subtitle;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MapSelect" object:[[self.annotation.title componentsSeparatedByString:@"-"] lastObject]];
         
         [self addSubview:self.calloutView];
     }

@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PickUpTaskTableViewCellDelegate <NSObject>
+
+- (void)todoTaskWithID:(NSInteger)taskID;
+
+@end
+
 @interface PickUpTaskTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
+@property (nonatomic,assign) NSInteger taskID;
+@property (nonatomic,weak) id<PickUpTaskTableViewCellDelegate>delegate;
 
 
 @end

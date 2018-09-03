@@ -36,7 +36,7 @@
 
 #define TabLeViewFootView [[UIView alloc]initWithFrame:CGRectZero]
 
-#define GeocodeApiKey @"e172283179a7520685fe0053ea06a4fd"
+#define GeocodeApiKey @"5a8e15e6edaf329a1716b6ab48a5f266"
 
 #define QiniuAK @"GtoI3GgOSMPciZWop4byiRMAGlvHv2RVvbCUXLYS"
 #define QiniuSK @"d7wyhtUIYp7ekQ6vrLGYvGCvfvHePM-YIpe1d82_"
@@ -52,9 +52,9 @@
 
 
 //MARK:---------------------------------------登录模块-------------------------------------------------
-#define serverIP @"http://39.107.97.147:8090/"
-//#define serverIP @"http://192.168.1.119:80/"
-//#define serverIP @"http://192.168.1.5/"
+//#define serverIP @"http://118.190.145.106/"
+#define serverIP @"http://192.168.1.119:80/"
+//#define serverIP @"http://192.168.1.8/" //张
 //#define serverIP @"http://192.168.1.3/"
 //MARK:----------------------------------------注册登录------------------------------------------------
 /**
@@ -199,6 +199,10 @@
  @return 查询自己接收并且完成的任务
  */
 #define MyreceptionOverUserTask [serverIP stringByAppendingString:@"task/MyreceptionOverUserTask"]
+///接收任务
+#define receptionUserTask [serverIP stringByAppendingString:@"task/receptionUserTask"]
+///9、确认自己被接收的任务已完成
+#define overUserTask [serverIP stringByAppendingString:@"task/overUserTask"]
 /**
  查询自己发布的任务
 
