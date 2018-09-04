@@ -324,7 +324,7 @@ UITextFieldDelegate>
         [self pushNoTabBarViewController:wordVC animated:YES];
     }
 }
-//MARK:--------------------------------------MineEditMyselfInfoEditCellDelegate--------------------------------------------------
+//MARK:--MineEditMyselfInfoEditCellDelegate--
 - (void)sendIntroudceToController:(NSString *)introudce{
     _model.personSignature = introudce;
 }
@@ -355,6 +355,8 @@ UITextFieldDelegate>
         homeVC.chooseHomeTwon = ^(NSString *country, NSString *provices, NSString *city) {
             mySelf.model.hometown = @{@"country":country,@"province":provices,@"city":city};
             [mySelf.userInfoDic setObject:@{@"country":country,@"province":provices,@"city":city} forKey:@"hometown"];
+            NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+            [mySelf.listView reloadRowAtIndexPath:path withRowAnimation:UITableViewRowAnimationAutomatic];
         };
         [self pushNoTabBarViewController:homeVC animated:YES];
     }
@@ -367,7 +369,7 @@ UITextFieldDelegate>
     }
     return _cameraView;
 }
-//MARK:------------------------------------------KGCameraDelegate----------------------------------------------
+//MARK:--KGCameraDelegate--
 /**
  本地上传
  */

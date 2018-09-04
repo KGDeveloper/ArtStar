@@ -15,7 +15,7 @@
 @interface LiteratureAndArtVenuesVC ()<MAMapViewDelegate>
 
 @property (nonatomic,strong) ViewForActivity *activityView;
-@property (nonatomic,strong) NSMutableArray *dataArr;
+@property (nonatomic,strong) MAMapView *mapView;
 
 @end
 
@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _dataArr = [NSMutableArray array];
     [self requestData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapSelect:) name:@"MapSelect" object:nil];
@@ -34,6 +33,7 @@
 - (void)mapSelect:(NSNotification *)info{
     InstitutionsVC *vc = [[InstitutionsVC alloc]init];
     vc.postID = info.object;
+    vc.url = findOneMerchant;
     [self pushNoTabBarViewController:vc animated:YES];
 }
 // MARK: --请求文化场所首页--
@@ -43,11 +43,8 @@
     [KGRequestNetWorking postWothUrl:findAllMerchant parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"longitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"latitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]} succ:^(id result) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if ([result[@"code"] integerValue] == 200) {
-            NSArray *tmp = result[@"data"];
-            weakSelf.dataArr = [NSMutableArray arrayWithArray:tmp];
-            if (weakSelf.dataArr > 0) {
-                [weakSelf setMapView];
-            }
+            weakSelf.searchArr = result[@"data"];
+            [weakSelf setMapView];
         }
     } fail:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -56,21 +53,21 @@
 // MARK: --创建地图--
 - (void)setMapView{
     [AMapServices sharedServices].enableHTTPS = YES;
-    MAMapView *mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    mapView.delegate = self;
-    mapView.showsIndoorMap = YES;
-    mapView.touchPOIEnabled = YES;
-    mapView.rotateEnabled = NO;
-    mapView.rotateCameraEnabled = NO;
-    [self.view addSubview:mapView];
+    self.mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    self.mapView.delegate = self;
+    self.mapView.showsIndoorMap = YES;
+    self.mapView.touchPOIEnabled = YES;
+    self.mapView.rotateEnabled = NO;
+    self.mapView.rotateCameraEnabled = NO;
+    [self.view addSubview:self.mapView];
     
-    [_dataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_searchArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSDictionary *dic = obj;
         MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc]init];
         pointAnnotation.coordinate = CLLocationCoordinate2DMake([dic[@"latitude"] floatValue], [dic[@"longitude"] floatValue]);
         pointAnnotation.title = [NSString stringWithFormat:@"%@-%@",dic[@"username"],dic[@"id"]];
         pointAnnotation.subtitle = dic[@"blurb"];
-        [mapView addAnnotation:pointAnnotation];
+        [self.mapView addAnnotation:pointAnnotation];
     }];
 }
 // MARK: --MAMapViewDelegate--
@@ -88,6 +85,13 @@
     }
     return nil;
 }
+
+- (void)setSearchArr:(NSArray *)searchArr{
+    _searchArr = searchArr;
+    [self.mapView removeFromSuperview];
+    [self setMapView];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

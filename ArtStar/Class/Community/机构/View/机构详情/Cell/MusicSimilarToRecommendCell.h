@@ -10,4 +10,6 @@
 
 @interface MusicSimilarToRecommendCell : UITableViewCell
 
+@property (nonatomic,copy) NSArray *dataArr;
+
 @end

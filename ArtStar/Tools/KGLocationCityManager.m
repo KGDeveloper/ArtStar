@@ -52,6 +52,9 @@
     regeo.requireExtension = YES;
     [self.search AMapReGoecodeSearch:regeo];
 }
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error{
+    
+}
 /* 逆地理编码回调. */
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response{
     if (response.regeocode != nil){

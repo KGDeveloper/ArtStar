@@ -11,8 +11,9 @@
 #import "MapAccurateAndFuzzyScreeningView.h"
 #import "LiteratureAndArtVenuesVC.h"
 #import "ConsumptionOfLiteratureAndArtVC.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
-@interface MapVC ()<MapTopScreeningViewDelegate>
+@interface MapVC ()<MapTopScreeningViewDelegate,UIWebViewDelegate>
 
 @property (nonatomic,strong) UIView *titleView;
 @property (nonatomic,strong) UIView *line;
@@ -21,36 +22,35 @@
 @property (nonatomic,copy) NSString *type;
 @property (nonatomic,strong) LiteratureAndArtVenuesVC *literatureAndArtVenuesVC;//:--文化场所--
 @property (nonatomic,strong) ConsumptionOfLiteratureAndArtVC *consumptionOfLiteratureAndArtVC;//:--文艺消费--
+@property (nonatomic,strong) JSContext *jsContext;
 
 @end
 
 @implementation MapVC
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"]) {
-        [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"] image:Image(@"loc")];
-    }else{
-        [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
-    }
+    [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
     [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"筛选" image:nil];
     [self loadHTMLFaile];
     [self setNavCenterView];
-//     !!!: --判断是否是刚打开APP，如果是从其他页面跳转过来不显示活动入口，只在第一次进入才显示--
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"IntoAcitivitry"]) {
+    [self yourLocation];
+    // !!!: --判断是否是刚打开APP，如果是从其他页面跳转过来不显示活动入口，只在第一次进入才显示--
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"IntoAcitivitry"]) {
         [self intoAcitivityView];
-//        [[NSUserDefaults standardUserDefaults] setObject:@"已加载过" forKey:@"IntoAcitivitry"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSUserDefaults standardUserDefaults] setObject:@"已加载过" forKey:@"IntoAcitivitry"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 - (void)yourLocation{
-    
+    KGLocationCityManager *manager = [KGLocationCityManager shareManager];
+    [manager obtainYourLocation];
+    __weak typeof(self) weakSelf = self;
+    manager.ToObtainYourLocation = ^(NSString *city, double latitude, double longitude) {
+        [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"] image:Image(@"loc")];
+        [weakSelf requestLiterature];
+    };
 }
 // MARK: --初始化文化消费页面--
 - (ConsumptionOfLiteratureAndArtVC *)consumptionOfLiteratureAndArtVC{
@@ -73,6 +73,7 @@
     UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight - NavButtomHeight)];
     webView.dataDetectorTypes = UIDataDetectorTypeAll;
     webView.scrollView.scrollEnabled = NO;
+    webView.delegate = self;
     NSString *mainBoundPath = [[NSBundle mainBundle] bundlePath];
     NSString *basePath = [NSString stringWithFormat:@"%@/星球吸引",mainBoundPath];
     NSURL *baseUrl = [NSURL fileURLWithPath:basePath isDirectory:YES];
@@ -80,6 +81,12 @@
     NSString *htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
     [webView loadHTMLString:htmlString baseURL:baseUrl];
     [self.view addSubview:webView];
+}
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    if ([request.mainDocumentURL.relativePath isEqualToString:@"/initData"]) {
+        
+    }
+    return YES;
 }
 // MARK: --创建活动入口--
 - (void)intoAcitivityView{
@@ -158,9 +165,7 @@
 // MARK: --导航栏左侧按钮--
 - (void)leftNavBtuAction:(UIButton *)sender{
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"]) {
-        [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"] image:Image(@"loc")];
-    }
+    [self yourLocation];
 }
 // MARK: --导航栏右侧按钮--
 - (void)rightNavBtuAction:(UIButton *)sender{
@@ -195,6 +200,21 @@
     }
     return _fuzzyScreeningView;
 }
+// MARK: --文化场所一系类操作--
+- (void)requestLiterature{
+    __weak typeof(self) weakSelf = self;
+    if ([_type isEqualToString:@"文化场所"]) {
+        [KGRequestNetWorking postWothUrl:findPlaceMerchants parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"longitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"latitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]} succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                weakSelf.literatureAndArtVenuesVC.searchArr = result[@"data"];
+            }
+        } fail:^(NSError *error) {
+            
+        }];
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

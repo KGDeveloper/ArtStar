@@ -249,7 +249,9 @@
 ///文化场所首页
 #define findAllMerchant [serverIP stringByAppendingString:@"merchants/findAllMerchant"]
 ///文艺消费
-#define findAllMerchants [serverIP stringByAppendingString:@"merchants/findAllMerchants"]
+#define findAllMerchants [serverIP stringByAppendingString:@"consumption/findAllMerchants"]
+///根据指定位置来查询附近的商家
+#define findPlaceMerchants [serverIP stringByAppendingString:@"merchants/findPlaceMerchants"]
 
 
 

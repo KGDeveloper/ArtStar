@@ -182,8 +182,10 @@
  根据条件查今日推荐图书集合，畅销图书集合，你可能感兴趣图书集合
  */
 #define selectBookListByCondition [serverIP stringByAppendingString:@"community/selectBookListByCondition"]
-
-
+///活动机构详情
+#define selectPlaceById [serverIP stringByAppendingString:@"community/selectPlaceById"]
+///普通机构详情
+#define findOneMerchant [serverIP stringByAppendingString:@"merchants/findOneMerchant"]
 
 
 

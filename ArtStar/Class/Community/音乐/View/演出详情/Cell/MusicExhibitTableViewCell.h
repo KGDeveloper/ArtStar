@@ -11,5 +11,6 @@
 @interface MusicExhibitTableViewCell : UITableViewCell
 
 @property (nonatomic,copy) NSDictionary *dataDic;
+@property (nonatomic,copy) NSDictionary *inDic;
 
 @end

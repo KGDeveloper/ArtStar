@@ -86,6 +86,21 @@
     _detailLab.attributedText = [TransformChineseToPinying string:dataDic[@"recommend"] font:SYFont(12) space:9];
 }
 
+- (void)setInDic:(NSDictionary *)inDic{
+    _inDic = inDic;
+    NSArray<NSDictionary *> *imageArr = inDic[@"images"];
+    if (imageArr.count > 0) {
+        NSDictionary *imageDic = [imageArr firstObject];
+        [_topImage sd_setImageWithURL:[NSURL URLWithString:imageDic[@"iamgeURL"]]];
+    }
+    _titleLab.text = inDic[@"username"];
+    if (![inDic[@"blurb"] isKindOfClass:[NSNull class]]) {
+        _detailLab.attributedText = [TransformChineseToPinying string:inDic[@"blurb"] font:SYFont(12) space:9];
+    }else{
+        _detailLab.attributedText = [TransformChineseToPinying string:@"" font:SYFont(12) space:9];
+    }
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

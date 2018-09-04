@@ -82,6 +82,11 @@
     
 }
 
+- (void)setTitle:(NSString *)title{
+    _title = title;
+    [_leftBtu setTitle:title forState:UIControlStateNormal];
+}
+
 - (void)setImageArr:(NSArray *)imageArr{
     _imageArr = imageArr;
     
@@ -89,8 +94,9 @@
     _scrollView.contentSize = CGSizeMake(ViewWidth(self) * imageArr.count, ViewHeight(self));
     
     for (int i = 0; i < imageArr.count; i++) {
+        NSDictionary *dic = imageArr[i];
         UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(ViewWidth(self)*i, 0, ViewWidth(self), ViewHeight(self))];
-        [image sd_setImageWithURL:[NSURL URLWithString:imageArr[i]]];
+        [image sd_setImageWithURL:[NSURL URLWithString:dic[@"imageURL"]]];
         [_scrollView addSubview:image];
     }
 }

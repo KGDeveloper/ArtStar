@@ -21,6 +21,11 @@
         [_scrollView addSubview:image];
     }
 }
+- (IBAction)tletePhoneAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(tletePhoneAction)]) {
+        [self.delegate tletePhoneAction];
+    }
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

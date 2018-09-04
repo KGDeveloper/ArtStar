@@ -244,8 +244,8 @@
     NSString *fileUlr = [[NSBundle mainBundle] pathForResource:@"KGIndustryPlist" ofType:@"plist"];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:fileUlr];
     _firstArr = [NSMutableArray arrayWithArray:dic.allKeys];
-    [self createSecondArr:YES key:_firstArr[0]];
-    [self createThriedArr:YES title:_firstArr[0] key:_secondArr[1]];
+//    [self createSecondArr:YES key:_firstArr[0]];
+//    [self createThriedArr:YES title:_firstArr[0] key:_secondArr[1]];
 }
 
 - (void)createSecondArr:(BOOL)status key:(NSString *)key{

@@ -11,5 +11,6 @@
 @interface InstitutionsDetailHeaderView : UIView
 
 @property (nonatomic,copy) NSArray *imageArr;
+@property (nonatomic,copy) NSString *title;
 
 @end

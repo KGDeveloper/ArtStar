@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MusicPhotosCellDelegate <NSObject>
+
+- (void)tletePhoneAction;
+
+@end
+
 @interface MusicPhotosCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *countLab;
@@ -17,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *adressLab;
 
 @property (weak, nonatomic) IBOutlet UIButton *spaceLab;
+
+@property (nonatomic,weak) id<MusicPhotosCellDelegate>delegate;
 
 @property (nonatomic,copy) NSArray *imageArr;
 

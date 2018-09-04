@@ -32,6 +32,12 @@
     [self addSubview:_titleLab];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.theTicketAction) {
+        self.theTicketAction();
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -11,5 +11,6 @@
 @interface LiteratureAndArtVenuesVC : BaseVC
 
 @property (nonatomic,copy) NSArray *chooseArr;
+@property (nonatomic,copy) NSArray *searchArr;
 
 @end

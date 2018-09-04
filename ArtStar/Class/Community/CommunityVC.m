@@ -29,7 +29,7 @@
 
 @end
 
-@interface CommunityVC ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
+@interface CommunityVC ()<UIWebViewDelegate>
 
 @property (nonatomic,copy) NSArray *dataArr;
 @property (nonatomic,strong) JSContext *jsContext;

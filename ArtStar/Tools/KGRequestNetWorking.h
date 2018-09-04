@@ -53,6 +53,12 @@
  @return 视频第一帧图片
  */
 - (UIImage *)thumbnailImageForVideo:(NSURL *)video;
+/**
+ 照片旋转后修正
+
+ @param aImage 原始照片
+ @return 修改后的照片
+ */
 + (UIImage *)fixOrientation:(UIImage *)aImage;
 
 

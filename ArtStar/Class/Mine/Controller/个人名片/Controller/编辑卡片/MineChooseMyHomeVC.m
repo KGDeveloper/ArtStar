@@ -14,17 +14,15 @@
 
 @property (nonatomic,strong) UITableView *cityView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
-@property (nonatomic,strong) NSMutableArray *countryArr;
+
 @property (nonatomic,strong) NSMutableArray *provinceArr;
 @property (nonatomic,strong) NSMutableArray *cityArr;
 @property (nonatomic,strong) NSMutableArray *areaArr;
 
-@property (nonatomic,assign) BOOL isCountry;
 @property (nonatomic,assign) BOOL isProvince;
 @property (nonatomic,assign) BOOL isCity;
 @property (nonatomic,assign) BOOL isArea;
 
-@property (nonatomic,copy) NSString *countryStr;
 @property (nonatomic,copy) NSString *provinceStr;
 @property (nonatomic,copy) NSString *cityStr;
 
@@ -33,15 +31,8 @@
 @implementation MineChooseMyHomeVC
 
 - (void)leftNavBtuAction:(UIButton *)sender{
-    if (_isCountry == YES) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
     if (_isProvince == YES) {
-        _isCountry = YES;
-        _isProvince = NO;
-        _dataArr = _countryArr.copy;
-        [_cityView reloadData];
-        [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"家乡" image:Image(@"back")];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     if (_isCity == YES) {
         _isProvince = YES;
@@ -53,7 +44,7 @@
 }
 - (void)rightNavBtuAction:(UIButton *)sender{
     if (self.chooseHomeTwon) {
-        self.chooseHomeTwon(_countryStr, _provinceStr, _cityStr);
+        self.chooseHomeTwon(@"中国", _provinceStr, _cityStr);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -64,13 +55,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     _dataArr = [NSMutableArray array];
-    _countryArr = [NSMutableArray array];
     _provinceArr = [NSMutableArray array];
     _cityArr = [NSMutableArray array];
     _areaArr = [NSMutableArray array];
     
-    _isCountry = YES;
-    _isProvince = NO;
+    _isProvince = YES;
     _isCity = NO;
     _isArea = NO;
     
@@ -96,28 +85,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MineChooseMyHomeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineChooseMyHomeCell"];
-    if (_isCountry == YES) {
-        if ([_dataArr[indexPath.row] isEqualToString:@"中国"]) {
-            cell.openImage.hidden = NO;
-        }else{
-            cell.openImage.hidden = YES;
-        }
-    }
     if (_isProvince == YES) {
         cell.openImage.hidden = NO;
     }
     if (_isCity == YES) {
-        cell.selectedBackgroundView = [self tableViewNormalBackView:cell.frame];
+        cell.selectedBackgroundView = [self tableViewWhiteBackView:cell.frame];
         cell.openImage.hidden = YES;
     }
     cell.titleLab.text = _dataArr[indexPath.row];
     return cell;
-}
-
-- (UIView *)tableViewNormalBackView:(CGRect)frame{
-    UIView *backView = [[UIView alloc]initWithFrame:frame];
-    backView.backgroundColor = [UIColor colorWithHexString:@"#f5f5f5"];
-    return backView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -137,31 +113,25 @@
             [_cityView reloadData];
         }
     }
-    if (_isCountry == YES) {
-        _countryStr = _dataArr[indexPath.row];
-        if ([_dataArr[indexPath.row] isEqualToString:@"中国"]) {
-            _isCountry = NO;
-            _isProvince = YES;
-            _dataArr = _provinceArr.copy;
-            [self setLeftBtuWithFrame:CGRectMake(0, 0, 150, 30) title:@"中国" image:Image(@"back")];
-            [_cityView reloadData];
-        }
-    }
 }
 
 - (void)createData{
-    
-    NSLocale *locale = [NSLocale currentLocale];
-    NSArray *arr = [NSLocale ISOCountryCodes];
-    for (NSString *countryCode in arr) {
-        NSString *countryName = [locale displayNameForKey:NSLocaleCountryCode value:countryCode];
-        [_countryArr addObject:countryName];
-    }
-    _dataArr = _countryArr.copy;
-    [_cityView reloadData];
-    
     _provinceArr = [NSMutableArray arrayWithArray:[KGCity province]];
+    _dataArr = _provinceArr;
+    [_cityView reloadData];
 
+}
+
+- (UIView *)tableViewWhiteBackView:(CGRect)frame{
+    UIView *backView = [[UIView alloc]initWithFrame:frame];
+    backView.backgroundColor = [UIColor whiteColor];
+    return backView;
+}
+
+- (UIView *)tableViewNormalBackView:(CGRect)frame{
+    UIView *backView = [[UIView alloc]initWithFrame:frame];
+    backView.backgroundColor = [UIColor colorWithHexString:@"#f5f5f5"];
+    return backView;
 }
 
 - (void)didReceiveMemoryWarning {

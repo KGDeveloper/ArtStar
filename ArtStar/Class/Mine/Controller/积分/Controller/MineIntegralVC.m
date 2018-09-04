@@ -78,7 +78,7 @@
         }else if ([title isEqualToString:@"积分明细"]){
             [mySelf pushNoTabBarViewController:[[MineIntegralDetailVC alloc]init] animated:YES];
         }else{
-            
+            [MBProgressHUD bwm_showTitle:@"该功能尚未实现哦~" toView:mySelf.view hideAfter:1];
         }
     };
     [header addSubview:_headerView];

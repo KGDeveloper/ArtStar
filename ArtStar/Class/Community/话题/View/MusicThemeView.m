@@ -119,13 +119,31 @@
         if ([keyDic[@"imgList"] isKindOfClass:NSClassFromString(@"__NSSingleObjectArrayI")]) {
             NSArray<NSDictionary *> *tmp = keyDic[@"imgList"];
             [keyDic removeObjectForKey:@"imgList"];
-            [keyDic setObject:tmp forKey:@"images"];
+            __block NSMutableArray *tmpArr = [NSMutableArray array];
+            [tmp enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:obj];
+                NSString *imageUrl = dic[@"locationimg"];
+                [dic removeObjectForKey:dic[@"locationimg"]];
+                [dic setObject:imageUrl forKey:@"imageURL"];
+                [tmpArr addObject:dic];
+            }];
+            [keyDic setObject:tmpArr.copy forKey:@"images"];
         }else{
             NSArray<NSDictionary *> *tmp = keyDic[@"imgList"];
             [keyDic removeObjectForKey:@"imgList"];
+            __block NSMutableArray *tmpArr = [NSMutableArray array];
+            [tmp enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:obj];
+                NSString *imageUrl = dic[@"locationimg"];
+                [dic removeObjectForKey:dic[@"locationimg"]];
+                [dic setObject:imageUrl forKey:@"imageURL"];
+                [tmpArr addObject:dic];
+            }];
+            [keyDic setObject:tmpArr.copy forKey:@"images"];
             [keyDic setObject:tmp forKey:@"images"];
         }
     }
+    
     [keyDic setObject:@{@"username":keyDic[@"username"],@"portraitUri":keyDic[@"portraitUri"]} forKey:@"user"];
     [keyDic removeObjectForKey:@"makeup"];
     [keyDic setObject:value forKey:@"composing"];
