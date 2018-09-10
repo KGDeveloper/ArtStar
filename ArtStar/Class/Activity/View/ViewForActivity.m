@@ -7,10 +7,14 @@
 //
 
 #import "ViewForActivity.h"
+#import "ActivityCellTableViewCell.h"
 
-@interface ViewForActivity ()
+@interface ViewForActivity ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UIView *centerView;
+@property (nonatomic,strong) UITableView *listView;
+@property (nonatomic,assign) NSInteger page;
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 
@@ -46,7 +50,62 @@
         [cancelBtu setImage:Image(@"组19拷贝") forState:UIControlStateNormal];
         [cancelBtu addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:cancelBtu];
+    }else if (alertType == ActivityTypeClick){
+        _page = 1;
+        _dataArr = [NSMutableArray array];
+        [self requestData];
+        [self setUpListView];
     }
+}
+
+- (void)setUpListView{
+    _listView = [[UITableView alloc]initWithFrame:CGRectMake(32, 65, ViewWidth(_centerView) - 64, ViewHeight(_centerView) - 140)];
+    _listView.delegate = self;
+    _listView.dataSource = self;
+    _listView.emptyDataSetSource = self;
+    _listView.emptyDataSetDelegate = self;
+    _listView.rowHeight = 50;
+    _listView.backgroundColor = [UIColor clearColor];
+    _listView.tableFooterView = TabLeViewFootView;
+    _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    __weak typeof(self) weakSelf = self;
+    _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.dataArr = [NSMutableArray array];
+        weakSelf.page = 1;
+        [weakSelf  requestData];
+        [weakSelf.listView.mj_header beginRefreshing];
+    }];
+    _listView.mj_footer =[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        weakSelf.page++;
+        [weakSelf requestData];
+        [weakSelf.listView.mj_footer beginRefreshing];
+    }];
+    [_centerView insertSubview:_listView atIndex:99];
+    
+    [_listView registerNib:[UINib nibWithNibName:@"ActivityCellTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ActivityCellTableViewCell"];
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _dataArr.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ActivityCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityCellTableViewCell"];
+    if (_dataArr.count > 0) {
+        NSDictionary *dic = _dataArr[indexPath.row];
+        cell.timeLab.text = [[dic[@"time"] componentsSeparatedByString:@" "] firstObject];
+        cell.nameLab.text = dic[@"mName"];
+    }
+    return cell;
+}
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return Image(@"空空如也");
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *str = @"木有内容哦~";
+    NSDictionary *attributes = @{NSFontAttributeName:SYFont(15),NSForegroundColorAttributeName:Color_999999};
+    return [[NSAttributedString alloc]initWithString:str attributes:attributes];
+}
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
+    return 25.0;
 }
 // MARK: --根据传入的图片创建自适应的视图--
 - (void)setShowImage:(UIImage *)showImage{
@@ -67,6 +126,28 @@
             self.hidden = YES;
         }
     }
+}
+
+- (void)requestData{
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:selectPunchRecordListByUidAndMid parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"uid":[KGUserInfo shareInterace].userID,@"page":@(_page),@"rows":@"15"} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        if ([result[@"code"] integerValue] == 200) {
+            NSArray *tmp = result[@"data"];
+            if (tmp.count > 0) {
+                [weakSelf.dataArr addObjectsFromArray:tmp];
+            }
+        }
+        [weakSelf.listView.mj_header endRefreshing];
+        [weakSelf.listView.mj_footer endRefreshing];
+        [weakSelf.listView reloadData];
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        [weakSelf.listView.mj_header endRefreshing];
+        [weakSelf.listView.mj_footer endRefreshing];
+        [weakSelf.listView reloadData];
+    }];
 }
 
 /*

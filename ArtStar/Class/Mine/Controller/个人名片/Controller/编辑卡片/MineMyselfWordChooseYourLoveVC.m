@@ -40,8 +40,16 @@
         if ([_titleStr isEqualToString:@"喜欢的书籍"]) {
             MineLoveBookModel *model = _dataArr[i];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            [dic setObject:model.region forKey:@"region"];
-            [dic setObject:model.writer forKey:@"writer"];
+            if (model.region == nil) {
+                [dic setObject:@"暂无" forKey:@"region"];
+            }else{
+                [dic setObject:model.region forKey:@"region"];
+            }
+            if (model.writer == nil) {
+                [dic setObject:@"暂无" forKey:@"writer"];
+            }else{
+                [dic setObject:model.writer forKey:@"writer"];
+            }
             if (model.userId == nil) {
                 [dic setObject:@"" forKey:@"userId"];
             }else{
@@ -53,8 +61,15 @@
                 [dic setObject:model.ID forKey:@"id"];
             }
             [dic setObject:@(model.bookGrade) forKey:@"bookGrade"];
+//            if ([model.bookGrade ]) {
+//                
+//            }
             [dic setObject:model.bookName forKey:@"bookName"];
-            [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            if (model.imageUrl == nil) {
+                [dic setObject:@"" forKey:@"imageUrl"];
+            }else{
+                [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            }
             if (model.createTime == nil) {
                 [dic setObject:@"暂无" forKey:@"createTime"];
             }else{
@@ -64,8 +79,16 @@
         }else if([_titleStr isEqualToString:@"喜欢的电影"]){
             MineLoveMoviesModel *model = _dataArr[i];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            [dic setObject:model.region forKey:@"region"];
-            [dic setObject:model.director forKey:@"director"];
+            if (model.region == nil) {
+                [dic setObject:@"暂无" forKey:@"region"];
+            }else{
+                [dic setObject:model.region forKey:@"region"];
+            }
+            if (model.director == nil) {
+                [dic setObject:@"暂无" forKey:@"director"];
+            }else{
+                [dic setObject:model.director forKey:@"director"];
+            }
             if (model.userId == nil) {
                 [dic setObject:@"" forKey:@"userId"];
             }else{
@@ -78,7 +101,11 @@
             }
             [dic setObject:@(model.movieGrade) forKey:@"movieGrade"];
             [dic setObject:model.movieName forKey:@"movieName"];
-            [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            if (model.imageUrl == nil) {
+                [dic setObject:@"" forKey:@"imageUrl"];
+            }else{
+                [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            }
             if (model.createTime == nil) {
                 [dic setObject:@"暂无" forKey:@"createTime"];
             }else{
@@ -88,8 +115,16 @@
         }else if ([_titleStr isEqualToString:@"喜欢的音乐"]){
             MineLoveMusicModel *model = _dataArr[i];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            [dic setObject:model.region forKey:@"region"];
-            [dic setObject:model.singer forKey:@"singer"];
+            if (model.region == nil) {
+                [dic setObject:@"暂无" forKey:@"region"];
+            }else{
+                [dic setObject:model.region forKey:@"region"];
+            }
+            if (model.singer == nil) {
+                [dic setObject:@"暂无" forKey:@"singer"];
+            }else{
+                [dic setObject:model.singer forKey:@"singer"];
+            }
             if (model.userId == nil) {
                 [dic setObject:@"" forKey:@"userId"];
             }else{
@@ -102,7 +137,11 @@
             }
             [dic setObject:@(model.musicGrade) forKey:@"musicGrade"];
             [dic setObject:model.musicName forKey:@"musicName"];
-            [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            if (model.imageUrl == nil) {
+                [dic setObject:@"" forKey:@"imageUrl"];
+            }else{
+                [dic setObject:model.imageUrl forKey:@"imageUrl"];
+            }
             if (model.createTime == nil) {
                 [dic setObject:@"暂无" forKey:@"createTime"];
             }else{

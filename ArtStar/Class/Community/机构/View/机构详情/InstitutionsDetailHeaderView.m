@@ -44,7 +44,7 @@
     _threeDTouchBtu.btuTitle = @"3D展示";
     _threeDTouchBtu.btuImage = @"3d";
     _threeDTouchBtu.actionClick = ^{
-        NSLog(@"这是3D展示");
+        
     };
     [self addSubview:_threeDTouchBtu];
     
@@ -52,7 +52,7 @@
     _aRTouchBtu.btuTitle = @"AR展示";
     _aRTouchBtu.btuImage = @"AR";
     _aRTouchBtu.actionClick = ^{
-        NSLog(@"这是AR展示");
+        
     };
     [self addSubview:_aRTouchBtu];
     

@@ -102,7 +102,7 @@
     
     MusicChooseSexView *sexView = [[MusicChooseSexView alloc]initWithFrame:CGRectMake(0, NavTopHeight + 285, ViewWidth(self), 140)];
     sexView.chooseSexStr = ^(NSString *sex) {
-        NSLog(@"%@",sex);
+        //:--在这获取性别--
     };
     [_backView addSubview:sexView];
     

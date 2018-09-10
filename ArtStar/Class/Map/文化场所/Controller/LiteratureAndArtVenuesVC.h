@@ -13,4 +13,6 @@
 @property (nonatomic,copy) NSArray *chooseArr;
 @property (nonatomic,copy) NSArray *searchArr;
 
+- (void)sendchooseType:(NSString *)type chooseStr:(NSString *)chooseStr;
+
 @end

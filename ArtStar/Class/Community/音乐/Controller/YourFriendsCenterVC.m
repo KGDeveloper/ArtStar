@@ -200,10 +200,10 @@
 ////MARK:--竖排文字改变排版--
 ////MARK:--FriendsOnlyHaveImageCellDelegate,FriendsTopImageButtomLabelCellDelegate,FriendsButtomImageTopLabelCellDelegate,FriendsLeftImageRightLabelCellDelegate,FriendsOnlyHaveLabelCellDelegate--
 //- (void)headerPushInfo:(NSInteger)index{
-//    NSLog(@"点击头像%ld",(long)index);
+
 //}
 //- (void)deleteCell:(NSInteger)index{
-//    NSLog(@"点击删除%ld",(long)index);
+
 //}
 //- (void)lookAllCellImage:(NSInteger)index{
 //    FriendsDetailVC *vc = [[FriendsDetailVC alloc]init];

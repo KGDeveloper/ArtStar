@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSMutableArray *addressArr;
 @property (nonatomic,strong) AMapSearchAPI *search;
 @property (nonatomic,assign) NSInteger type;
+@property (nonatomic,copy) NSString *perviseStr;
 
 @end
 
@@ -37,7 +38,7 @@
 
 - (void)setCityName:(NSString *)cityName{
     _cityName = cityName;
-    
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
     [AMapServices sharedServices].apiKey = GeocodeApiKey;
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
@@ -49,7 +50,11 @@
     dist.requireExtension = YES;
     [self.search AMapDistrictSearch:dist];
 }
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error{
+    [MBProgressHUD hideAllHUDsForView:self animated:YES];
+}
 - (void)onDistrictSearchDone:(AMapDistrictSearchRequest *)request response:(AMapDistrictSearchResponse *)response{
+    [MBProgressHUD hideAllHUDsForView:self animated:YES];
     if (response == nil){
         return;
     }
@@ -58,10 +63,12 @@
     dist = [districtsArr lastObject];
     NSArray *disArr = dist.districts;
     if (_type == 0) {
-        _countryArr = [NSMutableArray arrayWithArray:disArr];
+        _addressArr = [NSMutableArray array];
+        [_countryArr addObjectsFromArray:disArr];
         [_leftView reloadData];
     }else{
-        _addressArr = [NSMutableArray arrayWithArray:disArr];
+        _addressArr = [NSMutableArray array];
+        [_addressArr addObjectsFromArray:disArr];
         [_rightView reloadData];
     }
 }
@@ -124,15 +131,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _leftView) {
         AMapDistrict *dic = _countryArr[indexPath.row];
-        _addressArr = [NSMutableArray array];
         _type = 1;
         self.cityName = dic.name;
+        _perviseStr = dic.name;
     }else{
         AMapDistrict *dic = _addressArr[indexPath.row];
-        _addressArr = [NSMutableArray array];
-        _type = 0;
         if (self.sendCityDis) {
-            self.sendCityDis(dic.name);
+            self.sendCityDis([NSString stringWithFormat:@"%@%@",_perviseStr,dic.name]);
         }
     }
 }

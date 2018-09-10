@@ -243,6 +243,7 @@
                 <outlet property="btuView" destination="hB6-1N-UqH" id="isy-rO-TD9"/>
                 <outlet property="commentBtu" destination="Rcq-bQ-M9T" id="qIk-5M-GTk"/>
                 <outlet property="countLab" destination="kib-EF-rsw" id="8jQ-Fn-ClB"/>
+                <outlet property="deleteBtu" destination="OS9-sY-kY5" id="A6U-Ia-byO"/>
                 <outlet property="headerImage" destination="69i-Dm-7pQ" id="KcK-BD-D5w"/>
                 <outlet property="labView" destination="06h-4N-Ntr" id="yOk-Md-zpQ"/>
                 <outlet property="locationLab" destination="hs5-5i-QlK" id="Jyr-MG-xLy"/>

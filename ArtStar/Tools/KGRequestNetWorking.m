@@ -111,7 +111,7 @@
     NSError *error = nil;
     thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60) actualTime:NULL error:&error];
     if (!thumbnailImageRef) {
-        NSLog(@"%@",error);
+        
     }
     UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
     return thumbnailImage;

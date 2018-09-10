@@ -14,6 +14,7 @@
 @property (nonatomic,strong) UIButton *rightBtu;
 @property (nonatomic,strong) UIImageView *backView;
 @property (nonatomic,strong) UILabel *integralLab;
+@property (nonatomic,strong) UILabel *idLab;
 @property (nonatomic,strong) UIButton *integralBtu;
 
 @end
@@ -33,9 +34,10 @@
     _rightBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     _backView = [UIImageView new];
     _integralLab = [UILabel new];
+    _idLab = [UILabel new];
     _integralBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [self sd_addSubviews:@[_backView,_leftBtu,_rightBtu,_integralLab,_integralBtu]];
+    [self sd_addSubviews:@[_backView,_leftBtu,_rightBtu,_integralLab,_idLab,_integralBtu]];
     
     _backView.image = Image(@"jifenbeijing");
     _backView.sd_layout.leftSpaceToView(self, 0).topSpaceToView(self, 0).widthIs(ViewWidth(self)).heightIs(ViewHeight(self));
@@ -62,6 +64,12 @@
     _integralLab.font = SYBFont(33);
     _integralLab.textAlignment = NSTextAlignmentCenter;
     _integralLab.sd_layout.leftSpaceToView(self, 0).rightSpaceToView(self, 0).topSpaceToView(self, NavTopHeight + 20).heightIs(35);
+    
+    _idLab.text = [NSString stringWithFormat:@"您的id：%@",[KGUserInfo shareInterace].userID];
+    _idLab.textColor = [UIColor whiteColor];
+    _idLab.font = SYBFont(15);
+    _idLab.textAlignment = NSTextAlignmentCenter;
+    _idLab.sd_layout.leftSpaceToView(self, 0).rightSpaceToView(self, 0).topSpaceToView(self, NavTopHeight).heightIs(20);
     
     [_integralBtu setTitle:@"积分明细" forState:UIControlStateNormal];
     [_integralBtu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

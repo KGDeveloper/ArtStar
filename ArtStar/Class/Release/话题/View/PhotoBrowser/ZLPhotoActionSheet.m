@@ -62,7 +62,6 @@ double const ScalePhotoWidth = 1000;
 - (void)dealloc
 {
     [[PHPhotoLibrary sharedPhotoLibrary] unregisterChangeObserver:self];
-//    NSLog(@"---- %s", __FUNCTION__);
 }
 
 - (NSMutableArray<ZLPhotoModel *> *)arrDataSources

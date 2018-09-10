@@ -186,6 +186,8 @@
 #define selectPlaceById [serverIP stringByAppendingString:@"community/selectPlaceById"]
 ///普通机构详情
 #define findOneMerchant [serverIP stringByAppendingString:@"merchants/findOneMerchant"]
+//文化消费页面
+#define findOneMerchantParticulars [serverIP stringByAppendingString:@"consumption/findOneMerchantParticulars"]
 
 
 
@@ -210,6 +212,10 @@
  根据广告ID查看场所机构集合
  */
 #define selectAdvertisingListByAdvertisingPosition [serverIP stringByAppendingString:@"communityAdvertising/selectAdvertisingListByAdvertisingPosition"]
+//打卡
+#define firstTimePunchings [serverIP stringByAppendingString:@"community/firstTimePunchings"]
+//打卡记录
+#define selectPunchRecordListByUidAndMid [serverIP stringByAppendingString:@"community/selectPunchRecordListByUidAndMid"]
 
 
 #endif /* CommuntityHttpsDefine_h */

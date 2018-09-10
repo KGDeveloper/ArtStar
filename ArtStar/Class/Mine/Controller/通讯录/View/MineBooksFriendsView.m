@@ -9,6 +9,7 @@
 #import "MineBooksFriendsView.h"
 #import "MineBooksFriendsTableViewCell.h"
 #import "AppDelegate.h"
+#import "MineChatDetaialViewController.h"
 
 @interface MineBooksFriendsView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -70,6 +71,16 @@
     cell.nameLab.text = dic[@"username"];
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dic = _friendsArr[indexPath.row];
+    MineChatDetaialViewController *chatVC = [[MineChatDetaialViewController alloc]init];
+    chatVC.title = dic[@"username"];
+    chatVC.conversationType = ConversationType_PRIVATE;
+    chatVC.targetId = [NSString stringWithFormat:@"%@",dic[@"id"]];
+    chatVC.displayUserNameInCell = YES;
+    [RCIM sharedRCIM].globalMessageAvatarStyle = RC_USER_AVATAR_CYCLE;
+    [[self supViewController].navigationController pushViewController:chatVC animated:YES];
 }
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return Image(@"空空如也");

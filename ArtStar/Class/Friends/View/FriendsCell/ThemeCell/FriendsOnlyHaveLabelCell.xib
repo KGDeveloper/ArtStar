@@ -192,6 +192,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="commentBtu" destination="D4E-JZ-GfT" id="Bi8-73-y7R"/>
+                <outlet property="deleteBtu" destination="0Ig-Za-wmt" id="OTm-mW-nU8"/>
                 <outlet property="headerImage" destination="i3H-IG-40v" id="Xdf-aN-OaE"/>
                 <outlet property="locationLab" destination="w64-Yn-ZwG" id="fnz-qk-1cP"/>
                 <outlet property="nikeNameLab" destination="PPD-vv-1bL" id="mA6-JX-jG9"/>

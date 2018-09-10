@@ -253,6 +253,7 @@
                 <outlet property="commentBtu" destination="Ktp-76-S3R" id="6TN-sx-fYr"/>
                 <outlet property="commentWidth" destination="YLm-rI-qzj" id="1R1-xN-cQ0"/>
                 <outlet property="countLab" destination="544-Ku-qfM" id="Ehj-rZ-bg8"/>
+                <outlet property="deleteBtu" destination="fbh-iU-qFL" id="FdG-Mt-IZm"/>
                 <outlet property="headerImage" destination="qdV-OO-IUI" id="OuU-wV-6jz"/>
                 <outlet property="locationLab" destination="v5C-Mb-bbQ" id="4Rx-Q2-KvZ"/>
                 <outlet property="locationWidth" destination="Wv1-XC-lnI" id="fMb-sl-TAM"/>

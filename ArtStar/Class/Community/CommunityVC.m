@@ -69,13 +69,15 @@
     self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     __weak typeof(self) weakSelf = self;
     self.jsContext[@"clicks"] = ^(){
-        NSArray *args = [JSContext currentArguments];
-        [args enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf pushNoTabBarViewController:[weakSelf pushController:[NSString stringWithFormat:@"%@",[args firstObject]]] animated:YES];
-            });
-            *stop = YES;
-        }];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isOnLine"] integerValue] == 0) {
+            NSArray *args = [JSContext currentArguments];
+            [args enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf pushNoTabBarViewController:[weakSelf pushController:[NSString stringWithFormat:@"%@",[args firstObject]]] animated:YES];
+                });
+                *stop = YES;
+            }];
+        }
     };
 }
 

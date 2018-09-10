@@ -63,6 +63,23 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)didSendMessage:(NSInteger)status content:(RCMessageContent *)messageContent{
+    
+}
+
+- (RCMessageContent *)willSendMessage:(RCMessageContent *)messageContent{
+    RCUserInfo *info = [[RCIM sharedRCIM] getUserInfoCache:self.targetId];
+    if (!info) {
+        [[RCIM sharedRCIM] sendMessage:ConversationType_PRIVATE targetId:self.targetId content:messageContent pushContent:[NSString stringWithFormat:@"%@给你发消息啦",[KGUserInfo shareInterace].userName] pushData:@"" success:^(long messageId) {
+            
+        } error:^(RCErrorCode nErrorCode, long messageId) {
+            
+        }];
+        return nil;
+    }
+    return messageContent;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -132,11 +132,13 @@
             NSDictionary *tmpDic = dic[@"文化消费"];
             NSDictionary *detailDic = tmpDic[_countryArr[indexPath.row]];
             NSDictionary *dataDic = detailDic[@"data"];
-            if (self.sendChooseTypeID) {
-                self.sendChooseTypeID(detailDic[@"id"]);
-            }
             _leftStr = _countryArr[indexPath.row];
             _addressArr = dataDic.allKeys.copy;
+            if (_addressArr.count == 0) {
+                if (self.sendChooseTypeID) {
+                    self.sendChooseTypeID(detailDic[@"id"]);
+                }
+            }
             [_rightView reloadData];
         }else{
             NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MapTypePlist" ofType:@"plist"];

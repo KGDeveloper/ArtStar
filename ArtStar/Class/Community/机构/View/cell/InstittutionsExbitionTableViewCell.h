@@ -10,4 +10,6 @@
 
 @interface InstittutionsExbitionTableViewCell : UITableViewCell
 
+@property (nonatomic,copy) NSArray *showArr;
+
 @end

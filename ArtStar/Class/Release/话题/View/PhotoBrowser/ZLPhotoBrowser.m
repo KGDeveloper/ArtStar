@@ -18,7 +18,6 @@
 - (void)dealloc
 {
     [[SDWebImageManager sharedManager] cancelAll];
-//    NSLog(@"---- %s", __FUNCTION__);
 }
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
@@ -130,7 +129,7 @@
 
 - (void)dealloc
 {
-//    NSLog(@"---- %s", __FUNCTION__);
+
 }
 
 - (UIView *)placeholderView

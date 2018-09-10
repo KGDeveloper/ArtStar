@@ -87,7 +87,6 @@ static BOOL _sortAscending;
 
 + (PHAsset *)getAssetFromlocalIdentifier:(NSString *)localIdentifier{
     if(localIdentifier == nil){
-        NSLog(@"Cannot get asset from localID because it is nil");
         return nil;
     }
     PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[localIdentifier] options:nil];
@@ -671,10 +670,8 @@ static BOOL _sortAscending;
                 [arrImages addObject:[UIImage imageWithCGImage:image]];
                 break;
             case AVAssetImageGeneratorFailed:
-                NSLog(@"第%ld秒图片解析失败", count);
                 break;
             case AVAssetImageGeneratorCancelled:
-                NSLog(@"取消解析视频图片");
                 break;
         }
         

@@ -1,71 +1,68 @@
 window.onload = function () {
-/*获取屏幕的高度*/
-var heightH=$(window).height();
-$('.beijing').css('height',heightH);
+    /*获取屏幕的高度*/
+    var heightH=$(window).height();
+    $('.beijing').css('height',heightH);
 
     var timer;
 
     var flag = true;
 
+    var upData = null;
+
+    function getToken() {
+        var query = window.location.search.substring(1);
+        return query.split(" --")[0].split("=")[1];
+    }
+
+    var token =  getToken();
+
+    var  params = {
+        "tokenCode": token,
+        "searchType": 1,
+        "longitude": 40.222012,
+        "distance": 1000,
+        "similarity": 90,
+        "ageMax": 40,
+        "ageMin": 5,
+        "sex": 1,
+        "query": {
+            "page": 1,
+            "rows": 20
+        },
+        "myLabelIds": [2]
+    }
+
     $.ajax({
         headers:{
             "Content-type":"application/json",
+            "User-Agent":"wyxqIOS",
         },
-        url:"a207665u90.51mypc.cn:53274/user/filtratebycdn",
+        url:"http://118.190.145.106/user/filtratebycdn",
         type:"post",
-        data:{
-            "tokenCode":"5b8afd03-c0de-4584-ae20-9721fecb17ee541534929570919",
-            "searchType":1,
-            "longitude":40.222012,
-            "distance":1000,
-            "similarity":"0%",
-            "ageMax":40,
-            "ageMin":5,
-            "sex":1,
-            "query":{"page":1,"rows":20},
-            "myLabelIds":[2]
-        },
+        data:JSON.stringify(params),
         success:function (data) {
-            console.log(data);
+            upData = data.data;
+            initData(upData);
+           /* 设置卡片内容 */
+           $('.popBox .zzz .dis-name> h3').text($('.gif2').attr("data-dis"));
+           $('.popBox .zzz .dis-name> span').text($('.gif2').attr("data-num")+"%匹配");
+           $('.popBox .sub-btn > .great').attr("uid",$('.gif2').attr("data-id"));
+           $('.popBox .sub-btn > .great').attr("username",$('.gif2').attr("data-dis"));
         }
 
     });
 
-    var upData = [
-            {id:"0xfd23ffs",num:20,dis:"独自等待"},
-            {id:"0xfd23ffd",num:91,dis:"牡丹"},
-            {id:"0xfd23ffa",num:90,dis:"午后骄阳"},
-            {id:"0xfd23ffb",num:98,dis:"屌丝"},
-            {id:"0xfd23ffc",num:88,dis:"忘不掉"},
-            {id:"0xfd23ffs",num:20,dis:"一般小女"},
-            {id:"0xfd23ffd",num:92,dis:"芸儿Y头"},
-            {id:"0xfd23ffa",num:99,dis:"蓝精灵"},
-            {id:"0xfd23ffb",num:97,dis:"喵喵喵"},
-            {id:"0xfd23ffc",num:88,dis:"周周"},
-            {id:"0xfd23ffc",num:87,dis:"爱在何方"},
-            {id:"0xfd23ffc",num:86,dis:"梦癌"},
-            {id:"0xfd23ffc",num:85,dis:"迷梦初醒"},
-            {id:"0xfd23ffc",num:84,dis:"烟花短暂却.."},
-            {id:"0xfd23ffc",num:83,dis:"玛雅"},
-            {id:"0xfd23ffc",num:82,dis:"够狠才女Ren"},
-            {id:"0xfd23ffc",num:81,dis:"0o小月o0"},
-            {id:"0xfd23ffc",num:80,dis:"90后小姐姐"},
-            {id:"0xfd23ffc",num:79,dis:"! ! !"},
-            {id:"0xfd23ffc",num:78,dis:"无聊"}
-        ];
-
-    initData(upData);// upData 你们传的数值,
-
     function initData(arr) {
         var string1 = arr;
-        var max =   Math.max.apply(Math, string1.map(function(o) {return o.num}));
+        var max =   Math.max.apply(Math, string1.map(function(o) {return o.similarity}));
         var number1 = null;
         var data = "";
         var data2 = "";
+        
         for(var i = 0; i < string1.length; i++){
-            if(string1[i].num == max){
+            if(string1[i].similarity == max){
                 number1 = string1[i];
-                data2 = '<div class="gif2 step1 current" data-num=" '+number1.num+' " data-id = " '+ number1.id +' "  data-dis = " '+number1.dis+' "><img src="img/'+ random(1,12) +'.png" alt=""></div>';
+                data2 = '<div class="gif2 step1 current" data-num=" '+number1.similarity+' " data-id = " '+ number1.id +' "  data-dis = " '+number1.username+' "><img src="img/'+ random(1,12) +'.png" alt=""></div>';
             }
             // data +=  '<span class="img'+ random(1,16) +'"   "><img src="img/('+ random(4,12) +').png" alt=""></span>';
         }
@@ -75,16 +72,15 @@ $('.beijing').css('height',heightH);
 
     function initData2(arr) {
         var string1 = arr;
-        var max =   Math.max.apply(Math, string1.map(function(o) {return o.num}));
+        var max =   Math.max.apply(Math, string1.map(function(o) {return o.similarity}));
         var number1 = null;
         var data = "";
 
 
-
         for(var i = 0; i < string1.length; i++){
-            if(string1[i].num == max){
+            if(string1[i].similarity == max){
                 number1 = string1[i];
-                data = '<div class="gif2 step1 current" data-num=" '+number1.num+' " data-id = " '+ number1.id +' "  data-dis = " '+number1.dis+' "><img src="img/'+ random(1,12) +'.png" alt=""></div>';
+                data = '<div class="gif2 step1 current" data-num=" '+number1.similarity+' " data-id = " '+ number1.id +' "  data-dis = " '+number1.username+' "><img src="img/'+ random(1,12) +'.png" alt=""></div>';
             }
         }
         $(".ball").append(data);
@@ -123,24 +119,27 @@ $('.beijing').css('height',heightH);
         }
         if(nearby3<=120 && nearby3>=95 && nums>=90){ //满足匹配度高达90%出现闪电
 
-             $('.lightning').css('display','block');
-             setTimeout(function () {
-                 $('.beijing_1').css('animation-play-state', 'paused'); //动画暂停
-                 $('.popBox').slideDown();
-                 clearInterval(timer);
+            $('.lightning').css('display','block');
+            setTimeout(function () {
+                $('.beijing_1').css('animation-play-state', 'paused'); //动画暂停
+                $('.popBox').slideDown();
+                clearInterval(timer);
             },800);
         }else{
             $('.lightning').css('display','none')
         }
     }
 
+    // 点击不感兴趣
+
     $(".miss").on('click',function () {
         missClick(this);
     });
 
-    /* 设置卡片内容 */
-    $('.popBox .zzz .dis-name> h3').text($('.gif2').attr("data-dis"));
-    $('.popBox .zzz .dis-name> span').text($('.gif2').attr("data-num")+"%匹配");
+    // 点击私聊
+    $(".great").on('click',function () {
+        window.chatWithUserID($(this).attr("uid"),$(this).attr("username"));
+    });
 
     function missClick(that) {
         $('.lightning').css('display','none');
@@ -153,7 +152,7 @@ $('.beijing').css('height',heightH);
 
 
         for (var i = upData.length-1; i>0; i--)
-            if (upData[i].num==_thisNum)
+            if (upData[i].similarity==_thisNum)
                 upData.splice(i,1);
 
         initData2(upData);
@@ -162,6 +161,8 @@ $('.beijing').css('height',heightH);
         setTimeout(function () {
             $('.popBox .zzz .dis-name> h3').text($('.gif2').attr("data-dis"));
             $('.popBox .zzz .dis-name> span').text($('.gif2').attr("data-num")+"%匹配");
+            $('.popBox .sub-btn > .great').attr("uid",$('.gif2').attr("data-id"));
+            $('.popBox .sub-btn > .great').attr("username",$('.gif2').attr("data-dis"));
         },500)
 
     }
@@ -173,10 +174,10 @@ $('.beijing').css('height',heightH);
 
 
     /*
-    * 点击刷新图标 请求你们的API
-    * success 回调函数 里调用initData 方法 传data参数
-    * 
-    * */
+     * 点击刷新图标 请求你们的API
+     * success 回调函数 里调用initData 方法 传data参数
+     *
+     * */
 
     $("#refresh").on('click',function () {
         var fl = confirm("试试换一批吗？");

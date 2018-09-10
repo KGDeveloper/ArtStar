@@ -10,4 +10,8 @@
 
 @interface ConsumptionOfLiteratureAndArtVC : BaseVC
 
+@property (nonatomic,copy) NSArray *searchArr;
+
+- (void)sendChooseType:(NSString *)type chooseStr:(NSString *)chooseStr;
+
 @end

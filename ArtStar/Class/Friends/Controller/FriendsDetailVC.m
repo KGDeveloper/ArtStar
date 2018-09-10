@@ -122,7 +122,11 @@ FriendsPlayVideoViewdelegate>
                 mySelf.model = [arr firstObject];
                 NSDictionary *userDic = mySelf.model[@"user"];
                 if ([userDic[@"id"] integerValue] != [[KGUserInfo shareInterace].userID integerValue]) {
-                    [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
+                    if ([userDic[@"isAttention"] integerValue] == 0){
+                        [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"关注" image:nil];
+                    }else{
+                        [self setRightBtuWithFrame:CGRectMake(0, 0, 50, 30) title:@"已关注" image:nil];
+                    }
                 }
                 mySelf.dataArr = [FriendsTalentsCommentModel mj_objectArrayWithKeyValuesArray:mySelf.model[@"rccomment"]];
                 if (type == 0) {
@@ -324,6 +328,11 @@ FriendsPlayVideoViewdelegate>
     
     if (_model[@"user"]) {
         NSDictionary *dic = _model[@"user"];
+        if ([[NSString stringWithFormat:@"%@",dic[@"id"]] isEqualToString:[KGUserInfo shareInterace].userID]){
+            _deleteBtu.hidden = NO;
+        }else{
+            _deleteBtu.hidden = YES;
+        }
         [_userImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
         _nikName.text = dic[@"username"];
     }else{

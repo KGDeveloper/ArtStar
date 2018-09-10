@@ -37,6 +37,11 @@
     }
     
     NSDictionary *dic = model[@"user"];
+    if ([[NSString stringWithFormat:@"%@",dic[@"id"]] isEqualToString:[KGUserInfo shareInterace].userID]){
+        _deleteBtu.hidden = NO;
+    }else{
+        _deleteBtu.hidden = YES;
+    }
     [_headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     _nikeNameLab.text = dic[@"username"];
     if (![model[@"location"] isKindOfClass:[NSNull class]]) {
@@ -51,7 +56,11 @@
     }
     [_commentBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"rccommentNum"] integerValue]] forState:UIControlStateNormal];
     [_zansBtu setTitle:[NSString stringWithFormat:@"%li",[model[@"likeCount"] integerValue]] forState:UIControlStateNormal];
-    
+    if ([model[@"islikeCount"] integerValue] == 0) {
+        [_zansBtu setImage:Image(@"点赞") forState:UIControlStateNormal];
+    }else{
+        [_zansBtu setImage:Image(@"点赞选中") forState:UIControlStateNormal];
+    }
     _rfuid = model[@"id"];
     
 }
@@ -83,9 +92,11 @@
 }
 - (IBAction)zansClick:(UIButton *)sender {
     if ([sender.currentImage isEqual:Image(@"点赞")]) {
-        [sender setImage:Image(@"点赞选中状态") forState:UIControlStateNormal];
+        [sender setImage:Image(@"点赞选中") forState:UIControlStateNormal];
+        [sender setTitle:[NSString stringWithFormat:@"%li",[sender.currentTitle integerValue] + 1] forState:UIControlStateNormal];
     }else{
         [sender setImage:Image(@"点赞") forState:UIControlStateNormal];
+        [sender setTitle:[NSString stringWithFormat:@"%li",[sender.currentTitle integerValue] - 1] forState:UIControlStateNormal];
     }
     if ([self.delegate respondsToSelector:@selector(zansCell:)]) {
         [self.delegate zansCell:self.rfuid.integerValue];

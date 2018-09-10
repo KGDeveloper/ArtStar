@@ -166,10 +166,34 @@
         _loginBtu.backgroundColor = Color_333333;
         _loginBtu.enabled = YES;
     }
-    
     NSNotification *notification =[NSNotification notificationWithName:@"LoginRongClond" object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
+}
+
+- (void)cllLocation{
+    if ([CLLocationManager locationServicesEnabled]){
+        KGLocationCityManager *manager = [KGLocationCityManager shareManager];
+        [manager obtainYourLocation];
+    }else if ([CLLocationManager authorizationStatus] ==kCLAuthorizationStatusDenied) {
+        __weak typeof(self) weakSelf = self;
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您的手机没有给予App定位权限，App无法正常获取到您的位置" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *shureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL *url = [NSURL URLWithString:@"App-Prefs:root=LOCATION_SERVICES"];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                NSDictionary<NSString *,id>*options = @{UIApplicationOpenURLOptionsSourceApplicationKey:@YES};
+                [[UIApplication sharedApplication] openURL:url options:options completionHandler:^(BOOL success) {
+                    [weakSelf cllLocation];
+                }];
+            }
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alert addAction:shureAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 //MARK:--密码登录按钮点击事件--
 - (IBAction)passLoginClick:(UIButton *)sender {
@@ -271,87 +295,58 @@
     
 }
 - (IBAction)loginClick:(UIButton *)sender {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *latitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlatitude"];
-    NSString *longitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"Userlongitude"];
-    __weak typeof(self) mySelf = self;
-    if (_isSMSLogin == YES) {
-        [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"msgAuthCode":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
-            if ([result[@"message"] isEqualToString:@"操作成功！"]) {
-                NSArray *dataArr = result[@"data"];
-                NSDictionary *userDic = dataArr[0];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];//:--number类型--
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];//:--number类型--
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];//:--number类型--
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"token"] forKey:@"userToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
-                id personSignature = userDic[@"personSignature"];
-                if (![personSignature isKindOfClass:[NSNull class]]) {
-                    [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
-                }
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                window.rootViewController = [[TabBarVC alloc]init];
-                //:--注册融云--
-                AppDelegate *app = [[UIApplication sharedApplication] delegate];
-                [app registRongIM];
-                
-            }else if ([result[@"message"] isEqualToString:@"验证码有误"]){
-                mySelf.errorLab.hidden = NO;
-                mySelf.errorLab.text = @"验证码有误";
-            }else if ([result[@"message"] isEqualToString:@"用户未注册"]){
-                mySelf.errorLab.hidden = NO;
-                mySelf.errorLab.text = @"用户未注册,请先注册账号";
-            }
-            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        } fail:^(NSError *error) {
-            mySelf.errorLab.hidden = NO;
-            mySelf.errorLab.text = @"登录超时";
-            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        }];
-    }else{
-        [KGRequestNetWorking postWothUrl:loginServer parameters:@{@"telphone":_userTF.text,@"password":_passWordTF.text,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
-            mySelf.errorLab.hidden = YES;
-            if ([result[@"message"] isEqualToString:@"操作成功！"]) {
-                NSArray *dataArr = result[@"data"];
-                NSDictionary *userDic = dataArr[0];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];//:--number类型--
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];//:--number类型--
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];//:--number类型--
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"token"] forKey:@"userToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
-                id personSignature = userDic[@"personSignature"];
-                if (![personSignature isKindOfClass:[NSNull class]]) {
-                    [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
-                }
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
-                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                window.rootViewController = [[TabBarVC alloc]init];
-                //:--注册融云--
-                AppDelegate *app = [[UIApplication sharedApplication] delegate];
-                [app registRongIM];
-            }else if ([result[@"message"] isEqualToString:@"用户未注册"]){
-                mySelf.errorLab.hidden = NO;
-                mySelf.errorLab.text = @"用户未注册,请先注册账号";
-            }else if ([result[@"message"] isEqualToString:@"用户名/密码错误"]){
-                mySelf.errorLab.hidden = NO;
-                mySelf.errorLab.text = @"用户名/密码错误";
-            }
-            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        } fail:^(NSError *error) {
-            mySelf.errorLab.hidden = NO;
-            mySelf.errorLab.text = @"登录超时";
-            [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
-        }];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]) {
+        [self cllLocation];
+        return ;
     }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *latitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"];
+    NSString *longitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"];
+    __weak typeof(self) mySelf = self;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:_userTF.text forKey:@"telphone"];
+    [parameters setObject:longitude forKey:@"longitude"];
+    [parameters setObject:latitude forKey:@"latitude"];
+    if (_isSMSLogin == YES) {
+        [parameters setObject:_passWordTF.text forKey:@"msgAuthCode"];
+    }else{
+        [parameters setObject:_passWordTF.text forKey:@"password"];
+    }
+    [KGRequestNetWorking postWothUrl:loginServer parameters:parameters succ:^(id result) {
+        mySelf.errorLab.hidden = YES;
+        [MBProgressHUD hideAllHUDsForView:mySelf.view animated:YES];
+        if ([result[@"message"] isEqualToString:@"操作成功！"]) {
+            NSArray *dataArr = result[@"data"];
+            NSDictionary *userDic = dataArr[0];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"age"] forKey:@"userAge"];//:--number类型--
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"sex"] forKey:@"userSex"];//:--number类型--
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"state"] forKey:@"userState"];//:--number类型--
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"token"] forKey:@"userToken"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"tokenCode"] forKey:@"userTokenCode"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"username"] forKey:@"userName"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"portraitUri"] forKey:@"portraitUri"];
+            id personSignature = userDic[@"personSignature"];
+            if (![personSignature isKindOfClass:[NSNull class]]) {
+                [[NSUserDefaults standardUserDefaults] setObject:userDic[@"personSignature"] forKey:@"personSignature"];
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"telphone"] forKey:@"userPhone"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"id"] forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"isOnLine"] forKey:@"isOnLine"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"companyUrl"] forKey:@"companyUrl"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            window.rootViewController = [[TabBarVC alloc]init];
+            //:--注册融云--
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            [app registRongIM];
+        }else{
+            [MBProgressHUD bwm_showTitle:result[@"message"] toView:mySelf.view hideAfter:1];
+        }
+    } fail:^(NSError *error) {
+        mySelf.errorLab.hidden = NO;
+        mySelf.errorLab.text = @"登录超时";
+        [MBProgressHUD hideHUDForView:mySelf.view animated:YES];
+    }];
 }
 
 //MARK:创建定时器，开始发送验证码计时

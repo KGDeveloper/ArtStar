@@ -108,7 +108,7 @@
         spaceSlider.maxValue = 50;
         spaceSlider.unitStr = @"km";
         spaceSlider.sendValueToFormView = ^(NSString *str) {
-            NSLog(@"%@",str);
+            
         };
         [_leftView addSubview:spaceSlider];
         
@@ -118,7 +118,7 @@
         ageSlider.maxValue = 50;
         ageSlider.unitStr = @"岁";
         ageSlider.sendValueToFormView = ^(NSString *str) {
-            NSLog(@"%@",str);
+            
         };
         [_leftView addSubview:ageSlider];
         
@@ -128,7 +128,7 @@
         compatibilitySlider.maxValue = 100;
         compatibilitySlider.unitStr = @"%";
         compatibilitySlider.sendValueToFormView = ^(NSString *str) {
-            NSLog(@"%@",str);
+            
         };
         [_leftView addSubview:compatibilitySlider];
         
@@ -141,7 +141,7 @@
         MusicChooseSexView *sexView = [[MusicChooseSexView alloc]initWithFrame:CGRectMake(0, 290, ViewWidth(_leftView), 120)];
         sexView.backgroundColor = [UIColor clearColor];
         sexView.chooseSexStr = ^(NSString *sex) {
-            NSLog(@"%@",sex);
+            
         };
         [_leftView addSubview:sexView];
         

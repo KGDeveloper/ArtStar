@@ -494,6 +494,11 @@
 		5A05B0B6211463AE00D1F876 /* ReleaseTaskWriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A05B0B4211463AE00D1F876 /* ReleaseTaskWriteCell.xib */; };
 		5A05B0BA2114676C00D1F876 /* ReleaseTaskIntrduiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05B0B82114676C00D1F876 /* ReleaseTaskIntrduiceCell.m */; };
 		5A05B0BB2114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A05B0B92114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib */; };
+		5A09DA35214284EC00F32F49 /* AcitvitryClockSuccessAddScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A09DA34214284EC00F32F49 /* AcitvitryClockSuccessAddScoreView.m */; };
+		5A09DA3921428D3800F32F49 /* ActivityCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A09DA3721428D3800F32F49 /* ActivityCellTableViewCell.m */; };
+		5A09DA3A21428D3800F32F49 /* ActivityCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A09DA3821428D3800F32F49 /* ActivityCellTableViewCell.xib */; };
+		5A126181213FCF59000D3288 /* 星球吸引 in Resources */ = {isa = PBXBuildFile; fileRef = 5A126180213FCF59000D3288 /* 星球吸引 */; };
+		5A126183213FE8CB000D3288 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A126182213FE8CB000D3288 /* JavaScriptCore.framework */; };
 		5A1A14322111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */; };
 		5A1A14332111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */; };
 		5A1DF6BC2112D90300D1FCDF /* CommunityExhibitionIntrouceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1DF6BA2112D90300D1FCDF /* CommunityExhibitionIntrouceCell.m */; };
@@ -508,7 +513,6 @@
 		5A3397C82133E33D006F5844 /* ScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3397C72133E33D006F5844 /* ScoreViewController.m */; };
 		5A34C0B32138092D0007643A /* ViewForActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A34C0B22138092D0007643A /* ViewForActivity.m */; };
 		5A34C0B5213809940007643A /* Activity.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A34C0B4213809940007643A /* Activity.xcassets */; };
-		5A4495C1213E248300AD9E6B /* 星球吸引 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4495C0213E248300AD9E6B /* 星球吸引 */; };
 		5A45A63F212AAB0200727446 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 5A45A63E212AAB0200727446 /* images */; };
 		5A618874211D44AC002E7E51 /* MineReleaseHositryPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */; };
 		5A6551CB21216DE500D65DBA /* PickUpTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6551CA21216DE500D65DBA /* PickUpTaskView.m */; };
@@ -1421,6 +1425,13 @@
 		5A05B0B72114676C00D1F876 /* ReleaseTaskIntrduiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskIntrduiceCell.h; sourceTree = "<group>"; };
 		5A05B0B82114676C00D1F876 /* ReleaseTaskIntrduiceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskIntrduiceCell.m; sourceTree = "<group>"; };
 		5A05B0B92114676C00D1F876 /* ReleaseTaskIntrduiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReleaseTaskIntrduiceCell.xib; sourceTree = "<group>"; };
+		5A09DA33214284EC00F32F49 /* AcitvitryClockSuccessAddScoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcitvitryClockSuccessAddScoreView.h; sourceTree = "<group>"; };
+		5A09DA34214284EC00F32F49 /* AcitvitryClockSuccessAddScoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcitvitryClockSuccessAddScoreView.m; sourceTree = "<group>"; };
+		5A09DA3621428D3800F32F49 /* ActivityCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityCellTableViewCell.h; sourceTree = "<group>"; };
+		5A09DA3721428D3800F32F49 /* ActivityCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityCellTableViewCell.m; sourceTree = "<group>"; };
+		5A09DA3821428D3800F32F49 /* ActivityCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCellTableViewCell.xib; sourceTree = "<group>"; };
+		5A126180213FCF59000D3288 /* 星球吸引 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "星球吸引"; sourceTree = "<group>"; };
+		5A126182213FE8CB000D3288 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		5A1A142F2111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityExhibitionDetailTimeAndAddressCell.h; sourceTree = "<group>"; };
 		5A1A14302111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityExhibitionDetailTimeAndAddressCell.m; sourceTree = "<group>"; };
 		5A1A14312111C24E0077AAE7 /* CommunityExhibitionDetailTimeAndAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityExhibitionDetailTimeAndAddressCell.xib; sourceTree = "<group>"; };
@@ -1446,7 +1457,6 @@
 		5A34C0B12138092D0007643A /* ViewForActivity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewForActivity.h; sourceTree = "<group>"; };
 		5A34C0B22138092D0007643A /* ViewForActivity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewForActivity.m; sourceTree = "<group>"; };
 		5A34C0B4213809940007643A /* Activity.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Activity.xcassets; sourceTree = "<group>"; };
-		5A4495C0213E248300AD9E6B /* 星球吸引 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "星球吸引"; sourceTree = "<group>"; };
 		5A45A63E212AAB0200727446 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		5A618872211D44AC002E7E51 /* MineReleaseHositryPictureModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineReleaseHositryPictureModel.h; sourceTree = "<group>"; };
 		5A618873211D44AC002E7E51 /* MineReleaseHositryPictureModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineReleaseHositryPictureModel.m; sourceTree = "<group>"; };
@@ -1556,6 +1566,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A126183213FE8CB000D3288 /* JavaScriptCore.framework in Frameworks */,
 				28E4DAC5210065B300FDCC2B /* MediaPlayer.framework in Frameworks */,
 				2840DF5020DCF2C00066E2C4 /* UserNotifications.framework in Frameworks */,
 				2813DB6B20C7BD24004CD973 /* CoreLocation.framework in Frameworks */,
@@ -2202,6 +2213,8 @@
 				286C903620BD32AF004EBA67 /* InstitutionsDetailHeaderView.m */,
 				286C903820BD3332004EBA67 /* MusicDetaialBtu.h */,
 				286C903920BD3332004EBA67 /* MusicDetaialBtu.m */,
+				5A09DA33214284EC00F32F49 /* AcitvitryClockSuccessAddScoreView.h */,
+				5A09DA34214284EC00F32F49 /* AcitvitryClockSuccessAddScoreView.m */,
 			);
 			path = "机构详情";
 			sourceTree = "<group>";
@@ -3854,6 +3867,9 @@
 			children = (
 				5A34C0B12138092D0007643A /* ViewForActivity.h */,
 				5A34C0B22138092D0007643A /* ViewForActivity.m */,
+				5A09DA3621428D3800F32F49 /* ActivityCellTableViewCell.h */,
+				5A09DA3721428D3800F32F49 /* ActivityCellTableViewCell.m */,
+				5A09DA3821428D3800F32F49 /* ActivityCellTableViewCell.xib */,
 				5ABD7206213AA1B600258997 /* CustomCalloutView.h */,
 				5ABD7207213AA1B600258997 /* CustomCalloutView.m */,
 				5ABD7209213AA66900258997 /* CustomAnnotationView.h */,
@@ -3874,6 +3890,7 @@
 		5DBDAC9073BE60E74FC6E0E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A126182213FE8CB000D3288 /* JavaScriptCore.framework */,
 				2840DF4F20DCF2C00066E2C4 /* UserNotifications.framework */,
 				2813DB8620C7BDBD004CD973 /* Photos.framework */,
 				2813DB8420C7BDB1004CD973 /* UIKit.framework */,
@@ -3935,7 +3952,7 @@
 			children = (
 				28EC5F8B20DA09D50019D4C1 /* MapVC.h */,
 				28EC5F8C20DA09D50019D4C1 /* MapVC.m */,
-				5A4495C0213E248300AD9E6B /* 星球吸引 */,
+				5A126180213FCF59000D3288 /* 星球吸引 */,
 				5A05B065211452CA00D1F876 /* 文化消费 */,
 				5A05B0642114525800D1F876 /* 文化场所 */,
 			);
@@ -4374,6 +4391,7 @@
 				2875DA8420D3A82200D6CAFE /* MineReleaseVideoTableViewCell.xib in Resources */,
 				28A6C9D620D8A60400ECBF4F /* MineUnitAndPositionTableViewCell.xib in Resources */,
 				2874725520CA6DF0004317A5 /* FocusViewTopCell.xib in Resources */,
+				5A09DA3A21428D3800F32F49 /* ActivityCellTableViewCell.xib in Resources */,
 				281DF6E320D246270086030E /* MineIntegraltableViewCell.xib in Resources */,
 				2820B08420B5677A00EA1DAC /* CommenityMedia.xcassets in Resources */,
 				2874725A20CA735C004317A5 /* FocusViewChatInfoCell.xib in Resources */,
@@ -4422,7 +4440,7 @@
 				280601AC20B7FF790090254E /* HeadLinesNormalCell.xib in Resources */,
 				280601B820B80C250090254E /* HeadLinesDetaialCommentCell.xib in Resources */,
 				2875DAB820D3C5F600D6CAFE /* MineAddBaseNameAndPhoneTableViewCell.xib in Resources */,
-				5A4495C1213E248300AD9E6B /* 星球吸引 in Resources */,
+				5A126181213FCF59000D3288 /* 星球吸引 in Resources */,
 				287D2D1420BEAAB200500156 /* MusicThemeMyThemeCell.xib in Resources */,
 				286C904020BD3EA6004EBA67 /* DomIntroduceCell.xib in Resources */,
 				28FDAC6420C14F4700531597 /* MyselfPerformanViewCell.xib in Resources */,
@@ -4678,6 +4696,7 @@
 				28636D7A20F4BCE900DE0926 /* MineSelfMyLabelsModel.m in Sources */,
 				2820B08720B56F1D00EA1DAC /* CommunitySmartView.m in Sources */,
 				28E56FCF20AA7DFD00203D1E /* TransformChineseToPinying.m in Sources */,
+				5A09DA35214284EC00F32F49 /* AcitvitryClockSuccessAddScoreView.m in Sources */,
 				281DF70520D25FFA0086030E /* MineCollectionExibitionTableViewCell.m in Sources */,
 				28E8E86F20B663D5002E10FC /* KGSearchBarAndSearchView.m in Sources */,
 				2874726720CA8094004317A5 /* MsgTapNoteVC.m in Sources */,
@@ -4696,6 +4715,7 @@
 				5A05B0AE21145A9900D1F876 /* ReleaseTaskVC.m in Sources */,
 				282E072F20C911F600A9B2E1 /* MIneMessageVC.m in Sources */,
 				2875DA9620D3B67800D6CAFE /* MineJointalentTopTableViewCell.m in Sources */,
+				5A09DA3921428D3800F32F49 /* ActivityCellTableViewCell.m in Sources */,
 				287D2D1320BEAAB200500156 /* MusicThemeMyThemeCell.m in Sources */,
 				2804BEA420E09970007E33DE /* TlentIntroudceTableViewCell.m in Sources */,
 				28EC5F8020D9FAEF0019D4C1 /* MineFeedBackPictureTableViewCell.m in Sources */,
@@ -5170,7 +5190,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ArtStar/other/ArtStar.pch";
 				INFOPLIST_FILE = ArtStar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5182,7 +5202,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "ArtStar/Tools/ArtStar-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -5204,7 +5224,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ArtStar/other/ArtStar.pch";
 				INFOPLIST_FILE = ArtStar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5215,7 +5235,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ArtStar/Tools/ArtStar-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

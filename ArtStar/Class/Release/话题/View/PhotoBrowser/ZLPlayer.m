@@ -23,7 +23,6 @@
     [self removeObserver];
     [_player pause];
     _player = nil;
-//    NSLog(@"%s", __func__);
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

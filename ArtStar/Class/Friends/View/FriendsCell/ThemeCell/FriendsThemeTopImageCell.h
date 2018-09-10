@@ -21,6 +21,7 @@
 
 @interface FriendsThemeTopImageCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtu;
 @property (weak, nonatomic) IBOutlet UIImageView *headerIamge;
 @property (weak, nonatomic) IBOutlet UILabel *nikNameLab;
 @property (weak, nonatomic) IBOutlet UIImageView *topImage;

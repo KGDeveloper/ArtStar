@@ -33,13 +33,13 @@
     
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
-        NSLog(@"上传进度：%f",percent);
+        
     }
                                                                  params:nil
                                                                checkCrc:NO
                                                      cancellationSignal:nil];
     
-    [KGRequestNetWorking postWothUrl:qiniuToken parameters:@{} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:qiniuToken parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *arr = result[@"data"];
             NSDictionary *dic = [arr firstObject];
@@ -66,7 +66,7 @@
                                                                checkCrc:NO
                                                      cancellationSignal:nil];
     
-    [KGRequestNetWorking postWothUrl:qiniuToken parameters:@{} succ:^(id result) {
+    [KGRequestNetWorking postWothUrl:qiniuToken parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
         if ([result[@"code"] integerValue] == 200) {
             NSArray *arr = result[@"data"];
             NSDictionary *dic = [arr firstObject];

@@ -248,11 +248,28 @@
 #define setFriendCirclePermissions [serverIP stringByAppendingString:@"FriendCirclePermissions/setFriendCirclePermissions"]
 ///文化场所首页
 #define findAllMerchant [serverIP stringByAppendingString:@"merchants/findAllMerchant"]
-///文艺消费
-#define findAllMerchants [serverIP stringByAppendingString:@"consumption/findAllMerchants"]
 ///根据指定位置来查询附近的商家
 #define findPlaceMerchants [serverIP stringByAppendingString:@"merchants/findPlaceMerchants"]
+///查询有新品上市的商家
+#define findmerchantsNewProduct [serverIP stringByAppendingString:@"merchants/findmerchantsNewProduct"]
+////展示能够接受预定的商家
+#define findReservemerchants [serverIP stringByAppendingString:@"merchants/findReservemerchants"]
+///根据商家的评分来降序展示商家
+#define findmerchantsScore [serverIP stringByAppendingString:@"merchants/findmerchantsScore"]
+///根据商家的人均消费来升序展示商家
+#define findMerchantAverageConsumption [serverIP stringByAppendingString:@"merchants/findMerchantAverageConsumption"]
+//根据指定商家类型来查询附近相同类型的商家
+#define findPreciseMerchant [serverIP stringByAppendingString:@"merchants/findPreciseMerchant"]
 
+///文艺消费
+#define findAllMerchants [serverIP stringByAppendingString:@"consumption/findAllMerchants"]
+//根据用户指定的位置去查询附近的商家
+#define findConsumptionPlaceMerchants [serverIP stringByAppendingString:@"consumption/findPlaceMerchants"]
+//根据类型查询
+#define findConsumptionPreciseMerchant [serverIP stringByAppendingString:@"consumption/findPreciseMerchant"]
+//#define findConsumptionPlaceMerchants [serverIP stringByAppendingString:@"consumption/findPlaceMerchants"]
+//#define findConsumptionPlaceMerchants [serverIP stringByAppendingString:@"consumption/findPlaceMerchants"]
+//#define findConsumptionPlaceMerchants [serverIP stringByAppendingString:@"consumption/findPlaceMerchants"]
 
 
 #endif /* MineHttpsDefine_h */

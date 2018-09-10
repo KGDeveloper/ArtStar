@@ -63,7 +63,6 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    NSLog(@"---- %s", __FUNCTION__);
 }
 
 - (void)viewDidLoad {
@@ -148,7 +147,6 @@
 #pragma mark - 设备旋转
 - (void)deviceOrientationChanged:(NSNotification *)notify
 {
-//    NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
     _indexBeforeRotation = _currentPage - 1;
 }
 

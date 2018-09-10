@@ -157,13 +157,13 @@
     if (!_screeningView) {
         _screeningView = [[MusicScreeningView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _screeningView.sendProvinceNameAndCityName = ^(NSString *provinceName, NSString *cityName) {
-            NSLog(@"%@--%@",provinceName,cityName);
+            
         };
         _screeningView.sendSexStr = ^(NSString *sex) {
-            NSLog(@"%@",sex);
+            
         };
         _screeningView.sendTypeStr = ^(NSString *type) {
-            NSLog(@"%@",type);
+            
         };
         [self.navigationController.view addSubview:_screeningView];
     }

@@ -253,6 +253,7 @@
             <connections>
                 <outlet property="commentBtu" destination="H3v-vN-YmU" id="kE2-oV-sd2"/>
                 <outlet property="countLab" destination="VcS-4u-PJf" id="zgm-dV-9ib"/>
+                <outlet property="deleteBtu" destination="LgG-wK-p76" id="2YU-m7-jpQ"/>
                 <outlet property="headerIamge" destination="JKO-qi-Nqe" id="JOb-Bh-eDe"/>
                 <outlet property="locationLab" destination="QgJ-82-Nxg" id="PJo-sl-3WT"/>
                 <outlet property="nikNameLab" destination="twy-ij-UgG" id="WXd-L2-1Xg"/>

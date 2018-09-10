@@ -72,18 +72,28 @@
         NSArray *timeArr = [timeStr componentsSeparatedByString:@"-"];
         cell.dayLab.text = [NSString stringWithFormat:@"%@",timeArr[2]];
         cell.mouthLab.text = [NSString stringWithFormat:@"%@月",timeArr[1]];
-        cell.locationLab.text = dic[@"location"];
-        NSArray *imageArr = dic[@"imageUrl"];
-        [cell.topImage sd_setImageWithURL:[NSURL URLWithString:[imageArr firstObject]] placeholderImage:Image(@"空空如也")];
-        cell.countLab.text = [NSString stringWithFormat:@"共%li张",imageArr.count];
-        NSData *strData = [dic[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
-        NSError *error = nil;
-        NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
-        NSString *str = dataArr[0];
-        for (int i = 1; i < dataArr.count; i++) {
-            str = [NSString stringWithFormat:@"%@%@",str,dataArr[i]];
+        if (dic[@"location"]) {
+            cell.locationLab.text = dic[@"location"];
+        }else{
+            cell.locationLab.text = @"";
         }
-        cell.detailLab.text = str;
+        if (dic[@"imageUrl"]) {
+            NSArray *imageArr = dic[@"imageUrl"];
+            [cell.topImage sd_setImageWithURL:[NSURL URLWithString:[imageArr firstObject]] placeholderImage:Image(@"空空如也")];
+            cell.countLab.text = [NSString stringWithFormat:@"共%li张",imageArr.count];
+        }
+        if (dic[@"content"]) {
+            NSData *strData = [dic[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error = nil;
+            NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:strData options:NSJSONReadingMutableContainers error:&error];
+            NSString *str = dataArr[0];
+            for (int i = 1; i < dataArr.count; i++) {
+                str = [NSString stringWithFormat:@"%@%@",str,dataArr[i]];
+            }
+            cell.detailLab.text = str;
+        }else{
+            cell.detailLab.text = @"";
+        }
         cell.nameLab.text = [NSString stringWithFormat:@"#%@#",dic[@"title"]];
         cell.ID = [dic[@"id"] integerValue];
         if (_isEditCell == YES) {

@@ -45,7 +45,7 @@
     UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, ViewWidth(exbihitionView) - 30, 15)];
     nameLab.textColor = Color_333333;
     nameLab.font = SYFont(14);
-    nameLab.text = @"战区";
+    nameLab.text = @"展区";
     [exbihitionView addSubview:nameLab];
     
     UIButton *rightBtu = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -59,6 +59,7 @@
     imageView.backgroundColor = Color_ededed;
     imageView.layer.cornerRadius = 5;
     imageView.layer.masksToBounds = YES;
+    [imageView sd_setImageWithURL:[NSURL URLWithString:modelDic[@"https://i4.artsky.com/r/s/pic/info/2018/06/1529385657007.jpeg#300|404jpg"]]];
     [exbihitionView addSubview:imageView];
     
     return exbihitionView;
@@ -66,6 +67,13 @@
 
 - (void)rightAction:(UIButton *)sender{
     
+}
+
+- (void)setShowArr:(NSArray *)showArr{
+    _showArr = showArr;
+    [self createViewWithFrame:CGRectMake(0, 30, kScreenWidth, (kScreenWidth - 30)/690*280 + 55) model:nil];
+    [self createViewWithFrame:CGRectMake(0, (kScreenWidth - 30)/690*280 + 86, kScreenWidth, (kScreenWidth - 30)/690*280 + 55) model:nil];
+    [self createViewWithFrame:CGRectMake(0, (kScreenWidth - 30)/690*280 + 86 + (kScreenWidth - 30)/690*280 + 55, kScreenWidth, (kScreenWidth - 30)/690*280 + 55) model:nil];
 }
 
 - (void)awakeFromNib {

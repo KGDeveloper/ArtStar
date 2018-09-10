@@ -37,11 +37,11 @@
 }
 - (void)regcognizerAction:(UISwipeGestureRecognizer *)sender{
     if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"左滑");
+        
     }else if (sender.direction == UISwipeGestureRecognizerDirectionLeft){
         [UIView animateWithDuration:0.5 animations:^{
             self.frame = CGRectMake(-ViewWidth(self), 0, ViewWidth(self), ViewHeight(self));
-            NSLog(@"进行中");
+            
         } completion:^(BOOL finished) {
             if (self.finishAnimalShowView) {
                 self.finishAnimalShowView();

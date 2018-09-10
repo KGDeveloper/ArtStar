@@ -12,6 +12,9 @@
 #import "LiteratureAndArtVenuesVC.h"
 #import "ConsumptionOfLiteratureAndArtVC.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "MineCenterHomeVC.h"
+#import "MineChatDetaialViewController.h"
+
 
 @interface MapVC ()<MapTopScreeningViewDelegate,UIWebViewDelegate>
 
@@ -23,10 +26,19 @@
 @property (nonatomic,strong) LiteratureAndArtVenuesVC *literatureAndArtVenuesVC;//:--文化场所--
 @property (nonatomic,strong) ConsumptionOfLiteratureAndArtVC *consumptionOfLiteratureAndArtVC;//:--文艺消费--
 @property (nonatomic,strong) JSContext *jsContext;
+@property (nonatomic,strong) UIWebView *webView;
 
 @end
 
 @implementation MapVC
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+- (NSString *)getToken{
+    return [KGUserInfo shareInterace].userTokenCode;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,10 +49,8 @@
     [self setNavCenterView];
     [self yourLocation];
     // !!!: --判断是否是刚打开APP，如果是从其他页面跳转过来不显示活动入口，只在第一次进入才显示--
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"IntoAcitivitry"]) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"companyUrl"] integerValue] == 0) {
         [self intoAcitivityView];
-        [[NSUserDefaults standardUserDefaults] setObject:@"已加载过" forKey:@"IntoAcitivitry"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 - (void)yourLocation{
@@ -49,7 +59,6 @@
     __weak typeof(self) weakSelf = self;
     manager.ToObtainYourLocation = ^(NSString *city, double latitude, double longitude) {
         [weakSelf setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:[[NSUserDefaults standardUserDefaults] objectForKey:@"yourLocationCity"] image:Image(@"loc")];
-        [weakSelf requestLiterature];
     };
 }
 // MARK: --初始化文化消费页面--
@@ -70,23 +79,34 @@
 }
 // MARK: --创建首页加载附近的人HTML文件--
 - (void)loadHTMLFaile{
-    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight - NavButtomHeight)];
-    webView.dataDetectorTypes = UIDataDetectorTypeAll;
-    webView.scrollView.scrollEnabled = NO;
-    webView.delegate = self;
-    NSString *mainBoundPath = [[NSBundle mainBundle] bundlePath];
-    NSString *basePath = [NSString stringWithFormat:@"%@/星球吸引",mainBoundPath];
-    NSURL *baseUrl = [NSURL fileURLWithPath:basePath isDirectory:YES];
-    NSString *htmlPath = [NSString stringWithFormat:@"%@/shandian.html",basePath];
-    NSString *htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
-    [webView loadHTMLString:htmlString baseURL:baseUrl];
-    [self.view addSubview:webView];
+    _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, NavTopHeight, kScreenWidth, kScreenHeight - NavTopHeight - NavButtomHeight)];
+    _webView.dataDetectorTypes = UIDataDetectorTypeAll;
+    _webView.scrollView.scrollEnabled = NO;
+    _webView.delegate = self;
+    NSURL *filePath = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"星球吸引/shandian.html"] withExtension:nil];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"?token=%@",[KGUserInfo shareInterace].userTokenCode] relativeToURL:filePath];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [_webView loadRequest:request];
+    [self.view addSubview:_webView];
 }
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    if ([request.mainDocumentURL.relativePath isEqualToString:@"/initData"]) {
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    __weak typeof(self) weakSelf = self;
+    _jsContext = [_webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    _jsContext.exceptionHandler = ^(JSContext *context, JSValue *exception) {
         
-    }
-    return YES;
+    };
+    _jsContext[@"chatWithUserID"] = ^(NSString *uid,NSString *username) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            MineChatDetaialViewController *chatVC = [[MineChatDetaialViewController alloc]init];
+            chatVC.title = username;
+            chatVC.conversationType = ConversationType_PRIVATE;
+            chatVC.targetId = uid;
+            chatVC.displayUserNameInCell = YES;
+            [RCIM sharedRCIM].globalMessageAvatarStyle = RC_USER_AVATAR_CYCLE;
+            [weakSelf pushNoTabBarViewController:chatVC animated:YES];
+        });
+    };
+    
 }
 // MARK: --创建活动入口--
 - (void)intoAcitivityView{
@@ -166,6 +186,11 @@
 - (void)leftNavBtuAction:(UIButton *)sender{
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 100, 30) title:@"定位中" image:Image(@"loc")];
     [self yourLocation];
+    if ([_type isEqualToString:@"文化场所"]) {
+        [self requestLiterature:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]] longitude:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"]]];
+    }else if ([_type isEqualToString:@"文艺消费"]) {
+        [self requestConsumptionWithLatitude:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]] longitude:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"]]];
+    }
 }
 // MARK: --导航栏右侧按钮--
 - (void)rightNavBtuAction:(UIButton *)sender{
@@ -190,7 +215,11 @@
 }
 // MARK: --MapTopScreeningViewDelegate--
 - (void)sendChooseToVCType:(NSString *)type chooseStr:(NSString *)chooseStr{
-    
+    if ([_type isEqualToString:@"文化场所"]) {
+        [self.literatureAndArtVenuesVC sendchooseType:type chooseStr:chooseStr];
+    }else if ([_type isEqualToString:@"文艺消费"]){
+        [self.consumptionOfLiteratureAndArtVC sendChooseType:type chooseStr:chooseStr];
+    }
 }
 // MARK: --创建筛选附近的人筛选页面--
 - (MapAccurateAndFuzzyScreeningView *)fuzzyScreeningView{
@@ -201,20 +230,28 @@
     return _fuzzyScreeningView;
 }
 // MARK: --文化场所一系类操作--
-- (void)requestLiterature{
+// MARK: --根据指定位置搜索附近商家--
+- (void)requestLiterature:(NSString *)latitude longitude:(NSString *)longitude{
     __weak typeof(self) weakSelf = self;
-    if ([_type isEqualToString:@"文化场所"]) {
-        [KGRequestNetWorking postWothUrl:findPlaceMerchants parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"longitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"latitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]} succ:^(id result) {
-            if ([result[@"code"] integerValue] == 200) {
-                weakSelf.literatureAndArtVenuesVC.searchArr = result[@"data"];
-            }
-        } fail:^(NSError *error) {
-            
-        }];
-    }
+    [KGRequestNetWorking postWothUrl:findPlaceMerchants parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            weakSelf.literatureAndArtVenuesVC.searchArr = result[@"data"];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
 }
-
-
+// MARK: --文艺消费--
+- (void)requestConsumptionWithLatitude:(NSString *)latitude longitude:(NSString *)longitude{
+    __weak typeof(self) weakSelf = self;
+    [KGRequestNetWorking postWothUrl:findConsumptionPlaceMerchants parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"longitude":longitude,@"latitude":latitude} succ:^(id result) {
+        if ([result[@"code"] integerValue] == 200) {
+            weakSelf.consumptionOfLiteratureAndArtVC.searchArr = result[@"data"];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

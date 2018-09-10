@@ -17,6 +17,7 @@
 #import "HotInstitutionsDetailVC.h"
 #import "KGTicketView.h"
 #import "InstittutionsExbitionTableViewCell.h"
+#import "AcitvitryClockSuccessAddScoreView.h"
 
 @interface InstitutionsVC ()<UITableViewDelegate,UITableViewDataSource,MusicPhotosCellDelegate>
 
@@ -24,6 +25,8 @@
 @property (nonatomic,strong) InstitutionsDetailHeaderView *headerView;
 @property (nonatomic,strong) KGTicketView *ticketView;
 @property (nonatomic,strong) NSMutableDictionary *dataDic;
+@property (nonatomic,strong) UIButton *clockBtu;
+@property (nonatomic,strong) AcitvitryClockSuccessAddScoreView *scroeView;
 
 @end
 
@@ -47,7 +50,6 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     _dataDic = [NSMutableDictionary dictionary];
-    [self requestData];
 }
 
 - (void)setTableView{
@@ -58,7 +60,7 @@
     _listView.tableFooterView = TabLeViewFootView;
     _listView.tableHeaderView = [self tabViewHeaderView];
     _listView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_listView];
+    [self.view insertSubview:_listView atIndex:1];
     
     [_listView registerNib:[UINib nibWithNibName:@"DomIntroduceCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"DomIntroduceCell"];
     [_listView registerNib:[UINib nibWithNibName:@"MusicAboutCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MusicAboutCell"];
@@ -116,14 +118,41 @@
     if (_dataDic[@"showList"] && ![_dataDic[@"showList"] isKindOfClass:[NSNull class]]) {
         if (indexPath.row == 0) {
             DomIntroduceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DomIntroduceCell"];
-            cell.detailLab.attributedText = [TransformChineseToPinying string:_dataDic[@"blurb"] font:SYFont(14) space:10];
+            if (![_dataDic[@"blurb"] isKindOfClass:[NSNull class]]){
+                cell.detailLab.attributedText = [TransformChineseToPinying string:_dataDic[@"blurb"] font:SYFont(14) space:10];
+            }else{
+                cell.detailLab.text = @"暂无介绍";
+            }
+            if(![_dataDic[@"potime"] isKindOfClass:[NSNull class]]){
+                cell.starTime.text = _dataDic[@"potime"];
+            }else{
+                cell.starTime.text = @"暂无相关时间";
+            }
+            cell.topTime.text = @"";
+            cell.endTime.text = @"";
+            cell.nameLab.text = _dataDic[@"username"];
             return cell;
         }else if(indexPath.row == 1){
             InstittutionsExbitionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InstittutionsExbitionTableViewCell"];
+            if (![_dataDic[@"showList"] isKindOfClass:[NSNull class]]) {
+                cell.showArr = _dataDic[@"showList"];
+            }
             return cell;
         }else if (indexPath.row == 2){
             MusicPhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicPhotosCell"];
-            cell.imageArr = @[];
+            NSArray *tmp = _dataDic[@"images"];
+            if(tmp.count > 0){
+                __block NSMutableArray *imageArr = [NSMutableArray array];
+                [tmp enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSDictionary *dic = obj;
+                    [imageArr addObject:dic[@"imageURL"]];
+                }];
+                cell.imageArr = imageArr.copy;
+                cell.countLab.text = [NSString stringWithFormat:@"相册(%li)",imageArr.count];
+            }
+            cell.adressLab.text = _dataDic[@"address"];
+            [cell.spaceLab setTitle:[NSString stringWithFormat:@"%@m",_dataDic[@"distance"]] forState:UIControlStateNormal];
+            cell.delegate = self;
             return cell;
         }else if (indexPath.row == 3){
             MusicCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicCommentCell"];
@@ -132,27 +161,41 @@
             return cell;
         }else{
             MusicSimilarToRecommendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicSimilarToRecommendCell"];
+            cell.dataArr = _dataDic[@"merchant"];
+            if(![_dataDic[@"merchantList"] isKindOfClass:[NSNull class]]){
+                cell.dataArr = _dataDic[@"merchantList"];
+            }
             return cell;
         }
     }else{
         if (indexPath.row == 0) {
             DomIntroduceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DomIntroduceCell"];
-            cell.detailLab.attributedText = [TransformChineseToPinying string:_dataDic[@"blurb"] font:SYFont(14) space:10];
+            if (![_dataDic[@"blurb"] isKindOfClass:[NSNull class]]){
+                cell.detailLab.attributedText = [TransformChineseToPinying string:_dataDic[@"blurb"] font:SYFont(14) space:10];
+            }else{
+                cell.detailLab.text = @"暂无介绍";
+            }
             cell.topTime.text = @"";
             cell.endTime.text = @"";
             cell.nameLab.text = _dataDic[@"username"];
-            cell.starTime.text = _dataDic[@"potime"];
+            if(![_dataDic[@"potime"] isKindOfClass:[NSNull class]]){
+                cell.starTime.text = _dataDic[@"potime"];
+            }else{
+                cell.starTime.text = @"暂无相关时间";
+            }
             return cell;
         }else if (indexPath.row == 1){
             MusicPhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MusicPhotosCell"];
             NSArray *tmp = _dataDic[@"images"];
-            __block NSMutableArray *imageArr = [NSMutableArray array];
-            [tmp enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                NSDictionary *dic = obj;
-                [imageArr addObject:dic[@"imageURL"]];
-            }];
-            cell.imageArr = imageArr.copy;
-            cell.countLab.text = [NSString stringWithFormat:@"相册(%li)",imageArr.count];
+            if(tmp.count > 0){
+                __block NSMutableArray *imageArr = [NSMutableArray array];
+                [tmp enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSDictionary *dic = obj;
+                    [imageArr addObject:dic[@"imageURL"]];
+                }];
+                cell.imageArr = imageArr.copy;
+                cell.countLab.text = [NSString stringWithFormat:@"相册(%lu)",(unsigned long)imageArr.count];
+            }
             cell.adressLab.text = _dataDic[@"address"];
             [cell.spaceLab setTitle:[NSString stringWithFormat:@"%@m",_dataDic[@"distance"]] forState:UIControlStateNormal];
             cell.delegate = self;
@@ -171,8 +214,12 @@
 }
 
 - (void)tletePhoneAction{
-    NSString *callPhone = [NSString stringWithFormat:@"telprompt://%@",@"10010"];//_dataDic[@"cNumber"]
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone] options:@{} completionHandler:nil];
+    if(![_dataDic[@"telphone"] isKindOfClass:[NSNull class]]){
+        NSString *callPhone = [NSString stringWithFormat:@"telprompt://%@",_dataDic[@"telphone"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone] options:@{} completionHandler:nil];
+    }else{
+        [MBProgressHUD bwm_showTitle:@"暂无电话" toView:self.view hideAfter:1];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -180,7 +227,7 @@
         [self pushNoTabBarViewController:[[HotInstitutionsDetailVC alloc]init] animated:YES];
     }
 }
-
+// MARK: --买票，这个功能暂未开放--
 - (void)setTicket{
     _ticketView = [[KGTicketView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 50, kScreenWidth, 50)];
     __weak typeof(self) weakSelf = self;
@@ -190,12 +237,25 @@
     _ticketView.backgroundColor = [UIColor colorWithHexString:@"#4d4d4d"];
     [self.view insertSubview:_ticketView atIndex:99];
 }
-// MARK: --请求场馆详情--
-- (void)requestData{
+// MARK: --根据Url判断加载活动机构详情页还是普通机构详情页--
+- (void)setUrl:(NSString *)url{
+    _url = url;
     __weak typeof(self) weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if ([_url isEqualToString:findOneMerchant]) {//:--普通机构详情--
-        [KGRequestNetWorking postWothUrl:_url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":_postID,@"longitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"latitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]} succ:^(id result) {
+    if ([url isEqualToString:findOneMerchant]) {//:--普通机构详情--
+        [KGRequestNetWorking postWothUrl:url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":_postID,@"longitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"latitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]} succ:^(id result) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                NSArray *tmp = result[@"data"];
+                weakSelf.dataDic = [NSMutableDictionary dictionaryWithDictionary:[tmp firstObject]];
+                [weakSelf setTableView];
+                [weakSelf setTicket];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        }];
+    }else if ([url isEqualToString:findOneMerchantParticulars]){
+        [KGRequestNetWorking postWothUrl:findOneMerchantParticulars parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"id":_postID,@"longitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"latitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"]} succ:^(id result) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             if ([result[@"code"] integerValue] == 200) {
                 NSArray *tmp = result[@"data"];
@@ -207,12 +267,67 @@
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         }];
     }else{
-        [KGRequestNetWorking postWothUrl:_url parameters:@{} succ:^(id result) {
+        [KGRequestNetWorking postWothUrl:url parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"pid":_postID,@"uid":[KGUserInfo shareInterace].userID,@"userlatitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLatitude"],@"userLongitude":[[NSUserDefaults standardUserDefaults] objectForKey:@"YourLocationLongitude"],@"query":@{@"page":@"1",@"rows":@"15"},@"typename":@""} succ:^(id result) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            if ([result[@"code"] integerValue] == 200) {
+                NSArray *tmp = result[@"data"];
+                weakSelf.dataDic = [NSMutableDictionary dictionaryWithDictionary:[tmp firstObject]];
+                if ([weakSelf.dataDic[@"types"] integerValue] == 0) {
+                    [weakSelf setUpClock:Image(@"打卡")];
+                }else{
+                    [weakSelf setUpClock:Image(@"打卡不可点击")];
+                }
+                [weakSelf setTableView];
+                [weakSelf setTicket];
+            }
         } fail:^(NSError *error) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         }];
     }
+}
+// MARK: --创建打卡按钮--
+- (void)setUpClock:(UIImage *)image{
+    _clockBtu = [UIButton buttonWithType:UIButtonTypeCustom];
+    _clockBtu.frame =CGRectMake(kScreenWidth - 70, kScreenHeight - 120, 40, 40);
+    [_clockBtu setImage:image forState:UIControlStateNormal];
+    [_clockBtu addTarget:self action:@selector(clockAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view insertSubview:_clockBtu atIndex:99];
+}
+
+- (void)clockAction:(UIButton *)sender{
+    __weak typeof(self) weakSelf = self;
+    if ([sender.currentImage isEqual:Image(@"打卡")]) {
+        [sender setImage:Image(@"打卡不可点击") forState:UIControlStateNormal];
+        [KGRequestNetWorking postWothUrl:firstTimePunchings parameters:@{@"tokenCode":[KGUserInfo shareInterace].userTokenCode,@"uid":[KGUserInfo shareInterace].userID,@"mid":_postID,@"mName":_dataDic[@"username"],@"types":_dataDic[@"types"],@"userLongitude":[[NSUserDefaults standardUserDefaults]objectForKey:@"YourLocationLongitude"],@"userlatitude":[[NSUserDefaults standardUserDefaults]objectForKey:@"YourLocationLatitude"],@"longitude":_dataDic[@"longitude"],@"latitude":_dataDic[@"latitude"]} succ:^(id result) {
+            if ([result[@"code"] integerValue] == 200) {
+                if ([result[@"message"] isEqualToString:@"打卡成功！"]) {
+                    if ([weakSelf.dataDic[@"integral"] integerValue] == 20) {
+                        weakSelf.scroeView.scroe = Image(@"20积分");
+                    }else if ([weakSelf.dataDic[@"integral"] integerValue] == 40){
+                        weakSelf.scroeView.scroe = Image(@"40积分");
+                    }else{
+                        weakSelf.scroeView.scroe = Image(@"50积分");
+                    }
+                }else{
+                    [MBProgressHUD bwm_showTitle:result[@"message"] toView:weakSelf.view hideAfter:1];
+                }
+            }else{
+                [MBProgressHUD bwm_showTitle:@"打卡失败" toView:weakSelf.view hideAfter:1];
+                [sender setImage:Image(@"打卡") forState:UIControlStateNormal];
+            }
+        } fail:^(NSError *error) {
+            [MBProgressHUD bwm_showTitle:@"打卡失败" toView:weakSelf.view hideAfter:1];
+            [sender setImage:Image(@"打卡") forState:UIControlStateNormal];
+        }];
+    }
+}
+// MARK: --显示加积分页面--
+- (AcitvitryClockSuccessAddScoreView *)scroeView{
+    if (!_scroeView) {
+        _scroeView = [[AcitvitryClockSuccessAddScoreView alloc]initWithFrame:self.view.bounds];
+        [self.navigationController.view addSubview:_scroeView];
+    }
+    return _scroeView;
 }
 
 - (void)didReceiveMemoryWarning {

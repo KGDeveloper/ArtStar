@@ -8,6 +8,7 @@
 
 #import "MineBooksFocusView.h"
 #import "MineBooksFriendsTableViewCell.h"
+#import "MineChatDetaialViewController.h"
 
 @interface MineBooksFocusView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -126,6 +127,19 @@
         [cell.headImage sd_setImageWithURL:[NSURL URLWithString:dic[@"portraitUri"]]];
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_isNews == NO) {
+        NSDictionary *dic = _peopleArr[indexPath.row];
+        MineChatDetaialViewController *chatVC = [[MineChatDetaialViewController alloc]init];
+        chatVC.title = dic[@"username"];
+        chatVC.conversationType = ConversationType_PRIVATE;
+        chatVC.targetId = [NSString stringWithFormat:@"%@",dic[@"id"]];
+        chatVC.displayUserNameInCell = YES;
+        [RCIM sharedRCIM].globalMessageAvatarStyle = RC_USER_AVATAR_CYCLE;
+        [[self supViewController].navigationController pushViewController:chatVC animated:YES];
+    }
 }
 
 - (void)leftClick:(UIButton *)sender{

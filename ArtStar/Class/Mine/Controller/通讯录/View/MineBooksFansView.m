@@ -8,6 +8,7 @@
 
 #import "MineBooksFansView.h"
 #import "MineBooksFriendsTableViewCell.h"
+#import "MineChatDetaialViewController.h"
 
 @interface MineBooksFansView ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,MineBooksFriendsTableViewCellDelegate>
 
@@ -52,6 +53,16 @@
     cell.ID = [NSString stringWithFormat:@"%@",dic[@"id"]];
     
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dic = _dataArr[indexPath.row];
+    MineChatDetaialViewController *chatVC = [[MineChatDetaialViewController alloc]init];
+    chatVC.title = dic[@"username"];
+    chatVC.conversationType = ConversationType_PRIVATE;
+    chatVC.targetId = [NSString stringWithFormat:@"%@",dic[@"id"]];
+    chatVC.displayUserNameInCell = YES;
+    [RCIM sharedRCIM].globalMessageAvatarStyle = RC_USER_AVATAR_CYCLE;
+    [[self supViewController].navigationController pushViewController:chatVC animated:YES];
 }
 // MARK: --MineBooksFriendsTableViewCellDelegate--
 - (void)foucsActionWithID:(NSString *)ID{

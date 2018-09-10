@@ -10,10 +10,13 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import "CustomAnnotationView.h"
+#import "InstitutionsVC.h"
 
 @interface AcitivityForViewController ()<MAMapViewDelegate>
 
 @property (nonatomic,strong) ViewForActivity *activityView;
+@property (nonatomic,copy) NSArray *searchArr;
+@property (nonatomic,strong) MAMapView *mapView;
 
 @end
 
@@ -23,6 +26,11 @@
     [super viewWillAppear:animated];
     [self setNavBackGroundClearColor];
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,23 +38,35 @@
     [self setLeftBtuWithFrame:CGRectMake(0, 0, 50, 30) title:nil image:Image(@"back")];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapSelect:) name:@"MapSelect" object:nil];
+    
+    [self requestList];
     [self setButton];
-    [self setMapView];
 }
 // MARK: --创建地图--
 - (void)setMapView{
     [AMapServices sharedServices].enableHTTPS = YES;
-    MAMapView *mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    mapView.delegate = self;
-    mapView.showsIndoorMap = YES;
-    mapView.touchPOIEnabled = YES;
-    [self.view addSubview:mapView];
+    _mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    self.mapView.delegate = self;
+    self.mapView.showsIndoorMap = YES;
+    self.mapView.touchPOIEnabled = YES;
+    self.mapView.rotateEnabled = NO;
+    self.mapView.rotateCameraEnabled = NO;
+    [self.view insertSubview:self.mapView atIndex:1];
     
-    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc]init];
-    pointAnnotation.coordinate = CLLocationCoordinate2DMake(39.989631, 116.481018);
-    pointAnnotation.title = @"测试点";
-    pointAnnotation.subtitle = @"这是展览";
-    [mapView addAnnotation:pointAnnotation];
+    __weak typeof(self) weakSelf = self;
+    [_searchArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dic = obj;
+        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc]init];
+        pointAnnotation.coordinate = CLLocationCoordinate2DMake([dic[@"latitude"] floatValue], [dic[@"longitude"] floatValue]);
+        pointAnnotation.title = [NSString stringWithFormat:@"%@-%@",dic[@"username"],dic[@"id"]];
+        if (![dic[@"blurb"] isKindOfClass:[NSNull class]]){
+            pointAnnotation.subtitle = dic[@"blurb"];
+        }else{
+            pointAnnotation.subtitle = @"";
+        }
+        [weakSelf.mapView addAnnotation:pointAnnotation];
+    }];
 }
 // MARK: --MAMapViewDelegate--
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation{
@@ -63,7 +83,15 @@
     }
     return nil;
 }
-
+// MARK: --点击事件--
+- (void)mapSelect:(NSNotification *)info{
+    if (info.object != nil) {
+        InstitutionsVC *vc = [[InstitutionsVC alloc]init];
+        vc.postID = info.object;
+        vc.url = selectPlaceById;
+        [self pushNoTabBarViewController:vc animated:YES];
+    }
+}
 // MARK: --创建右侧点击按钮--
 - (void)setButton{
     UIButton *rulesBtu = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -124,6 +152,20 @@
         [self.tabBarController.view addSubview:_activityView];
     }
     return _activityView;
+}
+
+- (void)requestList{
+    __weak typeof(self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [KGRequestNetWorking postWothUrl:seleteMerchantsListByAid parameters:@{@"id":@"11",@"tokenCode":[KGUserInfo shareInterace].userTokenCode} succ:^(id result) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if([result[@"code"] integerValue] == 200){
+            weakSelf.searchArr = result[@"data"];
+            [weakSelf setMapView];
+        }
+    } fail:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

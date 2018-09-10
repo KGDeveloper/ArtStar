@@ -155,7 +155,7 @@ DZNEmptyDataSetSource
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, (kScreenWidth - 40)/670*450 + 60)];
     _bannerView = [HW3DBannerView initWithFrame:CGRectMake(0,0, kScreenWidth, (kScreenWidth - 40)/670*450) imageSpacing:5 imageWidth:kScreenWidth - 40];
     _bannerView.backgroundColor = [UIColor whiteColor];
-    _bannerView.data = @[Image(@"图片加载失败"),Image(@"图片加载失败"),Image(@"图片加载失败"),Image(@"图片加载失败"),Image(@"图片加载失败")];
+    _bannerView.data = @[Image(@"1"),Image(@"2"),Image(@"3")];
     _bannerView.imageRadius = 5;
     _bannerView.imageHeightPoor = 25;
     _bannerView.showPageControl = NO;

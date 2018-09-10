@@ -24,22 +24,17 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor blackColor];
     self.window.rootViewController = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil];
-//    self.window.rootViewController = [[TabBarVC alloc]init];
     [self.window makeKeyAndVisible];
     /*设置全局输入框控制类*/
     [self setUpIQKeyboardManager];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"RongLogin"]) {
         [self registRongIM];
     }
-    [self cllLocation];
-    sleep(3);
     return YES;
 }
 
 - (void)registRongIM{
-    
     [[RCIM sharedRCIM] initWithAppKey:@"qd46yzrfqimtf"];
-
     [[RCIM sharedRCIM] connectWithToken:[KGUserInfo shareInterace].userToken success:^(NSString *userId) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [RCIM sharedRCIM].userInfoDataSource = self;
@@ -87,11 +82,6 @@
 - (void)cllLocation{
     KGLocationCityManager *manager = [KGLocationCityManager shareManager];
     [manager obtainYourLocation];
-    manager.ToObtainYourLocation = ^(NSString *city, double latitude, double longitude) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",latitude] forKey:@"Userlatitude"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",longitude] forKey:@"Userlongitude"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    };
 }
 //MARK:--设置全局输入框控制类--
 - (void)setUpIQKeyboardManager{
@@ -138,9 +128,6 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    //:--在这里删除标记，下次运行App再次显示活动入口--
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IntoAcitivitry"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [self saveContext];
 }
 

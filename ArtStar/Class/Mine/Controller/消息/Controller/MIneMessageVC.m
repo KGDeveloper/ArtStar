@@ -85,12 +85,6 @@
     [RCIM sharedRCIM].receiveMessageDelegate = self;
     
 }
-- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left{
-    if ([message.content isMemberOfClass:[RCTextMessage class]]) {
-        RCTextMessage *textMessage = (RCTextMessage *)message.content;
-        NSLog(@"%@",textMessage.content);
-    }
-}
 - (void)setTableView{
     self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.conversationListTableView.tableFooterView = TabLeViewFootView;

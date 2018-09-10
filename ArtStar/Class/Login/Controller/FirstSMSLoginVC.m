@@ -121,6 +121,8 @@
             [mySelf.timer invalidate];
             mySelf.timer = nil;
             mySelf.number = 60;
+            [mySelf.smsBtu setTitle:@"发送验证码" forState:UIControlStateNormal];
+            mySelf.smsBtu.enabled = YES;
         }else{
             mySelf.topErrorLab.hidden = YES;
         }
